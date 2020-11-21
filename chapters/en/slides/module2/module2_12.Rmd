@@ -1,0 +1,402 @@
+---
+params:
+  dynamictitle: "module2_12"
+title: "`r params$dynamictitle`"
+output: 
+  md_document:
+    variant: gfm
+---
+
+
+```{r setup, include=FALSE}
+## DO NOT FORGET TO CHANGE THIS ACCORDINGLY 
+library(rmarkdown)
+# MAke sure you are updating your title 
+knitr::opts_chunk$set(echo = TRUE,
+                      base.dir = ".", 
+                      base.url = "/",
+                      fig.path = paste("../../../../static/module2/", params$dynamictitle,"/", sep = ""))
+
+knitr_opts <- knitr_options( opts_knit = NULL,
+                             opts_chunk = NULL,
+                             knit_hooks = NULL,
+                             opts_hooks = NULL,
+                             opts_template = NULL)
+md_document_custom <- md_document(variant = "gfm")
+output_format(knitr = knitr_opts,
+              pandoc = NULL,
+              base_format = md_document_custom)
+library(reticulate)
+
+```
+
+
+```{python include=FALSE}
+import pandas as pd
+import numpy as np
+import altair as alt
+from altair_saver import save
+import glob
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline, make_pipeline
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.linear_model import LinearRegression, LogisticRegression
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor, export_graphviz
+
+from IPython.display import HTML, display
+from PIL import Image, ImageFile
+
+from plot_classifier import plot_classifier
+pd.set_option('display.width', 350)
+
+np.set_printoptions(linewidth=400)
+
+pd.set_option('display.max_columns', 50)
+pd.set_option('display.max_rows', 15)
+
+path = "../../../../static/module2/"
+from display_tree import display_tree
+```
+
+
+type: slides
+
+# Parameters and hyperparameters
+
+Notes: <br>
+
+---
+
+<center><img src="/module2/valves.jpg"  width = "80%" alt="404 image" /></center>
+
+- ***Parameters***:  Derived during training
+- ***Hyperparameters***: Adjustable parameters that can be set before training. 
+
+Notes: 
+
+ When you call `fit`, a bunch of values get set, like the split variables and split thresholds. 
+ 
+- These are called **parameters**.
+
+But even before calling `fit` on a specific data set, we can set some "knobs" that control the learning.
+
+- These are called **hyperparameters**.
+
+---
+
+
+```{python}
+classification_df = pd.read_csv("data/quiz2-grade-toy-classification.csv")
+classification_df.head()
+```
+
+```{python}
+X = classification_df.drop(columns=["quiz2"])
+y = classification_df["quiz2"]
+```
+
+
+
+
+Notes: 
+
+Let's first bring in the classification quiz 2 grades dataset that we've seen before. 
+
+We are going to set our `X` object and our `y` object.
+
+
+
+
+---
+
+```{python results='hide'}
+model = DecisionTreeClassifier(max_depth=1)  
+model.fit(X, y);
+```
+
+```{python include=FALSE}
+display_tree(X.columns, model, "../../../../static/module2/module2_12a")
+```
+
+<center><img src="/module2/module2_12a.png"  width = "33%" alt="404 image" /></center>
+
+
+Notes: 
+
+In scikit-learn, hyperparameters are set in the constructor.
+
+`max_depth`is a hyperparameter that lets us decide and set the maximum depth of the decision tree.
+
+We can set the argument `max_depth=1` in our code so that it builds a ***decision stump***.
+
+We have control over how deep the decision tree will be. 
+
+Our decision tree here has 1 decision boundary.
+
+For any values of `lab_3` less than or equal to 83.5, our model will predict `Not A+` and values greater than this will be predicted as `A+`.   
+
+
+
+---
+
+
+
+```{python results='hide'}
+model2 = DecisionTreeClassifier(max_depth=2)  
+model2.fit(X, y);
+```
+
+```{python include=FALSE}
+display_tree(X.columns, model2, "../../../../static/module2/module2_depth2")
+```
+
+<center><img src="/module2/module2_depth2.png"  width = "33%" alt="404 image" /></center>
+
+
+Notes: 
+
+We can do the same thing, this time using a `max _depth` equal to 2 and now we can see our decision tree has a depth of 2 with 2 decision boundaries; On `lab3` at 83.5 and another on `quiz1` at 83.5. 
+
+---
+
+
+
+```{python results='hide'}
+model3 = DecisionTreeClassifier(max_depth=3)  
+model3.fit(X, y);
+```
+
+```{python include=FALSE}
+display_tree(X.columns, model3, "../../../../static/module2/module2_depth3")
+```
+
+<center><img src="/module2/module2_depth3.png"  width = "45%" alt="404 image" /></center>
+
+
+Notes: 
+
+We can do this again for `max_depth=3` with a total of 4 different splits. 
+
+---
+
+
+```{python}
+model.score(X, y)
+```
+
+
+```{python}
+model2.score(X, y)
+```
+
+```{python}
+model3.score(X, y)
+```
+
+
+```{python}
+model4 = DecisionTreeClassifier(max_depth=5)  
+model4.fit(X, y);
+model4.score(X, y)
+```
+
+
+
+
+Notes: 
+
+Now we see what the trees look, let's see how they score.
+
+How well does our `model1` score which uses hyperparameter max_depth=1?
+Ok, 76% that’s not too bad but what’s the score of `model2` which had a `max_depth` to 2?
+
+It looks like it’s increasing!
+
+Increasing `max_depth` to 3, increases the model's accuracy to 95%.
+
+Finally, if we make a new model with `max_depth=5` our model gets a score of 100%. 
+
+We see here that as `max_depth` increases, the accuracy of the training data does as well.
+
+Doing this isn't always the best idea and we'll explain this a little bit later on. 
+
+
+---
+
+```{python results='hide'}
+model5 = DecisionTreeClassifier(min_samples_split=2)  
+model5.fit(X, y);
+```
+
+
+Notes: 
+
+Let’s explore another different hyperparameter `min_samples_split`.
+
+`min_samples_split` sets the minimum number of samples required to split an internal node.
+Remember our decision boundaries? 
+
+This hyperparameter will set a minimum number of observations that need to be on either side of the boundary.
+
+Let’s test it out first by setting ` min_samples_split =2`.
+
+
+---
+
+
+```{python include=FALSE}
+import graphviz
+dot_data = export_graphviz(model)
+graphviz.Source(
+    export_graphviz(
+        model5,
+        out_file=None,
+        feature_names=X.columns,
+         class_names=["A+", "Not A+"],
+        impurity=True,
+    )   
+).render("../../../../static/module2/module2_12b", format='png') 
+```
+
+<center><img src="/module2/module2_12b.png"  width = "44%" alt="404 image" /></center>
+
+
+Notes: 
+
+This time we are going to look at the number of samples on each side of the boundary. 
+
+Since our dataset starts with 21 samples, we can see we have 21 samples at the root node. 
+
+This gets split up to 6 on the left branch and 15 on the right. 
+
+This means that the tree will continue to split the examples so long as there are at least 2 samples to split up.
+
+Some of these nodes have more than the minimum split value and do not split, but that’s likely because splitting is not needed since all the values are classified to the same class.
+
+
+---
+
+```{python}
+model5.score(X, y)
+```
+
+Notes: 
+
+ What kind of score is obtained on the data the model was trained on?
+
+It looks like the model is 100 % accurate!
+
+
+---
+
+
+```{python}
+model6 = DecisionTreeClassifier(min_samples_split=4) 
+model6.fit(X, y);
+model6.score(X,y)
+```
+```{python include=FALSE}
+import graphviz
+dot_data = export_graphviz(model)
+graphviz.Source(
+    export_graphviz(
+        model6,
+        out_file=None,
+        feature_names=X.columns,
+        class_names=["A+", "Not A+"],
+        impurity=True,
+    )   
+).render("../../../../static/module2/module2_12min4", format='png') 
+```
+
+<center><img src="/module2/module2_12min4.png"  width = "35%" alt="404 image" /></center>
+
+
+
+Notes: 
+
+What happens when we increase this hyperparameter to 4 now? 
+
+We see that the score went from 100 percent accuracy to 95 percent. 
+
+If we look at our decision tree, we can see it’s a little bit smaller. 
+
+It now has a depth of 4 instead of 5. The bottom node on the far right originally split into 2 when we had `min_samples_split` of 2 but now it stops and classes both samples as `A+` now. 
+
+
+---
+
+```{python}
+model7 = DecisionTreeClassifier(min_samples_split=10) 
+model7.fit(X, y);
+model7.score(X,y)
+```
+
+```{python include=FALSE}
+import graphviz
+dot_data = export_graphviz(model)
+graphviz.Source(
+    export_graphviz(
+        model7,
+        out_file=None,
+        feature_names=X.columns,
+        class_names=["A+", "Not A+"],
+        impurity=True,
+    )   
+).render("../../../../static/module2/module2_12min10", format='png') 
+```
+
+<center><img src="/module2/module2_12min10.png"  width = "28%" alt="404 image" /></center>
+
+
+
+Notes: 
+
+Let’s set `min_samples_split` now to 10 and see what happens. 
+
+The model’s score decreases from 95% to 90 percent and our tree looks like it’s lost a branch. 
+
+The node with 4 samples no longer is split.
+
+So unlike `max_depth`, when we increase the `min_samples_split` hyperparameter, the score of the data the model has seen, decreases. 
+
+
+---
+
+
+<center><img src="/module2/decisiontree.png"  width = "70%" alt="404 image" /></center>  
+
+<br>
+See this link <a href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html" target="_blank">here</a>  .
+
+Notes: 
+
+There are many other hyperparameters for decision trees that you can explore at the link <a href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html" target="_blank">here</a> .
+
+
+---
+
+### To summarize
+
+- **parameters** are automatically learned by the algorithm during training
+- **hyperparameters** are specified based on:
+    - expert knowledge
+    - heuristics, or 
+    - systematic/automated optimization (more on that in the upcoming modules)
+
+Notes: 
+
+Let's summarize what we know so far:
+
+Parameters are chosen during training and hyperparameters are specified by us before training. 
+
+They can also be chosen by automated optimization which we will cover in module 5. 
+
+
+
+---
+
+# Let’s apply what we learned!
+
+Notes: <br>

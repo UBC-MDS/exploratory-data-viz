@@ -1,0 +1,323 @@
+---
+params:
+  dynamictitle: "module4_21"
+title: "`r params$dynamictitle`"
+output: 
+  md_document:
+    variant: gfm
+---
+
+
+```{r setup, include=FALSE}
+## DO NOT FORGET TO CHANGE THIS ACCORDINGLY 
+library(rmarkdown)
+# MAke sure you are updating your title 
+knitr::opts_chunk$set(echo = TRUE,
+                      base.dir = ".", 
+                      base.url = "/",
+                      fig.path = paste("../../../../static/module4/", params$dynamictitle,"/", sep = ""))
+
+knitr_opts <- knitr_options( opts_knit = NULL,
+                             opts_chunk = NULL,
+                             knit_hooks = NULL,
+                             opts_hooks = NULL,
+                             opts_template = NULL)
+md_document_custom <- md_document(variant = "gfm")
+output_format(knitr = knitr_opts,
+              pandoc = NULL,
+              base_format = md_document_custom)
+library(reticulate)
+
+```
+
+
+```{python include=FALSE}
+import pandas as pd
+import numpy as np
+import altair as alt
+from altair_saver import save
+import glob
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline, make_pipeline
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.linear_model import LinearRegression, LogisticRegression
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor, export_graphviz
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import cross_validate
+
+from IPython.display import HTML, display
+from PIL import Image, ImageFile
+
+from plot_classifier import plot_classifier
+pd.set_option('display.width', 350)
+
+np.set_printoptions(linewidth=400)
+
+pd.set_option('display.max_columns', 50)
+pd.set_option('display.max_rows', 15)
+
+path = "../../../../static/module4/"
+```
+
+
+type: slides
+
+# 𝑘 -Nearest Neighbours Regressor
+
+Notes: <br>
+
+---
+
+## Regression with  𝑘 -nearest neighbours ( 𝑘 -NNs)
+
+
+
+```{python}
+np.random.seed(0)
+n = 50
+X_1 = np.linspace(0,2,n)+np.random.randn(n)*0.01
+X = pd.DataFrame(X_1[:,None], columns=['length'])
+X.head()
+```
+
+```{python}
+y = abs(np.random.randn(n,1))*2 + X_1[:,None]*5
+y = pd.DataFrame(y, columns=['weight'])
+y.head()
+```
+
+
+
+Notes: 
+
+We can use the 𝑘-nearest neighbour algorithm on regression problems as well.
+
+ In 𝑘-nearest neighbour regression, we take the average of 𝑘-nearest neighbours instead of majority vote.
+
+ Let's look at an example. Here we are creating some synthetic data with fifty examples and only one feature. 
+
+Let's imagine that our one feature represents the length of a snake and our task is to predict the weight of the snake given the length. 
+
+Right now, do not worry about the code and only focus on data and our model. 
+
+
+---
+
+```{python}
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=123)
+
+```
+
+```{python}
+source = pd.concat([X_train, y_train], axis=1)
+
+scatter = alt.Chart(source, width=500, height=300).mark_point(filled=True, color='green').encode(
+    alt.X('length:Q'),
+    alt.Y('weight:Q'))
+
+scatter
+```
+
+```{python include =FALSE}
+scatter.save(path + 'snakes2.png')
+```
+
+<br>
+<center><img src="/module4/snakes2.png" alt="A caption" width="50%" /></center>
+
+
+Notes:
+
+Let's split over data first so there we do not break the golden rule of machine learning.
+
+And here is what our data looks like.
+
+We only have one feature of `length` and our goal is to predict `weight`. 
+
+
+
+---
+
+```{python}
+from sklearn.neighbors import KNeighborsRegressor
+```
+
+```{python}
+knnr = KNeighborsRegressor(n_neighbors=1, weights="uniform")
+knnr.fit(X_train,y_train);
+```
+
+```{python}
+predicted = knnr.predict(X_train)
+predicted[:5]
+```
+
+```{python}
+knnr.score( X_train, y_train)  
+```
+
+
+
+Notes: 
+
+Now let's try the 𝑘-nearest neighbours regressor on this data. 
+
+In this case, we import `KNeighborsRegressor` instead of `KNeighborsClassifier`.  
+
+Then we create our `KNeighborsRegressor` object with `n_neighbors=1` so we are only considering 1 neighbour  and with `uniform` weights. 
+
+We fit our model and predict on `X_train`. 
+
+Here are the first five predictions. 
+
+As expected we get continuous values as predictions. 
+
+If we scored over regressors we get this perfect score of one. 
+
+Now remember that we are using a `n_neighbors=1`, so we are likely to overfit.
+
+---
+
+```{python include = FALSE}
+n = 50  # number of samples
+np.random.seed(0)  # fix seed for reproducibility
+X = np.linspace(0,2,n)+np.random.randn(n)*0.01
+X = X[:, None]
+y = abs(np.random.randn(n,1))*2 + X_1[:,None]*5
+
+knn = KNeighborsRegressor(n_neighbors=1, weights="uniform")
+knn.fit(X, y)
+```
+
+```{python echo=FALSE, fig.width = 13, fig.height = 8,  out.width = '100%', fig.align='center'}
+grid = np.linspace(np.min(X), np.max(X), 1000)[:, None]
+plt.plot(grid, knn.predict(grid), color='orange', linewidth=1)
+plt.plot(X, y, ".r", markersize=10, color='green')
+plt.xticks(fontsize= 14);
+plt.yticks(fontsize= 14);
+plt.xlabel("length",fontsize= 14)
+plt.ylabel("weight",fontsize= 14)
+
+```
+
+
+
+Notes: 
+
+Here is how our model would look like if we plotted it. 
+
+The model is trying to get every example correct since `n_neighbors=1`.
+
+
+---
+
+```{python}
+knnr = KNeighborsRegressor(n_neighbors=10, weights="uniform")
+knnr.fit(X_train, y_train);
+```
+
+```{python}
+knnr.score(X_train, y_train)
+```
+
+```{python echo=FALSE, fig.width = 13, fig.height = 8,  out.width = '60%'}
+knn = KNeighborsRegressor(n_neighbors=10, weights="uniform")
+knn.fit(X, y);
+plt.plot(grid, knn.predict(grid), color='orange', linewidth=1)
+plt.plot(X, y, ".r", markersize=10, color='green')
+plt.xticks(fontsize= 16);
+plt.yticks(fontsize= 16);
+plt.xlabel("length",fontsize= 16)
+plt.ylabel("weight",fontsize= 16)
+```
+
+Notes: 
+
+ Now let's try `n_neighbors=10`.
+
+Again, we are creating our `KNeighborsRegressor` object with `n_neighbors=10` and ` `n_neighbors=10`=’uniform’` which means all of our examples have equal contribution to the prediction.
+
+We fit our regressor and score it. Now we can see we are getting a lower score over the training set. Our score decreased from 1.0 when to had `n_neighbors=1` to now having a score of 0.932.  
+
+When we plot our model, we can see that it no longer is trying to get every example correct. 
+
+---
+
+## Using weighted distances
+
+```{python}
+knnr = KNeighborsRegressor(n_neighbors=10, weights="distance")
+knnr.fit(X_train, y_train);
+```
+
+```{python}
+knnr.score(X_train, y_train)
+```
+
+```{python echo=FALSE, fig.width = 13, fig.height = 8,  out.width = '60%'}
+knn = KNeighborsRegressor(n_neighbors=10, weights="distance").fit(X, y);
+plt.plot(grid, knn.predict(grid), color='orange', linewidth=1)
+plt.plot(X, y, ".r", markersize=10, color='green')
+plt.xticks(fontsize= 16);
+plt.yticks(fontsize= 16);
+plt.xlabel("length",fontsize= 16)
+plt.ylabel("weight",fontsize= 16)
+```
+
+
+Notes: 
+
+Let's now take a look at the `weight` hyperparameter `distance`. 
+
+This means that the points (examples) that are closer now have more meaning to the prediction than the points (example) that are further away. 
+
+If we use this parameter, fit it and then score it, we get a perfect training score again. 
+
+Plotting it shows that the model is trying to predict every model correctly. This is likely another situation of overfitting. 
+
+---
+
+## Pros and Cons of 𝑘 -Nearest Neighbours
+
+<br>
+<br>
+
+### Pros:
+
+- Easy to understand, interpret.
+- Simply hyperparameter 𝑘 (`n_neighbors`) controlling the fundamental tradeoff.
+- Can learn very complex functions given enough data.
+- Lazy learning: Takes no time to `fit`
+
+<br>
+
+### Cons:
+
+- Can potentially be VERY slow during prediction time. 
+- Often not that great test accuracy compared to the modern approaches.
+- You should scale your features. We'll be looking into it in the next lecture. 
+
+Notes: 
+
+Let's talk about some pros and cons.
+
+Advantages include:
+
+- Easy to understand and interpret.
+- Simply hyperparameter 𝑘 (`n_neighbors`) controlling the fundamental trade-off.
+    - lower 𝑘 is likely producing an overfit model and higher 𝑘 is likely producing an underfit model. 
+- Given the simplicity of this algorithm, it can surprisingly learn very complex functions given enough data. 
+- 𝑘-Nearest Neighbours we don't really do anything during the fit phase. 
+
+Some disadvantages often include:
+
+- Can potentially be quite slow during prediction time which is due to the fact that it does very little during training time. During prediction, the model must find the distances to the query point to all examples in the training set and this makes it very slow.
+- Scaling must be done when using this model, which will be covered in module 5. 
+
+
+---
+
+# Let’s apply what we learned!
+
+Notes: <br>

@@ -1,0 +1,470 @@
+---
+params:
+  dynamictitle: "module1_01"
+title: "`r params$dynamictitle`"
+output: 
+  md_document:
+    variant: gfm
+---
+
+
+```{r setup, include=FALSE}
+## DO NOT FORGET TO CHANGE THIS ACCORDINGLY 
+library(rmarkdown)
+# MAke sure you are updating your title 
+knitr::opts_chunk$set(echo = TRUE,
+                      base.dir = ".", 
+                      base.url = "/",
+                      fig.path = paste("../../../../static/module1/", params$dynamictitle,"/", sep = ""))
+
+knitr_opts <- knitr_options( opts_knit = NULL,
+                             opts_chunk = NULL,
+                             knit_hooks = NULL,
+                             opts_hooks = NULL,
+                             opts_template = NULL)
+md_document_custom <- md_document(variant = "gfm")
+output_format(knitr = knitr_opts,
+              pandoc = NULL,
+              base_format = md_document_custom)
+library(reticulate)
+
+```
+
+
+```{python include=FALSE}
+import pandas as pd
+import numpy as np
+import glob
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline, make_pipeline
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.linear_model import LinearRegression, LogisticRegression
+import matplotlib.pyplot as plt
+from image_classifier import classify_image
+
+from IPython.display import HTML, display
+from PIL import Image, ImageFile
+pd.set_option('display.width', 350)
+
+np.set_printoptions(linewidth=400)
+
+pd.set_option('display.max_columns', 50)
+pd.set_option('display.max_rows', 15)
+
+```
+
+
+type: slides
+
+# What is Supervised Machine Learning?
+
+Notes: <br>
+
+---
+
+## Prevalence of Machine Learning (ML)
+
+
+<center><img src='/module1/examples.png'  width = "75%" alt="404 image" /></center>
+
+
+Notes: 
+
+You may not know it, but machine learning  (ML) is all around you. 
+
+Some examples include:
+
+- Voice assistance
+- Google news
+- Recommender systems
+- Face recognition
+- Auto completion
+- Stock market predictions
+- Character recognition
+- Self-driving cars
+- Cancer diagnosis
+- Drug discovery
+
+The best AlphaGo player in the world is not human anymore. 
+
+AlphaGo, a machine learning-based system from Google, is the world's best player at the moment.
+
+--- 
+
+## What is Machine Learning?
+
+* A field of study that gives computers the ability to learn without being explicitly programmed.*
+<br>      -- Arthur Samuel (1959)
+
+
+<center>
+<img src="/module1/traditional-programming-vs-ML.png" height="800" width="800"> 
+</center>
+
+
+Notes: 
+
+What exactly is machine learning? There is no clear consensus on the definition of machine learning. But here is a popular definition by Artur Samuel who was one of the pioneers of machine learning and artificial intelligence.
+
+Arthur Samuel said that machine learning is *"A field of study that gives computers the ability to learn without being explicitly programmed."*
+
+Machine learning is a different way to think about problem-solving. Usually, when we write a program we’re thinking logically and mathematically. Here is how a traditional program looks like. We are given input and an algorithm and we produce an output.
+
+Instead, in the machine learning paradigm, we're given data and some output and our machine learning algorithm returns a program. we can use this program to predict the output for some unseen input. 
+
+In this paradigm, we’re making observations about an uncertain world and thinking about it statistically. 
+
+
+---
+
+## Some concrete examples of supervised learning
+
+<br>
+<br>
+
+## Example 1: Predict whether a patient has a liver disease or not
+
+*In all the the upcoming examples, Don't worry about the code. Just focus on the input and output in each example.*
+
+Notes:
+
+Before we start let's look at some concrete examples of supervised machine learning. 
+
+Our first example is predicting whether a patient has a liver disease or not. 
+
+For now, ignore the code and only focus on input and output.
+
+
+---
+
+```{python include=FALSE}
+df = pd.read_csv("data/indian_liver_patient.csv")
+df = df.drop(columns=["Gender"])
+df.loc[df["Dataset"] == 1, "Target"] = "Disease"
+df.loc[df["Dataset"] == 2, "Target"] = "No Disease"
+df = df.drop(columns=["Dataset"])
+train_df, test_df = train_test_split(df, test_size=4, random_state=16)
+train_df.head()
+```
+
+
+```{python}
+train_df, test_df = train_test_split(df, test_size=4, random_state=16)
+train_df.head()
+```
+
+
+Notes: 
+
+ Usually, for supervised machine learning, we are provided data in a tabular form. 
+
+We have columns full of data and a special “target” column which is what we are trying to predict.
+
+We pass this to a machine learning algorithm.
+
+
+---
+
+
+```{python  results = 'hide'}
+from xgboost import XGBClassifier
+X_train = train_df.drop(columns=['Target'])
+y_train = train_df['Target']
+X_test = test_df.drop(columns=['Target'])
+model = XGBClassifier()
+model.fit(X_train, y_train)
+```
+
+
+
+
+Notes:
+
+Next, we build a model and train our model using the labels we already have. 
+
+Ignore this output here.  
+
+It's just explaining what's going on in the model which we will explain soon. 
+
+---
+
+```{python}
+pred_df = pd.DataFrame(
+    {"Predicted label": model.predict(X_test).tolist()}
+)
+df_concat = pd.concat([X_test.reset_index(drop=True), pred_df], axis=1)
+df_concat
+```
+
+
+Notes: 
+
+Then, given new unseen input, we can apply our learned model to predict the target for the input. 
+
+In this case, we can imagine that a new patient arrives and we want to predict if the patient has a disease or not.
+ 
+Given the patient’s information, our model predicts if the patient has the disease or not. 
+
+
+---
+
+<br>
+<br>
+<br>
+
+## Example 2: Predict the label of a given image
+
+Notes:
+
+Our second example is predicting the label of a given image. 
+
+---
+
+##  Predict labels with associated probability scores for unseen images  
+
+```{python eval=FALSE}
+images = glob.glob("test_images/*.*")
+for image in images:
+    img = Image.open(image)
+    img.load()
+    plt.imshow(img)
+    plt.show()
+    df = classify_image(img)
+    print(df.to_string(index=False))
+```
+
+<img src="/module1/module1_01/unnamed-chunk-6-1.png" width="300" />
+
+```out
+  Class  Probability
+      ox     0.869893
+  oxcart     0.065034
+  sorrel     0.028593
+ gazelle     0.010053
+
+```
+
+
+Notes: 
+
+Here we use a machine learning model trained on millions of images and their labels. 
+
+We are applying our model to predict the labels of unseen images. 
+
+In this particular case, our unseen image is that of an ox. 
+
+When we apply our trained model on this image, it gives us some predictions and their associated probability scores.
+
+So in this particular case, the model predicted that the image was that of an ox with a confidence of 0.869. 
+
+
+---
+
+
+```{python eval=FALSE}
+images = glob.glob("test_images/*.*")
+for image in images:
+    img = Image.open(image)
+    img.load()
+    plt.imshow(img)
+    plt.show()
+    df = classify_image(img)
+    print(df.to_string(index=False))
+```
+
+<img src="/module1/module1_01/unnamed-chunk-6-2.png" width="300" />
+
+```out
+            Class  Probability
+            llama     0.123625
+               ox     0.076333
+           kelpie     0.071548
+ ibex, Capra ibex     0.060569
+
+```
+
+
+Notes: 
+
+Our second unseen image contains some donkeys. 
+
+In this case, when we apply our mode to the image, The model predicts that it contains a llama. That being said, the probability score here is only 0.123. 
+
+
+---
+
+<br>
+<br>
+<br>
+
+## Example 3: Predict sentiment expressed in a movie review (pos/neg)
+*Attribution: The dataset `imdb_master.csv` was obtained from <a href="https://www.kaggle.com/uttam94/imdb-mastercsv" target="_blank">Kaggle</a>*
+
+Notes: 
+
+Our third example is about predicting sentiment expressed in movie reviews.
+
+
+---
+
+```{python include=FALSE, Eval=FALSE}
+imdb_df = pd.read_csv("data/imdb_master.csv", encoding="ISO-8859-1")
+imdb_df = imdb_df[imdb_df["label"].str.startswith(("pos", "neg"))]
+imdb_df = imdb_df.drop(columns=["Unnamed: 0", "type"])
+train_df, test_df = train_test_split(imdb_df, test_size=0.10, random_state=12)
+```
+
+```{python eval=FALSE}
+train_df.head()
+```
+
+
+```out
+                                                review label         file
+43020  Just caught it at the Toronto International Fi...   pos   3719_9.txt
+49131  The movie itself made me want to go and call s...   pos  9219_10.txt
+23701  I came across this movie on DVD purely by chan...   pos   8832_9.txt
+4182   Having seen Carlo Lizzani's documentary on Luc...   neg   2514_4.txt
+38521  I loved this film. I first saw it when I was 2...   pos  1091_10.txt
+```
+
+Notes:  First we wrangle our data so that we can train our model. 
+
+This data contains the review in a column named `review` and a `label` column which contains values of either `pos` or `neg` for positive or negative. 
+
+---
+
+```{python }
+X_train, y_train = train_df['review'], train_df['label']
+X_test, y_test = test_df['review'], test_df['label']
+
+clf = Pipeline(
+    [
+        ("vect", CountVectorizer(max_features=5000)),
+        ("clf", LogisticRegression(max_iter=5000)),
+    ]
+)
+clf.fit(X_train, y_train)
+```
+
+
+Notes: Next, we build our model and train on our existing data.
+
+Again, don't worry about the code here. 
+
+---
+
+```{python}
+pred_dict = {
+    "reviews": X_test[0:4],
+    "true_sentiment": y_test[0:4],
+    "sentiment_predictions": clf.predict(X_test[0:4]),
+}
+pred_df = pd.DataFrame(pred_dict)
+pred_df.head()
+```
+
+Notes: 
+
+
+Once we have the model, we can use this to predict the sentiment expressed in new movie reviews. 
+
+---
+
+<br>
+<br>
+<br>
+
+## Example 4: Predict housing prices
+*Attribution: The dataset `kc_house_data.csv` was obtained from <a href="https://www.kaggle.com/harlfoxem/housesalesprediction" target="_blank">Kaggle</a>.*
+
+Notes: 
+
+Example 4 is about predicting housing prices.
+
+
+---
+
+```{python}
+df = pd.read_csv("data/kc_house_data.csv")
+df = df.drop(columns=["id", "date"])
+train_df, test_df = train_test_split(df, test_size=0.2, random_state=4)
+train_df.head()
+```
+
+
+Notes: 
+
+In this particular case, our data contains attributes associated with properties 
+
+For example, our attributes consist of the number of bedrooms, the number of bathrooms, etc. 
+
+Our special column which we call our “target column” is the price for the corresponding property.
+
+Note that this price column here contains continuous values and not discrete values as we saw in our previous examples. 
+
+
+---
+
+```{python}
+
+X_train = train_df.drop(columns=["price"])
+X_train.head()
+```
+
+```{python}
+y_train = train_df["price"]
+y_train.head()
+```
+
+```{python}
+X_test = test_df.drop(columns=["price"])
+y_test = train_df["price"]
+```
+
+
+
+Notes: 
+
+It's important that we separate our data from the target column (The `y` variables).
+
+---
+
+
+```{python results = 'hide'}
+from xgboost import XGBRegressor
+
+model = XGBRegressor()
+model.fit(X_train, y_train)
+```
+
+Notes: 
+
+Again we use this data to train our machine learning model. 
+
+---
+
+
+```{python}
+pred_df = pd.DataFrame(
+    {"Predicted price": model.predict(X_test[0:4]).tolist(), "Actual price": y_test[0:4].tolist()}
+)
+df_concat = pd.concat([X_test[0:4].reset_index(drop=True), pred_df], axis=1)
+df_concat.head()
+```
+
+
+Notes: 
+
+And once we have our trained model, we apply it to predict the price associated with new home properties. 
+
+When we pass new properties into the model we get a predicted price for those properties. 
+
+And note again that our predicted prices here are continuous numbers and not discrete values
+
+
+---
+
+# Let’s apply what we learned!
+
+Notes: <br>
