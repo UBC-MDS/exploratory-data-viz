@@ -2,470 +2,556 @@
 type: slides
 ---
 
-# What is Supervised Machine Learning?
+# What is data visualization?
+
+Notes: At its core, data visualization is about representing numbers
+with graphical components. These include many components, such as
+position, area, color, etc, Picking the most appropriate component for
+you data can be tricky, but fortunately there is research on which are
+the most appropriate for different situations as we will see later.
+
+---
+
+## Why bother visualizing data instead of showing raw numbers?
+
+Notes: Think about it, numbers have been around for about 5,000 years.
+Visual systems, on the other hand, have undergone refinement for over
+500,000,000 years by training with a lethal, evolutionary cost function.
+While we need to train ourselves to recognize structure in numerical
+data, we have evolved to instinctively recognize visual patterns and to
+accurately judge properties such as colors and distances between
+objects. Drawing upon this complex build-in apparatus, we can arrive at
+conclusion much faster by glancing at visual representations of data
+rather than numerical representations.
+
+---
+
+## Can you spot the differences between these four sets of numbers?
+
+<table style="text-align: center; margin-left:auto; margin-right:auto; width:20%">
+<tbody>
+<tr>
+<th colspan="2">
+I
+</th>
+<th colspan="2">
+II
+</th>
+<th colspan="2">
+III
+</th>
+<th colspan="2">
+IV
+</th>
+</tr>
+<tr>
+<td>
+x
+</td>
+<td>
+y
+</td>
+<td>
+x
+</td>
+<td>
+y
+</td>
+<td>
+x
+</td>
+<td>
+y
+</td>
+<td>
+x
+</td>
+<td>
+y
+</td>
+</tr>
+<tr>
+<td>
+10.0
+</td>
+<td>
+8.04
+</td>
+<td>
+10.0
+</td>
+<td>
+9.14
+</td>
+<td>
+10.0
+</td>
+<td>
+7.46
+</td>
+<td>
+8.0
+</td>
+<td>
+6.58
+</td>
+</tr>
+<tr>
+<td>
+8.0
+</td>
+<td>
+6.95
+</td>
+<td>
+8.0
+</td>
+<td>
+8.14
+</td>
+<td>
+8.0
+</td>
+<td>
+6.77
+</td>
+<td>
+8.0
+</td>
+<td>
+5.76
+</td>
+</tr>
+<tr>
+<td>
+13.0
+</td>
+<td>
+7.58
+</td>
+<td>
+13.0
+</td>
+<td>
+8.74
+</td>
+<td>
+13.0
+</td>
+<td>
+12.74
+</td>
+<td>
+8.0
+</td>
+<td>
+7.71
+</td>
+</tr>
+<tr>
+<td>
+9.0
+</td>
+<td>
+8.81
+</td>
+<td>
+9.0
+</td>
+<td>
+8.77
+</td>
+<td>
+9.0
+</td>
+<td>
+7.11
+</td>
+<td>
+8.0
+</td>
+<td>
+8.84
+</td>
+</tr>
+<tr>
+<td>
+11.0
+</td>
+<td>
+8.33
+</td>
+<td>
+11.0
+</td>
+<td>
+9.26
+</td>
+<td>
+11.0
+</td>
+<td>
+7.81
+</td>
+<td>
+8.0
+</td>
+<td>
+8.47
+</td>
+</tr>
+<tr>
+<td>
+14.0
+</td>
+<td>
+9.96
+</td>
+<td>
+14.0
+</td>
+<td>
+8.10
+</td>
+<td>
+14.0
+</td>
+<td>
+8.84
+</td>
+<td>
+8.0
+</td>
+<td>
+7.04
+</td>
+</tr>
+<tr>
+<td>
+6.0
+</td>
+<td>
+7.24
+</td>
+<td>
+6.0
+</td>
+<td>
+6.13
+</td>
+<td>
+6.0
+</td>
+<td>
+6.08
+</td>
+<td>
+8.0
+</td>
+<td>
+5.25
+</td>
+</tr>
+<tr>
+<td>
+4.0
+</td>
+<td>
+4.26
+</td>
+<td>
+4.0
+</td>
+<td>
+3.10
+</td>
+<td>
+4.0
+</td>
+<td>
+5.39
+</td>
+<td>
+19.0
+</td>
+<td>
+12.50
+</td>
+</tr>
+<tr>
+<td>
+12.0
+</td>
+<td>
+10.84
+</td>
+<td>
+12.0
+</td>
+<td>
+9.13
+</td>
+<td>
+12.0
+</td>
+<td>
+8.15
+</td>
+<td>
+8.0
+</td>
+<td>
+5.56
+</td>
+</tr>
+<tr>
+<td>
+7.0
+</td>
+<td>
+4.82
+</td>
+<td>
+7.0
+</td>
+<td>
+7.26
+</td>
+<td>
+7.0
+</td>
+<td>
+6.42
+</td>
+<td>
+8.0
+</td>
+<td>
+7.91
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+<td>
+5.68
+</td>
+<td>
+5.0
+</td>
+<td>
+4.74
+</td>
+<td>
+5.0
+</td>
+<td>
+5.73
+</td>
+<td>
+8.0
+</td>
+<td>
+6.89
+</td>
+</tr>
+</tbody>
+</table>
+
+Notes: For example, have a look at the four sets of numbers in the table
+below, [put together by statistician Francis Anscombe in the
+70s.](https://en.wikipedia.org/wiki/Anscombe%27s_quartet) Can you see
+how the sets are different from each other by just glancing at the
+table?
+
+---
+
+## Summary statistics don’t necessarily help
+
+### All four sets of numbers are nearly identical in the following properties
+
+<table style="width:80%; text-align:center">
+<tbody>
+<tr>
+<th>
+Property
+</th>
+<th>
+Value
+</th>
+<th>
+Accuracy
+</th>
+</tr>
+<tr>
+<td>
+<a href="/wiki/Mean" title="Mean">Mean</a> of <i>x</i>
+</td>
+<td>
+9
+</td>
+<td>
+exact
+</td>
+</tr>
+<tr>
+<td>
+Sample <a href="/wiki/Variance" title="Variance">variance</a> of
+<i>x</i> : <span class="mwe-math-element"><span
+class="mwe-math-mathml-inline mwe-math-mathml-a11y"
+style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \sigma ^{2}}">
+<semantics> <mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0"> <msup> <mi>σ<!-- σ --></mi>
+<mrow class="MJX-TeXAtom-ORD"> <mn>2</mn> </mrow> </msup> </mstyle>
+</mrow> <annotation encoding="application/x-tex">{^{2}}</annotation>
+</semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/53a5c55e536acf250c1d3e0f754be5692b843ef5" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.385ex; height:2.676ex;" alt="\sigma ^{2}"/></span>
+</td>
+<td>
+11
+</td>
+<td>
+exact
+</td>
+</tr>
+<tr>
+<td>
+Mean of <i>y</i>
+</td>
+<td>
+7.50
+</td>
+<td>
+to 2 decimal places
+</td>
+</tr>
+<tr>
+<td>
+Sample variance of <i>y</i> : <span class="mwe-math-element"><span
+class="mwe-math-mathml-inline mwe-math-mathml-a11y"
+style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \sigma ^{2}}">
+<semantics> <mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0"> <msup> <mi>σ<!-- σ --></mi>
+<mrow class="MJX-TeXAtom-ORD"> <mn>2</mn> </mrow> </msup> </mstyle>
+</mrow> <annotation encoding="application/x-tex">{^{2}}</annotation>
+</semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/53a5c55e536acf250c1d3e0f754be5692b843ef5" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.385ex; height:2.676ex;" alt="\sigma ^{2}"/></span>
+</td>
+<td>
+4.125
+</td>
+<td>
+±0.003
+</td>
+</tr>
+<tr>
+<td>
+<a href="/wiki/Correlation" class="mw-redirect" title="Correlation">Correlation</a>
+between <i>x</i> and <i>y</i>
+</td>
+<td>
+0.816
+</td>
+<td>
+to 3 decimal places
+</td>
+</tr>
+<tr>
+<td>
+<a href="/wiki/Linear_regression" title="Linear regression">Linear
+regression</a> line
+</td>
+<td>
+<i>y</i> = 3.00 + 0.500<i>x</i>
+</td>
+<td>
+to 2 and 3 decimal places, respectively
+</td>
+</tr>
+<tr>
+<td>
+<a href="/wiki/Coefficient_of_determination" title="Coefficient of determination">Coefficient
+of determination</a> of the linear regression : <span
+class="mwe-math-element"><span
+class="mwe-math-mathml-inline mwe-math-mathml-a11y"
+style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle R^{2}}">
+<semantics> <mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0"> <msup> <mi>R</mi>
+<mrow class="MJX-TeXAtom-ORD"> <mn>2</mn> </mrow> </msup> </mstyle>
+</mrow> <annotation encoding="application/x-tex">{R^{2}}</annotation>
+</semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/5ce07e278be3e058a6303de8359f8b4a4288264a" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.818ex; height:2.676ex;" alt="R^{2}"/></span>
+</td>
+<td>
+0.67
+</td>
+<td>
+to 2 decimal places
+</td>
+</tr>
+</tbody>
+</table>
+
+Notes: No? What about if I showed you the commonly used numerical
+summaries of the data? Tough luck, all the summary statistics in the
+table below are **the same** for each of these four set.
+
+---
+
+## Plotting the data make the differences obvious to us
+
+<img src="/module1/anscombes-quartet.png" alt="A caption" width=80% text-align="center"></img>
+
+Notes: Humans are not good at detecting patterns in raw numbers, and we
+don’t have good intuition about which combination of numbers can
+contribute to the same statistical summaries. But guess what we excel
+at? Detecting visual patterns! It is immediately clear to us how these
+sets of numbers differ once they are shown as graphical objects instead
+of textual objects. And this is one of the main reasons why data
+visualization is such a powerful tool for data exploration and
+communication.
+
+---
+
+``` python
+y = 3
+y
+```
+
+```out
+3
+```
+
+---
+
+# Let’s apply what we learned!
 
 Notes: <br>
 
 ---
 
-## Prevalence of Machine Learning (ML)
-
-<center>
-
-<img src='/module1/examples.png'  width = "75%" alt="404 image" />
-
-</center>
-
-Notes:
-
-You may not know it, but machine learning (ML) is all around you.
-
-Some examples include:
-
-  - Voice assistance
-  - Google news
-  - Recommender systems
-  - Face recognition
-  - Auto completion
-  - Stock market predictions
-  - Character recognition
-  - Self-driving cars
-  - Cancer diagnosis
-  - Drug discovery
-
-The best AlphaGo player in the world is not human anymore.
-
-AlphaGo, a machine learning-based system from Google, is the world’s
-best player at the moment.
-
----
-
-## What is Machine Learning?
-
-  - A field of study that gives computers the ability to learn without
-    being explicitly programmed.\* <br> – Arthur Samuel (1959)
-
-<center>
-
-<img src="/module1/traditional-programming-vs-ML.png" height="800" width="800">
-
-</center>
-
-Notes:
-
-What exactly is machine learning? There is no clear consensus on the
-definition of machine learning. But here is a popular definition by
-Artur Samuel who was one of the pioneers of machine learning and
-artificial intelligence.
-
-Arthur Samuel said that machine learning is *“A field of study that
-gives computers the ability to learn without being explicitly
-programmed.”*
-
-Machine learning is a different way to think about problem-solving.
-Usually, when we write a program we’re thinking logically and
-mathematically. Here is how a traditional program looks like. We are
-given input and an algorithm and we produce an output.
-
-Instead, in the machine learning paradigm, we’re given data and some
-output and our machine learning algorithm returns a program. we can use
-this program to predict the output for some unseen input.
-
-In this paradigm, we’re making observations about an uncertain world and
-thinking about it statistically.
-
----
-
-## Some concrete examples of supervised learning
-
-<br> <br>
-
-## Example 1: Predict whether a patient has a liver disease or not
-
-*In all the the upcoming examples, Don’t worry about the code. Just
-focus on the input and output in each example.*
-
-Notes:
-
-Before we start let’s look at some concrete examples of supervised
-machine learning.
-
-Our first example is predicting whether a patient has a liver disease or
-not.
-
-For now, ignore the code and only focus on input and output.
-
----
-
 ``` python
-train_df, test_df = train_test_split(df, test_size=4, random_state=16)
-train_df.head()
-```
+from vega_datasets import data
+import altair as alt
 
-```out
-     Age  Total_Bilirubin  Direct_Bilirubin  Alkaline_Phosphotase  Alamine_Aminotransferase  Aspartate_Aminotransferase  Total_Protiens  Albumin  Albumin_and_Globulin_Ratio      Target
-13    74              1.1               0.4                   214                        22                          30             8.1      4.1                         1.0     Disease
-236   22              0.8               0.2                   300                        57                          40             7.9      3.8                         0.9  No Disease
-335   13              0.7               0.1                   182                        24                          19             8.9      4.9                         1.2     Disease
-234   40              0.9               0.2                   285                        32                          27             7.7      3.5                         0.8     Disease
-159   50              1.2               0.4                   282                        36                          32             7.2      3.9                         1.1     Disease
-```
 
-Notes:
-
-Usually, for supervised machine learning, we are provided data in a
-tabular form.
-
-We have columns full of data and a special “target” column which is what
-we are trying to predict.
-
-We pass this to a machine learning algorithm.
-
----
-
-``` python
-from xgboost import XGBClassifier
-X_train = train_df.drop(columns=['Target'])
-y_train = train_df['Target']
-X_test = test_df.drop(columns=['Target'])
-model = XGBClassifier()
-model.fit(X_train, y_train)
-```
-
-Notes:
-
-Next, we build a model and train our model using the labels we already
-have.
-
-Ignore this output here.
-
-It’s just explaining what’s going on in the model which we will explain
-soon.
-
----
-
-``` python
-pred_df = pd.DataFrame(
-    {"Predicted label": model.predict(X_test).tolist()}
+chart0 = alt.Chart(data.cars()).mark_bar().encode(
+x='Origin',
+y='count()'
 )
-df_concat = pd.concat([X_test.reset_index(drop=True), pred_df], axis=1)
-df_concat
+chart0
+```
+<img src="/module1/chart0.svg" alt="A caption" width="20%"></img>
+
+---
+
+``` python
+print(4)
 ```
 
 ```out
-   Age  Total_Bilirubin  Direct_Bilirubin  Alkaline_Phosphotase  Alamine_Aminotransferase  Aspartate_Aminotransferase  Total_Protiens  Albumin  Albumin_and_Globulin_Ratio Predicted label
-0   61              0.7               0.2                   145                        53                          41             5.8      2.7                        0.87         Disease
-1   42             11.1               6.1                   214                        60                         186             6.9      2.8                        2.80         Disease
-2   22              0.8               0.2                   198                        20                          26             6.8      3.9                        1.30      No Disease
-3   72              1.7               0.8                   200                        28                          37             6.2      3.0                        0.93         Disease
+4
 ```
-
-Notes:
-
-Then, given new unseen input, we can apply our learned model to predict
-the target for the input.
-
-In this case, we can imagine that a new patient arrives and we want to
-predict if the patient has a disease or not.
-
-Given the patient’s information, our model predicts if the patient has
-the disease or not.
 
 ---
-
-<br> <br> <br>
-
-## Example 2: Predict the label of a given image
-
-Notes:
-
-Our second example is predicting the label of a given image.
-
----
-
-## Predict labels with associated probability scores for unseen images
-
-``` python
-images = glob.glob("test_images/*.*")
-for image in images:
-    img = Image.open(image)
-    img.load()
-    plt.imshow(img)
-    plt.show()
-    df = classify_image(img)
-    print(df.to_string(index=False))
-```
-
-<img src="/module1/module1_01/unnamed-chunk-6-1.png" width="300" />
-
-``` out
-  Class  Probability
-      ox     0.869893
-  oxcart     0.065034
-  sorrel     0.028593
- gazelle     0.010053
-```
-
-Notes:
-
-Here we use a machine learning model trained on millions of images and
-their labels.
-
-We are applying our model to predict the labels of unseen images.
-
-In this particular case, our unseen image is that of an ox.
-
-When we apply our trained model on this image, it gives us some
-predictions and their associated probability scores.
-
-So in this particular case, the model predicted that the image was that
-of an ox with a confidence of 0.869.
-
----
-
-``` python
-images = glob.glob("test_images/*.*")
-for image in images:
-    img = Image.open(image)
-    img.load()
-    plt.imshow(img)
-    plt.show()
-    df = classify_image(img)
-    print(df.to_string(index=False))
-```
-
-<img src="/module1/module1_01/unnamed-chunk-6-2.png" width="300" />
-
-``` out
-            Class  Probability
-            llama     0.123625
-               ox     0.076333
-           kelpie     0.071548
- ibex, Capra ibex     0.060569
-```
-
-Notes:
-
-Our second unseen image contains some donkeys.
-
-In this case, when we apply our mode to the image, The model predicts
-that it contains a llama. That being said, the probability score here is
-only 0.123.
-
----
-
-<br> <br> <br>
-
-## Example 3: Predict sentiment expressed in a movie review (pos/neg)
-
-*Attribution: The dataset `imdb_master.csv` was obtained from
-<a href="https://www.kaggle.com/uttam94/imdb-mastercsv" target="_blank">Kaggle</a>*
-
-Notes:
-
-Our third example is about predicting sentiment expressed in movie
-reviews.
-
----
-
-``` python
-train_df.head()
-```
-
-``` out
-                                                review label         file
-43020  Just caught it at the Toronto International Fi...   pos   3719_9.txt
-49131  The movie itself made me want to go and call s...   pos  9219_10.txt
-23701  I came across this movie on DVD purely by chan...   pos   8832_9.txt
-4182   Having seen Carlo Lizzani's documentary on Luc...   neg   2514_4.txt
-38521  I loved this film. I first saw it when I was 2...   pos  1091_10.txt
-```
-
-Notes: First we wrangle our data so that we can train our model.
-
-This data contains the review in a column named `review` and a `label`
-column which contains values of either `pos` or `neg` for positive or
-negative.
-
----
-
-``` python
-X_train, y_train = train_df['review'], train_df['label']
-X_test, y_test = test_df['review'], test_df['label']
-
-clf = Pipeline(
-    [
-        ("vect", CountVectorizer(max_features=5000)),
-        ("clf", LogisticRegression(max_iter=5000)),
-    ]
-)
-clf.fit(X_train, y_train)
-```
-
-```out
-Pipeline(steps=[('vect', CountVectorizer(max_features=5000)),
-                ('clf', LogisticRegression(max_iter=5000))])
-```
-
-Notes: Next, we build our model and train on our existing data.
-
-Again, don’t worry about the code here.
-
----
-
-``` python
-pred_dict = {
-    "reviews": X_test[0:4],
-    "true_sentiment": y_test[0:4],
-    "sentiment_predictions": clf.predict(X_test[0:4]),
-}
-pred_df = pd.DataFrame(pred_dict)
-pred_df.head()
-```
-
-```out
-                                                 reviews true_sentiment sentiment_predictions
-34622  I love horror movies that brings out a real am...            neg                   pos
-1163   It seems that some viewers assume that the onl...            neg                   neg
-7637   I have seen this film 3 times. Mostly because ...            neg                   neg
-7045   For weeks I had been looking forward to seeing...            neg                   neg
-```
-
-Notes:
-
-Once we have the model, we can use this to predict the sentiment
-expressed in new movie reviews.
-
----
-
-<br> <br> <br>
-
-## Example 4: Predict housing prices
-
-*Attribution: The dataset `kc_house_data.csv` was obtained from
-<a href="https://www.kaggle.com/harlfoxem/housesalesprediction" target="_blank">Kaggle</a>.*
-
-Notes:
-
-Example 4 is about predicting housing prices.
-
----
-
-``` python
-df = pd.read_csv("data/kc_house_data.csv")
-df = df.drop(columns=["id", "date"])
-train_df, test_df = train_test_split(df, test_size=0.2, random_state=4)
-train_df.head()
-```
-
-```out
-          price  bedrooms  bathrooms  sqft_living  sqft_lot  floors  waterfront  view  condition  grade  sqft_above  sqft_basement  yr_built  yr_renovated  zipcode      lat     long  sqft_living15  sqft_lot15
-8583   509000.0         2       1.50         1930      3521     2.0           0     0          3      8        1930              0      1989             0    98007  47.6092 -122.146           1840        3576
-19257  675000.0         5       2.75         2570     12906     2.0           0     0          3      8        2570              0      1987             0    98075  47.5814 -122.050           2580       12927
-1295   420000.0         3       1.00         1150      5120     1.0           0     0          4      6         800            350      1946             0    98116  47.5588 -122.392           1220        5120
-15670  680000.0         8       2.75         2530      4800     2.0           0     0          4      7        1390           1140      1901             0    98112  47.6241 -122.305           1540        4800
-3913   357823.0         3       1.50         1240      9196     1.0           0     0          3      8        1240              0      1968             0    98072  47.7562 -122.094           1690       10800
-```
-
-Notes:
-
-In this particular case, our data contains attributes associated with
-properties
-
-For example, our attributes consist of the number of bedrooms, the
-number of bathrooms, etc.
-
-Our special column which we call our “target column” is the price for
-the corresponding property.
-
-Note that this price column here contains continuous values and not
-discrete values as we saw in our previous examples.
-
----
-
-``` python
-
-X_train = train_df.drop(columns=["price"])
-X_train.head()
-```
-
-```out
-       bedrooms  bathrooms  sqft_living  sqft_lot  floors  waterfront  view  condition  grade  sqft_above  sqft_basement  yr_built  yr_renovated  zipcode      lat     long  sqft_living15  sqft_lot15
-8583          2       1.50         1930      3521     2.0           0     0          3      8        1930              0      1989             0    98007  47.6092 -122.146           1840        3576
-19257         5       2.75         2570     12906     2.0           0     0          3      8        2570              0      1987             0    98075  47.5814 -122.050           2580       12927
-1295          3       1.00         1150      5120     1.0           0     0          4      6         800            350      1946             0    98116  47.5588 -122.392           1220        5120
-15670         8       2.75         2530      4800     2.0           0     0          4      7        1390           1140      1901             0    98112  47.6241 -122.305           1540        4800
-3913          3       1.50         1240      9196     1.0           0     0          3      8        1240              0      1968             0    98072  47.7562 -122.094           1690       10800
-```
-
-``` python
-y_train = train_df["price"]
-y_train.head()
-```
-
-```out
-8583     509000.0
-19257    675000.0
-1295     420000.0
-15670    680000.0
-3913     357823.0
-Name: price, dtype: float64
-```
-
-``` python
-X_test = test_df.drop(columns=["price"])
-y_test = train_df["price"]
-```
-
-Notes:
-
-It’s important that we separate our data from the target column (The `y`
-variables).
-
----
-
-``` python
-from xgboost import XGBRegressor
-
-model = XGBRegressor()
-model.fit(X_train, y_train)
-```
-
-Notes:
-
-Again we use this data to train our machine learning model.
-
----
-
-``` python
-pred_df = pd.DataFrame(
-    {"Predicted price": model.predict(X_test[0:4]).tolist(), "Actual price": y_test[0:4].tolist()}
-)
-df_concat = pd.concat([X_test[0:4].reset_index(drop=True), pred_df], axis=1)
-df_concat.head()
-```
-
-```out
-   bedrooms  bathrooms  sqft_living  sqft_lot  floors  waterfront  view  condition  grade  sqft_above  sqft_basement  yr_built  yr_renovated  zipcode      lat     long  sqft_living15  sqft_lot15  Predicted price  Actual price
-0         4       2.25         2130      8078     1.0           0     0          4      7        1380            750      1977             0    98055  47.4482 -122.209           2300        8112      333981.6250      509000.0
-1         3       2.50         2210      7620     2.0           0     0          3      8        2210              0      1994             0    98052  47.6938 -122.130           1920        7440      615222.4375      675000.0
-2         4       1.50         1800      9576     1.0           0     0          4      7        1800              0      1977             0    98045  47.4664 -121.747           1370        9576      329770.0625      420000.0
-3         3       2.50         1580      1321     2.0           0     2          3      8        1080            500      2014             0    98107  47.6688 -122.402           1530        1357      565091.6250      680000.0
-```
-
-Notes:
-
-And once we have our trained model, we apply it to predict the price
-associated with new home properties.
-
-When we pass new properties into the model we get a predicted price for
-those properties.
-
-And note again that our predicted prices here are continuous numbers and
-not discrete values
-
----
-
-# Let’s apply what we learned\!
-
-Notes: <br>
