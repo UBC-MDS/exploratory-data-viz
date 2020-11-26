@@ -1,7 +1,7 @@
 ---
-title: 'Module 1: Machine Learning Terminology'
+title: 'Module 1: Why Data Visulization'
 description:
-  'In this module, we will explain the different branches of machine learning and introduce the steps needed to build a model by constructing baseline models.'
+  'In this module ....'
 prev: module0
 next: /module2
 type: chapter
@@ -16,7 +16,7 @@ id: 1
 </exercise>
 
 
-<exercise id="1" title="What is Supervised Machine Learning?" type="slides,video">
+<exercise id="1" title="What is Data Visualization?" type="slides,video">
 
 <slides source="module1/module1_01" shot="1" start="0:003" end="07:12">
 </slides>
@@ -24,7 +24,7 @@ id: 1
 </exercise>
 
 
-<exercise id="2" title="Is it Machine Learning?">
+<exercise id="2" title="Question Title Here">
 
 
 **Question 1**    
@@ -96,22 +96,21 @@ This the the number of true negatives.
 </exercise>
 
 
-<exercise id="3" title="Describing a Dataset">
+<exercise id="3" title="Question Title Here">
 
-
-**Instructions:**    
 Running a coding exercise for the first time could take a bit of time for everything to load.  Be patient, it could take a few minutes. 
 
 **When you see `____` in a coding exercise, replace it with what you assume to be the correct code.  Run it and see if you obtain the desired output.  Submit your code to validate if you were correct.**
 
-
 _**Make sure you remove the hash (`#`) symbol in the coding portions of this question.  We have commented them so that the line won't execute and you can test your code after each step.**_
 
+We've seen our basketball dataset before and predicted using `SVC` with it before but this time we are going to have a look at how well our model does by building a confusion matrix. 
 
-Let's make sure we understand all the components we use in a dataset for machine learning. The packages you need will be loaded for you. In this example we would be attempting to predict the country availability of candy bars, which makes the column `availability` the target.
-
-- Print the `canbybar_df` object. 
-- Save the dimensions of the dataframe in an object named `candybar_dim`.
+Tasks:   
+- Import the plotting confusion matrix library. 
+- Build a pipeline naed `pipe_bb` that preprocesses with `preprocessor` and builds an `SVC()` model with default hyperparameters. 
+- Fit the pipeline on `X_train` and `y_train`. 
+- Next, build a confusion matrix using `plot_confusion_matrix` and calling `pipe_bb` and the **test** set. Pick any colour you like with `cmap`. You can find the colour options <a href=" https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html" target="_blank">here</a>.
 
 <codeblock id="01_03">
 
