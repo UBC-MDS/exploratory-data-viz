@@ -28,12 +28,9 @@ export default ({ lang = 'en' }) => {
                                 
                                         <p>
                                         <center>
-                                        Welcome to Introduction to Machine Learning!
-                                        This course is part of the  <u><strong><a href="https://extendedlearning.ubc.ca/programs/key-capabilities-data-science">Key Capabilities for Data Science program</a></strong></u> and covers topics related to machine learning; a topic  closely related to artificial intelligence (AI), data science, and statistics.
-                                        This course covers the data science perspective on the introductory concepts in machine learning, with a focus on making predictions.
-                                        Not only does it cover different models such as K-NN, decision trees and linear classifiers, but it also tackles important concepts needed to prepare and preprocess data before building them. 
-                                        No course would be complete without knowing how to read the results. We cover different ways to evaluate your model and when to question your results. 
-                                        Finally, we show you how to streamline the entire process by implementing pipelines in your workflow. 
+                                        Welcome to Exploratory Data Visualization!
+                                        This course is part of the  <u><strong><a href="https://extendedlearning.ubc.ca/programs/key-capabilities-data-science">Key Capabilities for Data Science program</a></strong></u> and covers topics related to data visualization. 
+                                        ...........TBD
                                         </center>
                                         </p>
                                         <p>
