@@ -26,59 +26,72 @@ id: 1
 
 <exercise id="2" title="Is it Machine Learning?">
 
-**True or False: The following is an example of machine learning?**      
-_Diagnosing cancer from magnetic resonance imaging_
 
-<choice id="1" >
-<opt text="True"  correct="true">
+**Question 1**    
 
-Great!
+How many example did the model of this matrix correctly label as "Guard"?
+
+<choice id="1">
+
+<opt text="19">
+
+This is the number of example the model correctly predicted as **Forward**.
 
 </opt>
 
-<opt text="False">
+<opt text= "3">
+ 
+This is the number of examples the model predicted **Guard** when the true label was **Forward**.
 
-Machine Learning can be use to attempt to diagnose cancer.
+</opt>
+
+<opt text="4">
+
+This is the number of examples the model predicted **Forward** when the true label was **Guard**.
+
+</opt>
+
+<opt text="26"  correct="true">
+
+Nice!
+
+</opt>
+
+</choice>
+
+
+**Question 2**    
+
+If **Forward** is the positve label, how many ***false positive*** values?
+
+<choice id="2" >
+
+<opt text="19">
+
+This is the number of example true positives. 
+
+</opt>
+
+<opt text= "3">
+ 
+This is the number of false negatives! 
+
+</opt>
+
+<opt text="4"  correct="true">
+
+Great! This is the number of examples the model predicted **Forward** (positive) when the true label was **Guard** (negative) .
+
+</opt>
+
+<opt text="26" >
+
+This the the number of true negatives. 
 
 </opt>
 
 </choice>
 
-**True or False: The following is an example of machine learning?**       
-_Classifying images containing animals_
-
-<choice id="2">
-<opt text="True" correct="true">
-
-Nice work! 
-
-</opt>
-
-<opt text="False">
-
-If you look at example 2, in the slides you'll see the code we used to do this. 
-
-</opt>
-
-</choice >
-
-**True or False: The following is an example of machine learning?**       
-_Blowing out a candle_
-
-<choice  id="3">
-<opt text="True" >
-
-No quite sure how this would work, but never say never! Technology is progressing everyday. 
-
-</opt>
-
-<opt text="False" correct= "true">
-
-I don't think we can use machine learning quite yet to do this. Maybe one day we will be able to! Who knows. 
-
-</opt>
-
-</choice>
 
 </exercise>
 
@@ -164,23 +177,6 @@ Well done!
 
 <opt text="26">
 This is not the number of examples.
-
-</opt>
-</choice>
-
-**Question 3**     
-Would this be considered classification or regression?
-
-<choice  id="3">
-<opt text="Classification" correct="true">
-
-Great job!
-
-</opt>
-
-<opt text="Regression" >
-
-What would we be predicting, a numerical value or categorical?
 
 </opt>
 </choice>
