@@ -2,18 +2,18 @@
 params:
   dynamictitle: "module1_01"
 title: "`r params$dynamictitle`"
-output: 
+output:
   md_document:
     variant: gfm
     pandoc_args: "--atx-headers"
 ---
 
 ```{r setup, include=FALSE}
-## DO NOT FORGET TO CHANGE THIS ACCORDINGLY 
+## DO NOT FORGET TO CHANGE THIS ACCORDINGLY
 library(rmarkdown)
 # Make sure you are updating your title
 knitr::opts_chunk$set(echo = TRUE,
-                      base.dir = ".", 
+                      base.dir = ".",
                       base.url = "/",
                       fig.path = paste("../../../../static/module1/", params$dynamictitle,"/", sep = ""))
 
