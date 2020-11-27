@@ -4,7 +4,7 @@ type: slides
 
 # Module Learning Outcomes
 
-Notes: In this module you will be introduced to the Scikit-learn library and the fundamental concepts of machine learning. 
+Notes: In this module we will be learning about the importance of data visualization and how a grammar of graphics can help us effectively visualize data.
 
 
 ---
