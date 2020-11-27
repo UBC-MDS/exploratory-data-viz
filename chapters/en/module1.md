@@ -1,5 +1,5 @@
 ---
-title: 'Module 1: Why Data Visulization'
+title: 'Module 1: Why Visualize Data?'
 description:
   'In this module we will be learning how to create effective data visualizations to strengthen our exploratory data analysis skills and our ability to communicate insights to others.'
 prev: module0
@@ -23,8 +23,7 @@ id: 1
 
 </exercise>
 
-
-<exercise id="2" title="Why visualize data?">
+<exercise id="2" title="Why Visualize Data?">
 
 **True or False: It is easier for humans to interpret plots than raw numbers.**
 
