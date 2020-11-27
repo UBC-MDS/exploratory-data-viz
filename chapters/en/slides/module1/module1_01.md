@@ -369,7 +369,7 @@ table?
 
 ### All four sets of numbers are nearly identical in the following statistical properties
 
-<table style="width:60%;">
+<table style="width:80%;">
 <tbody>
 <tr>
 <th>
@@ -491,9 +491,9 @@ to 2 decimal places
 </tbody>
 </table>
 
-Notes: No? What about if I showed you the commonly used numerical
-summaries of the data? Tough luck, all the summary statistics in the
-table below are **the same** for each of these four set.
+Notes: What about if I showed you the commonly used numerical summaries
+of the data? Tough luck, all the summary statistics in the table below
+are **the same** for each of these four set.
 
 ---
 
