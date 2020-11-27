@@ -24,10 +24,24 @@ id: 1
 </exercise>
 
 
-<exercise id="2" title="Question Title Here">
+<exercise id="2" title="Why visualize data?">
 
+**True or False: It is easier for humans to interpret plots than raw numbers.**
 
-**Question 1**    
+<choice id="1" >
+<opt text="True"  correct="true"></opt>
+<opt text="False"></opt>
+</choice>
+
+**True or False: Statistical summaries can be misleading.**
+
+<choice id="1" >
+<opt text="True"  correct="true"></opt>
+<opt text="False"></opt>
+</choice>
+
+<!--
+**Question 1**
 
 How many example did the model of this matrix correctly label as "Guard"?
 
@@ -60,7 +74,7 @@ Nice!
 </choice>
 
 
-**Question 2**    
+**Question 2**
 
 If **Forward** is the positve label, how many ***false positive*** values?
 
@@ -180,6 +194,8 @@ This is not the number of examples.
 </opt>
 </choice>
 </exercise>
+
+-->
 
 
 <exercise id="21" title="What Did We Just Learn?" type="slides, video">
