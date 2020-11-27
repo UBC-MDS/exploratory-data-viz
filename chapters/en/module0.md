@@ -1,5 +1,5 @@
 ---
-title: 'Module 0: Welcome to Introduction to Machine Learning'
+title: 'Module 0: Exploratory Data Visualization'
 description:
   'Course introduction, summary of course learning outcomes and prerequisite validation.' 
 prev: null
@@ -8,7 +8,7 @@ type: chapter
 id: 0
 ---
 
-<exercise id="1" title=" Introduction to Machine Learning" type="slides,video">
+<exercise id="1" title="Exploratory Data Visualization" type="slides,video">
 
 <slides source="module0/module0_00" shot="0" start="0:002" end="3:5706">
 </slides>
@@ -22,7 +22,7 @@ Have you taken the prerequisite **Programming in Python for Data Science**?
 
 
 <choice>
-<opt text="Yes I have and I am ready to take Introduction to Machine Learning." correct="true">
+<opt text="Yes I have and I am ready to take Exploratory Data Visualization." correct="true">
 
 Great! Let's get started. Please continue on to Module 1.
 

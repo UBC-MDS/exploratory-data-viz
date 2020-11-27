@@ -11,11 +11,11 @@ Notes: Welcome to Introduction to Machine Learning.
 # Course Learning Outcomes 
 
 By the end of the course, students are expected to be able to:
-- Describe supervised learning and identify what kind of tasks it is suitable for.
-- Explain common machine learning concepts such as classification and regression, training and testing, overfitting, parameters and hyperparameters, and the golden rule.
-- Identify when and why to apply data pre-processing techniques such as scaling and one-hot encoding.
-- Describe at a high level how common machine learning algorithms work, including decision trees, and 𝑘-nearest neighbours.
-- Use Python and the scikit-learn package to develop an end-to-end supervised machine learning pipeline.
+- Use a grammar of graphics to create data visualizations.
+- Use ggplot and altair to generate data visualizations.
+- Perform exploratory data analysis on a dataset.
+- Select the data visualization most appropriate for the the data-type and the communication goal.
+- Interpret data visualizations to answer questions and formulate follow-up questions.
  
 
 Notes:
