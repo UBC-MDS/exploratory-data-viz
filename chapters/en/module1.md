@@ -2,7 +2,7 @@
 title: 'Module 1: Why Visualize Data?'
 description:
   'In this module we will be learning about the importance of data visualization and how a grammar of graphics can help us effectively visualize data.'
-prev: module0
+prev: /module0
 next: /module2
 type: chapter
 id: 1
