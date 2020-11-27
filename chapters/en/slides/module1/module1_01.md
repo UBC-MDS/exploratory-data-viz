@@ -14,19 +14,7 @@ the most appropriate for different situations as we will see later.
 
 ## Why bother visualizing data instead of showing raw numbers?
 
-Notes: Think about it, numbers have been around for about 5,000 years.
-Visual systems, on the other hand, have undergone refinement for over
-500,000,000 years by training with a lethal, evolutionary cost function.
-While we need to train ourselves to recognize structure in numerical
-data, we have evolved to instinctively recognize visual patterns and to
-accurately judge properties such as colors and distances between
-objects. Drawing upon this complex build-in apparatus, we can arrive at
-conclusion much faster by glancing at visual representations of data
-rather than numerical representations.
-
----
-
-## Can you spot the differences between these four sets of numbers?
+### Can you spot the differences between these four sets of numbers?
 
 <table style="text-align:center; width:40%">
 <tbody>
@@ -359,8 +347,18 @@ y
 </tbody>
 </table>
 
-Notes: For example, have a look at the four sets of numbers in the table
-below, [put together by statistician Francis Anscombe in the
+Notes: Think about it, numbers have been around for about 5,000 years.
+Visual systems, on the other hand, have undergone refinement for over
+500,000,000 years by training with a lethal, evolutionary cost function.
+While we need to train ourselves to recognize structure in numerical
+data, we have evolved to instinctively recognize visual patterns and to
+accurately judge properties such as colors and distances between
+objects. Drawing upon this complex build-in apparatus, we can arrive at
+conclusion much faster by glancing at visual representations of data
+rather than numerical representations.
+
+For example, have a look at the four sets of numbers in the table below,
+[put together by statistician Francis Anscombe in the
 70s.](https://en.wikipedia.org/wiki/Anscombe%27s_quartet) Can you see
 how the sets are different from each other by just glancing at the
 table?
@@ -499,9 +497,9 @@ table below are **the same** for each of these four set.
 
 ---
 
-## Plotting the data make the differences obvious to us
+## Plotting the data immediately reveals the differences to the human eye
 
-<img src="/module1/anscombes-quartet.png" alt="A caption" width="55%"></img>
+<img src="/module1/anscombes-quartet.png" alt="A caption" width="80%"></img>
 
 Notes: Humans are not good at detecting patterns in raw numbers, and we
 don’t have good intuition about which combination of numbers can
@@ -518,7 +516,7 @@ communication.
 
 ![](https://blog.revolutionanalytics.com/downloads/DataSaurus%20Dozen.gif)
 
-Notes: For a more recent, dynamic, and avian illustration of how
+Notes: For a dynamic, more recent, and avian illustration of how
 graphical representations are much easier for us to interpret compared
 to statistical summaries, check out the [Datasaurus
 GIF](https://www.autodesk.com/research/publications/same-stats-different-graphs)
@@ -528,19 +526,6 @@ data graphically shows us how different datasets actually are.
 
 ---
 
-``` python
-y = 3
-y
-```
-
-```out
-3
-```
-
----
-
 # Let’s apply what we learned!
 
 Notes: <br>
-
----
