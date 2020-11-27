@@ -2,7 +2,7 @@
 type: slides
 ---
 
-# Congratulations on completing Introduction to Machine Learning !
+# Congratulations on completing Exploratory Data Visualization!
 
 Notes: 
 
@@ -23,9 +23,7 @@ Notes:
 
 ## Attribution
 
-- Material from UBC's <a href="https://github.com/UBC-MDS/DSCI_571_sup-learn-1" target="_blank">DSCI 571: Supervised Learning I</a> by <a href="https://kvarada.github.io/" target="_blank">Varada Kolhatkar</a>.
-- Material from UBC's <a href="https://github.com/UBC-CS/cpsc330" target="_blank">CPSC330 course</a> by <a href="www.mikegelbart.com" target="_blank">Mike Gelbart</a>.
-- Material originally from UBC's <a href="https://www.cs.ubc.ca/~schmidtm/Courses/340-F19/" target="_blank">CPSC340 course</a>  by <a href="https://www.cs.ubc.ca/~schmidtm/" target="_blank"> Mark Schmidt</a>.
+- Material from UBC's <a href="https://github.com/UBC-MDS/DSCI_531_viz-1" target="_blank">DSCI 531: Data Visualization I</a> by <a href="https://joelostblom.com/" target="_blank">Joel Ostblom</a>.
 
 
 Notes: 
@@ -43,7 +41,6 @@ Special thanks must be attributed to the following individuals and organizations
 - <a href="https://www.tomasbeuzen.com/" target="_blank"> Tom Beuzen</a> 
 - <a href="https://betatim.github.io/" target="_blank">Tim Head</a>  
 - <a href="https://ines.io/" target="_blank">Ines Montani</a> 
-- <a href="https://joelostblom.com/" target="_blank">Joel Ostblom</a> 
 - <a href="https://www.tiffanytimbers.com/" target="_blank"> Tiffany Timbers</a> 
 - <a href="https://www.linkedin.com/in/elijah-willie-203845b9/?originalSubdomain=ca" target="_blank">Elijah Willie</a>
 
@@ -60,17 +57,17 @@ Notes:
 
 <br>
 
-### Mike Gelbart
+### Tiffany Timbers 
 
-- Website: <a href="https://www.mikegelbart.com/" target="_blank">www.mikegelbart.com</a> 
-- Twitter: <a href="https://twitter.com/mikegelbart" target="_blank">@MikeGelbart</a> 
+- Website: <a href="https://www.tiffanytimbers.com/" target="_blank">www.tiffanytimbers.com</a> 
+- Twitter: <a href="https://twitter.com/TiffanyTimbers" target="_blank">@TiffanyTimbers</a> 
 <br>
 <br>
 
-### Varada Kolhatkar 
+### Joel Ostblom 
 
-- Website: <a href="https://kvarada.github.io/" target="_blank">https://kvarada.github.io/</a> 
-- Twitter: <a href="https://twitter.com/varadakolhatkar" target="_blank">@varadakolhatkar</a> 
+- Website: <a href="https://joelostblom.com/" target="_blank">https://joelostblom.com/</a> 
+- Twitter: <a href="https://twitter.com/joelostblom" target="_blank">@joelostblom</a> 
 <br>
 <br>
 
