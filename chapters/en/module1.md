@@ -1,7 +1,7 @@
 ---
 title: 'Module 1: Why Data Visulization'
 description:
-  'In this module ....'
+  'In this course we will be learning about how to create effective data visualization that strengthen both our own exploratory data analysis and our ability to communicate insights to others.'
 prev: module0
 next: /module2
 type: chapter
