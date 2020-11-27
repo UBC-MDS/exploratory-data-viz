@@ -2,7 +2,7 @@
 type: slides
 ---
 
-# What is data visualization?
+# What is Data Visualization?
 
 Notes: At its core, data visualization is about representing numbers
 with graphical components. These include many components, such as
