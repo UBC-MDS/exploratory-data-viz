@@ -396,15 +396,7 @@ exact
 <tr>
 <td>
 Sample <a href="/wiki/Variance" title="Variance">variance</a> of
-<i>x</i> : <span class="mwe-math-element"><span
-class="mwe-math-mathml-inline mwe-math-mathml-a11y"
-style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \sigma ^{2}}">
-<semantics> <mrow class="MJX-TeXAtom-ORD">
-<mstyle displaystyle="true" scriptlevel="0"> <msup> <mi>σ<!-- σ --></mi>
-<mrow class="MJX-TeXAtom-ORD"> <mn>2</mn> </mrow> </msup> </mstyle>
-</mrow> <annotation encoding="application/x-tex">{^{2}}</annotation>
-</semantics>
-</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/53a5c55e536acf250c1d3e0f754be5692b843ef5" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.385ex; height:2.676ex;" alt="\sigma ^{2}"/></span>
+<i>x</i>
 </td>
 <td>
 11
@@ -426,15 +418,7 @@ to 2 decimal places
 </tr>
 <tr>
 <td>
-Sample variance of <i>y</i> : <span class="mwe-math-element"><span
-class="mwe-math-mathml-inline mwe-math-mathml-a11y"
-style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \sigma ^{2}}">
-<semantics> <mrow class="MJX-TeXAtom-ORD">
-<mstyle displaystyle="true" scriptlevel="0"> <msup> <mi>σ<!-- σ --></mi>
-<mrow class="MJX-TeXAtom-ORD"> <mn>2</mn> </mrow> </msup> </mstyle>
-</mrow> <annotation encoding="application/x-tex">{^{2}}</annotation>
-</semantics>
-</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/53a5c55e536acf250c1d3e0f754be5692b843ef5" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.385ex; height:2.676ex;" alt="\sigma ^{2}"/></span>
+Sample variance of <i>y</i>
 </td>
 <td>
 4.125
@@ -470,16 +454,7 @@ to 2 and 3 decimal places, respectively
 <tr>
 <td>
 <a href="/wiki/Coefficient_of_determination" title="Coefficient of determination">Coefficient
-of determination</a> of the linear regression : <span
-class="mwe-math-element"><span
-class="mwe-math-mathml-inline mwe-math-mathml-a11y"
-style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle R^{2}}">
-<semantics> <mrow class="MJX-TeXAtom-ORD">
-<mstyle displaystyle="true" scriptlevel="0"> <msup> <mi>R</mi>
-<mrow class="MJX-TeXAtom-ORD"> <mn>2</mn> </mrow> </msup> </mstyle>
-</mrow> <annotation encoding="application/x-tex">{R^{2}}</annotation>
-</semantics>
-</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/5ce07e278be3e058a6303de8359f8b4a4288264a" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.818ex; height:2.676ex;" alt="R^{2}"/></span>
+of determination</a> of the linear regression
 </td>
 <td>
 0.67

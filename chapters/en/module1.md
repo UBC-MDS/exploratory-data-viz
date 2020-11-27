@@ -1,7 +1,7 @@
 ---
 title: 'Module 1: Why Visualize Data?'
 description:
-  'In this module we will be learning how to create effective data visualizations to strengthen our exploratory data analysis skills and our ability to communicate insights to others.'
+  'In this module we will be learning about the importance of data visualization and how a grammar of graphics can help us effectively visualize data.'
 prev: module0
 next: /module2
 type: chapter

@@ -13,25 +13,24 @@ Notes:
 
 # Module Learning Outcomes
 
-By the end of the module, students are expected to:
+In this module students will learn how to
 
-- Explain motivation to study machine learning.
-- Differentiate between supervised and unsupervised learning.
-- Differentiate between classification and regression problems.
-- Explain machine learning terminology such as features, targets, training, and error.
-- Use DummyClassifier/ Dummy Regressor as a baseline for machine learning problems.
-- Explain the `.fit()` and `.predict()` paradigm and use `.score()` method of ML models.
+- Explain the importance of data visualizations.
+- Understand the grammar of graphics presented here.
+- Create point and line visualizations in ggplot/Altair.
+- Transform data directly in ggplot/Altair instead of dplyr/pandas.
+- Combine geometric marks via layering.
 
 
-Notes: 
+Notes:
 
-The assignment will concentrate on the learning objectives as well as building knowledge on existing concepts. 
+The assignment will concentrate on the learning objectives as well as building knowledge on existing concepts.
 
 ---
 
 # On to Assignment 1!
 
-Notes: 
+Notes:
 
 <br>
 
