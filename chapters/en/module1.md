@@ -34,7 +34,7 @@ id: 1
 
 **True or False: Statistical summaries can be misleading.**
 
-<choice id="1" >
+<choice id="2" >
 <opt text="True"  correct="true"></opt>
 <opt text="False"></opt>
 </choice>
