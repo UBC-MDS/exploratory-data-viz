@@ -6,7 +6,7 @@ type: slides
 
 Notes: At its core, data visualization is about representing numbers
 with graphical components. These include many components, such as
-position, area, color, etc, Picking the most appropriate component for
+position, area, color, etc. Picking the most appropriate component for
 you data can be tricky, but fortunately there is research on which are
 the most appropriate for different situations as we will see later.
 
@@ -28,7 +28,7 @@ rather than numerical representations.
 
 ## Can you spot the differences between these four sets of numbers?
 
-<table style="text-align: center; margin-left:auto; margin-right:auto; width:20%">
+<table style="text-align:center; width:40%">
 <tbody>
 <tr>
 <th colspan="2">
@@ -369,9 +369,9 @@ table?
 
 ## Summary statistics don’t necessarily help
 
-### All four sets of numbers are nearly identical in the following properties
+### All four sets of numbers are nearly identical in the following statistical properties
 
-<table style="width:80%; text-align:center">
+<table style="width:60%;">
 <tbody>
 <tr>
 <th>
@@ -501,7 +501,7 @@ table below are **the same** for each of these four set.
 
 ## Plotting the data make the differences obvious to us
 
-<img src="/module1/anscombes-quartet.png" alt="A caption" width=80% text-align="center"></img>
+<img src="/module1/anscombes-quartet.png" alt="A caption" width="55%"></img>
 
 Notes: Humans are not good at detecting patterns in raw numbers, and we
 don’t have good intuition about which combination of numbers can
@@ -511,6 +511,20 @@ sets of numbers differ once they are shown as graphical objects instead
 of textual objects. And this is one of the main reasons why data
 visualization is such a powerful tool for data exploration and
 communication.
+
+---
+
+## More examples of plotting versus statistical summaries
+
+![](https://blog.revolutionanalytics.com/downloads/DataSaurus%20Dozen.gif)
+
+Notes: For a more recent, dynamic, and avian illustration of how
+graphical representations are much easier for us to interpret compared
+to statistical summaries, check out the [Datasaurus
+GIF](https://www.autodesk.com/research/publications/same-stats-different-graphs)
+below. It displays several different datasets, all with the same mean,
+standard deviation and correlation between X and Y, but looking at the
+data graphically shows us how different datasets actually are.
 
 ---
 
