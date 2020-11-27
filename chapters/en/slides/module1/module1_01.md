@@ -544,28 +544,3 @@ y
 Notes: <br>
 
 ---
-
-``` python
-from vega_datasets import data
-import altair as alt
-
-
-chart0 = alt.Chart(data.cars()).mark_bar().encode(
-x='Origin',
-y='count()'
-)
-chart0
-```
-<img src="/module1/chart0.svg" alt="A caption" width="20%"></img>
-
----
-
-``` python
-print(4)
-```
-
-```out
-4
-```
-
----
