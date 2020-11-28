@@ -3,7 +3,7 @@ title: 'Module 0: Exploratory Data Visualization'
 description:
   'Course introduction, summary of course learning outcomes and prerequisite validation.' 
 prev: null
-next: /module1
+next: ../../module1
 type: chapter
 id: 0
 ---
