@@ -8,7 +8,7 @@ output:
     pandoc_args: "--atx-headers"
 ---
 
-```{r setup, include = FALSE}
+```{r setup, include=FALSE}
 ## DO NOT FORGET TO CHANGE THIS ACCORDINGLY
 library(rmarkdown)
 # Make sure you are updating your title
@@ -29,16 +29,18 @@ output_format(knitr = knitr_opts,
 library(reticulate)
 ```
 
-```{python include = FALSE}
+```{python include=FALSE}
 import pandas as pd
 import numpy as np
+
+
 pd.set_option('display.width', 350)
 np.set_printoptions(linewidth=400)
 pd.set_option('display.max_columns', 50)
 pd.set_option('display.max_rows', 15)
 ```
 
-```{python include = FALSE}
+```{python include=FALSE}
 path = "../../../../static/module1/"
 ```
 
@@ -61,237 +63,26 @@ as we will see later.
 
 ### Can you spot the differences between these four sets of numbers?
 
-<table border="1" style="width:70px; float:left; margin-right:40px">
-  <thead style="text-align: center">
-    <tr>
-      <th colspan="2" halign="left">A</th>
-    </tr>
-    <tr>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>10.0</td>
-      <td>8.04</td>
-    </tr>
-    <tr>
-      <td>8.0</td>
-      <td>6.95</td>
-    </tr>
-    <tr>
-      <td>13.0</td>
-      <td>7.58</td>
-    </tr>
-    <tr>
-      <td>9.0</td>
-      <td>8.81</td>
-    </tr>
-    <tr>
-      <td>11.0</td>
-      <td>8.33</td>
-    </tr>
-    <tr>
-      <td>14.0</td>
-      <td>9.96</td>
-    </tr>
-    <tr>
-      <td>6.0</td>
-      <td>7.24</td>
-    </tr>
-    <tr>
-      <td>4.0</td>
-      <td>4.26</td>
-    </tr>
-    <tr>
-      <td>12.0</td>
-      <td>10.84</td>
-    </tr>
-    <tr>
-      <td>7.0</td>
-      <td>4.82</td>
-    </tr>
-    <tr>
-      <td>5.0</td>
-      <td>5.68</td>
-    </tr>
-  </tbody>
-</table>
+```{python echo=FALSE, results='asis'}
+# This is the code that generates the table below,
+# but you need to run it outside of here so that you can copy and paste the raw HTML and not have it wrapped in an output code block
+import altair as alt
+from vega_datasets import data
 
-<table border="1" style="width:70px; float:left; margin-right:40px">
-  <thead style="text-align: center">
-    <tr>
-      <th colspan="2" halign="left">B</th>
-    </tr>
-    <tr>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>10.0</td>
-      <td>9.14</td>
-    </tr>
-    <tr>
-      <td>8.0</td>
-      <td>8.14</td>
-    </tr>
-    <tr>
-      <td>13.0</td>
-      <td>8.74</td>
-    </tr>
-    <tr>
-      <td>9.0</td>
-      <td>8.77</td>
-    </tr>
-    <tr>
-      <td>11.0</td>
-      <td>9.26</td>
-    </tr>
-    <tr>
-      <td>14.0</td>
-      <td>8.10</td>
-    </tr>
-    <tr>
-      <td>6.0</td>
-      <td>6.13</td>
-    </tr>
-    <tr>
-      <td>4.0</td>
-      <td>3.10</td>
-    </tr>
-    <tr>
-      <td>12.0</td>
-      <td>9.13</td>
-    </tr>
-    <tr>
-      <td>7.0</td>
-      <td>7.26</td>
-    </tr>
-    <tr>
-      <td>5.0</td>
-      <td>4.74</td>
-    </tr>
-  </tbody>
-</table>
+anscombe = data.anscombe()#.query('Series != "IV"')
+anscombe['Set'] = anscombe['Series'].map({'I': 'A', 'II': 'B', 'III': 'C', 'IV': 'D'})
+anscombe = anscombe.drop(columns='Series')
+anscombe.loc[anscombe['Y'] == anscombe['Y'].max(), 'Y'] = 8.5
 
-<table border="1" style="width:70px; float:left; margin-right:40px">
-  <thead style="text-align: center">
-    <tr>
-      <th colspan="2" halign="left">C</th>
-    </tr>
-    <tr>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>10.0</td>
-      <td>7.46</td>
-    </tr>
-    <tr>
-      <td>8.0</td>
-      <td>6.77</td>
-    </tr>
-    <tr>
-      <td>13.0</td>
-      <td>12.74</td>
-    </tr>
-    <tr>
-      <td>9.0</td>
-      <td>7.11</td>
-    </tr>
-    <tr>
-      <td>11.0</td>
-      <td>7.81</td>
-    </tr>
-    <tr>
-      <td>14.0</td>
-      <td>8.84</td>
-    </tr>
-    <tr>
-      <td>6.0</td>
-      <td>6.08</td>
-    </tr>
-    <tr>
-      <td>4.0</td>
-      <td>5.39</td>
-    </tr>
-    <tr>
-      <td>12.0</td>
-      <td>8.15</td>
-    </tr>
-    <tr>
-      <td>7.0</td>
-      <td>6.42</td>
-    </tr>
-    <tr>
-      <td>5.0</td>
-      <td>5.73</td>
-    </tr>
-  </tbody>
-</table>
-
-<table border="1" style="width:70px; float:left; margin-right:40px">
-  <thead style="text-align: center">
-    <tr>
-      <th colspan="2" halign="left">D</th>
-    </tr>
-    <tr>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>8.0</td>
-      <td>6.58</td>
-    </tr>
-    <tr>
-      <td>8.0</td>
-      <td>5.76</td>
-    </tr>
-    <tr>
-      <td>8.0</td>
-      <td>7.71</td>
-    </tr>
-    <tr>
-      <td>8.0</td>
-      <td>8.84</td>
-    </tr>
-    <tr>
-      <td>8.0</td>
-      <td>8.47</td>
-    </tr>
-    <tr>
-      <td>8.0</td>
-      <td>7.04</td>
-    </tr>
-    <tr>
-      <td>8.0</td>
-      <td>5.25</td>
-    </tr>
-    <tr>
-      <td>19.0</td>
-      <td>12.50</td>
-    </tr>
-    <tr>
-      <td>8.0</td>
-      <td>5.56</td>
-    </tr>
-    <tr>
-      <td>8.0</td>
-      <td>7.91</td>
-    </tr>
-    <tr>
-      <td>8.0</td>
-      <td>6.89</td>
-    </tr>
-  </tbody>
-</table>
+for set_name, df in anscombe.groupby('Set'):
+    df = df.drop(columns='Set')
+    df.columns = pd.MultiIndex.from_tuples([(set_name, 'X'), (set_name, 'Y')])
+    print(
+        df
+        .to_html(index=False)
+        .replace('class="dataframe"', 'style="width:70px; float:left; margin-right:40px"')
+        .replace('<thead>',  '<thead style="text-align: center">'))
+```
 
 Notes:
 Think about it, numbers have been around for about 5,000 years.
@@ -313,128 +104,67 @@ table?
 
 ---
 
-## Although summary statistics are often useful, they can be misleading
+## Although summary statistics are often useful, they don't tell the whole story
 
-### We can distinguish two sets of numbers All four sets of numbers are nearly identical in the following statistical properties
+### Set C appears to be slightly different, but are the other sets actually identical?
 
-<table border="1" style="width:70px; float:left; margin-right:40px">
-  <thead style="text-align: center">
-    <tr>
-      <th></th>
-      <th colspan="2" halign="left">A</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>mean</td>
-      <td>9.00</td>
-      <td>7.50</td>
-    </tr>
-    <tr>
-      <td>std</td>
-      <td>3.32</td>
-      <td>2.03</td>
-    </tr>
-  </tbody>
-</table>
 
-<table border="1" style="width:70px; float:left; margin-right:40px">
-  <thead style="text-align: center">
-    <tr>
-      <th></th>
-      <th colspan="2" halign="left">B</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>mean</td>
-      <td>9.00</td>
-      <td>7.50</td>
-    </tr>
-    <tr>
-      <td>std</td>
-      <td>3.32</td>
-      <td>2.03</td>
-    </tr>
-  </tbody>
-</table>
-
-<table border="1" style="width:70px; float:left; margin-right:40px">
-  <thead style="text-align: center">
-    <tr>
-      <th></th>
-      <th colspan="2" halign="left">C</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>mean</td>
-      <td>9.00</td>
-      <td>7.50</td>
-    </tr>
-    <tr>
-      <td>std</td>
-      <td>3.32</td>
-      <td>2.03</td>
-    </tr>
-  </tbody>
-</table>
-
-<table border="1" style="width:70px; float:left; margin-right:40px">
-  <thead style="text-align: center">
-    <tr>
-      <th></th>
-      <th colspan="2" halign="left">D</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>mean</td>
-      <td>9.00</td>
-      <td>7.50</td>
-    </tr>
-    <tr>
-      <td>std</td>
-      <td>3.32</td>
-      <td>2.03</td>
-    </tr>
-  </tbody>
-</table>
+```{python echo=FALSE, results='asis'}
+for set_name, df in anscombe.groupby('Set'):
+    df = df.drop(columns='Set')
+    df.columns = pd.MultiIndex.from_tuples([(set_name, 'X'), (set_name, 'Y')])
+    print(
+        df
+        .agg(['mean', 'std']).round(2).reset_index().rename(columns={'index': ''})
+        .to_html(index=False)
+        .replace('class="dataframe"', 'style="width:70px; float:left; margin-right:40px"')
+        .replace('<thead>',  '<thead style="text-align: center">'))
+```
 
 Notes:
-What about if I showed you the commonly used numerical summaries of the data?
-Tough luck,
-all the summary statistics in the table below are **the same** for each of these four set.
+Statistical summaries,
+such as the mean and standard deviation,
+are often useful for detecting difference between datasets.
+However,
+since they collapse the data into just a few numbers,
+they don't tell the whole story
+and there can be important differences between datasets
+that summaries fail to reveal.
 
 ---
 
 ## Plotting the data immediately reveals the differences to the human eye
 
-<img src="/module1/anscombes-quartet.png" alt="A caption" width="80%"></img>
+### There are clear patterns in the data that we could not detect from looking at the numbers
+
+```{python include=FALSE}
+def bigger_font():
+    return {
+        'config': {
+            'view': {'continuousWidth': 400, 'continuousHeight': 300},
+            'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14}, 
+            'axis': {'titleFontSize': 14, 'labelFontSize': 12},
+            'header': {'titleFontSize': 16, 'labelFontSize': 14},
+            'encoding': {'x': {'scale': {'zero': False}}}}}
+alt.themes.register('bigger_font', bigger_font)
+alt.themes.enable('bigger_font')
+
+(alt.Chart(anscombe).mark_circle(size=80, opacity=1).encode(
+    x='X',
+    y='Y')
+ .properties(width=300, height=200)
+ .facet('Set', columns=2)
+ .configure_axis(grid=True)
+ .configure_header(title=None)
+ .save(path + 'modified-anscombes.svg'))
+```
+
+<img src="/module1/modified-anscombes.svg" alt="" width="65%"></img>
 
 Notes:
 Humans are not good at detecting patterns in raw numbers,
-and we don't have good intuition about which combination of numbers can contribute to the same statistical summaries.
+and we don't have good intuition about how different distributions of data
+can contribute to identical statistical summaries.
 But guess what we excel at? Detecting visual patterns!
 It is immediately clear to us how these sets of numbers differ
 once they are shown as graphical objects
