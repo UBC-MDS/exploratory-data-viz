@@ -51,10 +51,11 @@ type: slides
 
 Notes:
 At its core,
-data visualization is about representing numbers with graphical components.
-These include many components, such as position, area, color, etc.
+data visualization is about representing numbers with graphical elements,
+such as position, area, color, etc.
 Picking the most appropriate component for you data can be tricky,
-but fortunately there is research on which are the most appropriate for different situations
+but fortunately there is research
+on which are the most appropriate for different situations
 as we will see later.
 
 ---
@@ -85,22 +86,25 @@ for set_name, df in anscombe.groupby('Set'):
 ```
 
 Notes:
-Think about it, numbers have been around for about 5,000 years.
-Visual systems, on the other hand, have undergone refinement for over
-500,000,000 years by training with a lethal, evolutionary cost function.
-While we need to train ourselves to recognize structure in numerical
-data, we have evolved to instinctively recognize visual patterns and to
-accurately judge properties such as colors and distances between
-objects. Drawing upon this complex build-in apparatus, we can arrive at
-conclusion much faster by glancing at visual representations of data
+Think about it,
+numbers have only been around for about 5,000 years.
+Visual systems on the other hand,
+have undergone refinement for over 500,000,000 years
+by training with a lethal, evolutionary cost function.
+While we need to train ourselves to recognize structure in numerical data,
+we have evolved to instinctively recognize visual patterns
+and to accurately judge properties such as colors and distances between objects.
+Drawing upon this complex build-in apparatus,
+we can arrive at conclusion much faster by glancing at visual representations of data
 rather than numerical representations.
 
 For example, have a look at the
-four sets of numbers in the table below, [put together by statistician
-Francis Anscombe in the
-70s.](https://en.wikipedia.org/wiki/Anscombe%27s_quartet) Can you see
-how the sets are different from each other by just glancing at the
-table?
+four sets of numbers in the table on the slide.
+This is a slightly modified version of the original,
+[which was put together by statistician Francis Anscombe in the
+70s.](https://en.wikipedia.org/wiki/Anscombe%27s_quartet)
+Can you see how the sets are different from each other
+by just glancing at the table?
 
 ---
 
@@ -122,12 +126,13 @@ for set_name, df in anscombe.groupby('Set'):
 ```
 
 Notes:
-Statistical summaries,
+Summaries,
 such as the mean and standard deviation,
-are often useful for detecting difference between datasets.
+are helpful statistical tools
+that are often useful for detecting difference between datasets.
 However,
 since they collapse the data into just a few numbers,
-they don't tell the whole story
+statistical summaries can't tell the whole story about the data
 and there can be important differences between datasets
 that summaries fail to reveal.
 
@@ -135,14 +140,14 @@ that summaries fail to reveal.
 
 ## Plotting the data immediately reveals the differences to the human eye
 
-### There are clear patterns in the data that we could not detect from looking at the numbers
+### There are clear patterns in these datasets that we could not detect from looking at the numbers
 
 ```{python include=FALSE}
 def bigger_font():
     return {
         'config': {
             'view': {'continuousWidth': 400, 'continuousHeight': 300},
-            'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14}, 
+            'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14},
             'axis': {'titleFontSize': 14, 'labelFontSize': 12},
             'header': {'titleFontSize': 16, 'labelFontSize': 14},
             'encoding': {'x': {'scale': {'zero': False}}}}}
@@ -165,11 +170,12 @@ Notes:
 Humans are not good at detecting patterns in raw numbers,
 and we don't have good intuition about how different distributions of data
 can contribute to identical statistical summaries.
-But guess what we excel at? Detecting visual patterns!
+But guess what we excel at?
+Detecting visual patterns!
 It is immediately clear to us how these sets of numbers differ
-once they are shown as graphical objects
+once they are shown as graphical elements
 instead of textual objects.
-And this is one of the main reasons why data visualization
+This is one of the main reasons why data visualization
 is such a powerful tool for data exploration and communication.
 
 ---
@@ -179,11 +185,13 @@ is such a powerful tool for data exploration and communication.
 ![](https://blog.revolutionanalytics.com/downloads/DataSaurus%20Dozen.gif)
 
 Notes:
-For a dynamic, more recent, and avian illustration of how graphical representations are much easier for us to interpret compared to statistical summaries,
-check out the [Datasaurus GIF](https://www.autodesk.com/research/publications/same-stats-different-graphs) below.
+A more recent and dynamic illustration of
+how graphical representations are much easier for us to interpret
+compared to statistical summaries,
+is the [Datasaurus GIF](https://www.autodesk.com/research/publications/same-stats-different-graphs) in this slides.
 It displays several different datasets,
 all with the same mean, standard deviation and correlation between X and Y,
-but looking at the data graphically shows us how different datasets actually are.
+but looking at the data graphically shows us how different these datasets actually are.
 
 ---
 
