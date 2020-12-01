@@ -11,10 +11,10 @@ Notes: Welcome to Introduction to Exploratory Data Visualization.
 # Course Learning Outcomes 
 
 By the end of the course, students are expected to be able to:
-- Use a grammar of graphics to create data visualizations.
-- Use ggplot and altair to generate data visualizations.
+- Use the Altair grammar of graphics to create data visualizations.
+- Select an appropriate visualization for the data.
 - Perform exploratory data analysis on a dataset.
-- Select the data visualization most appropriate for the the data-type and the communication goal.
+- Effectively communicate findings with figures.
 - Interpret data visualizations to answer questions and formulate follow-up questions.
  
 
