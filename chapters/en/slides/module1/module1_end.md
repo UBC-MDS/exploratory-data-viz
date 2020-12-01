@@ -17,8 +17,8 @@ In this module students will learn how to
 
 - Explain the importance of data visualizations.
 - Understand the grammar of graphics presented here.
-- Create point and line visualizations in ggplot/Altair.
-- Transform data directly in ggplot/Altair instead of dplyr/pandas.
+- Create point and line visualizations in Altair.
+- Transform data directly in Altair instead of pandas.
 - Combine geometric marks via layering.
 
 
