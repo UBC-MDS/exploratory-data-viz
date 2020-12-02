@@ -66,7 +66,8 @@ as we will see later.
 
 ```{python echo=FALSE, results='asis'}
 # This is the code that generates the table below,
-# but you need to run it outside of here so that you can copy and paste the raw HTML and not have it wrapped in an output code block
+# and setting results to `'asis'` ensures it is rendered as HTML
+# instead of being wrapped in an output code block
 import altair as alt
 from vega_datasets import data
 
@@ -112,7 +113,6 @@ by just glancing at the table?
 
 ### Set C appears to be slightly different, but are the other sets actually identical?
 
-
 ```{python echo=FALSE, results='asis'}
 for set_name, df in anscombe.groupby('Set'):
     df = df.drop(columns='Set')
@@ -143,6 +143,10 @@ that summaries fail to reveal.
 ### There are clear patterns in these datasets that we could not detect from looking at the numbers
 
 ```{python include=FALSE}
+# Make plot elements easier to see
+# This is a bit ugly but there is no faster why,
+# maybe we should discuss if we want this in all slide decks
+# or just go with the default smaller font.
 def bigger_font():
     return {
         'config': {
