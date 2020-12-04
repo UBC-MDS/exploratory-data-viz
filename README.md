@@ -8,8 +8,8 @@ Hosted here: [https://exploratory-data-visualization.netlify.app/](https://explo
 
 To view the course locally with Docker:
 
-1. Install Docker
+1. Install docker and docker-compose
 
-2. clone this GitHub repo, and then from the root of this project repo type: `docker compose up`
+2. Clone this GitHub repo, and then from the root of this project repo type: `docker-compose up`
 
 3. Then copy this url to the browser: `http://localhost:8000`
