@@ -8,13 +8,13 @@ Notes: At its core, data visualization is about representing numbers
 with graphical elements, such as position, area, color, etc. Picking the
 most appropriate component for you data can be tricky, but fortunately
 there is research on which are the most appropriate for different
-situations as we will see later.
+situations which we will use as guidance in our visualization journey.
 
 ---
 
 ## Why bother visualizing data instead of showing raw numbers?
 
-### Can you spot the differences between these four sets of numbers?
+### Can you see any differences in the general trends of these four sets of numbers?
 
 <table border="1" style="width:70px; float:left; margin-right:40px">
 <thead style="text-align: center">
@@ -446,27 +446,27 @@ Y
 </table>
 
 Notes: Think about it, numbers have only been around for about 5,000
-years. Visual systems on the other hand, have undergone refinement for
-over 500,000,000 years by training with a lethal, evolutionary cost
-function. While we need to train ourselves to recognize structure in
-numerical data, we have evolved to instinctively recognize visual
-patterns and to accurately judge properties such as colors and distances
-between objects. Drawing upon this complex build-in apparatus, we can
-arrive at conclusion much faster by glancing at visual representations
-of data rather than numerical representations.
+years. Visual systems on the other hand, have undergone refinement
+during 500,000,000 years of evolution. While we need to train ourselves
+to recognize structure in numerical data, we have evolved to
+instinctively recognize visual patterns and to accurately judge
+properties such as colors and distances between objects. Drawing upon
+this complex build-in apparatus, we can arrive at conclusion much faster
+by glancing at visual representations of data rather than numerical
+representations.
 
 For example, have a look at the four sets of numbers in the table on the
 slide. This is a slightly modified version of the original, [which was
 put together by statistician Francis Anscombe in the
 70s.](https://en.wikipedia.org/wiki/Anscombe%27s_quartet) Can you see
-how the sets are different from each other by just glancing at the
-table?
+how the differences in the general trends between these four sets of
+numbers?
 
 ---
 
 ## Although summary statistics are often useful, they don’t tell the whole story
 
-### Set C appears to be slightly different, but are the other sets actually identical?
+### C is the only set with a different mean and standard deviation
 
 <table border="1" style="width:70px; float:left; margin-right:40px">
 <thead style="text-align: center">
@@ -654,13 +654,16 @@ statistical tools that are often useful for detecting difference between
 datasets. However, since they collapse the data into just a few numbers,
 statistical summaries can’t tell the whole story about the data and
 there can be important differences between datasets that summaries fail
-to reveal.
+to reveal. Here, the mean and standard deviation indicate that set C is
+slightly different from the other sets of data in terms of the centre of
+the sample distribution and the spread of that distribution, while the
+remaining three sets of data have a similar centre and spread.
 
 ---
 
 ## Plotting the data immediately reveals the differences to the human eye
 
-### There are clear patterns in these datasets that we could not detect from looking at the numbers
+### There are clear patterns in these datasets that we could not detect from only looking at the raw numbers or some summary statistics
 
 <img src="/module1/modified-anscombes.svg" alt="" width="65%"></img>
 
@@ -671,7 +674,11 @@ at? Detecting visual patterns! It is immediately clear to us how these
 sets of numbers differ once they are shown as graphical elements instead
 of textual objects. This is one of the main reasons why data
 visualization is such a powerful tool for data exploration and
-communication.
+communication. In our example here, we would come to widely different
+conclusions about the behavior of the data for the four different data
+sets. Sets A and C are roughly linearly increasing at similar rates,
+whereas set B reaches a plateau and starts to drop, and set D has a
+constant X-value for all numbers except one big outlier.
 
 ---
 
