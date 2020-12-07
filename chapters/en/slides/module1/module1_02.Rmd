@@ -119,3 +119,97 @@ knit_hooks$set(
 #         else {
 #             default_output_hook(x, options)}})
 ```
+
+type: slides
+
+# How Can We Visualize Data?
+
+Notes:
+There is a plethora of visualization packages in Python.
+This rich selection can be beneficial, but is also confusing,
+especially when starting out trying to decide which one to choose.
+A helpful distinction to make is between *low level* and *high level* plotting packages.
+
+---
+
+## Low level and high level visualization concepts
+
+### Low level (imperative)
+
+- Focus on plot construction details.
+    - Often includes loops, low-level drawing commands, etc.
+- Specify *how* something should be done
+    - "Draw a red point for every observation that has value X in column A,
+      a blue point for every observation that has value Y in column A, etc."
+
+### High level (declarative)
+
+- Focus on data and relationships.
+    - Often includes data, graphical marks, and encoding channels.
+- Specify *what* should be done
+    - "Assign colors based on the values in column A"
+
+Notes:
+By *declarative*,
+we mean that you can provide a high-level specification of *what* you want the visualization to include,
+in terms of *data*, *graphical marks*, and *encoding channels*,
+rather than having to specify *how* to implement the visualization in terms of for-loops, low-level drawing commands, *etc*.
+For example,
+you would say "color my data by the column 'country'"
+instead of "go through this data frame and plot any observations of country1 in blue, any observations of country in red, etc".
+
+Declarative visualization tools lets you think about **data and relationship**,
+rather than **plot construction details**.
+A key idea is that you declare links between data fields and visual encoding channels,
+such as the x-axis, y-axis, color, *etc*.
+The rest of the plot details are handled automatically.
+
+---
+
+## The Python plotting landscape
+
+<img src="/module1/py-plotting-landscape.png" alt="The Python plotting landscape" width="100%"></img>
+
+Notes:
+In this image you can see the most commonly used Python plotting packages.
+There are many more,
+but these are the ones you are the most likely to hear about,
+so it is good to know that they exist.
+As you can see there are several high and low level language,
+so how to we chose?
+In this course we have chosen to use Altair,
+because it is a powerful high level visualization tool 
+with a clear and consistent syntax
+that also allows us to add interactive components to our plots,
+such as tooltips and selections.
+
+---
+
+## A high level grammar of graphics
+
+- Simple grammatical components combine to create visualizations.
+- The Altair visualization grammar consist of three main components:
+    1. Create a chart.
+    2. Add a graphical mark.
+    3. Encode dataframe columns as visual channels.
+- In code, it looks like this: `Chart(data).mark().encode(x, y, ...)`.
+
+Notes:
+The declarative plotting concept can be implemented in different ways.
+Here we will describe how a visualization grammar
+can be used similarly to how grammar in regular language
+is used to build complex linguistic constructs.
+A wide range of simple to sophisticated visualizations can be created using a concise grammar.
+Thanks to this functional way of interfacing with data,
+only minimal changes are required if the underlying data change or to change the type of plot.
+
+One of the most prominent declarative statistical visualization libraries is [Altair](https://altair-viz.github.io/).
+Altair offer a powerful and concise visualization grammar for quickly building a wide range of statistical graphics.
+In brief, you first create a chart,
+then you indicate which graphical marks should represent the data (points, lines, etc)
+and finally you encode your dataframe colums as different visual channels (x, y, color, etc).
+
+Enough talking,
+let's code!
+
+---
