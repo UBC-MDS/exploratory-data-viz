@@ -41,6 +41,13 @@ id: 1
 
 </exercise>
 
+<exercise id="3" title="How Can We Visualize Data?" type="slides,video">
+
+<slides source="module1/module1_02" shot="1" start="0:003" end="07:12">
+</slides>
+
+</exercise>
+
 <!--
 **Question 1**
 
@@ -199,7 +206,7 @@ This is not the number of examples.
 -->
 
 
-<exercise id="3" title="What Did We Just Learn?" type="slides, video">
+<exercise id="10" title="What Did We Just Learn?" type="slides, video">
 <slides source="module1/module1_end" shot="0" start="04:5307" end="05:5911">
 </slides>
 </exercise>
