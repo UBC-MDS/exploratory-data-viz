@@ -264,7 +264,7 @@ since we have not yet specified positions for these points.
 
 ## Encoding channels
 
-### Mapping a data feature to the x-axis
+### Mapping a data feature to the x-scale
 
 ```{python}
 alt.Chart(cars).mark_point().encode(
@@ -288,9 +288,7 @@ which in this case is quantitative (or numerical).
 
 ---
 
-## Encoding channels
-
-### Mapping a data feature to the y-axis
+## Mapping a data feature to the y-scale
 
 ```{python}
 alt.Chart(cars).mark_point().encode(
@@ -302,6 +300,78 @@ Notes:
 Though we've now separated the data by one attribute,
 we still have multiple points overlapping within each category.
 Let's further separate these by adding an `y` encoding channel:
+
+---
+
+## Mapping a numerical data feature to the color scale
+
+```{python}
+alt.Chart(cars).mark_point().encode(
+    x='Miles_per_Gallon',
+    y='Horsepower',
+    color='Weight_in_lbs')
+
+```
+
+Notes:
+We can specify which column we want to color the points by
+and Altair will automatically figure out an appropriate colorscale to use.
+
+---
+
+## Mapping a categorical data feature to the color scale
+
+```{python}
+alt.Chart(cars).mark_point().encode(
+    x='Miles_per_Gallon',
+    y='Horsepower',
+    color='Origin')
+```
+
+Notes:
+Since we used a column with numerical (also called "quantitative") data,
+a continuous, gradually increasing colorscale was used.
+If we instead choose a color with categorical (also called "nominal") data,
+Altair will automatically pick a suitable colorscale with distinct colors.
+
+---
+
+## Mapping a data feature to the shape scale
+
+```{python}
+alt.Chart(cars).mark_point().encode(
+    x='Miles_per_Gallon',
+    y='Horsepower',
+    color='Origin',
+    shape='Origin')
+```
+
+Notes:
+We can encode shapes aesthetics the same way.
+
+---
+
+## Mapping a data feature to the size scale
+
+
+```{python}
+alt.Chart(cars).mark_point().encode(
+    x='Miles_per_Gallon',
+    y='Horsepower',
+    color='Origin',
+    shape='Origin',
+    size='Weight_in_lbs')
+```
+
+Notes:
+Another common encoding aesthetic is `size`.
+The plot is now quite messy,
+there are too many things going on to be able to see the variation in weight.
+If you go back to the plot where we encoded weight in the color channel,
+you can see that the plot is much clearer.
+There is plenty of research on which channels are best for what features,
+which we will learn more about next lecture.
+
 
 ---
 
