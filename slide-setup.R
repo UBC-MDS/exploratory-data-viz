@@ -16,7 +16,19 @@ knitr::knit_hooks$set(
         # Using element-wise `&&` to avoid raising warning for multi-line R code chunks.
         # Python chunks are always one line.
         if (options$engine == "python" && grepl("alt.Chart(", x, fixed = T)) {
-            c(default_source_hook(x, options), vegawidget::vw_to_svg(exec_with_return(paste(x, '.to_json()'))))}
+            # This section handles layered plots
+            # where a parenthesis needs to be added to the last element of the string
+            # so that `to_json()` can be called on the entire plot
+            # instead of just the last layer.
+            vector_string <- unlist(strsplit(x, '\n'))
+            last_command <- tail(vector_string, 1)
+            if (grepl('+', last_command, fixed = T)) {
+                new_last <- paste0('(', last_command, ')')
+                vector_string[length(vector_string)] <- new_last
+                xx <- paste(vector_string, collapse='\n')
+                c(default_source_hook(x, options), vegawidget::vw_to_svg(exec_with_return(paste(xx, '.to_json()'))))}
+            else {
+                c(default_source_hook(x, options), vegawidget::vw_to_svg(exec_with_return(paste(x, '.to_json()'))))}}
         else {
             default_source_hook(x, options)}})
 
@@ -38,11 +50,12 @@ knitr::knit_hooks$set(
 # However, when using the course framework, that line already removed for some reason.
 # Not sure if this discrepancy comes from a bug in the framework, RMarkdown,
 # or a if it is a setting somewhere.
-# default_output_hook <- knitr::knit_hooks$get('output')
-# knitr::knit_hooks$set(
-#     output = function(x, options) {
-#         if (options$engine == "python" && grepl("alt.Chart(", x, fixed = T)) {
-#             # Swallow the output so that "alt.Chart(...)" is not printed
-#         }
-#         else {
-#             default_output_hook(x, options)}})
+# alt.LayerChart shows up in both and must be removed
+default_output_hook <- knitr::knit_hooks$get('output')
+knitr::knit_hooks$set(
+    output = function(x, options) {
+        if (options$engine == "python" && grepl("alt\\..*Chart\\(", x)) {
+            # Swallow the output so that "alt.Chart(...)" is not printed
+        }
+        else {
+            default_output_hook(x, options)}})
