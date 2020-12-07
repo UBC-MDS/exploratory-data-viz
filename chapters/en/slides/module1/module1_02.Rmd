@@ -271,6 +271,193 @@ you can see that the plot is much clearer.
 There is plenty of research on which channels are best for what features,
 which we will learn more about next lecture.
 
+---
+
+## Trends over time with scatter plots
+
+```{python}
+alt.Chart(cars).mark_point().encode(
+    x='Year',
+    y='Miles_per_Gallon')
+```
+
+Notes:
+We can use the point chart to visualize trends over time,
+such as how the miles per gallon has changes over the years.
+
+---
+
+## Trends over time with line plots
+
+```{python}
+alt.Chart(cars).mark_line().encode(
+    x='Year',
+    y='Miles_per_Gallon')
+```
+
+Notes:
+However,
+trends are often more effectively visualized with lines,
+since the slope can help visualize the difference overtime.
+Let's try switching our mark to a line.
+
+Oh oh, something is wrong.
+Because there are multiple values per year,
+the line goes between all of them vertically and it just looks really odd.
+
+---
+
+## Aggregate the data for each year
+
+```{python}
+yearly_avg_gallons = cars.groupby('Year')['Miles_per_Gallon'].mean().reset_index()
+
+alt.Chart(yearly_avg_gallons).mark_line().encode(
+    x='Year',
+    y='Miles_per_Gallon')
+```
+
+Notes:
+Instead,
+what we want is to aggregate the data
+(e.g. by calculating the mean or median per year),
+so that there is only one point per year.
+We could wrangle the data manually in pandas before plotting it
+like in this slide.
+
+---
+
+## Data aggregation in Altair instead of in pandas
+
+```{python}
+alt.Chart(cars).mark_line().encode(
+    x='Year',
+    y='mean(Miles_per_Gallon)')
+```
+
+Notes:
+Instead of doing this two step process with pandas,
+we could aggregate right inside Altair!
+To get the mean of a column,
+wrap it in a string that says `'mean()'` as in this slide.
+
+That is a convenient short cut!
+Many common aggregations/transformations are available via this syntax,
+[more info in the documentation including a table with all available aggregations](https://altair-viz.github.io/user_guide/encoding.html#binning-and-aggregation).
+
+---
+
+## Grouping before aggregating
+
+```{python}
+alt.Chart(cars).mark_line().encode(
+    x='Year',
+    y='mean(Miles_per_Gallon)',
+    color='Origin')
+```
+
+Notes:
+Altair understands that when we specify for example a color 
+together with an aggregation,
+we want to take the mean of each group
+in the color channel separately.
+This works just like if we had done the following in pandas
+`groupby('Origin').mean('Miles_per_Gallong)`,
+and gives us one line per group in this plot.
+
+---
+
+## Combining marks via Layering
+
+```{python}
+line = alt.Chart(cars).mark_line().encode(
+    x='Year',
+    y='mean(Miles_per_Gallon)')
+
+point = alt.Chart(cars).mark_point().encode(
+    x='Year',
+    y='mean(Miles_per_Gallon)')
+
+line + point
+```
+
+Notes:
+As we've seen above, the Altair `Chart` object represents a plot with a single mark type.
+What about more complicated diagrams, involving multiple charts or layers?
+Using a set of *view composition* operators,
+Altair can take multiple chart definitions
+and combine them to create more complex views.
+
+To augment this plot,
+we might like to add `point` marks for each averaged data point.
+We can start by defining each chart separately:
+first a line plot,
+then a scatter plot.
+We can then use the `layer` operator to combine the two into a layered chart.
+Here we use the shorthand `+` (plus) operator to invoke layering.
+
+---
+
+## Briefer syntax by building upon previous plots
+
+```{python}
+line = alt.Chart(cars).mark_line().encode(
+    x='Year',
+    y='mean(Miles_per_Gallon)')
+
+line + line.mark_point()
+```
+
+Notes:
+We can also create this chart by *reusing* and *modifying* a previous chart definition!
+Rather than completely re-write a chart,
+we can start with the line chart,
+then invoke the `mark_point` method
+to generate a new chart definition with a different mark type:
+We could also have typed `mark_line(point=True)`,
+which is a special case for getting points on a line
+since it is such a common operation.
+
+---
+
+## Showing raw values together with the mean
+
+```{python}
+line = alt.Chart(cars).mark_line().encode(
+    x='Year',
+    y='mean(Miles_per_Gallon)')
+
+line + line.mark_point().encode(y='Miles_per_Gallon')
+```
+
+
+Notes:
+We can also create a layer with one point per observations,
+and with a line for the average values.
+For this we need to use `encode` again
+after creating the first plot,
+to instruct Altair to use the raw vales
+instead of the mean for the points.
+(Note that the axis now has two labels,
+we will see how to change that next lecture.)
+
+---
+
+## Adding color to separate layers
+
+```{python}
+line = alt.Chart(cars).mark_line().encode(
+    x='Year',
+    y='mean(Miles_per_Gallon)',
+    color='Origin')
+
+line + line.mark_point().encode(y='Miles_per_Gallon')
+```
+
+Notes:
+Adding color to the base chart propagates it to all the layers.
+If we would only have added it to the point chart,
+there would still have been a single line instead of three.
 
 ---
 
