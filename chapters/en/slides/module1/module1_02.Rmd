@@ -213,3 +213,98 @@ Enough talking,
 let's code!
 
 ---
+
+## Sample data
+
+```{python}
+from vega_datasets import data
+
+cars = data.cars()
+cars
+```
+
+Notes:
+When specifying data in Altair,
+it is important that dataframes are in the ["tidy"](http://vita.had.co.nz/papers/tidy-data.html) format.
+They should consist of a set of named data *columns* (also called *fields* or *variables*)
+with one feature each
+and rows with one *observation* each.
+In our Altair examples
+we will often use data from the [vega-datasets](https://github.com/vega/vega-datasets) package.
+Many of these datasets are directly available as Pandas dataframes,
+such as the `cars` dataset.
+
+---
+
+## Our first plot
+
+```{python}
+import altair as alt
+
+alt.Chart(cars).mark_point()
+```
+
+Notes:
+The fundamental object in Altair is the `Chart`,
+which takes a data frame as a single argument `alt.Chart(cars)`.
+
+With a chart object in hand,
+we can now specify how we would like the data to be visualized.
+We first indicate what kind of geometric *mark* we want to use to represent the data.
+We can set the `mark` attribute of the chart object using the `Chart.mark_*` methods.
+
+For example, we can show the data as a point using `mark_point()`,
+as in this slide.
+In this plot,
+the rendering consists of one point per row in the dataset,
+all plotted on top of each other,
+since we have not yet specified positions for these points.
+
+---
+
+## Encoding channels
+
+### Mapping a data feature to the x-axis
+
+```{python}
+alt.Chart(cars).mark_point().encode(
+    x='Miles_per_Gallon')
+```
+
+Notes:
+To visually separate the points,
+we can map various *encoding channels*,
+or *channels* for short,
+to columns in the dataset.
+For example,
+we could *encode* the column `Miles_per_Gallon` of the data using the `x` channel,
+which represents the x-axis position of the points.
+To specify this,
+use the `encode` method as in the slide
+to map a dataframe column to a visual channel, such as x, y, or color.
+For Pandas data frames,
+Altair automatically determines an appropriate data type for the mapped column,
+which in this case is quantitative (or numerical).
+
+---
+
+## Encoding channels
+
+### Mapping a data feature to the y-axis
+
+```{python}
+alt.Chart(cars).mark_point().encode(
+    x='Miles_per_Gallon',
+    y='Horsepower')
+```
+
+Notes:
+Though we've now separated the data by one attribute,
+we still have multiple points overlapping within each category.
+Let's further separate these by adding an `y` encoding channel:
+
+---
+
+# Let's apply what we learned!
+
+Notes: <br>
