@@ -8,116 +8,15 @@ output:
     pandoc_args: "--atx-headers"
 ---
 
-```{r setup, include=FALSE}
-library(rmarkdown)
-library(reticulate)
-library(knitr)
-library(vegawidget)
-
-# Make sure you are updating your title
+```{r include=FALSE}
+# Make sure you are updating your title in the YAML preamble
 knitr::opts_chunk$set(
     echo = TRUE,
     base.dir = ".",
     base.url = "/",
     fig.path = paste("../../../../static/module1/", params$dynamictitle,"/", sep = ""))
 
-md_document_custom <- md_document(variant = "gfm")
-output_format(
-    knitr = NULL,
-    pandoc = NULL,
-    base_format = md_document_custom)
-```
-
-```{python, include=FALSE}
-# Show all dataframe columns
-import pandas as pd
-
-
-pd.set_option('display.width', 350)
-pd.set_option('display.max_columns', 50)
-pd.set_option('display.max_rows', 15)
-
-# These Python functions are from SO
-# and save the day since they allow statements to be executed AND return a value.
-# The built-in `exec` does not return a value,
-# and `eval` does not work with statements (assignment, imports, etc).
-# Reticulate only provides a thin wrapper around `eval`,
-# so it is not much use here.
-# The actual reticulate code for processing Python code chunks
-# is more complex than these functions.
-import ast
-import copy
-
-
-def convertExpr2Expression(Expr):
-        Expr.lineno = 0
-        Expr.col_offset = 0
-        result = ast.Expression(Expr.value, lineno=0, col_offset=0)
-        return result
-
-def exec_with_return(code):
-    code_ast = ast.parse(code)
-
-    init_ast = copy.deepcopy(code_ast)
-    init_ast.body = code_ast.body[:-1]
-
-    last_ast = copy.deepcopy(code_ast)
-    last_ast.body = code_ast.body[-1:]
-
-    exec(compile(init_ast, "<ast>", "exec"), globals())
-    if type(last_ast.body[0]) == ast.Expr:
-        return eval(compile(convertExpr2Expression(last_ast.body[0]), "<ast>", "eval"),globals())
-    else:
-        exec(compile(last_ast, "<ast>", "exec"),globals())
-```
-
-```{r include=FALSE}
-# This hooks into the knitr machinery
-# and appends a custom function to the standard RMarkdown source code evaluation.
-# Here it is appending `to_json()` to Altair code,
-# sending it to the Python function above for evaluation,
-# and converting the result to SVG via vegawidget.
-# The results cannot be assigned a variable for some reasons
-# and the vector is needed for RMarkdown to output both the source code and the SVG result.
-# The SVG introduces an unnecessary doctype string
-# which can be removed by adding the following to `format_slides.R`:
-# text <- gsub('&lt;!DOCTYPE svg PUBLIC .*&gt;', '', text)
-default_source_hook <- knit_hooks$get('source')
-knit_hooks$set(
-    source = function(x, options) {
-        # Using element-wise `&&` to avoid raising warning for multi-line R code chunks.
-        # Python chunks are always one line.
-        if (options$engine == "python" && grepl("alt.Chart(", x, fixed = T)) {
-            c(default_source_hook(x, options), vw_to_svg(py$exec_with_return(paste(x, '.to_json()'))))}
-        else {
-            default_source_hook(x, options)}})
-
-# To get the interactive vega HTML instead of SVG when knitting,
-# the source hook needs to be changed from using `vw_to_svg` to using `knit_print.vegaspec`.
-# The following line also need to be uncommented to register the knit_print S3 method properly for vegaspecs:
-# vctrs::s3_register("knitr::knit_print", "vegaspec")
-# In addition, there is a bug in RMarkdown or vegawidget
-# which requires the function `as_vegaspec` to be run once separately for plots to show up.
-# R is probably not loading the CDN or other HTML resources properly otherwise.
-# Since so many workarounds are required for the above,
-# I came up with this simpler way of rendering the HTML,
-# which can replace the second element of the output vector (the svg part):
-# gsub('<!DOCTYPE html>', '', py$exec_with_return(paste(x, '.to_html()')))
-# It works when knitting in RStudio,
-# but we still need Ines to fix the js script bug in her framework before using it here.
-
-# The below is needed to remove "alt.Chart(...)" when knitting inside RStudio.
-# However, when using the course framework, that line already removed for some reason.
-# Not sure if this discrepancy comes from a bug in the framework, RMarkdown,
-# or a if it is a setting somewhere.
-# default_output_hook <- knit_hooks$get('output')
-# knit_hooks$set(
-#     output = function(x, options) {
-#         if (options$engine == "python" && grepl("alt.Chart(", x, fixed = T)) {
-#             # Swallow the output so that "alt.Chart(...)" is not printed
-#         }
-#         else {
-#             default_output_hook(x, options)}})
+source('../../../../slide-setup.R')
 ```
 
 type: slides
