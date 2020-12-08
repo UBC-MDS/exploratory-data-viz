@@ -9,57 +9,42 @@ id: 1
 ---
 
 <exercise id="0" title="Module Learning Outcomes"  type="slides, video">
-
-<slides source="module1/module1_00" shot="0" start="3:5707" end="4:5306">
-</slides>
-
+<slides source="module1/module1_00" shot="0" start="3:5707" end="4:5306"> </slides>
 </exercise>
 
 
 <exercise id="1" title="What is Data Visualization?" type="slides,video">
-
-<slides source="module1/module1_01" shot="1" start="0:003" end="07:12">
-</slides>
-
+<slides source="module1/module1_01" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
-<exercise id="2" title="Excercises">
-
-**True or False: It is easier for humans to interpret plots than raw numbers.**
-
+<exercise id="2" title="Why Visualize Data?">
+<p><strong>True or False: It is easier for humans to interpret plots than raw numbers.</strong></p>
 <choice id="1" >
 <opt text="True"  correct="true"></opt>
 <opt text="False"></opt>
 </choice>
 
-**True or False: Statistical summaries are often useful, but it is a good idea to also visualize your data before drawing any conclusions.**
-
+<p><strong>True or False: Statistical summaries are often useful,
+but it is a good idea to also visualize your data before drawing any conclusions.</strong></p>
 <choice id="2" >
 <opt text="True"  correct="true"></opt>
 <opt text="False"></opt>
 </choice>
-
 </exercise>
 
 
 <exercise id="3" title="How Can We Visualize Data?" type="slides,video">
-
-<slides source="module1/module1_02" shot="1" start="0:003" end="07:12">
-</slides>
-
+<slides source="module1/module1_02" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
 <exercise id="4" title="Exercises">
-
-**True or False: An low level visualization library focuse on plot construction details.**
-
+<p><strong>True or False: An low level visualization library focuse on plot construction details.</strong></p>
 <choice id="3" >
 <opt text="True"  correct="true"></opt>
 <opt text="False"></opt>
 </choice>
 
-**True or False: A high level visualization library focuses on data and relationships.**
-
+<p><strong>True or False: A high level visualization library focuses on data and relationships.</strong></p>
 <choice id="4" >
 <opt text="True"  correct="true"></opt>
 <opt text="False"></opt>
@@ -94,20 +79,16 @@ You should color the dots by the origin of the cars.
 <slides source="module1/module1_03" shot="1" start="0:003" end="07:12"></slides>
 </exercise>
 
+
 <exercise id="5" title="Exercises">
-
-**Question 1**
-
-When combining plots in Altair, we say that each plot has its own `___`.
-
+<p><strong>When combining plots in Altair, we say that each plot has its own `___`.</strong></p>
 <choice id="5">
 <opt text="Overlay"></opt>
 <opt text="Layer"  correct="true"></opt>
 <opt text= "Panel"></opt>
 </choice>
 
-Line plots are often preferable to point plots when visualizing trends over time because...
-
+<p><strong>Line plots are often preferable to point plots when visualizing trends over time because...</p></strong>
 <choice id="6">
 <opt text="The lines make the plot more visually appealing."></opt>
 <opt text= "Line plots are faster to create."></opt>
@@ -137,8 +118,7 @@ so that you can compare the stock development for the different companies.
 
 </codeblock>
 
-In the chart above, which stock was priced the highest in 2003?
-
+<p><strong>In the chart above, which stock was priced the highest in 2003?</strong></p>
 <choice id="7">
 <opt text="GOOG"></opt>
 <opt text= "AAPL"></opt>
