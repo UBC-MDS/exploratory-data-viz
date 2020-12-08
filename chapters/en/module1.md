@@ -84,20 +84,99 @@ You should color the dots by the origin of the cars.
 
 <codeblock id="01_03">
 
-- Remember that the column names should be in quotes, e.g. `y = 'Horsepower'`.
+- Remember that the column names should be in quotes, e.g. `y='Horsepower'`.
+
+</codeblock>
+</exercise>
+
+
+<exercise id="5" title="Lines and layers" type="slides,video">
+<slides source="module1/module1_03" shot="1" start="0:003" end="07:12"></slides>
+</exercise>
+
+<exercise id="5" title="Exercises">
+
+**Question 1**
+
+When combining plots in Altair, we say that each plot has its own `___`.
+
+<choice id="5">
+<opt text="Overlay"></opt>
+<opt text="Layer"  correct="true"></opt>
+<opt text= "Panel"></opt>
+</choice>
+
+Line plots are often preferable to point plots when visualizing trends over time because...
+
+<choice id="6">
+<opt text="The lines make the plot more visually appealing."></opt>
+<opt text= "Line plots are faster to create."></opt>
+<opt text="The line makes it easy to see which values are connected in the same group and its slope facilitates our interpretation of the overall trend."  correct="true"></opt>
+</choice>
+
+**Creating a line plot for change over time**
+
+*When you see `____` in a coding exercise,
+replace it with what you assume to be the correct code.
+Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.
+Be patient when running a coding exercise for the first time,
+it can take a few minutes.*
+
+Let's use a line plot to visualize how the price of a few common stocks has changed over time.
+Your task is to fill out the missing fields in the code below
+in order to create a line plot
+with the stocks' date on the x-axis and their price on the y-axis.
+You should color the lines by the stock symbol,
+so that you can compare the stock development for the different companies.
+
+<codeblock id="01_06">
+
+- Remember that the column names should be in quotes, e.g. `y='price'`.
+- Look at the dataframe by typing `stocks.columns` if you are unsure about the exact column names.
 
 </codeblock>
 
+In the chart above, which stock was priced the highest in 2003?
 
+<choice id="7">
+<opt text="GOOG"></opt>
+<opt text= "AAPL"></opt>
+<opt text="IBM"  correct="true"></opt>
+</choice>
+
+**Combining a point and line plot**
+
+Let's add points to the line above to indicate each observation along the line.
+Your task is to fill out the missing fields in the code below
+in order to assign the line plot to a variable name (of your choice),
+and then use this name to combine a line plot and a point plot.
+
+<codeblock id="01_07">
+
+- Remember that the column names should be in quotes, e.g. `y='price'`.
+- Look at the dataframe by typing `stocks.columns` if you are unsure about the exact column names.
+- Revisit the slides on how to build upon existing plots when layering.
+
+</codeblock>
+
+**Plotting an aggregated value**
+
+Instead of showing the value for each individual stock value,
+we could explore the average trend over time
+for all five companies.
+Use the first coding exercise above as a base
+and modify the code to plot one line with the average value over time,
+instead of giving each company its own line.
+
+<codeblock id="01_08">
+
+- Remember that the column names should be in quotes, e.g. `y='price'`.
+- Look at the dataframe by typing `stocks.columns` if you are unsure about the exact column names.
+- Remember that the string syntax for creating and average is `'mean(column_name)'`
+
+</codeblock>
 </exercise>
-
-<exercise id="5" title="Lines and layers" type="slides,video">
-
-<slides source="module1/module1_03" shot="1" start="0:003" end="07:12">
-</slides>
-
-</exercise>
-
 
 <!--
 **Question 1**
