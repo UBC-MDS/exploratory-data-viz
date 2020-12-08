@@ -41,6 +41,7 @@ id: 1
 
 </exercise>
 
+
 <exercise id="3" title="How Can We Visualize Data?" type="slides,video">
 
 <slides source="module1/module1_02" shot="1" start="0:003" end="07:12">
@@ -86,6 +87,14 @@ You should color the dots by the origin of the cars.
 - Remember that the column names should be in quotes, e.g. `y = 'Horsepower'`.
 
 </codeblock>
+
+
+</exercise>
+
+<exercise id="5" title="Lines and layers" type="slides,video">
+
+<slides source="module1/module1_03" shot="1" start="0:003" end="07:12">
+</slides>
 
 </exercise>
 
