@@ -32,7 +32,7 @@ id: 1
 <opt text="False"></opt>
 </choice>
 
-**True or False: Statistical summaries can be misleading.**
+**True or False: Statistical summaries are often useful, but it is a good idea to also visualize your data before drawing any conclusions.**
 
 <choice id="2" >
 <opt text="True"  correct="true"></opt>
