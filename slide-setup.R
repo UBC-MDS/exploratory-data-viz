@@ -22,7 +22,7 @@ knitr::knit_hooks$set(
             # instead of just the last layer.
             vector_string <- unlist(strsplit(x, '\n'))
             last_command <- tail(vector_string, 1)
-            if (grepl('\\+|\\*', last_command, fixed = T)) {
+            if (grepl('\\+|\\&|\\|', last_command)) {
                 new_last <- paste0('(', last_command, ')')
                 vector_string[length(vector_string)] <- new_last
                 xx <- paste(vector_string, collapse='\n')
