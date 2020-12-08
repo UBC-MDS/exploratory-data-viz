@@ -23,7 +23,7 @@ id: 1
 
 </exercise>
 
-<exercise id="2" title="Why Visualize Data?">
+<exercise id="2" title="Excercises">
 
 **True or False: It is easier for humans to interpret plots than raw numbers.**
 
