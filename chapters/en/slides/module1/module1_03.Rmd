@@ -29,6 +29,11 @@ and how to combine line and point plots together.
 ## Trends over time with scatter plots
 
 ```{python}
+import altair as alt
+from vega_datasets import data
+
+cars = data.cars()
+
 alt.Chart(cars).mark_point().encode(
     x='Year',
     y='Miles_per_Gallon')
