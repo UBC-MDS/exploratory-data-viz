@@ -316,7 +316,7 @@ This is not the number of examples.
 -->
 
 
-<exercise id="10" title="What Did We Just Learn?" type="slides, video">
+<exercise id="6" title="What Did We Just Learn?" type="slides, video">
 <slides source="module1/module1_end" shot="0" start="04:5307" end="05:5911">
 </slides>
 </exercise>
