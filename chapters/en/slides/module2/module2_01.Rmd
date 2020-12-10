@@ -1,0 +1,63 @@
+---
+params:
+  dynamictitle: "module2_01"
+title: "`r params$dynamictitle`"
+output:
+  md_document:
+    variant: gfm
+    pandoc_args: "--markdown-headings=atx"
+---
+
+```{r include=FALSE}
+# Update the title in the YAML preamble for each slide show
+knitr::opts_chunk$set(
+    echo = TRUE,
+    base.dir = ".",
+    base.url = "/",
+    fig.path = paste("../../../../static/module2/", params$dynamictitle,"/", sep = ""))
+
+source('../../../../slide-setup.R')
+```
+
+type: slides
+
+# Visual encoding channels
+
+Notes:
+So far we have seen how to use points and lines to represent data visually.
+In this lecture,
+we will see how we can also use areas and bars for this purpose.
+But before we dive in to the code,
+let's talk about which visual channels are the most effective
+at graphically representing data.
+
+---
+
+## Comparing sizes is easier for some geometrical objects than for others
+
+![](/module2/circle-comparison.png)
+
+Notes:
+As with many aspect,
+the best way to learn is to experience
+rather than being told something.
+So lets experience which visual encodings are the most effective.
+
+In the image in this slide,
+try to estimate how many times bigger the big circle is compared to the small one.
+
+---
+
+## Comparing sizes is easier for some geometrical objects than for others
+
+![](/module2/bar-comparison.png)
+
+Notes:
+In the image in this slide,
+try to estimate how many times bigger the big bar is compared to the small one.
+
+---
+
+# Let's apply what we learned!
+
+Notes: <br>
