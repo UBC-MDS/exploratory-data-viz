@@ -459,7 +459,7 @@ For example, have a look at the four sets of numbers in the table on the
 slide. This is a slightly modified version of the original, [which was
 put together by statistician Francis Anscombe in the
 70s.](https://en.wikipedia.org/wiki/Anscombe%27s_quartet) Can you see
-how the differences in the general trends between these four sets of
+the differences in the general trends between these four sets of
 numbers?
 
 ---
@@ -586,8 +586,8 @@ mean
 <td>
 9.00
 </td>
-<td>
-7.11
+<td style="background-color:#4853a4; color:#ffffff">
+<b>7.11</b>
 </td>
 </tr>
 <tr>
@@ -597,8 +597,8 @@ std
 <td>
 3.32
 </td>
-<td>
-1.15
+<td style="background-color:#4853a4; color:#ffffff">
+<b>1.15</b>
 </td>
 </tr>
 </tbody>
