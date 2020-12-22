@@ -120,7 +120,9 @@ for set_name, df in anscombe.groupby('Set'):
         .agg(['mean', 'std']).round(2).reset_index().rename(columns={'index': ''})
         .to_html(index=False)
         .replace('class="dataframe"', 'style="width:70px; float:left; margin-right:40px"')
-        .replace('<thead>',  '<thead style="text-align: center">'))
+        .replace('<thead>',  '<thead style="text-align: center">')
+        .replace('>7.11',  ' style="background-color:#4853a4; color:#ffffff"> <b>7.11</b>')
+        .replace('>1.15',  ' style="background-color:#4853a4; color:#ffffff"> <b>1.15</b>'))
 ```
 
 Notes:
