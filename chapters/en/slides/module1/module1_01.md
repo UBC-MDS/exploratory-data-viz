@@ -5,10 +5,12 @@ type: slides
 # What is Data Visualization?
 
 Notes: At its core, data visualization is about representing numbers
-with graphical elements, such as position, area, color, etc. Picking the
-most appropriate component for you data can be tricky, but fortunately
-there is research on which are the most appropriate for different
-situations which we will use as guidance in our visualization journey.
+with graphical elements such as the position of a line, the length of a
+bar, or the color of a point. We often visualize data in order to help
+us answer a specific question we have about our dataset, but it can also
+help us generate new questions. In addition to using visualizations to
+explore data ourselves, we can use them to effectively communicate our
+insights to others, as we will learn in later modules of this course.
 
 ---
 
@@ -445,15 +447,20 @@ Y
 </tbody>
 </table>
 
-Notes: Think about it, numbers have only been around for about 5,000
-years. Visual systems on the other hand, have undergone refinement
-during 500,000,000 years of evolution. While we need to train ourselves
-to recognize structure in numerical data, we have evolved to
-instinctively recognize visual patterns and to accurately judge
-properties such as colors and distances between objects. Drawing upon
-this complex build-in apparatus, we can arrive at conclusion much faster
-by glancing at visual representations of data rather than numerical
-representations.
+Notes: Why do we need visualizations to help answer our questions? Is it
+not enough to look at numbers in tables?
+
+To understand why visualizations are so powerful, it is helpful to
+remember that to answer a question, we often have to put the data in a
+format that is easy for us humans to interpret. Because our number
+systems have only been around for about 5,000 years, we need to assert
+effort and train ourselves to recognize structure in numerical data.
+Visual systems, on the other hand, have undergone refinement during
+500,000,000 years of evolution, so we can instinctively recognize visual
+patterns and accurately estimate visual properties such as colors and
+distances. Practically, this means that we can arrive at correct
+conclusions faster from studying visual rather than numerical
+representations of the same data.
 
 For example, have a look at the four sets of numbers in the table on the
 slide. This is a slightly modified version of the original, [which was
