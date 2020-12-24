@@ -25,15 +25,15 @@ type: slides
 
 Notes:
 There is a plethora of visualization packages in Python.
-This rich selection can be beneficial, but is also confusing,
-especially when starting out trying to decide which one to choose.
-A helpful distinction to make is between *low level* and *high level* plotting packages.
+This rich selection can be beneficial
+but it is also confusing,
+especially when starting out and trying to decide which package to choose.
+When learning about data visualization,
+it is helpful to distinguish between *low level* and *high level* plotting packages.
 
 ---
 
-## Low level and high level visualization concepts
-
-### Low level (imperative) is more about the plot mechanics
+## Low level (imperative) is more about the plot mechanics
 
 - Focus on plot construction details.
     - Often includes loops, low-level drawing commands, etc.
@@ -41,27 +41,95 @@ A helpful distinction to make is between *low level* and *high level* plotting p
     - "Draw a red point for every observation that has value X in column A,
       a blue point for every observation that has value Y in column A, etc."
 
-### High level (declarative) is more about the data
+
+```
+# Pseudocode
+colors = ['orange', 'blue', 'red']
+plot = create_plot()
+for number, group in enumerate(dataframe.groupby('ColumnC')):
+    plot.add_points(x=group['ColumnA'], y=group['ColumnB'], color=colors[number])
+```
+
+Notes:
+*Imperative* plotting packages
+focus on plot construction details
+such as *how* to implement the visualization in terms of for-loops, low-level drawing commands, etc.
+In the pseudocode example in the slide,
+image that we have
+you can see how we need to loop through the dataframe
+when we want to add points in different colors for different values.
+
+---
+
+## High level (declarative) is more about the data
 
 - Focus on data and relationships.
     - Often includes data, graphical marks, and encoding channels.
 - Specify *what* should be done
     - "Assign colors based on the values in column A"
 
+```
+point_plot(data=dataframe, x='ColumnA', y='ColumnB', color='ColumnC')
+```
+
 Notes:
 By *declarative*,
 we mean that you can provide a high-level specification of *what* you want the visualization to include,
 in terms of *data*, *graphical marks*, and *encoding channels*,
-rather than having to specify *how* to implement the visualization in terms of for-loops, low-level drawing commands, *etc*.
-For example,
-you would say "color my data by the column 'country'"
-instead of "go through this data frame and plot any observations of country1 in blue, any observations of country in red, etc".
 
-Declarative visualization tools lets you think about **data and relationship**,
-rather than **plot construction details**.
+In summary,
+declarative visualization tools lets you think about **data and relationship**,
+while imperative visualization tools focus on **plot construction details**.
+
 A key idea is that you declare links between data fields and visual encoding channels,
 such as the x-axis, y-axis, color, *etc*.
 The rest of the plot details are handled automatically.
+
+---
+
+## A high level grammar of graphics helps us compose plots effectively
+
+- Simple grammatical components combine to create visualizations.
+- Visualization grammars often consist of three main components:
+    1. Create a chart linked to a dataframe.
+    2. Add graphical elements (such as points, lines, etc).
+    3. Encode dataframe columns as visual channels (such as x, etc).
+
+```
+chart(dataframe).add_points().encode_columns(x='ColumnA', y='ColumnB', color='ColumnC')`.
+```
+
+Notes:
+The declarative plotting concept can be implemented in different ways.
+In the previous slide we had a dedicated function for creating the pointplot,
+and there would be a separate function for creating a lineplot, barplot, etc.
+With this approach,
+it is often not easy to combine plots together,
+unless there is a specific function for that purpose
+and the three bullets points on this slide
+are all executed by this single function.
+
+Another way to use declarative plotting is via a visualization grammar.
+Generally,
+a grammar governs how individuals parts come together to compose
+more complex constructs.
+For example,
+a linguistic grammar decides how words and phrases can be combined into coherent sentences.
+A data visualization grammar
+determines how to combine individual parts of the plotting syntax
+to create complete visualization.
+In this example on this slide,
+you can see that the three bullet points are now broken down into one main
+function to create the chart linked to the data,
+and then we build upon this by adding the graphical elements (`add_points()`)
+and the encoding of the columns to properties of this chart (`encode_columns()`).
+
+By combining these three grammatical components in different ways,
+we can build a wide range of visualizations,
+without memorizing a unique function for each plot type.
+Thanks to this grammatical visualization approach,
+we also only require minimal changes to our code
+to change the type of plot.
 
 ---
 
@@ -92,6 +160,10 @@ such as tooltips and selections.
     2. Add a graphical mark.
     3. Encode dataframe columns as visual channels.
 - In code, it looks like this: `Chart(data).mark().encode(x, y, ...)`.
+
+```
+Chart(dataframe).mark_point().encode(x='ColumnA', y='ColumnB', color='ColumnC')`.
+```
 
 Notes:
 The declarative plotting concept can be implemented in different ways.
