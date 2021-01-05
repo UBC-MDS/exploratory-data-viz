@@ -8,11 +8,11 @@ Notes: There is a plethora of visualization packages in Python. This
 rich selection can be beneficial but it is also confusing, especially
 when starting out and trying to decide which package to choose. When
 learning about data visualization, it is helpful to distinguish between
-*low level* and *high level* plotting packages.
+*imperative* and *declarative* plotting packages.
 
 ---
 
-## Low level (imperative) is more about the plot mechanics
+## Imperative (low level) plotting focuses on plot mechanics
 
 -   Focus on plot construction details.
     -   Often includes loops, low-level drawing commands, etc.
@@ -20,37 +20,108 @@ learning about data visualization, it is helpful to distinguish between
     -   “Draw a red point for every observation that has value X in
         column A, a blue point for every observation that has value Y in
         column A, etc.”
-
-| Country | Area     | Population |
-|---------|----------|------------|
-| Russia  | 17098246 | 144386830  |
-| Canada  | 9984670  | 38008005   |
-| China   | 9596961  | 1400050000 |
-
-    # Pseudocode
-    colors = ['orange', 'blue', 'red']
-    plot = create_plot()
-    for number, group in enumerate(dataframe.groupby('ColumnC')):
-        plot.add_points(x=group['ColumnA'], y=group['ColumnB'], color=colors[number])
+-   Minute control over plotting details, but laborious for complex
+    visualization.
 
 Notes: *Imperative* plotting packages focus on plot construction details
 such as *how* to implement the visualization in terms of for-loops,
-low-level drawing commands, etc. In the pseudocode example in the slide,
-image that we have you can see how we need to loop through the dataframe
-when we want to add points in different colors for different values.
+low-level drawing commands, etc. This approach gives us minute control
+over what is plotted, but it becomes quite laborious when we need to
+plot larger dataframes, or create more complex visualizations.
 
 ---
 
-## High level (declarative) is more about the data
+## Example of imperative plotting
+
+``` python
+# Pseudocode
+colors = ['blue', 'red', 'yellow']
+plot = create_plot()
+for row_number, row_data in enumerate(dataframe):
+    plot.add_point(x=row_data['Area'], y=row_data['Population'], color=colors[row_number])
+```
+
+<img src="/module1/pseudocode-plot.svg" alt="" width="65%"></img>
+
+Notes: In the example in this slide, we will plot the area and the
+population for the three largest countries in the world:
+
+<table style="width:40%;">
+<thead>
+<tr class="header">
+<th style="text-align: center;">
+Country
+</th>
+<th style="text-align: center;">
+Area
+</th>
+<th style="text-align: center;">
+Population
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>
+Russia
+</td>
+<td style="text-align: right;">
+17098246
+</td>
+<td style="text-align: right;">
+144386830
+</td>
+</tr>
+<tr class="even">
+<td>
+Canada
+</td>
+<td style="text-align: right;">
+9984670
+</td>
+<td style="text-align: right;">
+38008005
+</td>
+</tr>
+<tr class="odd">
+<td>
+China
+</td>
+<td style="text-align: right;">
+9596961
+</td>
+<td style="text-align: right;">
+1400050000
+</td>
+</tr>
+</tbody>
+</table>
+
+We will use Python-inspired pseudocode, which is code that is made up
+and designed so that it is less complex and easier to read than real
+programming languages. This helps us focus on understanding the concepts
+of plotting instead of getting hung up on the code syntax details of a
+particular package.
+
+In this example, you can see that an imperative approach to plotting
+this data would be to first create the plot and then loop through the
+dataframe to add a point for each country one by one. To color the
+points, we need to manually create a sequence of colors that we can
+access inside the loop.
+
+The visualization on this page is an example of what a plot could look
+like when run with real code similar to our pseudocode.
+
+---
+
+## Declarative (high level) plotting focuses on the data
 
 -   Focus on data and relationships.
     -   Often includes data, graphical marks, and encoding channels.
 -   Specify *what* should be done
     -   “Assign colors based on the values in column A”
-
-<!-- -->
-
-    point_plot(data=dataframe, x='ColumnA', y='ColumnB', color='ColumnC')
+-   Smart defaults gives us what we want without complete control over
+    minor plotting details.
 
 Notes: By *declarative*, we mean that you can provide a high-level
 specification of *what* you want the visualization to include, in terms
@@ -66,6 +137,23 @@ the plot details are handled automatically.
 
 ---
 
+## Example of declarative plotting
+
+``` python
+# Pseudocode
+point_plot(data=dataframe, x='Area', y='Population', color='Country')
+```
+
+<img src="/module1/pseudocode-plot-with-legend.svg" alt="" width="65%"></img>
+
+Notes: The visualization on this page is an example of what a plot could
+look like when run with real code similar to our pseudocode. You will
+notice that this time the plot also includes a legend without us having
+to create it explicitly, which is a common convenience in declarative
+plotting packages.
+
+---
+
 ## A high level grammar of graphics helps us compose plots effectively
 
 -   Simple grammatical components combine to create visualizations.
@@ -74,9 +162,10 @@ the plot details are handled automatically.
     2.  Add graphical elements (such as points, lines, etc).
     3.  Encode dataframe columns as visual channels (such as x, etc).
 
-<!-- -->
-
-    chart(dataframe).add_points().encode_columns(x='ColumnA', y='ColumnB', color='ColumnC')`.
+``` python
+# Pseudocode
+chart(dataframe).add_points().encode_columns(x='Area', y='Population', color='Country')`.
+```
 
 Notes: The declarative plotting concept can be implemented in different
 ways. In the previous slide we had a dedicated function for creating the
@@ -352,5 +441,3 @@ which we will learn more about next lecture.
 # Let’s apply what we learned!
 
 Notes: <br>
-
----
