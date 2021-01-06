@@ -19,7 +19,7 @@ In this module students will learn how to
 - Understand the grammar of graphics presented here.
 - Create point and line visualizations in Altair.
 - Transform data directly in Altair instead of pandas.
-- Combine geometric marks via layering.
+- Combine graphical marks via layering.
 
 
 Notes:
