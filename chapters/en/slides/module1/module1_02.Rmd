@@ -43,7 +43,7 @@ it is helpful to distinguish between *imperative* and *declarative* plotting pac
 - Minute control over plotting details, but laborious for complex visualization.
 
 Notes:
-*Imperative* plotting packages
+*Imperative* (or *low level*) plotting packages
 focus on plot construction details
 such as *how* to implement the visualization
 in terms of for-loops, low-level drawing commands, etc.
@@ -86,12 +86,14 @@ df = pd.read_table(StringIO(data), sep='|')
  .save('../../../../static/module1/pseudocode-plot.svg'))
 ```
 
-<img src="/module1/pseudocode-plot.svg" alt="" width="65%"></img>
+<img src="/module1/pseudocode-plot.svg" alt="" width="52%"></img>
 
 Notes:
 In the example in this slide,
 we will plot the area and the population
-for the three largest countries in the world:
+for the three largest countries in the world
+to see how they compare.
+This is the table we are plotting:
 
 <table style="width:40%;">
 <thead>
@@ -120,15 +122,15 @@ for the three largest countries in the world:
 </tbody>
 </table>
 
-We will use Python-inspired pseudocode,
+For this example,
+we will use Python-inspired pseudocode,
 which is code that is made up
 and designed so that it is less complex and easier to read
 than real programming languages.
 This helps us focus on understanding the concepts of plotting
 instead of getting hung up on the code syntax details of a particular package.
 
-In this example,
-you can see that an imperative approach to plotting this data
+You can see that an imperative approach to plotting this data
 would be to first create the plot
 and then loop through the dataframe
 to add a point for each country one by one.
