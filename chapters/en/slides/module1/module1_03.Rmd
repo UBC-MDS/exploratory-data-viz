@@ -21,122 +21,153 @@ source('../../../../slide-setup.R')
 
 type: slides
 
-# Lines and layers
+# Aggregations, lines, and layers
 
 Notes:
-In this slide deck we will see how to create lineplots
+In this slide deck we will see how to aggregate data in Altair
+(to plot the mean, median, etc),
+how to create lineplots via `mark_line()`,
 and how to combine line and point plots together
-via layers in Altair.
+via layers.
 
 ---
 
-## Visualizing trends over time with scatter plots is not ideal
+## Including all the data can hinder visualization of general trends
 
 ```{python}
 import altair as alt
 from vega_datasets import data
 
+
 cars = data.cars()
-
 alt.Chart(cars).mark_point().encode(
-    x='Year',
-    y='Miles_per_Gallon')
+    x='Weight_in_lbs',
+    y='Miles_per_Gallon',
+    color='Origin')
 ```
 
 Notes:
-We could use the point mark to visualize trends over time,
-such as how the miles per gallon has changes over the years.
-However,
-it is hard to see a general trend in this data.
+Throughout this course
+we will explore many different datasets,
+but for now we will stick to the `cars`
+dataset to keep it simple
+and focus on introducing additional Altair functionality.
+
+Let's refresh our memory with this plot from the previous module.
+We noted that it appears that cars differ
+in their weight and mileage
+based on their country of origin.
+At least the American cars appear to stand out,
+but it is difficult to see any differences
+between Europe and Japan.
+
+Visualizing all data points as in this slide
+is helpful to detect patterns in the data.
+But when showing all observations,
+it can be hard to pick up on general trends in the data,
+e.g. if there are any differences in the mean weight
+of cars made in either Japan or Europe.
+To more effectively visualize such general trends in the data,
+we can create plots of statistical summaries,
+such as means and medians.
+In Altair (and pandas) these are refereed to as data aggregations.
 
 ---
 
-## Visualizing trends over time with line plots makes them easier to interpret
+## Data aggregations are built into Altair
 
 ```{python}
-alt.Chart(cars).mark_line().encode(
-    x='Year',
-    y='Miles_per_Gallon')
+alt.Chart(cars).mark_point().encode(
+    x='mean(Weight_in_lbs)',
+    y='mean(Miles_per_Gallon)',
+    color='Origin')
 ```
 
 Notes:
-Trends are often more effectively visualized with lines,
-since the slope can help us determine the change in y over time.
-Let's try switching our mark to a line.
+To plot the means of weight and mileage,
+we could use pandas to first calculate the mean values,
+and then plot the resulting dataframe in Altair.
+This is powerful since we can access all aggregations built into pandas,
+but it is a bit verbose for simple common operations, such as the mean.
 
-Oh oh, something is wrong.
-Since there are multiple values per year,
-the line connects them vertically,
-which is not what we want here.
+Fortunately,
+Altair has shortcuts for plotting simple aggregations
+where you provide the name of the aggregation
+together with the name of the column inside a string
+as in the example in this slide.
+[The Altair documentation includes a table
+with all available aggregations](https://altair-viz.github.io/user_guide/encoding.html#binning-and-aggregation).
+
+In this visualization we can detect small differences
+between the means of the Japanese and Europeans cars,
+which was not discernible when we plotted all the points.
+Wether this difference is big enough to reach a different conclusion
+than when inspecting the previous plots
+depends on our application and purpose of the data exploration.
 
 ---
 
-## Visualizing an aggregate for each year gives a better overview
+## Plotting aggregations to visualize trends over time
 
 ```{python}
-yearly_avg_gallons = cars.groupby('Year')['Miles_per_Gallon'].mean().reset_index()
-
-alt.Chart(yearly_avg_gallons).mark_line().encode(
-    x='Year',
-    y='Miles_per_Gallon')
+cars
 ```
 
 Notes:
-Instead,
-what we want is to aggregate the data
-so that there is only one point per year
-(e.g. by calculating the mean or median).
-We could wrangle the data manually in pandas before plotting it
-like in this slide.
-This plot looks much better
-and it is easy for us to visualize the change over time.
+Aggregations are often helpful when comparing trends over time,
+especially when there are multiple groups in the data.
+In the cars dataset,
+there is a `Year` column,
+indicating when the car was made.
+Often when there is a notion of time in the data,
+it is interesting to see how values in the dataframe changes over time.
+
+In this case,
+we might be interested in knowing whether newer cars
+are more fuel efficient than older ones.
+Presumably they should be,
+but does it differ depending on where the car was made?
+Let's find out!
 
 ---
 
-## Performing the aggregation in Altair directly is more convenient
+## Plotting aggregations to visualize trends over time works well
 
 ```{python}
-alt.Chart(cars).mark_line().encode(
+alt.Chart(cars).mark_point().encode(
     x='Year',
     y='mean(Miles_per_Gallon)')
 ```
 
 Notes:
-Instead of doing this two step process with pandas,
-we could aggregate right inside Altair.
-To get the mean of a column,
-wrap it in a string that says `'mean()'` as in this slide.
-
-That is a convenient shortcut!
-Many common aggregations and transformations
-are available directly in Altair via this syntax,
-[more info can be found in the documentation
-including a table with all available aggregations](https://altair-viz.github.io/user_guide/encoding.html#binning-and-aggregation).
+To visualize the mean mileage for each year of all cars,
+we want to perform the aggregation on the `Miles_per_Gallon` column
+while leaving the `Year` column intact.
+As you can see this plot one value (the mean)
+for each year in the dataframe.
+Here we can see that the observations in this dataframe span the years 1970-1982
+and it does indeed look like the mileage is getting better over time
+as we expected!
 
 ---
 
-## Grouping by a column before aggregating creates one aggregate per group
+## Plotting all data to visualize trends over time is not effective
 
 ```{python}
-alt.Chart(cars).mark_line().encode(
+alt.Chart(cars).mark_point().encode(
     x='Year',
-    y='mean(Miles_per_Gallon)',
-    color='Origin')
+    y='Miles_per_Gallon')
 ```
 
 Notes:
-Altair understands that when we specify another encoding channel
-(such as `color`)
-together with an aggregation,
-we want to take the mean of each group
-in the color channel separately.
-This works just like if we had done the following in pandas
-`groupby('Origin').mean('Miles_per_Gallon)`,
-and gives us one line per group in this plot.
+As a comparison with the previous slide,
+if we instead of the mean would plot all the data points for each year,
+it would be much more difficult to see the pattern over time
+as you can see here.
 
 ---
 
-## Comparing points with lines for grouped charts reveals the advantages of using lines
+## Plotting points to visualize trends over time is not ideal
 
 ```{python}
 alt.Chart(cars).mark_point().encode(
@@ -146,10 +177,44 @@ alt.Chart(cars).mark_point().encode(
 ```
 
 Notes:
-This is the same plot as on the previous slide,
-but using points instead of line
-in order to illustrate how much harder it is to follow
-the trends over time without the lines connecting the values together.
+If we try to explore the mileage over time
+while grouping the cars according their origin,
+it is a bit difficult to immediately recognize
+which points belongs to which group.
+In fact,
+using points for visualizing trends is not ideal,
+and lines are often preferred
+as we will see in the next slide.
+
+---
+
+## Plotting lines to visualize trends over time is ideal
+
+```{python}
+alt.Chart(cars).mark_line().encode(
+    x='Year',
+    y='mean(Miles_per_Gallon)',
+    color='Origin')
+```
+
+Notes:
+One key advantage of line plots is that they connect
+all the observations that belong to the same group
+presenting them as one unified graphical object (one line),
+which is easy for us to distinguish when looking at the plot
+instead of trying to connect the dots mentally.
+Another advantage is that the slope of the line
+makes it easier to see if the value from one year to another
+is increasing or decreasing.
+
+Altair grammar let's us switch from a point plot to a line plot,
+by only changing `mark_point()` to `mark_line()`,
+and keeping the rest of the code as is.
+
+In this plot we can clearly compare the mileage trends over time
+to conclude that cars from all origins improved their mileage,
+and that the trajectory and mileage values
+are the most similar between Europe and Japan.
 
 ---
 
@@ -168,20 +233,26 @@ line + point
 ```
 
 Notes:
-As we've seen above, the Altair `Chart` object represents a plot with a single mark type.
-What about more complicated diagrams, involving multiple charts or layers?
-Using a set of *view composition* operators,
-Altair can take multiple chart definitions
-and combine them to create more complex views.
+To augment a line plot,
+it is sometimes helpful to add `point` marks for each data point along the line,
+to emphasize where the observations fall.
+This is helpful since the line drawn between points could be misleading
+if we have very few points.
+For example,
+if you see a straight line,
+does that mean there are just two points,
+one in each corner of the line?
+Or are there ten points spread out all along the line?
 
-To augment this plot,
-we might like to add `point` marks for each averaged data point.
-We can start by defining each chart separately:
+To combine two different types of graphical marks
+(line and point in this case),
+we will use Altair's *layering* grammar.
+In this slide,
+we start by defining each chart separately:
 first a line plot,
-then a scatter plot.
-We can then use the `alt.layer` function or its shortcut operator `+` (plus)
+then a point plot.
+We can then use `+` (plus) operator
 to combine the two into a layered chart.
-Here we use the shorthand `+` (plus) operator to invoke layering.
 
 ---
 
@@ -196,14 +267,16 @@ line + line.mark_point()
 ```
 
 Notes:
-We can also create this chart by *reusing* and *modifying* a previous chart definition!
-Rather than completely re-write a chart,
-we can start with the line chart,
-then invoke the `mark_point` method
-to generate a new chart definition with a different mark type:
+We can also create a layered plot
+by reusing a previous chart definition.
+Rather than creating the point plot from scratch,
+we can start with the line plot,
+and then invoke the `mark_point` method.
 We could also have typed `mark_line(point=True)`,
 which is a special case for getting points on a line
-since it is such a common operation.
+since it is such a common operation,
+but the layering grammar extends to other plots,
+so it is more helpful to focus on learning that.
 
 ---
 
@@ -219,14 +292,24 @@ line + line.mark_point().encode(y='Miles_per_Gallon')
 
 
 Notes:
-We can also create a layer with one point per observations,
+When we are combing plots in layers,
+we can not only change the mark,
+but also the encodings.
+This way,
+we can create a layer with one point per observations,
 and with a line for the average values.
 For this we need to use `encode` again
 after creating the first plot,
 to instruct Altair to use the raw vales
 instead of the mean for the points.
-(Note that the axis now has two labels,
-we will see how to change that next lecture.)
+(note that the axis now has two labels,
+we will see how to change that in a future lecture).
+
+This type of visualization is helpful when we want to show
+both the underlying data and a statistical summary,
+which is often helpful for elucidating what the data tells us.
+It is also a good check to make sure nothing unexpected is
+going on with the raw values as we saw in the introductory example with Anscombe's quartet.
 
 ---
 
@@ -242,8 +325,14 @@ line + line.mark_point().encode(y='Miles_per_Gallon')
 ```
 
 Notes:
-Adding color to the base chart propagates it to all the layers.
-If we would only have added it to the point chart,
+We have already seen that the x and y encoding remain the same
+in any subsequently created plots.
+Here,
+we're showing that this also applies to the color encoding
+to illustrate that any encoding
+will be propagated to all layers
+unless they are specifically overwritten.
+If we would only have added color to the point chart,
 there would still have been a single line instead of three.
 
 ---
