@@ -140,29 +140,34 @@ that we can access inside the loop.
 
 The visualization on this page is an example of what a plot could look like
 when run with real code similar to our pseudocode.
+You can see that one of the countries is bigger than the others,
+and one of the countries has a much larger population,
+but without seeing the code,
+it is not possible to know which color represent which country.
+We could add a legend by creating it explicitly 
+and adding one colored dot per iteration in the loop.
 
 ---
 
 ## Declarative (high level) plotting focuses on the data
 
 - Focus on data and relationships.
-    - Often includes data, graphical marks, and encoding channels.
+    - Often includes linking columns to visual channels.
 - Specify *what* should be done
     - "Assign colors based on the values in column A"
 - Smart defaults gives us what we want without complete control over minor plotting details.
 
 Notes:
-By *declarative*,
-we mean that you can provide a high-level specification of *what* you want the visualization to include,
-in terms of *data*, *graphical marks*, and *encoding channels*,
+*Declarative* (or *high level*) plotting packages
+declaring links between dataframe columns and visual channels,
+such as the x-axis, y-axis, color, *etc*.
+This means that you can provide a high-level specification
+of *what* you want the visualization to include,
+and the plot details are handled automatically.
 
 In summary,
-declarative visualization tools lets you think about **data and relationship**,
+declarative visualization tools let you think about **data and relationships**,
 while imperative visualization tools focus on **plot construction details**.
-
-A key idea is that you declare links between data fields and visual encoding channels,
-such as the x-axis, y-axis, color, *etc*.
-The rest of the plot details are handled automatically.
 
 ---
 
@@ -219,14 +224,15 @@ are all executed by this single function.
 
 Another way to use declarative plotting is via a visualization grammar.
 Generally,
-a grammar governs how individuals parts come together to compose
+a grammar governs how individual parts come together to compose
 more complex constructs.
 For example,
 a linguistic grammar decides how words and phrases can be combined into coherent sentences.
 A data visualization grammar
 determines how to combine individual parts of the plotting syntax
 to create complete visualization.
-In this example on this slide,
+
+In the example on this slide,
 you can see that the three bullet points are now broken down into one main
 function to create the chart linked to the data,
 and then we build upon this by adding the graphical elements (`add_points()`)
@@ -246,50 +252,20 @@ to change the type of plot.
 <img src="/module1/py-plotting-landscape.png" alt="The Python plotting landscape" width="100%"></img>
 
 Notes:
+Now that we know the basic concepts of how data can be visualized,
+let's select a Python package and get coding!
 In this image you can see the most commonly used Python plotting packages.
 There are many more,
 but these are the ones you are the most likely to hear about,
 so it is good to know that they exist.
 As you can see there are several high and low level language,
-so how to we chose?
-In this course we have chosen to use Altair,
-because it is a powerful high level visualization tool 
-with a clear and consistent syntax
+so how do we chose?
+
+In this course we have chosen to use [Altair](https://altair-viz.github.io/),
+because it is a powerful declarative visualization tool
+with a clear and consistent grammar
 that also allows us to add interactive components to our plots,
 such as tooltips and selections.
-
----
-
-## A high level grammar of graphics helps us compose plots effectively
-
-- Simple grammatical components combine to create visualizations.
-- The Altair visualization grammar consist of three main components:
-    1. Create a chart.
-    2. Add a graphical mark.
-    3. Encode dataframe columns as visual channels.
-- In code, it looks like this: `Chart(data).mark().encode(x, y, ...)`.
-
-```
-Chart(dataframe).mark_point().encode(x='ColumnA', y='ColumnB', color='ColumnC')`.
-```
-
-Notes:
-The declarative plotting concept can be implemented in different ways.
-Here we will describe how a visualization grammar
-can be used similarly to how grammar in regular language
-is used to build complex linguistic constructs.
-A wide range of simple to sophisticated visualizations can be created using a concise grammar.
-Thanks to this functional way of interfacing with data,
-only minimal changes are required if the underlying data change or to change the type of plot.
-
-One of the most prominent declarative statistical visualization libraries is [Altair](https://altair-viz.github.io/).
-Altair offer a powerful and concise visualization grammar for quickly building a wide range of statistical graphics.
-In brief, you first create a chart,
-then you indicate which graphical marks should represent the data (points, lines, etc)
-and finally you encode your dataframe colums as different visual channels (x, y, color, etc).
-
-Enough talking,
-let's code!
 
 ---
 
