@@ -279,19 +279,37 @@ cars
 ```
 
 Notes:
-When specifying data in Altair,
-it is important that dataframes are in the ["tidy"](http://vita.had.co.nz/papers/tidy-data.html) format.
-They should consist of a set of named data *columns* (also called *fields* or *variables*)
+Before we start visualizing data,
+we need to select a dataset and often also a question we want to answer.
+Altair works with dataframes in the ["tidy"](http://vita.had.co.nz/papers/tidy-data.html) format,
+which means that they should consist of 
+rows with one *observation* each
+and a set of named data *columns*
 with one feature each
-and rows with one *observation* each.
-In our Altair examples
-we will often use data from the [vega-datasets](https://github.com/vega/vega-datasets) package.
-Many of these datasets are directly available as Pandas dataframes,
-such as the `cars` dataset.
+(you might also have heard these called *fields* or *variables*,
+but we will stick to *columns* for clarity).
+
+In this course,
+we will often use data from the [vega-datasets](https://github.com/vega/vega-datasets) package,
+which has many plot-friendly practice datasets available as Pandas dataframes,
+and can be loaded as demonstrated in this slide.
+Here,
+our data contains the name of different cars
+and some attributes relating to each car.
+There are many interesting questions we could ask from this data set!
+For our first plot,
+let's explore the relationship between how heavy car is
+(the *Weight_in_lbs* column)
+and how good gas mileage it has
+(the *Miles_per_gallon* column).
+
+Before starting to code the visualization,
+take a few seconds and think about
+what you would expect the relationship between these two columns to look like when you plot it.
 
 ---
 
-## Let's create our first plot
+## Adding graphical elements via marks
 
 ```{python}
 import altair as alt
@@ -300,132 +318,179 @@ alt.Chart(cars).mark_point()
 ```
 
 Notes:
+The Altair syntax is similar to the grammar of graphics pseudocode
+we saw a few slides ago.
 The fundamental object in Altair is the `Chart`,
-which takes a data frame as a single argument `alt.Chart(cars)`.
+which takes a data frame as a single argument,
+e.g. `alt.Chart(cars)`.
 
-With a chart object in hand,
-we can now specify how we would like the data to be visualized.
-We first indicate what kind of geometric *mark* we want to use to represent the data.
-We can set the `mark` attribute of the chart object using the `Chart.mark_*` methods.
+After the chart object has been created,
+we can specify how the graphical element should look
+that we use to visualize the data.
+This is called a graphical *mark* in Altair,
+and in this slide we have used `mark_point()` to show the data as points.
 
-For example, we can show the data as a point using `mark_point()`,
-as in this slide.
-In this plot,
-the rendering consists of one point per row in the dataset,
-all plotted on top of each other,
-since we have not yet specified positions for these points.
+Since we have not specified which columns should be used for the x and y axes,
+we appear to only see one point in this plot
+since all the data is plotted on top of each other in the same location.
 
 ---
 
-## Encoding channels
+## Encoding columns as visual channels
 
-### Mapping a data feature to the x-scale
+### Mapping a dataframe column to the x-scale
 
 ```{python}
 alt.Chart(cars).mark_point().encode(
-    x='Miles_per_Gallon')
+    x='Weight_in_lbs')
 ```
 
 Notes:
 To visually separate the points,
-we can map various *encoding channels*,
-or *channels* for short,
-to columns in the dataset.
-For example,
-we could *encode* the column `Miles_per_Gallon` of the data using the `x` channel,
-which represents the x-axis position of the points.
-To specify this,
-use the `encode` method as in the slide
-to map a dataframe column to a visual channel, such as x, y, or color.
+we can encode columns in the dataframe
+as visual channels,
+such as the axes or colors of the plot.
+Here,
+we *encode* the column `Miles_per_Gallon` as the x-axis.
 For Pandas data frames,
 Altair automatically determines an appropriate data type for the mapped column,
-which in this case is quantitative (or numerical).
+which in this case is quantitative (or numerical)
+and shows the numbers under the axis.
 
 ---
 
-## Mapping a data feature to the y-scale
+## Mapping a dataframe column to the y-scale
 
 ```{python}
 alt.Chart(cars).mark_point().encode(
-    x='Miles_per_Gallon',
-    y='Horsepower')
+    x='Weight_in_lbs',
+    y='Miles_per_Gallon')
 ```
 
 Notes:
-Though we've now separated the data by one attribute,
-we still have multiple points overlapping within each category.
-Let's further separate these by adding an `y` encoding channel:
+By spreading out the data along the both the x and y-axis,
+we can answer our initial question about the relationship between car weight and gas mileage.
+as it appears that the heavier cars are the ones that have the poorest mileage.
+Although we might have expected this to be the case,
+visualizing all the data points also provides
+information on the nature of the relationship between weight and mileage.
+It appears that the xy points don't simply follow a straight line,
+but rather a curved line that where the mileage drop quickly
+when moving away from the lightest cars,
+but then decrease more slowly throughout the remainder of the data.
+
+This rich, easily interpretable display of information
+is one of the main advantages from visualizing data
+and later in the course we will talk more about different type of relationships,
+such as linear, exponential, etc.
 
 ---
 
-## Mapping a numerical data feature to the color scale
+## Mapping a numerical dataframe column to the color scale
 
 ```{python}
 alt.Chart(cars).mark_point().encode(
-    x='Miles_per_Gallon',
-    y='Horsepower',
-    color='Weight_in_lbs')
-
+    x='Weight_in_lbs',
+    y='Miles_per_Gallon',
+    color='Horsepower')
 ```
 
 Notes:
-We can specify which column we want to color the points by
-and Altair will automatically figure out an appropriate colorscale to use.
+To enrich this display of information further,
+we can color the points according to a column in the dataframe.
+When we encode a column as the color channel
+Altair will automatically figure out an appropriate colorscale to use,
+depending on whether the data is numerical, categorical, etc.
+Here we have indicated that we want to color the points according to the car's horsepower,
+which indicated how powerful its engine is.
+
+We can see that the heavier cars have more powerful engines,
+than the lighter ones,
+but when using color for a numerical comparison like this,
+makes it is harder to tell whether the relationship follows a straight line 
+or is of another nature,
+so this encoding is mostly useful as an approximate indication of the horsepower.
+In the net module we will learn more in detail about 
+which encodings are most suitable for different comparisons.
 
 ---
 
-## Mapping a categorical data feature to the color scale
+## Mapping a categorical dataframe column to the color scale
 
 ```{python}
 alt.Chart(cars).mark_point().encode(
-    x='Miles_per_Gallon',
-    y='Horsepower',
+    x='Weight_in_lbs',
+    y='Miles_per_Gallon',
     color='Origin')
 ```
 
 Notes:
-Since we used a column with numerical (also called "quantitative") data,
-a continuous, gradually increasing colorscale was used.
-If we instead choose a color with categorical (also called "nominal") data,
-Altair will automatically pick a suitable colorscale with distinct colors.
+In the previous slide,
+a continuous, gradually increasing colorscale was used
+to visualize the gradual increase in the numerical column `Horsepower`.
+In this slide,
+we instead chose to color the points per the categorical column `Origin`
+(where the car was made).
+As you can see,
+Altair detects that this column contains categorical data
+(with the help of pandas)
+and picks a different colorscale to facilitate distinction between the categories.
+As in the previous slide,
+Altair automatically adds a helpful legend,
+and we can see that the heavier, more powerful cars are primary manufactured in the US,
+while the lighter more fuel efficient ones are manufactured in Europe and Japan
+(remember that this is true for this particular dataset,
+and not necessarily all cars).
 
 ---
 
-## Mapping a data feature to the shape scale
+## Mapping a dataframe column to the shape scale
 
 ```{python}
 alt.Chart(cars).mark_point().encode(
-    x='Miles_per_Gallon',
-    y='Horsepower',
+    x='Weight_in_lbs',
+    y='Miles_per_Gallon',
     color='Origin',
     shape='Origin')
 ```
 
 Notes:
-We can encode shapes aesthetics the same way.
+Although Altair's colorscales are designed to be effective and easy to interpret,
+we can make the categories in our plot even more distinct
+by encoding the same categorical column as both color and shape.
+This is also makes visualizations much easier to interpret understand
+for anyone with visual color deficiency
+(about 10% of the population).
+We will talk more in depth about color theory in a later module.
 
 ---
 
-## Mapping a data feature to the size scale
+## Mapping a dataframe column to the size scale
 
 
 ```{python}
 alt.Chart(cars).mark_point().encode(
-    x='Miles_per_Gallon',
-    y='Horsepower',
+    x='Weight_in_lbs',
+    y='Miles_per_Gallon',
     color='Origin',
     shape='Origin',
-    size='Weight_in_lbs')
+    size='Horsepower')
 ```
 
 Notes:
-Another common encoding aesthetic is `size`.
-The plot is now quite messy,
-there are too many things going on to be able to see the variation in weight.
+Sometimes a visualization tries to do too much.
+In this example,
+we have added the size channel
+to indicate the engine power.
+Although Altair elegantly handles the dual legends,
+it is difficult for us to discern useful information from this plot.
 If you go back to the plot where we encoded weight in the color channel,
 you can see that the plot is much clearer.
-There is plenty of research on which channels are best for what features,
-which we will learn more about next lecture.
+Later we will learn more about how to efficiently load a visualization
+with an appropriate amount of information,
+and what the research indicates
+regarding which visual channels are the most efficient
+for communicating information visually.
 
 ---
 
