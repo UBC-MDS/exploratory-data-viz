@@ -75,12 +75,12 @@ You should color the dots by the origin of the cars.
 </exercise>
 
 
-<exercise id="5" title="Lines and layers" type="slides,video">
+<exercise id="5" title="Aggregations, Lines, and Layers" type="slides,video">
 <slides source="module1/module1_03" shot="1" start="0:003" end="07:12"></slides>
 </exercise>
 
 
-<exercise id="5" title="Exercises">
+<exercise id="6" title="Exercises">
 <p><strong>When combining plots in Altair, we say that each plot has its own `___`.</strong></p>
 <choice id="5">
 <opt text="Overlay"></opt>
@@ -316,7 +316,7 @@ This is not the number of examples.
 -->
 
 
-<exercise id="6" title="What Did We Just Learn?" type="slides, video">
+<exercise id="7" title="What Did We Just Learn?" type="slides, video">
 <slides source="module1/module1_end" shot="0" start="04:5307" end="05:5911">
 </slides>
 </exercise>
