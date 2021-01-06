@@ -224,6 +224,7 @@ tooltips and selections.
 ``` python
 from vega_datasets import data
 
+
 cars = data.cars()
 cars
 ```
@@ -273,6 +274,7 @@ to look like when you plot it.
 
 ``` python
 import altair as alt
+
 
 alt.Chart(cars).mark_point()
 ```
