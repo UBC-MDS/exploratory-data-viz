@@ -672,7 +672,7 @@ remaining three sets of data have a similar centre and spread.
 
 ### There are clear patterns in these datasets that we could not detect from only looking at the raw numbers or some summary statistics
 
-<img src="/module1/modified-anscombes.svg" alt="" width="65%"></img>
+<img src="/module1/modified-anscombes.svg" alt="" width="60%"></img>
 
 Notes: Humans are not good at detecting patterns in raw numbers, and we
 don’t have good intuition about how different distributions of data can
