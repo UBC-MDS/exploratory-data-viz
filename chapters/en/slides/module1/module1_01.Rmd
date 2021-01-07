@@ -9,24 +9,14 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-## DO NOT FORGET TO CHANGE THIS ACCORDINGLY
-library(rmarkdown)
-# Make sure you are updating your title
-knitr::opts_chunk$set(echo = TRUE,
-                      base.dir = ".",
-                      base.url = "/",
-                      fig.path = paste("../../../../static/module1/", params$dynamictitle,"/", sep = ""))
+# Update the title in the YAML preamble for each slide show
+knitr::opts_chunk$set(
+    echo = TRUE,
+    base.dir = ".",
+    base.url = "/",
+    fig.path = paste("../../../../static/module1/", params$dynamictitle,"/", sep = ""))
 
-knitr_opts <- knitr_options( opts_knit = NULL,
-                             opts_chunk = NULL,
-                             knit_hooks = NULL,
-                             opts_hooks = NULL,
-                             opts_template = NULL)
-md_document_custom <- md_document(variant = "gfm")
-output_format(knitr = knitr_opts,
-              pandoc = NULL,
-              base_format = md_document_custom)
-library(reticulate)
+source('../../../../slide-setup.R')
 ```
 
 ```{python include=FALSE}
@@ -40,12 +30,7 @@ pd.set_option('display.max_columns', 50)
 pd.set_option('display.max_rows', 15)
 ```
 
-```{python include=FALSE}
-path = "../../../../static/module1/"
-```
-
 type: slides
-
 
 # What is Data Visualization?
 
@@ -158,7 +143,7 @@ while the remaining three sets of data have a similar centre and spread.
 
 ### There are clear patterns in these datasets that we could not detect from only looking at the raw numbers or some summary statistics
 
-```{python include=FALSE}
+```{python echo=F, results=F}
 # Make plot elements easier to see
 # This is a bit ugly but there is no faster why,
 # maybe we should discuss if we want this in all slide decks
@@ -181,10 +166,10 @@ alt.themes.enable('bigger_font')
  .facet('Set', columns=2)
  .configure_axis(grid=True)
  .configure_header(title=None)
- .save(path + 'modified-anscombes.svg'))
+ .save('../../../../modified-anscombes.svg'))
 ```
 
-<img src="/module1/modified-anscombes.svg" alt="" width="65%"></img>
+<img src="/module1/modified-anscombes.svg" alt="" width="60%"></img>
 
 Notes:
 Humans are not good at detecting patterns in raw numbers,
