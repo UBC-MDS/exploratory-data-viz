@@ -208,14 +208,29 @@ Notes: Now that we know the basic concepts of how data can be
 visualized, let’s select a Python package and get coding! In this image
 you can see the most commonly used Python plotting packages. There are
 many more, but these are the ones you are the most likely to hear about,
-so it is good to know that they exist. As you can see there are several
-high and low level language, so how do we chose?
+so it is good to know that they exist.
 
-In this course we have chosen to use
+The text to the left in the image is a legend to explain the colors used
+for the different Python packages (blue for high level, declarative
+packages and orange for low level, imperative packages). We have also
+included some of the most common visualization packages for the web
+which are build in Javascript and colored in white, more on these in the
+next paragraph.
+
+As you can see there are several high and low level language, so how do
+we chose? In this course we will use
 [Altair](https://altair-viz.github.io/), because it is a powerful
 declarative visualization tool with a clear and consistent grammar that
 also allows us to add interactive components to our plots, such as
 tooltips and selections.
+
+The Altair library is a little but of Python code connected to an
+already existing powerful JavaScript package that is called VegaLite,
+which in turns builds on D3, the most dominant visualization package on
+the web today. By leveraging these well-established JavaScript
+visualization packages Altair is able to create plots that work natively
+on the web and includes interactive features without reinventing the
+wheel.
 
 ---
 
