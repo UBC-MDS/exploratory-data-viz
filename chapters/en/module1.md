@@ -17,7 +17,7 @@ id: 1
 <slides source="module1/module1_01" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
-<exercise id="2" title="Why Visualize Data?">
+<exercise id="2" title="Exercises">
 <p><strong>True or False: It is easier for humans to interpret plots than raw numbers.</strong></p>
 <choice id="1" >
 <opt text="True"  correct="true"></opt>
