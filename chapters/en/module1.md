@@ -9,56 +9,42 @@ id: 1
 ---
 
 <exercise id="0" title="Module Learning Outcomes"  type="slides, video">
-
-<slides source="module1/module1_00" shot="0" start="3:5707" end="4:5306">
-</slides>
-
+<slides source="module1/module1_00" shot="0" start="3:5707" end="4:5306"> </slides>
 </exercise>
 
 
 <exercise id="1" title="What is Data Visualization?" type="slides,video">
-
-<slides source="module1/module1_01" shot="1" start="0:003" end="07:12">
-</slides>
-
+<slides source="module1/module1_01" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
-<exercise id="2" title="Excercises">
-
-**True or False: It is easier for humans to interpret plots than raw numbers.**
-
+<exercise id="2" title="Why Visualize Data?">
+<p><strong>True or False: It is easier for humans to interpret plots than raw numbers.</strong></p>
 <choice id="1" >
 <opt text="True"  correct="true"></opt>
 <opt text="False"></opt>
 </choice>
 
-**True or False: Statistical summaries are often useful, but it is a good idea to also visualize your data before drawing any conclusions.**
-
+<p><strong>True or False: Statistical summaries are often useful,
+but it is a good idea to also visualize your data before drawing any conclusions.</strong></p>
 <choice id="2" >
 <opt text="True"  correct="true"></opt>
 <opt text="False"></opt>
 </choice>
-
 </exercise>
 
+
 <exercise id="3" title="How Can We Visualize Data?" type="slides,video">
-
-<slides source="module1/module1_02" shot="1" start="0:003" end="07:12">
-</slides>
-
+<slides source="module1/module1_02" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
 <exercise id="4" title="Exercises">
-
-**True or False: An low level visualization library focuse on plot construction details.**
-
+<p><strong>True or False: An low level visualization library focuse on plot construction details.</strong></p>
 <choice id="3" >
 <opt text="True"  correct="true"></opt>
 <opt text="False"></opt>
 </choice>
 
-**True or False: A high level visualization library focuses on data and relationships.**
-
+<p><strong>True or False: A high level visualization library focuses on data and relationships.</strong></p>
 <choice id="4" >
 <opt text="True"  correct="true"></opt>
 <opt text="False"></opt>
@@ -83,12 +69,94 @@ You should color the dots by the origin of the cars.
 
 <codeblock id="01_03">
 
-- Remember that the column names should be in quotes, e.g. `y = 'Horsepower'`.
+- Remember that the column names should be in quotes, e.g. `y='Horsepower'`.
+
+</codeblock>
+</exercise>
+
+
+<exercise id="5" title="Aggregations, Lines, and Layers" type="slides,video">
+<slides source="module1/module1_03" shot="1" start="0:003" end="07:12"></slides>
+</exercise>
+
+
+<exercise id="6" title="Exercises">
+<p><strong>When combining plots in Altair, we say that each plot has its own `___`.</strong></p>
+<choice id="5">
+<opt text="Overlay"></opt>
+<opt text="Layer"  correct="true"></opt>
+<opt text= "Panel"></opt>
+</choice>
+
+<p><strong>Line plots are often preferable to point plots when visualizing trends over time because...</p></strong>
+<choice id="6">
+<opt text="The lines make the plot more visually appealing."></opt>
+<opt text= "Line plots are faster to create."></opt>
+<opt text="The line makes it easy to see which values are connected in the same group and its slope facilitates our interpretation of the overall trend."  correct="true"></opt>
+</choice>
+
+**Creating a line plot for change over time**
+
+*When you see `____` in a coding exercise,
+replace it with what you assume to be the correct code.
+Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.
+Be patient when running a coding exercise for the first time,
+it can take a few minutes.*
+
+Let's use a line plot to visualize how the price of a few common stocks has changed over time.
+Your task is to fill out the missing fields in the code below
+in order to create a line plot
+with the stocks' date on the x-axis and their price on the y-axis.
+You should color the lines by the stock symbol,
+so that you can compare the stock development for the different companies.
+
+<codeblock id="01_06">
+
+- Remember that the column names should be in quotes, e.g. `y='price'`.
+- Look at the dataframe by typing `stocks.columns` if you are unsure about the exact column names.
 
 </codeblock>
 
-</exercise>
+<p><strong>In the chart above, which stock was priced the highest in 2003?</strong></p>
+<choice id="7">
+<opt text="GOOG"></opt>
+<opt text= "AAPL"></opt>
+<opt text="IBM"  correct="true"></opt>
+</choice>
 
+**Combining a point and line plot**
+
+Let's add points to the line above to indicate each observation along the line.
+Your task is to fill out the missing fields in the code below
+in order to assign the line plot to a variable name (of your choice),
+and then use this name to combine a line plot and a point plot.
+
+<codeblock id="01_07">
+
+- Remember that the column names should be in quotes, e.g. `y='price'`.
+- Look at the dataframe by typing `stocks.columns` if you are unsure about the exact column names.
+- Revisit the slides on how to build upon existing plots when layering.
+
+</codeblock>
+
+**Plotting an aggregated value**
+
+Instead of showing the value for each individual stock value,
+we could explore the average trend over time
+for all five companies.
+Use the first coding exercise above as a base
+and modify the code to plot one line with the average value over time,
+instead of giving each company its own line.
+
+<codeblock id="01_08">
+
+- Remember that the column names should be in quotes, e.g. `y='price'`.
+- Look at the dataframe by typing `stocks.columns` if you are unsure about the exact column names.
+- Remember that the string syntax for creating and average is `'mean(column_name)'`
+
+</codeblock>
+</exercise>
 
 <!--
 **Question 1**
@@ -248,7 +316,7 @@ This is not the number of examples.
 -->
 
 
-<exercise id="10" title="What Did We Just Learn?" type="slides, video">
+<exercise id="7" title="What Did We Just Learn?" type="slides, video">
 <slides source="module1/module1_end" shot="0" start="04:5307" end="05:5911">
 </slides>
 </exercise>
