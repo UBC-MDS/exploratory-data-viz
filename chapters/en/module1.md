@@ -41,6 +41,55 @@ id: 1
 
 </exercise>
 
+<exercise id="3" title="How Can We Visualize Data?" type="slides,video">
+
+<slides source="module1/module1_02" shot="1" start="0:003" end="07:12">
+</slides>
+
+</exercise>
+
+<exercise id="4" title="Exercises">
+
+**True or False: An low level visualization library focuse on plot construction details.**
+
+<choice id="3" >
+<opt text="True"  correct="true"></opt>
+<opt text="False"></opt>
+</choice>
+
+**True or False: A high level visualization library focuses on data and relationships.**
+
+<choice id="4" >
+<opt text="True"  correct="true"></opt>
+<opt text="False"></opt>
+</choice>
+
+**Your first plot!**
+
+*When you see `____` in a coding exercise,
+replace it with what you assume to be the correct code.
+Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.
+Be patient when running a coding exercise for the first time,
+it can take a few minutes.*
+
+Let's use the same vehicle dataset we saw in the lecture,
+but visualize the relationship between two different columns.
+The data has already been imported for you in this exercise,
+Your task is to fill out the missing fields in the Altair plot
+in order to create a scatter plot
+with the cars' horsepower on the x-axis and their weight on the y-axis.
+You should color the dots by the origin of the cars.
+
+<codeblock id="01_03">
+
+- Remember that the column names should be in quotes, e.g. `y = 'Horsepower'`.
+
+</codeblock>
+
+</exercise>
+
+
 <!--
 **Question 1**
 
@@ -199,7 +248,7 @@ This is not the number of examples.
 -->
 
 
-<exercise id="3" title="What Did We Just Learn?" type="slides, video">
+<exercise id="10" title="What Did We Just Learn?" type="slides, video">
 <slides source="module1/module1_end" shot="0" start="04:5307" end="05:5911">
 </slides>
 </exercise>

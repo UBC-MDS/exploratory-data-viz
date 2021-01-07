@@ -3,9 +3,12 @@ def test():
     # string value of the solution, available as __solution__. A helper for
     # printing formatted messages is available as __msg__. See the testTemplate
     # in the meta.json for details.
-
     # If an assertion fails, the message will be displayed
-    assert 'candybar_dim' in __solution__, "Make sure you are naming your solution 'candybar_dim'."
-    assert candybar_dim == (25, 10), "Did you load your data correctly? "
-    assert "shape"  in __solution__, "Are you sure you used the right functions and parameters?"
-    __msg__.good("Nice work, well done!")
+
+    # Since we haven't started assigning charts to variable names yet,
+    # this might be the better way to test for the first exercise.
+    # Maybe even for later exercises.
+    assert 'x="Weight_in_lbs"' in __solution__, "Did you encode the x channel correctly?"
+    assert 'y="Horsepower"' in __solution__, "Did you encode the y channel correctly?"
+    assert 'color="Origin"' in __solution__, "Did you encode the color channel correctly?"
+    __msg__.good("You're correct, well done!")

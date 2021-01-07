@@ -1,9 +1,10 @@
-import pandas as pd
+import altair as alt
+from vega_datasets import data
 
 
-candybar_df = pd.read_csv('data/candybars.csv')
+cars = data.cars()
 
-print(candybar_df.head())
-
-candybar_dim = candybar_df.____
-print(candybar_dim)
+alt.Chart(___).mark___.encode(
+    x=___,
+    y=___,
+    color=___)
