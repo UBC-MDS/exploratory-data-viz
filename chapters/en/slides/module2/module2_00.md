@@ -12,7 +12,7 @@ Notes: In this module we will be learning about the most and least effective way
 
 In this module students will learn how to
 
-- Choose effective visual encodings.
+- Choose effective visual channels for information display.
 - Visualize frequencies with bar plots.
 - Facet plots to explore more variables simultaneously.
 - Customize axes labels and scales.

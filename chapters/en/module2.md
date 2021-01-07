@@ -13,7 +13,7 @@ id: 2
 </exercise>
 
 
-<exercise id="1" title="Visual encoding channels" type="slides,video">
+<exercise id="1" title="Effective Use of Visual Channels" type="slides,video">
 <slides source="module2/module2_01" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
