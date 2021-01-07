@@ -2,13 +2,17 @@
 type: slides
 ---
 
-# Visual encoding channels
+# Effective Use of Visual Channels
 
 Notes: So far we have seen how to use points and lines to represent data
 visually. In this lecture, we will see how we can also use areas and
-bars for this purpose. But before we dive in to the code, let’s talk
-about which visual channels are the most effective at graphically
-representing data.
+bars for this purpose. Before we dive in to the code, let’s discuss how
+different visual channels, such as position, area, etc, can impact how
+easy it is for us to accurately interpret the plotted data.
+
+As in many cases, an efficient way to learn this topic is through
+personal experience. Please follow along in the exercises on the next
+two slides to see which visual channels you find the most effective.
 
 ---
 
@@ -16,12 +20,8 @@ representing data.
 
 ![](/module2/circle-comparison.png)
 
-Notes: As with many aspect, the best way to learn is to experience
-rather than being told something. So lets experience which visual
-encodings are the most effective.
-
-In the image in this slide, try to estimate how many times bigger the
-big circle is compared to the small one.
+Notes: In the image in this slide, try to estimate how many times larger
+the big circle is compared to the small one.
 
 ---
 
@@ -29,7 +29,7 @@ big circle is compared to the small one.
 
 ![](/module2/bar-comparison.png)
 
-Notes: In the image in this slide, try to estimate how many times bigger
+Notes: In the image in this slide, try to estimate how many times larger
 the big bar is compared to the small one.
 
 ---
@@ -38,14 +38,20 @@ the big bar is compared to the small one.
 
 <img src="/module2/7x.png" style="width:60.0%" />
 
-Notes: In both cases the answer is seven times bigger. Most people find
-it is much easier to compare the length or position of the bars rather
-than the area of the circles. And for the circles, you also didn’t
-really know if you were supposed to compare the area or maybe the
-diameter. The examples on the previous two slides is from [Jeffrey
-Heer’s PyData talk](https://www.youtube.com/watch?v=hsfWtPH2kDg), a
-visualization researcher at the university of Washington whose research
-group also created Altair.
+Notes: In both cases the answer is seven times bigger. Even if you
+guessed both of these exactly correct, most people find it is much
+easier to compare the length or position of the bars rather than the
+area of the circles. For the circles, you might even have hesitated at
+exactly what to compare when we said “how many time *larger*”, were you
+supposed to compare the area or the diameter? This is less ambiguous for
+bars as long as their widths are kept the same.
+
+This is important to keep in mind, especially when communicating to
+others via visualization, but also when creating plots for yourself.
+These two examples are originally from [Jeffrey Heer’s PyData
+talk](https://www.youtube.com/watch?v=hsfWtPH2kDg), who is visualization
+researcher at the university of Washington and whose research group
+created D3 and VegaLite (which Altair is based on).
 
 ---
 
