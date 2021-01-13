@@ -173,18 +173,22 @@ Be patient when running a coding exercise for the first time, it can take a few 
 **When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
 and submit it to validate if you were correct.**
 
-_**Make sure you remove the hash (`#`) symbol in the coding portions of this question.  We have commented them so that the line won't execute and you can test your code after each step.**_
-
 
 Let's use the same vehicle dataset we saw in the lecture, but visualize the relationship between two different columns.
 
 The data has already been imported for you in this exercise.
 
+Here is what it looks like:
+
+<codeblock id="cars_data">
+
+</codeblock>
+
 Tasks: 
 
 - Fill out the missing fields in the Altair plotin order to create a scatter plot.
-- The cars' horsepower should be on the x-axis and their weight on the y-axis.
-- Color the dots by the origin of the cars.
+- The cars' `Horsepower` should be on the x-axis and their `Weight_in_lbs` on the y-axis.
+- Color the points by the `Origin` of the cars.
 
 <codeblock id="01_06">
 
@@ -199,62 +203,120 @@ Tasks:
 </exercise>
 
 
-<exercise id="8" title="Exercises">
-<p><strong>When combining plots in Altair, we say that each plot has its own `___`.</strong></p>
+<exercise id="8" title="Questions on How Plots are Created">
+
+**Question 1**     
+When combining plots in Altair, we say that each plot has its own ___.
+
 <choice id="1">
-<opt text="Overlay"></opt>
-<opt text="Layer"  correct="true"></opt>
-<opt text= "Panel"></opt>
+
+<opt text="Overlay">
+
+Not quite right here. 
+
+</opt>
+
+<opt text="Layer"  correct="true">
+
+That's it!
+
+</opt>
+
+<opt text= "Panel">
+
+This is something else by good try. 
+
+</opt>
+
 </choice>
 
-<p><strong>Line plots are often preferable to point plots when visualizing trends over time because...</p></strong>
+**Question 2**     
+Line plots are often preferable to point plots when visualizing trends over time because...
+
 <choice id="2">
-<opt text="The lines make the plot more visually appealing."></opt>
-<opt text= "Line plots are faster to create."></opt>
-<opt text="The line makes it easy to see which values are connected in the same group and its slope facilitates our interpretation of the overall trend."  correct="true"></opt>
+<opt text="The lines make the plot more visually appealing.">
+There is more to plots then just being visually appealing. 
+</opt>
+<opt text= "Line plots are faster to create.">
+They both take approximately the same time to create.
+</opt>
+<opt text="The line makes it easy to see which values are connected in the same group and its slope facilitates our interpretation of the overall trend."  correct="true">
+Nailed it!
+</opt>
 </choice>
 
 </exercise>
 
-<exercise id="9" title="Exercises">
+<exercise id="9" title="Creating a Line Plot for Change Over Time">
 
-**Creating a line plot for change over time**
 
-*When you see `____` in a coding exercise,
-replace it with what you assume to be the correct code.
-Run the code to see if you obtain the desired output
-and submit it to validate if you were correct.
-Be patient when running a coding exercise for the first time,
-it can take a few minutes.*
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes.. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+_**Make sure you remove the hash (`#`) symbol in the coding portions of this question.  We have commented them so that the line won't execute and you can test your code after each step.**_
 
 Let's use a line plot to visualize how the price of a few common stocks has changed over time.
-Your task is to fill out the missing fields in the code below
-in order to create a line plot
-with the stocks' date on the x-axis and their price on the y-axis.
-You should color the lines by the stock symbol,
+
+Tasks:
+
+- Fill out the missing fields in the code below.
+- Import the correct library from `vega_datasets`.
+- Before going further take a look at the stock data.
+- Create a line plot with the stocks' date on the x-axis and their price on the y-axis.
+- You should color the lines by the stock symbol,
 so that you can compare the stock development for the different companies.
 
 <codeblock id="01_09a">
 
-- Remember that the column names should be in quotes, e.g. `y='price'`.
+- Are you putting the column names in quotes, e.g. `y='price'`?
 - Look at the dataframe by typing `stocks.columns` if you are unsure about the exact column names.
 
 </codeblock>
 
-<p><strong>In the chart above, which stock was priced the highest in 2003?</strong></p>
+
+**Question**   
+In the chart above, which stock was priced the highest in 2003?
 
 <choice id="1">
-<opt text="GOOG"></opt>
-<opt text= "AAPL"></opt>
-<opt text="IBM"  correct="true"></opt>
+
+<opt text="GOOG">
+
+GOOG wasn't present in 2003.
+
+</opt>
+
+<opt text= "AAPL">
+
+This stock was quite low in 2003.
+
+</opt>
+
+<opt text= "AMZN">
+
+This stock was quite low in 2003.
+
+</opt>
+
+<opt text="IBM"  correct="true">
+
+You got it!
+
+</opt>
+
 </choice>
 
 
 **Combining a point and line plot**
 
 Let's add points to the line above to indicate each observation along the line.
-Your task is to fill out the missing fields in the code below
-in order to assign the line plot to a variable name (of your choice),
+
+Tasks:  
+
+- Fill out the missing fields in the code below.
+- Assign the line plot to a variable name (of your choice),
 and then use this name to combine a line plot and a point plot.
 
 <codeblock id="01_09b">
@@ -266,15 +328,23 @@ and then use this name to combine a line plot and a point plot.
 </codeblock>
 </exercise>
 
-<exercise id="10" title="Exercises">
+<exercise id="10" title="Plotting an Aggregated Value">
 
-**Plotting an aggregated value**
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes.. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
 
 Instead of showing the value for each individual stock value,
 we could explore the average trend over time
 for all five companies.
-Use the first coding exercise above as a base
-and modify the code to plot one line with the average value over time,
+
+Tasks:
+
+- Use the code from exercise 9 above as a base.
+- Modify the code to plot one line with the average value of all stocks over time,
 instead of giving each company its own line.
 
 <codeblock id="01_10">
