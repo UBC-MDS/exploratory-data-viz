@@ -8,7 +8,7 @@ def test():
     # Since we haven't started assigning charts to variable names yet,
     # this might be the better way to test for the first exercise.
     # Maybe even for later exercises.
-    assert 'x="date"' in __solution__, "Did you encode the x channel correctly?"
-    assert 'y="price"' in __solution__, "Did you encode the y channel correctly?"
-    assert 'color="symbol"' in __solution__, "Did you encode the color channel correctly?"
+    assert 'x="Weight_in_lbs"' in __solution__, "Did you encode the x channel correctly?"
+    assert 'y="Horsepower"' in __solution__, "Did you encode the y channel correctly?"
+    assert 'color="Origin"' in __solution__, "Did you encode the color channel correctly?"
     __msg__.good("You're correct, well done!")
