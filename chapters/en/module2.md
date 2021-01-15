@@ -17,6 +17,10 @@ id: 2
 <slides source="module2/module2_01" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
+<exercise id="2" title="Area charts" type="slides,video">
+<slides source="module2/module2_02" shot="1" start="0:003" end="07:12"> </slides>
+</exercise>
+
 <exercise id="10" title="What Did We Just Learn?" type="slides, video">
 <slides source="module1/module1_end" shot="0" start="04:5307" end="05:5911">
 </slides>
