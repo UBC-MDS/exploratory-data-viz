@@ -9,12 +9,11 @@ def test():
     # this might be the better way to test for the first exercise.
     # Maybe even for later exercises.
 
-    assert 'data.stocks()' in __solution__, ""
+    assert 'data.stocks()' in __solution__, "Make sure to call the stocks data from the data library."
     assert 'alt.Chart(stocks)' in __solution__, "Make sure you're passing the correct data object fot plotting."
-    assert 'mark_line(' in __solution__, "Make sure you're using the correct type of mark"
+    assert 'mark_line' in __solution__, "Make sure you're using the correct type of mark"
     assert 'x="date"' in __solution__, "Did you encode the x channel correctly?"
-    # More specific hint
-    assert 'y="price"' not in __solution__, "Almost there, but not quite. Here, you want one line with the average value of all stocks over time. Can you modify the encoding for y to aggregate all prices into a single mean?"
+    assert 'y="price"' not in __solution__, "Almost there, but not quite. Here, you want one line with the average value of all stocks over time. Can you specify the y encoding to be the mean of a column?"
     assert 'y="mean(price)"' in __solution__, "Did you encode the y channel correctly?"
     # Don't want color encoding because the plot should be aggregated
     assert 'color="symbol"' not in __solution__, "You don't need color encoding here because we want one aggregated line plot"
