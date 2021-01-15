@@ -186,8 +186,8 @@ Here is what it looks like:
 
 Tasks: 
 
-- Fill out the missing fields in the Altair plotin order to create a scatter plot.
-- The cars' `Horsepower` should be on the x-axis and their `Weight_in_lbs` on the y-axis.
+- Fill out the missing fields in the Altair plot in order to create a scatter plot.
+- The cars' `Horsepower` should be on the y-axis and their `Weight_in_lbs` on the x-axis.
 - Color the points by the `Origin` of the cars.
 
 <codeblock id="01_06">
