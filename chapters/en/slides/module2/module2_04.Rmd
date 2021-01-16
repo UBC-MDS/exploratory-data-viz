@@ -1,0 +1,143 @@
+---
+params:
+  dynamictitle: "module2_04"
+title: "`r params$dynamictitle`"
+output:
+  md_document:
+    variant: gfm
+    pandoc_args: "--markdown-headings=atx"
+---
+
+```{r setup, include=FALSE}
+source('../../../../slide-setup.R')
+# Remember to also manually update the YAML title above
+```
+
+type: slides
+
+# Creating subplots via faceting
+
+Notes:
+Exploring mutiple vars
+
+---
+
+```{python}
+import pandas as pd
+import altair as alt
+
+url = 'https://raw.githubusercontent.com/UofTCoders/workshops-dc-py/master/data/processed/world-data-gapminder.csv'
+gm = pd.read_csv(url, parse_dates=['year'])
+gm2018 = gm[gm['year'] == '2018']
+
+alt.Chart(gm2018).mark_bar().encode(
+    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    y='count()',
+    color='region')
+```
+
+Notes:
+We have previously seen how we can explore categorical dataframe columns
+by encoding them as the color channel of our plots.
+Doing this with barplots allows us to drill down into two categorical columns
+at the same time:
+the one on the y-axis
+the one represented by color.
+
+Altair creates a stacked bar chart by default.
+Just like with the stacked area chart,
+this is good when the total height of each bar
+is the most important,
+but it is difficult to compare
+the length of the different colored segments against each other,
+both within a bar and between bars.
+
+---
+
+## Faceting creates subplots for different subsets of the data
+
+```{python}
+alt.Chart(gm2018).mark_bar().encode(
+    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    y='count()',
+    color='region'
+).properties(width=200, height=200
+).facet('region')
+```
+
+Notes:
+Placing color segments next to each other
+would make it easier to compare their heights.
+Altair does not yet support this type of plot,
+but it has outstanding support for another more powerful feature
+for comparing multiple categorical variables: faceting.
+
+Faceting creates multiple views (or subplots),
+separated by a categorical column
+(we're also setting the dimensions of the plot
+so that the entire subplot grid fits in view).
+
+Now we see that the bulk of the distribution for Europe
+is to the right at higher life expectancies
+whereas it is lower for African countries.
+
+---
+
+## Subplots are often laid out in even grids
+
+```{python}
+alt.Chart(gm2018).mark_bar().encode(
+    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    y='count()',
+    color='region'
+).properties(width=200, height=140
+).facet('region', columns=3)
+```
+
+Notes:
+If we prefer to not have the plots laid out in a single row,
+we can specify this in `facet`.
+
+Often it is visually please to create a near even grid,
+so that both the rows and columns are filled out with plots
+as we have here.
+
+Using the `columns` keyword allows us to specify
+when Altair should start putting plots on a new row.
+
+---
+
+## Faceting across two categorical variables
+
+```{python}
+alt.Chart(gm2018[gm2018['income_group'].isin(['High', 'Low'])]).mark_bar().encode(
+    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    y='count()',
+    color='region'
+).properties(width=200, height=140
+).facet(column='region', row='income_group')
+```
+
+Notes:
+Instead of using the `columns` parameter,
+we could specify one categorical column each
+for the `row` and `column` parameters (note no "s").
+Altair will then spread the data out accordingly.
+
+In this faceted chart we can see that the countries with low life expectancy in Africa
+are mostly low income countries,
+whereas those with high life expectancy in Europe
+are mostly high incomes countries
+(we have filtered the data to save space on the slide).
+
+Depending on the exact relationship you want to investigate,
+you can choose which dataframe columns
+you encode in which visual channels
+according to the principles we have discussed
+to best bring out the comparison of interest in the visualization.
+
+---
+
+# Let's apply what we learned!
+
+Notes: <br>

@@ -25,7 +25,11 @@ id: 2
 <slides source="module2/module2_03" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
-<exercise id="10" title="What Did We Just Learn?" type="slides, video">
-<slides source="module1/module1_end" shot="0" start="04:5307" end="05:5911">
+<exercise id="4" title="Creating subplots via faceting" type="slides,video">
+<slides source="module2/module2_04" shot="1" start="0:003" end="07:12"> </slides>
+</exercise>
+
+<exercise id="5" title="What Did We Just Learn?" type="slides, video">
+<slides source="module2/module2_end" shot="0" start="04:5307" end="05:5911">
 </slides>
 </exercise>
