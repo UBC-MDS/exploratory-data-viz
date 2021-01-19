@@ -21,14 +21,19 @@ id: 1
 
 **True or False**       
 *It is easier for humans to interpret plots than raw numbers.*
+
+
 <choice id="1" >
 
 <opt text="True"  correct="true">
+
 You got it! We saw in the slides that sometimes humans can pick up more information about the data in plots. 
+
 </opt>
 
 
 <opt text="False">
+
 Take a look at the slides. Is it easier to notice trends and patterns with the data displayed in tables or in plots?
 
 </opt>
@@ -40,13 +45,19 @@ Take a look at the slides. Is it easier to notice trends and patterns with the d
 *Statistical summaries are often useful, but it is a good idea to also visualize your data before drawing any conclusions.*
 
 <choice id="2" >
+
 <opt text="True"  correct="true">
+
 You've been paying attention. 
+
 </opt>
 
 <opt text="False">
+
 Summaries are helpful but don't get us a full picture like a visualization can. 
+
 </opt>
+
 </choice>
 </exercise>
 
