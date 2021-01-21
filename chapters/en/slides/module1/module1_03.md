@@ -176,10 +176,6 @@ for row_number, row_data in enumerate(dataframe):
     plot.add_point(x=row_data['Area'], y=row_data['Population'], color=colors[row_number])
 ```
 
-```out
-(not in PATH env variable)
-```
-
 <img src="/module1/pseudocode-plot.svg" alt="" width="52%"></img>
 
 Notes:
