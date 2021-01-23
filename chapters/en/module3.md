@@ -16,6 +16,10 @@ id: 3
 <slides source="module3/module3_01" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
+<exercise id="2" title="Visulize distributions with density plots" type="slides,video">
+<slides source="module3/module3_02" shot="1" start="0:003" end="07:12"> </slides>
+</exercise>
+
 <exercise id="5" title="What Did We Just Learn?" type="slides, video">
 <slides source="module3/module3_end" shot="0" start="04:5307" end="05:5911">
 </slides>
