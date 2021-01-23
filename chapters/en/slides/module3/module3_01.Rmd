@@ -53,7 +53,7 @@ several questions might rush to our mind:
 
 ---
 
-## ReprestnData points from a single variable 
+## Visualizing a single column with a point plot along one axis
 
 ```{python}
 import altair as alt
@@ -77,7 +77,7 @@ which is why we subset the data in this slide.
 
 ---
 
-## ... becomes saturated when there is a lot of data to plot
+## Single axis point plots can become saturated when there is a lot of data to plot
 
 ```{python}
 alt.Chart(movies[:50]).mark_point().encode(
@@ -123,7 +123,7 @@ instead of remembering a specific name.
 
 ---
 
-## When there are too many data points, we can
+## Thinner marks also saturate for large data sets
 
 ```{python}
 alt.Chart(movies).mark_tick().encode(
