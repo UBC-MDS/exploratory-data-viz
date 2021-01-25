@@ -11,22 +11,140 @@ when they are a suitable alternative to use instead of line charts.
 
 ## Global Development Data
 
-| Column                   | Description                                                                                                                                                            |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| country                  | Country name                                                                                                                                                           |
-| year                     | Year of observation                                                                                                                                                    |
-| population               | Population in the country at each year                                                                                                                                 |
-| region                   | Continent the country belongs to                                                                                                                                       |
-| sub\_region              | Sub-region the country belongs to                                                                                                                                      |
-| income\_group            | Income group [as specified by the world bank in 2018](https://datahelpdesk.worldbank.org/knowledgebase/articles/378833-how-are-the-income-group-thresholds-determined) |
-| life\_expectancy         | The mean number of years a newborn would <br>live if mortality patterns remained constant                                                                              |
-| income                   | GDP per capita (in USD) <em>adjusted <br>for differences in purchasing power</em>                                                                                      |
-| children\_per\_woman     | Average number of children born per woman                                                                                                                              |
-| child\_mortality         | Deaths of children under 5 years <break>of age per 1000 live births                                                                                                    |
-| pop\_density             | Average number of people per km<sup>2</sup>                                                                                                                            |
-| co2\_per\_capita         | CO2 emissions from fossil fuels (tonnes per capita)                                                                                                                    |
-| years\_in\_school\_men   | Mean number of years in primary, secondary,<br>and tertiary school for 25-36 years old men                                                                             |
-| years\_in\_school\_women | Mean number of years in primary, secondary,<br>and tertiary school for 25-36 years old women                                                                           |
+<font size="2" face="Courier New" >
+<table>
+<thead>
+<tr>
+<th>
+Column
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+country
+</td>
+<td>
+Country name
+</td>
+</tr>
+<tr>
+<td>
+year
+</td>
+<td>
+Year of observation
+</td>
+</tr>
+<tr>
+<td>
+population
+</td>
+<td>
+Population in the country at each year
+</td>
+</tr>
+<tr>
+<td>
+region
+</td>
+<td>
+Continent the country belongs to
+</td>
+</tr>
+<tr>
+<td>
+sub\_region
+</td>
+<td>
+Sub-region the country belongs to
+</td>
+</tr>
+<tr>
+<td>
+income\_group
+</td>
+<td>
+Income group [as specified by the world bank in
+2018](https://datahelpdesk.worldbank.org/knowledgebase/articles/378833-how-are-the-income-group-thresholds-determined)
+</td>
+</tr>
+<tr>
+<td>
+life\_expectancy
+</td>
+<td>
+The mean number of years a newborn would <br>live if mortality patterns
+remained constant
+</td>
+</tr>
+<tr>
+<td>
+income
+</td>
+<td>
+GDP per capita (in USD) <em>adjusted <br>for differences in purchasing
+power</em>
+</td>
+</tr>
+<tr>
+<td>
+children\_per\_woman
+</td>
+<td>
+Average number of children born per woman
+</td>
+</tr>
+<tr>
+<td>
+child\_mortality
+</td>
+<td>
+Deaths of children under 5 years <break>of age per 1000 live births
+</td>
+</tr>
+<tr>
+<td>
+pop\_density
+</td>
+<td>
+Average number of people per km<sup>2</sup>
+</td>
+</tr>
+<tr>
+<td>
+co2\_per\_capita
+</td>
+<td>
+CO2 emissions from fossil fuels (tonnes per capita)
+</td>
+</tr>
+<tr>
+<td>
+years\_in\_school\_men
+</td>
+<td>
+Mean number of years in primary, secondary,<br>and tertiary school for
+25-36 years old men
+</td>
+</tr>
+<tr>
+<td>
+years\_in\_school\_women
+</td>
+<td>
+Mean number of years in primary, secondary,<br>and tertiary school for
+25-36 years old women
+</td>
+</tr>
+</tbody>
+</table>
+
+</font>
 
 Notes: We will be visualizing global health and population data for a
 number of countries. This is the same data we are working with in the
@@ -36,6 +154,8 @@ We will be looking at many different data sets in later labs, but we’re
 sticking to a familiar one for now so that we can focus on laying down a
 solid understanding of the visualization principles with data we already
 know.
+
+---
 
 ## Reading in the data with pandas
 
