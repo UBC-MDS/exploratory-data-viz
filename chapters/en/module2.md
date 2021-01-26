@@ -258,6 +258,8 @@ Nice!
 
 <exercise id="7" title="Practicing Your Plotting">
 
+
+
 **Instructions:**    
 Be patient when running a coding exercise for the first time, it can take a few minutes.. 
 
@@ -265,11 +267,8 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-Let's use the same vehicle dataset we saw in the lecture, but visualize the relationship between two different columns.
+Remember our vehicle dataset? We are going to take a look at how the fuel efficiency has improved over the years. Let's try answering the question **"Over time, how has the average automobile fuel efficiency changed?"**
 
-The data has already been imported for you in this exercise.
-
-Here is what it looks like:
 
 <codeblock id="cars_data">
 
@@ -277,20 +276,381 @@ Here is what it looks like:
 
 Tasks: 
 
-- Fill out the missing fields in the Altair plot in order to create a scatter plot.
-- The cars' `Horsepower` should be on the y-axis and their `Weight_in_lbs` on the x-axis.
-- Color the points by the `Origin` of the cars.
+- Plot an appropriate graph that visualizes the change of the mean `Miles_per_Gallon` over time. 
+- Assign you plot to an object named `fuel_efficiency`. 
+- Make sure to give it an appropriate title.
 
-<codeblock id="02_07">
+<codeblock id="02_07a">
 
-- Are the column names expressed in quotes, e.g. `y='Horsepower'`?
+- Are you using `.mark_area()` or `.mark_line()`?
+- Are you assigning the plot to an object named`fuel_efficiency`?
+- Are you specifying `mean(Miles_per_Gallon)` on the y-axis?
+- Are you specifying `Year` on the x-axis?
+- Are you giving the plot a title using `.properties()`?
 
 </codeblock>
+
+**Question**      
+
+How has the average fuel efficiency changed from the year 1970 to 1982 as a whole? 
+
+<choice id="1" >
+<opt text="It approximately halved.">
+
+It looks like efficiency is increasing, not decreasing?
+
+</opt>
+
+<opt text="It approximately doubled." correct="true">
+
+It looks like it went from ~17 miles per gallon to ~31 miles per gallon.
+
+</opt>
+
+<opt text="It approximately tripled.">
+
+Efficiency is definitely increasing but are you sure it trippled from 1970-1982? 
+
+</opt>
+
+
+<opt text="It approximately quadrupled.">
+
+This would be a huge accomplishment but are you looking at the correct numbers?
+
+</opt>
+
+</choice>
+
+
+Let's now take a look at each country manufacturer. How did the mean fuel efficiency change from the year 1070-1982 for each manufacturing origin?
+
+Tasks: 
+
+- Plot an appropriate graph that visualizes the change of the mean `Miles_per_Gallon` over time. 
+- Assign you plot to an object named `fuel_efficiency_org`. 
+- Make sure to give it an appropriate title.
+
+<codeblock id="02_07b">
+
+- Are you assigning the plot to an object named`fuel_efficiency_org`?
+- Are you specifying `mean(Miles_per_Gallon)` on the y-axis?
+- Are you specifying `Year` on the x-axis?
+- Are you specifying `color = 'Origin'`?
+- Are you giving the plot a title using `.properties()`?
+
+</codeblock>
+
+
+**Question**      
+
+Which origin's fuel efficiency improved the most between the years 1970 to 1982?
+
+<choice id="1" >
+
+<opt text="Europe">
+
+This looks like it improved, but not the most of the 3 origins. 
+
+</opt>
+
+<opt text="Japan" >
+
+This one did improve but not the most! 
+
+</opt>
+
+<opt text="USA" correct="true">
+
+Efficiency is definitely increasing but are you sure it trippled from 170-1982? 
+
+</opt>
+
+
+</choice>
+
 </exercise>
 
 <exercise id="8" title="Bar charts and histograms" type="slides,video">
 <slides source="module2/module2_03" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
+
+
+<exercise id="9" title="True or False: Area and lines">
+
+**True or False**       
+*It's often a good idea to make horizontal histogram so that the labels of the x-axis are easier to read.*
+
+<choice id="1" >
+
+<opt text="True"  >
+
+The labels of histograms are numbers which don’t need to be rotated to be readable.
+
+</opt>
+
+<opt text="False" correct="true">
+
+It's bar charts that can to rotated to make it easier to read the X axis labels. 
+
+</opt>
+
+</choice>
+
+**True or False**       
+*It is best to sort bar charts from high to low values (unless the categotical values have a natural order).*
+
+
+<choice id="2" >
+
+<opt text="True"  correct="true">
+
+You got it. It's better to sort your bars with some sort of ordering (be it natural or by frequency)!
+
+</opt>
+
+
+<opt text="False">
+
+Does sorting a bar chart make it easier to read?
+
+</opt>
+
+</choice>
+
+</exercise>
+
+
+<exercise id="10" title='Some Visualization Bar-ter'>
+
+**Question 1**      
+Why do we avoid bar charts when showing summary statistics such as the mean? 
+
+<choice id="1" >
+<opt text="They don't look the best aestetically." >
+
+Bar plots can be quite useful and beautiful depending on what is communicated!
+
+</opt>
+
+<opt text="Summary statistics are communicated best with line or scatter plots." >
+
+Is a plot communicating just the summary statistics even a good idea?
+
+</opt>
+
+<opt text="They tend to take too long.">
+
+Sometimes this can be an issue with coding but not when it comes to visualization.
+
+</opt>
+
+
+<opt text="They remove a lot of information such as variation amoung the data." correct="true">
+
+Super! 
+
+</opt>
+
+</choice>
+
+
+**Question 2**      
+
+If we wanted to increase the number of bars in the histogram, what would be needed instead of `"???"` in the code below? 
+
+```python
+alt.Chart(data_source).mark_bar().encode(
+    x=alt.X('students', bin=???),
+    y='count()').properties(The distribution of students per classroom)
+
+
+```
+
+<choice id="2" >
+<opt text="<code>50</code>">
+
+You need to use a helper function to increase the number of bars and not just set `bin` equal to a number. 
+
+</opt>
+
+<opt text="<code>alt.Bin(50)</code>">
+
+There needs to be some sort of argument set within `alt.Bin()`. 
+
+</opt>
+
+
+<opt text="<code>bin=alt.Bin(bins=30)</code>">
+
+You are close but the argument `bins` within the helper function `alt.Bin()` isn't quite right. 
+
+</opt>
+
+<opt text="<code>bin=alt.Bin(maxbins=30)</code>">
+
+Nice!
+
+</opt>
+
+
+</choice>
+
+</exercise>
+
+
+<exercise id="11" title="Have a Candy Bar... Plot!">
+
+
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes.. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+Remember our vehicle dataset? We are going to take a look at how the fuel efficiency has improved over the years. Let's try answering the question **"Over time, how has the average automobile fuel efficiency changed?"**
+
+
+<codeblock id="cars_data">
+
+</codeblock>
+
+Tasks: 
+
+- Plot an appropriate graph that visualizes the change of the mean `Miles_per_Gallon` over time. 
+- Assign you plot to an object named `fuel_efficiency`. 
+- Make sure to give it an appropriate title.
+
+<codeblock id="02_07a">
+
+- Are you using `.mark_area()` or `.mark_line()`?
+- Are you assigning the plot to an object named`fuel_efficiency`?
+- Are you specifying `mean(Miles_per_Gallon)` on the y-axis?
+- Are you specifying `Year` on the x-axis?
+- Are you giving the plot a title using `.properties()`?
+
+</codeblock>
+
+**Question**      
+
+How has the average fuel efficiency changed from the year 1970 to 1982 as a whole? 
+
+<choice id="1" >
+<opt text="It approximately halved.">
+
+It looks like efficiency is increasing, not decreasing?
+
+</opt>
+
+<opt text="It approximately doubled." correct="true">
+
+It looks like it went from ~17 miles per gallon to ~31 miles per gallon.
+
+</opt>
+
+<opt text="It approximately tripled.">
+
+Efficiency is definitely increasing but are you sure it trippled from 1970-1982? 
+
+</opt>
+
+
+<opt text="It approximately quadrupled.">
+
+This would be a huge accomplishment but are you looking at the correct numbers?
+
+</opt>
+
+</choice>
+
+
+Let's now take a look at each country manufacturer. How did the mean fuel efficiency change from the year 1070-1982 for each manufacturing origin?
+
+Tasks: 
+
+- Plot an appropriate graph that visualizes the change of the mean `Miles_per_Gallon` over time. 
+- Assign you plot to an object named `fuel_efficiency_org`. 
+- Make sure to give it an appropriate title.
+
+<codeblock id="02_07b">
+
+- Are you assigning the plot to an object named`fuel_efficiency_org`?
+- Are you specifying `mean(Miles_per_Gallon)` on the y-axis?
+- Are you specifying `Year` on the x-axis?
+- Are you specifying `color = 'Origin'`?
+- Are you giving the plot a title using `.properties()`?
+
+</codeblock>
+
+
+**Question**      
+
+Which origin's fuel efficiency improved the most between the years 1970 to 1982?
+
+<choice id="1" >
+
+<opt text="Europe">
+
+This looks like it improved, but not the most of the 3 origins. 
+
+</opt>
+
+<opt text="Japan" >
+
+This one did improve but not the most! 
+
+</opt>
+
+<opt text="USA" correct="true">
+
+Efficiency is definitely increasing but are you sure it trippled from 170-1982? 
+
+</opt>
+
+
+</choice>
+
+
+</exercise>
+
+<exercise id="12" title="Making History with Histograms">
+
+
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes.. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+Remember our vehicle dataset? We are going to take a look at how the fuel efficiency has improved over the years. Let's try answering the question **"Over time, how has the average automobile fuel efficiency changed?"**
+
+
+<codeblock id="cars_data">
+
+</codeblock>
+
+Tasks: 
+
+- Plot an appropriate graph that visualizes the change of the mean `Miles_per_Gallon` over time. 
+- Assign you plot to an object named `fuel_efficiency`. 
+- Make sure to give it an appropriate title.
+
+<codeblock id="02_07a">
+
+- Are you using `.mark_area()` or `.mark_line()`?
+- Are you assigning the plot to an object named`fuel_efficiency`?
+- Are you specifying `mean(Miles_per_Gallon)` on the y-axis?
+- Are you specifying `Year` on the x-axis?
+- Are you giving the plot a title using `.properties()`?
+
+</codeblock>
+
+</exercise>
+
 
 <exercise id="13" title="Creating subplots via faceting" type="slides,video">
 <slides source="module2/module2_04" shot="1" start="0:003" end="07:12"> </slides>
