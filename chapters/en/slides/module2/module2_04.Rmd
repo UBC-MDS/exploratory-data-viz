@@ -1,6 +1,6 @@
 ---
 params:
-  dynamictitle: "module2_04"
+  dynamictitle: "module2_02"
 title: "`r params$dynamictitle`"
 output:
   md_document:
@@ -15,126 +15,323 @@ source('../../../../slide-setup.R')
 
 type: slides
 
-# Creating subplots via faceting
+# Creating area charts
 
 Notes:
-Exploring mutiple vars
+In this module
+we will be learning how to create area charts 
+and when they are a suitable alternative to use
+instead of line charts.
 
 ---
 
+## Global Development Data
+
+<font size="2" face="Courier New" >
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>country</td>
+<td>Country name</td>
+</tr>
+<tr>
+<td>year</td>
+<td>Year of observation</td>
+</tr>
+<tr>
+<td>population</td>
+<td>Population in the country at each year</td>
+</tr>
+<tr>
+<td>region</td>
+<td>Continent the country belongs to</td>
+</tr>
+<tr>
+<td>sub_region</td>
+<td>Sub-region the country belongs to</td>
+</tr>
+<tr>
+<td>income_group</td>
+<td>Income group [as specified by the world bank in 2018]</td>
+</tr>
+<tr>
+<td>life_expectancy</td>
+<td>The mean number of years a newborn would <br>live if mortality patterns remained constant</td>
+</tr>
+<tr>
+<td>income</td>
+<td>GDP per capita (in USD) <em>adjusted <br>for differences in purchasing power</em></td>
+</tr>
+<tr>
+<td>children_per_woman</td>
+<td>Average number of children born per woman</td>
+</tr>
+<tr>
+<td>child_mortality</td>
+<td>Deaths of children under 5 years <break>of age per 1000 live births</td>
+</tr>
+<tr>
+<td>pop_density</td>
+<td>Average number of people per km<sup>2</sup></td>
+</tr>
+<tr>
+<td>co2_per_capita</td>
+<td>CO2 emissions from fossil fuels (tonnes per capita)</td>
+</tr>
+<tr>
+<td>years_in_school_men</td>
+<td>Mean number of years in primary, secondary,<br>and tertiary school for 25-36 years old men</td>
+</tr>
+<tr>
+<td>years_in_school_women</td>
+<td>Mean number of years in primary, secondary,<br>and tertiary school for 25-36 years old women</td>
+</tr>
+</tbody>
+</table>
+</font>
+
+[as specified by the world bank in 2018]: https://datahelpdesk.worldbank.org/knowledgebase/articles/378833-how-are-the-income-group-thresholds-determined
+
+Notes:
+We will be visualizing global health and population data for a number of countries.
+
+This is the same data we are working with in the assignments for the first two modules.
+
+We will be looking at many different data sets in later labs,
+but we're sticking to a familiar one for now
+so that we can focus on laying down a solid understanding
+of the visualization principles
+with data we already know.
+
+---
+
+## Reading in the data with pandas
+
 ```{python}
 import pandas as pd
-import altair as alt
+
 
 url = 'https://raw.githubusercontent.com/UofTCoders/workshops-dc-py/master/data/processed/world-data-gapminder.csv'
 gm = pd.read_csv(url, parse_dates=['year'])
-gm2018 = gm[gm['year'] == '2018']
+gm = gm[gm['country'].isin(gm[gm['year'] == '2018'].nlargest(10, ['population'])['country'])]
+gm
+```
 
-alt.Chart(gm2018).mark_bar().encode(
-    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
-    y='count()',
+Notes:
+This dataset is made available via an URL
+and we can download and read it into pandas
+with `read_csv`.
+
+Here we also tell pandas to read in the `year` column as a date,
+rather than an integer,
+which is the default behaviour.
+
+Remember that Altair uses the pandas data types
+to infer the data it is working with.
+Integers would show up on the Altair chart axes as `1,990, 2,000, etc`
+whereas dates are shown as `1990, 2000, etc`
+
+---
+
+## Using `info` to view dataframe columns
+
+```{python}
+gm.info()
+```
+
+Notes:
+When reading in a new dataset,
+it is always a good idea to have a look at a few rows
+like we did in the previous slide
+to get an idea of how the data looks.
+
+Another helpful practice is to use the `.info()` method
+to get an overview of the column types
+and see if there are any `NaNs` (missing values).
+
+---
+
+## A line chart is a good choice for trends over time
+
+```{python}
+import altair as alt
+
+
+alt.Chart(gm).mark_line().encode(
+    x='year',
+    y='population')
+```
+
+Notes:
+Since the data reaches all the way back to the 1800s,
+it would be really interesting to plot
+how the world population have been growing up until today.
+We could use a line plot for this
+as we learned in the first module.
+
+Why does the plot look so weird?
+
+Because for every year in the dataset,
+we have plotted the population for every single country
+and connected them with a vertical line.
+
+That's not what we want!
+
+---
+
+## The `sum` aggregate method will show us the trend of the entire world
+
+```{python}
+alt.Chart(gm).mark_line().encode(
+    x='year',
+    y='sum(population)')
+```
+
+Notes:
+We want to see how the **world** population has been changing.
+
+We can calculate this by summing up all the countries'
+populations for each year via the `sum` aggregation method in Altair.
+
+That looks much better!
+
+Interestingly,
+it seem like the world population have been growing in two distinct phases.
+
+We will talk more about that in a few slides,
+but first,
+let's recreate this chart as an area chart.
+
+---
+
+## Area charts are also effective at visualizing trends over time
+
+```{python}
+alt.Chart(gm).mark_area().encode(
+    x='year',
+    y='sum(population)')
+```
+
+Notes:
+Thanks to Altair's consistent visualization grammar,
+the modification we need to make to the code are minor.
+Replace `mark_line` with `mark_area` and we're done.
+
+For showing a single trend over time,
+the choice between a line and area chart comes down to aesthetics.
+They are both effective choices for communicating
+
+However,
+when visualizing the trends over time for multiple groups,
+lines and areas have different advantages,
+as we will see next.
+
+---
+
+## Area charts are preferred when the total of the groups is the most important
+
+```{python}
+alt.Chart(gm).mark_area().encode(
+    x='year',
+    y='sum(population)',
     color='region')
 ```
 
 Notes:
-We have previously seen how we can explore categorical dataframe columns
-by encoding them as the color channel of our plots.
-Doing this with barplots allows us to drill down into two categorical columns
-at the same time:
-the one on the y-axis
-the one represented by color.
+The y-axis range of this chart
+is the same as the one on the previous slide,
+so it is easy to see how the total world population has changed over time.
 
-Altair creates a stacked bar chart by default.
-Just like with the stacked area chart,
-this is good when the total height of each bar
-is the most important,
-but it is difficult to compare
-the length of the different colored segments against each other,
-both within a bar and between bars.
+From the stacked coloured regions,
+we also get a rough idea of how each region has grown,
+but it is hard to compare exactly,
+especially for regions that are not stacked next to each other.
+
+For example,
+we can't really tell if Europe, Africa, or the Americas
+has the largest population in the most recent year.
 
 ---
 
-## Faceting creates subplots for different subsets of the data
+## Line charts are preferred when the values of the individual groups are the most important
 
 ```{python}
-alt.Chart(gm2018).mark_bar().encode(
-    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
-    y='count()',
-    color='region'
-).properties(width=200, height=200
-).facet('region')
+alt.Chart(gm).mark_line().encode(
+    x='year',
+    y='sum(population)',
+    color='region')
 ```
 
 Notes:
-Placing color segments next to each other
-would make it easier to compare their heights.
-Altair does not yet support this type of plot,
-but it has outstanding support for another more powerful feature
-for comparing multiple categorical variables: faceting.
+Using a line chart
+is the preferred choice when we want to view the exact values of each group
+and don't care as much about the total of the groups added together.
 
-Faceting creates multiple views (or subplots),
-separated by a categorical column
-(we're also setting the dimensions of the plot
-so that the entire subplot grid fits in view).
+For example,
+here it is immediately clear that Africa has a bigger population 
+than Europe and the America,
+and we can see that the populations shifted around year 2000.
 
-Now we see that the bulk of the distribution for Europe
-is to the right at higher life expectancies
-whereas it is lower for African countries.
+On the other hand,
+it's quite cognitively demanding
+to try to reconstruct the total world population
+by adding all the lines up together,
+especially over time!
 
 ---
 
-## Subplots are often laid out in even grids
+## When will the world's population stop growing?
 
 ```{python}
-alt.Chart(gm2018).mark_bar().encode(
-    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
-    y='count()',
-    color='region'
-).properties(width=200, height=140
-).facet('region', columns=3)
+alt.Chart(gm).mark_area().encode(
+    x='year',
+    y='sum(population)')
 ```
 
 Notes:
-If we prefer to not have the plots laid out in a single row,
-we can specify this in `facet`.
+Going back to the area chart with one group,
+let's look closer at the growth curve of the world's population.
 
-Often it is visually please to create a near even grid,
-so that both the rows and columns are filled out with plots
-as we have here.
+First,
+there is a slow linear phase,
+but soon after the end of the second world war,
+it the growth starts increasing much more rapidly
+(but still in a straight line).
 
-Using the `columns` keyword allows us to specify
-when Altair should start putting plots on a new row.
+Will the world population keep growing like this for much longer?
 
 ---
 
-## Faceting across two categorical variables
+## The world population is predicted to stabilize around 11 billion
 
 ```{python}
-alt.Chart(gm2018[gm2018['income_group'].isin(['High', 'Low'])]).mark_bar().encode(
-    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
-    y='count()',
-    color='region'
-).properties(width=200, height=140
-).facet(column='region', row='income_group')
+alt.Chart(gm).mark_area().encode(
+    x='year',
+    y='mean(children_per_woman)')
 ```
 
 Notes:
-Instead of using the `columns` parameter,
-we could specify one categorical column each
-for the `row` and `column` parameters (note no "s").
-Altair will then spread the data out accordingly.
+Fortunately,
+the world population is predicted
+to stabilize around 11 billion people at the end of the century.
 
-In this faceted chart we can see that the countries with low life expectancy in Africa
-are mostly low income countries,
-whereas those with high life expectancy in Europe
-are mostly high incomes countries
-(we have filtered the data to save space on the slide).
+Why?
+Because as living conditions improve around the world,
+child mortality is going down,
+which means that the number of children per women is decreasing
+towards a level than means that the current population will be sustained
+rather than increase.
 
-Depending on the exact relationship you want to investigate,
-you can choose which dataframe columns
-you encode in which visual channels
-according to the principles we have discussed
-to best bring out the comparison of interest in the visualization.
+If you're interested in knowing more about the world population predictions,
+you can use Gapminders online resources,
+for example [this video on population growh](https://www.gapminder.org/answers/how-did-the-world-population-change/)
+and [this one on why it will slow down](https://www.gapminder.org/answers/the-rapid-growth-of-the-world-population-when-will-it-slow-down/).
 
 ---
 
