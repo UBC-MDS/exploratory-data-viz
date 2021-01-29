@@ -159,7 +159,7 @@ Let's bring back our [penguins](https://www.kaggle.com/parulpandey/palmer-archip
 
 </codeblock>
 
-This time we want to see the shape of the different penguin species 
+This time we want to see the histogram shape of the `culmen_depth_mm` column for different penguin species. We also want to facet on the `sex` column
 
 Tasks: 
 
