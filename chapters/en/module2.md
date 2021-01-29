@@ -1,5 +1,5 @@
 ---
-title: 'Module 2: Visual encoding channels'
+title: 'Module 2: Visual Encoding Xhannels'
 description:
   'In this module we will be learning about the most and least effective ways to encode and present data graphically.'
 prev: ../../module1
@@ -506,7 +506,7 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-Alright, let's bring in a new dataset containing information on penguins This data is available from [Kaggle](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) and originally available from [Allison Horst's GitHub Repository](https://github.com/allisonhorst/palmerpenguins). 
+Alright, let's bring in a new dataset containing information on penguins. This data is available from [Kaggle](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) and originally available from [Allison Horst's GitHub Repository](https://github.com/allisonhorst/palmerpenguins). 
 
 
 
