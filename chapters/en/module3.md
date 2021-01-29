@@ -159,7 +159,7 @@ Let's bring back our [penguins](https://www.kaggle.com/parulpandey/palmer-archip
 
 </codeblock>
 
-This time we want to see the histogram shape of the `culmen_depth_mm` column for different penguin species. We also want to facet on the `sex` column
+This time we want to see the histogram shape of the `culmen_depth_mm` column for different penguin species. We also want to facet on the `sex` column.
 
 Tasks: 
 
@@ -169,7 +169,7 @@ Tasks:
 - Make sure to give it a title and set the dimensions to a height of 350 and a width of 500.
 - Save your plot in an object named `penguin_bar`.
 
-<codeblock id="03_4">
+<codeblock id="03_04">
 
 - Are you using `.mark_bar()`?
 - Are you assigning the plot to an object named`penguin_bar`?
