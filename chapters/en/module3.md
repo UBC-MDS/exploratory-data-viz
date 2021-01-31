@@ -20,7 +20,11 @@ id: 3
 <slides source="module3/module3_02" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
-<exercise id="5" title="What Did We Just Learn?" type="slides, video">
+<exercise id="3" title="Comparing multiple distributions" type="slides,video">
+<slides source="module3/module3_03" shot="1" start="0:003" end="07:12"> </slides>
+</exercise>
+
+<exercise id="4" title="What Did We Just Learn?" type="slides, video">
 <slides source="module3/module3_end" shot="0" start="04:5307" end="05:5911">
 </slides>
 </exercise>
