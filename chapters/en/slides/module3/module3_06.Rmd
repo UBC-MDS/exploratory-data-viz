@@ -17,6 +17,10 @@ type: slides
 
 # Using density plots to visualize distributions
 
+<head>
+    <base target="_blank">
+</head>
+
 Notes:
 In this module we will see how to use density plots
 instead of histograms to represent distributions of data.
@@ -25,7 +29,7 @@ instead of histograms to represent distributions of data.
 
 ## Histograms can give different results depending on the data
 
-<img src=/module3/histogram-and-shifted.png></img>
+<center><img src=/module3/histogram-and-shifted.png></img></center>
 
 [From scikit-learn](https://scikit-learn.org/stable/auto_examples/neighbors/plot_kde_1d.html)
 
@@ -50,23 +54,25 @@ makes a big difference for the bar height.
 
 ## Centering the bins on the data can help create more accurate distribution plots
 
-<img src=/module3/kde-buildup.gif></img>
+<center><img src=/module3/kde-buildup.gif></img></center>
 
 Notes:
 Instead of setting fixed lines along the axis
-and then count plots fully in one bin or another,
-we can create bins that are centered
+and then counting points fully in one bin or another,
+we can create bins that are centred
 on the data and then add them together.
 
 When we center bins on the data,
-we also usually have a round shape 
-instead of a square one,
-which gives the impression of a smoother distribution
+we also usually have a rounded shape 
+instead of a square one.
+
+This gives the impression of a smoother distribution
 that is more conducive to communicating the shape of the data distribution.
 
 The round bins (also called kernels)
-are then added together as in the gif in this slide,
-and sum up to an overall distribution line.
+are then added together as shown like we see in this slide's animation,
+and them sum up to an overall distribution line.
+
 Formally,
 this is called a Kernel Density Estimate (KDE),
 or just a density plot.
@@ -84,8 +90,9 @@ movies
 ```
 
 Notes:
-We will be using the movies dataset again,
-let's see if we can make a plot
+We will be using the movies dataset again.
+
+Let's see if we can make a plot
 that is easier to interpret
 than the layered histograms
 from the end of the last slide deck.
@@ -115,6 +122,7 @@ we need to do two things:
 In Altair,
 these operations are done in two explicit steps,
 using `transform_density` for the calculation.
+
 We could also have calculated this as a new column in our pandas data frame
 and then plotted that column,
 but it is convenient to do both the steps in Altair.
@@ -146,9 +154,9 @@ by a categorical variable,
 we need to add an explicit `groupby` column
 when calculating the density.
 This computes one density 
-per color variable (`genre` in this case),
-that will then be colored accordingly
-since we used the same variable for the color argument.
+per colour variable (`genre` in this case),
+that will then be coloured accordingly
+since we used the same variable for the colour argument.
 
 In this plot,
 it is quite easy to see the relationship between movie lengths of different genres.
@@ -203,7 +211,7 @@ which gives the area a smoother appearance.
 Notes:
 The density areas don't suffer the same issues as the histograms when made transparent.
 The continuous solid shape is easier to follow
-even when it is semi transparent
+even when it is semi transparent and
 overlaps with the other areas.
 
 The transparency gives us the advantage
@@ -229,6 +237,7 @@ Notes:
 If we facet these,
 you will notice that they look quite different from the faceted histograms
 in the previous slide deck.
+
 This is because the density rather than the count is shown by default on the y-axis.
 Showing the density means that it is easier for us to compare the shape of the distributions
 but is not really a useful numbers for us to know.
@@ -256,9 +265,9 @@ When looking at this plot,
 are you be able to tell that
 the density is made up of just ten observations?
 
-It is a little bit easier in Altair to tel this,
+It is a little bit easier in Altair to see this,
 because the default is to end the density where the data ends,
-which often creates sharp borders as in this plot.
+which often creates sharp bordered edges, like we see in this plot.
 
 This is a great default in Altair,
 but many other plotting packages
@@ -288,10 +297,9 @@ before interpreting a density plot.
 Notes:
 In Altair,
 we could actually scale the density plots by the count of observations,
-why does make the y-axis easier to interpret.
+which does make the y-axis easier to interpret.
 
-However,
-this only gives and indication of how many observations there are
+This, however only gives an indication of how many observations there are
 for different parts of the density
 and it is not as easy to interpret this y-value
 as in a histogram where there is and exact count in each discrete bin.
