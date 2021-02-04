@@ -54,7 +54,7 @@ What about positions, angles, or shades? There are many channels and it would be
 
 <opt text="False" correct="true">
 
-Great! We saw that there are several visual channels such as position, angle, area, colour brightness or saturation, and volume!
+Great! We saw that there are several other visual channels in addition to texture, size and colour! For example, position, angle, area, colour brightness or saturation, and volume!
 
 </opt>
 
