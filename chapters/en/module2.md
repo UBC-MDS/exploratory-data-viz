@@ -113,7 +113,7 @@ What about the blood vessel example we saw?
 
 </opt>
 
-<opt text="Yes, they are usually effective in Topographical Maps."  correct="true">
+<opt text="Yes, they can be effective in cases when it is important to convey real 3D objects and/or data mapped onto them. Examples include topographical Maps and biological protein structures. Making such visualizations interactive, or providing animations of them helps the audience more easily see where the different graphical features are located in the 3D space."  correct="true">
 
 You got it!
 
