@@ -89,6 +89,21 @@ So what can we do to create an effective comparison between all the genres?
 
 ---
 
+## Heatmaps are effective for comparing multiple distributions
+
+```{python}
+(alt.Chart(movies_extended).mark_rect().encode(
+    alt.X('Worldwide Gross', bin=alt.Bin(maxbins=25)),
+    alt.Y('Major Genre'),
+    alt.Color('count()')))
+```
+
+Notes:
+Representing counts with color
+TODO should we have this slide or not, not the best data for heatmap dists
+
+---
+
 ## Bar charts are effective for comparing a single value but hides any variation
 
 ```{python}
