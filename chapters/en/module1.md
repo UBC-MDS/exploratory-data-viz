@@ -217,7 +217,7 @@ Tasks:
 <exercise id="8" title="Questions on How Plots are Created">
 
 **Question 1**     
-When combining plots in Altair, we say that each plot has its own ___.
+Which function do we need to use to superimpose plots in Altair?
 
 <choice id="1">
 
@@ -271,12 +271,14 @@ _**Make sure you remove the hash (`#`) symbol in the coding portions of this que
 
 Let's use a line plot to visualize how the price of a few common stocks has changed over time.
 
+Click Run code to take a look at the stock data before uncommenting the plot code and creating the visualization.
+
 Tasks:
 
 - Fill out the missing fields in the code below.
 - Import the correct library from `vega_datasets`.
-- Before going further take a look at the stock data.
-- Create a line plot with the stocks' date on the x-axis and their price on the y-axis.
+- ***Before going further Click <font style="color:blue">Run code</font>   to take a look at the stock data before uncommenting the plot code and creating the visualization.***
+- Create a line plot with the stocks' date on the x-axis and their price on the y-axis. Save the plot in an object named `price_lineplot`.
 - You should color the lines by the stock symbol,
 so that you can compare the stock development for the different companies.
 
@@ -354,9 +356,10 @@ for all five companies.
 
 Tasks:
 
-- Use the code from exercise 9 above as a base.
-- Modify the code to plot one line with the average value of all stocks over time,
-instead of giving each company its own line.
+- Creat a line plot with the average value of all stocks over time,
+instead of giving each company its own line. 
+*Hint: This will requite aggregating using mean for your x-axis values.*
+
 
 <codeblock id="01_10">
 

@@ -6,7 +6,9 @@ stocks = ___
 
 print(stocks.head())
 
-# alt.Chart(___).___.encode(
-#    x=___,
-#    y=___,
-#    color=___)
+# price_lineplot = alt.Chart(___).___.encode(
+#     x=___,
+#     y=___,
+#     color=___)
+
+print(price_lineplot)

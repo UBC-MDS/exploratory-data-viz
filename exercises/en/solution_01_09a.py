@@ -6,7 +6,9 @@ stocks = data.stocks()
 
 print(stocks.head())
 
-alt.Chart(stocks).mark_line().encode(
+price_lineplot = alt.Chart(stocks).mark_line().encode(
     x='date',
     y='price',
     color='symbol')
+
+price_lineplot
