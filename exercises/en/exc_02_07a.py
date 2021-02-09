@@ -4,6 +4,8 @@ from vega_datasets import data
 
 cars = data.cars()
 
-____ = ____
+fuel_efficiency = alt.Chart(____).____().encode(
+    x=____,
+    y='____').properties(____=____)
 
 ____
