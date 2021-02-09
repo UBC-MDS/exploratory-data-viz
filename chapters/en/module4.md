@@ -16,7 +16,11 @@ id: 4
 <slides source="module4/module4_01" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
-<exercise id="4" title="What Did We Just Learn?" type="slides, video">
+<exercise id="2" title="How to create repeated plots and perform exploratory data analysis" type="slides,video">
+<slides source="module4/module4_02" shot="1" start="0:003" end="07:12"> </slides>
+</exercise>
+
+<exercise id="3" title="What Did We Just Learn?" type="slides, video">
 <slides source="module4/module4_end" shot="0" start="04:5307" end="05:5911">
 </slides>
 </exercise>
