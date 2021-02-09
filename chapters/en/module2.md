@@ -1,5 +1,5 @@
 ---
-title: 'Module 2: Visual Encoding Xhannels'
+title: 'Module 2: Visual Encoding Channels'
 description:
   'In this module we will be learning about the most and least effective ways to encode and present data graphically.'
 prev: ../../module1
@@ -244,7 +244,7 @@ This is difficult to differentiate between the continent's fertility rate separa
 
 </opt>
 
-<opt text="Plot B">
+<opt text="Plot B" correct="true">
 
 Nice!
 
@@ -346,17 +346,17 @@ Tasks:
 
 Which origin's fuel efficiency improved the most between the years 1970 to 1982?
 
-<choice id="1" >
+<choice id="2" >
 
 <opt text="Europe">
 
-This looks like it improved, but other origins have improved but greater amounts. 
+Europe has improvedimproved, but other origins have improved by greater amounts. 
 
 </opt>
 
 <opt text="Japan" >
 
-This one did improve but not the most! 
+This country did improve but not the most! 
 
 </opt>
 
@@ -484,7 +484,7 @@ You are close but the argument `bins` within the helper function `alt.Bin()` isn
 
 </opt>
 
-<opt text="<code>bin=alt.Bin(maxbins=30)</code>">
+<opt text="<code>bin=alt.Bin(maxbins=30)</code>"  correct="true">
 
 Nice!
 
@@ -522,7 +522,7 @@ Tasks:
 - Using a bar plot, visualize the count of penguins for each species in the data. 
 - Choose the appropriate rotation, given the axis labels. 
 - Sort your bars in an appropriate order. 
-- Make sure to give it a title and set the dimensions to a height of 350 and a width of 500.
+- Make sure to give it a title and set the dimensions to a height of 150 and a width of 300.
 - Save your plot in an object named `penguin_bar`.
 
 <codeblock id="02_11">
@@ -577,7 +577,7 @@ Let's now see what the distribution of penguin flipper length looks like.
 Tasks: 
 
 - Using bars, show the counts of the `flipper_length_mm` values. 
-- Make sure to give it a title and set the dimensions to a height of 350 and a width of 500.
+- Make sure to give it a title and set the dimensions to a height of 150 and a width of 300.
 - Save your plot in an object named `penguin_hist`.
 
 <codeblock id="02_12">
@@ -601,19 +601,19 @@ Tasks:
 <exercise id="14" title="True or False: Facets">
 
 **True or False**       
-*If faceting, it's important to assign a color channel to the same column.*
+*If you faceting and assign a color channel to the same column, you will obtain subplots all in different colours*
 
 <choice id="1" >
 
-<opt text="True"  >
+<opt text="True" correct="true">
 
-Setting a color channel column to the same column as the facet will just change the colour of each of the faceted plots. Without the colour channel, all the same information will be visible. 
+Got it!
 
 </opt>
 
-<opt text="False" correct="true">
+<opt text="False" >
 
-This will change each of the faceted plots to different colours. Without the colour channel, all the same information will be visible. 
+Setting a colour channel column to the same column as the facet, will change each of the faceted plots to different colours.
 
 </opt>
 
