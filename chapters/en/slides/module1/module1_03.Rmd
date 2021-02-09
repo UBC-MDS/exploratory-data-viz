@@ -466,20 +466,26 @@ alt.Chart(cars).mark_point().encode(
 ```
 
 Notes:
+
+Is there a relationship between horsepower and car weight, or fuel efficiency?
+
 To enrich this display of information further,
-we can color the points according to a column in the dataframe.
-When we encode a column as the color channel
+we can colour the points according to a column in the dataframe.
+When we encode a column as the colour channel
 Altair will automatically figure out an appropriate colorscale to use,
 depending on whether the data is numerical, categorical, etc.
-Here we have indicated that we want to color the points according to the car's horsepower,
+Here we have indicated that we want to colour the points according to the car's horsepower,
 which indicated how powerful its engine is.
 
 We can see that the heavier cars have more powerful engines,
 than the lighter ones,
-but when using color for a numerical comparison like this,
+but when using colour for a numerical comparison like this,
 makes it is harder to tell whether the relationship follows a straight line 
 or is of another nature,
 so this encoding is mostly useful as an approximate indication of the horsepower.
+
+We can also observe a relationship between the horsepower of a vehicle and the fuel efficiency. It appears thats cars with greater horsepower (the point are a darker shade of blue), are less efficient with their fuel since miles per Gallon is much lower. 
+
 In the net module we will learn more in detail about 
 which encodings are most suitable for different comparisons.
 
