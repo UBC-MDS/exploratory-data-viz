@@ -379,8 +379,7 @@ TODO I am guessing it is too complicated to show df.corr() and talk about pearso
 
 ## Repeat also allows us to explore the relationship between categorical and numerical columns
 
-
-```python
+```{python}
 categorical_columns = movies_extended.select_dtypes('object').columns.tolist()
 categorical_columns = [col for col in categorical_columns if col != 'Title']
 (alt.Chart(movies_extended.drop(columns='Title'))
@@ -389,7 +388,6 @@ categorical_columns = [col for col in categorical_columns if col != 'Title']
      alt.Y(alt.repeat('row'), type='nominal'))
  .repeat(column=numerical_columns, row=categorical_columns))
 ```
-
 
 Notes:
 In addition to repeating charts with numerical data only,
@@ -530,8 +528,7 @@ and we need to adapt our testing strategy accordingly.
 
 ## Altair's grammar allows us to repeat facetted charts
 
-
-```python
+```{python}
 (alt.Chart(movies_extended.drop(columns='Title').query('`MPAA Rating` == ["G", "R"]'))
  .mark_boxplot().encode(
      alt.X('Running Time min', type='quantitative'),
@@ -540,7 +537,6 @@ and we need to adapt our testing strategy accordingly.
  .facet(column='MPAA Rating')
  .repeat(row=['Major Genre', 'Creative Type']))
 ```
-
 
 Notes:
 Thanks to the flexible grammar of graphics in Altair,
