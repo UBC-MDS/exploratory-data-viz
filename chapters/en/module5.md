@@ -12,7 +12,7 @@ id: 5
 <slides source="module5/module5_00" shot="0" start="3:5707" end="4:5306"> </slides>
 </exercise>
 
-<exercise id="1" title="How to modify labels, titles, and ranges?" type="slides,video">
+<exercise id="1" title="Effective figure design" type="slides,video">
 <slides source="module5/module5_01" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
