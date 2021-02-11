@@ -1,5 +1,5 @@
 ---
-title: 'Module 4: Visualizing distributions and exploratory data analysis.'
+title: 'Module 4: Visualizing Distributions and Exploratory Data Analysis'
 description:
   'In this module we will be learning about how to visualize two dimensional and categorical distributions of data as well as how to perform exploratory data analysis.'
 prev: ../../module3
