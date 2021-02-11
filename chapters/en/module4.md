@@ -587,7 +587,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 
 - Are you setting `alt.X(alt.repeat(), type='quantitative', bin=alt.Bin(maxbins=30)`?
 - Are you setting `alt.Y('count()')`?
-- Are you setting a the height and width in `properties()`?
+- Are you setting the height and width in `properties()`?
 - Are you using `.repeat()` and setting `numeric_cols` as the first argument and `columns=2` or `rows=2`?
 
 </codeblock>
@@ -614,7 +614,180 @@ Do you see 2 "bumps" in any of the plots?
 </choice>
 </exercise>
 
-<exercise id="11" title="What Did We Just Learn?" type="slides, video">
+
+<exercise id="11" title="Repeating Categorical Columns Quick Questions!">
+
+**True or False**       
+*We start EDA by displaying a few rows from the data.*
+
+
+<choice id="1" >
+
+<opt text="True" correct="true">
+
+Perfect! Let's see what we are dealing with! 
+</opt>
+
+
+<opt text="False"  >
+
+It's important to see what our data looks like! 
+
+</opt>
+
+
+</choice>
+
+**True or False**       
+*Repeating charts is the same as facetting them.*
+
+<choice id="2" >
+
+<opt text="True">
+
+Killed it!
+
+</opt>
+
+<opt text="False"  correct="true">
+
+Not quite. We can facet on a categorical variable and repeate a plot mapping many categorical variables making them 2 distinct actions.  
+
+</opt>
+
+</choice>
+
+**Question 2**      
+When we want to repeat categorical column values, what value *can* we use in the `type` argument?
+
+
+<choice id="2" >
+
+<opt text="<code>'qualitative'</code>">
+I can understand the confusion since quantitative was used for numeric columns but that's because altair recognizes them with a tag of Q for quantitative. 
+
+</opt>
+
+<opt text="<code>'object'</code>">
+
+This is a pandas dtype and not a reconizable Altair type.
+
+</opt>
+
+<opt text="<code>'nominal'</code>" correct="true">
+
+Nice!
+
+</opt>
+
+<opt text="<code>'categorical'</code>">
+
+Altair doesn't recognize this as a type. 
+
+</opt>
+
+</choice>
+
+
+</exercise>
+
+<exercise id="12" title="Plotting Repeated Categorical Columns with Penguins">
+
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+Are you getting bored of this [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) data yet? Don't worry, we will spice it up soon, but let finish off this module with it. 
+
+<codeblock id="penguins">
+
+</codeblock>
+
+
+Let's  count combinations of the differentcategoricals, so we can get a bit of a better idea about where our data lies. 
+
+Tasks: 
+
+Fill in the blanks in the code below so that the following gets accomplished.
+
+- Use the data source `penguins_df` to make a circle plots for each pair of categorical columns.
+- Assign the plot to an object named `categorical_plots`. 
+- Map and repeat every categorical column on both the x and y axis.
+- Map the counts to both a `Color` and `Size` channel and indicate that no title should be assigned.
+- Make sure to give the size and colour channels independent scales. 
+
+
+<codeblock id="04_12">
+
+- Are you using `.mark_circle()`?
+- Are you setting `alt.X(alt.repeat('column'), type='nominal')`?
+- Are you setting `alt.Y('count()')`?
+- Are you chaining `repeat(row=cat_cols, column=cat_cols)` after `.encode()`?
+- Are you setting `color='independent'` and `size='independent'` in `.resolve_scale()`?
+
+</codeblock>
+
+
+**Question**      
+
+Are their approximately the same number of female and male penguins for each penguin species?
+
+<choice id="1" >
+<opt text="Yes" correct='true'>
+
+If you look at the circle size and colours of each species in the `sex` vs `species` plot (top right), they are approximately equal. 
+
+</opt>
+
+<opt text="No">
+
+Are you comparing the circle size and colours of each species in the `sex` vs `species` plot (top right)?
+
+</opt>
+
+</choice>
+
+
+**Question**      
+
+What species of penguins and from what island are most prominent in our data?
+
+<choice id="1" >
+<opt text="The Adelie species on Biscoe island are most prominent penguin in the data.">
+
+Although the Adelie species are present on Biscoe island, they are not the most occuring in our data.
+
+</opt>
+
+
+<opt text="The Gentoo species on Biscoe island are most prominent penguin in the data." correct='true'>
+
+Nice work!
+
+</opt>
+
+<opt text="The Chinstrap species on Dream island are most prominent penguin in the data.">
+
+This is the second most occuring penguin in the data but not the first.
+
+</opt>
+
+<opt text="The Gentoo species on Dream island are most prominent penguin in the data.">
+
+There are no records of Gentoo penguins on Dream island in the data.
+
+</opt>
+
+</choice>
+
+</exercise>
+
+
+<exercise id="13" title="What Did We Just Learn?" type="slides, video">
 <slides source="module4/module4_end" shot="0" start="04:5307" end="05:5911">
 </slides>
 </exercise>
