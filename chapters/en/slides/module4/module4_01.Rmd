@@ -32,16 +32,17 @@ import altair as alt
 from vega_datasets import data
 
 
-movies_extended = (
-    data.movies()
-    .dropna(subset=['Major Genre', 'MPAA Rating', 'Running Time min'])
-    .query('`MPAA Rating` != ["Not Rated", "NC-17"]'))
-movies_extended
+movies_nonas = data.movies().dropna(subset=['Major Genre', 'MPAA Rating', 'Running Time min'])
+
+movies_extended = movies_nonas[(movies_nonas['MPAA Rating'] !="Not Rated") & (movies_nonas['MPAA Rating'] != "NC-17")]
+
 ```
 
-We're continuing to work with the movies data set,
+
+Notse: We're continuing to work with the movies data set,
 but in contrast to last module we're filtering out some categories
 that contains few or problematic values.
+
 TODO filter the dataset beforehand?
 
 ---
