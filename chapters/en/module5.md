@@ -28,7 +28,7 @@ id: 5
 <slides source="module5/module5_04" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
-<exercise id="3" title="What Did We Just Learn?" type="slides, video">
+<exercise id="5" title="What Did We Just Learn?" type="slides, video">
 <slides source="module5/module5_end" shot="0" start="04:5307" end="05:5911">
 </slides>
 </exercise>
