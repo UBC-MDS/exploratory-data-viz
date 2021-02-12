@@ -16,6 +16,18 @@ id: 5
 <slides source="module5/module5_01" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
+<exercise id="2" title="Descriptive titles and labels" type="slides,video">
+<slides source="module5/module5_02" shot="1" start="0:003" end="07:12"> </slides>
+</exercise>
+
+<exercise id="3" title="Defining and transforming axis ranges" type="slides,video">
+<slides source="module5/module5_03" shot="1" start="0:003" end="07:12"> </slides>
+</exercise>
+
+<exercise id="4" title="Adjusting axis range" type="slides,video">
+<slides source="module5/module5_04" shot="1" start="0:003" end="07:12"> </slides>
+</exercise>
+
 <exercise id="3" title="What Did We Just Learn?" type="slides, video">
 <slides source="module5/module5_end" shot="0" start="04:5307" end="05:5911">
 </slides>
