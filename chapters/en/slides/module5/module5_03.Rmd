@@ -1,0 +1,285 @@
+---
+params:
+  dynamictitle: "module5_01"
+title: "`r params$dynamictitle`"
+output:
+  md_document:
+    variant: gfm
+    pandoc_args: "--markdown-headings=atx"
+---
+
+```{python setup, include=FALSE}
+source('../../../../slide-setup.R')
+# Remember to also manually update the YAML title above
+```
+
+type: slides
+
+
+# Defining and transforming axis ranges
+
+Notes:
+asdf
+
+---
+
+## We can zoom in to highlight a region of an axes
+
+```{python}
+# TODO save wrangled data?
+import pandas as pd
+import altair as alt
+from vega_datasets import data
+
+donations = (
+    pd.read_csv("https://frdata.wikimedia.org/donationdata-vs-day.csv", parse_dates=['date'])
+    .query('2020 < date < 2021')
+    .assign(week_day=lambda df: df['date'].dt.day_name().str[:3]))
+
+alt.Chart(donations, title='Wikipedia donations peak during Christmas').mark_point().encode(
+    alt.X('date', title=None),
+    alt.Y('sum', axis=alt.Axis(format='$s'), title='Amount donated per day'))
+```
+
+```{python}
+import altair as alt
+from vega_datasets import data
+
+
+stocks = data.stocks()
+stock_title = "Google's stock experiencing heavier fluctuations than competitors"
+
+stock_max_date = stocks[stocks['date'] == stocks['date'].max()]
+stock_max_date.loc[stock_max_date['symbol'] == "IBM", 'price'] = 140
+stock_max_date.loc[stock_max_date['symbol'] == "AMZN", 'price'] = 110
+texts = alt.Chart(stock_max_date).mark_text(align='left', dx=2).encode(
+    x='date',
+    y='price',
+    text='symbol',
+    color='symbol')
+
+
+lines = alt.Chart(stocks.query('"2008" < date < "2010-03"'), title=stock_title).mark_line().encode(
+    alt.X('date', title=None, axis=alt.Axis(tickCount=3, grid=False)),
+    alt.Y('price', title='Closing price', axis=alt.Axis(format='$s')),
+    color=alt.Color('symbol', legend=None))
+
+(lines + texts).configure_view(strokeWidth=0)
+```
+
+```{python}
+donations['date'].dt.year
+```
+
+```{python}
+title_text = 'Wikipedia donations peak during Christmas'
+alt.Chart(donations[donations['date'].between("2020", "2020-07")], title=title_text).mark_point().encode(
+    alt.X('date', title=None),
+    alt.Y('sum', axis=alt.Axis(format='$s'), title='Amount donated per day'))
+```
+
+Notes:
+Zooming in on an axis is useful
+when we want to highlight a certain region.
+The easiest way to achieve this
+is usually to filter you data as you we it to Altair.
+
+In this case we could have written
+`alt.Chart(stocks.query('"2008" < date < "2010-03"'))`.
+But this is not always practical,
+such as in this case
+where it would cause Altair 
+to recalculate the y-axis based on the filtered data
+and our labes would be misaligned.
+
+---
+
+## We can zoom in to highlight a region of an axes
+
+```{python}
+lines = alt.Chart(stocks, title=stock_title).mark_line(clip=True).encode(
+    alt.X('date', title=None, axis=alt.Axis(tickCount=3, grid=False), scale=alt.Scale(domain=['2008', '2010-03'])),
+    alt.Y('price', title='Closing price', axis=alt.Axis(format='$s')),
+    color=alt.Color('symbol', legend=None))
+
+(lines + texts).configure_view(strokeWidth=0)
+```
+
+```{python}
+title_text = 'Wikipedia donations peak during Christmas'
+alt.Chart(donations[donations['date'].between("2020", "2020-07")], title=title_text).mark_point(clip=True).encode(
+    alt.X('date', title=None),
+    alt.Y('sum', axis=alt.Axis(format='$s'), title='Amount donated per day', scale=alt.Scale(domain=[0, 100_000])))
+```
+
+Notes:
+Instead,
+we could modify the domain of the scale
+for the value we want to zoom.
+When we used `alt.Axis` previously,
+the changes we made were cosmetic,
+such as tick numbers,
+label formatting etc.
+
+Now that were are modifying the range of the actual displayed values,
+we need to use `alt.Scale` instead.
+It also works for colors and sizes in a legend,
+just like `alt.Axis`.
+
+Finally we need to set `clip=True` in the axis,
+to be explicit about that we are excluding data.
+Without it,
+we would still see the lines extending beyond the range of the chart.
+This ensures that we are intentional about our data exclusion,
+and it is something we should think twice about because it can skew the perception of the data.
+For example,
+as we saw in the previous slide deck,
+we should not do in to a bar chart that shows counts or proportions.
+
+---
+
+## Axis can be anchored to the data range instead of to zero without explicitly setting the domain
+
+```{python}
+alt.Chart(stocks.query('2008 < date < 2010 and symbol == "GOOG"'),
+          title="Google stock prices surged in 2009").mark_line().encode(
+    alt.X('date', title=None),
+    alt.Y('price', title='Closing price', axis=alt.Axis(format='$s')))
+```
+
+```{python}
+alt.Chart(donations[donations['sum'] > 2.5e6]).mark_point().encode(
+    alt.X('date', title=None),
+    alt.Y('sum', axis=alt.Axis(format='$s'), title='Amount donated per day'))
+```
+
+Notes:
+You might have noticed from previous modules that Altair often includes 0 in the axis,
+even if our data does not have any values close to 0.
+The reason for this is to enforce good habits 
+and not create for example bar plot that are cut off
+which makes difference appear much bigger than they actually are.
+
+However,
+there are also good reasons for setting the range based on the extent of the data,
+e.g. do be able to show the variation fully.
+
+In this slide we can see that showing only the google stock prices
+uses about half the plot space available.
+
+---
+
+## Axis can be anchored to the data range instead of to zero without explicitly setting the domain
+
+```{python}
+alt.Chart(stocks.query('2008 < date < 2010 and symbol == "GOOG"'),
+          title="Google stock prices surged in 2009").mark_line().encode(
+    alt.X('date', title=None),
+    alt.Y('price', title='Closing price', axis=alt.Axis(format='$s'), scale=alt.Scale(zero=False)))
+```
+
+```{python}
+alt.Chart(donations[donations['sum'] > 2.5e6]).mark_point().encode(
+    alt.X('date', title=None),
+    alt.Y('sum', axis=alt.Axis(format='$s'), title='Amount donated per day', scale=alt.Scale(zero=False)))
+```
+
+## Large values can hide variation among the rest of the data
+
+```{python}
+# TODO save wrangled data?
+donations = (
+    pd.read_csv("https://frdata.wikimedia.org/donationdata-vs-day.csv", parse_dates=['date'])
+    .query('2020 < date < 2021')
+    .assign(week_day=lambda df: df['date'].dt.day_name().str[:3]))
+
+alt.Chart(donations, title='Wikipedia donations peak during Christmas').mark_point().encode(
+    alt.X('date', title=None),
+    alt.Y('sum', axis=alt.Axis(format='$s'), title='Amount donated per day'))
+```
+
+Notes:
+Here we are visualizing the total amount donated to Wikipedia
+for each day in the year 2020.
+We can see that the highest daily donations occur during Christmas
+
+---
+
+## A log transformed axis can reveal detail across a large range of values
+
+```{python}
+from calendar import day_abbr
+alt.Chart(donations).mark_bar().encode(
+    alt.Y('week_day', sort=list(day_abbr)),
+    alt.X('sum(sum)', axis=alt.Axis(format='$s')))
+```
+
+```{python}
+alt.Chart(donations).mark_boxplot().encode(
+    alt.Y('week_day', sort=list(day_abbr)),
+    alt.X('sum', axis=alt.Axis(format='$s')))
+```
+
+Notes:
+If we wanted to use the full range,
+we could set the domain explicitly like before,
+but the shortcut `zero=False` allows us to adjust the axis
+to the min and max values of the data with less typing.
+
+---
+
+## A log transformed axis can reveal detail across a large range of values
+
+
+Notes:
+Here we are visualizing the max donations
+
+---
+
+## Log transforming and axes can reveal detail even when observations are far apart
+
+```{python}
+alt.Chart(donations).mark_point().encode(
+    alt.X('date'),
+    alt.Y('sum', axis=alt.Axis(format='$'), scale=alt.Scale(type='log')),
+    alt.Tooltip('week_day')
+).interactive()
+```
+
+```{python}
+donations.loc[4461, 'sum'] = 0
+alt.Chart(donations).mark_point().encode(
+    alt.X('date'),
+    alt.Y('sum', axis=alt.Axis(format='$'), scale=alt.Scale(type='log')))
+```
+
+```{python}
+alt.Chart(donations).mark_point().encode(
+    alt.X('date'),
+    alt.Y('sum', axis=alt.Axis(format='$'), scale=alt.Scale(type='symlog')))
+```
+
+```{python}
+alt.Chart(donations.drop(4461)).mark_line().encode(
+    alt.X('date'),
+    alt.Y('sum', axis=alt.Axis(format='$'), scale=alt.Scale(type='log')))
+```
+
+Notes:
+If we wanted to use the full range,
+we could set the domain explicitly like before,
+but the shortcut `zero=False` allows us to adjust the axis
+to the min and max values of the data with less typing.
+
+---
+
+
+```python
+
+```
+
+---
+
+# Let's apply what we learned!
+
+Notes: <br>
