@@ -180,11 +180,11 @@ but still be able to see details for the days with lower total donations?
 
 ## Altair allows us to interactively zoom in and out of the plot
 
-
+```{python}
 alt.Chart(donations, title='Wikipedia donations peak during Christmas').mark_circle().encode(
     alt.X('date', title=None),
     alt.Y('sum', axis=alt.Axis(format='$s'), title='Amount donated per day')).interactive()
-
+```
 
 Notes:
 One of Altair's stong suites
@@ -204,13 +204,13 @@ How can we solve the problem of a large axis range in a static figure?
 
 ## A log transformed axis can reveal detail across a large range of values
 
-
+```{python}
 alt.Chart(donations).mark_point().encode(
     alt.X('date'),
     alt.Y('sum', axis=alt.Axis(format='$'), scale=alt.Scale(type='log')),
     alt.Tooltip('week_day')
 ).interactive()
-
+```
 
 Notes:
 By applying a logarithmic (log) transformation to the y-axis,
