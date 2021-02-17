@@ -24,11 +24,18 @@ id: 5
 <slides source="module5/module5_03" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
-<exercise id="4" title="Adjusting axis range" type="slides,video">
+<exercise id="4" title="Effective use of color for categorical data" type="slides,video">
 <slides source="module5/module5_04" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
-<exercise id="5" title="What Did We Just Learn?" type="slides, video">
-<slides source="module5/module5_end" shot="0" start="04:5307" end="05:5911">
-</slides>
+<exercise id="5" title="Effective use of color for quantitative data" type="slides,video">
+<slides source="module5/module5_05" shot="1" start="0:003" end="07:12"> </slides>
+</exercise>
+
+<exercise id="6" title="Using color to highlight data" type="slides,video">
+<slides source="module5/module5_06" shot="1" start="0:003" end="07:12"> </slides>
+</exercise>
+
+<exercise id="7" title="What Did We Just Learn?" type="slides, video">
+<slides source="module5/module5_end" shot="0" start="04:5307" end="05:5911"></slides>
 </exercise>
