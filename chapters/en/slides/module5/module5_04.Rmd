@@ -20,7 +20,7 @@ type: slides
 
 Notes:
 In this slide deck you will learn how to select colors that accurately represents your data
-and effectively communicates it to the reader.
+and effectively communicate it to the reader.
 
 ---
 
@@ -39,6 +39,44 @@ is suitable for the data you are visualizing.
 
 ---
 
+## Color can be broken down into hue, lightness, and saturation
+
+<center><img src="/module5/hsl-cylinder.png" width="100%"></img></center>
+
+Notes:
+There are several different ways to represent colors.
+You might arleady have heard of RGB (red, green, blue) or CMYK (cyan, magenta, yellow, black)
+where different amount of a set of base colors are combined to create all possible colors.
+
+When discussing colors in the context of data visualization,
+We will be describing them with the parameters "hue", "saturation" and "lightness".
+
+The left schematic in this slide is a 2D circular representation including only hue and saturation.
+When we add lightness this circle grows into cylinder with lightness as the height.
+
+On the next slide we will break down exactly what each of these three parameters represent.
+
+---
+
+## Hue, lightness, and saturation describes different properties of colors
+
+<center><img src="/module5/hsl-questions.png" width="100%"></img></center>
+
+We could verbalize the changes we saw in the previous slide in the following manner:
+
+Hue is what we traditionally think of as the “color”, is it red, blue, etc?
+
+Each hue can have a varying saturation, which ranges from a dull, greyish appearance to a vibrant fully saturated hue.
+
+Lightness is how bright the color is. For every hue, it starts at black (no lightness) and ends at white (full lightness).
+
+Hue and lightness are the most important from a data visualization perspective,
+and we use them for categorical and quantitative data, respectively. 
+
+Saturation is often used more as a stylistic choice
+to decide whether the colors we use should be muted/desaturated or vivid/saturated.
+
+---
 
 
 ## Hues are used to distinguish categorical values
@@ -214,12 +252,12 @@ you will rarely, if ever, be able to go this high.
 
 ## Too many hues are impossible to distinguish
 
-```{python}
+
 alt.Chart(cars).mark_point(size=70, filled=True).encode(
     x='Horsepower',
     y='Miles_per_Gallon',
     color=alt.Color('Name', title=None))
-```
+
 
 Notes:
 This is an example of what happens when too many categorical hues are used.
