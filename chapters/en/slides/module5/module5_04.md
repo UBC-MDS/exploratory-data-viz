@@ -54,8 +54,8 @@ parameters represent.
 <img src="/module5/hsl-questions.png" width="100%"></img>
 </center>
 
-We could verbalize the changes we saw in the previous slide in the
-following manner:
+Notes: We could verbalize the changes we saw in the previous slide in
+the following manner:
 
 Hue is what we traditionally think of as the “color”, is it red, blue,
 etc?
