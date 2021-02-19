@@ -19,7 +19,7 @@ text = alt.Chart(penguins_df).mark_text(align='center', dx=10).encode(
 
 # Set up the title and subtitle formatting
 penguin_title = alt.TitleParams(
-    "Adelie Penguins species most abundant in the Antartic",
+    "Adelie Penguins species most abundant in the Antarctic",
      subtitle = "The Chinstrap species appears to have the lowest penguin population.",
      fontSize=18,
      subtitleColor='firebrick')

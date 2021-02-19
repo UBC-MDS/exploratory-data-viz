@@ -8,11 +8,15 @@ type: chapter
 id: 5
 ---
 
+<head>
+    <base target="_blank">
+</head>
+
 <exercise id="0" title="Module Learning Outcomes"  type="slides, video">
 <slides source="module5/module5_00" shot="0" start="3:5707" end="4:5306"> </slides>
 </exercise>
 
-<exercise id="1" title="Effective figure design" type="slides,video">
+<exercise id="1" title="Effective Figure Design" type="slides,video">
 <slides source="module5/module5_01" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
@@ -20,14 +24,14 @@ id: 5
 <exercise id="2" title="True or False: Is it Effective?">
 
 **True or False**       
-*It's important to imclude as much information on a plot as possible.*
+*It's important to include as much information on a plot as possible.*
 
 
 <choice id="1" >
 
 <opt text="True" >
 
-Sometimes removing categories can help commmunicate better and more effectively.
+Sometimes removing categories can help communicate better and more effectively.
 
 </opt>
 
@@ -135,7 +139,7 @@ Nice!
 </exercise>
 
 
-<exercise id="4" title="Descriptive titles and labels" type="slides,video">
+<exercise id="4" title="Descriptive Titles and Labels" type="slides,video">
 <slides source="module5/module5_02" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
@@ -150,7 +154,7 @@ Nice!
 
 <opt text="True" >
 
-Often it's not necessary to have a subtitle but they can be helpful in supporting the communication of the plot's insights.
+Often it's not necessary to have a subtitle but they can help support the communication of the plot's insights.
 
 </opt>
 
@@ -171,7 +175,7 @@ Clever!
 
 <opt text="True" >
 
-This does work in other plotting tools, but in Altair we separate our title and subtitle lines but putting strings as elements in a list. Each element in the list is indicative of a new line.
+This does work in other plotting tools, but in Altair, we separate our title and subtitle lines but putting strings as elements in a list. Each element in the list is indicative of a new line.
 
 </opt>
 
@@ -197,7 +201,7 @@ You got it!
 
 <opt text="False" >
 
-For axis such as time and some categorical labels, it's redundant to have labels. 
+For axes such as time and some categorical labels, it's redundant to have labels. 
 </opt>
 
 </choice>
@@ -309,7 +313,7 @@ Nice!
 
 <opt text="Hockey Players in the NLH originate from all around the world" >
 
-This is not exactly pertaining to the plot we see above. We would more likely want to title it commenting on the large number of players originating from Canada.
+This is not exactly what we are trying to communicate with the plot we see above. We would more likely want to title it commenting on the large number of players originating from Canada.
 
 </opt>
 
@@ -327,7 +331,7 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-The [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) that we seen time and time again is going to help us practice with formatting in this question.
+The [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) that we see time and time again is going to help us practice with formatting in this question.
 
 <codeblock id="penguins">
 
@@ -344,10 +348,10 @@ Fill in the blanks in the code below so that the following gets accomplished:
 
 - In a plot named `base`, use the data source `penguins_df` to make a histogram of the different quantities of penguin species in the data. 
 - Map the species on the y-axis and the count on the x-axis. 
-- In the base plot make sure to give a label to the x axis. Since the species is categorical, do not set a label for the y-axis.
+- In the base plot make sure to give a label to the x-axis. Since the species is categorical, do not set a label for the y-axis.
 - Display the base plot and take a look at what it's communicating.
 - Create text by using `mark_text()` and save this in an object named `text`. It should have the same x and y mapping as the base plot but this time you want to make sure the count is displayed on the side of each species bar. Make sure it's centered in alignment and located at `dx=10`.
-- After observing the plot create and object named `penguin_title` using `.TitleParams()`. In this method you will need to specify an insightful title, and subtitle, give the title a fontsize of 18, and set the subtitle colour to `firebrick`.
+- After observing the plot create and object named `penguin_title` using `.TitleParams()`. In this method, you will need to specify an insightful title, and subtitle, give the title a fontsize of 18, and set the subtitle colour to `firebrick`.
 - Remove emove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method. 
 
 <codeblock id="05_07">
@@ -372,7 +376,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 <exercise id="9" title="True or False: Transformations">
 
 **True or False**       
-*Filtering and clipping clipping is approriate to see variation in certain areas of your data.*
+*Filtering and clipping is appropriate to see a variation in certain areas of your data.*
 
 
 <choice id="1" >
@@ -385,7 +389,7 @@ You've been paying attention here!
 
 <opt text="False" >
 
-Sometimes we need to see values within a certain range to indentify any variable or relationships within the data. 
+Sometimes we need to see values within a certain range to identify any variable or relationships within the data. 
 
 </opt>
 
@@ -405,7 +409,7 @@ Sometimes we need to see values within a certain range to indentify any variable
 
 <opt text="False" >
 
-Sometimes a large value can affect the scale on an axes and make it difficult to identify and relationships or trends occuring in the data.
+Sometimes a large value can affect the scale on an axis and make it difficult to identify and relationships or trends occurring in the data.
 
 </opt>
 
@@ -413,13 +417,13 @@ Sometimes a large value can affect the scale on an axes and make it difficult to
 
 
 **True or False**       
-*Log transforming an axis is a good option to use if there is a large range to displayed and you don't want to to compress the smaller values into bottom of the graph and with all possible values.*
+*Log transforming an axis is a good option to use if there is a large range to displayed and you don't want to compress the smaller values into the bottom of the graph and with all possible values.*
 
 <choice id="3" >
 
 <opt text="True">
 
-The first part is true, however log transforming does not work with values of 0 which would result in a value of -<span>&#8734;</span>. 
+The first part is true, however, log transforming does not work with values of 0 which would result in a value of -<span>&#8734;</span>. 
 
 </opt>
 
@@ -434,10 +438,10 @@ You are on fire!
 </exercise>
 
 
-<exercise id="10" title="Transformations and presentations">
+<exercise id="10" title="Transformations and Presentations">
 
 **Question 1**      
-Which of the folowing arguments will exclude data from a plot?
+Which of the following arguments will exclude data from a plot?
 
 <choice id="1" >
 <opt text="<code>clip</code>"  correct="true">
@@ -512,14 +516,14 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-This variation of the [Phillipino dataset originally from Kaggle](https://www.kaggle.com/grosvenpaul/family-income-and-expenditure) shows the income and expenditure (in PHP) of residents in the Philippine.
+This variation of the [Phillipino dataset originally from Kaggle](https://www.kaggle.com/grosvenpaul/family-income-and-expenditure) shows the income and expenditure (in PHP) of residents in the Philippines.
 
 <codeblock id="income_exp">
 
 </codeblock>
 
 
-First let's just plot the income vs education expenditure with no transformations. Let's make sure we are formatting the axes correctly and determine if we can make any conclusions regarding the relationship between the two variables.
+First, let's just plot the income vs education expenditure with no transformations. Let's make sure we are formatting the axes correctly and determine if we can make any conclusions regarding the relationship between the two variables.
 
 Tasks: 
 
@@ -543,7 +547,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 It's difficult to draw any clear conclusion on the relationship between these two variables. It might be helpful to transform these axes. 
 
 **Question**      
-Which type of transformation do you think would be best fitting here?
+Which type of transformation do you think would be the best fitting here?
 
 
 <choice id="1" >
@@ -580,12 +584,12 @@ Tasks:
 
 Fill in the blanks in the code below so that the following gets accomplished:
 
-- In a new plot named `income_log_plot` create a new scatter plot similarly to what we did before. 
+- In a new plot named `income_log_plot` create a new scatter plot similar to what we did before. 
 - Map the `tot_income` on the x-axis and `education_expenditure` on the y-axis. 
 - Set the opacity of the points to 0.5 and size to 10.
 - Make sure to give the x and y-axis labels (with units) and the plot a title.
 - The x and y-axis values should have SI-units. 
-- **This time, transform both the x and y-axes with the appropriate transformation we answered from the multiple choice question above.** 
+- **This time, transform both the x and y-axes with the appropriate transformation we answered from the multiple-choice question above.** 
 
 <codeblock id="05_11b">
 
@@ -604,7 +608,7 @@ What type of relationship is there between income and education expenditure now?
 <choice id="2" >
 <opt text="Positive" correct="true">
 
-There appears to be an upward slope between the datapoints. 
+There appears to be an upward slope between the data points. 
 
 </opt>
 
@@ -633,7 +637,7 @@ There appears to be some sort of relationship between the variables!
 
 
 **True or False**       
-*It's important to set your work apart and demonstate creativity by creating your own colour scheme.*
+*It's important to set your work apart and demonstrate creativity by creating your own colour scheme.*
 
 
 <choice id="1" >
@@ -654,7 +658,7 @@ It's often better to use colour schemes designed by experts in a way to be easy 
 </choice>
 
 **True or False**       
-*Adding an additional channel like "shape" to an exisiting column mapping, is often recommended to help people with color vision deficiences.*
+*Adding an additional channel like "shape" to an existing column mapping, is often recommended to help people with color vision deficiencies.*
 
 <choice id="2" >
 
@@ -666,7 +670,7 @@ Yes! If you want to add a colour mapping of a column, it's often a good idea to 
 
 <opt text="False" >
 
-Is using only a colour mapping inclusive to people who can't interprete them?   
+Is using strictly colour mapping inclusive to people who can't interpret them?   
 
 </opt>
 
@@ -675,7 +679,7 @@ Is using only a colour mapping inclusive to people who can't interprete them?
 </exercise>
 
 
-<exercise id="14" title="Transformations and presentations">
+<exercise id="14" title="Colour Coordination Questions">
 
 **Question 1**      
 When is it a good idea to use custom colour schemes?
@@ -689,7 +693,7 @@ Cool!
 
 <opt text="When it helps demonstrates your creativity and coding ability.">
 
-Using custom colours may actually do the oposite in this case.
+Using custom colours may do the opposite in this case.
 
 </opt>
 
@@ -710,7 +714,7 @@ I can understand this one but not necessarily the number one reason.
 
 
 **Question 2**      
-A around how many colour hues is it a good rule of thumb to reconsider colour as an effective channel to represent your data?
+How many colours (approximately by a rule of thumb) should you begin to reconsider colour as an effective channel to represent your data?
 
 
 <choice id="2" >
@@ -733,7 +737,7 @@ Can you differential between 10 different colours easily?
 
 <opt text="20">
 
-20 colours seems like a lot!
+20 colours is a lot!
 
 </opt>
 
@@ -742,7 +746,7 @@ Can you differential between 10 different colours easily?
 
 </exercise>
 
-<exercise id="15" title="Colouring Between the Lines!">
+<exercise id="15" title="Adding some Colour to Penguins">
 
 
 **Instructions:**    
@@ -752,50 +756,73 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-The [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) that we seen time and time again is going to help us practice with formatting in this question.
+We are about to talk our typically black and white [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) and brighten these birds up a bit!  Using what we learned in the last 2 sections, let's identify if there are any relationships between the flipper and culmen length and the different species of Antarctic penguins. 
 
 <codeblock id="penguins">
 
 </codeblock>
 
 
-For this question let's create a stacked histogram of the values in the `culmen_depth_mm` column for different penguin species.
-
-***([Culmen](https://allisonhorst.github.io/palmerpenguins/articles/articles/art.html): the upper ridge of a bird's beak)***
+Let's plot the `culmen_length_mm` and `flipper_length_mm` but this time let's add a colour and shape channel to the species and explore if there are appears to be anything telling. 
 
 Tasks: 
 
 Fill in the blanks in the code below so that the following gets accomplished:
 
 
-- In a plot named `base`, use the data source `penguins_df` to make a histogram of the different quantities of penguin species in the data. 
-- Map the species on the y-axis and the count on the x-axis. 
-- In the base plot make sure to give a label to the x axis. Since the species is categorical, do not set a label for the y-axis.
-- Display the base plot and take a look at what it's communicating.
-- Create text by using `mark_text()` and save this in an object named `text`. It should have the same x and y mapping as the base plot but this time you want to make sure the count is displayed on the side of each species bar. Make sure it's centered in alignment and located at `dx=10`.
-- After observing the plot create and object named `penguin_title` using `.TitleParams()`. In this method you will need to specify an insightful title, and subtitle, give the title a fontsize of 18, and set the subtitle colour to `firebrick`.
-- Remove emove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method. 
+- In a plot named `colour_plot`, use the data source `penguins_df` to make a scatter plot (`mark_point`) with points that are size 10.
+- Map the flipper length on the x-axis and the culmen length on the y-axis. 
+- Map the penguin species to both a colour and a shape channel.
+- Select a [desired colour scheme](https://vega.github.io/vega/docs/schemes/), and assign it to the colour channel. 
+- In this plot, it might be a good idea to restrict the axis ranges. Select an appropriate domain for both the x and y-axis. 
+- Make sure you are giving the channels all proper labels and the plot a title. 
 
-<codeblock id="05_07">
+<codeblock id="05_15">
 
-- Are you setting `alt.Y('species', title=None)` in the base plot?
-- Are you setting `alt.X('count()', title='something')` in the base plot?
-- In the text plot, are you coding `.mark_text(align='center', dx=10)`?
-- In the text plot, are you specifying `alt.Text('count()'`?
-- for the titles formatting are you making sure to use the arguments `subtitle`, `fontSize` and `subtitleColor`?
-
+- Are you using `mark_point(size=10)`?
+- Are you setting `alt.X('flipper_length_mm', scale=alt.Scale(domain=[140, 240]), title="Flipper length (mm)")`?
+- Are you setting `alt.X(''culmen_length_mm', scale=alt.Scale(domain=[25, 65]), title='Culmen length (mm)')`?
+- In the  plot, are you coding ` alt.Color('species', title='Penguin species', scale=alt.Scale(scheme='desired-set-name'))`?
+- Are you setting `alt.Shape('species')`?
+- Are you setting a title in `properties()`?
 
 </codeblock>
+
+**Question**      
+Which penguin species tend to have the shortest culmen length?
+
+
+<choice id="1" >
+<opt text="Adelie" correct="true">
+
+Great!
+
+</opt>
+
+<opt text="Chintrap" >
+Hmmm, maybe not this penguin species.
+
+</opt>
+
+<opt text="Gentoo">
+
+Not this species!
+
+</opt>
+
+
+</choice>
+
 
 
 </exercise>
 
-<exercise id="16" title="Effective use of color for quantitative data" type="slides,video">
+<exercise id="16" title="Effective Use of Colour for Quantitative Data" type="slides,video">
 <slides source="module5/module5_05" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
 
-<exercise id="20" title="Using color to highlight data" type="slides,video">
+<exercise id="20" title="Using Colour to Highlight Data" type="slides,video">
 <slides source="module5/module5_06" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
