@@ -140,7 +140,7 @@ Nice!
 </exercise>
 
 
-<exercise id="5" title="True or False: Is it Effective?">
+<exercise id="5" title="True or False: Titles and Formatting (T/F)?">
 
 **True or False**       
 *All plots should have a subtitle that adds additional details*
@@ -205,7 +205,7 @@ For axis such as time and some categorical labels, it's redundant to have labels
 </exercise>
 
 
-<exercise id="6" title="Which graph is effective?">
+<exercise id="6" title="Multiple Choices for Titles and Labels">
 
 **Question 1**      
 When aligning your titles, which argument would you use in `.TitleParams()`?
@@ -249,7 +249,7 @@ Which title is most appropriate for the plot below?
 
 
 
-<choice id="3" >
+<choice id="2" >
 <opt text="<code>full</code>">
 
 Not quite. Maybe take a look at slide 11.
@@ -288,7 +288,7 @@ To display the full number in the axis tick values instead of scientific notatio
 
 
 
-<choice id="2" >
+<choice id="3" >
 <opt text="NHL hockey player nationality" >
 
 This isn't explaining any insights from the plot.
@@ -317,7 +317,7 @@ This is not exactly pertaining to the plot we see above. We would more likely wa
 
 </exercise>
 
-<exercise id="7" title="Titles and Texts with penguins">
+<exercise id="7" title="Formatting Fun!">
 
 
 **Instructions:**    
@@ -342,61 +342,390 @@ Tasks:
 
 Fill in the blanks in the code below so that the following gets accomplished.
 
-- Use the data source `penguins` to make a **stacked** histogram plot.
-- Plot the counts of the `culmen_depth_mm`  and distinguish the penguin `species` using the color channel.
-- Make sure to set the `maxbins` argument to something appropriate. 
-- Give it an appropriate title. 
 
+- In a plot named `base`, use the data source `penguins_df` to make a histogram of the different quantities of penguin species in the data. 
+- Map the species on the y-axis and the count on the x-axis. 
+- In the base plot make sure to give a label to the x axis. Since the species is categorical, do not set a label for the y-axis.
+- Display the base plot and take a look at what it's communicating.
+- Create text by using `mark_text()` and save this in an object named `text`. It should have the same x and y mapping as the base plot but this time you want to make sure the count is displayed on the side of each species bar. Make sure it's centered in alignment and located at `dx=10`.
+- After observing the plot create and object named `penguin_title` using `.TitleParams()`. In this method you will need to specify an insightful title, and subtitle, give the title a fontsize of 18, and set the subtitle colour to `firebrick`.
+- Remove emove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method. 
 
 <codeblock id="05_07">
 
-- Are you setting `alt.X('culmen_depth_mm', bin=alt.Bin(maxbins=30))`?
-- Are you setting a title in `properties()`?
+- Are you setting `alt.Y('species', title=None)` in the base plot?
+- Are you setting `alt.X('count()', title='something'` in the base plot?
+- In the text plot, are you coding `.mark_text(align='center', dx=10)`?
+- In the text plot, are you specifying `alt.Text('count()'`?
+- for the titles formatting are you making sure to use the arguments `subtitle`, `fontSize` and `subtitleColor`?
+
 
 </codeblock>
 
 
-**Question**      
-
-Which species of penguin tend to have lower culmen depths?
-
-<choice id="1" >
-<opt text="Chinstrap">
-
-This species has a lot of overlap with the Adelie species. 
-
-</opt>
-
-<opt text="Gentoo" correct="true">
-
-These penguins tend to have a shorter culmen depth. 
-
-</opt>
-
-<opt text="Adelie" >
-
-This species has a lot of overlap with the Chinstrap species. 
-
-</opt>
-
-</choice>
 </exercise>
 
 <exercise id="8" title="Defining and transforming axis ranges" type="slides,video">
 <slides source="module5/module5_03" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
-<exercise id="12" title="Effective use of color for categorical data" type="slides,video">
+
+<exercise id="9" title="True or False: Transformations">
+
+**True or False**       
+*Filtering and clipping clipping is approriate to see variation in certain areas of your data.*
+
+
+<choice id="1" >
+
+<opt text="True"  correct="true">
+
+You've been paying attention here!
+
+</opt>
+
+<opt text="False" >
+
+Sometimes we need to see values within a certain range to indentify any variable or relationships within the data. 
+
+</opt>
+
+
+</choice>
+
+**True or False**       
+*Large outliers in the data can mask trends within the data.*
+
+<choice id="2" >
+
+<opt text="True"  correct="true">
+
+🎉.
+
+</opt>
+
+<opt text="False" >
+
+Sometimes a large value can affect the scale on an axes and make it difficult to identify and relationships or trends occuring in the data.
+
+</opt>
+
+</choice>
+
+
+**True or False**       
+*Log transforming an axis is a good option to use if there is a large range to displayed and you don't want to to compress the smaller values into bottom of the graph and with all possible values.*
+
+<choice id="3" >
+
+<opt text="True">
+
+The first part is true, however log transforming does not work with values of 0 which would result in a value of -<span>&#8734;</span>. 
+
+</opt>
+
+<opt text="False" correct="true">
+
+You are on fire!
+
+</opt>
+
+</choice>
+
+</exercise>
+
+
+<exercise id="10" title="Transformations and presentations">
+
+**Question 1**      
+Which of the folowing arguments will exclude data from a plot?
+
+<choice id="1" >
+<opt text="<code>clip</code>"  correct="true">
+
+Cool!
+
+</opt>
+
+<opt text="<code>scale</code>">
+
+We can use `.Scale()` and the `domain` argument to specify the domain of the plot axes but that does not stop the data points from appearing. 
+
+</opt>
+
+<opt text="<code>domain</code>">
+
+Although this specifies the domain for the plot, the data will still display with
+
+</opt>
+
+
+<opt text="<code>filter</code>">
+
+This is not an argument with Altair. 
+
+</opt>
+
+</choice>
+
+
+**Question 2**      
+How do you add interactivity to a plot?
+
+
+<choice id="2" >
+<opt text="<code>interactive=True</code>" >
+
+You would not add interactivity with this argument.
+
+</opt>
+
+<opt text="<code>.interactivity()</code>">
+
+Close but not quite!
+
+</opt>
+
+<opt text="<code>.interactive()</code>"  correct="true">
+
+Nice!
+
+</opt>
+
+<opt text="<code>.active()</code>">
+
+You are right that it's a method but not the correct one. 
+
+</opt>
+
+
+</choice>
+
+</exercise>
+
+<exercise id="11" title="Using Transformations in action!">
+
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+The [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) that we seen time and time again is going to help us practice with formatting in this question.
+
+<codeblock id="penguins">
+
+</codeblock>
+
+
+For this question let's create a stacked histogram of the values in the `culmen_depth_mm` column for different penguin species.
+
+***([Culmen](https://allisonhorst.github.io/palmerpenguins/articles/articles/art.html): the upper ridge of a bird's beak)***
+
+Tasks: 
+
+Fill in the blanks in the code below so that the following gets accomplished.
+
+
+- In a plot named `base`, use the data source `penguins_df` to make a histogram of the different quantities of penguin species in the data. 
+- Map the species on the y-axis and the count on the x-axis. 
+- In the base plot make sure to give a label to the x axis. Since the species is categorical, do not set a label for the y-axis.
+- Display the base plot and take a look at what it's communicating.
+- Create text by using `mark_text()` and save this in an object named `text`. It should have the same x and y mapping as the base plot but this time you want to make sure the count is displayed on the side of each species bar. Make sure it's centered in alignment and located at `dx=10`.
+- After observing the plot create and object named `penguin_title` using `.TitleParams()`. In this method you will need to specify an insightful title, and subtitle, give the title a fontsize of 18, and set the subtitle colour to `firebrick`.
+- Remove emove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method. 
+
+<codeblock id="05_07">
+
+- Are you setting `alt.Y('species', title=None)` in the base plot?
+- Are you setting `alt.X('count()', title='something'` in the base plot?
+- In the text plot, are you coding `.mark_text(align='center', dx=10)`?
+- In the text plot, are you specifying `alt.Text('count()'`?
+- for the titles formatting are you making sure to use the arguments `subtitle`, `fontSize` and `subtitleColor`?
+
+
+</codeblock>
+
+
+</exercise>
+
+<exercise id="12" title="Effective Use of Colour for Categorical Data" type="slides,video">
 <slides source="module5/module5_04" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
-<exercise id="15" title="Effective use of color for quantitative data" type="slides,video">
+
+<exercise id="13" title="True or False: These Statement are Either Black or White">
+
+
+**True or False**       
+*It's important to set your work apart and demonstate creativity by creating your own colour scheme.*
+
+
+<choice id="1" >
+
+<opt text="True">
+
+It's often better to use colour schemes designed by experts in a way to be easy to tell apart and in most cases also suitable for people with color vision deficiencies.
+
+</opt>
+
+<opt text="False"  correct="true">
+
+🎉.
+
+</opt>
+
+
+</choice>
+
+**True or False**       
+*Adding an additional channel like "shape" to an exisiting column mapping, is often recommended to help people with color vision deficiences.*
+
+<choice id="2" >
+
+<opt text="True"  correct="true">
+
+Yes! If you want to add a colour mapping of a column, it's often a good idea to add the same mapping to an additional channel. 
+
+</opt>
+
+<opt text="False" >
+
+Is using only a colour mapping inclusive to people who can't interprete them?   
+
+</opt>
+
+</choice>
+
+</exercise>
+
+
+<exercise id="14" title="Transformations and presentations">
+
+**Question 1**      
+When is it a good idea to use custom colour schemes?
+
+<choice id="1" >
+<opt text="When colours are already naturally associated with certain categories or values."  correct="true">
+
+Cool!
+
+</opt>
+
+<opt text="When it helps demonstrates your creativity and coding ability.">
+
+Using custom colours may actually do the oposite in this case.
+
+</opt>
+
+<opt text="When you don't like the pre-existing colour schemes.">
+
+There's gotta be at least one scheme you like!
+
+</opt>
+
+
+<opt text="When you want to colour coordinate with your company's logos.">
+
+I can understand this one but not necessarily the number one reason.
+
+</opt>
+
+</choice>
+
+
+**Question 2**      
+A around how many colour hues is it a good rule of thumb to reconsider colour as an effective channel to represent your data?
+
+
+<choice id="2" >
+<opt text="3" >
+
+Maybe a little higher.
+
+</opt>
+
+<opt text="5" correct="true">
+Nice :)!
+
+</opt>
+
+<opt text="10">
+
+Can you differential between 10 different colours easily?
+
+</opt>
+
+<opt text="20">
+
+20 colours seems like a lot!
+
+</opt>
+
+
+</choice>
+
+</exercise>
+
+<exercise id="15" title="Colouring Between the Lines!">
+
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+The [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) that we seen time and time again is going to help us practice with formatting in this question.
+
+<codeblock id="penguins">
+
+</codeblock>
+
+
+For this question let's create a stacked histogram of the values in the `culmen_depth_mm` column for different penguin species.
+
+***([Culmen](https://allisonhorst.github.io/palmerpenguins/articles/articles/art.html): the upper ridge of a bird's beak)***
+
+Tasks: 
+
+Fill in the blanks in the code below so that the following gets accomplished.
+
+
+- In a plot named `base`, use the data source `penguins_df` to make a histogram of the different quantities of penguin species in the data. 
+- Map the species on the y-axis and the count on the x-axis. 
+- In the base plot make sure to give a label to the x axis. Since the species is categorical, do not set a label for the y-axis.
+- Display the base plot and take a look at what it's communicating.
+- Create text by using `mark_text()` and save this in an object named `text`. It should have the same x and y mapping as the base plot but this time you want to make sure the count is displayed on the side of each species bar. Make sure it's centered in alignment and located at `dx=10`.
+- After observing the plot create and object named `penguin_title` using `.TitleParams()`. In this method you will need to specify an insightful title, and subtitle, give the title a fontsize of 18, and set the subtitle colour to `firebrick`.
+- Remove emove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method. 
+
+<codeblock id="05_07">
+
+- Are you setting `alt.Y('species', title=None)` in the base plot?
+- Are you setting `alt.X('count()', title='something'` in the base plot?
+- In the text plot, are you coding `.mark_text(align='center', dx=10)`?
+- In the text plot, are you specifying `alt.Text('count()'`?
+- for the titles formatting are you making sure to use the arguments `subtitle`, `fontSize` and `subtitleColor`?
+
+
+</codeblock>
+
+
+</exercise>
+
+<exercise id="16" title="Effective use of color for quantitative data" type="slides,video">
 <slides source="module5/module5_05" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
-<exercise id="19" title="Using color to highlight data" type="slides,video">
+
+<exercise id="20" title="Using color to highlight data" type="slides,video">
 <slides source="module5/module5_06" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
+
 
 <exercise id="25" title="What Did We Just Learn?" type="slides, video">
 <slides source="module5/module5_end" shot="0" start="04:5307" end="05:5911"></slides>
