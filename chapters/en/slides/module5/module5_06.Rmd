@@ -1,0 +1,288 @@
+---
+params:
+  dynamictitle: "module5_06"
+title: "`r params$dynamictitle`"
+output:
+  md_document:
+    variant: gfm
+    pandoc_args: "--markdown-headings=atx"
+---
+
+```{r setup, include=FALSE}
+source('../../../../slide-setup.R')
+# Remember to also manually update the YAML title above
+```
+
+type: slides
+
+
+# Annotating with text and color
+
+Notes:
+In this module we will be learning how to use color and text
+to annotate our visualizations
+and highlight important features.
+
+---
+
+## Understanding the periodic variations in the Wikipedia donations
+
+```{python}
+# TODO save wrangled data?
+import pandas as pd
+import altair as alt
+from vega_datasets import data
+
+donations = (
+    pd.read_csv("https://frdata.wikimedia.org/donationdata-vs-day.csv", parse_dates=['date'])
+    .query('2020 < date < 2021')
+    .assign(week_day=lambda df: df['date'].dt.day_name().str[:3]))
+
+alt.Chart(donations, title='Wikipedia donations peak during Christmas').mark_line().encode(
+    alt.X('date', title=None),
+    alt.Y('sum', axis=alt.Axis(format='$s'), title='Amount donated per day'))
+```
+
+Notes:
+Recall this plot of Wikipedia donations from a previous slide deck in this module.
+We noted that the oscillating pattern might indicate 
+a dependency on a periodic date feature,
+such as weekday or day of the month.
+
+---
+
+## Most contributions are donated in the middle of the week
+
+```{python}
+from calendar import day_abbr
+
+
+alt.Chart(donations).mark_bar().encode(
+    alt.Y('week_day', sort=list(day_abbr), title=None),
+    alt.X('sum(sum)', axis=alt.Axis(format='$s'), title='Total donated amount'))
+```
+
+Notes:
+Here we are using the built-in calendar module
+to get a sorted list of the weekday abbreviations,
+but we could also have written it out by hand.
+
+We can see that most contributions seem to be donated in the middle of the week
+and the Wed stands out as the day
+where the highest amount of money is donated.
+
+To draw additional attention to this bar,
+we could use color to highlight it.
+
+---
+
+## Color can be used to highlight specific features of a visualization
+
+```{python}
+alt.Chart(donations).mark_bar().encode(
+    alt.Y('week_day', sort=list(day_abbr), title=None),
+    alt.X('sum(sum)', axis=alt.Axis(format='$s'), title='Total donated amount'),
+    color = alt.condition(alt.datum.week_day == 'Wed',
+                          alt.value('coral'),
+                          alt.value('steelblue')))
+```
+
+Notes:
+To add a highlight color,
+we could create a new column in our dataframe
+that has a unique value for the bars we want to highlight
+and the same value for everything else.
+
+Then we could use this
+as a categorical column
+to color by via the `color` encoding.
+
+The downside of this is that we need to modify the dataframe,
+which might not always be desired.
+It is also clunky when we are computing an aggregation in Altair,
+such as using this `sum` here,
+and we would need to recompute this in pandas.
+
+Because of these inconveniences,
+it is often preferred to use the built-in Altair approach for highlighting
+by passing a conditional encoding to the `color` parameter of the chart
+as we do in this slide.
+
+Conceptually,
+you can think of `alt.condition` like this:
+`alt.condition(IF this is true, DO this, ELSE DO this)`.
+
+So here we are checking if the `week_day` column has the value `'Wed'`,
+and if it does we use the `'coral'` color,
+otherwise we use the default `'steelblue'` color.
+
+We need to `alt.value` to tell Altair that we want to use this specific color name,
+rather than looking for a column in the dataframe with this name.
+
+`alt.datum` is a way to unambiguously access a column name in conditional statements
+and other Altair computations,
+so that it is not confused for just that string of letters.
+
+---
+
+## Text labels can be added with custom annotations
+
+```{python}
+chart = alt.Chart(donations).mark_bar().encode(
+    alt.Y('week_day', sort=list(day_abbr), title=None),
+    alt.X('sum(sum)', axis=alt.Axis(format='$s'), title='Total donated amount'),
+    color = alt.condition(alt.datum.week_day == 'Wed',
+                          alt.value('coral'),
+                          alt.value('steelblue')))
+(chart 
+ + chart
+ .mark_text(align='left', dx=-125, dy=-15)
+ .encode(text=alt.condition(alt.datum.week_day == 'Wed', alt.value('Salaries are paid on Wed'), alt.value(''))))
+```
+
+Notes:
+We can add a custom text annotation to the plot
+in the same way that we added a custom color.
+This could be an explanatory label,
+for example when an event happened on a time axis,
+or as the label that we made up for this chart.
+
+We use `dx` and `dy` to position the label
+relative the top of the bar.
+
+---
+
+## Text labels of the values can be added to each bar to facilitate reading the exact value
+
+```{python}
+chart + chart.mark_text(align='left').encode(text='sum(sum)')
+```
+
+Notes:
+As we saw in a previous slide deck,
+it is possible to add text annotations directly on the plots.
+
+This is beneficial when we want to communicate the exact value to our audience,
+and can give the plot a different look and feel.
+
+The default formatting is not very easy to read,
+so let's use what we learned previously to reformat the label
+and make this chart more effective.
+
+---
+
+## Text marks can be formatted in the same manner as axes labels
+
+```{python}
+chart + chart.mark_text(align='left', dx=2).encode(text=alt.Text('sum(sum)', format='$,d'))
+```
+
+Notes:
+`alt.Text` uses the `format` parameter directly instead of within `alt.Axis`.
+Here we add a thousands separator (`,`)
+and round the values to integers (`d`) to remove the decimals.
+
+We also use `dx` to indtroduce some whitespace
+between the bar and the label.
+
+This makes the labels easier to read,
+but since we have thousands of thousands,
+we could simplify further by using the millions suffix.
+
+---
+
+## Standard international units can shorten labels of large values
+
+```{python}
+chart + chart.mark_text(align='left', dx=2).encode(text=alt.Text('sum(sum)', format='$.3~s'))
+```
+
+Notes:
+The `s` format string changes the values to millions
+as per the standard international units convention
+that we discussed earlier.
+
+We use `.3` to indicate that we want three significant digits for each label,
+otherwise they would all be printed with six decimals or so,
+which is hard to read.
+
+We also specify `~`,
+which removes trailing zero,
+e.g. the top bar says `15` instead of `15.0`.
+
+---
+
+## The redundant x-axis can be removed
+
+```{python}
+title = alt.TitleParams(
+    text='Wikipedia receives most donations on Wednesdays',
+    subtitle='Values represent the total amount donated in 2020',
+    anchor='start', dx=26, dy=-5)
+chart = alt.Chart(donations, title=title).mark_bar().encode(
+    alt.Y('week_day', sort=list(day_abbr), title=None),
+    alt.X('sum(sum)', axis=None),
+    color = alt.condition(alt.datum.week_day == 'Wed',
+                          alt.value('coral'),
+                          alt.value('steelblue')))
+(chart + chart.mark_text(align='left', dx=2).encode(text=alt.Text('sum(sum)', format='$.3s'))).configure_view(strokeWidth=0)
+```
+
+Notes:
+We can make our chart stand out by styling it further.
+Here we remove the x-axis,
+which is now redundant
+as we have included its information directly in the text annotations.
+
+We add a title to the plot with the take home message
+and explain what the values are in the subtitle.
+We anchor the title to the start (left) of the plot
+and use `dx` to align it with the bottom of the bars 
+since this often looks more visually appealing for horizontal bar chart.
+
+We use `dy` to add additional whitespace between the subtitle and the topmost bar
+and remove the grey ourline by setting the `strokeWidth` to 0.
+
+---
+
+## Themes can be used to change the overall styling of the chart
+
+```{python}
+alt.themes.enable('dark');
+((chart
+ + chart
+  .mark_text(align='left', dx=2)
+  .encode(text=alt.Text('sum(sum)', format='$.3s')))
+ .configure_view(strokeWidth=0)
+ .configure_title(subtitleColor='white'))
+```
+
+Notes:
+To style multiple visual components of our charts in the same command,
+we can use the built-in themes in Altair.
+Here we set the theme to dark,
+which automatically changes the color of the y-axis labels and chart title.
+
+Unfortunately,
+the subtitle color does not yet change automatically,
+so we need to change this manually.
+
+We could have rewritten the entire plot from last slide
+and added `subtitleColor` to `alt.TitleParams`,
+but here we use `configure_title` instead.
+
+The `configure_*` chart methods are useful when 
+we want to make a modification to an already existing chart
+without copying and pasting all the code,
+but in general it is preferred to change these parameters direclty in the main chart code instead
+([you can read this section of the docs to find out more](https://altair-viz.github.io/user_guide/customization.html#user-guide-customization)].
+
+All the available themes can be shown with `alt.themes.names()`,
+and currently they are
+`['dark', 'default', 'fivethirtyeight', 'ggplot2', 'latimes', 'none', 'opaque', 'quartz', 'urbaninstitute', 'vox']`.
+
+---
+
+# Let's apply what we learned!
+
+Notes: <br>
