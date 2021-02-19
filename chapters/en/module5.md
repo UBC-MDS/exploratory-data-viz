@@ -340,8 +340,7 @@ For this question let's create a stacked histogram of the values in the `culmen_
 
 Tasks: 
 
-Fill in the blanks in the code below so that the following gets accomplished.
-
+Fill in the blanks in the code below so that the following gets accomplished:
 
 - In a plot named `base`, use the data source `penguins_df` to make a histogram of the different quantities of penguin species in the data. 
 - Map the species on the y-axis and the count on the x-axis. 
@@ -354,7 +353,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 <codeblock id="05_07">
 
 - Are you setting `alt.Y('species', title=None)` in the base plot?
-- Are you setting `alt.X('count()', title='something'` in the base plot?
+- Are you setting `alt.X('count()', title='something')` in the base plot?
 - In the text plot, are you coding `.mark_text(align='center', dx=10)`?
 - In the text plot, are you specifying `alt.Text('count()'`?
 - for the titles formatting are you making sure to use the arguments `subtitle`, `fontSize` and `subtitleColor`?
@@ -503,7 +502,7 @@ You are right that it's a method but not the correct one.
 
 </exercise>
 
-<exercise id="11" title="Using Transformations in action!">
+<exercise id="11" title="Using Transformations in Action!">
 
 
 **Instructions:**    
@@ -513,41 +512,115 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-The [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) that we seen time and time again is going to help us practice with formatting in this question.
+This variation of the [Phillipino dataset originally from Kaggle](https://www.kaggle.com/grosvenpaul/family-income-and-expenditure) shows the income and expenditure (in PHP) of residents in the Philippine.
 
-<codeblock id="penguins">
+<codeblock id="income_exp">
 
 </codeblock>
 
 
-For this question let's create a stacked histogram of the values in the `culmen_depth_mm` column for different penguin species.
-
-***([Culmen](https://allisonhorst.github.io/palmerpenguins/articles/articles/art.html): the upper ridge of a bird's beak)***
+First let's just plot the income vs education expenditure with no transformations. Let's make sure we are formatting the axes correctly and determine if we can make any conclusions regarding the relationship between the two variables.
 
 Tasks: 
 
-Fill in the blanks in the code below so that the following gets accomplished.
+Fill in the blanks in the code below so that the following gets accomplished:
 
+- In a plot named `income_plot`, use the data source `income_df` to make a scatterplot. 
+- Map the `tot_income` on the x-axis and `education_expenditure` on the y-axis. 
+- Set the opacity of the points to 0.5 and size to 10.
+- Make sure to give the x and y-axis labels (with units) and the plot a title.
+- The x and y-axis values should have SI-units. 
 
-- In a plot named `base`, use the data source `penguins_df` to make a histogram of the different quantities of penguin species in the data. 
-- Map the species on the y-axis and the count on the x-axis. 
-- In the base plot make sure to give a label to the x axis. Since the species is categorical, do not set a label for the y-axis.
-- Display the base plot and take a look at what it's communicating.
-- Create text by using `mark_text()` and save this in an object named `text`. It should have the same x and y mapping as the base plot but this time you want to make sure the count is displayed on the side of each species bar. Make sure it's centered in alignment and located at `dx=10`.
-- After observing the plot create and object named `penguin_title` using `.TitleParams()`. In this method you will need to specify an insightful title, and subtitle, give the title a fontsize of 18, and set the subtitle colour to `firebrick`.
-- Remove emove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method. 
+<codeblock id="05_11a">
 
-<codeblock id="05_07">
-
-- Are you setting `alt.Y('species', title=None)` in the base plot?
-- Are you setting `alt.X('count()', title='something'` in the base plot?
-- In the text plot, are you coding `.mark_text(align='center', dx=10)`?
-- In the text plot, are you specifying `alt.Text('count()'`?
-- for the titles formatting are you making sure to use the arguments `subtitle`, `fontSize` and `subtitleColor`?
-
+- Are you setting `alt.X('tot_income', axis=alt.Axis(format='s'), title='Income (PHP)'))`?
+- Are you setting `alt.Y('education_expenditure', axis=alt.Axis(format='s'), title='Education expenditure (PHP)')`?
+- Are you using `.mark_circle()`?
+- Are you setting `opacity=0.5, size=10` within `.mark_circle()`?
 
 </codeblock>
 
+It's difficult to draw any clear conclusion on the relationship between these two variables. It might be helpful to transform these axes. 
+
+**Question**      
+Which type of transformation do you think would be best fitting here?
+
+
+<choice id="1" >
+<opt text="Logarithmic" >
+
+Are you sure? Some people may spend 0 PHP on education.
+
+</opt>
+
+<opt text="Symmetric Logarithmic" correct="true">
+
+You got it! `Symlog` is best here since some people spend 0 PHP on education. 
+
+</opt>
+
+<opt text="Exponential"  >
+
+Maybe it's a good idea to refer to the notes. 
+
+</opt>
+
+<opt text="Absolute Value">
+
+It doesn't make sense to have negative income or expenditures in this situation. 
+
+</opt>
+
+</choice>
+
+
+Let's transform the axes now!
+
+Tasks: 
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+- In a new plot named `income_log_plot` create a new scatter plot similarly to what we did before. 
+- Map the `tot_income` on the x-axis and `education_expenditure` on the y-axis. 
+- Set the opacity of the points to 0.5 and size to 10.
+- Make sure to give the x and y-axis labels (with units) and the plot a title.
+- The x and y-axis values should have SI-units. 
+- **This time, transform both the x and y-axes with the appropriate transformation we answered from the multiple choice question above.** 
+
+<codeblock id="05_11b">
+
+- Are you setting `alt.X('tot_income', axis=alt.Axis(format='s'), title='Income (PHP)'), scale=alt.Scale(type='symlog'))`?
+- Are you setting `alt.Y('education_expenditure', axis=alt.Axis(format='s'), title='Education expenditure (PHP)', scale=alt.Scale(type='symlog'))`?
+- Are you using `.mark_circle()`?
+- Are you setting `opacity=0.5, size=10` within `.mark_circle()`?
+
+</codeblock>
+
+
+**Question**      
+What type of relationship is there between income and education expenditure now?
+
+
+<choice id="2" >
+<opt text="Positive" correct="true">
+
+There appears to be an upward slope between the datapoints. 
+
+</opt>
+
+<opt text="Negative" >
+
+Are you sure here?
+
+</opt>
+
+<opt text="No Relationship"  >
+
+There appears to be some sort of relationship between the variables!
+
+</opt>
+
+</choice>
 
 </exercise>
 
@@ -692,7 +765,7 @@ For this question let's create a stacked histogram of the values in the `culmen_
 
 Tasks: 
 
-Fill in the blanks in the code below so that the following gets accomplished.
+Fill in the blanks in the code below so that the following gets accomplished:
 
 
 - In a plot named `base`, use the data source `penguins_df` to make a histogram of the different quantities of penguin species in the data. 
@@ -706,7 +779,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 <codeblock id="05_07">
 
 - Are you setting `alt.Y('species', title=None)` in the base plot?
-- Are you setting `alt.X('count()', title='something'` in the base plot?
+- Are you setting `alt.X('count()', title='something')` in the base plot?
 - In the text plot, are you coding `.mark_text(align='center', dx=10)`?
 - In the text plot, are you specifying `alt.Text('count()'`?
 - for the titles formatting are you making sure to use the arguments `subtitle`, `fontSize` and `subtitleColor`?
