@@ -307,7 +307,8 @@ color schemes include temperature, correlations, and differences, where
 zero often can be a natural midpoint.
 
 Here we are plotting data from the last few years of the average daily
-temperature (C) in Toronto, Canada.
+temperature (C) in Toronto, Canada [downloaded from
+weatherstats.ca](https://toronto.weatherstats.ca/download.html).
 
 As you can see, a sequential color scheme can be used to visualize this
 data, but it does not get a good sense for when the temperature was
