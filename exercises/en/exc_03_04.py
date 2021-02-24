@@ -4,7 +4,7 @@ import pandas as pd
 
 penguins_df = pd.read_csv('data/penguins.csv').dropna(subset=['sex'])
 
-culmen_stacked_plot = ___.___.encode(
+culmen_stacked_plot = ___.___.___.encode(
     alt.X(___),
     alt.Y(___),
     color=___
