@@ -1,11 +1,10 @@
 ---
 params:
-  dynamictitle: "module1_03"
+  dynamictitle: "module1_02"
 title: "`r params$dynamictitle`"
 output:
   md_document:
     variant: gfm
-    pandoc_args: "--markdown-headings=atx"
 ---
 
 ```{r setup, include=FALSE}
@@ -13,27 +12,488 @@ source('../../../../slide-setup.R')
 # Remember to also manually update the YAML title above
 ```
 
+
 type: slides
 
-# Aggregations, lines, and layers
+
+# How Can We Visualize Data?
 
 Notes:
-In this slide deck we will see how to aggregate data in Altair
-(to plot the mean, median, etc),
-how to create lineplots via `mark_line()`,
-and how to combine line and point plots together
-via layers.
+
+<br>
+
 
 ---
 
-## Including all the data can hinder visualization of general trends
+When learning about data visualization, it is helpful to distinguish between:
+
+- Imperative and, 
+- Declarative 
+
+plotting packages.
+
+Notes: 
+
+There is a plethora of visualization packages in Python.
+
+This rich selection can be beneficial
+but it is also confusing,
+especially when starting out and trying to decide which package to choose.
+
+When learning about data visualization,
+it is helpful to distinguish between *imperative* and *declarative* plotting packages.
+
+
+---
+
+## Imperative (low level) plotting focuses on plot mechanics
+
+- Focus on plot construction details.
+    - Often includes loops, low-level drawing commands, etc.
+- Specify *how* something should be done
+    - "Draw a red point for every observation that has value X in column A,
+      a blue point for every observation that has value Y in column A, etc."
+- Minute control over plotting details, but laborious for complex visualization.
+
+Notes:
+
+**Imperative** (or **low level**) plotting packages
+focus on plot construction details
+such as *how* to implement the visualization
+in terms of for-loops, low-level drawing commands, etc.
+
+This approach gives us minute control over what is plotted,
+but it becomes quite laborious when we need to plot larger dataframes,
+or create more complex visualizations.
+
+---
+
+<center><table style="width:40%;">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Country</th>
+<th style="text-align: center;">Area</th>
+<th style="text-align: center;">Population</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Russia</td>
+<td style="text-align: right;">17098246</td>
+<td style="text-align: right;">144386830</td>
+</tr>
+<tr class="even">
+<td>Canada</td>
+<td style="text-align: right;">9984670</td>
+<td style="text-align: right;">38008005</td>
+</tr>
+<tr class="odd">
+<td>China</td>
+<td style="text-align: right;">9596961</td>
+<td style="text-align: right;">1400050000</td>
+</tr>
+</tbody>
+</table></center>
+
+
+Notes:
+
+In the example in the next slide,
+we will plot the area and the population
+for the three largest countries in the world
+to see how they compare.
+This is the table we are plotting.
+
+---
+
+## Example of imperative plotting
+
+```python
+# Pseudocode
+colors = ['blue', 'red', 'yellow']
+plot = create_plot()
+for row_number, row_data in enumerate(dataframe):
+    plot.add_point(x=row_data['Area'], y=row_data['Population'], color=colors[row_number])
+```
+
+```{python echo=F}
+import pandas as pd
+import altair as alt
+from io import StringIO
+
+
+data='''
+Country|Area|Population
+Russia|17098246|144386830
+Canada|9984670|38008005
+China|9596961|1400050000
+'''
+
+df = pd.read_table(StringIO(data), sep='|')
+
+(alt.Chart(df).mark_circle(size=200).encode(
+    alt.X('Area'),
+    alt.Y('Population'),
+    alt.Color('Country', legend=None, scale=alt.Scale(range=['steelblue', 'coral', '#FFDB58'])))
+ .configure_axis(grid=False)
+ .configure_view(stroke=None)
+ .save('../../../../static/module1/pseudocode-plot.svg'))
+```
+
+<img src="/module1/pseudocode-plot.svg" alt="" width="52%"></img>
+
+Notes:
+
+
+For this example,
+we will use Python-inspired pseudocode,
+which is code that is made up
+and designed so that it is less complex and easier to read
+than real programming languages.
+
+This helps us focus on understanding the concepts of plotting
+instead of getting hung up on the code syntax details of a particular package.
+
+You can see that an imperative approach to plotting this data
+would be to first create the plot
+and then loop through the dataframe
+to add a point for each country one by one.
+
+To color the points,
+we need to manually create a sequence of colors
+that we can access inside the loop.
+
+The visualization on this page is an example of what a plot could look like
+when run with real code similar to our pseudocode.
+
+You can see that one of the countries is bigger than the others,
+and one of the countries has a much larger population,
+but without seeing the code,
+it is not possible to know which color represent which country.
+
+We could add a legend by creating it explicitly 
+and adding one colored dot per iteration in the loop.
+
+---
+
+## Declarative (high level) plotting focuses on the data
+
+- Focus on data and relationships.
+    - Often includes linking columns to visual channels.
+- Specify *what* should be done
+    - "Assign colors based on the values in column A"
+- Smart defaults gives us what we want without complete control over minor plotting details.
+
+Notes:
+
+**Declarative** (or **high level**) plotting packages
+declare links between dataframe columns and visual channels,
+such as the x-axis, y-axis, color, *etc*.
+
+This means that you can provide a high-level specification
+of *what* you want the visualization to include,
+and the plot details are handled automatically.
+
+In summary, <br>
+declarative visualization tools let you think about **data and relationships**,
+while imperative visualization tools focus on **plot construction details**.
+
+---
+
+## Example of declarative plotting
+
+```python
+# Pseudocode
+point_plot(data=dataframe, x='Area', y='Population', color='Country')
+```
+
+```{python echo=F}
+(alt.Chart(df).mark_circle(size=200).encode(
+    alt.X('Area'),
+    alt.Y('Population'),
+    alt.Color('Country', scale=alt.Scale(range=['steelblue', 'coral', '#FFDB58'])))
+ .configure_axis(grid=False)
+ .configure_view(stroke=None)
+ .save('../../../../static/module1/pseudocode-plot-with-legend.svg'))
+```
+
+<img src="/module1/pseudocode-plot-with-legend.svg" alt="" width="65%"></img>
+
+Notes:
+The visualization on this page is an example of what a plot could look like
+when run with real code similar to our pseudocode.
+
+You will notice that this time the plot also includes a legend
+without us having to create it explicitly,
+which is a common convenience in declarative plotting packages.
+
+---
+
+## A high level grammar of graphics helps us compose plots effectively
+
+- Simple grammatical components combine to create visualizations.
+- Visualization grammars often consist of three main components:
+    1. Create a chart linked to a dataframe.
+    2. Add graphical elements (such as points, lines, etc).
+    3. Encode dataframe columns as visual channels (such as x, etc).
+
+```python
+# Pseudocode
+chart(dataframe).add_points().encode_columns(x='Area', y='Population', color='Country')`.
+```
+
+Notes:
+The declarative plotting concept can be implemented in different ways.
+
+In the previous slide we had a dedicated function for creating the pointplot,
+and there would be a separate function for creating a lineplot, barplot, etc.
+
+With this approach,
+it is often not easy to combine plots together,
+unless there is a specific function for that purpose
+and the three bullets points on this slide
+are all executed by this single function.
+
+Another way to use declarative plotting is via a visualization grammar.
+
+Generally,
+a grammar governs how individual parts come together to compose
+more complex constructs.
+
+For example,
+a linguistic grammar decides how words and phrases can be combined into coherent sentences.
+A data visualization grammar
+determines how to combine individual parts of the plotting syntax
+to create complete visualization.
+
+In the example on this slide,
+you can see that the three bullet points are now broken down into one main
+function to create the chart linked to the data,
+and then we build upon this by adding the graphical elements (`add_points()`)
+and the encoding of the columns to properties of this chart (`encode_columns()`).
+
+By combining these three grammatical components in different ways,
+we can build a wide range of visualizations,
+without memorizing a unique function for each plot type.
+
+Thanks to this grammatical visualization approach,
+we also only require minimal changes to our code
+to change the type of plot.
+
+---
+
+## The Python plotting landscape
+
+<br>
+<br>
+<br>
+
+<img src="/module1/py-plotting-landscape.png" alt="The Python plotting landscape" width="100%"></img>
+
+Notes:
+Now that we know the basic concepts of how data can be visualized,
+let's select a Python package and get coding!
+
+In this image you can see the most commonly used Python plotting packages.
+
+There are many more,
+but these are the ones you are the most likely to hear about,
+so it is good to know that they exist.
+
+The text to the left in the image is a legend
+to explain the colors used for the different Python packages
+(blue for high level, declarative packages
+and orange for low level, imperative packages).
+
+We have also included some of the most common visualization packages for the web
+which are build in Javascript and colored in white,
+more on these in the next paragraph.
+
+As you can see there are several high and low level language,
+so how do we chose?
+
+In this course we will use <a href="https://altair-viz.github.io/" target="_blank">Altair</a>,
+because it is a powerful declarative visualization tool
+with a clear and consistent grammar
+that also allows us to add interactive components to our plots,
+such as tooltips and selections.
+
+The Altair library is a little bit of Python code
+connected to an already existing powerful JavaScript package that is called VegaLite,
+which in turns builds on D3,
+the most dominant visualization package on the web today.
+
+By leveraging these well-established JavaScript visualization packages
+Altair is able to create plots that work natively on the web
+and includes interactive features without reinventing the wheel.
+
+---
+
+## Sample data can be found in Altair's companion package vega_datasets
+
+```{python}
+from vega_datasets import data
+```
+
+```{python}
+cars = data.cars()
+cars
+```
+
+Notes:
+Before we start visualizing data,
+we need to select a dataset and often also a question we want to answer.
+
+Altair works with dataframes in the <a href="http://vita.had.co.nz/papers/tidy-data.html" target="_blank">"tidy"</a> format (which we talked about in the <a href="https://prog-learn.mds.ubc.ca/" target="_blank">Programming in Python for Data Science course</a>),
+which means that they should consist of 
+rows with one **observation** each
+and a set of named data **columns**
+with one feature each
+(you might also have heard these called **fields** or **variables**,
+but we will stick to **columns** for clarity).
+
+In this course,
+we will often use data from the  <a href="https://github.com/vega/vega-datasets" target="_blank">vega-datasets</a> package,
+which has many plot-friendly practice datasets available as Pandas dataframes,
+and can be loaded as demonstrated in this slide.
+We can use these datasets by importing the `data` module
+from the `vega_datasets` packages
+as in this slide.
+Here,
+our data contains the name of different cars
+and some attributes relating to each car.
+There are many interesting questions we could ask from this data set!
+For our first plot,
+let's explore the relationship between how heavy car is
+(the *Weight_in_lbs* column)
+and how good gas mileage it has
+(the *Miles_per_gallon* column).
+
+Before starting to code the visualization,
+take a few seconds and think about
+what you would expect the relationship between these two columns to look like when you plot it.
+
+---
+
+## Adding graphical elements via marks
 
 ```{python}
 import altair as alt
-from vega_datasets import data
 
 
-cars = data.cars()
+alt.Chart(cars).mark_point()
+```
+
+Notes:
+Here we assigned a shorter name (`alt`)
+to the Altair library when importing it
+to save us some typing later.
+The Altair syntax is similar to the grammar of graphics pseudocode
+we saw a few slides ago.
+The fundamental object in Altair is the `Chart`,
+which takes a data frame as a single argument,
+e.g. `alt.Chart(cars)`.
+
+After the chart object has been created,
+we can specify how the graphical element should look
+that we use to visualize the data.
+This is called a graphical *mark* in Altair,
+and in this slide we have used `mark_point()` to show the data as points.
+
+Since we have not specified which columns should be used for the x and y axes,
+we appear to only see one point in this plot
+since all the data is plotted on top of each other in the same location.
+
+---
+
+## Encoding columns as visual channels
+
+### Mapping a dataframe column to the x-scale
+
+```{python}
+alt.Chart(cars).mark_point().encode(
+    x='Weight_in_lbs')
+```
+
+Notes:
+To visually separate the points,
+we can encode columns in the dataframe
+as visual channels,
+such as the axes or colors of the plot.
+Here,
+we *encode* the column `Miles_per_Gallon` as the x-axis.
+For Pandas data frames,
+Altair automatically determines an appropriate data type for the mapped column,
+which in this case is quantitative (or numerical)
+and shows the numbers under the axis.
+
+---
+
+## Mapping a dataframe column to the y-scale
+
+```{python}
+alt.Chart(cars).mark_point().encode(
+    x='Weight_in_lbs',
+    y='Miles_per_Gallon')
+```
+
+Notes:
+By spreading out the data along the both the x and y-axis,
+we can answer our initial question about the relationship between car weight and gas mileage.
+as it appears that the heavier cars are the ones that have the poorest mileage.
+Although we might have expected this to be the case,
+visualizing all the data points also provides
+information on the nature of the relationship between weight and mileage.
+It appears that the xy points don't simply follow a straight line,
+but rather a curved line that where the mileage drop quickly
+when moving away from the lightest cars,
+but then decrease more slowly throughout the remainder of the data.
+
+This rich, easily interpretable display of information
+is one of the main advantages from visualizing data
+and later in the course we will talk more about different type of relationships,
+such as linear, exponential, etc.
+
+---
+
+## Mapping a numerical dataframe column to the color scale
+
+```{python}
+alt.Chart(cars).mark_point().encode(
+    x='Weight_in_lbs',
+    y='Miles_per_Gallon',
+    color='Horsepower')
+```
+
+Notes:
+
+Is there a relationship between horsepower and car weight, or fuel efficiency?
+
+To enrich this display of information further,
+we can colour the points according to a column in the dataframe.
+When we encode a column as the colour channel
+Altair will automatically figure out an appropriate colorscale to use,
+depending on whether the data is numerical, categorical, etc.
+Here we have indicated that we want to colour the points according to the car's horsepower,
+which indicated how powerful its engine is.
+
+We can see that the heavier cars have more powerful engines,
+than the lighter ones,
+but when using colour for a numerical comparison like this,
+makes it is harder to tell whether the relationship follows a straight line 
+or is of another nature,
+so this encoding is mostly useful as an approximate indication of the horsepower.
+
+We can also observe a relationship between the horsepower of a vehicle and the fuel efficiency. It appears thats cars with greater horsepower (the point are a darker shade of blue), are less efficient with their fuel since miles per Gallon is much lower. 
+
+In the net module we will learn more in detail about 
+which encodings are most suitable for different comparisons.
+
+---
+
+## Mapping a categorical dataframe column to the color scale
+
+```{python}
 alt.Chart(cars).mark_point().encode(
     x='Weight_in_lbs',
     y='Miles_per_Gallon',
@@ -41,293 +501,72 @@ alt.Chart(cars).mark_point().encode(
 ```
 
 Notes:
-Throughout this course
-we will explore many different datasets,
-but for now we will stick to the `cars`
-dataset to keep it simple
-and focus on introducing additional Altair functionality.
-
-Let's refresh our memory with this plot from the previous module.
-We noted that it appears that cars differ
-in their weight and mileage
-based on their country of origin.
-At least the American cars appear to stand out,
-but it is difficult to see any differences
-between Europe and Japan.
-
-Visualizing all data points as in this slide
-is helpful to detect patterns in the data.
-But when showing all observations,
-it can be hard to pick up on general trends in the data,
-e.g. if there are any differences in the mean weight
-of cars made in either Japan or Europe.
-To more effectively visualize such general trends in the data,
-we can create plots of statistical summaries,
-such as means and medians.
-In Altair (and pandas) these are refereed to as data aggregations.
-
----
-
-## Data aggregations are built into Altair
-
-```{python}
-alt.Chart(cars).mark_point().encode(
-    x='mean(Weight_in_lbs)',
-    y='mean(Miles_per_Gallon)',
-    color='Origin')
-```
-
-Notes:
-To plot the means of weight and mileage,
-we could use pandas to first calculate the mean values,
-and then plot the resulting dataframe in Altair.
-This is powerful since we can access all aggregations built into pandas,
-but it is a bit verbose for simple common operations, such as the mean.
-
-Fortunately,
-Altair has shortcuts for plotting simple aggregations
-where you provide the name of the aggregation
-together with the name of the column inside a string
-as in the example in this slide.
-[The Altair documentation includes a table
-with all available aggregations](https://altair-viz.github.io/user_guide/encoding.html#binning-and-aggregation).
-
-In this visualization we can detect small differences
-between the means of the Japanese and Europeans cars,
-which was not discernible when we plotted all the points.
-Wether this difference is big enough to reach a different conclusion
-than when inspecting the previous plots
-depends on our application and purpose of the data exploration.
-
----
-
-## Plotting aggregations to visualize trends over time
-
-```{python}
-cars
-```
-
-Notes:
-Aggregations are often helpful when comparing trends over time,
-especially when there are multiple groups in the data.
-In the cars dataset,
-there is a `Year` column,
-indicating when the car was made.
-Often when there is a notion of time in the data,
-it is interesting to see how values in the dataframe changes over time.
-
-In this case,
-we might be interested in knowing whether newer cars
-are more fuel efficient than older ones.
-Presumably they should be,
-but does it differ depending on where the car was made?
-Let's find out!
-
----
-
-## Plotting aggregations to visualize trends over time works well
-
-```{python}
-alt.Chart(cars).mark_point().encode(
-    x='Year',
-    y='mean(Miles_per_Gallon)')
-```
-
-Notes:
-To visualize the mean mileage for each year of all cars,
-we want to perform the aggregation on the `Miles_per_Gallon` column
-while leaving the `Year` column intact.
-As you can see this plot one value (the mean)
-for each year in the dataframe.
-Here we can see that the observations in this dataframe span the years 1970-1982
-and it does indeed look like the mileage is getting better over time
-as we expected!
-
----
-
-## Plotting all data to visualize trends over time is not effective
-
-```{python}
-alt.Chart(cars).mark_point().encode(
-    x='Year',
-    y='Miles_per_Gallon')
-```
-
-Notes:
-As a comparison with the previous slide,
-if we instead of the mean would plot all the data points for each year,
-it would be much more difficult to see the pattern over time
-as you can see here.
-
----
-
-## Plotting points to visualize trends over time is not ideal
-
-```{python}
-alt.Chart(cars).mark_point().encode(
-    x='Year',
-    y='mean(Miles_per_Gallon)',
-    color='Origin')
-```
-
-Notes:
-If we try to explore the mileage over time
-while grouping the cars according their origin,
-it is a bit difficult to immediately recognize
-which points belongs to which group.
-In fact,
-using points for visualizing trends is not ideal,
-and lines are often preferred
-as we will see in the next slide.
-
----
-
-## Plotting lines to visualize trends over time is ideal
-
-```{python}
-alt.Chart(cars).mark_line().encode(
-    x='Year',
-    y='mean(Miles_per_Gallon)',
-    color='Origin')
-```
-
-Notes:
-One key advantage of line plots is that they connect
-all the observations that belong to the same group
-presenting them as one unified graphical object (one line),
-which is easy for us to distinguish when looking at the plot
-instead of trying to connect the dots mentally.
-Another advantage is that the slope of the line
-makes it easier to see if the value from one year to another
-is increasing or decreasing.
-
-Altair grammar let's us switch from a point plot to a line plot,
-by only changing `mark_point()` to `mark_line()`,
-and keeping the rest of the code as is.
-
-In this plot we can clearly compare the mileage trends over time
-to conclude that cars from all origins improved their mileage,
-and that the trajectory and mileage values
-are the most similar between Europe and Japan.
-
----
-
-## Combining a line with a set of points via layers
-
-```{python}
-line = alt.Chart(cars).mark_line().encode(
-    x='Year',
-    y='mean(Miles_per_Gallon)')
-
-point = alt.Chart(cars).mark_point().encode(
-    x='Year',
-    y='mean(Miles_per_Gallon)')
-
-line + point
-```
-
-Notes:
-To augment a line plot,
-it is sometimes helpful to add `point` marks for each data point along the line,
-to emphasize where the observations fall.
-This is helpful since the line drawn between points could be misleading
-if we have very few points.
-For example,
-if you see a straight line,
-does that mean there are just two points,
-one in each corner of the line?
-Or are there ten points spread out all along the line?
-
-To combine two different types of graphical marks
-(line and point in this case),
-we will use Altair's *layering* grammar.
+In the previous slide,
+a continuous, gradually increasing colorscale was used
+to visualize the gradual increase in the numerical column `Horsepower`.
 In this slide,
-we start by defining each chart separately:
-first a line plot,
-then a point plot.
-We can then use `+` (plus) operator
-to combine the two into a layered chart.
+we instead chose to color the points per the categorical column `Origin`
+(where the car was made).
+As you can see,
+Altair detects that this column contains categorical data
+(with the help of pandas)
+and picks a different colorscale to facilitate distinction between the categories.
+As in the previous slide,
+Altair automatically adds a helpful legend,
+and we can see that the heavier, more powerful cars are primary manufactured in the US,
+while the lighter more fuel efficient ones are manufactured in Europe and Japan
+(remember that this is true for this particular dataset,
+and not necessarily all cars).
 
 ---
 
-## Building upon previous plots can save time when combining charts
+## Mapping a dataframe column to the shape scale
 
 ```{python}
-line = alt.Chart(cars).mark_line().encode(
-    x='Year',
-    y='mean(Miles_per_Gallon)')
-
-line + line.mark_point()
+alt.Chart(cars).mark_point().encode(
+    x='Weight_in_lbs',
+    y='Miles_per_Gallon',
+    color='Origin',
+    shape='Origin')
 ```
 
 Notes:
-We can also create a layered plot
-by reusing a previous chart definition.
-Rather than creating the point plot from scratch,
-we can start with the line plot,
-and then invoke the `mark_point` method.
-We could also have typed `mark_line(point=True)`,
-which is a special case for getting points on a line
-since it is such a common operation,
-but the layering grammar extends to other plots,
-so it is more helpful to focus on learning that.
+Although Altair's colorscales are designed to be effective and easy to interpret,
+we can make the categories in our plot even more distinct
+by encoding the same categorical column as both color and shape.
+This is also makes visualizations much easier to interpret understand
+for anyone with visual color deficiency
+(about 10% of the population).
+We will talk more in depth about color theory in a later module.
 
 ---
 
-## Showing raw values together with the mean is often helpful
+## Mapping a dataframe column to the size scale
+
 
 ```{python}
-line = alt.Chart(cars).mark_line().encode(
-    x='Year',
-    y='mean(Miles_per_Gallon)')
-
-line + line.mark_point().encode(y='Miles_per_Gallon')
-```
-
-
-Notes:
-When we are combing plots in layers,
-we can not only change the mark,
-but also the encodings.
-This way,
-we can create a layer with one point per observations,
-and with a line for the average values.
-For this we need to use `encode` again
-after creating the first plot,
-to instruct Altair to use the raw vales
-instead of the mean for the points.
-(note that the axis now has two labels,
-we will see how to change that in a future lecture).
-
-This type of visualization is helpful when we want to show
-both the underlying data and a statistical summary,
-which is often helpful for elucidating what the data tells us.
-It is also a good check to make sure nothing unexpected is
-going on with the raw values as we saw in the introductory example with Anscombe's quartet.
-
----
-
-## All encodings of the base chart are propagated unless they are overwritten
-
-```{python}
-line = alt.Chart(cars).mark_line().encode(
-    x='Year',
-    y='mean(Miles_per_Gallon)',
-    color='Origin')
-
-line + line.mark_point().encode(y='Miles_per_Gallon')
+alt.Chart(cars).mark_point().encode(
+    x='Weight_in_lbs',
+    y='Miles_per_Gallon',
+    color='Origin',
+    shape='Origin',
+    size='Horsepower')
 ```
 
 Notes:
-We have already seen that the x and y encoding remain the same
-in any subsequently created plots.
-Here,
-we're showing that this also applies to the color encoding
-to illustrate that any encoding
-will be propagated to all layers
-unless they are specifically overwritten.
-If we would only have added color to the point chart,
-there would still have been a single line instead of three.
+Sometimes a visualization tries to do too much.
+In this example,
+we have added the size channel
+to indicate the engine power.
+Although Altair elegantly handles the dual legends,
+it is difficult for us to discern useful information from this plot.
+If you go back to the plot where we encoded weight in the color channel,
+you can see that the plot is much clearer.
+Later we will learn more about how to efficiently load a visualization
+with an appropriate amount of information,
+and what the research indicates
+regarding which visual channels are the most efficient
+for communicating information visually.
 
 ---
 
