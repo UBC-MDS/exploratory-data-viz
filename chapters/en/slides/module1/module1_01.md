@@ -6,11 +6,15 @@ type: slides
 
 Notes: At its core, data visualization is about representing numbers
 with graphical elements such as the position of a line, the length of a
-bar, or the color of a point. We often visualize data in order to help
-us answer a specific question we have about our dataset, but it can also
-help us generate new questions. In addition to using visualizations to
-explore data ourselves, we can use them to effectively communicate our
-insights to others, as we will learn in later modules of this course.
+bar, or the color of a point.
+
+We often visualize data in order to help us answer a specific question
+we have about our dataset, but it can also help us generate new
+questions.
+
+In addition to using visualizations to explore data ourselves, we can
+use them to effectively communicate our insights to others, as we will
+learn in later modules of this course.
 
 ---
 
@@ -447,27 +451,33 @@ Y
 </tbody>
 </table>
 
-Notes: Why do we need visualizations to help answer our questions? Is it
-not enough to look at numbers in tables?
+Notes: Why do we need visualizations to help answer our questions?
+
+Is it not enough to look at numbers in tables?
 
 To understand why visualizations are so powerful, it is helpful to
 remember that to answer a question, we often have to put the data in a
-format that is easy for us humans to interpret. Because our number
-systems have only been around for about 5,000 years, we need to assert
-effort and train ourselves to recognize structure in numerical data.
+format that is easy for us humans to interpret.
+
+Because our number systems have only been around for about 5,000 years,
+we need to assert effort and train ourselves to recognize structure in
+numerical data.
+
 Visual systems, on the other hand, have undergone refinement during
 500,000,000 years of evolution, so we can instinctively recognize visual
 patterns and accurately estimate visual properties such as colors and
-distances. Practically, this means that we can arrive at correct
-conclusions faster from studying visual rather than numerical
-representations of the same data.
+distances.
+
+Practically, this means that we can arrive at correct conclusions faster
+from studying visual rather than numerical representations of the same
+data.
 
 For example, have a look at the four sets of numbers in the table on the
-slide. This is a slightly modified version of the original, [which was
-put together by statistician Francis Anscombe in the
-70s.](https://en.wikipedia.org/wiki/Anscombe%27s_quartet) Can you see
-the differences in the general trends between these four sets of
-numbers?
+slide. Can you see the differences in the general trends between these
+four sets of numbers? This is a slightly modified version of the
+original,
+<a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank">which
+was put together by statistician Francis Anscombe in the 70s.</a>
 
 ---
 
@@ -658,12 +668,16 @@ std
 
 Notes: Summaries, such as the mean and standard deviation, are helpful
 statistical tools that are often useful for detecting difference between
-datasets. However, since they collapse the data into just a few numbers,
+datasets.
+
+However, since they collapse the data into just a few numbers,
 statistical summaries can’t tell the whole story about the data and
 there can be important differences between datasets that summaries fail
-to reveal. Here, the mean and standard deviation indicate that set C is
-slightly different from the other sets of data in terms of the centre of
-the sample distribution and the spread of that distribution, while the
+to reveal.
+
+Here, the mean and standard deviation indicate that set C is slightly
+different from the other sets of data in terms of the centre of the
+sample distribution and the spread of that distribution, while the
 remaining three sets of data have a similar centre and spread.
 
 ---
@@ -676,16 +690,24 @@ remaining three sets of data have a similar centre and spread.
 
 Notes: Humans are not good at detecting patterns in raw numbers, and we
 don’t have good intuition about how different distributions of data can
-contribute to identical statistical summaries. But guess what we excel
-at? Detecting visual patterns! It is immediately clear to us how these
-sets of numbers differ once they are shown as graphical elements instead
-of textual objects. This is one of the main reasons why data
-visualization is such a powerful tool for data exploration and
-communication. In our example here, we would come to widely different
-conclusions about the behavior of the data for the four different data
-sets. Sets A and C are roughly linearly increasing at similar rates,
-whereas set B reaches a plateau and starts to drop, and set D has a
-constant X-value for all numbers except one big outlier.
+contribute to identical statistical summaries.
+
+But guess what we excel at?
+
+Detecting visual patterns!
+
+It is immediately clear to us how these sets of numbers differ once they
+are shown as graphical elements instead of textual objects.
+
+This is one of the main reasons why data visualization is such a
+powerful tool for data exploration and communication.
+
+In our example here, we would come to widely different conclusions about
+the behavior of the data for the four different data sets.
+
+Sets A and C are roughly linearly increasing at similar rates, whereas
+set B reaches a plateau and starts to drop, and set D has a constant
+X-value for all numbers except one big outlier.
 
 ---
 
@@ -693,15 +715,18 @@ constant X-value for all numbers except one big outlier.
 
 ![](https://blog.revolutionanalytics.com/downloads/DataSaurus%20Dozen.gif)
 
-Matejka and Fitzmaurice, 2017
+<a href="https://www.autodesk.com/research/publications/same-stats-different-graphs" target="_blank">Source:
+Matejka and Fitzmaurice, 2017</a>
 
 Notes: A more recent and dynamic illustration of how graphical
 representations are much easier for us to interpret compared to
-statistical summaries, is the Datasaurus GIF ([from Autodesk’s research
-team](https://www.autodesk.com/research/publications/same-stats-different-graphs))
-in this slide. It displays several different datasets, all with the same
-mean, standard deviation and correlation between X and Y, but looking at
-the data graphically shows us how different these datasets actually are.
+statistical summaries, is the Datasaurus GIF
+<a href="https://www.autodesk.com/research/publications/same-stats-different-graphs" target="_blank">from
+Autodesk’s research team</a> in this slide.
+
+It displays several different datasets, all with the same mean, standard
+deviation and correlation between X and Y, but looking at the data
+graphically shows us how different these datasets actually are.
 
 ---
 
