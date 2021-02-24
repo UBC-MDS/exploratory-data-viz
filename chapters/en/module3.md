@@ -65,8 +65,14 @@ You are on a roll!
 
 <exercise id="3" title="Multple Choice Questions on Single Column Plots">
 
-**Question 1**      
- Why can rugplots be problematic?
+**Question 1**   
+This is a rugplot: 
+
+<center>
+<img src="/module3/rugplot.svg" width="60%"></img>
+</center>
+
+Why can they be problematic?
 
 <choice id="1" >
 <opt text="They can take a lot time to produce.">
@@ -75,7 +81,7 @@ The time it takes to make a plot is more dependent on the amount of data you hav
 
 </opt>
 
-<opt text="They cannot visualize multiple features." >
+<opt text="They visualize too many features at a time." >
 
 Rugplots are mostly used to display a single feature.  
 
@@ -88,7 +94,7 @@ The problem might be that they have too much detail.
 </opt>
 
 
-<opt text="With large quantities of data, They can be very difficult to interpret." correct="true">
+<opt text="With large quantities of data, they can be very difficult to interpret." correct="true">
 
 You got it!
 </opt>
@@ -158,10 +164,18 @@ Let's bring back our [penguins](https://www.kaggle.com/parulpandey/palmer-archip
 
 </codeblock>
 
+The culmen, also sometimes referred to as the bill, is the [upper ridge of a bird's beak](https://allisonhorst.github.io/palmerpenguins/articles/articles/art.html). 
+Below, we've included a diagram made by [Allison Horst](https://twitter.com/allison_horst) which should help give you a bit of an idea of what these values are measuring. 
 
-For this question let's create a stacked histogram of the values in the `culmen_depth_mm` column for different penguin species.
+<center>
+<img src="/module3/penguin_culmen.jpg" width="60%"></img>
+</center>
 
-***([Culmen](https://allisonhorst.github.io/palmerpenguins/articles/articles/art.html): the upper ridge of a bird's beak)***
+The culmen measurements can useful for predicting the sex between penguin species, however it may be interesting to see if it's indicative of species as well!
+
+
+For this question let's create a stacked histogram of the values in the `culmen_depth_mm` column for different penguin species and determine if there is any type of relationship between the culmen depth and the species of penguin. 
+
 
 Tasks: 
 
@@ -235,16 +249,16 @@ Fill in the blanks in the code below so that the following gets accomplished.
 - Use the data source `penguins` to make a **layered** histogram plot and make sure to give it an appropriate opacity.
 - Plot the counts of the `culmen_depth_mm` and distinguish the penguin `species` using the color channel.
 - Make sure to set the `maxbins` argument to something appropriate and any other arguments needed to make a layered plot. 
-- Give it an appropriate title and facet by the `sex` column. 
+- Give it an appropriate title and facet by the `sex` column making sure that there is only 1 columns so the graphs are stacked vertically. 
 - Make sure to give each faceted plot an independent axis.
 
 <codeblock id="03_05">
 
-- Are you setting `opacity=0.4` in `mark_bar()`?
+- Are you setting `opacity=0.5` in `mark_bar()`?
 - Are you setting `alt.X('culmen_depth_mm', bin=alt.Bin(maxbins=30))`?
 - Are you specifying `stack=None` in the `alt.Y()` helper function?
 - Are you setting a title in `properties()`?
-- Are you faceting by `sex` using `.facet('sex')`?
+- Are you faceting by `sex` using `.facet('sex', columns=1)`?
 - Are you giving the plots independent axis with `.resolve_scale(y='independent')`?
 
 </codeblock>
@@ -254,13 +268,13 @@ Fill in the blanks in the code below so that the following gets accomplished.
 For each species of penguin, do the female penguins tend to have less deep culmen?
 
 <choice id="1" >
-<opt text=“Yes” correct=“true”>
+<opt text='Yes' correct=“true”>
 
 It appears that the culmen values for the female penguins on a per species level are lower.
 
 </opt>
 
-<opt text=“No”>
+<opt text='No'>
 
 Why don’t you compare the bars on a per colour basis?
 
@@ -473,8 +487,8 @@ Tasks:
 - Give the area plot an appropriate opacity.
 - Map the `body_mass_g` and the `density` column that was made to the x and y-axis and making sure to specify that `density` is a quantitative variable. 
 - Map the island to the colour (color) channel. 
-- Make sure to give your plot a title and set the width of the plot to 150.
-- Facet the plot by the penguin `species`. 
+- Make sure to give your plot a title and set the width of the plot to 200 and height to 100.
+- Facet the plot by the penguin `species` and display them all in a single column. 
 
 <codeblock id="03_09b">
 
@@ -484,8 +498,8 @@ Tasks:
 - Are you specifying `x='body_mass_g'` or `alt.X('body_mass_g')`?
 - Are you specifying `y='density:Q'` or `alt.Y('density:Q')`?
 - Are you specifying `color='island'` or `alt.Color('island')`?
-- Are you setting a title in `properties()`?
-- Are you faceting with `.facet('species')`?
+- Are you setting a title, height and width in `properties()`?
+- Are you faceting with `.facet('species', columns=1)`?
 
 </codeblock>
 
@@ -495,7 +509,7 @@ Tasks:
 
 Based on the plot we just made, what did we learn?
 
-<choice id="1" >
+<choice id="2" >
 <opt text="The Chinstrap species of penguin is available on Dream and Torgersen island.">
 
 Chinstrap species of penguin is only on Dream island.
@@ -592,15 +606,15 @@ Having a lot of observations has no impact on a density plot.
 
 </opt>
 
-<opt text="The majority of the observations lie to the left of the axis making the values and genres difficult to observe." correct="true">
+<opt text="The majority of the observations lie on the left side of the plot making the values and genres difficult to observe." correct="true">
 
 Got it! 
 
 </opt>
 
-<opt text="Their are too many genres to compare." >
+<opt text="There are too many columns being plotted." >
 
-Too many genres shouldn't cause a problem for observing insights.
+We are only plotting one column from a dataframe so this should not matter.
 
 </opt>
 
@@ -621,26 +635,26 @@ Which of the following statistics is **NOT** displayed in a boxplot?
 <choice id="2" >
 <opt text="Mean" correct="true">
 
-You've got the right argument but the wrong value being set. 
+🎉.
 
 </opt>
 
 <opt text="Maximum">
 
-Nice!
+This is displayed at the end of the top (or right) wisker. 
 
 </opt>
 
 <opt text="Minimum">
 
-I think your argument should be called something else.
+This is displayed at the end of the bottom (or left) wisker. 
 
 </opt>
 
 
 <opt text="Median">
 
-You are extremely close, but no past tense is needed.
+This is what the middle line in the box represents! 
 
 </opt>
 
@@ -685,7 +699,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 </codeblock>
 
 
-**Question**      
+**Question 1**      
 
 Which species of penguin tend to have the most outliers?
 
@@ -710,6 +724,61 @@ The points on either side of the whiskers are indicative of outliers. Does the b
 </opt>
 
 </choice>
+
+**Question 2**      
+
+Which species of penguin tend to have the highest median?
+
+<choice id="2" >
+<opt text="Chinstrap" >
+
+Not quite here. 
+
+</opt>
+
+<opt text="Gentoo" correct="true">
+
+The points on either side of the whiskers are indicative of outliers. Does the boxplot for the Gentoo species have these?
+
+</opt>
+
+<opt text="Adelie" >
+
+Unfortunately not this one!
+ 
+
+</opt>
+
+</choice>
+
+
+**Question 3**      
+
+Which species of penguin tend to lowest maximum?
+
+<choice id="3" >
+<opt text="Chinstrap" correct="true">
+
+Great!
+
+</opt>
+
+<opt text="Gentoo">
+
+This one has the highest actually!
+
+</opt>
+
+<opt text="Adelie" >
+
+Nope!
+ 
+
+</opt>
+
+</choice>
+
+
 </exercise>
 
 

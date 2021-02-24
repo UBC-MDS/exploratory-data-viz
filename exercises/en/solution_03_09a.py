@@ -2,9 +2,9 @@ import altair as alt
 import pandas as pd
 
 
-penguins = pd.read_csv('data/penguins.csv')
+penguins_df = pd.read_csv('data/penguins.csv')
 
-mass_density_plot = alt.Chart(penguins).transform_density(
+mass_density_plot = alt.Chart(penguins_df).transform_density(
      'body_mass_g',
      groupby=['island'],
      as_=['body_mass_g', 'density'],
