@@ -108,7 +108,7 @@ Which plot is most effective in answer the question "Which countries do most NHL
 
 
 <center>
-<img src="/module5/hockey1.svg" width="50%"></img>
+<img src="/module5/hockey1.svg" width="60%"></img>
 </center>
 
 
@@ -116,7 +116,7 @@ Which plot is most effective in answer the question "Which countries do most NHL
 
 
 <center>
-<img src="/module5/hockey2.svg" width="50%"></img>
+<img src="/module5/hockey2.svg" width="60%"></img>
 </center>
 
 
@@ -243,14 +243,10 @@ You got it!
 </choice>
 
 
+
+
 **Question 2**      
-Which title is most appropriate for the plot below?
-
-
-<center>
-<img src="/module5/hockey3.svg" width="50%"></img>
-</center>
-
+To display the full number in the axis tick values instead of scientific notation, we can set `format` in `.Axis()` to which of the following?
 
 
 <choice id="2" >
@@ -283,11 +279,10 @@ Close but not quite here.
 
 
 **Question 3**      
-To display the full number in the axis tick values instead of scientific notation, we can set `format` in `.Axis()` to which of the following )?
-
+Which title is most appropriate for the plot below?
 
 <center>
-<img src="/module5/hockey3.svg" width="50%"></img>
+<img src="/module5/hockey3.svg" width="70%"></img>
 </center>
 
 
@@ -1177,19 +1172,19 @@ Fill in the blanks in the code below so that the following gets accomplished:
 Now we know the month with the highest rainfall collectively, what kind of plot would you expect for snowfall?
 
 <choice id="1" >
-<opt text="A similarly shaped plot" >
+<opt text="A similarly shaped plot." >
 
 If it's raining, it's likely not snowing in Ottawa.
 
 </opt>
 
-<opt text="a plot that looks like the inverse of this one" correct="true">
+<opt text="A plot that looks like the inverse of this one." correct="true">
 
 Nice!
 
 </opt>
 
-<opt text="A uniform looking distribution (all similar argregated values)" >
+<opt text="A uniform looking distribution (all similar argregated values)." >
 
 Snow in July?
 
