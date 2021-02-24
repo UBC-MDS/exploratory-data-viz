@@ -197,7 +197,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 
 **Question**      
 
-Which species of penguin tend to have lower culmen depths?
+Which species of penguin tend to have shallower culmen depths?
 
 <choice id="1" >
 <opt text="Chinstrap">
