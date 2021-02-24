@@ -140,7 +140,7 @@ Nice!
 
 
 <exercise id="4" title="Descriptive Titles and Labels" type="slides,video">
-<slides source="module5/module5_02" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_04" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
 
@@ -369,7 +369,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 </exercise>
 
 <exercise id="8" title="Defining and transforming axis ranges" type="slides,video">
-<slides source="module5/module5_03" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_08" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
 
@@ -629,7 +629,7 @@ There appears to be some sort of relationship between the variables!
 </exercise>
 
 <exercise id="12" title="Effective Use of Colour for Categorical Data" type="slides,video">
-<slides source="module5/module5_04" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_12" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
 
@@ -763,7 +763,7 @@ We are about to talk our typically black and white [penguins](https://www.kaggle
 </codeblock>
 
 
-Let's plot the `culmen_length_mm` and `flipper_length_mm` but this time let's add a colour and shape channel to the species and explore if there are appears to be anything telling. 
+Let's plot the `culmen_length_mm` and `flipper_length_mm` but this time, let's add a colour and shape channel to the species and explore if there are appears to be anything telling. 
 
 Tasks: 
 
@@ -818,15 +818,388 @@ Not this species!
 </exercise>
 
 <exercise id="16" title="Effective Use of Colour for Quantitative Data" type="slides,video">
-<slides source="module5/module5_05" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_16" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
+
+<exercise id="17" title="True or False: Colouring in the Blank">
+
+**True or False**       
+*Some colour palettes and schemes may introduce a bias towards certain insights.*
+
+<choice id="1" >
+
+<opt text="True"  correct="true">
+
+Got it!
+
+</opt>
+
+<opt text="False" >
+
+It's important to be careful since using a palette potentially can cause a slight bias towards seeing groupings where there are none.
+
+</opt>
+
+</choice>
+
+
+**True or False**       
+*When using colour to communicate changes in quantitative data, it's better to use a scale with many different colours and hues.*
+
+
+<choice id="2" >
+
+<opt text="True">
+
+It's often better to use a palette with few colours designed specifically to distinguish a scale or a single colour with different saturations.
+
+</opt>
+
+<opt text="False"  correct="true">
+
+🎉.
+
+</opt>
+
+
+</choice>
+
+</exercise>
+
+
+<exercise id="18" title="Colouring by Numbers Questions">
+
+**Question 1**      
+If you are plotting data for a particular variable where there is no difference in importance between the high and low values, which colour should be assigned to the highest variable given the colours below?
+
+<svg width="20" height="20" ><rect width="20" height="20" style="fill:#440154FF;stroke-width:2;stroke:rgb(0,0,0)" /></svg>  &nbsp; Indigo <br>
+<svg width="20" height="20" ><rect width="20" height="20" style="fill:#30568CFF;stroke-width:2;stroke:rgb(0,0,0)" /></svg>  &nbsp; Blue <br>
+<svg width="20" height="20" ><rect width="20" height="20" style="fill:#55C667FF;stroke-width:2;stroke:rgb(0,0,0)" /></svg>  &nbsp; Green <br>
+<svg width="20" height="20" ><rect width="20" height="20" style="fill:#FDE725FF;stroke-width:2;stroke:rgb(0,0,0)" /></svg>  &nbsp; Yellow
+
+
+
+
+<choice id="1" >
+<opt text="💜- Indigo"  correct="true">
+
+Cool! This is the darkest colour and thus has the largest contrast with the background which gets assigned to the highest values.
+
+</opt>
+
+
+<opt text="🔵 - Blue">
+
+We need to assign the colour with the most contrast to the highest values. Is this the darkest colour?
+
+</opt>
+<opt text="✅ - Green">
+
+We need to assign the colour with the most contrast to the highest values. Is this the darkest colour?
+
+</opt>
+
+
+<opt text="☀️- Yellow">
+
+We need to assign the colour with the most contrast to the highest values. Is this the darkest colour?
+
+</opt>
+
+</choice>
+
+
+**Question 2**      
+Which colour scheme is most appropriate for quantitative data that has a natural midpoint? 
+
+
+<choice id="2" >
+<opt text="Sequential" >
+
+Not quite. There is a better answer. 
+
+</opt>
+
+<opt text="Categorical" >
+This is for categorical data! We asked for quantitative data!
+
+</opt>
+
+<opt text="Diverging" correct="true">
+
+Passing with flying colours!
+
+</opt>
+
+<opt text="Rainbow">
+
+There is no pot of gold at the end of this rainbow. 
+
+</opt>
+
+</choice>
+
+</exercise>
+
+<exercise id="19" title="Playing with Colour">
+
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+The University of British Columbia is based in Vancouver and we are lucky enough to have a relatively mild climate (mild climate, but rainy). This made us think of our country's wonderful capital Ottawa and how they are not so fortunate. This question will be using the data obtained from the [Governement of Canada](https://climate.weather.gc.ca/). The data we have collected is from 2008-2010.
+
+<codeblock id="temperatures">
+
+</codeblock>
+
+ Let's observe and visualize the mean monthly temperature of Ottawa and see if there is any relationship between rainfall, the season and temperature. 
+
+Tasks: 
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+
+- In a plot named `temp_plot`, use the data source `temps_df` to make a scatter plot (`mark_point`) with points that are size 50.
+- Map the date on the x-axis and the total rainfall levels on the y-axis. 
+- Map the mean temperature to a colour channel and select an appropriate [colour scheme](https://vega.github.io/vega/docs/schemes/). Is a diverging or sequential scheme more appropriate?
+- Make sure you are giving the channels all proper labels and the plot a title. 
+- In a plot named `line_plot`, make a line plot mapping the same variables but specify a line size of 1 and a grey colour. 
+
+<codeblock id="05_19">
+
+- Are you using `mark_point(size=50)`?
+- Are you setting `alt.X('date', title="Date"))`?
+- Are you setting `alt.Y('total_rain_mm',title='rainfall total for the month (mm)')`?
+- In the  plot, are you coding `alt.Color('mean_temp', title=' Mean Temperature', scale=alt.Scale(scheme='blueorange'))`?
+- Are you setting a title in `properties()`?
+- In `line_plot` are you specifying `mark_line(size=1, color='grey')`?
+
+</codeblock>
+
+**Question**      
+Do colder months tend to have higher or lower levels of rainfall?
+
+
+<choice id="1" >
+<opt text="Lower"" correct="true">
+
+Cool as a cucumber! 
+
+</opt>
+
+<opt text="Higher" >
+
+Maybe take a look at your graph?
+
+</opt>
+
+</choice>
+
+Can you think of why this might occurs?
+
+</exercise>
 
 <exercise id="20" title="Using Colour to Highlight Data" type="slides,video">
-<slides source="module5/module5_06" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_20" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
 
-<exercise id="25" title="What Did We Just Learn?" type="slides, video">
+<exercise id="21" title="True or False: Colouring in Black or White">
+
+**True or False**       
+*Within the colour channel, we can simply set `color='blue'` or `color='yellow'` if we want a specific plot colour.*
+
+<choice id="1" >
+
+<opt text="True"  >
+
+When using a colour channel, we need to make sure that we use `alt.value('blue')` to specify a colour or Altair will think you are trying to add a variable to a colour channel instead of a static colour. 
+
+</opt>
+
+<opt text="False" correct="true">
+
+Right! When using a colour channel, we need to make sure that we use `alt.value('blue')` to specify a colour. 
+
+</opt>
+
+</choice>
+
+
+**True or False**       
+*An entire aesthetic of a plot can be changed by styling multiple visual components at a time by applying a theme.*
+
+
+<choice id="2" >
+
+<opt text="True" correct="true">
+
+🎉.
+
+</opt>
+
+<opt text="False">
+
+Take a look at the last slide. This is a cool technique to know!
+
+</opt>
+
+
+</choice>
+
+</exercise>
+
+
+<exercise id="22" title="Texting and Selecting">
+
+**Question 1**      
+the `.condition()` Altair method acts like which of the following Python Syntax? 
+
+
+
+<choice id="1" >
+<opt text="A <code>for</code> loop"  >
+
+Not a for loop. What does `.condition()` relate to?
+
+</opt>
+
+<opt text="An if-else statement" correct="true">
+
+You are on a roll!
+
+</opt>
+
+<opt text="the assignment operator">
+
+Nope. Think about the name of the method. 
+
+</opt>
+
+<opt text="A dictionary">
+
+This is a data structure, think about an action that is occurring.
+
+</opt>
+
+</choice>
+
+
+**Question 2**      
+How would we format text on a graph so that it displays ***dollar*** values to 2 significant figures and removes any trailing zeros? <br>
+Which of the following is most appropriate?
+
+
+<choice id="2" >
+<opt text="<code>format='$.2,d'</code>">
+
+This will produce 2 significant figures and will round to the nearest integer.
+
+</opt>
+
+<opt text="<code>format='.2s-'</code>">
+
+This is missing the dollar sign and the `s` is in the wrong location. We also do not use `-` for the removal of trailing zeros.
+
+</opt>
+
+<opt text="<code>format='$.2~s'</code>" correct="true">
+
+🏆.
+
+</opt>
+
+
+<opt text="<code>format='.2~s'</code>">
+
+You are close! You are missing the dollar sign!
+
+</opt>
+
+</choice>
+
+
+
+</exercise>
+
+<exercise id="23" title="Precipitation Contemplation">
+
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+Let's take a look again at the [Government of Canada](https://climate.weather.gc.ca/) data that contains the weather in Ottawa from 2008-2010.
+We left off seeing that precipitation was higher in the hotter months.
+
+<codeblock id="temperatures2">
+
+</codeblock>
+
+For the 3 years of data, Let's find out the total rainfall in each month. So between the years 2008 and 2010, how much precipitation was there in total during all the Januarys, Februarys, etc?  Remember that we will have to aggregate values here. 
+
+Tasks: 
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+
+- In a plot named `rain_plot`, use the data source `temps_df` to make a bar plot.
+- Map the month on the y-axis and the sum of all the precipitation for each month on the x-axis. Print your chart first and examine which month has the most precipitation.
+- Color `rain_plot` by designating a different colour bar to the month with the highest rainfall.
+- Make sure you are giving the x-axis an appropriate label and the plot a title. 
+- In a second plot named `text_plot`, add text to each bar that shows the aggregate precipitation for each month and format it so it includes integer values only. Make sure it is aligned to the left and located 4 units to the right of the bar (use `dx` for this).  Set the text colour as black.
+
+<codeblock id="05_23">
+
+- Are you using `mark_bar()`?
+- Are you setting `alt.X('sum(total_precipitate_mm)', title="Total precipitate per month (mm)")`?
+- Are you setting `alt.Y('month', sort=list(month_name), title=None)`?
+- Are you setting `color=alt.condition(alt.datum.month == 'September', alt.value('colour1'), alt.value('colour2')`?
+- Are you setting a title in `.properties()`?
+- In the text plot, are you coding `mark_text(align='left', dx=5)`?
+- Are you setting ` text=alt.Text('sum(total_precipitate_mm)', format='d')`?
+- Are you setting the colour to black using `color = alt.value('black')`? 
+
+</codeblock>
+
+
+
+**Question**      
+Now we know the month with the highest rainfall collectively, what kind of plot would you expect for snowfall?
+
+<choice id="1" >
+<opt text="A similarly shaped plot" >
+
+If it's raining, it's likely not snowing in Ottawa.
+
+</opt>
+
+<opt text="a plot that looks like the inverse of this one" correct="true">
+
+Nice!
+
+</opt>
+
+<opt text="A uniform looking distribution (all similar argregated values)" >
+
+Snow in July?
+
+</opt>
+
+</choice>
+
+
+</exercise>
+
+<exercise id="24" title="What Did We Just Learn?" type="slides, video">
 <slides source="module5/module5_end" shot="0" start="04:5307" end="05:5911"></slides>
 </exercise>

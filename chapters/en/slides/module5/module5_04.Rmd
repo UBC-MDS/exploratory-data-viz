@@ -1,6 +1,6 @@
 ---
 params:
-  dynamictitle: "module5_04"
+  dynamictitle: "module5_02"
 title: "`r params$dynamictitle`"
 output:
   md_document:
@@ -13,333 +13,384 @@ source('../../../../slide-setup.R')
 # Remember to also manually update the YAML title above
 ```
 
+```{python include=FALSE}
+import pandas as pd
+pd.options.mode.chained_assignment = None
+```
+
 type: slides
 
 
-# Effective use of color for categorical data
+# Descriptive titles and labels
 
 Notes:
-In this slide deck you will learn how to select colors that accurately represents your data
-and effectively communicate it to the reader.
+In this slide deck we will see
+how we can change different aesthetic elements of the plot
+to cater to communication in various settings.
 
 ---
 
-## Color choices can have profound impact on the interpretation of the results
-
-![](/module5/color-importance-vessels.png)
-
-Notes:
-In module 2 we discussed how changing the colorscheme drastically improved a clinical outcome
-by almost doubling physician's detection rate of blodd vessles regions indicative of potential future heart disease 
-(from 40% to 70%).
-
-In this slide deck we will discuss some of the consideration
-that goes into evaluating if a colorscheme (also called a colormap)
-is suitable for the data you are visualizing.
-
----
-
-## Color can be broken down into hue, lightness, and saturation
-
-<center><img src="/module5/hsl-cylinder.png" width="100%"></img></center>
-
-Notes:
-There are several different ways to represent colors.
-You might arleady have heard of RGB (red, green, blue) or CMYK (cyan, magenta, yellow, black)
-where different amount of a set of base colors are combined to create all possible colors.
-
-When discussing colors in the context of data visualization,
-We will be describing them with the parameters "hue", "saturation" and "lightness".
-
-The left schematic in this slide is a 2D circular representation including only hue and saturation.
-When we add lightness this circle grows into cylinder with lightness as the height.
-
-On the next slide we will break down exactly what each of these three parameters represent.
-
----
-
-## Hue, lightness, and saturation describes different properties of colors
-
-<center><img src="/module5/hsl-questions.png" width="70%"></img></center>
-
-Notes:
-We could verbalize the changes we saw in the previous slide in the following manner:
-
-Hue is what we traditionally think of as the “color”, is it red, blue, etc?
-
-Each hue can have a varying saturation, which ranges from a dull, greyish appearance to a vibrant fully saturated hue.
-
-Lightness is how bright the color is. For every hue, it starts at black (no lightness) and ends at white (full lightness).
-
-Hue and lightness are the most important from a data visualization perspective,
-and we use them for categorical and quantitative data, respectively. 
-
-Saturation is often used more as a stylistic choice
-to decide whether the colors we use should be muted/desaturated or vivid/saturated.
-
----
-
-
-## Hues are used to distinguish categorical values
+## Chart titles should convey the main take home message
 
 ```{python}
-# This code cell should be hidden but echo=False does not work with the knitr output hook
 import altair as alt
 from vega_datasets import data
 
-
-cars = data.cars()
-chart = alt.Chart(cars).mark_point(size=50, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
-    color=alt.Color('Origin', title=None))
-
-(chart | chart.encode(alt.Color('Origin', scale=alt.Scale(scheme='blues'), title=None))).resolve_scale(color='independent')
+stocks = data.stocks()
+stock_title = "Google's stock experiencing heavier fluctuations than competitors"
+alt.Chart(stocks, title=stock_title).mark_line().encode(
+    alt.X('date'),
+    alt.Y('price'),
+    color='symbol')
 ```
 
 Notes:
-Hue is useful to distinguish between categories,
-because it is often relatively easy for us to to say that different hues are distinct.
-We can see that blue, orange, red, etc are different and don’t easily mix them up.
+The title of the chart should clearly convey
+the take home message of the figure to the reader.
+It should answer the question you posed before making the visualization.
 
-The leftmost plot uses different hues
-to separate the points belonging to different categories.
-We can quickly identify that there is a tota of three distinct colors being used here
-even without looking at the legend.
+It you made a more general visualization
+or answered multiple questions,
+it is ok with a more general title.
+Note however such general visualizations
+are rarer in communication compared to exploration.
 
-In the plot to the right
-we used lightness within a single hue (blue) to label the different categories.
-Here it is much harder to say how many different categories there are,
-and even when we have the legend,
-it is difficult to tell which points are which shade of blue.
+We could have had a title targeted to a specific time period,
+such as "Google's stock outperforms competitors in 2009",
+but then we might want to narrow down the date region at least a bit.
 
----
-
-## It is often better to use established color schemes instead of making your own
-
-<center><img src=/module5/color-schemes.png></img></center>
-
-Notes:
-There are many different hues we could use to represent our colors
-and some might not go as well together as others,
-so how do we decide which ones to use?
-
-Fortunately,
-we don’t have to design our own combination of colors to use,
-but can pick from combinations designed by experts to be easy to tell apart
-and in most cases also suitable for people with color vision deficiencies.
-
-These color combinations are referred to as color schemes in Altair,
-but you might also hear them being called colormaps or color palettes.
-
-In this slide, you can see some of the color schemes for categorical values
-that are built into Altair.
-
-The default one is “tableau10”
-and it was named this way because it was originally designed by the company Tableau,
-but is now one of the most common categorical color schemes used in data visualization.
-[All Altair color schemes can be viewed here](https://vega.github.io/vega/docs/schemes/).
+A less effective title here would be something like "Stock prices over time",
+which is too general and not very informative.
 
 ---
 
-## Specifying color schemes in Altair
+## Subtitles can provide additional detail
 
 ```{python}
-alt.Chart(cars).mark_point(size=70, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
-    color=alt.Color('Origin', title=None, scale=alt.Scale(scheme='set1')))
+stock_title = alt.TitleParams(
+    "Google's stock experiencing heavier fluctuations than competitors",
+     subtitle = "Prices have been surging since 2009, but have still not reached an all-time high")
+alt.Chart(stocks, title=stock_title).mark_line().encode(
+    alt.X('date'),
+    alt.Y('price'),
+    color='symbol')
 ```
 
 Notes:
-You can change the color scheme of a plot by specifying its name as a string
-to the `scheme` parameter inside `alt.Scale`.
-
-To easier see the changes we are making to the colors,
-we also increase the size of all points 
-via the `size` parameter of the mark.
+If you want to add additional details you can create a subtitle.
+Here we use `TitleParams` to create the main title text and the subtitle
+which we then pass to the `title` parameter in `Chart`.
 
 ---
 
-## Redundant coding can make charts easier to interpret
+## Titles can be aligned according the the presentation context
 
 ```{python}
-alt.Chart(cars).mark_point(size=70, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
-    color=alt.Color('Origin', title=None, scale=alt.Scale(scheme='set1')),
-    shape='Origin')
+stock_title = alt.TitleParams(
+    "Google's stock experiencing heavier fluctuations than competitors",
+     subtitle = "Prices have been surging since 2009, but have still not reached an all-time high",
+     anchor='start')
+alt.Chart(stocks, title=stock_title).mark_line().encode(
+    alt.X('date'),
+    alt.Y('price'),
+    color='symbol')
 ```
 
 Notes:
-Although many of the color schemes in Altair 
-are designed according to the guidelines for effective color uses,
-they can sometimes be difficult to interpret 
-for people with color vision deficiences.
+Depending on the context in which we are presenting the figure,
+it can look more appealing to left align the title.
 
-Esppecially color schemes that mix red and green
-as the one in the previous slide.
-
-In addition to using a more suitable color scheme (such as the default),
-we could also change the shape of the points for each category.
-
-Although this is technically redundant
-since the color is already used for the categorical groups,
-it can make your visualization more effective.
-
-For line plots we could achieve a similar effect via the `strokeDash` encoding
-instead of `shape`,
-which together with direct labeling from the previous slide deck
-can facilitate interpretation of these plots.
+This is done via the `anchor` parameter in Altair.
 
 ---
 
-## Specifying custom colors
+## Breaking titles into multiple line can improve readability
 
 ```{python}
-colors = ['coral', '#4682b4', 'rebeccapurple']
-alt.Chart(cars).mark_point(size=70, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
-    color=alt.Color('Origin', title=None, scale=alt.Scale(range=colors)))
+stock_title = alt.TitleParams(
+    "Google's stock experiencing heavier fluctuations than competitors",
+     subtitle = ["Prices have been surging since 2009", "but have still not reached the same levels as in late 2007."])
+alt.Chart(stocks, title=stock_title).mark_line().encode(
+    alt.X('date'),
+    alt.Y('price'),
+    color='symbol')
 ```
 
 Notes:
-Most of the time it is a good idea to stick to the predefined color scheme
-because of the advantages mentioned in the previous slide.
+If we have a really long title,
+we can improve readability by breaking it into multiple lines.
+Altair converts lists of strings into multiline titles.
 
-However,
-sometimes the categories we are representing might have a color already associated with them,
-such as political parties or sports team.
+The title to this figure does not look great 
+because they go from a wide main title,
+to a narrow first line of the subtitle
+and then another wide line.
 
-In these cases,
-it is often better to design a custom color scheme
-using the colors naturally associated with each category.
-
-In Altair we can create a custom color scheme by passing a list of colors 
-to the `range` parameter of `alt.Scale`.
-
-You can specify colors either by their HTML/CSS name (such as 'coral')
-or their hex code (such as '#4682b4').
-[All HTML/CSS color names can be found in the image in this post](https://stackoverflow.com/a/37232760/2166823).
-
-Hex codes are defines over the range `#000000` for black ("zero color")
-to `#ffffff` for white ("full color")
-and [are easiest chosen via color pickers such as this one](https://colorpicker.me/).
+To make this figure more visually pleasing, 
+we should try to rewrite these titles
+before presenting the figure.
 
 ---
 
-## Don't use more than 5-8 distinct hues for categories
-
-<center><img src=/module5/hue-guidelines.png></img></center>
-
-Notes:
-Although many of the categorical color schemes contain ten or more hues,
-if is often not a good idea to use all that many.
-
-The guidelines on what is too many hues differ between different sources
-and also depends on your use case.
-A good rule of thumb is that when you get to around five different hues,
-you should really consider if this is the best way to represent your data
-or if you could split it up into multiple visualizations instead.
-
-If the data is neatly organized in well-separated clusters,
-it is possible that you could visualize more than five colors
-(maybe even ten) effectively,
-but in data where the datapoints are more mixed,
-you will rarely, if ever, be able to go this high.
-
----
-
-## Too many hues are impossible to distinguish
+## Axis titles should be capitalized proper words
 
 ```{python}
-alt.Chart(cars).mark_point(size=70, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
-    color=alt.Color('Name', title=None))
+alt.Chart(stocks, title=stock_title).mark_line().encode(
+    alt.X('date', title='Date'),
+    alt.Y('price', title='Price (USD)'),
+    color='symbol')
 ```
 
 Notes:
-This is an example of what happens when too many categorical hues are used.
-In this plot,
-we can not separate the colors
-even if we spent a considerable amount of effort studying the chart.
+During EDA,
+axis titles etc don't matter that much,
+since you are the primary person interpreting them
+and it is often clear to you what titles mean
+as long as you have given your dataframe reasonable column names.
 
-As we saw on the last slide,
-categorical color schemes have a limited amount of hues
-so in addition of it being hard to differentiate this many hues in general,
-it become practically impossible in cases
-where there are more categories than coor hues,
-since the color scheme starts repeating as in the chart.
+In communication however,
+your plots need to be interpretable by other people,
+often on their own without your explanation.
+Setting descriptive titles adds significantly to this interpretability.
 
-A better approach here would have been to label specific points of interest directly
-and keeping the rest as either a single color or using a categorical variable with fewer values, e.g. by grouping the cars into brands rather than their full model name.
+Axis titles should be proper words that are descriptive, capitalized, and contain spaces instead of underscores,
+so cryptic lower case column names with underscores
+are not at all effective for communication figures
+and look unprofessional.
 
-Since Altair allows for interactive elements,
-we could also have used the tooltip here as we saw in a previous module.
+Any relevant units of measurement
+can be included in parenthesis to clarify further for the reader
+or as part of the axis label as we will see later.
+
+To set the title for the axes,
+we use the `title` parameter in the axis,
+similar to how we used it in the Chart for the figure title.
 
 ---
 
-## Redundant coding of bar charts can be disorienting
+## Legend and axis titles are often redundant for categorical and temporal variable
 
 ```{python}
-cars['Brand'] = cars['Name'].str.split().str[0]  # Extract brand from name column
-chart = alt.Chart(cars, width=200, height=450).mark_bar().encode(
-    alt.Y('Brand', title=None, sort='x'),
-    alt.X('mean(Horsepower)'))
-alt.hconcat(chart, chart.encode(alt.Color('Brand', legend=None, scale=alt.Scale(scheme='tableau20'))))
+# Assigning to a variable for use in the next slide
+lines = alt.Chart(stocks, title=stock_title).mark_line().encode(
+    alt.X('date', title=None),
+    alt.Y('price', title='Price (USD)'),
+    alt.Color('symbol', title=None))
+lines
 ```
 
 Notes:
-A few slides ago we saw how encoding the same variable as both shape and color
-could make our figures more effective.
+For axis titles that encode a temporal variable
+we rarely need a title
+as it is clear that the x-axis represents time.
 
-Quite frequently,
-you might come across bar charts where the author of the visualization
-has added a distinct color for each bar.
+Similarly,
+axis and legend titles that denote a categorical variable
+are often redundant and it is clear what the categories are.
 
-This can work when there are relatively few bars,
-but it usually does not add anything
-and can become directly disorienting when there are many bars
-as in this slide.
-
-It is usually preferable to color all the bars in the same color
-(or after another categorical variable, such as "Origin" in this data),
-and let the axis labels alone identify which category the bar belongs too.
-
-One exception to this is if each axis label
-is broken down into subcategories
-where each location has multiple bars based on another categorical variable,
-then color can help.
+Thanks to Altair's consistent grammar,
+we change the title of the legend in the same way that we change the axis titles.
 
 ---
 
-## Use consistent coloring between subplots even when it is redundant
+## Direct labeling is often preferred over legend when applicable
 
 ```{python}
-chart = alt.Chart(cars).mark_bar().encode(
-    alt.X('Origin', title=None),
-    alt.Y('mean(Horsepower)'),
-    alt.Color('Origin'))
-alt.hconcat(chart, chart.mark_line().encode(x='Year', strokeDash='Origin'))
+stock_max_date = stocks[stocks['date'] == stocks['date'].max()]
+texts = alt.Chart(stock_max_date).mark_text(align='left', dx=2).encode(
+    x='date',
+    y='price',
+    text='symbol',
+    color='symbol')
+
+lines + texts
 ```
 
 Notes:
+In this graph,
+we could label the lines directly
+instead of relying on the legend text and additional colored lines marks.
 
-When creating a figure that contains several subplots,
-it is important to be consistent in the coloring between these
-even if the coloring is redundant in one of the subplots.
+This has the advantage that
+we don't have to go back and forth between the legend and the plot,
+and avoids issues from matching up the colors incorrectly.
 
-Here we have colored the bars to match the lines
-although we could tell the categories only from reading the axis labels.
+We use `align` to attach the left part of the label to the data point at the end of the line,
+and then `dx` (delta x) to add a little whitespace
+between the label and the end of the line.
 
-It is important to not use different colors for the same categories between subplots.
-For example,
-if we made an additional subplot which only contained Japan and USA,
-then we should make sure that these are still colored in orange and red.
-Since the default Altair color scheme will always start with blue,
-we would need to manually specify the colors in this case.
+---
+
+## To solve overlapping text labels we have to manually specify their position
+
+```{python}
+stock_max_date.loc[stock_max_date['symbol'] == "IBM", 'price'] = 140
+stock_max_date.loc[stock_max_date['symbol'] == "AMZN", 'price'] = 110
+texts = alt.Chart(stock_max_date).mark_text(align='left', dx=2).encode(
+    x='date',
+    y='price',
+    text='symbol',
+    color='symbol')
+
+lines + texts
+```
+
+Notes:
+There is no way to automatically separate the labels in Altair,
+so we have to manually specify new y-axis values for the text of the overlapping labels.
+
+---
+
+## Units can be incorporated directly in the axis labels instead of the axis title
+
+```{python}
+lines = alt.Chart(stocks, title=stock_title).mark_line().encode(
+    alt.X('date', title=None),
+    alt.Y('price', title='Price', axis=alt.Axis(format='$')),
+    color=alt.Color('symbol', legend=None))
+
+lines + texts
+```
+
+Notes:
+Instead of writing measurement units in parenthesis in the axis title,
+they can be incorporated directly in each axis label
+by setting the axis format.
+
+You can see that the dollar sign was prefixed each numerical label on the y-axis,
+but because we overwrote the default formatting of the axis,
+it changed the labels to scientific notation
+instead of standard international units.
+
+TODO I *think* that technically what happens here is that we are overwriting the default in vega/vegalite and falling back to the default in D3, so I am trying to explain that without saying any of those things =)
+
+---
+
+## Axis formatting labels can be combined
+
+```{python}
+lines = alt.Chart(stocks, title=stock_title).mark_line().encode(
+    alt.X('date', title=None),
+    alt.Y('price', title='Closing price', axis=alt.Axis(format='$s')),
+    color=alt.Color('symbol', legend=None))
+
+lines + texts
+```
+
+Notes:
+To revert back to displaying the full number instead of using scentific formatting,
+we can combine the dollar sign with the format string `s`,
+which stands for SI-units.
+
+Now that we have the units in the label,
+the title "Price" appear a bit redundant
+and we can either remove it or (preferably) improve it.
+
+Here we add more detail to indicate that this is the closing price of each stock.
+
+In addition to being used in the x and y axis, 
+axis formatting can be applied to any aspect of Altair that uses `alt.Axis`,
+including legends for colors and sizes.
+
+Other useful format strings include `%` for including a percentage sign,
+`e` to force scientific format,
+`d` to force integer format,
+`~` which removes trailing zeros (e.g. 1.0 becomes 1),
+and `,` which adds a comma as the thousands separator.
+[All labels format strings can be found here](https://github.com/d3/d3-format#locale_format).
+
+---
+
+## The number of axis ticks can be reduced to make the plot less noisy
+
+```{python}
+lines = alt.Chart(stocks, title=stock_title).mark_line().encode(
+    alt.X('date', title=None, axis=alt.Axis(tickCount=3)),
+    alt.Y('price', title='Closing price', axis=alt.Axis(format='$s')),
+    color=alt.Color('symbol', legend=None))
+
+lines + texts
+```
+
+Notes:
+Altair usually picks a suitable number of axis ticks,
+but sometimes we might want to tweak this
+in order to achieve a specific effect,
+such as a more clean looking plot.
+
+Here we reduce the number of ticks along the x-axis
+to only show three of the years.
+Note that Altair will round the number of ticks to a number that works well with your data,
+so you might not always get the exact number you ask for
+(e.g. it wouldn't make much sense to have 4 ticks here
+since that would mean year "2002.5" and "2007.5").
+
+---
+
+## Gridlines can be removed when they are not helpful
+
+```{python}
+lines = alt.Chart(stocks, title=stock_title).mark_line().encode(
+    alt.X('date', title=None, axis=alt.Axis(tickCount=3, grid=False)),
+    alt.Y('price', title='Closing price', axis=alt.Axis(format='$s')),
+    color=alt.Color('symbol', legend=None))
+
+(lines + texts).configure_view(strokeWidth=0)
+```
+
+Notes:
+Gridlines are usually helpful for guiding the eye
+and making exact comparisons
+and as long as they are faint they don't distract from the visual overall.
+
+There are still situations where we might want to remove them.
+
+In our plot on the last slide,
+we might not like the appearance of the single gridline in the middle
+and then reall close to the right axis,
+so we can turn them off with `grid=False`.
+
+To remove the grey box outlining the entire figure,
+we can set the `strokeWidth` of the layered chart.
+
+---
+
+## Font sizes can be adjusted for different communication purposes
+
+```{python}
+stock_title = alt.TitleParams(
+    "Google's stock experiencing heavier fluctuations than competitors",
+     subtitle = "Prices have been surging since 2009 but have still not reached the same levels as in late 2007.",
+     fontSize=18, subtitleColor='steelblue', subtitleFontWeight='bold')
+lines = alt.Chart(stocks, title=stock_title).mark_line().encode(
+    alt.X('date', title=None, axis=alt.Axis(tickCount=3, grid=False)),
+    alt.Y('price', title='Closing price', axis=alt.Axis(format='$s', labelFontSize=12, titleFontSize=16)),
+    color=alt.Color('symbol', legend=None))
+
+(lines + texts).configure_view(strokeWidth=0)
+```
+
+Notes:
+If you are making a figure for the web,
+the default font sizes in Altair are generally a good choice.
+They are maybe a little bit on the smaller side of the ideal range,
+but it is possible to zoom in if really needed.
+
+If you are making a figure for print,
+it is recommended to increase the font sizes
+to make sure that your figure is readable,
+especially if you are presenting it in a poster.
+
+In this figure,
+you can see several examples of how to set fontsizes for titles and labels,
+as well as how to change the font color and weight.
+
+This figure does not necessarily look good as a whole,
+but serves to demonstrate how to set multiple of these properties at once.
+
+To learn more about good guidelines for titles and labels,
+you can read [section 22 - 22.2 in the book Fundamentals of Data Visualization](https://clauswilke.com/dataviz/figure-titles-captions.html).
+
 
 ---
 
