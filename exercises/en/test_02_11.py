@@ -9,7 +9,7 @@ def test():
     # this might be the better way to test for the first exercise.
     # Maybe even for later exercises.
     assert not penguin_bar is None, "Your answer does not exist. Have you passed in the correct variable?"
-    assert type(penguin_bar) == type(alt.Chart()), "Your answer is not an altair Chart object. Check to make sure that you have assigned an alt.Chart object to penguin_bar."
+    assert type(penguin_bar) == type(alt.Chart()), "Your answer is not an Altair Chart object. Check to make sure that you have assigned an alt.Chart object to penguin_bar."
     assert penguin_bar.data.equals(penguins) and penguin_bar.data.shape == (344, 7), "Make sure you are using the penguins dataset."
     assert penguin_bar.mark == 'bar', "Make sure you are using the bar mark type."
     assert (penguin_bar.encoding.x.shorthand in {'count()', 'count():quantitative', 'count:Q'} or 
