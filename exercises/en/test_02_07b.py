@@ -6,7 +6,7 @@ def test():
     # If an assertion fails, the message will be displayed
 
     assert not fuel_efficiency_org is None, "Your answer does not exist. Have you passed in the correct variable?"
-    assert type(fuel_efficiency_org) == type(alt.Chart()), "Your answer is not an altair Chart object. Check to make sure that you have assigned an alt.Chart object to fuel_efficiency_org."
+    assert type(fuel_efficiency_org) == type(alt.Chart()), "Your answer is not an Altair Chart object. Check to make sure that you have assigned an alt.Chart object to fuel_efficiency_org."
     assert fuel_efficiency_org.data.equals(data.cars()), "Make sure you are using cars() dataset from vega_datasets."
     assert fuel_efficiency_org.mark == 'area' or fuel_efficiency_org.mark == 'line', "Make sure you are using the area or line mark type."
     assert (fuel_efficiency_org.encoding.x.field in {'Year', 'Year:temporal', 'Year:T'} or
