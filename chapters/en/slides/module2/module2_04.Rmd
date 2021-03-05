@@ -233,7 +233,7 @@ as we will see next.
 ```{python}
 alt.Chart(gm).mark_area().encode(
     x='year',
-    y='sum(population)',
+    y=alt.Y('sum(population)', title='World population'),
     color='region')
 ```
 
@@ -253,12 +253,40 @@ has the largest population in the most recent year.
 
 ---
 
-## Line charts are preferred when the values of the individual groups are the most important
+## It is helpful to clarified that the areas are stacked on top of each other
+
+```{python}
+alt.Chart(gm).mark_area().encode(
+    x='year',
+    y=alt.Y('sum(population)', title='Cumulative population of stacked regions'),
+    color='region')
+```
+
+Notes:
+Altair stacks by areas by default,
+which is usually what we want when creating an area chart with groups.
+
+But if someone saw our chart without knowing this,
+they might think that the areas are layered behind each other,
+so that we only see the top of the blue region 
+peak out behind the orange region.
+
+To prevent this misunderstanding,
+we can change the y-axis label
+to clearly state that areas are stacked.
+
+Taken together,
+stacked area charts are ideal when you want to focus on a total measurement
+and give a rough idea of the contributions from different groups.
+
+---
+
+## Line charts are preferred when the individual groups are the most important
 
 ```{python}
 alt.Chart(gm).mark_line().encode(
     x='year',
-    y='sum(population)',
+    y=alt.Y('sum(population)', title='Population'),
     color='region')
 ```
 
@@ -288,7 +316,7 @@ split line charts are ideal when you want to compare the difference groups accur
 ```{python}
 alt.Chart(gm).mark_area().encode(
     x='year',
-    y='sum(population)')
+    y=alt.Y('sum(population)', title='World population'))
 ```
 
 Notes:
@@ -310,7 +338,7 @@ Will the world population keep growing like this for much longer?
 ```{python}
 alt.Chart(gm).mark_area().encode(
     x='year',
-    y='mean(children_per_woman)')
+    y=alt.Y('mean(children_per_woman)', title='Average children per woman worldwide'))
 ```
 
 Notes:
