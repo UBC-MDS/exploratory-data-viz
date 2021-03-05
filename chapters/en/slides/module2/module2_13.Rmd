@@ -49,33 +49,129 @@ both within a bar and between bars.
 
 ---
 
-## Faceting creates subplots for different subsets of the data
+## Stacked histograms make it hard to compare between groups
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
     x=alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
     y='count()',
-    color='region'
-).properties(width=200, height=200
-).facet('region')
+    color='region')
 ```
 
 Notes:
-Placing colour segments next to each other
-would make it easier to compare their heights.
+We have previously seen how we can explore categorical dataframe columns
+by encoding them as the colour channel of our plots.
 
-Altair does not yet support this type of plot,
-but it has outstanding support for another more powerful feature
-for comparing multiple categorical variables: faceting.
+Altair creates a stacked bar chart by default
+when we when encode a dataframe variable as the `color` channel.
 
-Faceting creates multiple views (or subplots),
-separated by a categorical column
-(we're also setting the dimensions of the plot
-so that the entire subplot grid fits in view).
+Just like with the stacked area chart,
+this is good when the total height of each bar
+is the most important,
+but it is not ideal when the main focus of our visualization
+is to compare the colored groups against each other.
 
-Now we see that the bulk of the distribution for Europe
-is to the right at higher life expectancies
-whereas it is lower for African countries.
+The reason it is difficult to compare
+the length of the coloured segments against each other
+(both within a bar and between bars),
+is that they don't share the same baseline
+so we can't just compare the position of the top part of the bars,
+but have to try to estimate their lengths.
+
+For these reasons,
+it is difficult to tell the difference between the regions
+in this plot
+and it is not an effective visualization.
+
+---
+
+## Layered histograms are also difficult to compare
+
+```{python}
+alt.Chart(gm2018).mark_bar(opacity=0.7).encode(
+    alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    alt.Y('count()', stack=False),
+    color='region')
+```
+
+Notes:
+If we tell Altair not to stack the bar along the y-axis,
+it will instead layer them behind each other.
+To be able to see all groups,
+we need to add some opacity to the bar mark.
+
+Although the bars share the same baseline here,
+they are still difficult to compare against each other,
+because there is so much overlap with different colors.
+
+Layered histograms and bar charts can be effective
+when there are few groups and clear separation between them,
+but that is not the case here
+and this plot is even harder to interpret than the previous one.
+
+---
+
+## Creating a separate subplot for each regions facilitate comparisons between them
+
+```{python}
+(alt.Chart(gm2018).mark_bar().encode(
+    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    y='count()',
+    color='region')
+ .properties(width=200, height=150)
+ .facet('region'))#.configure_view(stroke=None)
+```
+
+Notes:
+Faceting creates one facet/subplot
+for each group in the specified variable.
+To ensure that the entire grid of facets fit on the slide,
+we're also shrinking the dimensions of each subplot.
+
+From this chart,
+we can more easily compare the regions.
+For example,
+we can see that that most European countries
+have a higher life expectancy
+than most African countries.
+
+However,
+it is a little bit more demanding 
+to see exactly how much of the two distributions are overlapping
+and we would need to look at the number of the axes
+while scanning left and right on the grid.
+
+---
+
+## Laying out facets vertically makes it easier to compare position on the x-axis
+
+```{python}
+(alt.Chart(gm2018).mark_bar().encode(
+    alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    alt.Y('count()', title=None),
+    color='region')
+ .properties(width=200, height=50)
+ .facet('region', columns=1))
+```
+
+Notes:
+To make it easier to compare overlap between histograms on the x-axis,
+we can lay out the facets vertically in a single column.
+
+The vertical layout is preferred in this case since
+we are the most interested to compare position on the x-axis between the groups.
+If we instead wanted to compare position on the y-axis,
+a single row would have been better.
+
+Here,
+we immediately see that there is a long region
+overlap between European and African countries,
+but that the buld of each distribution is separated.
+
+Compare this with the stacked and layered histogram
+we made in the first few slides
+and you will realize just how much easier it is 
+to compare the groups here!
 
 ---
 
