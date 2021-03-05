@@ -53,10 +53,9 @@ or the entire date string in the format shown in the slide.
 ```{python}
 import altair as alt
 
-
 alt.Chart(gm2018).mark_bar().encode(
     x='region',
-    y='sum(population)')
+    y=alt.Y('sum(population)', title='Population'))
 ```
 
 Notes:
@@ -77,8 +76,8 @@ which represents the sum of all the countries' populations.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    y='region',
-    x='sum(population)')
+    x=alt.X('sum(population)', title='Population'),
+    y='region')
 ```
 
 Notes:
@@ -118,8 +117,8 @@ since we are just counting values in each categorical group on the y-axis.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x='count()',
-    y=alt.Y('region'))
+    x=alt.X('count()', title='Number of countries'),
+    y='region')
 ```
 
 Notes:
@@ -150,7 +149,7 @@ just to demonstrate how it works.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x='count()',
+    x=alt.X('count()', title='Number of countries'),
     y=alt.Y('region', sort='x'))
 ```
 
@@ -172,12 +171,14 @@ as in this slide.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x='count()',
+    x=alt.X('count()', title='Number of countries'),
     y=alt.Y('region', sort='-x'))
 ```
 
 If we for some reason would want the reverse order,
 we could use the minus sign before the axis reference.
+This can be helpful in cases where you are making a vertical bar chart,
+since it would then align the tallest bar next to the y-axis.
 
 ---
 
@@ -186,7 +187,7 @@ we could use the minus sign before the axis reference.
 ```{python}
 my_order = ['Africa', 'Europe', 'Oceania', 'Asia', 'Americas']
 alt.Chart(gm2018).mark_bar().encode(
-    x='count()',
+    x=alt.X('count()', title='Number of countries'),
     y=alt.Y('region', sort=my_order))
 ```
 
