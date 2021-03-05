@@ -64,14 +64,13 @@ with data we already know.
 
 ---
 
-## Reading in the data with pandas
+## Read in and glimpse at the data with pandas
 
 ```{python}
 import pandas as pd
 
-
-url = 'https://raw.githubusercontent.com/UofTCoders/workshops-dc-py/master/data/processed/world-data-gapminder.csv'
-gm = pd.read_csv(url, parse_dates=['year'])
+gm = pd.read_csv('data/world-data-gapminder.csv', parse_dates=['year'])
+# TODO remove when we change to HTML or rewrite text as for why top ten
 gm = gm[gm['country'].isin(gm[gm['year'] == '2018'].nlargest(10, ['population'])['country'])]
 gm
 ```
