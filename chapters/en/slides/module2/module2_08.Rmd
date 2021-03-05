@@ -205,8 +205,6 @@ As with all arguments passed to Python functions,
 we can leave out the parameter names (`x=` and `y=`)
 if we pass the arguments in the order they are defined in the function signature.
 
-TODO will they understand the above?
-
 In this example,
 we're typing `sort='x'` to specify that we want to sort
 according to the values on the y-axis.
@@ -226,6 +224,7 @@ alt.Chart(gm2018).mark_bar().encode(
     y=alt.Y('region', sort='-x'))
 ```
 
+Notes:
 If we for some reason would want the reverse order,
 we could use the minus sign before the axis reference.
 This can be helpful in cases where you are making a vertical bar chart,
@@ -233,7 +232,7 @@ since it would then align the tallest bar next to the y-axis.
 
 ---
 
-## Sorting in a custom order
+## A custom order can be used for the sort
 
 ```{python}
 my_order = ['Africa', 'Europe', 'Oceania', 'Asia', 'Americas']
@@ -262,7 +261,7 @@ you can refer to [chapter 6 of Fundamental of Data Visualizations](https://claus
 
 ---
 
-## Using bars to show counts of quantitative values
+## Using bars to show counts of quantitative variables
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
@@ -347,7 +346,7 @@ which we will talk more about in the next module.
 
 ---
 
-## Changing the number of bins
+## Narrower bins increase the resolution along the axis
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
