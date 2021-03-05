@@ -2,7 +2,7 @@
 type: slides
 ---
 
-# Creating area charts
+# Creating Area Charts
 
 Notes: In this module we will be learning how to create area charts and
 when they are a suitable alternative to use instead of line charts.
