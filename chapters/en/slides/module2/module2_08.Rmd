@@ -30,9 +30,7 @@ for showing distributions of data.
 ```{python}
 import pandas as pd
 
-
-url = 'https://raw.githubusercontent.com/UofTCoders/workshops-dc-py/master/data/processed/world-data-gapminder.csv'
-gm = pd.read_csv(url, parse_dates=['year'])
+gm = pd.read_csv('data/world-data-gapminder.csv', parse_dates=['year'])
 gm2018 = gm[gm['year'] == '2018']
 gm2018
 ```
