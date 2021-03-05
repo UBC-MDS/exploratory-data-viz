@@ -91,7 +91,7 @@ whereas dates are shown as `1990, 2000, etc`
 
 ---
 
-## Using `info` to view dataframe columns
+## `info` shows column data types and missing values
 
 ```{python}
 gm.info()
@@ -104,7 +104,7 @@ like we did in the previous slide
 to get an idea of how the data looks.
 
 Another helpful practice is to use the `.info()` method
-to get an overview of the column types
+to get an overview of the column data types
 and see if there are any `NaNs` (missing values).
 
 ---
@@ -113,7 +113,6 @@ and see if there are any `NaNs` (missing values).
 
 ```{python}
 import altair as alt
-
 
 alt.Chart(gm).mark_line().encode(
     x='year',
@@ -127,11 +126,14 @@ how the world population have been growing up until today.
 We could use a line plot for this
 as we learned in the first module.
 
-Why does the plot look so weird?
+But this doesn't look line an line plot,
+why is that?
 
-Because for every year in the dataset,
-we have plotted the population for every single country
-and connected them with a vertical line.
+Because every country has multiple entries,
+one for each year.
+We have plotted the population for every single country
+in every year
+and connected them all with a line.
 
 That's not what we want!
 
@@ -154,11 +156,48 @@ populations for each year via the `sum` aggregation method in Altair.
 That looks much better!
 
 Interestingly,
-it seem like the world population have been growing in two distinct phases.
+it seem like the world population have been growing in two distinct phases:
+slowly before 1950,
+and more rapidly afterwards.
 
-We will talk more about that in a few slides,
-but first,
-let's recreate this chart as an area chart.
+We will talk more about that in a few slides.
+
+---
+
+## Changing axes titles clarifies makes our plot easier to interpret
+
+```{python}
+alt.Chart(gm).mark_line().encode(
+    x='year',
+    y=alt.Y('sum(population)', title='World population'))
+```
+
+Notes:
+Altair automatically changes the axis label for us to reflect the operation
+that we have performed on the data,
+here taking the "sum" of the countries.
+
+This is often great to keep track of how we have aggregated the data,
+but is not always needed.
+
+In this case,
+our plot could be made even clearer
+if the axis title read "World population" instead.
+
+To change an axis title,
+we can use the helper functions `alt.X` and `alt.Y`,
+instead of `x=` and `y=`.
+
+These have the role of customizing things like titles, orders, groups, and scales
+for the axes.
+When using just `y='column'`,
+we're still calling `alt.Y()` under the hood,
+we just save ourselves some typing.
+
+We will do a deep dive into titles for axis and other chart elements
+in a later module;
+from now and onwards we will just use it to clarify
+when an automatic label might be confusing.
 
 ---
 
@@ -167,17 +206,20 @@ let's recreate this chart as an area chart.
 ```{python}
 alt.Chart(gm).mark_area().encode(
     x='year',
-    y='sum(population)')
+    y=alt.Y('sum(population)', title='World population'))
 ```
 
 Notes:
+Let's see how we can visualize the world population changes
+with an area chart instead of a line chart.
+
 Thanks to Altair's consistent visualization grammar,
-the modification we need to make to the code are minor.
+the modifications we need to make to the code are minor.
 Replace `mark_line` with `mark_area` and we're done.
 
 For showing a single trend over time,
 the choice between a line and area chart comes down to aesthetics.
-They are both effective choices for communicating
+They are both effective choices for this purpose.
 
 However,
 when visualizing the trends over time for multiple groups,
@@ -227,7 +269,7 @@ and don't care as much about the total of the groups added together.
 
 For example,
 here it is immediately clear that Africa has a bigger population 
-than Europe and the America,
+than Europe and the Americas,
 and we can see that the populations shifted around year 2000.
 
 On the other hand,
@@ -235,6 +277,9 @@ it's quite cognitively demanding
 to try to reconstruct the total world population
 by adding all the lines up together,
 especially over time!
+
+In summary,
+split line charts are ideal when you want to compare the difference groups accurately.
 
 ---
 
@@ -275,13 +320,21 @@ to stabilize around 11 billion people at the end of the century.
 
 Why?
 Because as living conditions improve around the world,
-child mortality is going down,
-which means that the number of children per women is decreasing
-towards a level than means that the current population will be sustained
-rather than increase.
+child mortality is going down
+as can be seen in this visualization.
+
+In countries where child mortality is high,
+women will often give birth to more children than they want
+in order to protect against losing some of their children.
+
+Lower child mortality leads to more predictable family planning,
+which in turn often leads to smaller families.
+In the majority of countries where child mortality has been observed to decrease,
+the number of children per woman has followed
+and stabilized around two.
 
 If you're interested in knowing more about the world population predictions,
-you can use Gapminders online resources,
+you can use Gapminder's online resources,
 for example [this video on population growh](https://www.gapminder.org/answers/how-did-the-world-population-change/)
 and [this one on why it will slow down](https://www.gapminder.org/answers/the-rapid-growth-of-the-world-population-when-will-it-slow-down/).
 
