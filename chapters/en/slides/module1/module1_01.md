@@ -8,15 +8,49 @@ Notes: At its core, data visualization is about representing numbers
 with graphical elements such as the position of a line, the length of a
 bar, or the color of a point.
 
-We often visualize data in order to help us answer a specific question
-we have about our dataset, but it can also help us generate new
-questions.
-
-In addition to using visualizations to explore data ourselves, we can
-use them to effectively communicate our insights to others, as we will
-learn in later modules of this course.
+We often use visualizations to explore data ourselves, and to
+effectively communicate our insights to others, as we will learn in
+later modules of this course.
 
 ---
+
+## What is the purpose of visualizing data?
+
+Visualizing data can be used to
+
+-   Answer a specific question
+-   Explore data more generally to generate new questions
+
+To create an effective visualization, start by
+
+-   Look at the data
+-   Think about what you want to achieve by making the visualization
+-   Draw it out with pen and paper
+
+Notes: We often visualize data in order to help us answer a specific
+question we have about our dataset, but it can also help us generate new
+questions.
+
+Before creating a visualization, it is important that you think about
+why you are making it, and what you want to achieve from creating this
+plot.
+
+Is there a specific question you are trying to answer, like comparing
+the relationship between two dataframe variables?
+
+Or are you creating a plot to help you understand the structure of your
+data more in general, such as plotting the distribution of each
+dataframe variable?
+
+In either case, it can be extremely helpful to draw out your plot with
+pen and paper first.
+
+This helps you think about if the plot you are creating makes sense or
+if there is another plot better suited for the task at hands.
+
+Drawing with pen and paper also makes it easier to write the code
+afterwards, since you clearly know what you are expecting the
+visualization to look like.
 
 ## Why bother visualizing data instead of showing raw numbers?
 
