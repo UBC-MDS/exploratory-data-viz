@@ -187,7 +187,7 @@ What about when we
 Before making any plots, what is an important first step in visualizing data?
 
 <choice id="1" >
-<opt text="Looking at the data." correct="true">
+<opt text="Look at the data, think about why you are making the visualization, and draw it out with pen and paper." correct="true">
 
 We need to see what we are plotting before we visualize it!
 
