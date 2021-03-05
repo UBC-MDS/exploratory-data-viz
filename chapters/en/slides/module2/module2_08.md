@@ -225,8 +225,6 @@ As with all arguments passed to Python functions, we can leave out the
 parameter names (`x=` and `y=`) if we pass the arguments in the order
 they are defined in the function signature.
 
-TODO will they understand the above?
-
 In this example, we’re typing `sort='x'` to specify that we want to sort
 according to the values on the y-axis.
 
@@ -250,14 +248,14 @@ alt.Chart(gm2018).mark_bar().encode(
 of
 countries</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-group role-axis" role="graphics-symbol" aria-roledescription="axis" aria-label="Y-axis titled 'region' for a discrete scale with 5 values: Africa, Asia, Europe, Americas, Oceania"><g transform="translate(0.5,0.5)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-rule role-axis-tick" pointer-events="none"><line transform="translate(0,10)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,30)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,50)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,70)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,90)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-label" pointer-events="none"><text text-anchor="end" transform="translate(-7,12.5)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">Africa</text><text text-anchor="end" transform="translate(-7,32.5)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">Asia</text><text text-anchor="end" transform="translate(-7,52.5)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">Europe</text><text text-anchor="end" transform="translate(-7,72.5)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">Americas</text><text text-anchor="end" transform="translate(-7,92.5)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">Oceania</text></g><g class="mark-rule role-axis-domain" pointer-events="none"><line transform="translate(0,0)" x2="0" y2="100" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-title" pointer-events="none"><text text-anchor="middle" transform="translate(-75,50) rotate(-90) translate(0,-2)" font-family="sans-serif" font-size="11px" font-weight="bold" fill="#000" opacity="1">region</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-rect role-mark marks" role="graphics-object" aria-roledescription="rect mark container"><path aria-label="Number of countries: 47; region: Asia" role="graphics-symbol" aria-roledescription="bar" d="M0,21h341.8181818181818v18h-341.8181818181818Z" fill="#4c78a8"/><path aria-label="Number of countries: 39; region: Europe" role="graphics-symbol" aria-roledescription="bar" d="M0,41h283.6363636363636v18h-283.6363636363636Z" fill="#4c78a8"/><path aria-label="Number of countries: 52; region: Africa" role="graphics-symbol" aria-roledescription="bar" d="M0,1h378.1818181818182v18h-378.1818181818182Z" fill="#4c78a8"/><path aria-label="Number of countries: 31; region: Americas" role="graphics-symbol" aria-roledescription="bar" d="M0,61h225.45454545454544v18h-225.45454545454544Z" fill="#4c78a8"/><path aria-label="Number of countries: 9; region: Oceania" role="graphics-symbol" aria-roledescription="bar" d="M0,81h65.45454545454545v18h-65.45454545454545Z" fill="#4c78a8"/></g></g><path class="foreground" aria-hidden="true" d="" display="none"/></g></g></g></svg>
 
-If we for some reason would want the reverse order, we could use the
-minus sign before the axis reference. This can be helpful in cases where
-you are making a vertical bar chart, since it would then align the
+Notes: If we for some reason would want the reverse order, we could use
+the minus sign before the axis reference. This can be helpful in cases
+where you are making a vertical bar chart, since it would then align the
 tallest bar next to the y-axis.
 
 ---
 
-## Sorting in a custom order
+## A custom order can be used for the sort
 
 ``` python
 my_order = ['Africa', 'Europe', 'Oceania', 'Asia', 'Americas']
@@ -291,7 +289,7 @@ Visualizations](https://clauswilke.com/dataviz/visualizing-amounts.html).
 
 ---
 
-## Using bars to show counts of quantitative values
+## Using bars to show counts of quantitative variables
 
 ``` python
 alt.Chart(gm2018).mark_bar().encode(
@@ -380,7 +378,7 @@ talk more about in the next module.
 
 ---
 
-## Changing the number of bins
+## Narrower bins increase the resolution along the axis
 
 ``` python
 alt.Chart(gm2018).mark_bar().encode(
