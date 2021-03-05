@@ -350,7 +350,7 @@ which we will talk more about in the next module.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=20)),
+    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=20), title='Life expectancy'),
     y='count()')
 ```
 
@@ -366,6 +366,10 @@ Note that you will not get the exact number of bins,
 Altair will find a number than aligns well with the axis ticks
 within the max you specified
 (the `step` parameter can be used to set and exact bin width if desired).
+
+Here we also changed the title because "binned" 
+is not really necessary
+and it is largely clear from the axis already that each bar spans a range of numbers.
 
 We will talk more about histograms
 and other ways to represent distributions in the next module,
