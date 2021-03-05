@@ -40,6 +40,7 @@ gm2018
 Notes:
 In this slide deck,
 we will continue to work with the gapminder dataset.
+
 To make it more suitable for this slide deck
 let's subset it to include observations from the year 2018 only.
 
@@ -92,7 +93,7 @@ when the labels on the categorical axis
 become so long that they need to be rotated
 to be readable in a vertical bar chart.
 
-Since this is the case for our plot
+Since this is the case for our plot,
 we will continue to use horizontal bar charts
 in this slide deck.
 
@@ -109,6 +110,7 @@ alt.Chart(gm2018).mark_bar().encode(
 Notes:
 To count values,
 we can use the aggregation function `count()` in Altair.
+
 We don't need to specify a column name for the y-axis,
 since we are just counting values in each categorical group on the y-axis.
 
@@ -125,12 +127,14 @@ alt.Chart(gm2018).mark_bar().encode(
 Notes:
 Unless the categorical axis has a natural order to it,
 it is best to sort bar charts from high to low values.
+
 This makes it easier to see any trends in the data,
 and to compare bars of similar height more carefully.
 
 To sort the bars,
 we will use the helper functions `alt.X` and `alt.Y`,
 instead of `x=` and `y=`.
+
 These have the role of customizing things like order, groups, and scale for the axis.
 When using just `y='column'`,
 we're still calling `alt.Y()` under the hood,
@@ -154,6 +158,7 @@ alt.Chart(gm2018).mark_bar().encode(
 
 Notes:
 Sorting can now be done via the `sort` parameter in `alt.Y`.
+
 In this example,
 we're typing `sort='x'` to specify that we want to sort
 according to the values on the y-axis.
@@ -196,7 +201,7 @@ For situations like this,
 we can pass a list or array
 to the `sort` parameter.
 
-We can either create this list manually as in thie slide,
+We can either create this list manually as we did in this slide,
 or use the pandas sort function if we wanted
 for example reverse alphabetical order.
 
@@ -217,6 +222,7 @@ alt.Chart(gm2018).mark_bar().encode(
 Notes:
 So far we have been counting observations in categorical groups
 (the continents).
+
 Another common use of bar charts is to count how many observations
 fall into numerical intervals
 in an attempt to estimate the distribution, or shape, of the entire dataset.
@@ -230,6 +236,7 @@ which is called binning.
 If we would skip this binning step,
 a bar would be plotted for each of the unique numerical values,
 and our histogram would look very spiky as you can see in this slide.
+
 This is because there are very few values that are exactly the same.
 
 For example,
@@ -251,6 +258,7 @@ alt.Chart(gm2018).mark_bar().encode(
 Notes:
 To enable binning of the x-axis in Altair,
 we can set `bin=True` inside `alt.X`.
+
 This automatically calculates a suitable number of bins,
 and counts up all the values within each group
 before plotting a bar representing this count.
@@ -272,8 +280,10 @@ alt.Chart(gm2018).mark_bar().encode(
 Notes:
 Although the automatically calculated number of bins is often appropriate,
 it tends to be on the low side.
+
 While to many bins make the plot look spiky,
 having too few bins can hide the true shape of the data distribution.
+
 We can change the number of bins by passing `alt.Bin(maxbins=30)`
 to the `bin` parameter instead of passing the value `True`.
 

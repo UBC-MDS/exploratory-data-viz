@@ -2,7 +2,7 @@
 type: slides
 ---
 
-# What Did we Learn and What to Expect in Assignment 1
+# What Did we Learn and What to Expect in Assignment 2
 
 Notes:
 
@@ -26,7 +26,7 @@ The assignment will concentrate on the learning objectives as well as building k
 
 ---
 
-# On to Assignment 1!
+# On to Assignment 2!
 
 Notes:
 

@@ -1,5 +1,5 @@
 ---
-title: 'Module 2: Visual encoding channels'
+title: 'Module 2: Visual Encoding Channels'
 description:
   'In this module we will be learning about the most and least effective ways to encode and present data graphically.'
 prev: ../../module1
@@ -27,14 +27,14 @@ id: 2
 
 <opt text="True"  correct="true">
 
-You got it! In the slides we saw that position and lenth does a better job than area when comparing size.  
+You got it! In the slides, we saw that position or length do a better job when comparing size.  
 
 </opt>
 
 
 <opt text="False">
 
-Do you find it easier to compare size with area? or with length?
+Do you find it easier to compare size using area? Or with length?
 
 </opt>
 
@@ -42,19 +42,19 @@ Do you find it easier to compare size with area? or with length?
 </choice>
 
 **True or False**       
-*There are 3 channels that can used in visualizations: Texture, size and colour.*
+*There are 3 channels that can be used in visualizations: Texture, size and colour.*
 
 <choice id="2" >
 
 <opt text="True"  >
 
-What about positions, angles or shades? There are many channels and it would be difficult to quantify and effectively communicate texture.
+What about positions, angles, or shades? There are many channels and it would be difficult to quantify and effectively communicate texture.
 
 </opt>
 
 <opt text="False" correct="true">
 
-Great! We saw that there are several visual channel such as position, angle, area, colour brightness or sarturation, and volume!
+Great! We saw that there are several other visual channels in addition to texture, size and colour! For example, position, angle, area, colour brightness or saturation, and volume!
 
 </opt>
 
@@ -90,7 +90,7 @@ As we saw in the example, a 3rd dimension can reduce the effectiveness of a plot
 
 <opt text="3-dimensions can reduce the clarity of a plot.">
 
-With bar charts, we saw that the observations on the plot appeared less that the true values.
+With bar charts, we saw that the observations on the plot appeared less than the true values.
 
 </opt>
 
@@ -98,7 +98,7 @@ With bar charts, we saw that the observations on the plot appeared less that the
 
 
 **Question 2**      
-Are there acceptable times to present 3D plot?
+Are there acceptable times to present a 3D plot?
 
 <choice id="2" >
 <opt text="No, never.">
@@ -113,7 +113,7 @@ What about the blood vessel example we saw?
 
 </opt>
 
-<opt text="Yes, they are usually effective in Topographical Maps."  correct="true">
+<opt text="Yes, they can be effective in cases when it is important to convey real 3D objects and/or data mapped onto them. Examples include topographical Maps and biological protein structures. Making such visualizations interactive, or providing animations of them helps the audience more easily see where the different graphical features are located in the 3D space."  correct="true">
 
 You got it!
 
@@ -131,8 +131,8 @@ This can help, but it's not always acceptable.
 
 </exercise>
 
-<exercise id="4" title="Area charts" type="slides,video">
-<slides source="module2/module2_02" shot="1" start="0:003" end="07:12"> </slides>
+<exercise id="4" title="Area Charts" type="slides,video">
+<slides source="module2/module2_04" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
 <exercise id="5" title="True or False: Area and lines">
@@ -164,7 +164,7 @@ Great! Area plots and line plots are both acceptable for displaying a single tre
 
 <opt text="True"  correct="true">
 
-You got it! We saw that when we made a line chart in the slides, it mislead us to believe it was an area chart which we fixed by suming up the y axis column. 
+You got it! We saw that when we made a line chart in the slides, it mislead us to believe it was an area chart which we fixed by summing up the y axis column. 
 
 </opt>
 
@@ -244,7 +244,7 @@ This is difficult to differentiate between the continent's fertility rate separa
 
 </opt>
 
-<opt text="Plot B">
+<opt text="Plot B" correct="true">
 
 Nice!
 
@@ -261,13 +261,13 @@ Nice!
 
 
 **Instructions:**    
-Be patient when running a coding exercise for the first time, it can take a few minutes.. 
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
 
 **When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
 and submit it to validate if you were correct.**
 
 
-Remember our vehicle dataset? We are going to take a look at how the fuel efficiency has improved over the years. Let's try answering the question **"Over time, how has the average automobile fuel efficiency changed?"**
+Remember our vehicle dataset? We are going to take a look at how fuel efficiency has improved over the years. Let's try answering the question **"Over time, how has the average automobile fuel efficiency changed?"**
 
 
 <codeblock id="cars_data">
@@ -277,7 +277,7 @@ Remember our vehicle dataset? We are going to take a look at how the fuel effici
 Tasks: 
 
 - Plot an appropriate graph that visualizes the change of the mean `Miles_per_Gallon` over time. 
-- Assign you plot to an object named `fuel_efficiency`. 
+- Assign your plot to an object named `fuel_efficiency`. 
 - Make sure to give it an appropriate title.
 
 <codeblock id="02_07a">
@@ -297,7 +297,7 @@ How has the average fuel efficiency changed from the year 1970 to 1982 as a whol
 <choice id="1" >
 <opt text="It approximately halved.">
 
-It looks like efficiency is increasing, not decreasing?
+It looks like efficiency is increasing, not decreasing.
 
 </opt>
 
@@ -309,7 +309,7 @@ It looks like it went from ~17 miles per gallon to ~31 miles per gallon.
 
 <opt text="It approximately tripled.">
 
-Efficiency is definitely increasing but are you sure it trippled from 1970-1982? 
+Efficiency is definitely increasing but are you sure it tripled from 1970-1982? 
 
 </opt>
 
@@ -328,7 +328,7 @@ Let's now take a look at each country manufacturer. How did the mean fuel effici
 Tasks: 
 
 - Plot an appropriate graph that visualizes the change of the mean `Miles_per_Gallon` over time. 
-- Assign you plot to an object named `fuel_efficiency_org`. 
+- Assign your plot to an object named `fuel_efficiency_org`. 
 - Make sure to give it an appropriate title.
 
 <codeblock id="02_07b">
@@ -346,59 +346,58 @@ Tasks:
 
 Which origin's fuel efficiency improved the most between the years 1970 to 1982?
 
-<choice id="1" >
+<choice id="2" >
 
 <opt text="Europe">
 
-This looks like it improved, but not the most of the 3 origins. 
+Europe has improvedimproved, but other origins have improved by greater amounts. 
 
 </opt>
 
 <opt text="Japan" >
 
-This one did improve but not the most! 
+This country did improve but not the most! 
 
 </opt>
 
 <opt text="USA" correct="true">
 
-Efficiency is definitely increasing but are you sure it trippled from 170-1982? 
+Efficiency is definitely increasing but are you sure it tripled from 1970-1982? 
 
 </opt>
-
 
 </choice>
 
 </exercise>
 
-<exercise id="8" title="Bar charts and histograms" type="slides,video">
-<slides source="module2/module2_03" shot="1" start="0:003" end="07:12"> </slides>
+<exercise id="8" title="Bar Charts and Histograms" type="slides,video">
+<slides source="module2/module2_08" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
 
-<exercise id="9" title="True or False: Area and lines">
+<exercise id="9" title="True or False: Bars and Histograms">
 
 **True or False**       
-*It's often a good idea to make horizontal histogram so that the labels of the x-axis are easier to read.*
+*It's often a good idea to make a horizontal histogram so that the labels of the x-axis are easier to read.*
 
 <choice id="1" >
 
 <opt text="True"  >
 
-The labels of histograms are numbers which don’t need to be rotated to be readable.
+The labels of histograms are numbers that don’t need to be rotated to be readable.
 
 </opt>
 
 <opt text="False" correct="true">
 
-It's bar charts that can to rotated to make it easier to read the X axis labels. 
+It's bar charts that can to rotated to make it easier to read the x-axis labels. 
 
 </opt>
 
 </choice>
 
 **True or False**       
-*It is best to sort bar charts from high to low values (unless the categotical values have a natural order).*
+*It is best to sort bar charts from high to low values (unless the categorical values have a natural order).*
 
 
 <choice id="2" >
@@ -421,7 +420,7 @@ Does sorting a bar chart make it easier to read?
 </exercise>
 
 
-<exercise id="10" title='Some Visualization Bar-ter'>
+<exercise id="10" title='Testing Your Bar Knowledge'>
 
 **Question 1**      
 Why do we avoid bar charts when showing summary statistics such as the mean? 
@@ -462,9 +461,7 @@ If we wanted to increase the number of bars in the histogram, what would be need
 ```python
 alt.Chart(data_source).mark_bar().encode(
     x=alt.X('students', bin=???),
-    y='count()').properties(The distribution of students per classroom)
-
-
+    y='count()').properties(title='The distribution of students per classroom')
 ```
 
 <choice id="2" >
@@ -487,7 +484,7 @@ You are close but the argument `bins` within the helper function `alt.Bin()` isn
 
 </opt>
 
-<opt text="<code>bin=alt.Bin(maxbins=30)</code>">
+<opt text="<code>bin=alt.Bin(maxbins=30)</code>"  correct="true">
 
 Nice!
 
@@ -499,162 +496,292 @@ Nice!
 </exercise>
 
 
-<exercise id="11" title="Have a Candy Bar... Plot!">
-
+<exercise id="11" title="Practicing Bar Plots with Penguins">
 
 
 **Instructions:**    
-Be patient when running a coding exercise for the first time, it can take a few minutes.. 
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
 
 **When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
 and submit it to validate if you were correct.**
 
 
-Remember our vehicle dataset? We are going to take a look at how the fuel efficiency has improved over the years. Let's try answering the question **"Over time, how has the average automobile fuel efficiency changed?"**
+Alright, let's bring in a new dataset containing information on penguins. This data is available from [Kaggle](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) and originally available from [Allison Horst's GitHub Repository](https://github.com/allisonhorst/palmerpenguins). 
 
 
-<codeblock id="cars_data">
+
+<codeblock id="penguins">
 
 </codeblock>
 
+
+We are interested in obtaining the number of penguins we collected of each species. 
+
 Tasks: 
 
-- Plot an appropriate graph that visualizes the change of the mean `Miles_per_Gallon` over time. 
-- Assign you plot to an object named `fuel_efficiency`. 
-- Make sure to give it an appropriate title.
+- Using a bar plot, visualize the count of penguins for each species in the data. 
+- Choose the appropriate rotation, given the axis labels. 
+- Sort your bars in an appropriate order. 
+- Make sure to give it a title and set the dimensions to a height of 150 and a width of 300.
+- Save your plot in an object named `penguin_bar`.
 
-<codeblock id="02_07a">
+<codeblock id="02_11">
 
-- Are you using `.mark_area()` or `.mark_line()`?
-- Are you assigning the plot to an object named`fuel_efficiency`?
-- Are you specifying `mean(Miles_per_Gallon)` on the y-axis?
-- Are you specifying `Year` on the x-axis?
-- Are you giving the plot a title using `.properties()`?
+- Are you using `.mark_bar()`?
+- Are you assigning the plot to an object named`penguin_bar`?
+- Are you specifying `alt.Y('species', sort='x')` on the y-axis?
+- Are you specifying `count()` on the x-axis?
+- Are you giving the plot a title and proper dimensions using `.properties()`?
 
 </codeblock>
 
 **Question**      
 
-How has the average fuel efficiency changed from the year 1970 to 1982 as a whole? 
+Which species is most occurring in the dataset?
 
 <choice id="1" >
-<opt text="It approximately halved.">
+<opt text="Chinstrap">
 
-It looks like efficiency is increasing, not decreasing?
-
-</opt>
-
-<opt text="It approximately doubled." correct="true">
-
-It looks like it went from ~17 miles per gallon to ~31 miles per gallon.
+Are you looking at the right plot?
 
 </opt>
 
-<opt text="It approximately tripled.">
+<opt text="Gentoo" >
 
-Efficiency is definitely increasing but are you sure it trippled from 1970-1982? 
+Maybe try again.
 
 </opt>
 
+<opt text="Adelie" correct="true">
 
-<opt text="It approximately quadrupled.">
-
-This would be a huge accomplishment but are you looking at the correct numbers?
+Nice!
 
 </opt>
 
 </choice>
-
-
-Let's now take a look at each country manufacturer. How did the mean fuel efficiency change from the year 1070-1982 for each manufacturing origin?
-
-Tasks: 
-
-- Plot an appropriate graph that visualizes the change of the mean `Miles_per_Gallon` over time. 
-- Assign you plot to an object named `fuel_efficiency_org`. 
-- Make sure to give it an appropriate title.
-
-<codeblock id="02_07b">
-
-- Are you assigning the plot to an object named`fuel_efficiency_org`?
-- Are you specifying `mean(Miles_per_Gallon)` on the y-axis?
-- Are you specifying `Year` on the x-axis?
-- Are you specifying `color = 'Origin'`?
-- Are you giving the plot a title using `.properties()`?
-
-</codeblock>
-
-
-**Question**      
-
-Which origin's fuel efficiency improved the most between the years 1970 to 1982?
-
-<choice id="1" >
-
-<opt text="Europe">
-
-This looks like it improved, but not the most of the 3 origins. 
-
-</opt>
-
-<opt text="Japan" >
-
-This one did improve but not the most! 
-
-</opt>
-
-<opt text="USA" correct="true">
-
-Efficiency is definitely increasing but are you sure it trippled from 170-1982? 
-
-</opt>
-
-
-</choice>
-
 
 </exercise>
 
 <exercise id="12" title="Making History with Histograms">
 
 
-
 **Instructions:**    
-Be patient when running a coding exercise for the first time, it can take a few minutes.. 
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
 
 **When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
 and submit it to validate if you were correct.**
 
 
-Remember our vehicle dataset? We are going to take a look at how the fuel efficiency has improved over the years. Let's try answering the question **"Over time, how has the average automobile fuel efficiency changed?"**
-
-
-<codeblock id="cars_data">
-
-</codeblock>
+Let's now see what the distribution of penguin flipper length looks like. 
 
 Tasks: 
 
-- Plot an appropriate graph that visualizes the change of the mean `Miles_per_Gallon` over time. 
-- Assign you plot to an object named `fuel_efficiency`. 
-- Make sure to give it an appropriate title.
+- Using bars, show the counts of the `flipper_length_mm` values. 
+- Make sure to give it a title and set the dimensions to a height of 150 and a width of 300.
+- Save your plot in an object named `penguin_hist`.
 
-<codeblock id="02_07a">
+<codeblock id="02_12">
 
-- Are you using `.mark_area()` or `.mark_line()`?
-- Are you assigning the plot to an object named`fuel_efficiency`?
-- Are you specifying `mean(Miles_per_Gallon)` on the y-axis?
-- Are you specifying `Year` on the x-axis?
-- Are you giving the plot a title using `.properties()`?
+- Are you using `.mark_bar()`?
+- Are you assigning the plot to an object named`penguin_hist`?
+- Are you specifying `alt.X('flipper_length_mm', bin=True)` on the x-axis?
+- Are you specifying `count()` on the y-axis?
+- Are you giving the plot a title and proper dimensions using `.properties()`?
 
 </codeblock>
 
 </exercise>
 
 
-<exercise id="13" title="Creating subplots via faceting" type="slides,video">
-<slides source="module2/module2_04" shot="1" start="0:003" end="07:12"> </slides>
+<exercise id="13" title="Creating Subplots via Faceting" type="slides,video">
+<slides source="module2/module2_13" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
+
+
+<exercise id="14" title="True or False: Facets">
+
+**True or False**       
+*If you faceting and assign a color channel to the same column, you will obtain subplots all in different colours*
+
+<choice id="1" >
+
+<opt text="True" correct="true">
+
+Got it!
+
+</opt>
+
+<opt text="False" >
+
+Setting a colour channel column to the same column as the facet, will change each of the faceted plots to different colours.
+
+</opt>
+
+</choice>
+
+**True or False**       
+*Faceting works best with a numeric column.*
+
+
+<choice id="2" >
+
+<opt text="True"  >
+
+How many plots will a continuous feature produce?
+
+</opt>
+
+
+<opt text="False" correct="true">
+
+Faceting works when the column you wish to facet is categorical. 
+
+</opt>
+
+</choice>
+
+</exercise>
+
+
+<exercise id="15" title='Facing some Faceting Questions'>
+
+**Question 1**      
+When we facet a plot by a specific column, by default are the subplots displayed vertically or horizontally?
+
+<choice id="1" >
+<opt text="Horizontally" correct="true">
+
+ Nice work! 
+
+</opt>
+
+<opt text="Vertically" >
+
+Just like a list, the plots are concatenated by default horizontally.
+
+</opt>
+
+
+</choice>
+
+
+**Question 2**      
+
+If we wanted to facet the plot below by the column `subject` and the number of plots per row at 4, what would be needed instead of `"???"` in the code below? 
+
+
+```python
+alt.Chart(data_source).mark_bar().encode(
+    x=alt.X('students', bin=True),
+    y='count()'
+).properties(width=300, height=150).facet(???)
+
+
+```
+
+
+<choice id="2" >
+<opt text="<code>'subject', row=3</code>">
+
+`row` needs a column name as an argument value
+
+</opt>
+
+<opt text="<code>'subject', rows=4</code>">
+
+This would produce 4 rows.
+
+
+</opt>
+
+
+<opt text="<code>'subject', columns=4</code>" correct="true">
+
+Got it!
+
+</opt>
+
+<opt text="<code>'subject', column=4</code>">
+
+The `column` argument needs a column label as an input. 
+
+</opt>
+
+
+</choice>
+
+</exercise>
+
+
+<exercise id="16" title="Faceting with Penguins">
+
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+Ok let's facet our penguin dataset now.
+
+Tasks: 
+
+- Using bars, show the distribution of the `body_mass_g` values. 
+- Make sure to give it a title and set the dimensions to a height of 100 and a width of 150.
+- Facet your plots by `species` for the columns and by `island` for the rows.
+- Save your plot in an object named `penguin_facet`.
+
+<codeblock id="02_16">
+
+- Are you using `.mark_bar()`?
+- Are you assigning the plot to an object named`penguin_facet`?
+- Are you specifying `alt.X('species', bin=True)` on the x-axis?
+- Are you specifying `count()` on the y-axis?
+- Are you giving the plot a title and proper dimensions using `.properties()`?
+
+</codeblock>
+
+
+
+**Question**      
+
+Based on how the plots are generated when facetting, which species of penguin are on the "Dream" island?
+
+<choice id="1" >
+<opt text=" Adelie, Chinstrap and Gentoo">
+
+Are all three plots generating distributions in the "Dream" island row?
+
+</opt>
+
+<opt text=" Adelie and Chinstrap" correct="true">
+
+
+Nice!
+
+
+</opt>
+
+
+<opt text=" Adelie and Gentoo">
+
+These are the 2 species present on Biscoe island.
+
+</opt>
+
+<opt text="Only Adelie">
+
+This is the only species on Torgorsen island.  
+
+</opt>
+
+
+</choice>
+
+
+</exercise>
+
 
 <exercise id="17" title="What Did We Just Learn?" type="slides, video">
 <slides source="module2/module2_end" shot="0" start="04:5307" end="05:5911">
