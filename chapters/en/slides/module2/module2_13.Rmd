@@ -18,33 +18,26 @@ type: slides
 # Creating subplots via faceting
 
 Notes:
-<br>
+In this slide deck we will be learning how we can use facets,
+or subplots, to compare different groups in the data.
 
 ---
+
+## How does life expectancy differ between regions?
 
 ```{python}
 import pandas as pd
 import altair as alt
 
-url = 'https://raw.githubusercontent.com/UofTCoders/workshops-dc-py/master/data/processed/world-data-gapminder.csv'
-gm = pd.read_csv(url, parse_dates=['year'])
+gm = pd.read_csv('data/world-data-gapminder.csv', parse_dates=['year'])
 gm2018 = gm[gm['year'] == '2018']
 
 alt.Chart(gm2018).mark_bar().encode(
     x=alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
-    y='count()',
-    color='region')
+    y='count()')
 ```
 
 Notes:
-We have previously seen how we can explore categorical dataframe columns
-by encoding them as the colour channel of our plots.
-
-Doing this with barplots allows us to drill down into two categorical columns
-at the same time: <br>
-- the one on the y-axis, and
-- the one represented by colour.
-
 Altair creates a stacked bar chart by default.
 
 Just like with the stacked area chart,
