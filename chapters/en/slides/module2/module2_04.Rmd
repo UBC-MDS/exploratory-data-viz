@@ -99,13 +99,41 @@ gm.info()
 
 Notes:
 When reading in a new dataset,
-it is always a good idea to have a look at a few rows
+it is always a good idea to glimpse at a few rows
 like we did in the previous slide
-to get an idea of how the data looks.
+to get an idea of what the data looks like.
 
 Another helpful practice is to use the `.info()` method
 to get an overview of the column data types
 and see if there are any `NaNs` (missing values).
+
+---
+
+## Draw a line chart for how you think the world population has changed since the 1800s
+
+
+Draw a line chart with how you
+
+Notes:
+Now that we are somewhat familiar with the data formats,
+let's think about what we would want to visualize and why.
+
+Since the data reaches all the way back to the 1800s,
+it would be really interesting to plot
+how the world population have been growing up until today.
+We could use a line plot for this
+as we learned in the first module.
+
+If we drew this visualization out on paper,
+we would draw a a single line that was increasing from the 1800s up until today
+as the population increased.
+
+But how do you think the population was increasing during this period,
+quickly or slowly?
+And was it as the same rate all the time?
+Draw this out on paper yourself
+so that it is clear what you expect the plot
+before going to the next slide.
 
 ---
 
@@ -119,14 +147,7 @@ alt.Chart(gm).mark_line().encode(
     y='population')
 ```
 
-Notes:
-Since the data reaches all the way back to the 1800s,
-it would be really interesting to plot
-how the world population have been growing up until today.
-We could use a line plot for this
-as we learned in the first module.
-
-But this doesn't look line an line plot,
+But the plot on this slide doesn't look like a line plot,
 why is that?
 
 Because every country has multiple entries,
