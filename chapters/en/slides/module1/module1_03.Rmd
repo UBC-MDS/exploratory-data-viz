@@ -25,12 +25,10 @@ Notes:
 
 ---
 
-When learning about data visualization, it is helpful to distinguish between:
+When learning about data visualization, it is helpful to distinguish between the following two types of plotting philosophies:
 
-- Imperative and, 
-- Declarative 
-
-plotting packages.
+1. Imperative
+2. Declarative 
 
 Notes: 
 
@@ -41,7 +39,8 @@ but it is also confusing,
 especially when starting out and trying to decide which package to choose.
 
 When learning about data visualization,
-it is helpful to distinguish between *imperative* and *declarative* plotting packages.
+it is helpful to distinguish between plotting packages that follow either an
+*imperative* or a *declarative* visualization philosophhy.
 
 
 ---
@@ -116,7 +115,7 @@ for row_number, row_data in enumerate(dataframe):
     plot.add_point(x=row_data['Area'], y=row_data['Population'], color=colors[row_number])
 ```
 
-```{python echo=F}
+```{python echo=FALSE}
 import pandas as pd
 import altair as alt
 from io import StringIO
@@ -207,7 +206,7 @@ while imperative visualization tools focus on **plot construction details**.
 point_plot(data=dataframe, x='Area', y='Population', color='Country')
 ```
 
-```{python echo=F}
+```{python echo=FALSE}
 (alt.Chart(df).mark_circle(size=200).encode(
     alt.X('Area'),
     alt.Y('Population'),
