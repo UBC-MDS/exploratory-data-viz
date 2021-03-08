@@ -30,9 +30,7 @@ for showing distributions of data.
 ```{python}
 import pandas as pd
 
-
-url = 'https://raw.githubusercontent.com/UofTCoders/workshops-dc-py/master/data/processed/world-data-gapminder.csv'
-gm = pd.read_csv(url, parse_dates=['year'])
+gm = pd.read_csv('data/world-data-gapminder.csv', parse_dates=['year'])
 gm2018 = gm[gm['year'] == '2018']
 gm2018
 ```
@@ -55,23 +53,39 @@ or the entire date string in the format shown in the slide.
 ```{python}
 import altair as alt
 
-
 alt.Chart(gm2018).mark_bar().encode(
     x='region',
-    y='sum(population)')
+    y=alt.Y('sum(population)', title='Population'))
 ```
 
 Notes:
-Bar charts are often avoided when showing summary statistics such as the mean
-because they hide any variation,
-something we will talk more about in later modules.
+Bar charts are often avoided when visualizing summary statistics
+where it is important to display the variation in the raw data.
 
-But they are fine for showing statistics
-such as counts of observations, summations, or individual values
-(e.g. the number of people in a country for a specific year).
+This is the case for measures of central tendency,
+such as the mean and median,
+which are better represented with other visualizations
+that we will cover later in the course.
 
-Here we create a bar chart of a single value per country,
-which represents the sum of all the countries' populations.
+Bar chart are a good choice for representing individual values,
+such as the number of people living in a country
+at a specific point in time.
+
+Some summary statistics are displayed as single values,
+such as counts of observations and summations,
+and bar charts are suitable for these as well.
+
+We will talk more about how to best represent summary statistics 
+and variation in raw data when we learn about distributions
+in the next module.
+
+Here we are answering the question
+"How many people live in each continent?",
+by creating a bar chart of a single value per continent
+representing the sum of the populations from the countries in that region.
+
+We can see that more than half the world's population is living in Asia,
+and almost twice as many people live in Africa compared to Europe.
 
 ---
 
@@ -79,8 +93,8 @@ which represents the sum of all the countries' populations.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    y='region',
-    x='sum(population)')
+    x=alt.X('sum(population)', title='Population'),
+    y='region')
 ```
 
 Notes:
@@ -108,43 +122,57 @@ alt.Chart(gm2018).mark_bar().encode(
 ```
 
 Notes:
-To count values,
-we can use the aggregation function `count()` in Altair.
+What if we wanted to know how many countries there were within each continent?
+
+Since we already have filtered the data to contain only values from a single year,
+we know that each country will only occur once in the dataset.
+
+So to answer this question,
+we could count the number of observations/rows in the dataframe
+for each continent.
+
+To count observations in Altair,
+we can use the aggregation function `count()`.
 
 We don't need to specify a column name for the y-axis,
 since we are just counting values in each categorical group on the y-axis.
 
 ---
 
-## Ordering bars makes them easier to interpret
+## Setting the axis title clarifies what we are visualizing
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x='count()',
-    y=alt.Y('region'))
+    x=alt.X('count()', title='Number of countries'),
+    y='region')
 ```
 
 Notes:
-Unless the categorical axis has a natural order to it,
-it is best to sort bar charts from high to low values.
+The default axis value for counts is "Count of Records",
+where "records" is another name for "observations".
 
-This makes it easier to see any trends in the data,
-and to compare bars of similar height more carefully.
+As previously,
+we can clarify what we are visualizing by setting a title.
 
-To sort the bars,
-we will use the helper functions `alt.X` and `alt.Y`,
-instead of `x=` and `y=`.
+What if we wanted to know how many countries there were within each continent?
 
-These have the role of customizing things like order, groups, and scale for the axis.
-When using just `y='column'`,
-we're still calling `alt.Y()` under the hood,
-we just save ourselves some typing.
+Since we already have filtered the data to contain only values from a single year,
+we know that each country will only occur once in the dataset.
 
-In this slide,
-we use `alt.Y`
-on its own without any additional argument
-to recreate the same plot as above
-just to demonstrate how it works.
+So to answer this question,
+we could count the number of observations/rows in the dataframe
+for each continent.
+
+To count observations in Altair,
+we can use the aggregation function `count()`.
+
+We don't need to specify a column name for the y-axis,
+since we are just counting observations
+in each `region`.
+
+In the resulting chart,
+we can see that Africa and Asia has the most individual countries,
+whereas Oceania has the fewest.
 
 ---
 
@@ -152,12 +180,30 @@ just to demonstrate how it works.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x='count()',
+    x=alt.X('count()', title='Number of countries'),
     y=alt.Y('region', sort='x'))
 ```
 
 Notes:
-Sorting can now be done via the `sort` parameter in `alt.Y`.
+By default,
+Altair sorts categorical values in alphabetical order.
+
+For most data,
+it becomes easier to interpret if the bars are sorted 
+from high to low values.
+An exception to this guidelines is
+if the categorical axis has a natural order to it,
+such as weekdays, months, etc.
+
+This makes it easier to see trends in the data,
+and to compare bars of similar height more accurately.
+
+To sort the bars,
+we will use the helper functions `alt.X` and `alt.Y` again.
+
+As with all arguments passed to Python functions,
+we can leave out the parameter names (`x=` and `y=`)
+if we pass the arguments in the order they are defined in the function signature.
 
 In this example,
 we're typing `sort='x'` to specify that we want to sort
@@ -174,44 +220,48 @@ as in this slide.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x='count()',
+    x=alt.X('count()', title='Number of countries'),
     y=alt.Y('region', sort='-x'))
 ```
 
+Notes:
 If we for some reason would want the reverse order,
 we could use the minus sign before the axis reference.
+This can be helpful in cases where you are making a vertical bar chart,
+since it would then align the tallest bar next to the y-axis.
 
 ---
 
-## Sorting in a custom order
+## A custom order can be used for the sort
 
 ```{python}
 my_order = ['Africa', 'Europe', 'Oceania', 'Asia', 'Americas']
 alt.Chart(gm2018).mark_bar().encode(
-    x='count()',
+    x=alt.X('count()', title='Number of countries'),
     y=alt.Y('region', sort=my_order))
 ```
 
 Notes:
-Sometimes there is a natural order to our data
+Sometimes there is a natural order to the values on the categorical axis
 that we want to use for the bars,
-for example days of the week.
+for example days of the week
+or months of the year.
 
 For situations like this,
 we can pass a list or array
 to the `sort` parameter.
 
 We can either create this list manually as we did in this slide,
-or use the pandas sort function if we wanted
-for example reverse alphabetical order.
+or use the pandas sort function if we 
+for example wanted to sort in reverse alphabetical order.
 
-To learn more about good considerations
+To learn more about important considerations
 when plotting counts of categorical observations,
 you can refer to [chapter 6 of Fundamental of Data Visualizations](https://clauswilke.com/dataviz/visualizing-amounts.html).
 
 ---
 
-## Using bars to show counts of quantitative values
+## Using bars to show counts of quantitative variables
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
@@ -223,27 +273,38 @@ Notes:
 So far we have been counting observations in categorical groups
 (the continents).
 
-Another common use of bar charts is to count how many observations
-fall into numerical intervals
-in an attempt to estimate the distribution, or shape, of the entire dataset.
+Another common use of bar charts
+is to visualize the range
+and frequency/count of the values in our data.
+This is often referred to as estimating the "distribution" of the data,
+which we will talk more about in the next module.
 
 This type of chart is so common that it has its own name: histogram.
 
-The first step we need to perform in Altair,
-is to divide the axis into intervals,
-which is called binning.
+In our data,
+we might want to answer the question
+"How long do people around the world live?"
+or in other words
+"What is the distribution of life expectancy for different countries?".
 
-If we would skip this binning step,
-a bar would be plotted for each of the unique numerical values,
-and our histogram would look very spiky as you can see in this slide.
+If we create a histogram directly for the numerical values
+its appearance would be very spiky,
+as you can see in this slide.
 
-This is because there are very few values that are exactly the same.
+This happens because there are very few values that are exactly the same.
 
 For example,
 values like 67.2, 69.3, 69.5, etc,
 would all get their own bar
 instead of being in the same bar
 representing the interval 65-70.
+
+If we had ordinal/ordinal values,
+such as the numbers on a dice,
+then it would make sense to have one bar per value on the dice,
+but in the case of quantitative/continuous data
+as we have here,
+this is not a good strategy.
 
 ---
 
@@ -256,6 +317,11 @@ alt.Chart(gm2018).mark_bar().encode(
 ```
 
 Notes:
+Instead,
+we want to create intervals or "bins"
+that represent ranges of numerical values
+and then count all the observations within each of these ranges.
+
 To enable binning of the x-axis in Altair,
 we can set `bin=True` inside `alt.X`.
 
@@ -267,25 +333,48 @@ In contrast to bar charts,
 it is rarely beneficial to make horizontal histograms
 since the labels are numbers which don't need to be rotated to be readable.
 
+You can also see that we have not changed the title of the y-axis.
+There isn't really any more informative title we can substitute for here,
+since the length of each bar simply represents the count of observations/records in each bin.
+
+Now it is easier to see where the life expectancy of the countries fall.
+We can see that most countries seem to have a life expectancy between 75 and 80 years,
+and that only very few have one under 60.
+However,
+these conclusions will depend on exactly how wide our bins are,
+which we will talk more about in the next module.
+
 ---
 
-## Changing the number of bins
+## Narrower bins increase the resolution along the axis
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=20), title='Life expectancy'),
     y='count()')
 ```
 
 Notes:
 Although the automatically calculated number of bins is often appropriate,
-it tends to be on the low side.
-
-While to many bins make the plot look spiky,
-having too few bins can hide the true shape of the data distribution.
+we might sometimes want to increase the resolution 
+of our visualization by have narrower bins.
 
 We can change the number of bins by passing `alt.Bin(maxbins=30)`
 to the `bin` parameter instead of passing the value `True`.
+
+Note that you will not get the exact number of bins,
+Altair will find a number than aligns well with the axis ticks
+within the max you specified
+(the `step` parameter can be used to set and exact bin width if desired).
+
+Here we also changed the title because "binned" 
+is not really necessary
+and it is largely clear from the axis already that each bar spans a range of numbers.
+
+We will talk more about histograms
+and other ways to represent distributions in the next module,
+but it is important to remember that they are just a bar chart
+on a binned axis.
 
 ---
 
