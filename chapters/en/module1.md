@@ -84,7 +84,7 @@ Great!
 
 </opt>
 
-<opt text="immediate">
+<opt text="Immediate">
 
 This isn't quite right. We made this part up!
 

@@ -4,9 +4,16 @@ type: slides
 
 # What is Data Visualization?
 
+<head>
+<base target="_blank">
+</head>
+<head>
+<base target="_blank">
+</head>
+
 Notes: At its core, data visualization is about representing numbers
 with graphical elements such as the position of a line, the length of a
-bar, or the color of a point.
+bar, or the colour of a point.
 
 We often use visualizations to explore data ourselves, and to
 effectively communicate our insights to others, as we will learn in
@@ -23,9 +30,9 @@ Visualizing data can be used to
 
 To create an effective visualization, start by
 
--   Look at the data
--   Think about what you want to achieve by making the visualization
--   Draw it out with pen and paper
+-   Looking at the data
+-   Thinking about what you want to achieve by making the visualization
+-   Drawing it out with pen and paper
 
 Notes: We often visualize data in order to help us answer a specific
 question we have about our dataset, but it can also help us generate new
@@ -46,11 +53,13 @@ In either case, it can be extremely helpful to draw out your plot with
 pen and paper first.
 
 This helps you think about if the plot you are creating makes sense or
-if there is another plot better suited for the task at hands.
+if there is another plot better suited for the task at hand.
 
 Drawing with pen and paper also makes it easier to write the code
 afterwards, since you clearly know what you are expecting the
 visualization to look like.
+
+---
 
 ## Why bother visualizing data instead of showing raw numbers?
 
@@ -499,7 +508,7 @@ numerical data.
 
 Visual systems, on the other hand, have undergone refinement during
 500,000,000 years of evolution, so we can instinctively recognize visual
-patterns and accurately estimate visual properties such as colors and
+patterns and accurately estimate visual properties such as colours and
 distances.
 
 Practically, this means that we can arrive at correct conclusions faster
@@ -701,8 +710,8 @@ std
 </table>
 
 Notes: Summaries, such as the mean and standard deviation, are helpful
-statistical tools that are often useful for detecting difference between
-datasets.
+statistical tools that are often useful for detecting the differences
+between datasets.
 
 However, since they collapse the data into just a few numbers,
 statistical summaries can’t tell the whole story about the data and
@@ -737,7 +746,7 @@ This is one of the main reasons why data visualization is such a
 powerful tool for data exploration and communication.
 
 In our example here, we would come to widely different conclusions about
-the behavior of the data for the four different data sets.
+the behaviour of the data for the four different data sets.
 
 Sets A and C are roughly linearly increasing at similar rates, whereas
 set B reaches a plateau and starts to drop, and set D has a constant
