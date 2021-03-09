@@ -16,6 +16,38 @@ knitr::knit_hooks$set(
         # Using element-wise `&&` to avoid raising warning for multi-line R code chunks.
         # Python chunks are always one line.
         if (options$engine == "python" && grepl("alt.Chart(", x, fixed = T)) {
+            # iframe_start = "<iframe srcdoc='"
+            # iframe_end = "' width=100% height=400px></iframe>"
+
+            # json_start = '
+            # <html>
+            # <head>
+            #   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+            #   <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.8.1"></script>
+            #   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+            # </head>
+            # <body>
+            #   <div id="vis"></div>
+            #   <script type="text/javascript">
+            #     var spec ='
+            # json_end = ';
+            #     var opt = {"renderer": "canvas", "actions": false};
+            #     vegaEmbed("#vis", spec, opt);
+            #   </script>
+            # </body>
+            # </html>'
+            # # cat(paste(iframe_start, json_start, json_end, iframe_end))
+            # module_dir <- paste(unlist(strsplit(options$fig.path, '_'))[1:2], collapse = '_')
+            module_dir <- unlist(strsplit(options$fig.path, '_'))[1]
+            chapter_dir <- unlist(strsplit(options$fig.path, '_'))[2]
+
+            parent_dir <- file.path('..', '..', '..', '..', 'static', module_dir, 'charts', chapter_dir)
+            if (!dir.exists(parent_dir)) {
+                dir.create(parent_dir, recursive = T)
+            }
+            file_name <- paste(file.path(parent_dir, options$label), '.png', sep='')
+
+            # cat(paste('<iframe src="', file_name, '" width=100% height=400px style=border-width:0;></iframe>', sep=''))
             # This section handles layered plots
             # where a parenthesis needs to be added to the last element of the string
             # so that `to_json()` can be called on the entire plot
@@ -26,9 +58,16 @@ knitr::knit_hooks$set(
                 new_last <- paste0('(', last_command, ')')
                 vector_string[length(vector_string)] <- new_last
                 xx <- paste(vector_string, collapse='\n')
-                c(default_source_hook(x, options), vegawidget::vw_to_svg(exec_with_return(paste(xx, '.to_json()'))))}
+                # c(default_source_hook(x, options), vegawidget::vw_to_svg(exec_with_return(paste(xx, '.to_json()'))))}
+                # c(default_source_hook(x, options), paste(iframe_start, json_start, exec_with_return(paste(xx, '.to_json()')), json_end, iframe_end))}
+                exec_with_return(paste(xx, '.save("', file_name, '")', sep=''))
+                c(default_source_hook(x, options), paste('<iframe src="', file_name, '" width=100% height=400px style=border-width:0;></iframe>', sep=''))}
+
             else {
-                c(default_source_hook(x, options), vegawidget::vw_to_svg(exec_with_return(paste(x, '.to_json()'))))}}
+                # c(default_source_hook(x, options), vegawidget::vw_to_svg(exec_with_return(paste(x, '.to_json()'))))}}
+                # c(default_source_hook(x, options), paste(iframe_start, json_start, exec_with_return(paste(x, '.to_json()')), json_end, iframe_end))}}
+                exec_with_return(paste(x, '.save("', file_name, '")', sep=''))
+                c(default_source_hook(x, options), paste('<iframe src="', file_name, '" width=100% height=400px style=border-width:0;></iframe>', sep=''))}}
         else {
             default_source_hook(x, options)}})
 
