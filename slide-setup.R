@@ -12,64 +12,54 @@ reticulate::source_python('../../../../slide-setup.py')
 # text <- gsub('&lt;!DOCTYPE svg PUBLIC .*&gt;', '', text)
 default_source_hook <- knitr::knit_hooks$get('source')
 knitr::knit_hooks$set(
-    source = function(x, options) {
+    source = function(code_chunk, options) {
         # Using element-wise `&&` to avoid raising warning for multi-line R code chunks.
         # Python chunks are always one line.
-        if (options$engine == "python" && grepl("alt.Chart(", x, fixed = T)) {
-            # iframe_start = "<iframe srcdoc='"
-            # iframe_end = "' width=100% height=400px></iframe>"
-
-            # json_start = '
-            # <html>
-            # <head>
-            #   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-            #   <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.8.1"></script>
-            #   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-            # </head>
-            # <body>
-            #   <div id="vis"></div>
-            #   <script type="text/javascript">
-            #     var spec ='
-            # json_end = ';
-            #     var opt = {"renderer": "canvas", "actions": false};
-            #     vegaEmbed("#vis", spec, opt);
-            #   </script>
-            # </body>
-            # </html>'
-            # # cat(paste(iframe_start, json_start, json_end, iframe_end))
-            # module_dir <- paste(unlist(strsplit(options$fig.path, '_'))[1:2], collapse = '_')
-            module_dir <- unlist(strsplit(options$fig.path, '_'))[1]
-            chapter_dir <- unlist(strsplit(options$fig.path, '_'))[2]
-
-            parent_dir <- file.path('..', '..', '..', '..', 'static', module_dir, 'charts', chapter_dir)
-            if (!dir.exists(parent_dir)) {
-                dir.create(parent_dir, recursive = T)
+        if (options$engine == "python" && grepl("alt.Chart(", code_chunk, fixed = T)) {
+            # We can use the chunk option `fig.path` to find the name of the
+            # directory for the executed scripts, which contains the module and
+            # chapter names.
+            module_name <- unlist(strsplit(options$fig.path, '_'))[1]
+            chapter_name <- unlist(strsplit(options$fig.path, '_'))[2]
+            # Create directory for storing the charts if it does not already exist
+            chart_dir <- file.path('..', '..', '..', '..', 'static', module_name, 'charts', chapter_name)
+            if (!dir.exists(chart_dir)) {
+                dir.create(chart_dir, recursive = T)
             }
-            file_name <- paste(file.path(parent_dir, options$label), '.png', sep='')
+            # The label of the chunk is set automaticlly by default which makes
+            # it suitable for defining the file name of each chunk's chart.
+            file_name <- paste(file.path(chart_dir, options$label), '.html', sep='')
 
-            # cat(paste('<iframe src="', file_name, '" width=100% height=400px style=border-width:0;></iframe>', sep=''))
-            # This section handles layered plots
-            # where a parenthesis needs to be added to the last element of the string
-            # so that `to_json()` can be called on the entire plot
-            # instead of just the last layer.
-            vector_string <- unlist(strsplit(x, '\n'))
+            # This first if section handles layered plots where a parenthesis
+            # needs to be added to the last element of the string so that
+            # `to_X()` can be called on the entire plot instead of just the
+            # last layer.
+            vector_string <- unlist(strsplit(code_chunk, '\n'))
             last_command <- tail(vector_string, 1)
             if (grepl('\\+|\\&|\\|', last_command)) {
                 new_last <- paste0('(', last_command, ')')
                 vector_string[length(vector_string)] <- new_last
-                xx <- paste(vector_string, collapse='\n')
-                # c(default_source_hook(x, options), vegawidget::vw_to_svg(exec_with_return(paste(xx, '.to_json()'))))}
-                # c(default_source_hook(x, options), paste(iframe_start, json_start, exec_with_return(paste(xx, '.to_json()')), json_end, iframe_end))}
-                exec_with_return(paste(xx, '.save("', file_name, '")', sep=''))
-                c(default_source_hook(x, options), paste('<iframe src="', file_name, '" width=100% height=400px style=border-width:0;></iframe>', sep=''))}
+                code_chunk_to_execute <- paste(vector_string, collapse='\n')
+            }
 
             else {
-                # c(default_source_hook(x, options), vegawidget::vw_to_svg(exec_with_return(paste(x, '.to_json()'))))}}
-                # c(default_source_hook(x, options), paste(iframe_start, json_start, exec_with_return(paste(x, '.to_json()')), json_end, iframe_end))}}
-                exec_with_return(paste(x, '.save("', file_name, '")', sep=''))
-                c(default_source_hook(x, options), paste('<iframe src="', file_name, '" width=100% height=400px style=border-width:0;></iframe>', sep=''))}}
+                code_chunk_to_execute <- code_chunk
+            }
+
+            # We technically don't need execute with return when saving a file
+            # to disk (just execute is enough), but if we ever want to switch
+            # back to inserting the charts as svg/html strings directly in the
+            # md-document then this is needed.
+            exec_with_return(paste(code_chunk_to_execute, '.save("', file_name, '")', sep=''))
+            # The output to the md document is the iframe string referencing
+            # the plot file we just saved.
+            c(default_source_hook(code_chunk, options),
+              paste('<iframe src="', file_name, '" width=100% height=400px style=border-width:0;></iframe>', sep=''))
+        }
         else {
-            default_source_hook(x, options)}})
+            default_source_hook(code_chunk, options)}
+    }
+)
 
 # To get the interactive vega HTML instead of SVG when knitting,
 # the source hook needs to be changed from using `vw_to_svg` to using `knit_print.vegaspec`.
@@ -92,9 +82,9 @@ knitr::knit_hooks$set(
 # alt.LayerChart shows up in both and must be removed
 default_output_hook <- knitr::knit_hooks$get('output')
 knitr::knit_hooks$set(
-    output = function(x, options) {
-        if (options$engine == "python" && grepl("alt\\..*Chart\\(", x)) {
+    output = function(code_chunk, options) {
+        if (options$engine == "python" && grepl("alt\\..*Chart\\(", code_chunk)) {
             # Swallow the output so that "alt.Chart(...)" is not printed
         }
         else {
-            default_output_hook(x, options)}})
+            default_output_hook(code_chunk, options)}})
