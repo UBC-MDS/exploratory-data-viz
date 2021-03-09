@@ -21,10 +21,11 @@ Notes:
 
 <br>
 
-
 ---
 
-When learning about data visualization, it is helpful to distinguish between the following two types of plotting philosophies:
+## There are two types of visualization approaches
+
+When learning about data visualization, it is helpful to distinguish between the following two approaches to visualization:
 
 1. Imperative
 2. Declarative 
@@ -331,9 +332,7 @@ and includes interactive features without reinventing the wheel.
 
 ```{python}
 from vega_datasets import data
-```
 
-```{python}
 cars = data.cars()
 cars
 ```
@@ -438,9 +437,11 @@ Notes:
 By spreading out the data along both the x and y-axis,
 we can answer our initial question about the relationship between car weight and gas mileage.
 as it appears that the heavier cars are the ones that have the poorest mileage.
+
 Although we might have expected this to be the case,
 visualizing all the data points also provides
 information on the nature of the relationship between weight and mileage.
+
 It appears that the x-y points don't simply follow a straight line,
 but rather a curved line that where the mileage drop quickly
 when moving away from the lightest cars,
@@ -504,11 +505,13 @@ to visualize the gradual increase in the numerical column `Horsepower`.
 In this slide,
 we instead chose to colour the points per the categorical column `Origin`
 (where the car was made).
+
 As you can see,
 Altair detects that this column contains categorical data
 (with the help of pandas)
 and picks a different colour scale to facilitate distinction between the categories.
 As in the previous slide,
+
 Altair automatically adds a helpful legend,
 and we can see that the heavier, more powerful cars are primarily manufactured in the US,
 while the lighter more fuel-efficient ones are manufactured in Europe and Japan
@@ -531,6 +534,7 @@ Notes:
 Although Altair's colour scales are designed to be effective and easy to interpret,
 we can make the categories in our plot even more distinct
 by encoding the same categorical column as both colour and shape.
+
 This also makes visualizations much easier to interpret and understand
 for anyone with visual colour deficiency
 (about 10% of the population).
@@ -555,10 +559,12 @@ Sometimes a visualization tries to do too much.
 In this example,
 we have added the size channel
 to indicate the engine power.
+
 Although Altair elegantly handles the dual legends,
 it is difficult for us to discern useful information from this plot.
 If you go back to the plot where we encoded weight in the colour channel,
 you can see that the plot is much clearer.
+
 Later we will learn more about how to efficiently load a visualization
 with an appropriate amount of information,
 and what the research indicates
