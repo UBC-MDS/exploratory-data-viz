@@ -13,7 +13,7 @@ def test():
     assert "island" in str(mass_density_plot.transform), "Make sure you are grouping by 'island'."
     assert "body_mass_g" in str(mass_density_plot.transform), "Make sure you are computing the density values using the 'body_mass_g' column."
     assert "density" in str(mass_density_plot.transform), "Make sure you are giving a name of 'densitys' to the KDE estimates"
-    assert "steps=100" in __solution__, "Make sure you are using  steps=100 when computing the KDE."
+    assert "steps: 100" in str(mass_density_plot.transform), "Make sure you are using  steps=100 when computing the KDE."
     assert mass_density_plot.encoding.color.shorthand == 'island', "Make sure you are coloring by island."
     assert mass_density_plot.encoding.x.shorthand == 'body_mass_g', "Make sure you are plotting 'body_mass_g' on the X-axis."
     assert mass_density_plot.encoding.y.shorthand == 'density:Q', "Make sure you are plotting 'density' as quantititave on the X-axis."
