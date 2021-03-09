@@ -4,13 +4,6 @@ type: slides
 
 # Creating bar charts and histograms
 
-<head>
-<base target="_blank">
-</head>
-<head>
-<base target="_blank">
-</head>
-
 Notes: In this module we will be learning how to create bars charts for
 counting observations, and special types of bar chars called histograms
 for showing distributions of data.
