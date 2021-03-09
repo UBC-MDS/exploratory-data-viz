@@ -29,34 +29,6 @@ Notes:
 
 ---
 
-```{python include=FALSE}
-import altair as alt
-from vega_datasets import data
-
-
-cars = data.cars()
-alt.Chart(cars).mark_point().encode(
-    x='Weight_in_lbs',
-    y='Miles_per_Gallon',
-    color='Origin')
-```
-
-
-```{python}
-point_plot = alt.Chart(cars).mark_point().encode(
-    x='Weight_in_lbs',
-    y='Miles_per_Gallon',
-    color='Origin')
-    
-line_plot = alt.Chart(cars).mark_line().encode(
-    x='Year',
-    y='mean(Miles_per_Gallon)',
-    color='Origin')
-    
-point_plot | line_plot 
-```
-
-
 
 Notes: 
 
@@ -127,8 +99,8 @@ but also when creating plots for yourself.
 
 These two examples are originally from [Jeffrey Heer's PyData talk](https://www.youtube.com/watch?v=hsfWtPH2kDg),
 who is a visualization researcher at the University of Washington
-and whose research group created D3 and VegaLite
-(which Altair is based on).
+and whose research group created the D3 and VegaLite packages
+which Altair is based on.
 
 ---
 

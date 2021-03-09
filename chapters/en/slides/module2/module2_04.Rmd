@@ -17,12 +17,6 @@ type: slides
 
 # Creating Area Charts
 
-<head>
-    <base target="_blank">
-</head><head>
-    <base target="_blank">
-</head>
-
 Notes:
 In this module
 we will be learning how to create area charts 
@@ -60,9 +54,12 @@ Notes:
 We will be visualizing global health data to answer the question:
 How has the population for different regions around the world changed over time?
 
-This is the same data we are working with in the assignments for the first two modules.
+This dataset is more similar to those you will encounter in the wild
+than the sample dataset we saw in the first module.
+We will be exploring this data in the assignments for the first two modules.
 
-We will be looking at many different data sets in later labs,
+In later labs
+we will look at many other datasets,
 but we're sticking to a familiar one for now
 so that we can focus on laying down a solid understanding
 of the visualization principles with data that we already know.
@@ -75,24 +72,20 @@ of the visualization principles with data that we already know.
 import pandas as pd
 
 gm = pd.read_csv('data/world-data-gapminder.csv', parse_dates=['year'])
-# TODO remove when we change to HTML or rewrite text as for why top ten
-gm = gm[gm['country'].isin(gm[gm['year'] == '2018'].nlargest(10, ['population'])['country'])]
 gm
 ```
 
 Notes:
-This dataset is made available via an URL
-and we can download and read it into pandas
-with `read_csv`.
-
-Here we also tell pandas to read in the `year` column as a date,
+As we read in the data with `pandas`,
+we specify to read in the `year` column as a date,
 rather than an integer,
 which is the default behaviour.
 
 Remember that Altair uses the `pandas` data types
 to infer the data it is working with.
 Integers would show up on the Altair chart axes as `1,990, 2,000, etc`
-whereas dates are shown as `1990, 2000, etc`
+whereas dates are shown as `1990, 2000, etc`,
+so make sure to parse these columns as dates when using pandas.
 
 ---
 
@@ -112,7 +105,113 @@ Another helpful practice is to use the `.info()` method
 to get an overview of the column data types
 and see if there are any `NaNs` (missing values).
 
+If there are many missing values in a column,
+we would want to look into why that is.
+Later in the course we will learn about how to visualize
+missing values to understand if there are patterns
+in which values are missing,
+which could affect our data analysis.
+
+In this and the previous slide,
+we can also see that our dataset is pretty big,
+there are almost 40,000 rows!
+
+The first time working with such large datasets in Altair can be a bit confusing
+because Altair saves the entire dataframe as part of the visualization,
+when working with `pandas` dataframes,
+
+This is great because each visualization is reproducible in itself,
+we don't need to go looking for the data if we come across a plot on the web,
+or worry that the authors didn't upload it.
+
+However,
+for large datasets this causes the visualizations files to become really big,
+and Altair shows a warning for any dataset larger than 5000 rows.
+
+We will talk about this in detail in a later module,
+and see different strategies for working with large datasets.
+
 ---
+
+
+## Working with large data in Altair via URLs
+
+```python
+alt.Chart('https://website.com/data.csv').mark_line().encode(
+    x='column1:T',
+    y='column2:Q')
+```
+
+Notes:
+In this slide deck,
+we're going to leverage the fact that Altair does not have to work with dataframes,
+but can also use a URL link that points to data
+that has been uploaded somewhere on the web.
+The slides show an example of what this syntax looks like in general.
+
+Since we have uploaded our dataset to the course online repository,
+we will read the data directly from there
+using this url
+<https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/main/chapters/en/slides/module2/data/world-data-gapminder.csv>.
+
+This is powerful since we can use any data online
+without downloading it first
+and it allows us to create Altair charts
+without worrying about that the entire dataframe will be included!
+Since Altair knows the location of the data online,
+the chart is still reproducible
+as long as the data is not removed from its online location.
+
+The drawback of not using a dataframe,
+is that Altair cannot rely on pandas to infer
+what type of data there is in each column,
+so we need to help it by indicate the datatype.
+
+This is what the `:T` and `:Q` after the column names does
+and an explanation of all the data types in Altair
+can be found in the next slide.
+
+
+
+## Data types needs to be manually specified when not working with pandas
+
+| Data Type    | Shorthand Code | Description                    | Examples                               |
+| ------------ | -------------- | ------------------------------ | -------------------------------------- |
+| Ordinal      | `O`            | a discrete ordered quantity    | "dislike", "neutral", "like"           |
+| Nominal      | `N`            | a discrete un-ordered quantity | eye color, postal code, university     |
+| Quantitative | `Q`            | a continuous quantity          | 5, 5.0, 5.011                          |
+| Temporal     | `T`            | a time or date value           | date (August 13 2020), time (12:00 pm) |
+
+Notes:
+Altair recognizes the four main column types,
+which you can see in this slide
+(that you also saw in the Programming with Python course).
+
+Ordinal and nominal both describe categorical data. 
+
+Ordinal implies that there is a natural order to the categories.
+for example, movie ratings with 1-5 stars would be an ordinal scale since a five star rating is better than a single star rating.
+
+In contrast,
+there is no such order for nominal categories,
+for example colors, fruits, or countries.
+
+Quantitative data describes data that is continuous,
+which means that it is a number
+that can be described with infinite precision.
+For example,
+someone's height could be said to be either 170 cm, 170.12 cm, 170.1281 cm, and so on
+depending on how accurately we can measure them.
+
+Dates are generally temporal,
+but there are instances when it makes sense to defines them as ordinal or even nominal categories,
+for example when having just a few dates to compare between.
+
+Armed with this knowledge,
+let's get started visualizing our data!
+
+---
+
 
 ## Draw a line chart for how you think the world population has changed since the 1800s
 
@@ -125,7 +224,8 @@ Take a few minutes to first sketch out how you would expect your plot to appear 
 
 Notes:
 
-Now that we are somewhat familiar with the data formats,
+Now that we have seen what the datatabel looks like,
+and which data types the values in each column are,
 let's think about what we would want to visualize and why.
 
 Since the data reaches all the way back to the 1800s,
@@ -159,11 +259,11 @@ as the population increased. It's a good idea to include axis labels too!
 ```{python}
 import altair as alt
 
-alt.Chart(gm).mark_line().encode(
-    x='year',
-    y='population')
+gm_url = 'https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/main/chapters/en/slides/module2/data/world-data-gapminder.csv'
+alt.Chart(gm_url).mark_line().encode(
+    x='year:T',
+    y='population:Q')
 ```
-
 
 Notes:
 
@@ -184,9 +284,9 @@ That's not what we want!
 ## The *.sum()* aggregate method will show us the trend of the entire world
 
 ```{python}
-alt.Chart(gm).mark_line().encode(
-    x='year',
-    y='sum(population)')
+alt.Chart(gm_url).mark_line().encode(
+    x='year:T',
+    y='sum(population):Q')
 ```
 
 Notes:
@@ -220,9 +320,9 @@ if the axis title read "World population" instead.
 ## Changing axes titles clarifies makes our plot easier to interpret
 
 ```{python}
-alt.Chart(gm).mark_line().encode(
-    x='year',
-    y=alt.Y('sum(population)', title='World population'))
+alt.Chart(gm_url).mark_line().encode(
+    x='year:T',
+    y=alt.Y('sum(population):Q', title='World population'))
 ```
 
 Notes:
@@ -250,9 +350,9 @@ when an automatic label might be confusing.
 ## Area charts are also effective at visualizing trends over time
 
 ```{python}
-alt.Chart(gm).mark_area().encode(
-      alt.X('year'),
-      alt.Y('sum(population)', title='World population'))
+alt.Chart(gm_url).mark_area().encode(
+    alt.X('year:T'),
+    alt.Y('sum(population):Q', title='World population'))
 ```
 
 Notes:
@@ -277,10 +377,10 @@ as we will see next.
 ## Area charts are preferred when the total of the groups is the most important
 
 ```{python}
-alt.Chart(gm).mark_area().encode(
-    alt.X('year'),
-    alt.Y('sum(population)', title='World population'),
-    color='region')
+alt.Chart(gm_url).mark_area().encode(
+    alt.X('year:T'),
+    alt.Y('sum(population):Q', title='World population'),
+    color='region:N')
 ```
 
 Notes:
@@ -301,10 +401,10 @@ we can't really tell if Europe or Africa, has the largest population in the most
 ## It is helpful to clarify that the areas are stacked on top of each other
 
 ```{python}
-alt.Chart(gm).mark_area().encode(
-    alt.X('year'),
-    alt.Y('sum(population)', title='Cumulative population of stacked regions'),
-    color='region')
+alt.Chart(gm_url).mark_area().encode(
+    alt.X('year:T'),
+    alt.Y('sum(population):Q', title='Cumulative population of stacked regions'),
+    color='region:N')
 ```
 
 Notes:
@@ -329,10 +429,10 @@ and give a rough idea of the contributions from different groups.
 ## Line charts are preferred when the individual groups are the most important
 
 ```{python}
-alt.Chart(gm).mark_line().encode(
-    alt.X('year'),
-    alt.Y('sum(population)', title='Population'),
-    color='region')
+alt.Chart(gm_url).mark_line().encode(
+    alt.X('year:T'),
+    alt.Y('sum(population):Q', title='Population'),
+    color='region:N')
 ```
 
 Notes:
@@ -359,9 +459,9 @@ split line charts are ideal when you want to compare the different groups accura
 ## When will the world's population stop growing?
 
 ```{python}
-alt.Chart(gm).mark_area().encode(
-    alt.X('year'),
-    alt.Y('sum(population)', title='World population'))
+alt.Chart(gm_url).mark_area().encode(
+    alt.X('year:T'),
+    alt.Y('sum(population):Q', title='World population'))
 ```
 
 Notes:
@@ -381,9 +481,9 @@ Will the world population keep growing like this for much longer?
 ## The world population is predicted to stabilize at around 11 billion
 
 ```{python}
-alt.Chart(gm).mark_area().encode(
-    alt.X('year'),
-    alt.Y('mean(children_per_woman)', title='Average children per woman worldwide'))
+alt.Chart(gm_url).mark_area().encode(
+    alt.X('year:T'),
+    alt.Y('mean(children_per_woman):Q', title='Average children per woman worldwide'))
 ```
 
 Notes:
