@@ -196,6 +196,36 @@ There are still a few things we could tweak to improve this plot!
      'runtime',
      groupby=['genre'],
      as_=['runtime', 'density'],
+     steps=2)
+ .mark_area().encode(
+     x='runtime',
+     y='density:Q',
+     color='genre'))
+```
+
+Notes:
+In the previous slide,
+we can see that the density curves are a bit jagged
+rather than perfectly smooth.
+
+This is because in the calculation of the density,
+we can indicate how many steps along the curve the density should be calculated for.
+This can be more intuitive to understand if we think of the extreme cases:
+
+If we calculated a density for only a single step,
+there would be a straight line between the start and end point,
+and for two steps there the curve would have a single sharp peak like a triangle
+as you can see in this slide.
+
+---
+
+## Creating smoother density plots with more calculation steps
+
+```{python}
+(alt.Chart(movies).transform_density(
+     'runtime',
+     groupby=['genre'],
+     as_=['runtime', 'density'],
      steps=200)
  .mark_area().encode(
      x='runtime',
@@ -204,13 +234,17 @@ There are still a few things we could tweak to improve this plot!
 ```
 
 Notes:
-To make the curves smoother,
-we can increase the resolution
-over which the KDE is calculated
-by setting the step size to a higher number.
+If we instead increased the number of steps,
+we could make the density curves appear smoother.
+Since a density is an approximation of the true distribution underlying our data,
+it makes sense to set the number of steps 
+so that the areas appear smooth.
 
-Now there will be 200 points calculated,
-which gives the area a smoother appearance.
+However,
+more steps takes more computing power since there are more calculations to make.
+If we are working with a large data set
+or creating many plots,
+we might therefore want to decrease the value slightly
 
 ---
 
@@ -237,6 +271,12 @@ overlaps with the other areas.
 The transparency gives us the advantage
 of knowing that there is not small density area hiding behind a bigger one.
 
+However,
+if we had more distributions to compare,
+a semi-transparent density plot would become hard to decipher.
+In such cases we could either filter the data to plot fewer distributions
+or facet them vertically as we saw with the histograms previously.
+
 ---
 
 ## The y-axis does not indicate a meaningful value for density plots
@@ -245,7 +285,8 @@ of knowing that there is not small density area hiding behind a bigger one.
 (alt.Chart(movies).transform_density(
      'runtime',
      groupby=['genre', 'country'],
-     as_=['runtime', 'density'])
+     as_=['runtime', 'density'],
+     steps=200)
  .mark_area().encode(
      x='runtime',
      y='density:Q',
