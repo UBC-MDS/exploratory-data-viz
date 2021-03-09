@@ -259,11 +259,11 @@ as the population increased. It's a good idea to include axis labels too!
 ```{python}
 import altair as alt
 
-alt.Chart(gm).mark_line().encode(
-    x='year',
-    y='population')
+gm_url = 'https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/main/chapters/en/slides/module2/data/world-data-gapminder.csv'
+alt.Chart(gm_url).mark_line().encode(
+    x='year:T',
+    y='population:Q')
 ```
-
 
 Notes:
 
@@ -284,9 +284,9 @@ That's not what we want!
 ## The *.sum()* aggregate method will show us the trend of the entire world
 
 ```{python}
-alt.Chart(gm).mark_line().encode(
-    x='year',
-    y='sum(population)')
+alt.Chart(gm_url).mark_line().encode(
+    x='year:T',
+    y='sum(population):Q')
 ```
 
 Notes:
@@ -320,9 +320,9 @@ if the axis title read "World population" instead.
 ## Changing axes titles clarifies makes our plot easier to interpret
 
 ```{python}
-alt.Chart(gm).mark_line().encode(
-    x='year',
-    y=alt.Y('sum(population)', title='World population'))
+alt.Chart(gm_url).mark_line().encode(
+    x='year:T',
+    y=alt.Y('sum(population):Q', title='World population'))
 ```
 
 Notes:
@@ -350,9 +350,9 @@ when an automatic label might be confusing.
 ## Area charts are also effective at visualizing trends over time
 
 ```{python}
-alt.Chart(gm).mark_area().encode(
-      alt.X('year'),
-      alt.Y('sum(population)', title='World population'))
+alt.Chart(gm_url).mark_area().encode(
+    alt.X('year:T'),
+    alt.Y('sum(population):Q', title='World population'))
 ```
 
 Notes:
@@ -377,10 +377,10 @@ as we will see next.
 ## Area charts are preferred when the total of the groups is the most important
 
 ```{python}
-alt.Chart(gm).mark_area().encode(
-    alt.X('year'),
-    alt.Y('sum(population)', title='World population'),
-    color='region')
+alt.Chart(gm_url).mark_area().encode(
+    alt.X('year:T'),
+    alt.Y('sum(population):Q', title='World population'),
+    color='region:N')
 ```
 
 Notes:
@@ -401,10 +401,10 @@ we can't really tell if Europe or Africa, has the largest population in the most
 ## It is helpful to clarify that the areas are stacked on top of each other
 
 ```{python}
-alt.Chart(gm).mark_area().encode(
-    alt.X('year'),
-    alt.Y('sum(population)', title='Cumulative population of stacked regions'),
-    color='region')
+alt.Chart(gm_url).mark_area().encode(
+    alt.X('year:T'),
+    alt.Y('sum(population):Q', title='Cumulative population of stacked regions'),
+    color='region:N')
 ```
 
 Notes:
@@ -429,10 +429,10 @@ and give a rough idea of the contributions from different groups.
 ## Line charts are preferred when the individual groups are the most important
 
 ```{python}
-alt.Chart(gm).mark_line().encode(
-    alt.X('year'),
-    alt.Y('sum(population)', title='Population'),
-    color='region')
+alt.Chart(gm_url).mark_line().encode(
+    alt.X('year:T'),
+    alt.Y('sum(population):Q', title='Population'),
+    color='region:N')
 ```
 
 Notes:
@@ -459,9 +459,9 @@ split line charts are ideal when you want to compare the different groups accura
 ## When will the world's population stop growing?
 
 ```{python}
-alt.Chart(gm).mark_area().encode(
-    alt.X('year'),
-    alt.Y('sum(population)', title='World population'))
+alt.Chart(gm_url).mark_area().encode(
+    alt.X('year:T'),
+    alt.Y('sum(population):Q', title='World population'))
 ```
 
 Notes:
@@ -481,9 +481,9 @@ Will the world population keep growing like this for much longer?
 ## The world population is predicted to stabilize at around 11 billion
 
 ```{python}
-alt.Chart(gm).mark_area().encode(
-    alt.X('year'),
-    alt.Y('mean(children_per_woman)', title='Average children per woman worldwide'))
+alt.Chart(gm_url).mark_area().encode(
+    alt.X('year:T'),
+    alt.Y('mean(children_per_woman):Q', title='Average children per woman worldwide'))
 ```
 
 Notes:
