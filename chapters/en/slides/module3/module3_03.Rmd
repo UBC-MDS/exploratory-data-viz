@@ -131,16 +131,136 @@ as you will see in the next slide.
 
 Notes:
 This image illustrates how the same barplot (A)
-could have been generated from several different distributions (B, C, D, or E).
+could have been generated from several different distributions (B, C, or D).
+
 If we just looked at the barplot,
 we could not tell which of the distributions it came from,
 but looking at the points directly
 we would arrive at widely different conclusion to what was going on with our data.
 
+In sample B,
+the points seem to be slightly different between the two groups,
+although there is significant overlap between the two distributions.
+
+In sample C there seems to be one outlier data point
+that increases the mean a lot for the one group,
+but most of of the other points are pretty similar between the two groups.
+
+In D, both groups have their data distributed bimodally (in two peaks).
+Maybe this means that there is a third group in this data which all the high values belong too?
+
+All the information that we just mentioned,
+is lost when displaying this data as a bar chart.
+Bar plots are best suited for displaying individual values,
+such as counts, proportions, and sums.
+
 This is why we most of the times need to present a richer representation of the data
-such as a histogram or a density plot.
-Since these do not work well for multiple distributions,
-we will use a compromise: the boxplot.
+such as a histogram or a density plot,
+which are great as long as we don't have too many distributions to compare.
+
+What other plots could we use instead of barplots for comparing many distributions?
+
+---
+
+## Showing individual observations is often more helpful than a barplot
+
+```{python}
+alt.Chart(movies_extended).mark_tick().encode(
+    alt.X('Worldwide Gross'),
+    alt.Y('Major Genre'))
+```
+
+Notes:
+One approach would be to show the individual observations,
+such as in this chart.
+This is a compact plot,
+which makes it easy to compare the different genres,
+since they are close to each other in the chart.
+
+We can also clearly see the reason for why the x-axis goes up to such a large max value:
+There are two movies that grossed highly above the rest!
+
+Which are these movies?
+
+---
+
+## Tooltips are helpful for answering questions about specific observations
+
+```{python}
+alt.Chart(movies_extended).mark_tick().encode(
+    alt.X('Worldwide Gross'),
+    alt.Y('Major Genre'),
+    alt.Tooltip('Title:N'))
+```
+
+Notes:
+Altair really shines in answering questions like this!
+In addition to having a robust visualization grammar,
+Altair also provides a grammar for interactive features.
+
+We will dive deep into more complex chart interactivity
+in the last module in this course,
+and by simply adding a tooltip to our chart as in this slide,
+we can answer the question we posed
+by hovering with the mouse over the two highly grossing movies,
+try it!
+
+(We need the `:N` because there are some title values
+that makes Altair not recognize this dataframe variable as nominal otherwise)
+
+Although this visualization is useful
+in getting information about the individual movies,
+it is hard to tell exactly how many data points
+there are in the area that are completely blue.
+Is it just enough so that we don't see any of the white background
+or are there thousands of observations stacked on top of each other?
+
+This is called plot "saturation" or "overplotting"
+and we will talk more about it in the next module.
+In brief,
+we could use transparency to alleviate this issue to some extend,
+but it is more effective to use color for representing the counts,
+such as in a heatmap.
+
+---
+
+## Heatmaps can comparing multiple distributions without risk of overplotting
+
+```{python}
+(alt.Chart(movies_extended).mark_rect().encode(
+    alt.X('Worldwide Gross', bin=alt.Bin(maxbins=100)),
+    alt.Y('Major Genre'),
+    alt.Color('count()')))
+```
+
+Notes:
+A heatmap of the number of observations
+is very simiar to a histogram,
+but the count is mapped to the color 
+instead of to the height on the y-axis.
+
+This heatmap shows the "color histogram"
+for each of the genres right next to each other
+so that they are easy to compare and contrast.
+
+Here we can see that some genres seem to have most of their observations
+close to zero, such as Comedy and Drama
+whereas others are more spread out,
+such as Adventure movies.
+
+This is a pretty effective visualization,
+but since the color scale is the same for each genre
+and some genres have many more observations than others,
+it can be difficult to accurately interpret
+the distribution of those genres that have few observations.
+
+We wouldn't be able to distinguish
+between regions with 10-20 and 40-50 observations
+since the colors are so similar.
+
+Remember that position can allow us to make more accurate interpretations than color,
+so how can we use position to show multiple distributions
+without using histograms?
 
 ---
 
