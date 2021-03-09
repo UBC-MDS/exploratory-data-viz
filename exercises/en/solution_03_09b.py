@@ -10,9 +10,9 @@ mass_faceted_plot = alt.Chart(penguins_df).transform_density(
      as_=['body_mass_g', 'density'],
      steps=100
      ).mark_area(opacity=0.5).encode(
-         x='body_mass_g',
-         y='density:Q',
-         color='island').properties(
+         alt.X('body_mass_g', title='Mass (grams'),
+         alt.Y('density:Q', title='Density'),
+         alt.Color('island', title='Island')).properties(
               title='body mass distribution by species and island',
               width=200, height=100).facet('species', columns=1)
 

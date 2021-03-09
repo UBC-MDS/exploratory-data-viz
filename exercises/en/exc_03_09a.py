@@ -10,8 +10,8 @@ mass_density_plot = alt.Chart(___).transform_density(
     ___=['body_mass_g', 'density'],
     ___=100
     ).mark_area(___).encode(
-        x=___,
+        alt.X(___),
         ___,
-        colour=___).properties(___)
+        alt.Color(___)).properties(___)
 
 mass_density_plot
