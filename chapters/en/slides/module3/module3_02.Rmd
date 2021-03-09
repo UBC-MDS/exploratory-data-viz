@@ -84,26 +84,38 @@ or just a density plot.
 
 ---
 
-## The movies dataset
+## Reading in the movies dataset
 
 ```{python}
 import pandas as pd
 
-
-movies = pd.read_csv('movies.csv')
+movies = pd.read_csv('data/movies.csv')
 movies
 ```
 
 Notes:
-We will be using the movies dataset again,
-let's see if we can make a plot
-that is easier to interpret
-than the layered histograms
-from the end of the last slide deck.
+We will continue with the movies dataset
+in this slide deck,
+to try to answer the question we posed at the end of the previous chapter:
+"Are there differences in movie runtime between genres?".
+
+As we have seen previously,
+histograms are not effective for this type of comparison between distributions,
+no matter if they are stacked or layered.
+
+We could use faceting to answer this question,
+but ideally we would dedicate the separate facets for the countries
+so that we could also explore the effect of genres within each country's movies.
+
+While row and column-based faceting would be possible,
+those plots require a lot of space.
+Here we will instead explore a new type of visualization,
+the "density plot",
+which allows us to effectively visualize both single and multiple distributions.
 
 ---
 
-## Creating a density plot in Altair required two step
+## Creating a density plot in Altair required two steps
 
 ```{python}
 import altair as alt
