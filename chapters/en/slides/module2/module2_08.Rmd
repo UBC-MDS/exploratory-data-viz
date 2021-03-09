@@ -17,11 +17,6 @@ type: slides
 
 # Creating bar charts and histograms
 
-<head>
-    <base target="_blank">
-</head><head>
-    <base target="_blank">
-</head>
 
 Notes:
 In this module
@@ -48,7 +43,7 @@ we will continue to work with the gapminder dataset.
 To make it more suitable for this slide deck
 let's subset it to include observations from the year 2018 only.
 
-When filtering on a date in pandas,
+When filtering on a date using Pandas,
 we can either type out just the year portion
 or the entire date string in the format shown in the slide.
 
@@ -60,8 +55,8 @@ or the entire date string in the format shown in the slide.
 import altair as alt
 
 alt.Chart(gm2018).mark_bar().encode(
-    x='region',
-    y=alt.Y('sum(population)', title='Population'))
+    alt.X('region'),
+    alt.Y('sum(population)', title='Population'))
 ```
 
 Notes:
@@ -91,7 +86,7 @@ by creating a bar chart of a single value per continent
 representing the sum of the populations from the countries in that region.
 
 We can see that more than half the world's population is living in Asia,
-and almost twice as many people live in Africa compared to Europe.
+and Oceania is by far the least populated.
 
 ---
 
@@ -99,8 +94,8 @@ and almost twice as many people live in Africa compared to Europe.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x=alt.X('sum(population)', title='Population'),
-    y='region')
+    alt.X('sum(population)', title='Population'),
+    alt.Y('region'))
 ```
 
 Notes:
@@ -123,8 +118,8 @@ in this slide deck.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x='count()',
-    y='region')
+    alt.X('count()'),
+    alt.Y('region'))
 ```
 
 Notes:
@@ -143,42 +138,26 @@ we can use the aggregation function `count()`.
 We don't need to specify a column name for the y-axis,
 since we are just counting values in each categorical group on the y-axis.
 
+The default axis value for counts is "Count of Records",
+where "records" is another name for "observations".
+
+As previously,
+we can clarify what we are visualizing by setting a title which we will demonstrate in the next slide. 
+
+
 ---
 
 ## Setting the axis title clarifies what we are visualizing
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x=alt.X('count()', title='Number of countries'),
-    y='region')
+    alt.X('count()', title='Number of countries'),
+    alt.Y('region'))
 ```
 
 Notes:
-The default axis value for counts is "Count of Records",
-where "records" is another name for "observations".
 
-As previously,
-we can clarify what we are visualizing by setting a title.
-
-What if we wanted to know how many countries there were within each continent?
-
-Since we already have filtered the data to contain only values from a single year,
-we know that each country will only occur once in the dataset.
-
-So to answer this question,
-we could count the number of observations/rows in the dataframe
-for each continent.
-
-To count observations in Altair,
-we can use the aggregation function `count()`.
-
-We don't need to specify a column name for the y-axis,
-since we are just counting observations
-in each `region`.
-
-In the resulting chart,
-we can see that Africa and Asia have the most individual countries,
-whereas Oceania has the fewest.
+Here we use the argument `title` within `alt.X()` to edit the title and add a bit of clarity. 
 
 ---
 
@@ -186,8 +165,8 @@ whereas Oceania has the fewest.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x=alt.X('count()', title='Number of countries'),
-    y=alt.Y('region', sort='x'))
+    alt.X('count()', title='Number of countries'),
+    alt.Y('region', sort='x'))
 ```
 
 Notes:
@@ -205,7 +184,7 @@ This makes it easier to see trends in the data,
 and to compare bars of similar height more accurately.
 
 To sort the bars,
-we will use the helper functions `alt.X` and `alt.Y` again.
+we will use the arguments in the helper functions `alt.X` and `alt.Y`.
 
 As with all arguments passed to Python functions,
 we can leave out the parameter names (`x=` and `y=`)
@@ -226,8 +205,8 @@ as in this slide.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x=alt.X('count()', title='Number of countries'),
-    y=alt.Y('region', sort='-x'))
+    alt.X('count()', title='Number of countries'),
+    alt.Y('region', sort='-x'))
 ```
 
 Notes:
@@ -243,8 +222,8 @@ since it would then align the tallest bar next to the y-axis.
 ```{python}
 my_order = ['Africa', 'Europe', 'Oceania', 'Asia', 'Americas']
 alt.Chart(gm2018).mark_bar().encode(
-    x=alt.X('count()', title='Number of countries'),
-    y=alt.Y('region', sort=my_order))
+    alt.X('count()', title='Number of countries'),
+    alt.Y('region', sort=my_order))
 ```
 
 Notes:
@@ -271,8 +250,8 @@ you can refer to [chapter 6 of Fundamental of Data Visualizations](https://claus
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x=alt.X('life_expectancy'),
-    y='count()')
+    alt.X('life_expectancy'),
+    alt.Y('count()'))
 ```
 
 Notes:
@@ -305,7 +284,7 @@ would all get their own bar
 instead of being in the same bar
 representing the interval 65-70.
 
-If we had ordinal/ordinal values,
+If we had ordinal values,
 such as the numbers on a dice,
 then it would make sense to have one bar per value on the dice,
 but in the case of quantitative/continuous data
@@ -318,8 +297,8 @@ this is not a good strategy.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x=alt.X('life_expectancy', bin=True),
-    y='count()')
+    alt.X('life_expectancy', bin=True),
+    alt.Y('count()'))
 ```
 
 Notes:
@@ -356,8 +335,8 @@ which we will talk more about in the next module.
 
 ```{python}
 alt.Chart(gm2018).mark_bar().encode(
-    x=alt.X('life_expectancy', bin=alt.Bin(maxbins=20), title='Life expectancy'),
-    y='count()')
+    alt.X('life_expectancy', bin=alt.Bin(maxbins=30), title='Life expectancy'),
+    alt.Y('count()'))
 ```
 
 Notes:
@@ -368,7 +347,7 @@ of our visualization by have narrower bins.
 We can change the number of bins by passing `alt.Bin(maxbins=30)`
 to the `bin` parameter instead of passing the value `True`.
 
-Note that you will not get the exact number of bins,
+Note that you will not get the exact number of bins that you set in `maxbins` and instead, 
 Altair will find a number that aligns well with the axis ticks
 within the max you specified
 (the `step` parameter can be used to set and exact bin width if desired).
@@ -381,3 +360,9 @@ We will talk more about histograms
 and other ways to represent distributions in the next module,
 but it is important to remember that they are just a bar chart
 on a binned axis.
+
+---
+
+# Let's apply what we learned!
+
+Notes: <br>

@@ -96,7 +96,7 @@ whereas dates are shown as `1990, 2000, etc`
 
 ---
 
-## `info` shows column data types and missing values
+## *.info()* shows column data types and missing values
 
 ```{python}
 gm.info()
@@ -116,10 +116,15 @@ and see if there are any `NaNs` (missing values).
 
 ## Draw a line chart for how you think the world population has changed since the 1800s
 
+<br>
+<br>
+<br>
+<br>
 
-Draw a line chart with how you
+Take a few minutes to first sketch out how you would expect your plot to appear before going to the next slide. 
 
 Notes:
+
 Now that we are somewhat familiar with the data formats,
 let's think about what we would want to visualize and why.
 
@@ -129,16 +134,23 @@ how the world population has been growing up until today.
 We could use a line plot for this
 as we learned in the first module.
 
-If we drew this visualization out on paper,
-we would draw a single line that was increasing from the 1800s up until today
-as the population increased.
-
-But how do you think the population was increasing during this period,
-quickly or slowly?
-And was it at the same rate all the time?
 Draw this out on paper yourself
 so that it is clear what you expect the plot
 before going to the next slide.
+
+
+---
+
+### Our sketched out plot
+
+<center><img src="/module2/drawing.png"  width = "80%"></center>
+
+
+Notes: 
+
+If we drew this visualization out on paper, we would expect something a little like this - a single line that increases from the 1800s up until today
+as the population increased. It's a good idea to include axis labels too! 
+
 
 ---
 
@@ -152,20 +164,24 @@ alt.Chart(gm).mark_line().encode(
     y='population')
 ```
 
+
+Notes:
+
+Next, we try to plot it in Altair using `mark_line()` and maping `year` to the x-axis and `population` to the y-axis. 
+
 But the plot on this slide doesn't look like a line plot,
 why is that?
 
 Because every country has multiple entries,
 one for each year.
 We have plotted the population for every single country
-in every year
-and connected them all with a line.
+in every year and connected them all with a line.
 
 That's not what we want!
 
 ---
 
-## The `sum` aggregate method will show us the trend of the entire world
+## The *.sum()* aggregate method will show us the trend of the entire world
 
 ```{python}
 alt.Chart(gm).mark_line().encode(
@@ -177,7 +193,7 @@ Notes:
 We want to see how the **world** population has been changing.
 
 We can calculate this by summing up all the countries'
-populations for each year via the `sum` aggregation method in Altair.
+populations for each year via the `.sum()` aggregation method in Altair.
 
 That looks much better!
 
@@ -187,6 +203,17 @@ slowly before 1950,
 and more rapidly afterwards.
 
 We will talk more about that in a few slides.
+
+We can see here that Altair automatically changes the axis label for us to reflect the operation
+that we have performed on the data,
+here taking the "sum" of the countries.
+
+This is often great to keep track of how we have aggregated the data,
+but is not always needed.
+
+In this case,
+our plot could be made even clearer
+if the axis title read "World population" instead.
 
 ---
 
@@ -199,16 +226,6 @@ alt.Chart(gm).mark_line().encode(
 ```
 
 Notes:
-Altair automatically changes the axis label for us to reflect the operation
-that we have performed on the data,
-here taking the "sum" of the countries.
-
-This is often great to keep track of how we have aggregated the data,
-but is not always needed.
-
-In this case,
-our plot could be made even clearer
-if the axis title read "World population" instead.
 
 To change an axis title,
 we can use the helper functions `alt.X` and `alt.Y`,
@@ -220,9 +237,12 @@ When using just `y='column'`,
 we're still calling `alt.Y()` under the hood,
 we just save ourselves some typing.
 
+We can also get rid of the `y=` and `x=` parts altogether as well which is even more efficient. 
+
 We will do a deep dive into titles for axis and other chart elements
-in a later module;
-from now and onwards we will just use it to clarify
+in a later module.
+
+For now on we will just use it to clarify
 when an automatic label might be confusing.
 
 ---
@@ -231,8 +251,8 @@ when an automatic label might be confusing.
 
 ```{python}
 alt.Chart(gm).mark_area().encode(
-    x='year',
-    y=alt.Y('sum(population)', title='World population'))
+      alt.X('year'),
+      alt.Y('sum(population)', title='World population'))
 ```
 
 Notes:
@@ -258,8 +278,8 @@ as we will see next.
 
 ```{python}
 alt.Chart(gm).mark_area().encode(
-    x='year',
-    y=alt.Y('sum(population)', title='World population'),
+    alt.X('year'),
+    alt.Y('sum(population)', title='World population'),
     color='region')
 ```
 
@@ -274,8 +294,7 @@ but it is hard to compare exactly,
 especially for regions that are not stacked next to each other.
 
 For example,
-we can't really tell if Europe, Africa, or the Americas
-has the largest population in the most recent year.
+we can't really tell if Europe or Africa, has the largest population in the most recent year.
 
 ---
 
@@ -283,8 +302,8 @@ has the largest population in the most recent year.
 
 ```{python}
 alt.Chart(gm).mark_area().encode(
-    x='year',
-    y=alt.Y('sum(population)', title='Cumulative population of stacked regions'),
+    alt.X('year'),
+    alt.Y('sum(population)', title='Cumulative population of stacked regions'),
     color='region')
 ```
 
@@ -311,8 +330,8 @@ and give a rough idea of the contributions from different groups.
 
 ```{python}
 alt.Chart(gm).mark_line().encode(
-    x='year',
-    y=alt.Y('sum(population)', title='Population'),
+    alt.X('year'),
+    alt.Y('sum(population)', title='Population'),
     color='region')
 ```
 
@@ -323,8 +342,8 @@ and don't care as much about the total of the groups added together.
 
 For example,
 here it is immediately clear that Africa has a bigger population 
-than Europe and the Americas,
-and we can see that the populations shifted around the year 2000.
+than Europe
+and we can see that the populations shifted shortly after the year 2000.
 
 On the other hand,
 it's quite cognitively demanding
@@ -341,8 +360,8 @@ split line charts are ideal when you want to compare the different groups accura
 
 ```{python}
 alt.Chart(gm).mark_area().encode(
-    x='year',
-    y=alt.Y('sum(population)', title='World population'))
+    alt.X('year'),
+    alt.Y('sum(population)', title='World population'))
 ```
 
 Notes:
@@ -363,8 +382,8 @@ Will the world population keep growing like this for much longer?
 
 ```{python}
 alt.Chart(gm).mark_area().encode(
-    x='year',
-    y=alt.Y('mean(children_per_woman)', title='Average children per woman worldwide'))
+    alt.X('year'),
+    alt.Y('mean(children_per_woman)', title='Average children per woman worldwide'))
 ```
 
 Notes:
