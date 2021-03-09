@@ -1,0 +1,260 @@
+---
+params:
+  dynamictitle: "module3_03"
+title: "`r params$dynamictitle`"
+output:
+  md_document:
+    variant: gfm
+    pandoc_args: "--markdown-headings=atx"
+---
+
+```{r setup, include=FALSE}
+source('../../../../slide-setup.R')
+# Remember to also manually update the YAML title above
+```
+
+type: slides
+
+# Comparing many distributions
+
+Notes:
+We have seen have we can use facetting for histograms
+and both faceting and coloring for density plots
+to compare multiple distributions against each other.
+So far we only studied these plots with up to three different distributions to compare,
+but what if we had many more?
+
+---
+
+## The extended movies dataset
+
+```{python}
+import altair as alt
+from vega_datasets import data
+
+
+movies_extended = data.movies().dropna(subset=['Major Genre'])
+movies_extended
+```
+
+Notes:
+For this exercise we will use another movies dataset containing more genres.
+The question we will try to answer is
+"Which genres has the highest worldwide gross?".
+
+---
+
+## Many distributions can't be effectively compared with histograms
+
+```{python}
+alt.Chart(movies_extended).mark_bar().encode(
+    alt.X('Worldwide Gross', bin=alt.Bin(maxbins=30)),
+    alt.Y('count()'),
+    alt.Color('Major Genre'))
+```
+
+Notes:
+This visualization is not effective at all
+in answering our question.
+Most genres have a really low worldwide gross,
+and because our histogram is stacked
+this bar dominates with around 2000 movies,
+and extends the y-axis so that it is hard to see 
+how many observations there are for highest
+x-values
+(but we know there are some since the axis extends that far).
+
+---
+
+## Many distributions can't be effectively compared with densities either
+
+```{python}
+(alt.Chart(movies_extended).mark_area().transform_density(
+    'Worldwide Gross',
+    groupby=['Major Genre'],
+    as_=['Worldwide Gross', 'density'])
+ .encode(
+    alt.X('Worldwide Gross'),
+    alt.Y('density:Q'),
+    alt.Color('Major Genre')))
+```
+
+Notes:
+Although we saw previously that a layered density chart
+is better than a stacked histogram,
+it is no effective in comparing this many distributions
+and has many of the same problems as the histogram in the previous slide.
+
+So what can we do to create an effective comparison between all the genres?
+
+---
+
+## Heatmaps are effective for comparing multiple distributions
+
+```{python}
+(alt.Chart(movies_extended).mark_rect().encode(
+    alt.X('Worldwide Gross', bin=alt.Bin(maxbins=25)),
+    alt.Y('Major Genre'),
+    alt.Color('count()')))
+```
+
+Notes:
+Representing counts with color
+TODO should we have this slide or not, not the best data for heatmap dists
+
+---
+
+## Bar charts are effective for comparing a single value but hides any variation
+
+```{python}
+alt.Chart(movies_extended).mark_bar().encode(
+    alt.X('mean(Worldwide Gross)'),
+    alt.Y('Major Genre'))
+```
+
+Notes:
+We could use a barplot if we were only interested in comparing a single value
+from each distribution,
+such as the mean or median.
+However,
+this is generally not a good idea because any plot that only shows a single value
+will hide the variation in our data
+and could lead to us drawing the wrong conclusion
+as you will see in the next slide.
+
+---
+
+## Showing a single value can lead to incorrect conclusions
+
+<img src=/module3/barplot-hiding-points.png></img>
+
+[Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128)
+
+Notes:
+This image illustrates how the same barplot (A)
+could have been generated from several different distributions (B, C, D, or E).
+If we just looked at the barplot,
+we could not tell which of the distributions it came from,
+but looking at the points directly
+we would arrive at widely different conclusion to what was going on with our data.
+
+This is why we most of the times need to present a richer representation of the data
+such as a histogram or a density plot.
+Since these do not work well for multiple distributions,
+we will use a compromise: the boxplot.
+
+---
+
+## Boxplots show several key statistic from a distribution
+
+<img src=/module3/boxplot-schematic.webp></img>
+
+[What does a box plot tell you? Simply psychology](https://www.simplypsychology.org/boxplots.html)
+
+Notes:
+Instead of showing just the mean or median,
+a box plot shows 5 values.
+The box always represents the median and the upper and lower quartile,
+which means that 50% of the data points lie within the range of the box.
+The whiskers can represent a few different things,
+in this picture they re the min and min and the max (the range) of our data,
+but they can also be 1.5x the interquartile range
+and then any observations outside this are drawn out as individual points
+(this is the case in Altair).
+
+---
+
+## Boxplots can effectively compare multiple distrubtions
+
+```{python}
+alt.Chart(movies_extended).mark_boxplot().encode(
+    alt.X('Worldwide Gross'),
+    alt.Y('Major Genre'))
+```
+
+Notes:
+Now it is much easier to see how the distributions compare!
+We can directly answer the question we posed at the beginning:
+the Action genre generates the highest revenue
+when comparing both the medians and the position of the boxes.
+
+Then it seems like Adventure is the second most highly grossing genres,
+but after that it becomes hard to compare.
+We could make this visualization even more effective by sorting the boxes by value.
+
+---
+
+## Boxplots need to be sorted with a custom list
+
+```{python}
+genre_order = movies_extended.groupby('Major Genre')['Worldwide Gross'].median().sort_values().index.tolist()
+alt.Chart(movies_extended).mark_boxplot().encode(
+    alt.X('Worldwide Gross'),
+    alt.Y('Major Genre', sort=genre_order))
+```
+
+Notes:
+Altair does not support sorting boxplots via the "x" or "-x" shortcut.
+
+Instead we need to create a list of the genres,
+ordered by value.
+
+We can do this with pandas by grouping the dataframe, computing the median for the grossing columns,
+sorting the values, and then extracting the index as a list.
+
+Now the visualization is very effective!
+It is easy to compare genres with similar grossing
+since they are right next to each other in the plot.
+
+---
+
+## Boxplots can be scaled by the number of observations
+
+```{python}
+alt.Chart(movies_extended).mark_boxplot().encode(
+    alt.X('Worldwide Gross'),
+    alt.Y('Major Genre', sort=genre_order),
+    alt.Size('count()'))
+```
+
+Notes:
+The size of the boxes can be made proportional to the count of observations
+in that group.
+
+This helps us see if there are many more observations 
+underlying some of the boxes versus others.
+In our plot,
+we can see that the "comedy" genre has the most movies
+whereas there are few documentaries and black comedies.
+
+
+If we wanted a more precise indication of the counts,
+we could have have used separate barplot instead.
+
+---
+
+## TODO mention violinplots and striplots are often better but not available yet
+
+```{python}
+alt.Chart(movies_extended).mark_bar().encode(
+    alt.X('Worldwide Gross', bin=alt.Bin(maxbins=30)),
+    alt.Y('count()'),
+    alt.Color('Major Genre')).properties(height=50).facet('Major Genre', columns=1)
+```
+
+Also shwo facetted histograms?
+
+Notes:
+While it is possible to make [violin plots](https://altair-viz.github.io/gallery/violin_plot.html)
+and [stripplots](https://altair-viz.github.io/gallery/stripplot.html) (categorical scatter plots) in Altair,
+these do currently not work with a categorical x/y axies,
+and you need to use faceting instead to display different categories,
+which gives us less flexibility.
+Therefore,
+we will primarily use boxplots when comparing multiple distributions with Altair.
+
+---
+
+# Let's apply what we learned!
+
+Notes: <br>

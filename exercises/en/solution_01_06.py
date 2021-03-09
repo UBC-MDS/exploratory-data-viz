@@ -2,9 +2,9 @@ import altair as alt
 from vega_datasets import data
 
 
-stocks = data.stocks()
+cars = data.cars()
 
-alt.Chart(stocks).mark_line().encode(
-    x='date',
-    y='price',
-    color='symbol')
+alt.Chart(cars).mark_point().encode(
+    x='Weight_in_lbs',
+    y='Horsepower',
+    color='Origin')

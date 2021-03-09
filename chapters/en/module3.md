@@ -182,7 +182,7 @@ Tasks:
 Fill in the blanks in the code below so that the following gets accomplished.
 
 - Use the data source `penguins` to make a **stacked** histogram plot.
-- Plot the counts of the `culmen_depth_mm`  and distinguish the penguin `species` using the color channel.
+- Plot the counts of the `culmen_depth_mm`  and distinguise the penguin `species` using the color channel.
 - Make sure to set the `maxbins` argument to something appropriate. 
 - Give it an appropriate title. 
 
@@ -202,7 +202,7 @@ Which species of penguin tend to have shallower culmen depths?
 <choice id="1" >
 <opt text="Chinstrap">
 
-This species has a lot of overlap with the Adelie species. 
+This species actually has a lot of over lap with the Adelie species. 
 
 </opt>
 
@@ -214,7 +214,7 @@ These penguins tend to have a shorter culmen depth.
 
 <opt text="Adelie" >
 
-This species has a lot of overlap with the Chinstrap species. 
+This species actually has a lot of over lap with the Chinstrap species. 
 
 </opt>
 
@@ -233,21 +233,21 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-Using the [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) dataset again, we are going to try to create a layered histogram. 
+Using the [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) dataset again, we are going to try create a layered historgram. 
 
 
 <codeblock id="penguins">
 
 </codeblock>
 
-We want to understand how culmen depth differs over different penguin species. This means we will need to layer the histogram shapes of the `culmen_depth_mm` column. We also want to facet on the `sex` column to see if this affects the distribution. 
+We want to understand how penguins culmen depth differs over different penguin species. This means we will need to layer the histogram shapes of the `culmen_depth_mm` column. We also want to facet on the `sex` columm to see if this has a effect on the distribution. 
 
 Tasks: 
 
 Fill in the blanks in the code below so that the following gets accomplished.
 
 - Use the data source `penguins` to make a **layered** histogram plot and make sure to give it an appropriate opacity.
-- Plot the counts of the `culmen_depth_mm` and distinguish the penguin `species` using the color channel.
+- Plot the counts of the `culmen_depth_mm` and distinguise the penguin `species` using the color channel.
 - Make sure to set the `maxbins` argument to something appropriate and any other arguments needed to make a layered plot. 
 - Give it an appropriate title and facet by the `sex` column making sure that there is only 1 columns so the graphs are stacked vertically. 
 - Make sure to give each faceted plot an independent axis.

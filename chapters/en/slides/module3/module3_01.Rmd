@@ -38,7 +38,8 @@ movies
 
 Notes:
 For this module,
-we will study a dataset of moviescontaining each movie's
+we will study a dataset of movies
+containing each movie's
 title, runtime, budget, revenue, genre, country of production, and average user rating.
 
 Upon see this table,
@@ -75,9 +76,8 @@ as a point.
 This is similar to a scatter plot,
 but only using one of the plot axes.
 
-It works well when there are just a few plots to visualize. 
-
-We are showing you this with only a subset of the data. 
+It works well when there are just a few plots to visualize,
+which is why we subset the data in this slide.
 
 ---
 
@@ -89,13 +89,12 @@ alt.Chart(movies[:50]).mark_point().encode(
 ```
 
 Notes:
-When there are many more observations,
+When there are more observations,
 it becomes really hard to see which ones are where
 since the circular marks are overlapping with each other.
 
 When it becomes hard to tell individual observations apart,
 we say that a plot become saturated.
-
 We will talk more about this concept later in the module.
 
 ---
@@ -114,15 +113,15 @@ as in the previous slide.
 
 The disadvantage of this plot type
 is that it can be a bit harder to see individual observations.
-
 However,
 when we are visualization many marks,
-we are often more interested in how the data is shaped (or distributed) in general,rather than looking at individual points.
+we are often more interested in how the data is shaped (or distributed) in general,
+rather than looking at individual points.
 
 This type of plot with vertical tick marks along one axis
 is so common that it is sometimes referred to by a special name: rugplot.
 
-The visualization grammar of Altair lets us think about it more intuitively
+The visualization grammar of Altair let's us think about it more intuitively
 by composing it with a mark and a single encoding,
 instead of remembering a specific name.
 
@@ -136,9 +135,9 @@ alt.Chart(movies).mark_tick().encode(
 ```
 
 Notes:
-
-When we increase the number of observations even further (to about 500)
-it again becomes difficult to tell exactly how the data distribution looks,
+However,
+when we increase the number of observations even further (to about 500)
+it becomes difficult to tell exactly how the data distribution looks,
 even with these thin marks.
 
 ---
@@ -152,17 +151,15 @@ alt.Chart(movies).mark_bar().encode(
 ```
 
 Notes:
-
 Instead of visualizing each individual observation,
 we can use the histograms we learnt about in last module,
 where we divide one axis into groups (or "bins")
 and represent the count of observations in each group with bar.
 
 In this plot,
-we can directly see that most movies are around 100 minutes in length.
-
-From our experience,
-we know that there are factors such as genre and production year that
+we can directly see that most movies are around 100 min in length.
+But from our experience,
+we know that factors such as genre and production year,
 can influence movie length.
 
 How can we separate the data based on other columns in the dataset
@@ -181,8 +178,7 @@ and compare multiple distributions?
 
 Notes:
 Let's start by comparing the movie length broken down per country.
-
-Here we use the same faceting technique we learnt about in the last module,
+Here we use faceting which we learnt about in the last module,
 to create one histogram per country.
 
 You can see that this dataset only contains movies made in the UK or the US.
@@ -238,8 +234,8 @@ Notes:
 To compare genres and countries in the same plot,
 we need to group on the combinations of these two categorical columns.
 
-We can do this by adding colour within one of our faceted subplots,
-so let's colour each facet by genre.
+We can do this by adding color within one of our faceted subplots,
+so let's color each facet by genre.
 
 We can get a rough indication of the genre differences from this plot,
 but as we have mention previously,
