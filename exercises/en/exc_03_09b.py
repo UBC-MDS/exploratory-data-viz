@@ -10,9 +10,9 @@ mass_faceted_plot = alt.Chart(___).___(
      ___=['body_mass_g', 'density'],
      steps=___
      ).___(___=0.5).encode(
-         ___,
-         ___='density:Q',
-         color=___).___(
+         alt.X(___),
+         ___('density:Q', title='Density'),
+         alt.Color(___)).___(
               ___='body mass distribution by species and island',
               ___).___(___, ___)
 
