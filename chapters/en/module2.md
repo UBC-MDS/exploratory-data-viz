@@ -63,7 +63,7 @@ Great! We saw that there are several other visual channels in addition to textur
 </exercise>
 
 
-<exercise id="3" title="To 3D or not to 3D?">
+<exercise id="3" title="To 3D or Not to 3D?">
 
 **Question 1**      
  Which of the following is **NOT** a reason to avoid plotting in 3 dimensions?
@@ -135,7 +135,7 @@ This can help, but it's not always acceptable.
 <slides source="module2/module2_04" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
-<exercise id="5" title="True or False: Area and lines">
+<exercise id="5" title="True or False: Area and Lines">
 
 **True or False**       
 *It's always better to use an area plot when showing a single trend over time.*
@@ -181,7 +181,7 @@ What about when we
 </exercise>
 
 
-<exercise id="6" title='Checking your "Area" of Expertise'>
+<exercise id="6" title='Checking Your "Area" of Expertise'>
 
 **Question 1**      
 Before making any plots, what is an important first step in visualizing data?
@@ -643,7 +643,7 @@ Faceting works when the column you wish to facet is categorical.
 </exercise>
 
 
-<exercise id="15" title='Facing some Faceting Questions'>
+<exercise id="15" title='Facing Some Faceting Questions'>
 
 **Question 1**      
 When we facet a plot by a specific column, by default are the subplots displayed vertically or horizontally?
