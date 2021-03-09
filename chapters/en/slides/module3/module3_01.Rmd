@@ -32,8 +32,7 @@ we will dive deeper into when it is appropriate to use certain charts instead of
 ```{python}
 import pandas as pd
 
-
-movies = pd.read_csv('movies.csv')
+movies = pd.read_csv('data/movies.csv')
 movies
 ```
 
@@ -63,16 +62,18 @@ and explore the best ways to visualize this data.
 ```{python}
 import altair as alt
 
-
 alt.Chart(movies[:5]).mark_point().encode(
     x='runtime')
 ```
 
 Notes:
-One of the simplest visualization we could perform
-with a single dataframe column
-is to plot each individual observations
-as a point.
+Visualizing data distributions are useful in understanding the measurements
+of a variable, as doing this allows us to quickly and easily see the range and
+frequency of values that occur.
+
+One of the simplest visualizations to understand a 
+distribution of a single dataframe variable
+is to plot each individual observations as a point.
 
 This is similar to a scatter plot,
 but only using one of the plot axes.
@@ -158,10 +159,22 @@ where we divide one axis into groups (or "bins")
 and represent the count of observations in each group with bar.
 
 In this plot,
-we can directly see that most movies are around 100 min in length.
-But from our experience,
+we can directly see that most movies are around 100 min in length,
+because all the highest bars are around this value.
+
+We would say that this distribution has a single peak around 100 min.
+Some distributions has multiple peaks
+which are not necessarily in the center of the distribution,
+and some have no distinct peaks at all,
+but are instead more uniformly distributed.
+
+From our experience,
 we know that factors such as genre and production year,
-can influence movie length.
+can influence movie length
+and we also see wide variation in the length of movies in the plot.
+
+The shortest movie is just 20-30 min long,
+while the longest is somewhere between 2010 and 220 minutes.
 
 How can we separate the data based on other columns in the dataset
 and compare multiple distributions?
@@ -179,12 +192,21 @@ and compare multiple distributions?
 
 Notes:
 Let's start by comparing the movie length broken down per country.
-Here we use faceting which we learnt about in the last module,
-to create one histogram per country.
+As we saw in the last module,
+faceting is a good way to compare multiple distributions
+and here we use it to create one histogram per country.
 
-You can see that this dataset only contains movies made in the UK or the US.
-It does seem like the distribution of movies is pretty equal between the two countries,
-but it is a bit hard to see because there are so many more movies made in the US.
+This is a little bit of repetition,
+but we will discuss the histograms in more detail in these slides
+now that we have learned more about what they represent.
+
+You can see that this particular dataset only contains movies made in the UK or the US.
+Because there are so many more movies made in the US compared to the UK,
+it is quite hard to tell if there are any meaningful differences between movies from the two countries.
+
+The location of the distribution on the x-axis looks quite similar,
+but we can't say if the location and number of peaks, 
+and the overall shape of the distribution is the same from this visualization.
 
 ---
 
@@ -208,64 +230,33 @@ and the total number of observations.
 If we want to drill down and compare the distribution shape more closely
 regardless of the number of observations
 we could define the y-axes to be independent for each subplot,
-instead of linked to the same axis range.
+instead of linked to the same axis range,
+as we have done in this slide.
 
-Now we can see that the distributions might be a bit different,
-it looks like the UK one is slightly bimodal (it has two peaks),
+Now we can get a better view of the UK histogram.
+it looks like the UK one could be slightly bimodal (it has two peaks),
 whereas the US one is unimodal (it has one peak).
 
-We could explore that data further to find out why this is,
-e.g. maybe the genre is more related to movie length
-and the UK movies in this dataset are of different genres than the US ones?
+However,
+since we have such few observations,
+we can't state this with much confidence;
+it might just be an artifact 
+of which intervals the bins are set to cover
+or from the small sample number.
 
----
+To be more certain about if there are any meaningful differences between these two histograms,
+we would need to have a larger sample set from the UK
+and create multiple visualizations
+each with a different number of maxbins
+to see if that changes the histogram appearance.
 
-## Comparing multiple distributions grouped by two variables
+Maybe there are other groups in the dataset
+that would better explain the spread in movie length that we saw in the initial histogram?
 
-```{python}
-(alt.Chart(movies).mark_bar().encode(
-    alt.X('runtime', bin=alt.Bin(maxbins=30)),
-    y='count()',
-    color='genre')
- .facet('country')
- .resolve_scale(y='independent'))
-```
-
-Notes:
-To compare genres and countries in the same plot,
-we need to group on the combinations of these two categorical columns.
-
-We can do this by adding color within one of our faceted subplots,
-so let's color each facet by genre.
-
-We can get a rough indication of the genre differences from this plot,
-but as we have mention previously,
-it is not ideal to be comparing marks with different baselines.
-
-Let's unstack the bars to be able to easier compare the histograms.
-
----
-
-## Layering bars instead of stacking them can make distributions easier to compare
-
-```{python}
-(alt.Chart(movies).mark_bar(opacity=0.4).encode(
-    alt.X('runtime', bin=alt.Bin(maxbins=30)),
-    alt.Y('count()', stack=None),
-    color='genre')
- .facet('country')
- .resolve_scale(y='independent'))
-```
-
-Notes:
-Layering semi-transparent bars like this can sometimes be effective,
-but with our data,
-the visualization is still pretty difficult to interpret.
-
-We will soon see how it can be easier to visually distinguish smooth histograms
-that are layered like this,
-but first let's discuss how these are created
-and why we might prefer them over regular histograms.
+In the next module we will explore
+if there are more distinct differences in movie length
+based on which genre the movies belong to
+rather than its production country.
 
 ---
 
