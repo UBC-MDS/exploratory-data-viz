@@ -108,7 +108,6 @@ genres?
 
 ---
 
-<<<<<<< HEAD
 ## Heatmaps are effective for comparing multiple distributions
 
 ``` python
@@ -133,8 +132,6 @@ Notes: Representing counts with color
 
 ---
 
-=======
->>>>>>> da835d5 (Add draft of module 3.3)
 ## Bar charts are effective for comparing a single value but hides any variation
 
 ``` python
