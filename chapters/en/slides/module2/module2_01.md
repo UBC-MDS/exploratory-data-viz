@@ -4,6 +4,13 @@ type: slides
 
 # Effective Use of Visual Channels
 
+<head>
+<base target="_blank">
+</head>
+<head>
+<base target="_blank">
+</head>
+
 Notes:
 
 <br>
@@ -36,11 +43,11 @@ Notes:
 So far we have seen how to use points and lines to represent data
 visually.
 
-In this lecture,we will see how we can also use areas and bars for this
+In this lecture, we will see how we can also use areas and bars for this
 purpose.
 
-Before we dive in to the code,let’s discuss how different visual
-channels, such as position, area, etc,can impact how easy it is for us
+Before we dive into the code, let’s discuss how different visual
+channels, such as position, area, etc, can impact how easy it is for us
 to accurately interpret the plotted data.
 
 As in many cases, an efficient way to learn this topic is through
@@ -85,7 +92,7 @@ the big bar is compared to the small one.
 <img src="/module2/7x.png"  width="80%">
 </center>
 
-Notes: In both cases the answer is seven times bigger. Even if you
+Notes: In both cases, the answer is seven times bigger. Even if you
 guessed both of these exactly correct, most people find it is much
 easier to compare the length or position of the bars rather than the
 area of the circles.
@@ -101,9 +108,9 @@ This is important to keep in mind, especially when communicating to
 others via visualization, but also when creating plots for yourself.
 
 These two examples are originally from [Jeffrey Heer’s PyData
-talk](https://www.youtube.com/watch?v=hsfWtPH2kDg), who is visualization
-researcher at the university of Washington and whose research group
-created D3 and VegaLite (which Altair is based on).
+talk](https://www.youtube.com/watch?v=hsfWtPH2kDg), who is a
+visualization researcher at the University of Washington and whose
+research group created D3 and VegaLite (which Altair is based on).
 
 ---
 
@@ -119,7 +126,7 @@ effective visualizations you need to know which visual channels are the
 easiest for humans to decode.
 
 Luckily, there has been plenty of research in this area, which can be
-summarizes in the schematic on this slide.
+summarized in the schematic on this slide.
 
 Position is by far the best and therefore we should put our most
 important comparison there.
@@ -129,9 +136,8 @@ or angle (like the angle in a pie chart), but we can add size or colour
 to represent other relationships.
 
 Even if it is hard to tell exact information from these (is this
-colour/dot 2x darker/bigger than another?) they are good to give and
-idea of trends in the data (are these dots darker/bigger than the
-others?
+colour/dot 2x darker/bigger than another?) they are good to give an idea
+of trends in the data (are these dots darker/bigger than the others?
 
 ---
 
@@ -143,12 +149,12 @@ others?
 <img src="/module2/bad-3d-barchart.png">
 </center>
 
-Notes: The biggest issues with using 3D is when it is used unnecessarily
+Notes: The biggest issue with using 3D is when it is used unnecessarily
 (like a 3D bar or pie chart), as the only way to compare position (like
 a 3D scatter plot), and when they are represented on a 2D medium like a
 paper where they can’t be rotated.
 
-In this slide we see a 3D bar chart, where it looks like the values of
+In this slide, we see a 3D bar chart, where it looks like the values of
 the bars are around A=0.7, B=1.7, C=2.7 and D=3.7.
 
 However, this is only because of the angle of the camera in the plot,
@@ -168,12 +174,12 @@ respectively.
 Notes: Sometimes 3D can be useful, like a topographical map or a protein
 folding visualization.
 
-In this slide you can see the [interesting work done with the Rayshader
-library](https://www.tylermw.com/3d-ggplots-with-rayshader/) that maps
-3D in an intuitive way and incorporates reasonable camera rotation
-around the objects.
+In this slide, you can see the [interesting work is done with the
+Rayshader library](https://www.tylermw.com/3d-ggplots-with-rayshader/)
+that maps 3D in an intuitive way and incorporates reasonable camera
+rotation around the objects.
 
-The example to the right visualizes the bend in space time via 3D
+The example to the right visualizes the bend in space-time via 3D
 position (depth), eliminating the need for an additional 2D plot as in
 the example to the left.
 
@@ -196,7 +202,7 @@ are interested to learn more.
 
 Notes: How much these best practices actually matters might be a bit
 abstract until you gain personal experience from it, therefore, I want
-to include a concrete example of how changing visualization method
+to include a concrete example of how changing visualization methods
 improved an important clinical outcome.
 
 Heart disease is the most common cause of death, yearly killing almost 9
@@ -204,13 +210,13 @@ million people, or as many as diabetes, dementia, neonatal conditions
 respiratory infections all together.
 
 By detecting regions of low shear stress in the arteries around the
-heart, doctors are able to identify patients that are on their way to
-develop heart disease and take action early to improve the patient’s
-survival chances.
+heart, doctors can identify patients that are on their way to develop
+heart disease and take action early to improve the patient’s survival
+chances.
 
 To evaluate the shear stress in the arteries, the regular practice is to
 use a digital 3D representation of the artery coloured according to the
-amount of sheer stress which is what you can see in this picture.
+amount of shear stress which is what you can see in this picture.
 
 The colormap changes from blue for the areas of interest (low stress) to
 cyan, green, yellow, and red for higher stress.
@@ -223,7 +229,7 @@ areas of low shear stress were correctly identified by doctors.
 
 ---
 
-## Changing the color scale almost doubled the accuracy
+## Changing the colour scale almost doubled the accuracy
 
 <center>
 <img src="/module2/blood-vessels-70.png"  width="40%">
@@ -237,7 +243,7 @@ highlighted in a bright red colour, and the rest are in black and white.
 By this seemingly small modification, they identified that the
 percentage of correct analysis almost doubled, from 40% to 70%.
 
-We will talk more about choosing correct colour scales at the later
+We will talk more about choosing the correct colour scales in the later
 modules of this course.
 
 ---

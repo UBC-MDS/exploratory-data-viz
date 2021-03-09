@@ -4,9 +4,16 @@ type: slides
 
 # Creating bar charts and histograms
 
+<head>
+<base target="_blank">
+</head>
+<head>
+<base target="_blank">
+</head>
+
 Notes: In this module we will be learning how to create bars charts for
-counting observations, and a special types of bar chars called
-histograms for showing distributions of data.
+counting observations, and special types of bar chars called histograms
+for showing distributions of data.
 
 ---
 
@@ -70,7 +77,7 @@ This is the case for measures of central tendency, such as the mean and
 median, which are better represented with other visualizations that we
 will cover later in the course.
 
-Bar chart are a good choice for representing individual values, such as
+Bar charts are a good choice for representing individual values, such as
 the number of people living in a country at a specific point in time.
 
 Some summary statistics are displayed as single values, such as counts
@@ -187,7 +194,7 @@ To count observations in Altair, we can use the aggregation function
 We don’t need to specify a column name for the y-axis, since we are just
 counting observations in each `region`.
 
-In the resulting chart, we can see that Africa and Asia has the most
+In the resulting chart, we can see that Africa and Asia have the most
 individual countries, whereas Oceania has the fewest.
 
 ---
@@ -211,7 +218,7 @@ Notes: By default, Altair sorts categorical values in alphabetical
 order.
 
 For most data, it becomes easier to interpret if the bars are sorted
-from high to low values. An exception to this guidelines is if the
+from high to low values. An exception to these guidelines is if the
 categorical axis has a natural order to it, such as weekdays, months,
 etc.
 
@@ -250,7 +257,7 @@ countries</text></g></g><path class="foreground" aria-hidden="true" d="" pointer
 
 Notes: If we for some reason would want the reverse order, we could use
 the minus sign before the axis reference. This can be helpful in cases
-where you are making a vertical bar chart, since it would then align the
+where you are making a vertical bar chart since it would then align the
 tallest bar next to the y-axis.
 
 ---
@@ -279,7 +286,7 @@ For situations like this, we can pass a list or array to the `sort`
 parameter.
 
 We can either create this list manually as we did in this slide, or use
-the pandas sort function if we for example wanted to sort in reverse
+the Pandas `sort` function if we, for example, wanted to sort in reverse
 alphabetical order.
 
 To learn more about important considerations when plotting counts of
@@ -362,17 +369,17 @@ all the values within each group before plotting a bar representing this
 count.
 
 In contrast to bar charts, it is rarely beneficial to make horizontal
-histograms since the labels are numbers which don’t need to be rotated
-to be readable.
+histograms since the labels are numbers that don’t need to be rotated to
+be readable.
 
 You can also see that we have not changed the title of the y-axis. There
-isn’t really any more informative title we can substitute for here,
-since the length of each bar simply represents the count of
+isn’t really a more informative title we can substitute for here, since
+the length of each bar simply represents the count of
 observations/records in each bin.
 
 Now it is easier to see where the life expectancy of the countries fall.
 We can see that most countries seem to have a life expectancy between 75
-and 80 years, and that only very few have one under 60. However, these
+and 80 years and that only very few have one under 60. However, these
 conclusions will depend on exactly how wide our bins are, which we will
 talk more about in the next module.
 
@@ -402,7 +409,7 @@ We can change the number of bins by passing `alt.Bin(maxbins=30)` to the
 `bin` parameter instead of passing the value `True`.
 
 Note that you will not get the exact number of bins, Altair will find a
-number than aligns well with the axis ticks within the max you specified
+number that aligns well with the axis ticks within the max you specified
 (the `step` parameter can be used to set and exact bin width if
 desired).
 
@@ -413,9 +420,3 @@ range of numbers.
 We will talk more about histograms and other ways to represent
 distributions in the next module, but it is important to remember that
 they are just a bar chart on a binned axis.
-
----
-
-# Let’s apply what we learned!
-
-Notes: <br>

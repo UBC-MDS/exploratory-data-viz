@@ -4,6 +4,13 @@ type: slides
 
 # Creating Area Charts
 
+<head>
+<base target="_blank">
+</head>
+<head>
+<base target="_blank">
+</head>
+
 Notes: In this module we will be learning how to create area charts and
 when they are a suitable alternative to use instead of line charts.
 
@@ -27,8 +34,8 @@ when they are a suitable alternative to use instead of line charts.
 | child\_mortality         | Deaths of children under 5 years of age per 1000 live births                                                                                                              |
 | pop\_density             | Average number of people per km2                                                                                                                                          |
 | co2\_per\_capita         | CO2 emissions from fossil fuels (tonnes per capita)                                                                                                                       |
-| years\_in\_school\_men   | Mean number of years in primary, secondary,and tertiary school for 25-36 years old men                                                                                    |
-| years\_in\_school\_women | Mean number of years in primary, secondary,and tertiary school for 25-36 years old women                                                                                  |
+| years\_in\_school\_men   | Mean number of years in primary, secondary, and tertiary school for 25-36 years old men                                                                                   |
+| years\_in\_school\_women | Mean number of years in primary, secondary, and tertiary school for 25-36 years old women                                                                                 |
 
 </font>
 
@@ -41,8 +48,8 @@ first two modules.
 
 We will be looking at many different data sets in later labs, but we’re
 sticking to a familiar one for now so that we can focus on laying down a
-solid understanding of the visualization principles with data we already
-know.
+solid understanding of the visualization principles with data that we
+already know.
 
 ---
 
@@ -80,8 +87,8 @@ read it into pandas with `read_csv`.
 Here we also tell pandas to read in the `year` column as a date, rather
 than an integer, which is the default behaviour.
 
-Remember that Altair uses the pandas data types to infer the data it is
-working with. Integers would show up on the Altair chart axes as
+Remember that Altair uses the `pandas` data types to infer the data it
+is working with. Integers would show up on the Altair chart axes as
 `1,990, 2,000, etc` whereas dates are shown as `1990, 2000, etc`
 
 ---
@@ -134,16 +141,16 @@ Notes: Now that we are somewhat familiar with the data formats, let’s
 think about what we would want to visualize and why.
 
 Since the data reaches all the way back to the 1800s, it would be really
-interesting to plot how the world population have been growing up until
+interesting to plot how the world population has been growing up until
 today. We could use a line plot for this as we learned in the first
 module.
 
-If we drew this visualization out on paper, we would draw a a single
-line that was increasing from the 1800s up until today as the population
+If we drew this visualization out on paper, we would draw a single line
+that was increasing from the 1800s up until today as the population
 increased.
 
 But how do you think the population was increasing during this period,
-quickly or slowly? And was it as the same rate all the time? Draw this
+quickly or slowly? And was it at the same rate all the time? Draw this
 out on paper yourself so that it is clear what you expect the plot
 before going to the next slide.
 
@@ -196,7 +203,7 @@ each year via the `sum` aggregation method in Altair.
 
 That looks much better!
 
-Interestingly, it seem like the world population have been growing in
+Interestingly, it seems like the world population have been growing in
 two distinct phases: slowly before 1950, and more rapidly afterwards.
 
 We will talk more about that in a few slides.
@@ -298,7 +305,7 @@ the largest population in the most recent year.
 
 ---
 
-## It is helpful to clarified that the areas are stacked on top of each other
+## It is helpful to clarify that the areas are stacked on top of each other
 
 ``` python
 alt.Chart(gm).mark_area().encode(
@@ -350,14 +357,14 @@ the groups added together.
 
 For example, here it is immediately clear that Africa has a bigger
 population than Europe and the Americas, and we can see that the
-populations shifted around year 2000.
+populations shifted around the year 2000.
 
 On the other hand, it’s quite cognitively demanding to try to
 reconstruct the total world population by adding all the lines up
 together, especially over time!
 
 In summary, split line charts are ideal when you want to compare the
-difference groups accurately.
+different groups accurately.
 
 ---
 
@@ -386,7 +393,7 @@ Will the world population keep growing like this for much longer?
 
 ---
 
-## The world population is predicted to stabilize around 11 billion
+## The world population is predicted to stabilize at around 11 billion
 
 ``` python
 alt.Chart(gm).mark_area().encode(
