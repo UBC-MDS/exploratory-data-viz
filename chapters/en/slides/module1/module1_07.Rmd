@@ -12,6 +12,7 @@ source('../../../../slide-setup.R')
 # Remember to also manually update the YAML title above
 ```
 
+
 type: slides
 
 
@@ -19,7 +20,7 @@ type: slides
 
 Notes:
 
-In this slide deck we will see how to aggregate data in Altair
+In this slide deck, we will see how to aggregate data in Altair
 (to plot the mean, median, etc),
 how to create lineplots via `mark_line()`,
 and how to combine line and point plots together
@@ -44,7 +45,7 @@ alt.Chart(cars).mark_point().encode(
 Notes:
 Throughout this course
 we will explore many different datasets,
-but for now we will stick to the `cars`
+but for now, we will stick to the `cars`
 dataset to keep it simple
 and focus on introducing additional Altair functionality.
 
@@ -69,7 +70,7 @@ To more effectively visualize such general trends in the data,
 we can create plots of statistical summaries,
 such as means and medians.
 
-In Altair (and pandas) these are refereed to as data aggregations.
+In Altair (and pandas) these are referred to as data aggregations.
 
 ---
 
@@ -101,13 +102,13 @@ as in the example in this slide.
 <a href="https://altair-viz.github.io/user_guide/encoding.html#binning-and-aggregation" target="_blank">The Altair documentation includes a table
 with all available aggregations</a>.
 
-In this visualization we can detect small differences
+In this visualization, we can detect small differences
 between the means of the Japanese and Europeans cars,
 which was not discernible when we plotted all the points.
 
 Whether this difference is big enough to reach a different conclusion
 than when inspecting the previous plots
-depends on our application and purpose of the data exploration.
+depends on our application and the purpose of the data exploration.
 
 ---
 
@@ -125,13 +126,13 @@ there is a `Year` column,
 indicating when the car was made.
 
 Often when there is a notion of time in the data,
-it is interesting to see how values in the dataframe changes over time.
+it is interesting to see how values in the dataframe change over time.
 
 In this case,
 we might be interested in knowing whether newer cars
-are more fuel efficient than older ones.
+are more fuel-efficient than older ones.
 
-Presumably they should be,
+Presumably, they should be,
 but does it differ depending on where the car was made?
 
 Let's find out!
@@ -187,9 +188,9 @@ alt.Chart(cars).mark_point().encode(
 
 Notes:
 If we try to explore the mileage over time
-while grouping the cars according their origin,
+while grouping the cars according to their origin,
 it is a bit difficult to immediately recognize
-which points belongs to which group.
+which points belong to which group.
 
 In fact,
 using points for visualizing trends is not ideal,
@@ -218,11 +219,11 @@ Another advantage is that the slope of the line
 makes it easier to see if the value from one year to another
 is increasing or decreasing.
 
-Altair grammar let's us switch from a point plot to a line plot,
+Altair grammar lets us switch from a point plot to a line plot,
 by only changing `mark_point()` to `mark_line()`,
-and keeping the rest of the code as is.
+and keeping the rest of the code as-is.
 
-In this plot we can clearly compare the mileage trends over time
+In this plot, we can clearly compare the mileage trends over time
 to conclude that cars from all origins improved their mileage,
 and that the trajectory and mileage values
 are the most similar between Europe and Japan.
@@ -320,9 +321,9 @@ This way,
 we can create a layer with one point per observations,
 and with a line for the average values.
 
-For this we need to use `encode` again
+For this, we need to use `encode` again
 after creating the first plot,
-to instruct Altair to use the raw vales
+to instruct Altair to use the raw values
 instead of the mean for the points.
 
 (note that the axis now has two labels,
@@ -353,12 +354,12 @@ We have already seen that the x and y encoding remain the same
 in any subsequently created plots.
 
 Here,
-we're showing that this also applies to the color encoding
+we're showing that this also applies to the colour encoding
 to illustrate that any encoding
 will be propagated to all layers
 unless they are specifically overwritten.
 
-If we would only have added color to the point chart,
+If we would only have added colour to the point chart,
 there would still have been a single line instead of three.
 
 ---

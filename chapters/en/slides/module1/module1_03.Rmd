@@ -12,7 +12,6 @@ source('../../../../slide-setup.R')
 # Remember to also manually update the YAML title above
 ```
 
-
 type: slides
 
 
@@ -32,7 +31,7 @@ When learning about data visualization, it is helpful to distinguish between the
 
 Notes: 
 
-There is a plethora of visualization packages in Python.
+There are a plethora of visualization packages in Python.
 
 This rich selection can be beneficial
 but it is also confusing,
@@ -40,7 +39,7 @@ especially when starting out and trying to decide which package to choose.
 
 When learning about data visualization,
 it is helpful to distinguish between plotting packages that follow either an
-*imperative* or a *declarative* visualization philosophhy.
+*imperative* or a *declarative* visualization philosophy.
 
 
 ---
@@ -158,8 +157,8 @@ would be to first create the plot
 and then loop through the dataframe
 to add a point for each country one by one.
 
-To color the points,
-we need to manually create a sequence of colors
+To colour the points,
+we need to manually create a sequence of colours
 that we can access inside the loop.
 
 The visualization on this page is an example of what a plot could look like
@@ -168,10 +167,10 @@ when run with real code similar to our pseudocode.
 You can see that one of the countries is bigger than the others,
 and one of the countries has a much larger population,
 but without seeing the code,
-it is not possible to know which color represent which country.
+it is not possible to know which colour represents which country.
 
 We could add a legend by creating it explicitly 
-and adding one colored dot per iteration in the loop.
+and adding one coloured dot per iteration in the loop.
 
 ---
 
@@ -181,13 +180,13 @@ and adding one colored dot per iteration in the loop.
     - Often includes linking columns to visual channels.
 - Specify *what* should be done
     - "Assign colors based on the values in column A"
-- Smart defaults gives us what we want without complete control over minor plotting details.
+- Smart defaults give us what we want without complete control over minor plotting details.
 
 Notes:
 
 **Declarative** (or **high level**) plotting packages
 declare links between dataframe columns and visual channels,
-such as the x-axis, y-axis, color, *etc*.
+such as the x-axis, y-axis, colour, *etc*.
 
 This means that you can provide a high-level specification
 of *what* you want the visualization to include,
@@ -228,7 +227,7 @@ which is a common convenience in declarative plotting packages.
 
 ---
 
-## A high level grammar of graphics helps us compose plots effectively
+## A high-level grammar of graphics helps us compose plots effectively
 
 - Simple grammatical components combine to create visualizations.
 - Visualization grammars often consist of three main components:
@@ -244,7 +243,7 @@ chart(dataframe).add_points().encode_columns(x='Area', y='Population', color='Co
 Notes:
 The declarative plotting concept can be implemented in different ways.
 
-In the previous slide we had a dedicated function for creating the pointplot,
+In the previous slide, we had a dedicated function for creating the pointplot,
 and there would be a separate function for creating a lineplot, barplot, etc.
 
 With this approach,
@@ -293,22 +292,22 @@ Notes:
 Now that we know the basic concepts of how data can be visualized,
 let's select a Python package and get coding!
 
-In this image you can see the most commonly used Python plotting packages.
+In this image, you can see the most commonly used Python plotting packages.
 
 There are many more,
 but these are the ones you are the most likely to hear about,
 so it is good to know that they exist.
 
 The text to the left in the image is a legend
-to explain the colors used for the different Python packages
+to explain the colours used for the different Python packages
 (blue for high level, declarative packages
-and orange for low level, imperative packages).
+and orange for low-level, imperative packages).
 
 We have also included some of the most common visualization packages for the web
-which are build in Javascript and colored in white,
+which are built in Javascript and coloured in white,
 more on these in the next paragraph.
 
-As you can see there are several high and low level language,
+As you can see there are several high and low-level language,
 so how do we chose?
 
 In this course we will use <a href="https://altair-viz.github.io/" target="_blank">Altair</a>,
@@ -323,7 +322,7 @@ which in turns builds on D3,
 the most dominant visualization package on the web today.
 
 By leveraging these well-established JavaScript visualization packages
-Altair is able to create plots that work natively on the web
+Altair can create plots that work natively on the web
 and includes interactive features without reinventing the wheel.
 
 ---
@@ -353,7 +352,7 @@ but we will stick to **columns** for clarity).
 
 In this course,
 we will often use data from the  <a href="https://github.com/vega/vega-datasets" target="_blank">vega-datasets</a> package,
-which has many plot-friendly practice datasets available as Pandas dataframes,
+which has many plot-friendly practice datasets available as Pandas dataframes
 and can be loaded as demonstrated in this slide.
 We can use these datasets by importing the `data` module
 from the `vega_datasets` packages
@@ -363,10 +362,10 @@ our data contains the name of different cars
 and some attributes relating to each car.
 There are many interesting questions we could ask from this data set!
 For our first plot,
-let's explore the relationship between how heavy car is
-(the *Weight_in_lbs* column)
+let's explore the relationship between how heavy a car is
+(the `Weight_in_lbs` column)
 and how good gas mileage it has
-(the *Miles_per_gallon* column).
+(the`Miles_per_gallon` column).
 
 Before starting to code the visualization,
 take a few seconds and think about
@@ -397,7 +396,7 @@ After the chart object has been created,
 we can specify how the graphical element should look
 that we use to visualize the data.
 This is called a graphical *mark* in Altair,
-and in this slide we have used `mark_point()` to show the data as points.
+and in this slide, we have used `mark_point()` to show the data as points.
 
 Since we have not specified which columns should be used for the x and y axes,
 we appear to only see one point in this plot
@@ -418,7 +417,7 @@ Notes:
 To visually separate the points,
 we can encode columns in the dataframe
 as visual channels,
-such as the axes or colors of the plot.
+such as the axes or colours of the plot.
 Here,
 we *encode* the column `Miles_per_Gallon` as the x-axis.
 For Pandas data frames,
@@ -437,25 +436,25 @@ alt.Chart(cars).mark_point().encode(
 ```
 
 Notes:
-By spreading out the data along the both the x and y-axis,
+By spreading out the data along both the x and y-axis,
 we can answer our initial question about the relationship between car weight and gas mileage.
 as it appears that the heavier cars are the ones that have the poorest mileage.
 Although we might have expected this to be the case,
 visualizing all the data points also provides
 information on the nature of the relationship between weight and mileage.
-It appears that the xy points don't simply follow a straight line,
+It appears that the x-y points don't simply follow a straight line,
 but rather a curved line that where the mileage drop quickly
 when moving away from the lightest cars,
-but then decrease more slowly throughout the remainder of the data.
+but then decreases more slowly throughout the remainder of the data.
 
 This rich, easily interpretable display of information
-is one of the main advantages from visualizing data
-and later in the course we will talk more about different type of relationships,
+is one of the main advantages of visualizing data
+and later in the course, we will talk more about the different type of relationships,
 such as linear, exponential, etc.
 
 ---
 
-## Mapping a numerical dataframe column to the color scale
+## Mapping a numerical dataframe column to the colour scale
 
 ```{python}
 alt.Chart(cars).mark_point().encode(
@@ -466,12 +465,12 @@ alt.Chart(cars).mark_point().encode(
 
 Notes:
 
-Is there a relationship between horsepower and car weight, or fuel efficiency?
+Is there a relationship between horsepower and car weight, or fuel-efficiency?
 
 To enrich this display of information further,
 we can colour the points according to a column in the dataframe.
 When we encode a column as the colour channel
-Altair will automatically figure out an appropriate colorscale to use,
+Altair will automatically figure out an appropriate colour scale to use,
 depending on whether the data is numerical, categorical, etc.
 Here we have indicated that we want to colour the points according to the car's horsepower,
 which indicated how powerful its engine is.
@@ -483,14 +482,14 @@ makes it is harder to tell whether the relationship follows a straight line
 or is of another nature,
 so this encoding is mostly useful as an approximate indication of the horsepower.
 
-We can also observe a relationship between the horsepower of a vehicle and the fuel efficiency. It appears thats cars with greater horsepower (the point are a darker shade of blue), are less efficient with their fuel since miles per Gallon is much lower. 
+We can also observe a relationship between the horsepower of a vehicle and the fuel efficiency. It appears that cars with greater horsepower (the points with a darker shade of blue) are less efficient with their fuel since miles per Gallon is much lower. 
 
-In the net module we will learn more in detail about 
+In the next module, we will learn more in detail about 
 which encodings are most suitable for different comparisons.
 
 ---
 
-## Mapping a categorical dataframe column to the color scale
+## Mapping a categorical dataframe column to the colour scale
 
 ```{python}
 alt.Chart(cars).mark_point().encode(
@@ -501,19 +500,19 @@ alt.Chart(cars).mark_point().encode(
 
 Notes:
 In the previous slide,
-a continuous, gradually increasing colorscale was used
+a continuous, gradually increasing colour scale was used
 to visualize the gradual increase in the numerical column `Horsepower`.
 In this slide,
-we instead chose to color the points per the categorical column `Origin`
+we instead chose to colour the points per the categorical column `Origin`
 (where the car was made).
 As you can see,
 Altair detects that this column contains categorical data
 (with the help of pandas)
-and picks a different colorscale to facilitate distinction between the categories.
+and picks a different colour scale to facilitate distinction between the categories.
 As in the previous slide,
 Altair automatically adds a helpful legend,
-and we can see that the heavier, more powerful cars are primary manufactured in the US,
-while the lighter more fuel efficient ones are manufactured in Europe and Japan
+and we can see that the heavier, more powerful cars are primarily manufactured in the US,
+while the lighter more fuel-efficient ones are manufactured in Europe and Japan
 (remember that this is true for this particular dataset,
 and not necessarily all cars).
 
@@ -530,13 +529,13 @@ alt.Chart(cars).mark_point().encode(
 ```
 
 Notes:
-Although Altair's colorscales are designed to be effective and easy to interpret,
+Although Altair's colour scales are designed to be effective and easy to interpret,
 we can make the categories in our plot even more distinct
-by encoding the same categorical column as both color and shape.
-This is also makes visualizations much easier to interpret understand
-for anyone with visual color deficiency
+by encoding the same categorical column as both colour and shape.
+This also makes visualizations much easier to interpret and understand
+for anyone with visual colour deficiency
 (about 10% of the population).
-We will talk more in depth about color theory in a later module.
+We will talk more in-depth about colour theory in a later module.
 
 ---
 
@@ -559,7 +558,7 @@ we have added the size channel
 to indicate the engine power.
 Although Altair elegantly handles the dual legends,
 it is difficult for us to discern useful information from this plot.
-If you go back to the plot where we encoded weight in the color channel,
+If you go back to the plot where we encoded weight in the colour channel,
 you can see that the plot is much clearer.
 Later we will learn more about how to efficiently load a visualization
 with an appropriate amount of information,
