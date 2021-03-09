@@ -137,7 +137,7 @@ to represent other relationships.
 
 Even if it is hard to tell exact information from these (is this
 colour/dot 2x darker/bigger than another?) they are good to give an idea
-of trends in the data (are these dots darker/bigger than the others?
+of trends in the data.
 
 ---
 
@@ -176,7 +176,7 @@ folding visualization.
 
 In this slide, you can see the [interesting work is done with the
 Rayshader library](https://www.tylermw.com/3d-ggplots-with-rayshader/)
-that maps 3D in an intuitive way and incorporates reasonable camera
+that maps in 3D in an intuitive way that incorporates reasonable camera
 rotation around the objects.
 
 The example to the right visualizes the bend in space-time via 3D
