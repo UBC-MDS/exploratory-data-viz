@@ -17,23 +17,6 @@ Notes:
 
 ---
 
-``` python
-point_plot = alt.Chart(cars).mark_point().encode(
-    x='Weight_in_lbs',
-    y='Miles_per_Gallon',
-    color='Origin')
-    
-line_plot = alt.Chart(cars).mark_line().encode(
-    x='Year',
-    y='mean(Miles_per_Gallon)',
-    color='Origin')
-    
-point_plot | line_plot 
-```
-
-<iframe src="/module2/charts/01/unnamed-chunk-2.html" width="100%" height="400px" style="border-width:0;">
-</iframe>
-
 Notes:
 
 So far we have seen how to use points and lines to represent data
@@ -106,7 +89,8 @@ others via visualization, but also when creating plots for yourself.
 These two examples are originally from [Jeffrey Heer’s PyData
 talk](https://www.youtube.com/watch?v=hsfWtPH2kDg), who is a
 visualization researcher at the University of Washington and whose
-research group created D3 and VegaLite (which Altair is based on).
+research group created the D3 and VegaLite packages which Altair is
+based on.
 
 ---
 
