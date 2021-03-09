@@ -31,7 +31,7 @@ line_plot = alt.Chart(cars).mark_line().encode(
 point_plot | line_plot 
 ```
 
-<iframe src="/module2/charts/01/unnamed-chunk-2.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/01/unnamed-chunk-2.html" width="80%" height="400px" style="border-width:0;">
 </iframe>
 
 Notes:
