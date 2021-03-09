@@ -2,7 +2,7 @@
 type: slides
 ---
 
-# What Did we Learn and What to Expect in Assignment 1
+# What Did we Learn and What to Expect in Assignment 3
 
 Notes:
 
@@ -17,7 +17,7 @@ In this module students will learn how to
 - Understand how different distribution plots are made and their pros and cons.
 - Select an appropriate distribution plot for the situation.
 - Create density plots to compare a few distributions.
-- Create boxplots and violin plot to compare many distributions.
+- Create boxplots to compare many distributions.
 
 Notes:
 
@@ -25,7 +25,7 @@ The assignment will concentrate on the learning objectives as well as building k
 
 ---
 
-# On to Assignment 1!
+# On to Assignment 3!
 
 Notes:
 
