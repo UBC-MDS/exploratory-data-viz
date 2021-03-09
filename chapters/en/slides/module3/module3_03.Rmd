@@ -271,35 +271,77 @@ without using histograms?
 [What does a box plot tell you? Simply psychology](https://www.simplypsychology.org/boxplots.html)
 
 Notes:
-Instead of showing just the mean or median,
-a box plot shows 5 values.
-The box always represents the median and the upper and lower quartile,
-which means that 50% of the data points lie within the range of the box.
-The whiskers can represent a few different things,
-in this picture they re the min and min and the max (the range) of our data,
-but they can also be 1.5x the interquartile range
-and then any observations outside this are drawn out as individual points
-(this is the case in Altair).
+A boxplot is a mix between showing individual values
+and some key summary statistics.
+
+Instead of showing just the mean or median as with a bar plot,
+a box plot shows 5 summary statistics:
+
+The box represents three values,
+the median in the middle and the upper and lower quartile at the edges
+This means that means that 50% of the data points lie within the box.
+
+The lines extending from the box as called whiskers
+and the can represent a few different things.
+They can be showing the min and the max (the range) of our data.
+
+However,
+it is more common that they show the furthest points that are still within
+1.5 x the "interquartile" range from the edges of the box.
+The interquartile range is the distance between the edges of the box
+
+The edges of the box are called the first and third quartile,
+and the median is the second quartile.
+These quartiles divide the box into four "quarters",
+with as many observations in each.
+
+Conventionally,
+any observations that fall outside the whiskers,
+are drawn out as individual points and are sometimes referred to as "outliers",
+and are occasionally discarded.
+
+However,
+what really is an outlier in your data and what you should do with them
+depends on the question you are asking.
+Maybe these data points are the most important in your dataset
+or they could be measurement errors.
+You should always look further and think carefully before discarding data as outliers.
 
 ---
 
-## Boxplots can effectively compare multiple distrubtions
+## Boxplots can effectively compare multiple distributions
 
 ```{python}
-alt.Chart(movies_extended).mark_boxplot().encode(
+bar = alt.Chart(movies_extended).mark_bar().encode(
+    alt.X('mean(Worldwide Gross)'),
+    alt.Y('Major Genre'))
+    
+box = alt.Chart(movies_extended).mark_boxplot().encode(
     alt.X('Worldwide Gross'),
     alt.Y('Major Genre'))
+
+box | bar
 ```
 
 Notes:
-Now it is much easier to see how the distributions compare!
+Here we show a boxplot next to the barplot we created initially.
+The `|` operator works similarly to the `+` operator,
+but instead of layering charts on top of each other,
+it puts them next to each other.
+
+We can see that the box plots provides us with the same clear positional comparison as in the barplot,
+but we now also has access to additional information about each genres' distribution.
+We can ensure ourselves that the distributions are roughly the same shape 
+and check to see that where potential outliers are.
+
 We can directly answer the question we posed at the beginning:
-the Action genre generates the highest revenue
+the Adventure genre generates the highest revenue
 when comparing both the medians and the position of the boxes.
 
-Then it seems like Adventure is the second most highly grossing genres,
+Then it seems like Action is the second most highly grossing genres,
 but after that it becomes hard to compare.
-We could make this visualization even more effective by sorting the boxes by value.
+We could make this visualization even more effective
+by sorting the boxes according to their median value.
 
 ---
 
@@ -354,12 +396,6 @@ we could have have used separate barplot instead.
 
 ## TODO mention violinplots and striplots are often better but not available yet
 
-```{python}
-alt.Chart(movies_extended).mark_bar().encode(
-    alt.X('Worldwide Gross', bin=alt.Bin(maxbins=30)),
-    alt.Y('count()'),
-    alt.Color('Major Genre')).properties(height=50).facet('Major Genre', columns=1)
-```
 
 Also shwo facetted histograms?
 
