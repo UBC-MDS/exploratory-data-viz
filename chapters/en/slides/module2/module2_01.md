@@ -4,19 +4,6 @@ type: slides
 
 # Effective Use of Visual Channels
 
-<head>
-<base target="_blank">
-</head>
-<head>
-<base target="_blank">
-</head>
-
-Notes:
-
-<br>
-
----
-
 Notes:
 
 So far we have seen how to use points and lines to represent data
