@@ -29,34 +29,6 @@ Notes:
 
 ---
 
-```{python include=FALSE}
-import altair as alt
-from vega_datasets import data
-
-
-cars = data.cars()
-alt.Chart(cars).mark_point().encode(
-    x='Weight_in_lbs',
-    y='Miles_per_Gallon',
-    color='Origin')
-```
-
-
-```{python}
-point_plot = alt.Chart(cars).mark_point().encode(
-    x='Weight_in_lbs',
-    y='Miles_per_Gallon',
-    color='Origin')
-    
-line_plot = alt.Chart(cars).mark_line().encode(
-    x='Year',
-    y='mean(Miles_per_Gallon)',
-    color='Origin')
-    
-point_plot | line_plot 
-```
-
-
 
 Notes: 
 
