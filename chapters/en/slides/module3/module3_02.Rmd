@@ -122,7 +122,7 @@ import altair as alt
 
 (alt.Chart(movies).transform_density(
     'runtime',
-    as_=['runtime', 'density'])  # Give a name to the KDE values, which we can use when plotting
+    as_=['runtime', 'density'])
  .mark_area().encode(
     x='runtime',
     y='density:Q'))
@@ -132,21 +132,26 @@ Notes:
 To visualize a density plot,
 we need to do two things:
 
-1. Calculate the KDE (adding the individual kernels and summing them together)
-2. Plot a line or area mark for the newly calculated KDE values.
+1. Calculate the bell-shaped bins and add them together as in the animation as few slides ago.
+2. Plot a line or area mark for the newly calculated sum of bins.
 
 In Altair,
 these operations are done in two explicit steps,
 using `transform_density` for the calculation.
-We could also have calculated this as a new column in our pandas data frame
-and then plotted that column,
-but it is convenient to do both the steps in Altair.
 
-The new variable we create is called `'density'`,
-and since this is not part of the pandas data frame,
+First we specify which dataframe variable we want to use for the calculation.
+Then we use the `as_` parameter to name the newly calculated values,
+which we here call `'density'`.
+
+Since the `'density'` variable
+is not part of the pandas dataframe,
 Altair cannot ask pandas which data type it is.
 Therefore,
-we need to add `':Q'` to indicate that the density has quantitative (numeric) values.
+we need to add `':Q'` to indicate that the density has quantitative values.
+
+We could also have calculated the sum of bins outside Altair 
+and added it as a new column in our pandas dataframe,
+but it is convenient to do both the steps in Altair.
 
 ---
 
