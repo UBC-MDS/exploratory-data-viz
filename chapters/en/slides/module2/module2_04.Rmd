@@ -54,9 +54,12 @@ Notes:
 We will be visualizing global health data to answer the question:
 How has the population for different regions around the world changed over time?
 
-This is the same data we are working with in the assignments for the first two modules.
+This dataset is more similar to those you will encounter in the wild
+than the sample dataset we saw in the first module.
+We will be exploring this data in the assignments for the first two modules.
 
-We will be looking at many different data sets in later labs,
+In later labs
+we will look at many other datasets,
 but we're sticking to a familiar one for now
 so that we can focus on laying down a solid understanding
 of the visualization principles with data that we already know.
@@ -69,24 +72,20 @@ of the visualization principles with data that we already know.
 import pandas as pd
 
 gm = pd.read_csv('data/world-data-gapminder.csv', parse_dates=['year'])
-# TODO remove when we change to HTML or rewrite text as for why top ten
-gm = gm[gm['country'].isin(gm[gm['year'] == '2018'].nlargest(10, ['population'])['country'])]
 gm
 ```
 
 Notes:
-This dataset is made available via an URL
-and we can download and read it into pandas
-with `read_csv`.
-
-Here we also tell pandas to read in the `year` column as a date,
+As we read in the data with `pandas`,
+we specify to read in the `year` column as a date,
 rather than an integer,
 which is the default behaviour.
 
 Remember that Altair uses the `pandas` data types
 to infer the data it is working with.
 Integers would show up on the Altair chart axes as `1,990, 2,000, etc`
-whereas dates are shown as `1990, 2000, etc`
+whereas dates are shown as `1990, 2000, etc`,
+so make sure to parse these columns as dates when using pandas.
 
 ---
 
