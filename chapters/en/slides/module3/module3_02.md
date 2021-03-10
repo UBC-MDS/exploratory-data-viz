@@ -36,6 +36,9 @@ the bar heights.
 
 <img src=/module3/kde-buildup.gif></img>
 
+[From Kimberly Fessel’s dataviz
+videos](https://www.youtube.com/watch?v=DCgPRaIDYXA)
+
 Notes: Instead of setting fixed lines along the axis and then count
 points fully in one bin or another, we can create bins that are centered
 on the data and then add the bins together.
