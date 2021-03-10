@@ -288,7 +288,7 @@ Why don’t you compare the bars on a per colour basis?
 
 
 <exercise id="6" title="Visulize Distributions with Density Plots" type="slides,video">
-<slides source="module3/module3_02" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module3/module3_06" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
 
