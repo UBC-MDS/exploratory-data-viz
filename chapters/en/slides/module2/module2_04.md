@@ -4,8 +4,8 @@ type: slides
 
 # Creating Area Charts
 
-Notes: In this module we will be learning how to create area charts and
-when they are a suitable alternative to use instead of line charts.
+Notes: In this slide deck, we will be learning how to create area charts
+and when they are a suitable alternative to use instead of line charts.
 
 ---
 
@@ -37,8 +37,8 @@ How has the population for different regions around the world changed
 over time?
 
 This dataset is more similar to those you will encounter in the wild
-than the sample dataset we saw in the first module. We will be exploring
-this data in the assignments for the first two modules.
+than the sample dataset, we saw in the first module. We will be
+exploring this data in the assignments for the first two modules.
 
 In later labs we will look at many other datasets, but we’re sticking to
 a familiar one for now so that we can focus on laying down a solid
@@ -123,7 +123,7 @@ overview of the column data types and see if there are any `NaNs`
 (missing values).
 
 If there are many missing values in a column, we would want to look into
-why that is. Later in the course we will learn about how to visualize
+why that is. Later in the course, we will learn about how to visualize
 missing values to understand if there are patterns in which values are
 missing, which could affect our data analysis.
 
@@ -161,24 +161,26 @@ points to data that has been uploaded somewhere on the web. The slides
 show an example of what this syntax looks like in general.
 
 Since we have uploaded our dataset to the course online repository, we
-will read the data directly from there using this url
+will read the data directly from there using this URL
 <https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/main/chapters/en/slides/module2/data/world-data-gapminder.csv>.
 
 This is powerful since we can use any data online without downloading it
-first and it allows us to create Altair charts without worrying about
-that the entire dataframe will be included! Since Altair knows the
-location of the data online, the chart is still reproducible as long as
-the data is not removed from its online location.
+first and it allows us to create Altair charts without worrying that the
+entire dataframe will be included! Since Altair knows the location of
+the data online, the chart is still reproducible as long as the data is
+not removed from its online location.
 
 The drawback of not using a dataframe, is that Altair cannot rely on
 pandas to infer what type of data there is in each column, so we need to
-help it by indicate the datatype.
+help it by indicating the datatype.
 
-This is what the `:T` and `:Q` after the column names does and an
+This is what the `:T` and `:Q` after the column names do and an
 explanation of all the data types in Altair can be found in the next
 slide.
 
-## Data types needs to be manually specified when not working with pandas
+---
+
+## Data types need to be manually specified when not working with pandas
 
 | Data Type    | Shorthand Code | Description                    | Examples                               |
 |--------------|----------------|--------------------------------|----------------------------------------|
@@ -188,16 +190,17 @@ slide.
 | Temporal     | `T`            | a time or date value           | date (August 13 2020), time (12:00 pm) |
 
 Notes: Altair recognizes the four main column types, which you can see
-in this slide (that you also saw in the Programming with Python course).
+in this slide (that you also saw in the [Programming with Python
+course](https://prog-learn.mds.ubc.ca/en/)).
 
 Ordinal and nominal both describe categorical data.
 
 Ordinal implies that there is a natural order to the categories. for
 example, movie ratings with 1-5 stars would be an ordinal scale since a
-five star rating is better than a single star rating.
+five-star rating is better than a single-star rating.
 
 In contrast, there is no such order for nominal categories, for example
-colors, fruits, or countries.
+colours, fruits, or countries.
 
 Quantitative data describes data that is continuous, which means that it
 is a number that can be described with infinite precision. For example,
@@ -221,9 +224,9 @@ appear before going to the next slide.
 
 Notes:
 
-Now that we have seen what the datatabel looks like, and which data
-types the values in each column are, let’s think about what we would
-want to visualize and why.
+Now that we have seen what the data table looks like, and which data
+type the values in each column are, let’s think about what we would want
+to visualize and why.
 
 Since the data reaches all the way back to the 1800s, it would be really
 interesting to plot how the world population has been growing up until
@@ -238,7 +241,7 @@ plot before going to the next slide.
 ### Our sketched out plot
 
 <center>
-<img src="/module2/drawing.png"  width = "80%">
+<img src="/module2/drawing.png"  width = "70%">
 </center>
 
 Notes:
@@ -266,7 +269,7 @@ alt.Chart(gm_url).mark_line().encode(
 
 Notes:
 
-Next, we try to plot it in Altair using `mark_line()` and maping `year`
+Next, we try to plot it in Altair using `mark_line()` and mapping `year`
 to the x-axis and `population` to the y-axis.
 
 But the plot on this slide doesn’t look like a line plot, why is that?
@@ -340,7 +343,7 @@ is even more efficient.
 We will do a deep dive into titles for axis and other chart elements in
 a later module.
 
-For now on we will just use it to clarify when an automatic label might
+From now on we will just use it to clarify when an automatic label might
 be confusing.
 
 ---
