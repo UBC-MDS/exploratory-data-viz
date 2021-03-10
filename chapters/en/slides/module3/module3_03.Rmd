@@ -433,25 +433,51 @@ In our plot,
 we can see that the "comedy" genre has the most movies
 whereas there are few documentaries and black comedies.
 
-
-If we wanted a more precise indication of the counts,
-we could have have used separate barplot instead.
+However,
+it also makes it hard to tell where the lines of the median
+and the boxes are for many of the distributions.
+A better alternative could be to not scale the boxes
+and instead include a bar chart with the number of observations per genre
+together with the boxplot.
 
 ---
 
-## TODO mention violinplots and striplots are often better but not available yet
+## Boxplots are not able to accurately represent data with multiple peaks
 
 
-Also shwo facetted histograms?
+<center><img src=/module3/point-box-violin.gif</img></center>
 
 Notes:
-While it is possible to make [violin plots](https://altair-viz.github.io/gallery/violin_plot.html)
-and [stripplots](https://altair-viz.github.io/gallery/stripplot.html) (categorical scatter plots) in Altair,
-these do currently not work with a categorical x/y axies,
-and you need to use faceting instead to display different categories,
-which gives us less flexibility.
-Therefore,
-we will primarily use boxplots when comparing multiple distributions with Altair.
+While boxplots are effective for visualizing multiple distributions,
+they also have their shortcomings.
+
+One of their main downsides
+is that they are not effective in showing distributions with multiple peaks.
+This can be seen in the animation in this slide,
+where variation in the raw data does no result in any change in the boxplots.
+
+Two effective visualizations for many distributions that
+also handle multiple peaks are
+[violin plots](https://altair-viz.github.io/gallery/violin_plot.html)
+(as shown in this slide)
+and [stripplots](https://altair-viz.github.io/gallery/stripplot.html).
+
+Violinplots are similar to density plots put next to each other,
+and stripplots prevent overlap
+by distributing the points in a cloud instead of a straight line.
+
+There are also [sina plots](https://cran.r-project.org/web/packages/sinaplot/vignettes/SinaPlot.html),
+which combine the best of violin plots and strip plots together.
+
+These are all highly effective,
+but not yet available to make easily in Altair,
+so we will not be teaching them here.
+
+Boxplots are still very effective in comparing multiple distributions,
+and when there are even more distributions than what we have here,
+e.g. 50+,
+then boxplots are often easier to interpret than the alternatives mentions above,
+since they are simpler.
 
 ---
 
