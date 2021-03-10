@@ -54,7 +54,7 @@ knitr::knit_hooks$set(
             # The output to the md document is the iframe string referencing
             # the plot file we just saved.
             c(default_source_hook(code_chunk, options),
-              paste('<iframe src="', file_name, '" width=100% height=400px style=border-width:0;></iframe>', sep=''))
+              paste('<iframe src="', file_name, '" width=100% height=420px style=border:none;></iframe>', sep=''))
         }
         else {
             default_source_hook(code_chunk, options)}
