@@ -341,7 +341,8 @@ interpreting a density plot.
 ## Densities can be combined with plotting individual data points
 
 ``` python
-(density.mark_area(opacity=0.7) + alt.Chart(movies[:10]).mark_tick(color='black', yOffset=140).encode(x='runtime'))
+(density.mark_area(opacity=0.7)
+ + alt.Chart(movies[:10]).mark_tick(color='black', yOffset=140).encode(x='runtime'))
 ```
 
 <iframe src="/module3/charts/06/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
