@@ -132,12 +132,12 @@ see in the next slide.
 
 ## Showing a single value can lead to incorrect conclusions
 
+[Beyond Bar and Line Graphs: Time for a New Data Presentation
+Paradigm](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128)
+
 <center>
 <img src=/module3/barplot-hiding-points.png></img>
 </center>
-
-[Beyond Bar and Line Graphs: Time for a New Data Presentation
-Paradigm](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128)
 
 Notes: This image illustrates how the same bar chart (A) could have been
 generated from three different distributions (B, C, or D).
@@ -433,12 +433,12 @@ number of observations per genre together with the boxplot.
 
 ## Boxplots are not able to accurately represent data with multiple peaks
 
-<center>
-<img src=/module3/point-box-violin.gif</img>
-</center>
-
 [From Autodesk
 research](https://www.autodesk.com/research/publications/same-stats-different-graphs)
+
+<center>
+<img src=/module3/point-box-violin.gif></img>
+</center>
 
 Notes: While boxplots are effective for visualizing multiple
 distributions, they also have their shortcomings.

@@ -11,10 +11,10 @@ histograms to represent distributions of data.
 
 ## Histograms can give different results depending on the data
 
-<img src=/module3/histogram-and-shifted.png></img>
-
 [From
 scikit-learn](https://scikit-learn.org/stable/auto_examples/neighbors/plot_kde_1d.html)
+
+<img src=/module3/histogram-and-shifted.png></img>
 
 Notes: How many observations are counted per bar in a histogram depends
 on exactly where on the axis the border between the bins are.
@@ -34,10 +34,10 @@ the bar heights.
 
 ## Centering the bins on the data can help create more accurate distribution plots
 
-<img src=/module3/kde-buildup.gif></img>
-
 [From Kimberly Fessel’s dataviz
 videos](https://www.youtube.com/watch?v=DCgPRaIDYXA)
+
+<img src=/module3/kde-buildup.gif></img>
 
 Notes: Instead of setting fixed lines along the axis and then count
 points fully in one bin or another, we can create bins that are centered
