@@ -4,62 +4,51 @@ type: slides
 
 # Visualizing data from one column
 
-Notes: In the previous modules we have seen how graphical marks in
-Altair to create plots and learn about which visual channels are
-effective for displaying data. Now that you are equipped with this
-knowledge and can create your own plots, we will dive deeper into when
-it is appropriate to use certain charts instead of others.
+Notes:
+In the previous modules we have learned
+how to use graphical marks to create plots
+and seen which visual channels are effective for displaying data.
+Equipped these new skills,
+we will dive deeper into
+when it is appropriate
+to use certain charts instead of others.
 
 ---
 
 ## The movies dataset
 
-``` python
+```python
 import pandas as pd
 
 movies = pd.read_csv('data/movies.csv')
 movies
 ```
 
-```out
-                                                 title  runtime     budget     revenue      genre                   country  vote_average
-0                                         Finding Nemo      100   94000000   940335536  Animation  United States of America          3.86
-1    Pirates of the Caribbean: The Curse of the Bla...      143  140000000   655011224    Fantasy  United States of America          3.81
-2                                   The Simpsons Movie       87   75000000   527068851  Animation  United States of America          3.44
-3           Pirates of the Caribbean: Dead Man's Chest      151  200000000  1065659812    Fantasy  United States of America          3.47
-4                                        Mars Attacks!      106   70000000   101371017    Fantasy  United States of America          2.96
-..                                                 ...      ...        ...         ...        ...                       ...           ...
-524                                     The Dark Tower       95   60000000    71000000    Fantasy  United States of America          3.20
-525                                              Sully       96   60000000   238470033    History  United States of America          3.75
-526                                    The Emoji Movie       86   50000000    66913939  Animation  United States of America          0.63
-527                                    A Dog's Purpose      100   22000000   194647323    Fantasy  United States of America          3.61
-528                           Batman: The Killing Joke       72    3500000     3775000  Animation  United States of America          2.94
+Notes:
+Throughout this module,
+we will study a dataset of movies containing
+each movie's title, runtime, budget, revenue, genre,
+country of production, and average user rating.
 
-[529 rows x 7 columns]
-```
+Upon see this table,
+there are several questions that might come to mind, e.g.
 
-Notes: For this module, we will study a dataset of movies containing
-each movie’s title, runtime, budget, revenue, genre, country of
-production, and average user rating.
+- Are high budget movies more profitable?
+- Do some countries make more movies of certain genres?
+- Are some genres rated higher than others?
 
-Upon see this table, there are several questions that might come to
-mind, e.g.
-
--   Are high budget movies more profitable?
--   Do some countries make more movies of certain genres?
--   Are some genres rated higher than others?
-
-Before diving into these comparisons, we want to understand the data for
+Before diving into these comparisons,
+we want to understand the data for
 each of the columns in our dataset.
 
-Let’s start by looking at the ratings the movies received and explore
-the best ways to visualize this data.
+Let's start by looking at the ratings the movies received
+and explore the best ways to visualize this data.
 
 ---
 
 ## Visualizing a single column with a point plot along one axis
 
-``` python
+```python
 import altair as alt
 
 alt.Chart(movies[:5]).mark_point().encode(
@@ -86,7 +75,7 @@ we subset the data in this slide.
 
 ## Single axis point plots can become saturated when there is a lot of data to plot
 
-``` python
+```python
 alt.Chart(movies[:50]).mark_point().encode(
     x='runtime')
 ```
@@ -106,7 +95,7 @@ the module.
 
 ## Thinner marks avoids saturation
 
-``` python
+```python
 alt.Chart(movies[:50]).mark_tick().encode(
     x='runtime')
 ```
@@ -134,7 +123,7 @@ of remembering a specific name.
 
 ## Thinner marks also saturate for large data sets
 
-``` python
+```python
 alt.Chart(movies).mark_tick().encode(
     x='runtime')
 ```
@@ -150,7 +139,7 @@ distribution looks, even with these thin marks.
 
 ## Using histograms to visualize distributions avoids saturation issues
 
-``` python
+```python
 alt.Chart(movies).mark_bar().encode(
     alt.X('runtime', bin=alt.Bin(maxbins=30)),
     y='count()')
@@ -186,7 +175,7 @@ compare multiple distributions?
 
 ## Comparing multiple distributions via faceting
 
-``` python
+```python
 (alt.Chart(movies).mark_bar().encode(
     alt.X('runtime', bin=alt.Bin(maxbins=30)),
     y='count()')
@@ -218,7 +207,7 @@ of the distribution is the same from this visualization.
 
 ## Comparing multiple distributions via faceting with independent y-axes
 
-``` python
+```python
 (alt.Chart(movies).mark_bar().encode(
     alt.X('runtime', bin=alt.Bin(maxbins=30)),
     y='count()')
