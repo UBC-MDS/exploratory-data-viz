@@ -271,12 +271,14 @@ colors, so how can we use position to compare multiple distributions?
 
 ## Boxplots show several key statistic from a distribution
 
-<center>
-<img src=/module3/boxplot-schematic.png></img>
-</center>
-
 [Jhguch at en.wikipedia via Wikimedia
 Commons](https://commons.wikimedia.org/wiki/File:Boxplot_vs_PDF.svg)
+
+<br> <br>
+
+<center>
+<img src=/module3/boxplot-schematic.svg></img>
+</center>
 
 Notes: A boxplot is a mix between showing individual values and a few
 key summary statistics.
@@ -284,8 +286,8 @@ key summary statistics.
 Instead of showing just the mean or median as with a bar plot, a box
 plot shows 5 summary statistics.
 
-The box represents three values, the median in the middle and the upper
-and lower quartile at the edges This means that means that 50% of the
+The box represents three values, the median in the middle and the lower
+and upper quartile at the edges This means that means that 50% of the
 data points lie within the box.
 
 The lines extending from the box are called whiskers and they can
