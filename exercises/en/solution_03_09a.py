@@ -10,9 +10,9 @@ mass_density_plot = alt.Chart(penguins_df).transform_density(
      as_=['body_mass_g', 'density'],
      steps=100
      ).mark_area(opacity=0.5).encode(
-          x='body_mass_g',
-          y='density:Q',
-          color='island').properties(
+          alt.X('body_mass_g', title='Mass (grams)'),
+          alt.Y('density:Q', title='Density'),
+          alt.Color('island', title='Antarctic Island')).properties(
                title="Penguin mass among species")
 
 mass_density_plot

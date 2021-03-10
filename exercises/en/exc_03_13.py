@@ -9,4 +9,4 @@ mass_boxplot = alt.Chart(___).___().encode(
     alt.Y(___).properties(
         ___, ___)
 
-____
+mass_boxplot
