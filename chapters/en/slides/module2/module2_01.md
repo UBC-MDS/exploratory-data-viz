@@ -9,8 +9,8 @@ Notes:
 So far we have seen how to use points and lines to represent data
 visually.
 
-In this lecture, we will see how we can also use areas and bars for this
-purpose.
+In this slide deck, we will see how we can also use areas and bars for
+this purpose.
 
 Before we dive into the code, let’s discuss how different visual
 channels, such as position, area, etc, can impact how easy it is for us

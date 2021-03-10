@@ -4,9 +4,9 @@ type: slides
 
 # Creating bar charts and histograms
 
-Notes: In this module we will be learning how to create bars charts for
-counting observations, and special types of bar chars called histograms
-for showing distributions of data.
+Notes: In this slide deck we will be learning how to create bars charts
+for counting observations, and special types of bar chars called
+histograms for showing distributions of data.
 
 ---
 
@@ -319,7 +319,7 @@ histograms since the labels are numbers that don’t need to be rotated to
 be readable.
 
 You can also see that we have not changed the title of the y-axis. There
-isn’t really a more informative title we can substitute for here, since
+isn’t really a more informative title we can substitute for here since
 the length of each bar simply represents the count of
 observations/records in each bin.
 
