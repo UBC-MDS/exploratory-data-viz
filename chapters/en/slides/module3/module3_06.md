@@ -116,7 +116,7 @@ import altair as alt
     y='density:Q'))
 ```
 
-<iframe src="/module3/charts/02/unnamed-chunk-2.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/06/unnamed-chunk-2.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: To create a density plot, we need to complete two tasks:
@@ -173,7 +173,7 @@ x-axis, those are the more informative in a density plot.
      color='genre'))
 ```
 
-<iframe src="/module3/charts/02/unnamed-chunk-3.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/06/unnamed-chunk-3.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: If we want to split and color the densities by a categorical
@@ -218,7 +218,7 @@ distributions.
      color='genre'))
 ```
 
-<iframe src="/module3/charts/02/unnamed-chunk-4.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/06/unnamed-chunk-4.html" width="100%" height="420px" style="border:none;">
 </iframe>
 <!-- #region -->
 
@@ -258,7 +258,7 @@ vertically as we saw with the histograms previously.
      color='genre'))
 ```
 
-<iframe src="/module3/charts/02/unnamed-chunk-5.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/06/unnamed-chunk-5.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: In the previous slide, we can see that the density curves are a
@@ -289,7 +289,7 @@ in this slide.
      color='genre'))
 ```
 
-<iframe src="/module3/charts/02/unnamed-chunk-6.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/06/unnamed-chunk-6.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: If we instead increased the number of steps, we could make the
@@ -316,7 +316,7 @@ density = (alt.Chart(movies[:10]).transform_density(
 density
 ```
 
-<iframe src="/module3/charts/02/unnamed-chunk-7.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/06/unnamed-chunk-7.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Since density plots don’t show the number of observations, they
@@ -344,7 +344,7 @@ interpreting a density plot.
 (density.mark_area(opacity=0.7) + alt.Chart(movies[:10]).mark_tick(color='black', yOffset=140).encode(x='runtime'))
 ```
 
-<iframe src="/module3/charts/02/unnamed-chunk-8.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/06/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes:
@@ -380,7 +380,7 @@ Notes: <br>
     y='density:Q'))
 ```
 
-<iframe src="/module3/charts/02/unnamed-chunk-9.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/06/unnamed-chunk-9.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: In Altair, we could actually scale the density plots by the count

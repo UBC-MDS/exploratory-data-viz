@@ -65,7 +65,7 @@ alt.Chart(movies[:5]).mark_point().encode(
     x='runtime')
 ```
 
-<iframe src="/module3/charts/01/unnamed-chunk-2.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/01/unnamed-chunk-2.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Visualizing data distributions are useful in understanding the
@@ -92,7 +92,7 @@ alt.Chart(movies[:50]).mark_point().encode(
     x='runtime')
 ```
 
-<iframe src="/module3/charts/01/unnamed-chunk-3.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/01/unnamed-chunk-3.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: When there are more observations, it becomes difficult to see how
@@ -112,7 +112,7 @@ alt.Chart(movies[:50]).mark_tick().encode(
     x='runtime')
 ```
 
-<iframe src="/module3/charts/01/unnamed-chunk-4.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/01/unnamed-chunk-4.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: It is often easier to separate individual observations when they
@@ -141,7 +141,7 @@ alt.Chart(movies).mark_tick().encode(
     x='runtime')
 ```
 
-<iframe src="/module3/charts/01/unnamed-chunk-5.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/01/unnamed-chunk-5.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: When we increase the number of observations even further it
@@ -160,7 +160,7 @@ alt.Chart(movies).mark_bar().encode(
     y='count()')
 ```
 
-<iframe src="/module3/charts/01/unnamed-chunk-6.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/01/unnamed-chunk-6.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Instead of visualizing each individual observation, we can use
@@ -196,7 +196,7 @@ the movie length?
  .facet('country'))
 ```
 
-<iframe src="/module3/charts/01/unnamed-chunk-7.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/01/unnamed-chunk-7.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Let’s start by comparing the runtimes of movies produced in
@@ -233,7 +233,7 @@ between the two distributions.
  .resolve_scale(y='independent'))
 ```
 
-<iframe src="/module3/charts/01/unnamed-chunk-8.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/01/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: By default when faceting, the y-axis is the same for all the

@@ -62,7 +62,7 @@ alt.Chart(movies_extended).mark_bar().encode(
     alt.Color('Major Genre'))
 ```
 
-<iframe src="/module3/charts/03/unnamed-chunk-2.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/10/unnamed-chunk-2.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: As we have seen, histograms are not very effective for comparing
@@ -89,7 +89,7 @@ since the axis extends that far).
     alt.Color('Major Genre')))
 ```
 
-<iframe src="/module3/charts/03/unnamed-chunk-3.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/10/unnamed-chunk-3.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Although we saw previously that a layered density chart is better
@@ -117,7 +117,7 @@ alt.Chart(movies_extended).mark_bar().encode(
     alt.Y('Major Genre'))
 ```
 
-<iframe src="/module3/charts/03/unnamed-chunk-4.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/10/unnamed-chunk-4.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: We could use a barplot if we were only interested in comparing a
@@ -180,7 +180,7 @@ alt.Chart(movies_extended).mark_tick().encode(
     alt.Y('Major Genre'))
 ```
 
-<iframe src="/module3/charts/03/unnamed-chunk-5.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/10/unnamed-chunk-5.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: One approach would be to show the individual observations, such
@@ -204,7 +204,7 @@ alt.Chart(movies_extended).mark_tick().encode(
     alt.Tooltip('Title:N'))
 ```
 
-<iframe src="/module3/charts/03/unnamed-chunk-6.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/10/unnamed-chunk-6.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Altair really shines in answering questions like this! In
@@ -241,7 +241,7 @@ counts, such as in a heatmap.
     alt.Color('count()')))
 ```
 
-<iframe src="/module3/charts/03/unnamed-chunk-7.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/10/unnamed-chunk-7.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: A heatmap of the number of observations is very similar to a
@@ -324,7 +324,7 @@ box = alt.Chart(movies_extended).mark_boxplot().encode(
 box | bar
 ```
 
-<iframe src="/module3/charts/03/unnamed-chunk-8.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/10/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Here we show a boxplot next to the barplot we created initially.
@@ -356,7 +356,7 @@ alt.Chart(movies_extended).mark_boxplot().encode(
     alt.Y('Major Genre', sort=genre_order))
 ```
 
-<iframe src="/module3/charts/03/unnamed-chunk-9.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/10/unnamed-chunk-9.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Altair does not support sorting boxplots via the “x” or “-x”
@@ -386,7 +386,7 @@ alt.Chart(filtered_movies).mark_boxplot().encode(
     alt.Y('Major Genre', sort=genre_order))
 ```
 
-<iframe src="/module3/charts/03/unnamed-chunk-10.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/10/unnamed-chunk-10.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Here we can compare the distributions more clearly, and it really
@@ -413,7 +413,7 @@ alt.Chart(movies_extended).mark_boxplot().encode(
     alt.Size('count()'))
 ```
 
-<iframe src="/module3/charts/03/unnamed-chunk-11.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module3/charts/10/unnamed-chunk-11.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: The size of the boxes can be made proportional to the count of
