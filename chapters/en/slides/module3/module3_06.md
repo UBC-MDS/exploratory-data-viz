@@ -366,9 +366,7 @@ created a histogram.
 
 ---
 
-# Scaling densities by the numbers of observations is possible but not very effective
-
-Notes: <br>
+## Scaling densities by the numbers of observations is possible but not very effective
 
 ``` python
 (alt.Chart(movies[:10]).transform_density(
