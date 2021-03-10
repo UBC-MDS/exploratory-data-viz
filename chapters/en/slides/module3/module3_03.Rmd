@@ -381,6 +381,37 @@ Now the visualization is very effective!
 It is easy to compare genres with similar grossing
 since they are right next to each other in the plot.
 
+If we wanted to look closer at the differences
+between the bulk of the distributions
+we could exclude the two most highly grossing movies.
+
+---
+
+## Zooming in facilitates comparison of small differences
+
+```{python}
+filtered_movies = movies_extended[movies_extended['Worldwide Gross'] < 1_500_000_000]
+alt.Chart(filtered_movies).mark_boxplot().encode(
+    alt.X('Worldwide Gross'),
+    alt.Y('Major Genre', sort=genre_order))
+```
+
+Notes:
+Here we can compare the distributions more clearly,
+and it really looks like there is no large differences
+in the medians between the five genres
+behind Adventure and Action.
+
+We will need to keep in mind that there are two additional data points
+that we have excluded from this visualization,
+but neither the median line nor the box would be much affected 
+by excluding just a few values from a large population.
+
+If we would have shown the mean instead of the median,
+this could have been an issue
+since the mean can be affected significantly
+from just a few extreme values.
+
 ---
 
 ## Boxplots can be scaled by the number of observations
