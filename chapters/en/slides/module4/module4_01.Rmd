@@ -339,73 +339,293 @@ alt.Chart(movies_extended).mark_bar().encode(
 ```
 
 Notes:
-TODO this is clearly a new topic, maybe its own slide deck even if the previous one is short? Alternatively move the previous one into the end of mod 3 (but we will show 2D categorical below).
 
-For categorical data,
-we usually don't say that we visualize "distributions"
-but rather counts of observations.
-We have already seen examples of this in the bar charts we made in previous chapters.
+We have already seen examples of visualizing categorical distributions
+when we used bar charts to plot the count of categories in previous modules.
+
+Although these plots represent categorical distributions,
+it's good to know that they are commonly referred to
+as just showing the counts of the categories,
+rather than their "distribution".
 
 Here we have made a bar chart to answer the question
 "Which is the most common genre among movies in this dataset?".
 
-We can see that the data set consists of mostly comedies and dramas
-with very few movies of concerts/performances.
-
-It is important to understand that a density plot
-would not be appropriate for categorical data.
-Densities are only suitable for contiuous data,
-where it makes sense to smoothen the distribution.
-Here it would not make sense to smoothen the categories into each other.
-
-TODO could densities be OK/semi-OK for ordinal data like weekdays? So it is order vs unorder rather than contious vs categorical that is the issue?
+We can see that the dataset consists of mostly comedies and dramas
+with very few concert/performance films.
 
 ---
 
 ## Visualizing counts for combinations of two categorical columns can be done via faceting but it's not always effective
 
 ```{python}
-(alt.Chart(movies_extended).mark_bar().encode(
+alt.Chart(movies_extended).mark_bar().encode(
     alt.X('count()'),
-    alt.Y('Major Genre', sort='x'))
- .properties(width=150)
- .facet('MPAA Rating'))
+    alt.Y('Major Genre', sort='x'),
+    alt.Color('MPAA Rating'))
 ```
 
 Notes:
-TODO shorter title or break into two slides (1=look faceting, 2=but not great)
 
 What if we wanted to ask a more complex question
 that involves visualizing the combinatorial counts of two categorical columns?
 
 Our data contains the MPAA rating for each movie,
-which indicates what age groups the movie is suitable for.
-We might want to visualize the count of genres per MPAA rating group
-to find out if movies of difference genres recevieve different MPAA ratings.
+which is classification given by the Motion Picture Association
+indicating what age groups a movie is suitable for:
+
+- G -- General Audiences
+- PG -- Parental Guidance Suggested
+- PG-13 -- Parents Strongly Cautioned
+- R -- Restricted
+
+Do you think there are any differences in
+the proportions of ratings
+between movie genres?
 
 For example,
 we might already have a hypothesis
-that there won't be many horror movies that are appropriate for children.
+that there won't be any horror movies that are appropriate for children.
 
-One approach to address this question is to facet based on the MPAA rating
-as we have done in this slide.
-Here we can see that most movies that are appropriate for families (G)
-are adventure movies and comedies
-whereas there is much more spread among the movies that are rated R.
+To find out,
+we could color the bars according to the MPAA rating as in this slide.
+However,
+one aspect of our chart is not very intuitive:
+the color legend and the stacked bar segments
+are not sorted in the same order.
 
-Since we are using bar graphs,
-we can accurately tell the exact number of observations for each bar,
-but at first glance it is a bit difficult to get a good overview
-of the take home message from this visualization.
+---
 
-While the facetted plot makes it easy to answer the question:
-"Which is the most common movie genre within each MPAA rating group?",
-it is harder to answer the question:
-"Which is the most common MPAA rating assigned to movies of a particular genre?".
+## Reordering the bar segments aligns it with the order in the legend
 
-To better answer the second question,
-we could have switched which column we facetted by and which we have on the y-axis,
-but there is no great solution for getting the best of both worlds in a faceted chart.
+```{python}
+alt.Chart(movies_extended).mark_bar().encode(
+    alt.X('count()'),
+    alt.Y('Major Genre', sort='x'),
+    alt.Color('MPAA Rating'),
+    alt.Order('MPAA Rating'))
+```
+
+Here we have reordered the bar segments using `alt.Order`,
+so that they are in the same order as the legend.
+We could have opted to reorder the legend instead,
+but it is more natural to start with the rating for children (G)
+and proceed towards increasingly more mature ratings.
+
+In this chart
+we can see that most comedies are rated PG-13,
+most dramas are rated R,
+that action movies almost only have movies rated either R or PG-13
+
+But this doesn't really answer our question,
+which was if there are any differences in
+the **proportions** of MPAA ratings
+**between** movie genres?
+
+While we can roughly see the relative proportions
+within a single bar,
+it is quite hard to compare the colored segments between bars as proportions
+since the bars are of different length.
+
+It is also impossible to see the proportions in the genres with fewer movies.
+
+---
+
+## Rescaling the bar lengths facilitates comparing proportions between bars
+
+```{python}
+alt.Chart(movies_extended).mark_bar().encode(
+    alt.X('count()', stack='normalize', title='Proportion of movies'),
+    alt.Y('Major Genre', sort='x'),
+    alt.Color('MPAA Rating'),
+    alt.Order('MPAA Rating'))
+```
+
+Here we have changed the strategy
+for how the segments are stacked together
+by setting `stack='normalize'`,
+which means to normalize/rescale each bar
+to span the entire length of the x-axis
+and label it as a proportion.
+
+The plot looks quite unordered,
+because 'x' is not a meaningful way to sort the bars
+when they are all the same length.
+Instead we would like to sort them
+by the length of one of the colored segments.
+
+---
+
+## Sorting by the length of one of the colored segments make the chart easier to rea
+
+```{python}
+sort_order = ['Adventure', 'Musical', 'Comedy', 'Romantic Comedy', 'Action',
+              'Drama', 'Concert/Performance', 'Documentary', 'Western',
+              'Thriller/Suspense', 'Horror', 'Black Comedy'] 
+alt.Chart(movies_extended).mark_bar().encode(
+    alt.X('count()', stack='normalize', title='Proportion of movies'),
+    alt.Y('Major Genre', sort=sort_order),
+    alt.Color('MPAA Rating'),
+    alt.Order('MPAA Rating'))
+```
+
+Notes:
+
+That's much better!
+Sorting the chart in an intuitive order
+has once again shown to be crucial
+for making our plot easier to interpret.
+
+In a normalized stacked bar chart
+it makes sense to sort by either the first or the last colored segment.
+Since not all genres have movies rated `'G'`,
+we chose to set the order based on `'R'` instead.
+
+If you are more interested in one genre than others,
+you could also choose to sort by that genre.
+
+Now we can directly compare the the length of individual bar segments
+between the genres.
+We see that there certainly are differences
+in the proportions of MPAA ratings
+between movies in different genres.
+
+For the R rating,
+it is immediately obvious exactly how big these differences are,
+and we can see that all black comedies are rated R,
+while almost no adventure movies receive this rating.
+
+It is a little bit harder to compare the other rating because 
+the colored segments do not share the same baseline.
+We can still see that concerts and performance movies
+has the highest proportions of movies that are kids-friendly at 50%,
+while musicals, documentaries, and action movies
+have around 20% kids-friendly movies.
+
+(We specified the sort order manually in this slide,
+because it is rather advanced to extract this order using pandas,
+but we include an example in the transcript 
+if you are interested in how this could be done:)
+
+```python
+sort_order = (
+    movies_extended
+    .groupby('Major Genre')['MPAA Rating']
+    .value_counts(normalize=True)
+    .xs('R', level='MPAA Rating')
+    .sort_values()
+    .index
+    .to_list())
+```
+
+---
+
+## Normalize stacked bar charts are effective at visualizing just a few categories
+
+```{python}
+sort_order = ['Concert/Performance', 'Musical', 'Documentary', 'Adventure', 
+              'Comedy', 'Romantic Comedy', 'Drama',  'Action']
+alt.Chart(movies_extended[movies_extended['MPAA Rating'].isin(['G', 'PG'])]).mark_bar().encode(
+    alt.X('count()', stack='normalize', title='Proportion of movies'),
+    alt.Y('Major Genre', sort=sort_order),
+    alt.Color('MPAA Rating'),
+    alt.Order('MPAA Rating'))
+```
+
+Notes:
+As with all charts,
+there are shortcoming to normalized stacked bar charts as well.
+We saw in the last slide that it was a bit harder
+to compare the colored segments that did not share a baseline
+versus the segments at the ends
+where the baseline is the same.
+
+This means that normalized stacked bar charts
+are ideal when there are only two categories,
+since both segments will be easy to compare
+between categories.
+
+We can see an example in this slide
+where we filtered the dataset
+to contain only movies rated either `'G'` or `'PG'`.
+It is easy to make comparison for both the blue and the orange segments.
+
+Stacked bar charts also work fine for 3-4 categories,
+but beyond that they are usually ineffective.
+Even for 3-4 categories it is often preferred
+to show the bars side by side instead of stacked.
+
+---
+
+## Showing bars side by side makes it easier to compare their exact heights within a category
+
+```{python}
+(alt.Chart(movies_extended).mark_bar().encode(
+    alt.X('count()', title=''),
+    alt.Y('MPAA Rating', title=''),
+    alt.Color('MPAA Rating', legend=None))
+ .properties(width=100, height=45)
+ .facet('Major Genre', columns=4)
+ .resolve_scale(x='independent'))
+```
+
+Notes:
+It is not (yet) possible to pass a different value to `stack`,
+which would put the bars next to each other.
+Instead,
+we could use faceting as in this slide.
+
+Here,
+we have also removed some of the axis title to make the figure more compact
+and less crowded with text.
+You will learn more about customizing elements
+such as titles in the next module.
+
+By resolving the x-scale to be independent between the plots,
+the bar height is not relative the max in each facet.
+This makes them easier to compare **as proportions** both within and between facets
+while still retaining an indication of the count on the x-axis.
+
+If we wanted to compare the absolute counts between facets,
+we would leave the axis axis at its default value: "shared". 
+
+This type of visualization is effective
+when we want to accurately compare the heights of bars
+**within** a genre.
+For example to answer the question:
+"Which are the most common MPAA ratings for each genre?".
+
+---
+
+## Switching the faceting and y column targets the plot towards a slightly different question
+
+```{python}
+(alt.Chart(movies_extended).mark_bar().encode(
+    alt.X('count()', title=''),
+    alt.Y('Major Genre', title='', sort='x'),
+    alt.Color('MPAA Rating', legend=None))
+ .properties(width=100, height=150)
+ .facet('MPAA Rating')
+ .resolve_scale(x='independent'))
+```
+
+Notes:
+If we instead wanted to answer the question:
+"Which are the most common genres for each MPAA Rating?",
+we would switch the faceting and y columns.
+
+Here,
+we kept the color column as the MPAA Rating
+so that it is consistent with the previous figures,
+and because with this many categories,
+it would look quite messy if we colored by the Major Genre instead.
+
+We can see that the most common G-rated movies are adventure films,
+and that most PG-13 rated movies are Comedies, Dramas and action movies.
+It is important to remember that genres have more movies in total,
+so we would expect them to show up highly in all the facets.
+Whether this is desired or not depends on the question we are asking,
+but it does make sense here.
 
 ---
 
@@ -420,24 +640,31 @@ alt.Chart(movies_extended).mark_rect().encode(
 
 Notes:
 
-To be able to effectively answer both the questions from the previous slide
-with a single visualization,
-we can represent the count with color
-instead of mapping it to one of the axes.
+If we want to get an overview of the information
+from both the faceted plots in the previous two slides,
+we could create a heatmap.
+In this heatmap
+the color represents the combinatorial counts of two categorical columns,
+such as how many movies are both rated G and in the comedy genre.
 
-Using `mark_rect`,
-we can now create a heatmap where 
-the two categorical are mapped to one axis each
-and we don't need to facet.
-Sorting on color/count puts the genres with many observations close together,
-similar to how we sorted on `'x'` and `'y'` in previous modules.
+Comparing squares vertically in this heatmap
+is similar to the first faceted plot we made
+and comparing them horizontally
+is similar to the faceted visualization in the last slide.
 
-If we want to compare which genre is most common for a certain rating,
-we compare the colors in the same *column*.
+In other words,
+if we want to compare which genre is most common for a certain rating,
+we compare the colors *column-wise* in the heatmap.
 If we instead are interested in the most common rating assigned to a movie
 we compare the columns *row-wise*.
 We can quickly see that most dramas are rated PG-13 or R
 and most horror movies are rated R.
+
+Sorting on color/count puts the genres with many observations close together,
+similar to how we sorted on `'x'` and `'y'` in previous modules.
+We could sort the x-axis also,
+but since it has a natural order to it,
+we have decided to keep it as is here.
 
 This visualization is effective
 for quickly communicating the main takeaways from the two questions
@@ -445,44 +672,33 @@ and giving us an overview of the data,
 but it is harder  to tell that exact count for each color
 so if that is of great importance a bar chart is more suitable.
 
-As you can see the default colorscale is different from the marks we have used so far.
-We will talk more about colorscale in a later module,
-but briefly the change in hue from one color to another
-allows for more resolution in being able to tell
-which color corresponds to a certain value.
-
-For the same reasons a density plot was not an appropriate replacement of the categorical barchart,
-we cannot replace this categorical heatmap with a 2D denity plot.
-
 ---
 
-## Using both the color and marker size to indicate the count creates a more effective visualization.
+## Using both the color and marker size to indicate the count creates a more effective visualization
 
 ```{python}
-# Sort since according to the natural order of the ratings
-mpaa_ordered = ['G', 'PG', 'PG-13', 'R']
 alt.Chart(movies_extended).mark_circle().encode(
+    alt.X('MPAA Rating'),
+    alt.Y('Major Genre', sort='color'),
     alt.Color('count()'),
-    alt.Size('count()'),
-    alt.X('MPAA Rating', sort=mpaa_ordered),
-    alt.Y('Major Genre', sort='x'))
+    alt.Size('count()'))
 ```
 
 Notes:
-TODO an alternative strategy is to not teach mark_rect for categorical and go straight to this plot... I like mentioning it to contrast it with this, but not sure if there would be confusion or if the heatmap for some reason implies continuous data.
-
 One potential concern with heatmaps
 is that they rely solely on color to communicate the value of interest.
 
 We cannot perceive small variations in color
 as accurately as we can for other visual channels,
-such as positions of size.
+such as position of size.
 
 Color can also be problematic for people with color vision deficiencies,
-which is almost 10% of the population.
+which is almost 10% of the population,
+which we will talk more about in a later module.
 
 To ameliorate these issues,
-we can use `map_square` or `map_circle` in Altair,
+we can use the same marks as when creating scatter plots,
+such as `mark_circle` or `mark_square`,
 which allows us to change the size of each mark in addition to its color.
 
 This visualization is highly effective in answering both of the questions we posed initially,
@@ -490,8 +706,6 @@ and if we wanted to,
 we could now facet by a third categorical column 
 such as the movie distributor,
 to interrogate three categorical columns simultaneously.
-
-TODO should we include something with relative counts? aka normalize per row or column, I belive this would be a manual preprocess step or custom js in altair via transform_calculate, quite useful but maybe too much (this module is short though)
 
 ---
 
