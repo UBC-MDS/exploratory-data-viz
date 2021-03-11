@@ -32,29 +32,23 @@ is a key part of most data science positions!
 
 ---
 
-## Reading in and filtering the movies data
-
-```{python}
-import altair as alt
-from vega_datasets import data
-
-
-movies_extended = (
-    data.movies()
-#     .dropna(subset=['Major Genre', 'MPAA Rating', 'Running Time min', 'IMDB Rating', 'IMDB Votes', 'Rotten Tomatoes Rating'])
-    .dropna(subset=['Running Time min'])
-    .query('`MPAA Rating` != ["Not Rated", "NC-17"]')
-    [['Major Genre', 'Creative Type', 'MPAA Rating', 'Title', 'Running Time min', 'Rotten Tomatoes Rating', 'IMDB Rating', 'IMDB Votes']]
-    .reset_index(drop=True))
-```
-
-Notes:
-
----
-
 ## Glancing at the values in the dataframe is a good first step to get familiar with a new dataset
 
+```{python include=FALSE}
+# import altair as alt
+# from vega_datasets import data
+# movies_extended = (
+#     data.movies()
+#     .dropna(subset=['Running Time min'])
+#     .query('`MPAA Rating` != ["Not Rated", "NC-17"]')
+#     [['Major Genre', 'Creative Type', 'MPAA Rating', 'Title', 'Running Time min', 'Rotten Tomatoes Rating', 'IMDB Rating', 'IMDB Votes']]
+#     .reset_index(drop=True)).to_csv('data/movies-extended-eda.csv', index=False)
+```
+
 ```{python}
+import pandas as pd
+
+movies_extended = pd.read_csv('data/movies-extended-eda.csv')
 movies_extended
 ```
 
