@@ -223,94 +223,110 @@ alt.Chart(movies_extended).mark_point().encode(
 ```
 
 Notes:
-Since we are interested in comparing two columns,
-we will add the second column to the y-axis.
-
-Sometimes this is enough to avoid overplotting
-since we are now spreading the points across two dimensions
-instead of one.
-
+As we have seen,
+scatter plots are generally effective for visualizing two dimensional relationships.
 However,
-as you can see in the plot on this slide,
-it is still impossible to tell
-if there are more points close to 80 million of 0,
+as with all plots,
+they have their shortcomings.
+
+Most notably,
+when the bulk of the points become concentrated to a small region of the chart,
+2D scatter plots become saturated in the same way
+as the 1D scatter and rug plots we saw in the previous module.
+
+In this slide we're trying to answer the question:
+"Do high grossing movies tend to have a high production budget?"
+
+In the scatter plot you can see
+that it it is impossible to tell
+if there are more points close to 80 million or 0 on the x-axis,
 and likewise 200 million or 0 on the y-axis.
 
 So although we can discern a trend
 for the points outside the saturated area
 we do not know how they data is spread out inside the blue blob. 
 
-We saw previously that 
-histograms can help when we have saturated plots.
-But if we were to make a histogram
-of each column separately
-we would have two one-dimensional histogram 
-but no information of how these relate to eachother.
-
-Instead,
-what we need here is a single two-dimensional histogram
-of the scatter plot above.
+To solve this issue,
+we can create a two-dimensional histogram
+in the form of a heatmap.
 
 ---
 
-## A heatmap allows us to visualize the relationship between two distributions
+## A heatmap can visualize the relationship between two distributions without saturation
 
 ```{python}
 alt.Chart(movies_extended).mark_rect().encode(
     alt.X('Production Budget', bin=alt.Bin(maxbins=60)),
     alt.Y('Worldwide Gross', bin=alt.Bin(maxbins=60)),
-    alt.Tooltip('Worldwide Gross', bin=alt.Bin(maxbins=60)),
     alt.Color('count()'))
 ```
 
 Notes:
 What's involved in creating a two-dimensional histogram?
-First, we need to bin both axes instead of just one.
-The bins will look like a grid or mesh
-overlayed on the image,
-similar to the faint grey gridlines in the previous slide.
 
-Wihtin each rectangle of this grid,
+This is similar to when we several heatmaps
+to compare multiple 1D distributions,
+but here we need to bin both the x and y-axis.
+
+These bins will look like a grid or mesh
+overlayed on the image,
+similar to the pattern of the faint grey gridlines in the previous slide.
+
+Within each rectangle of this grid,
 we will count the number of observations
 and represent the count value with a color.
 
 The result of these operations is the heatmap shown in this slide,
 which enables us to see a level of detail we could not perceive in the scatter plot.
+
 Here it is clear that there are many fewer movies with a production budget of 80 million
-comared to the area close to 0,
+compared to the area close to 0,
 and most movies seem to be around 10-15 million.
 Likewise the grossing of most movies is around 0-50 million,
 not 200 million.
 
 ---
 
-## A density plot can also be extended to two dimensions
+## A 2D density plot can also visualize the relationship between two distributions without saturation
 
 <img src="/module4/unnamed-chunk-5-1.png" width="48%" />
 
-```{python}
-import seaborn as sns
+```{python include=FALSE}
+# import seaborn as sns
 
-sns.kdeplot(
-    data=movies_extended,
-    x='Production Budget',
-    y='Worldwide Gross',
-    fill=True, cmap='YlGn', cut=0)
-sns.despine()
+# ax = sns.kdeplot(
+#     data=movies_extended,
+#     x='Production Budget',
+#     y='Worldwide Gross',
+#     fill=True, cmap='YlGn', cut=0, cbar=True)
+# sns.despine()
+# ax.figure.savefig('../../../../static/module4/unnamed-chunk-5-1.png')
 ```
 
 Notes:
-In addition to making 2D histograms,
-we can also make 2D density plots.
-Each kernel is now two dimensionalal
-and look like a bell or the top of a circus tent,
-rather than a bell-shaped one dimensional curve.
+In addition to representing 2D distributions as heatmaps,
+we can also represent them as density plots.
 
-Altair cannot yet make thes plots,
-so here we're showing an example from another plotting library called seaborn,
+Altair cannot yet make these plots,
+so here we're showing an example created 
+from another plotting library called seaborn,
 so that you can get a sense of what this visualization would look like for our data.
 
-TODO testing to involve seaborn as per our discussion today.
+In a 2D density plot,
+each bin is now two dimensional
+and look like a bell in a clocktower
+or the top of a circus tent,
+rather than a bell-shaped one-dimensional curve.
+
+This type of visualization gives us similar information
+as the heatmap in the previous slide
+and the advantages and disadvantages
+are similar to those between one-dimensional histograms
+and density plots.
+
+As with 1D density plots,
+the values of the density themselves are not helpful,
+but we have included them here in the colorbar as an example.
 
 ---
 
