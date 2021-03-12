@@ -16,7 +16,7 @@ source('../../../../slide-setup.R')
 type: slides
 
 
-# Visualizing multidimensional distributions
+# Visualizing Multidimensional Distributions
 
 Notes:
 In this slide deck,
@@ -148,6 +148,8 @@ let's see what a plot looks like
 when there appears to be no relationship 
 between the plotted dataframe columns.
 
+---
+
 ## When there is no relationship, there is also no pattern in the plotted points
 
 ```{python}
@@ -156,6 +158,7 @@ alt.Chart(movies_extended.reset_index()).mark_point().encode(
     alt.Y('index'))
 ```
 
+Notes:
 Here,
 we have plotted the IMDB Rating
 against the row number in the dataframe
@@ -179,6 +182,8 @@ anywhere from 0 to 1200.
 
 Let's contrast this with the first visualization we created. 
 
+---
+
 ## A strong relationship means that the value on one axis gives information about the value on the other axis
 
 ```{python}
@@ -187,7 +192,8 @@ alt.Chart(movies_extended).mark_point().encode(
     alt.Y('Rotten Tomatoes Rating'))
 ```
 
-Here, 
+Notes:
+Here,
 knowing the IMDB Rating for a movie
 is informative for knowing the Rotten Tomatoes Rating.
 
