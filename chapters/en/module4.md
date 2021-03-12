@@ -248,7 +248,7 @@ Tasks:
 Fill in the blanks in the code below so that the following gets accomplished.
 
 - Create a heatmap and assign it to an object named `penguin_heatmap`. 
-- Map `flipper_length_mm` on the x-axis and  and `body_mass_g` on the y-axis. Distinguish the penguin `count()` using the color channel.
+- Map `flipper_length_mm` on the x-axis and `body_mass_g` on the y-axis. Distinguish the penguin `count()` using the color channel.
 - Make sure to set the `maxbins` argument to 30. 
 - Set the dimensions to a width of 250 and a height of 200.
 - Give it an appropriate title and axis labels. 
@@ -658,7 +658,7 @@ Killed it!
 
 <opt text="False"  correct="true">
 
-Not quite. We can facet on a categorical variable and repeate a plot mapping many categorical variables making them 2 distinct actions.  
+Not quite. We can facet on a categorical dataframe column and repeat a plot mapping many categorical columns making them 2 distinct actions.
 
 </opt>
 
@@ -671,7 +671,7 @@ When we want to repeat categorical column values, what value *can* we use in the
 <choice id="2" >
 
 <opt text="<code>'qualitative'</code>">
-I can understand the confusion since quantitative was used for numeric columns but that's because altair recognizes them with a tag of Q for quantitative. 
+I can understand the confusion since quantitative was used for numeric columns but that's because Altair recognizes them with a tag of Q for quantitative.
 
 </opt>
 

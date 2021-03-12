@@ -432,10 +432,10 @@ Tasks:
 Fill in the blanks in the code below so that the following gets accomplished.
 
 - Use the data source `penguins` to make the plot.
-- Calculate the KDE of the `body_mass_g` column and make sure to split it up by the categorical column `island`. When you create your new variable for the calculation make sure to name it `density`. 
-- Set the step size to 100. 
+- Calculate the KDE of the `body_mass_g` column and make sure to split it up by the categorical column `island`. When you create your new values for the calculation make sure to name them `density`.
+- Set the step size to 100.
 - Give the area plot an appropriate opacity.
-- Map the `body_mass_g` and the `density` column that was made to the x and y axis and making sure to specify that `density` is a quantitative variable. 
+- Map `body_mass_g` and `density` to the x and y axis and make sure to specify that `density` consists of quantitative values . 
 - Map the island to the colour (color) channel. 
 - Make sure to give your plot a title.
 
@@ -485,10 +485,10 @@ Create a density plot for the `body_mass_g` column for penguins located on diffe
 Tasks: 
 
 - Use the data source `penguins` to make the plot and assign it to an object named `mass_faceted_plot`.
-- Calculate the KDE of the `body_mass_g` column and make sure to split it up by the categorical column `island` and penguin `species`. When you create your new variable for the calculation make sure to name it `density`. 
+- Calculate the KDE of the `body_mass_g` column and make sure to split it up by the categorical column `island` and penguin `species`. When you create your new values for the calculation make sure to name them `density`. 
 - Set the step size to 100. 
 - Give the area plot an appropriate opacity.
-- Map the `body_mass_g` and the `density` column that was made to the x and y axis and making sure to specify that `density` is a quantitative variable. 
+- Map `body_mass_g` and `density` to the x and y axis and make sure to specify that `density` consists of quantitative values.
 - Map the island to the colour (color) channel. 
 - Make sure to give your plot a title and set the width of the plot to 200 and height to 100.
 - Facet the plot by the penguin `species` and display them all in a single column. 
@@ -545,7 +545,7 @@ Dream island inhabits penguins of only the Chinstrap species and this body mass 
 <exercise id="11" title="True or False: Many Distributions">
 
 **True or False**       
-*Using a bar plot to display a statistic like the mean, is an effective way to compare quantitative variables.*
+*Using a bar plot to display a statistic like the mean, is an effective way to compare quantitative dataframe columns.*
 
 <choice id="1" >
 
@@ -572,7 +572,7 @@ Nice!
 
 <opt text="True"  >
 
-We have to first use `pandas` to sort the categorical variable's mean values outside of the `alt.Chart()`.
+We have to first use `pandas` to sort the categorical dataframe column's mean values outside of the `alt.Chart()`.
 
 </opt>
 
@@ -590,7 +590,7 @@ Great! You remembered that we must do this first before making the plot!
 <exercise id="12" title="Why and How to Compare Multiple Distributions">
 
 **Question 1**      
-When comparing the value counts of certain variables, why can it be extremely difficult to obtain meaningful insights from density plots such as the one below?
+When comparing the value counts of certain dataframe columns, why can it be extremely difficult to obtain meaningful insights from density plots such as the one below?
 
 
 <?xml version="1.0" encoding="utf-8"?>

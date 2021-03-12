@@ -299,10 +299,10 @@ Since we are not using the dataframe column directly, we also need to
 specify which type the repeated columns are.
 
 A great first step is to visualize the distribution of each of the
-numerical variables to get an overview of how our data looks and examine
-it to see if there are any weird things going on (e.g. values that are
-way too small or large, values all bunched up in one place that could
-indicate measurement errors, etc).
+quantitative dataframe columns to get an overview of how our data looks
+and examine it to see if there are any weird things going on
+(e.g. values that are way too small or large, values all bunched up in
+one place that could indicate measurement errors, etc).
 
 To do this, we here create a histogram chart and repeat it for each of
 the numerical columns.
@@ -449,9 +449,10 @@ Notes: In addition to repeating charts with numerical data only, we can
 use the same principles to explore the relationships between the
 categorical and the numerical columns in our dataset.
 
-Here, we spread the three categorical variables out along the columns of
-the plot to be able to answer questions regarding how the different
-categories compare, e.g. how does different genres impact movie runtime?
+Here, we spread out the three categorical dataframe columns along the
+columns of the plot to be able to answer questions regarding how the
+different categories compare, e.g. how does different genres impact
+movie runtime?
 
 The categories labeled “null” are the ones which are missing a value in
 that categorical column in the dataframe, but still has values in the
