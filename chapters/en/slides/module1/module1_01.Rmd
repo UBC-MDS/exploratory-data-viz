@@ -96,7 +96,7 @@ the visualization to look like.
 import altair as alt
 from vega_datasets import data
 
-anscombe = data.anscombe()#.query('Series != "IV"')
+anscombe = data.anscombe()
 anscombe['Set'] = anscombe['Series'].map({'I': 'A', 'II': 'B', 'III': 'C', 'IV': 'D'})
 anscombe = anscombe.drop(columns='Series')
 anscombe.loc[anscombe['Y'] == anscombe['Y'].max(), 'Y'] = 8.5
