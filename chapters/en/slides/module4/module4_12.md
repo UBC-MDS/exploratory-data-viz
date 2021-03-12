@@ -126,7 +126,7 @@ accordingly.
 ## Altair’s grammar allows us to repeat facetted charts
 
 ``` python
-(alt.Chart(movies_extended.query('`MPAA Rating` == ["G", "R"]'))
+(alt.Chart(movies_extended[movies_extended['MPAA Rating'].isin(["G", "R"])])
  .mark_boxplot().encode(
      alt.X('Running Time min', type='quantitative'),
      alt.Y(alt.repeat('row'), type='nominal'),
