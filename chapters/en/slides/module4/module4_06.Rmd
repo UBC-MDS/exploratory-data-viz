@@ -16,7 +16,7 @@ source('../../../../slide-setup.R')
 type: slides
 
 
-# Visualizing categorical distributions
+# Visualizing Categorical Distributions
 
 Notes:
 In this slide deck,
@@ -68,7 +68,7 @@ with very few concert/performance films.
 
 ---
 
-## Visualizing counts for combinations of two categorical columns can be done via faceting but it's not always effective
+## Stacked bar charts can visualize counts for combinations of two categorical columns
 
 ```{python}
 alt.Chart(movies_extended).mark_bar().encode(
@@ -118,6 +118,7 @@ alt.Chart(movies_extended).mark_bar().encode(
     alt.Order('MPAA Rating'))
 ```
 
+Notes:
 Here we have reordered the bar segments using `alt.Order`,
 so that they are in the same order as the legend.
 We could have opted to reorder the legend instead,
@@ -153,6 +154,7 @@ alt.Chart(movies_extended).mark_bar().encode(
     alt.Order('MPAA Rating'))
 ```
 
+Notes:
 Here we have changed the strategy
 for how the segments are stacked together
 by setting `stack='normalize'`,

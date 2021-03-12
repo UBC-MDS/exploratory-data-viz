@@ -1,6 +1,6 @@
 ---
 params:
-  dynamictitle: "module4_02"
+  dynamictitle: "module4_12"
 title: "`r params$dynamictitle`"
 output:
   md_document:
@@ -16,7 +16,7 @@ source('../../../../slide-setup.R')
 type: slides
 
 
-# Exploratory data analysis on categorical data
+# Exploratory Data Analysis on Categorical Data
  
 Notes:
 To perform EDA on categorical data
@@ -33,11 +33,6 @@ import pandas as pd
 movies_extended = pd.read_csv('data/movies-extended-eda.csv')
 movies_extended.describe(exclude='number')
 ```
-
----
-
-## Visualizing missing values helps us identify potential issues with the data
-
 
 Notes:
 Since we have already seen the dataset rows and info in the last slide deck,
@@ -73,7 +68,7 @@ and cross-reference this table with our plot on the next slide.
 import altair as alt
 
 categorical_columns = movies_extended.select_dtypes('object').columns.tolist()
-(alt.Chart(movies_extended.drop(columns='Title'))
+(alt.Chart(movies_extended)
  .mark_bar().encode(
      alt.X('count()'),
      alt.Y(alt.repeat(), type='nominal', sort='x'))
@@ -106,13 +101,13 @@ we could also have left it in and carried on.
 ## Repeat can also be used to explore the counts of combinations of categorical columns
 
 ```{python}
-(alt.Chart(movies_extended.drop(columns='Title'))
- .mark_circle().encode(
+(alt.Chart(movies_extended).mark_circle().encode(
      alt.X(alt.repeat('column'), type='nominal', sort='-size'),
      alt.Y(alt.repeat('row'), type='nominal', sort='size'),
      alt.Color('count()', title=None),
      alt.Size('count()', title=None))
- .repeat(row=categorical_columns, column=categorical_columns)).resolve_scale(color='independent', size='independent')
+ .repeat(row=categorical_columns, column=categorical_columns)
+ .resolve_scale(color='independent', size='independent'))
 ```
 
 Notes:
@@ -137,7 +132,7 @@ and we need to adapt our testing strategy accordingly.
 ## Altair's grammar allows us to repeat facetted charts
 
 ```{python}
-(alt.Chart(movies_extended.drop(columns='Title').query('`MPAA Rating` == ["G", "R"]'))
+(alt.Chart(movies_extended.query('`MPAA Rating` == ["G", "R"]'))
  .mark_boxplot().encode(
      alt.X('Running Time min', type='quantitative'),
      alt.Y(alt.repeat('row'), type='nominal'),

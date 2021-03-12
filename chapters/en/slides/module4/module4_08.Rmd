@@ -1,6 +1,6 @@
 ---
 params:
-  dynamictitle: "module4_02"
+  dynamictitle: "module4_08"
 title: "`r params$dynamictitle`"
 output:
   md_document:
@@ -16,7 +16,7 @@ source('../../../../slide-setup.R')
 type: slides
 
 
-# Exploratory data analysis
+# Exploratory Data Analysis
  
 Notes:
 Exploratory data analysis (EDA),
@@ -39,9 +39,10 @@ is a key part of most data science positions!
 # from vega_datasets import data
 # movies_extended = (
 #     data.movies()
+#     .drop(columns=['Title'])
 #     .dropna(subset=['Running Time min'])
 #     .query('`MPAA Rating` != ["Not Rated", "NC-17"]')
-#     [['Major Genre', 'Creative Type', 'MPAA Rating', 'Title', 'Running Time min', 'Rotten Tomatoes Rating', 'IMDB Rating', 'IMDB Votes']]
+#     [['Major Genre', 'Creative Type', 'MPAA Rating', 'Running Time min', 'Rotten Tomatoes Rating', 'IMDB Rating', 'IMDB Votes']]
 #     .reset_index(drop=True)).to_csv('data/movies-extended-eda.csv', index=False)
 ```
 
@@ -130,7 +131,7 @@ how could we check?
 ```{python}
 import altair as alt
 
-alt.data_transformers.disable_max_rows()
+alt.data_transformers.disable_max_rows();
 
 movies_nans = movies_extended.isna().reset_index().melt(id_vars='index', var_name='column', value_name='NaN')
 movies_nans
@@ -152,6 +153,10 @@ Whenever we do this,
 we should also check the final size of our visualization
 if we save it to a file or in the notebook
 to ensure that it is not too large for what we can currently handle.
+
+---
+
+## Visualizing missing values helps us identify potential issues with the data
 
 ```{python}
 alt.Chart(movies_nans).mark_rect(height=17).encode(
@@ -236,7 +241,7 @@ numerical_columns = movies_extended.select_dtypes('number').columns.tolist()
  .mark_bar().encode(
      alt.X(alt.repeat(), type='quantitative', bin=alt.Bin(maxbins=25)),
      y='count()')
- .properties(width=250, height=150)
+ .properties(width=200, height=120)
  .repeat(numerical_columns))
 ```
 
@@ -308,8 +313,6 @@ when interpreting the rest of our EDA.
 
 Our EDA is already helping us finding interesting aspects of the data!
 
-TODO should we do densities instead? I personally don't like the extra steps invoved in creating them in altair.
-
 ---
 
 ## Repeating columns of both X and Y lets us effectively explore pairwise relationships between columns
@@ -319,7 +322,7 @@ TODO should we do densities instead? I personally don't like the extra steps inv
  .mark_point().encode(
      alt.X(alt.repeat('column'), type='quantitative'),
      alt.Y(alt.repeat('row'), type='quantitative'))
- .properties(width=150, height=150)
+ .properties(width=140, height=140)
  .repeat(column=numerical_columns, row=numerical_columns))
 ```
 
@@ -376,7 +379,7 @@ using the techniques we learned in the previous slide deck.
      alt.X(alt.repeat('column'), type='quantitative', bin=alt.Bin(maxbins=30)),
      alt.Y(alt.repeat('row'), type='quantitative', bin=alt.Bin(maxbins=30)),
      alt.Color('count()', title=None))
- .properties(width=150, height=150)
+ .properties(width=130, height=130)
  .repeat(column=numerical_columns, row=numerical_columns)).resolve_scale(color='independent')
 ```
 
@@ -421,11 +424,11 @@ which would have the same color almost everywhere.
 
 ```{python}
 categorical_columns = movies_extended.select_dtypes('object').columns.tolist()
-categorical_columns = [col for col in categorical_columns if col != 'Title']
-(alt.Chart(movies_extended.drop(columns='Title'))
+(alt.Chart(movies_extended)
  .mark_boxplot().encode(
      alt.X(alt.repeat('column'), type='quantitative'),
-     alt.Y(alt.repeat('row'), type='nominal'))
+     alt.Y(alt.repeat('row'), type='nominal', title=''))
+ .properties(width=150, height=200)
  .repeat(column=numerical_columns, row=categorical_columns))
 ```
 
