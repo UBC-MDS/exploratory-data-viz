@@ -128,7 +128,7 @@ Notes: To create a density plot, we need to complete two tasks:
 In Altair, these operations are done in two explicit steps, using
 `transform_density` for the calculation.
 
-First we specify which dataframe variable we want to use for the
+First we specify which dataframe column we want to use for the
 calculation. Then we use the `as_` parameter to name the newly
 calculated values, which we here refer to as `'density'`.
 
@@ -177,8 +177,8 @@ x-axis, those are the more informative in a density plot.
 </iframe>
 
 Notes: If we want to split and color the densities by a categorical
-variable, we need to explicitly specify a dataframe column to the
-`groupby` parameter when calculating the density.
+dataframe column, we need to explicitly specify a dataframe column to
+the `groupby` parameter when calculating the density.
 
 Setting this parameter to the same column we use for the color encoding
 will compute one density for each of the differently colored areas.
@@ -341,8 +341,7 @@ interpreting a density plot.
 ## Densities can be combined with plotting individual data points
 
 ``` python
-(density.mark_area(opacity=0.7)
- + alt.Chart(movies[:10]).mark_tick(color='black', yOffset=140).encode(x='runtime'))
+(density.mark_area(opacity=0.7) + alt.Chart(movies[:10]).mark_tick(color='black', yOffset=140).encode(x='runtime'))
 ```
 
 <iframe src="/module3/charts/06/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">

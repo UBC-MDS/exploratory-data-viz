@@ -58,7 +58,7 @@ alt.Chart(gm2018).mark_bar().encode(
     alt.Y('sum(population)', title='Population'))
 ```
 
-<iframe src="/module2/charts/08/unnamed-chunk-2.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/08/unnamed-chunk-2.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Bar charts are often avoided when visualizing summary statistics
@@ -97,7 +97,7 @@ alt.Chart(gm2018).mark_bar().encode(
     alt.Y('region'))
 ```
 
-<iframe src="/module2/charts/08/unnamed-chunk-3.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/08/unnamed-chunk-3.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: If we switched x and y, we would create a horizontal bar chart
@@ -121,7 +121,7 @@ alt.Chart(gm2018).mark_bar().encode(
     alt.Y('region'))
 ```
 
-<iframe src="/module2/charts/08/unnamed-chunk-4.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/08/unnamed-chunk-4.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: What if we wanted to know how many countries there were within
@@ -156,7 +156,7 @@ alt.Chart(gm2018).mark_bar().encode(
     alt.Y('region'))
 ```
 
-<iframe src="/module2/charts/08/unnamed-chunk-5.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/08/unnamed-chunk-5.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes:
@@ -174,7 +174,7 @@ alt.Chart(gm2018).mark_bar().encode(
     alt.Y('region', sort='x'))
 ```
 
-<iframe src="/module2/charts/08/unnamed-chunk-6.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/08/unnamed-chunk-6.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: By default, Altair sorts categorical values in alphabetical
@@ -211,7 +211,7 @@ alt.Chart(gm2018).mark_bar().encode(
     alt.Y('region', sort='-x'))
 ```
 
-<iframe src="/module2/charts/08/unnamed-chunk-7.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/08/unnamed-chunk-7.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: If we for some reason would want the reverse order, we could use
@@ -230,7 +230,7 @@ alt.Chart(gm2018).mark_bar().encode(
     alt.Y('region', sort=my_order))
 ```
 
-<iframe src="/module2/charts/08/unnamed-chunk-8.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/08/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Sometimes there is a natural order to the values on the
@@ -251,7 +251,7 @@ Visualizations](https://clauswilke.com/dataviz/visualizing-amounts.html).
 
 ---
 
-## Using bars to show counts of quantitative variables
+## Using bars to show counts of quantitative dataframe columns
 
 ``` python
 alt.Chart(gm2018).mark_bar().encode(
@@ -259,7 +259,7 @@ alt.Chart(gm2018).mark_bar().encode(
     alt.Y('count()'))
 ```
 
-<iframe src="/module2/charts/08/unnamed-chunk-9.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/08/unnamed-chunk-9.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: So far we have been counting observations in categorical groups
@@ -300,7 +300,7 @@ alt.Chart(gm2018).mark_bar().encode(
     alt.Y('count()'))
 ```
 
-<iframe src="/module2/charts/08/unnamed-chunk-10.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/08/unnamed-chunk-10.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Instead, we want to create intervals or “bins” that represent
@@ -339,7 +339,7 @@ alt.Chart(gm2018).mark_bar().encode(
     alt.Y('count()'))
 ```
 
-<iframe src="/module2/charts/08/unnamed-chunk-11.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/08/unnamed-chunk-11.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Although the automatically calculated number of bins is often
