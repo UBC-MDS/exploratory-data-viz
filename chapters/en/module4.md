@@ -12,7 +12,7 @@ id: 4
 <slides source="module4/module4_00" shot="0" start="3:5707" end="4:5306"> </slides>
 </exercise>
 
-<exercise id="1" title="Visualizing Multidimensional and Categorical Distributions" type="slides,video">
+<exercise id="1" title="Visualizing Multidimensional Distributions" type="slides,video">
 <slides source="module4/module4_01" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
@@ -80,7 +80,7 @@ This can be used to visualize a single column's distribution.
 
 </opt>
 
-<opt text="boxplot" >
+<opt text="Boxplot" >
 
 This can be used to visualize a single column's distribution.
 
@@ -325,12 +325,14 @@ Are there any intervals of flipper length and mass that contains a darker blue? 
 
 </exercise>
 
+<exercise id="6" title="Visualizing Categorical Distributions" type="slides,video">
+<slides source="module4/module4_06" shot="1" start="0:003" end="07:12"> </slides>
+</exercise>
+
+<exercise id="7" title="Return of the Pokemon">
 
 
-<exercise id="6" title="Return of the Pokemon">
-
-
-**Instructions:**    
+**Instructions:**
 Be patient when running a coding exercise for the first time, it can take a few minutes. 
 
 **When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
@@ -355,7 +357,7 @@ Tasks:
 - Give it an appropriate title and axis labels. 
 
 
-<codeblock id="04_06">
+<codeblock id="04_07">
 
 - Are you using `.mark_cicle()`?
 - Are you setting `alt.X('gen:O')`?
@@ -436,12 +438,12 @@ This generation has no ground Pokemon.
 </exercise>
 
 
-<exercise id="7" title="Repeated Plots and Exploratory Data Analysis" type="slides,video">
-<slides source="module4/module4_07" shot="1" start="0:003" end="07:12"> </slides>
+<exercise id="8" title="Exploratory Data Analysis" type="slides,video">
+<slides source="module4/module4_08" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
 
-<exercise id="8" title="True or False: Exploratory Data Analysis (EDA)">
+<exercise id="9" title="True or False: Exploratory Data Analysis (EDA)">
 
 **True or False**       
 *We start EDA by displaying a few rows from the data.*
@@ -486,7 +488,7 @@ Are you sure? *Fun Fact*: Co-creator of this course, Hayley Boyce once **lost** 
 </exercise>
 
 
-<exercise id="9" title="Which graph is appropriate?">
+<exercise id="10" title="Which graph is appropriate?">
 
 **Question 1**      
 Which of the following is not a part of EDA?
@@ -553,7 +555,7 @@ You are extremely close, but no past tense is needed.
 
 </exercise>
 
-<exercise id="10" title="Plotting Numeric Columns with Penguins">
+<exercise id="11" title="Plotting Numeric Columns with Penguins">
 
 
 **Instructions:**    
@@ -583,7 +585,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 - Set width to 150 and height to 150 and display the plots in 2 columns and 2 rows.
 
 
-<codeblock id="04_10">
+<codeblock id="04_11">
 
 - Are you setting `alt.X(alt.repeat(), type='quantitative', bin=alt.Bin(maxbins=30)`?
 - Are you setting `alt.Y('count()')`?
@@ -615,7 +617,12 @@ Do you see 2 "bumps" in any of the plots?
 </exercise>
 
 
-<exercise id="11" title="Repeating Categorical Columns Quick Questions!">
+<exercise id="12" title="Exploratory Data Analysis on Categorial Data" type="slides,video">
+<slides source="module4/module4_12" shot="1" start="0:003" end="07:12"> </slides>
+</exercise>
+
+
+<exercise id="13" title="Repeating Categorical Columns Quick Questions!">
 
 **True or False**       
 *We start EDA by displaying a few rows from the data.*
@@ -691,7 +698,7 @@ Altair doesn't recognize this as a type.
 
 </exercise>
 
-<exercise id="12" title="Plotting Repeated Categorical Columns with Penguins">
+<exercise id="14" title="Plotting Repeated Categorical Columns with Penguins">
 
 
 **Instructions:**    
@@ -708,7 +715,7 @@ Are you getting bored of this [penguins](https://www.kaggle.com/parulpandey/palm
 </codeblock>
 
 
-Let's  count combinations of the differentcategoricals, so we can get a bit of a better idea about where our data lies. 
+Let's count combinations of the different categoricals, so we can get a bit of a better idea about where our data lies. 
 
 Tasks: 
 
@@ -721,7 +728,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 - Make sure to give the size and colour channels independent scales. 
 
 
-<codeblock id="04_12">
+<codeblock id="04_13">
 
 - Are you using `.mark_circle()`?
 - Are you setting `alt.X(alt.repeat('column'), type='nominal')`?
@@ -787,7 +794,7 @@ There are no records of Gentoo penguins on Dream island in the data.
 </exercise>
 
 
-<exercise id="13" title="What Did We Just Learn?" type="slides, video">
+<exercise id="15" title="What Did We Just Learn?" type="slides, video">
 <slides source="module4/module4_end" shot="0" start="04:5307" end="05:5911">
 </slides>
 </exercise>
