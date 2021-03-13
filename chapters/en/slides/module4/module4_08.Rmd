@@ -249,7 +249,7 @@ numerical_columns = movies_extended.select_dtypes('number').columns.tolist()
  .mark_bar().encode(
      alt.X(alt.repeat(), type='quantitative', bin=alt.Bin(maxbins=25)),
      y='count()')
- .properties(width=200, height=120)
+ .properties(width=250, height=150)
  .repeat(numerical_columns))
 ```
 
@@ -320,11 +320,12 @@ Our EDA is already helping us finding interesting aspects of the data!
 
 ```{python}
 (alt.Chart(movies_extended)
- .mark_point().encode(
+ .mark_point(size=10).encode(
      alt.X(alt.repeat('column'), type='quantitative'),
      alt.Y(alt.repeat('row'), type='quantitative'))
- .properties(width=140, height=140)
+ .properties(width=120, height=120)
  .repeat(column=numerical_columns, row=numerical_columns))
+# Scroll down on the plot to see the last row
 ```
 
 Notes:
@@ -380,8 +381,9 @@ using the techniques we learned in the previous slide deck.
      alt.X(alt.repeat('column'), type='quantitative', bin=alt.Bin(maxbins=30)),
      alt.Y(alt.repeat('row'), type='quantitative', bin=alt.Bin(maxbins=30)),
      alt.Color('count()', title=None))
- .properties(width=130, height=130)
+ .properties(width=110, height=110)
  .repeat(column=numerical_columns, row=numerical_columns)).resolve_scale(color='independent')
+# Scroll down on the plot to see the last row
 ```
 
 Notes:
@@ -429,7 +431,7 @@ categorical_columns = movies_extended.select_dtypes('object').columns.tolist()
  .mark_boxplot().encode(
      alt.X(alt.repeat('column'), type='quantitative'),
      alt.Y(alt.repeat('row'), type='nominal', title=''))
- .properties(width=150, height=200)
+ .properties(width=150)
  .repeat(column=numerical_columns, row=categorical_columns))
 ```
 

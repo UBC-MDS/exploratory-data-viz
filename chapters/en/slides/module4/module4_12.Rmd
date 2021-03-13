@@ -100,8 +100,8 @@ we could also have left it in and carried on.
 
 ```{python}
 (alt.Chart(movies_extended).mark_circle().encode(
-     alt.X(alt.repeat('column'), type='nominal', sort='-size'),
-     alt.Y(alt.repeat('row'), type='nominal', sort='size'),
+     alt.X(alt.repeat('column'), type='nominal', sort='-size', title=None),
+     alt.Y(alt.repeat('row'), type='nominal', sort='size', title=None),
      alt.Color('count()', title=None),
      alt.Size('count()', title=None))
  .repeat(row=categorical_columns, column=categorical_columns)
