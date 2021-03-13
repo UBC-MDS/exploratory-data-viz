@@ -77,7 +77,7 @@ categorical_columns = movies_extended.select_dtypes('object').columns.tolist()
 ```
 
 Notes:
-To answer how the counts are distributed between different categorical vaules,
+To answer how the counts are distributed between different categorical values,
 we will create a bar chart for each categorical dataframe column.
 
 The syntax here is very similar to when we created the histograms,
@@ -86,8 +86,6 @@ and the axis type is now nominal instead of quantitative.
 
 We can see that most movies are dramas and comedies,
 and fall withing the R and PG-13 ratings.
-Our plot for the titles look horrible
-because there is not enough room to plot one line per title.
 
 We could have included the title column here to check that no two movies have the same title.
 After that we can safely skip that subplot since it is rather messy with all the hundreds titles.
@@ -115,30 +113,32 @@ The same repeat principles can be used to count combinations of categoricals,
 helping us get more resolution into where the data lies.
 
 This plot should be read similarly to the pairplot we made earlier,
-so ony look at the three plots below the diagonal.
+so we only look at the one plot below the diagonal.
+In this case it means we could have just made a single plot,
+but if you have more than two categories to repeat over,
+there would be additional plots under the diagonal.
 
-In this plot we can see that Contermporary Comedies, 
-as well as comedies rated PG-13 and dramas rated R
+In this plot we can see that comedies rated PG-13 and dramas rated R
 are the most common combinations in our data.
 
-In the fact,
+In fact,
 there are so many more of these than some of the others
 that we should be careful if we proceed to perform any statistical tests on this data
-as many such tests are not robust against samples sizes that are this unequal
-and we need to adapt our testing strategy accordingly.
+as some analysis methods are not robust against samples sizes that are this unequal
+and we need to adapt our analysis strategy accordingly
 
 ---
 
 ## Altair's grammar allows us to repeat facetted charts
 
 ```{python}
+movies_extended['Top Rated'] = movies_extended['IMDB Rating'] > 8
 (alt.Chart(movies_extended[movies_extended['MPAA Rating'].isin(["G", "R"])])
  .mark_boxplot().encode(
      alt.X('Running Time min', type='quantitative'),
-     alt.Y(alt.repeat('row'), type='nominal'),
-     alt.Color('MPAA Rating'))
+     alt.Y(alt.repeat('row'), type='nominal'))
  .facet(column='MPAA Rating')
- .repeat(row=['Major Genre', 'Creative Type']))
+ .repeat(row=['Major Genre', 'Top Rated']))
 ```
 
 Notes:

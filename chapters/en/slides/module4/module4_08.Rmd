@@ -39,10 +39,11 @@ is a key part of most data science positions!
 # from vega_datasets import data
 # movies_extended = (
 #     data.movies()
-#     .drop(columns=['Title'])
+#     .drop(columns=['Title', 'Rotten Tomatoes Rating', 'Creative Type'])
 #     .dropna(subset=['Running Time min'])
 #     .query('`MPAA Rating` != ["Not Rated", "NC-17"]')
-#     [['Major Genre', 'Creative Type', 'MPAA Rating', 'Running Time min', 'Rotten Tomatoes Rating', 'IMDB Rating', 'IMDB Votes']]
+#     .query("`Major Genre` not in ['Black Comedy', 'Romantic Comedy', 'Thriller/Suspense', 'Western', 'Concert/Performance', 'Documentary']")
+#     [['Major Genre', 'MPAA Rating', 'Running Time min', 'IMDB Rating', 'IMDB Votes']]
 #     .reset_index(drop=True)).to_csv('data/movies-extended-eda.csv', index=False)
 ```
 
@@ -67,6 +68,13 @@ like in this slide.
 
 This gives us an idea about which columns are numerical and categorical
 as well as the size of the dataframe.
+
+You can also see that we don't have the exact same dataframe columns
+as in the previous slide decks.
+We have left out a few
+since we will be including all dataframe columns
+in the same chart
+and want to make sure it fits on the slide.
 
 ---
 
@@ -116,8 +124,8 @@ which we should investigate before performing our analysis.
 
 Here,
 it looks like there are some NaNs in many of the columns,
-and the ratings from Rotten Tomatoes seems to have the most,
-almost 200 rows are missing a value.
+and the IMDB ratings and votes seems to have the most:
+about 60 rows are missing a value.
 
 The IMDB rating and number of votes have the exact same amount of missing values,
 and it makes sense that movies without votes can't have a rating.
@@ -296,21 +304,13 @@ and repeat it for each of the numerical columns.
 
 This overview tells us that most movies have a runtime around 90-130 min,
 but there are some that are shorter and some that are longer.
+
 Most movies have less than 80,000 votes,
-but there are some that have a really high number,
-skewing this distribution.
+but there are some that have a really high number.
 
-Interestingly,
-the distributions of the ratings from IMDB and from Rotten Tomatoes
-don't look at all the same!
-The Rotten Tomatoes ratings are much more evenly spread out than the IMDB ratings
-and only fall off towards the extreme ends of the rating range.
-This is unexpected since they are both the result of people voting on movies online.
-
-When we discover such particularities during EDA,
-we would take note of them as something to investigate further later,
-and then keep it in the back of our head 
-when interpreting the rest of our EDA.
+The distribution for the IMDB ratings is centered around 6,
+with few extreme values on either end
+and no notable shift in either direction.
 
 Our EDA is already helping us finding interesting aspects of the data!
 
@@ -335,9 +335,9 @@ This type of visualization will help us understand which columns are related to 
 For example,
 we already saw earlier in this module that 
 the ratings on IMDB and Rotten Tomatoes have a strong relationship
-when we create a scatter plot of these two datafrme columns.
+when we create a scatter plot of these two dataframe columns.
 Here,
-we can ask that same question of all columns.
+we can ask that same question of all columns in the dataset.
 
 This is helpful both for our general knowledge about the data
 and if we have a specific goal in mine,
@@ -476,7 +476,7 @@ We could use a loop with pandas to create this like so:
 
 ```python
 running_time_order = []
-for groupby_col in ['Major Genre', 'Creative Type', 'MPAA Rating']:
+for groupby_col in ['Major Genre', 'MPAA Rating']:
     running_time_order.extend(
         movies_extended
         .groupby(groupby_col)
