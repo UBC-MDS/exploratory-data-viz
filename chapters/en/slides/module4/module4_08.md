@@ -27,20 +27,20 @@ movies_extended
 ```
 
 ```out
-            Major Genre         Creative Type MPAA Rating  Running Time min  Rotten Tomatoes Rating  IMDB Rating  IMDB Votes
-0       Romantic Comedy  Contemporary Fiction           R             104.0                     NaN          NaN         NaN
-1                Action  Contemporary Fiction           R             108.0                    55.0          5.8     33584.0
-2          Black Comedy               Fantasy           R             136.0                    98.0          8.0     76635.0
-3                Comedy  Contemporary Fiction       PG-13              95.0                    52.0          5.8     51109.0
-4                Action  Contemporary Fiction       PG-13             106.0                    13.0          5.2     15817.0
-...                 ...                   ...         ...               ...                     ...          ...         ...
-1196             Comedy               Fantasy           R              87.0                    89.0          7.8     81629.0
-1197             Comedy  Contemporary Fiction           R             101.0                    65.0          7.0     55687.0
-1198  Thriller/Suspense         Dramatization           R             157.0                    89.0          NaN         NaN
-1199          Adventure    Historical Fiction          PG             129.0                    26.0          5.7     21161.0
-1200          Adventure    Historical Fiction       PG-13             136.0                    82.0          6.7      4789.0
+     Major Genre MPAA Rating  Running Time min  IMDB Rating  IMDB Votes
+0         Action           R             108.0          5.8     33584.0
+1         Comedy       PG-13              95.0          5.8     51109.0
+2         Action       PG-13             106.0          5.2     15817.0
+3      Adventure         NaN             108.0          5.9     45773.0
+4          Drama           R             111.0          6.1      9908.0
+...          ...         ...               ...          ...         ...
+996       Comedy       PG-13              89.0          6.4     69296.0
+997       Comedy           R              87.0          7.8     81629.0
+998       Comedy           R             101.0          7.0     55687.0
+999    Adventure          PG             129.0          5.7     21161.0
+1000   Adventure       PG-13             136.0          6.7      4789.0
 
-[1201 rows x 7 columns]
+[1001 rows x 5 columns]
 ```
 
 Notes: In this slide deck, you will see how EDA allows us to identify
@@ -54,6 +54,11 @@ by printing out a few values like in this slide.
 This gives us an idea about which columns are numerical and categorical
 as well as the size of the dataframe.
 
+You can also see that we don’t have the exact same dataframe columns as
+in the previous slide decks. We have left out a few since we will be
+including all dataframe columns in the same chart and want to make sure
+it fits on the slide.
+
 ---
 
 ## Viewing the column data types and missing values protects us from errors later on
@@ -64,19 +69,17 @@ movies_extended.info()
 
 ```out
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 1201 entries, 0 to 1200
-Data columns (total 7 columns):
- #   Column                  Non-Null Count  Dtype  
----  ------                  --------------  -----  
- 0   Major Genre             1196 non-null   object 
- 1   Creative Type           1191 non-null   object 
- 2   MPAA Rating             1193 non-null   object 
- 3   Running Time min        1201 non-null   float64
- 4   Rotten Tomatoes Rating  1007 non-null   float64
- 5   IMDB Rating             1139 non-null   float64
- 6   IMDB Votes              1139 non-null   float64
-dtypes: float64(4), object(3)
-memory usage: 65.8+ KB
+RangeIndex: 1001 entries, 0 to 1000
+Data columns (total 5 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   Major Genre       996 non-null    object 
+ 1   MPAA Rating       994 non-null    object 
+ 2   Running Time min  1001 non-null   float64
+ 3   IMDB Rating       945 non-null    float64
+ 4   IMDB Votes        945 non-null    float64
+dtypes: float64(3), object(2)
+memory usage: 39.2+ KB
 ```
 
 Notes: Next, it is a good idea to check the type of data in each column
@@ -112,8 +115,8 @@ that something went wrong in the data collection process, which we
 should investigate before performing our analysis.
 
 Here, it looks like there are some NaNs in many of the columns, and the
-ratings from Rotten Tomatoes seems to have the most, almost 200 rows are
-missing a value.
+IMDB ratings and votes seems to have the most: about 60 rows are missing
+a value.
 
 The IMDB rating and number of votes have the exact same amount of
 missing values, and it makes sense that movies without votes can’t have
@@ -141,13 +144,13 @@ movies_nans
 3         3  Major Genre  False
 4         4  Major Genre  False
 ...     ...          ...    ...
-8402   1196   IMDB Votes  False
-8403   1197   IMDB Votes  False
-8404   1198   IMDB Votes   True
-8405   1199   IMDB Votes  False
-8406   1200   IMDB Votes  False
+5000    996   IMDB Votes  False
+5001    997   IMDB Votes  False
+5002    998   IMDB Votes  False
+5003    999   IMDB Votes  False
+5004   1000   IMDB Votes  False
 
-[8407 rows x 3 columns]
+[5005 rows x 3 columns]
 ```
 
 Notes: To create a visualization of missing values for all columns, we
@@ -217,15 +220,15 @@ movies_extended.describe()
 ```
 
 ```out
-       Running Time min  Rotten Tomatoes Rating  IMDB Rating     IMDB Votes
-count       1201.000000             1007.000000  1139.000000    1139.000000
-mean         110.283930               51.394240     6.306497   42919.236172
-std           20.072373               26.177944     1.144188   50563.844336
-min           72.000000                1.000000     1.700000      33.000000
-25%           95.000000               29.000000     5.600000   12759.000000
-50%          107.000000               51.000000     6.400000   26816.000000
-75%          121.000000               75.000000     7.100000   54504.500000
-max          222.000000              100.000000     9.100000  465000.000000
+       Running Time min  IMDB Rating     IMDB Votes
+count       1001.000000   945.000000     945.000000
+mean         110.312687     6.279577   43514.432804
+std           20.701090     1.178046   52241.047929
+min           72.000000     1.700000      48.000000
+25%           95.000000     5.500000   12747.000000
+50%          107.000000     6.300000   26303.000000
+75%          122.000000     7.100000   55248.000000
+max          222.000000     8.900000  465000.000000
 ```
 
 Notes: Now that we are aware of what data types we are working with and
@@ -261,7 +264,7 @@ numerical_columns = movies_extended.select_dtypes('number').columns.tolist()
  .mark_bar().encode(
      alt.X(alt.repeat(), type='quantitative', bin=alt.Bin(maxbins=25)),
      y='count()')
- .properties(width=200, height=120)
+ .properties(width=250, height=150)
  .repeat(numerical_columns))
 ```
 
@@ -308,19 +311,13 @@ To do this, we here create a histogram chart and repeat it for each of
 the numerical columns.
 
 This overview tells us that most movies have a runtime around 90-130
-min, but there are some that are shorter and some that are longer. Most
-movies have less than 80,000 votes, but there are some that have a
-really high number, skewing this distribution.
+min, but there are some that are shorter and some that are longer.
 
-Interestingly, the distributions of the ratings from IMDB and from
-Rotten Tomatoes don’t look at all the same! The Rotten Tomatoes ratings
-are much more evenly spread out than the IMDB ratings and only fall off
-towards the extreme ends of the rating range. This is unexpected since
-they are both the result of people voting on movies online.
+Most movies have less than 80,000 votes, but there are some that have a
+really high number.
 
-When we discover such particularities during EDA, we would take note of
-them as something to investigate further later, and then keep it in the
-back of our head when interpreting the rest of our EDA.
+The distribution for the IMDB ratings is centered around 6, with few
+extreme values on either end and no notable shift in either direction.
 
 Our EDA is already helping us finding interesting aspects of the data!
 
@@ -330,11 +327,12 @@ Our EDA is already helping us finding interesting aspects of the data!
 
 ``` python
 (alt.Chart(movies_extended)
- .mark_point().encode(
+ .mark_point(size=10).encode(
      alt.X(alt.repeat('column'), type='quantitative'),
      alt.Y(alt.repeat('row'), type='quantitative'))
- .properties(width=140, height=140)
+ .properties(width=120, height=120)
  .repeat(column=numerical_columns, row=numerical_columns))
+# Scroll down on the plot to see the last row
 ```
 
 <iframe src="/module4/charts/08/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
@@ -347,8 +345,8 @@ columns are related to each other.
 
 For example, we already saw earlier in this module that the ratings on
 IMDB and Rotten Tomatoes have a strong relationship when we create a
-scatter plot of these two datafrme columns. Here, we can ask that same
-question of all columns.
+scatter plot of these two dataframe columns. Here, we can ask that same
+question of all columns in the dataset.
 
 This is helpful both for our general knowledge about the data and if we
 have a specific goal in mine, maybe we would want to predict the movie
@@ -389,8 +387,9 @@ previous slide deck.
      alt.X(alt.repeat('column'), type='quantitative', bin=alt.Bin(maxbins=30)),
      alt.Y(alt.repeat('row'), type='quantitative', bin=alt.Bin(maxbins=30)),
      alt.Color('count()', title=None))
- .properties(width=130, height=130)
+ .properties(width=110, height=110)
  .repeat(column=numerical_columns, row=numerical_columns)).resolve_scale(color='independent')
+# Scroll down on the plot to see the last row
 ```
 
 <iframe src="/module4/charts/08/unnamed-chunk-9.html" width="100%" height="420px" style="border:none;">
@@ -438,7 +437,7 @@ categorical_columns = movies_extended.select_dtypes('object').columns.tolist()
  .mark_boxplot().encode(
      alt.X(alt.repeat('column'), type='quantitative'),
      alt.Y(alt.repeat('row'), type='nominal', title=''))
- .properties(width=150, height=200)
+ .properties(width=150)
  .repeat(column=numerical_columns, row=categorical_columns))
 ```
 
@@ -480,7 +479,7 @@ use a loop with pandas to create this like so:
 
 ``` python
 running_time_order = []
-for groupby_col in ['Major Genre', 'Creative Type', 'MPAA Rating']:
+for groupby_col in ['Major Genre', 'MPAA Rating']:
     running_time_order.extend(
         movies_extended
         .groupby(groupby_col)
