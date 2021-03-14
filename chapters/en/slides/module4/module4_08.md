@@ -326,13 +326,13 @@ Our EDA is already helping us finding interesting aspects of the data!
 ## Repeating columns of both X and Y lets us effectively explore pairwise relationships between columns
 
 ``` python
+# Scroll down on the plot to see the last row
 (alt.Chart(movies_extended)
  .mark_point(size=10).encode(
      alt.X(alt.repeat('column'), type='quantitative'),
      alt.Y(alt.repeat('row'), type='quantitative'))
  .properties(width=120, height=120)
  .repeat(column=numerical_columns, row=numerical_columns))
-# Scroll down on the plot to see the last row
 ```
 
 <iframe src="/module4/charts/08/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
@@ -382,6 +382,7 @@ previous slide deck.
 ## Heatmaps can be used for repeated charts to avoid saturation
 
 ``` python
+# Scroll down on the plot to see the last row
 (alt.Chart(movies_extended)
  .mark_rect().encode(
      alt.X(alt.repeat('column'), type='quantitative', bin=alt.Bin(maxbins=30)),
@@ -389,7 +390,6 @@ previous slide deck.
      alt.Color('count()', title=None))
  .properties(width=110, height=110)
  .repeat(column=numerical_columns, row=numerical_columns)).resolve_scale(color='independent')
-# Scroll down on the plot to see the last row
 ```
 
 <iframe src="/module4/charts/08/unnamed-chunk-9.html" width="100%" height="420px" style="border:none;">
