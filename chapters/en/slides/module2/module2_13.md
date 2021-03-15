@@ -23,7 +23,7 @@ alt.Chart(gm2018).mark_bar().encode(
     alt.Y('count()'))
 ```
 
-<iframe src="/module2/charts/13/unnamed-chunk-1.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/13/unnamed-chunk-1.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes:
@@ -45,7 +45,7 @@ alt.Chart(gm2018).mark_bar().encode(
     alt.Color('region'))
 ```
 
-<iframe src="/module2/charts/13/unnamed-chunk-2.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/13/unnamed-chunk-2.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes:
@@ -54,7 +54,7 @@ We have previously seen how we can explore categorical dataframe columns
 by encoding them as the colour channel of our plots.
 
 Altair creates a stacked bar chart by default when we when encode a
-dataframe variable as the `color` channel. Notice we are now using the
+dataframe column as the `color` channel. Notice we are now using the
 helper functions we saw before but now with `alt.Color`. (This must be
 spelt without the “U”)
 
@@ -83,7 +83,7 @@ alt.Chart(gm2018).mark_bar(opacity=0.7).encode(
     alt.Color('region'))
 ```
 
-<iframe src="/module2/charts/13/unnamed-chunk-3.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/13/unnamed-chunk-3.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: If we tell Altair not to stack the bar along the y-axis, it will
@@ -111,12 +111,12 @@ alt.Chart(gm2018).mark_bar().encode(
 ).facet('region')
 ```
 
-<iframe src="/module2/charts/13/unnamed-chunk-4.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/13/unnamed-chunk-4.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Faceting creates one facet/subplot for each group in the
-specified variable. To ensure that the entire grid of facets fit on the
-slide, we’re also shrinking the dimensions of each subplot.
+specified dataframe column. To ensure that the entire grid of facets fit
+on the slide, we’re also shrinking the dimensions of each subplot.
 
 From this chart, we can more easily compare the regions. For example, we
 can see that that most European countries have a higher life expectancy
@@ -139,7 +139,7 @@ alt.Chart(gm2018).mark_bar().encode(
 ).facet('region', columns=1)
 ```
 
-<iframe src="/module2/charts/13/unnamed-chunk-5.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/13/unnamed-chunk-5.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: To make it easier to compare overlap between histograms on the
@@ -171,7 +171,7 @@ alt.Chart(gm2018).mark_bar().encode(
 ).facet('region', columns=3)
 ```
 
-<iframe src="/module2/charts/13/unnamed-chunk-6.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/13/unnamed-chunk-6.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes:
@@ -188,7 +188,7 @@ read the plot in the top row.
 
 ---
 
-## Faceting on two categorical variables allows us to answer more complex questions
+## Faceting on two categorical dataframe columns allows us to answer more complex questions
 
 ``` python
 alt.Chart(gm2018[gm2018['income_group'].isin(['High', 'Low'])]).mark_bar().encode(
@@ -199,15 +199,14 @@ alt.Chart(gm2018[gm2018['income_group'].isin(['High', 'Low'])]).mark_bar().encod
 ).facet(column='region', row='income_group')
 ```
 
-<iframe src="/module2/charts/13/unnamed-chunk-7.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/13/unnamed-chunk-7.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes:
 
 Instead of using the `columns` parameter, we could specify one
-categorical dataframe variable each for the `row` and `column`
-parameters (note no “s”). Altair will then spread the data out
-accordingly.
+categorical dataframe column each for the `row` and `column` parameters
+(note no “s”). Altair will then spread the data out accordingly.
 
 With this strategy, we can answer more complex questions such as “How
 does child mortality differ between low and high income countries in
@@ -232,16 +231,16 @@ alt.Chart(gm2018[gm2018['region'].isin(['Africa'])]).mark_point().encode(
 ).facet('sub_region')
 ```
 
-<iframe src="/module2/charts/13/unnamed-chunk-8.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/13/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: So far we have encoded the same dataframe variable in both the
+Notes: So far we have encoded the same dataframe column in both the
 facet and colour channels. This is technically redundant but can be
 helpful to emphasize the groups in the data.
 
 If we wanted to drill down in the data further, we could instead
 separate each facet into groups by colouring according to another
-dataframe variable.
+dataframe column.
 
 This would allow us to answer questions of similar complexity as in the
 previous slide, without faceting into both rows and columns.
@@ -261,7 +260,7 @@ formal statistical tests, and investigating the literature to understand
 if these relationships are also causative.
 
 If there were so many categories that the colours become hard to tell
-apart, it would be worthwhile to try to facet by that dataframe variable
+apart, it would be worthwhile to try to facet by that dataframe column
 instead of encoding it as colour.
 
 ---
@@ -276,7 +275,7 @@ alt.Chart(gm2018[gm2018['region'] == 'Africa']).mark_bar().encode(
 ).properties(width=200)
 ```
 
-<iframe src="/module2/charts/13/unnamed-chunk-9.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/13/unnamed-chunk-9.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: In the plot on the previous slide, we saw that there were many
@@ -307,11 +306,11 @@ alt.Chart(gm2018[gm2018['region'] == 'Africa']).mark_bar().encode(
 ).facet('sub_region')
 ```
 
-<iframe src="/module2/charts/13/unnamed-chunk-10.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module2/charts/13/unnamed-chunk-10.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: By spreading the sub-regions out as facets, and encoding the same
-dataframe variable in both the y and colour channel, we can create where
+dataframe column in both the y and colour channel, we can create where
 the bars share the same baseline and are easy to compare.
 
 In this chart, it is immediately clear how many countries there are for
@@ -326,7 +325,7 @@ We could combine this strategy by using `row` and `column` in facet,
 which would allow us to create visualizations that split data across
 three different channels: rows, columns, and colour.
 
-When visualizing so many dataframe variables, it is often useful to use
+When visualizing so many dataframe columns, it is often useful to use
 colour for the most important comparison, since these groups will be the
 closest to each other making them easier to compare.
 

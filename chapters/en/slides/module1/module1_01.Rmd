@@ -68,11 +68,11 @@ think about why you are making it,
 and what you want to achieve from creating this plot.
 
 Is there a specific question you are trying to answer,
-like comparing the relationship between two dataframe variables?
+like comparing the relationship between two dataframe columns?
 
 Or are you creating a plot
 to help you understand the structure of your data more in general,
-such as plotting the distribution of each dataframe variable?
+such as plotting the distribution of each dataframe columns?
 
 In either case, it can be extremely helpful to draw out your plot with pen and paper first.
 
@@ -96,7 +96,7 @@ the visualization to look like.
 import altair as alt
 from vega_datasets import data
 
-anscombe = data.anscombe()#.query('Series != "IV"')
+anscombe = data.anscombe()
 anscombe['Set'] = anscombe['Series'].map({'I': 'A', 'II': 'B', 'III': 'C', 'IV': 'D'})
 anscombe = anscombe.drop(columns='Series')
 anscombe.loc[anscombe['Y'] == anscombe['Y'].max(), 'Y'] = 8.5
@@ -211,7 +211,7 @@ alt.themes.enable('bigger_font')
  .facet('Set', columns=2)
  .configure_axis(grid=True)
  .configure_header(title=None)
- .save('../../../../modified-anscombes.svg'))
+ .save('../../../../static/module1/modified-anscombes.svg'))
 ```
 
 <img src="/module1/modified-anscombes.svg" alt="" width="60%"></img>

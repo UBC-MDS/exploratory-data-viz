@@ -217,7 +217,7 @@ question we just posed by hovering with the mouse over the two highly
 grossing movies. Try it!
 
 (We need the `:N` because there are some title values that makes Altair
-not recognize this dataframe variable as nominal otherwise)
+not recognize this dataframe column as nominal otherwise)
 
 Although this visualization is useful in getting information about the
 individual movies, it is hard to tell exactly how many data points there

@@ -2,8 +2,11 @@ import altair as alt
 import pandas as pd
 
 
-penguins = pd.read_csv('data/penguins.csv')
+penguins_df = pd.read_csv('data/penguins.csv')
 
-____ = ____
+mass_boxplot = alt.Chart(___).___().encode(
+    alt.X(___),
+    alt.Y(___).properties(
+        ___, ___)
 
 ____

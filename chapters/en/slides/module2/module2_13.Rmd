@@ -61,7 +61,9 @@ We have previously seen how we can explore categorical dataframe columns
 by encoding them as the colour channel of our plots.
 
 Altair creates a stacked bar chart by default
-when we when encode a dataframe variable as the `color` channel. Notice we are now using the helper functions we saw before but now with `alt.Color`. (This must be spelt without the "U")
+when we when encode a dataframe column as the `color` channel.
+Notice we are now using the helper functions we saw before but now with `alt.Color`.
+(This must be spelt without the "U")
 
 Just like with the stacked area chart,
 this is good when the total height of each bar
@@ -122,7 +124,7 @@ alt.Chart(gm2018).mark_bar().encode(
 
 Notes:
 Faceting creates one facet/subplot
-for each group in the specified variable.
+for each group in the specified dataframe column.
 To ensure that the entire grid of facets fit on the slide,
 we're also shrinking the dimensions of each subplot.
 
@@ -202,7 +204,7 @@ so that we can use it to read the plot in the top row.
 
 ---
 
-## Faceting on two categorical variables allows us to answer more complex questions
+## Faceting on two categorical dataframe columns allows us to answer more complex questions
 
 ```{python}
 alt.Chart(gm2018[gm2018['income_group'].isin(['High', 'Low'])]).mark_bar().encode(
@@ -215,7 +217,8 @@ alt.Chart(gm2018[gm2018['income_group'].isin(['High', 'Low'])]).mark_bar().encod
 
 Notes:
 
-Instead of using the `columns` parameter, we could specify one categorical dataframe variable each
+Instead of using the `columns` parameter,
+we could specify one categorical dataframe column each
 for the `row` and `column` parameters (note no "s").
 Altair will then spread the data out accordingly.
 
@@ -245,15 +248,16 @@ alt.Chart(gm2018[gm2018['region'].isin(['Africa'])]).mark_point().encode(
 ```
 
 Notes:
-So far we have encoded the same dataframe variable in both the facet and colour channels.
+So far we have encoded the same dataframe column
+in both the facet and colour channels.
 This is technically redundant
 but can be helpful to emphasize the groups in the data.
 
 If we wanted to drill down in the data further,
 we could instead separate each facet
-into groups by colouring according to another dataframe variable.
+into groups by colouring according to another dataframe column.
 
-This would allow us to answer questions of similar complexity 
+This would allow us to answer questions of similar complexity
 as in the previous slide,
 without faceting into both rows and columns.
 
@@ -276,7 +280,7 @@ and investigating the literature to understand
 if these relationships are also causative.
 
 If there were so many categories that the colours become hard to tell apart,
-it would be worthwhile to try to facet by that dataframe variable 
+it would be worthwhile to try to facet by that dataframe column 
 instead of encoding it as colour.
 
 ---
@@ -325,7 +329,7 @@ alt.Chart(gm2018[gm2018['region'] == 'Africa']).mark_bar().encode(
 
 Notes:
 By spreading the sub-regions out as facets,
-and encoding the same dataframe variable in both the y and colour channel,
+and encoding the same dataframe column in both the y and colour channel,
 we can create where the bars share the same baseline
 and are easy to compare.
 
@@ -343,7 +347,7 @@ which would allow us to create visualizations
 that split data across three different channels:
 rows, columns, and colour.
 
-When visualizing so many dataframe variables,
+When visualizing so many dataframe columns,
 it is often useful to use colour for the most important comparison,
 since these groups will be the closest to each other 
 making them easier to compare.
