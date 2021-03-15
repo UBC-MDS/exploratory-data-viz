@@ -43,17 +43,14 @@ why you are making it, and what you want to achieve from creating this
 plot.
 
 Is there a specific question you are trying to answer, like comparing
-the relationship between two dataframe columns?
-
-Or are you creating a plot to help you understand the structure of your
-data more in general, such as plotting the distribution of each
-dataframe columns?
+the relationship between two dataframe columns? Or are you creating a
+plot to help you understand the structure of your data more in general,
+such as plotting the distribution of each dataframe columns?
 
 In either case, it can be extremely helpful to draw out your plot with
-pen and paper first.
-
-This helps you think about if the plot you are creating makes sense or
-if there is another plot better suited for the task at hand.
+pen and paper first. This helps you think about if the plot you are
+creating makes sense or if there is another plot better suited for the
+task at hand.
 
 Drawing with pen and paper also makes it easier to write the code
 afterwards, since you clearly know what you are expecting the
@@ -725,9 +722,9 @@ remaining three sets of data have a similar centre and spread.
 
 ---
 
-## Plotting the data immediately reveals the differences to the human eye
+## Plotting the data immediately reveals patterns in the data
 
-### There are clear patterns in these datasets that we could not detect from only looking at the raw numbers or some summary statistics
+### We could not detect these patterns from only looking at the raw numbers or summary statistics
 
 <img src="/module1/modified-anscombes.svg" alt="" width="60%"></img>
 
