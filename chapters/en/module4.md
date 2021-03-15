@@ -65,24 +65,24 @@ You are on a roll!
 <exercise id="3" title="Which Plot Is It?">
 
 **Question 1**      
-If we are interested in visualizing the relationship between two columns, which plot type is most appropriate?
+If we are interested in visualizing the relationship between two **numeric/quantitative** columns, which plot type is most appropriate?
 
 <choice id="1" >
 <opt text="Histogram">
 
-This can be used to visualize a single column's distribution.
+This can be used to visualize a single numeric column's distribution.
 
 </opt>
 
 <opt text="Violin plot" >
 
-This can be used to visualize a single column's distribution.
+This can be used to visualize a single numeric column's distribution.
 
 </opt>
 
-<opt text="Boxplot" >
+<opt text="boxplot" >
 
-This can be used to visualize a single column's distribution.
+This can be used to visualize a single numeric column's distribution.
 
 </opt>
 
@@ -97,7 +97,7 @@ You got it!
 
 
 **Question 2**      
-Which plots allows are most ideal for visualizing the relationship between 2 numerical column distributions?
+Which plots are most ideal for visualizing the relationship between 2 numeric column distributions where overplotting is an issue?
 
 
 <choice id="2" >
@@ -120,14 +120,13 @@ This doesn't quite show the distributions of the columns well.
 </opt>
 
 
-<opt text="Area plot">
+<opt text="Scatter plot">
 
-Not quite with this one. 
+This one is less informative if overplotting is present. 
 
 </opt>
 
 </choice>
-
 
 </exercise>
 
@@ -147,7 +146,7 @@ Score</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-eve
 
 **Question 1**     
 
-For which scores are pokemon most saturated in the plot?
+For which range of pokemon attack and defence scores do we have the most observations?
 
 <choice id="1" >
 <opt text="Pokemon with high defense and attack scores.">
@@ -169,7 +168,7 @@ This would correspond to the top left side of the plot. Is there a lot of satura
 </opt>
 
 
-<opt text="Pokemon with average defense and attack scores." correct="true">
+<opt text="Pokemon with mid-low defense and  mid-low attack scores." correct="true">
 
 You got it!
 
@@ -213,8 +212,6 @@ I think we discovered that for histograms we use `.mark_bar()`.
 </opt>
 
 
-
-</choice>
 
 </choice>
 </exercise>
@@ -266,7 +263,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 </codeblock>
 
 
-**Question**      
+**Question 1**      
 
 What kind of relationship is there between flipper length and penguin mass?
 
@@ -292,33 +289,32 @@ Are there any obvious shapes being formed from the data?
 </choice>
 
 
-**Question**      
+**Question 2**      
 
 What flipper length and mass are most common among the penguins in our data (with the given bin size)?
 
 <choice id="2" >
-<opt text="Flipper length between 180-182mm and mass between 3600-3800g" >
+<opt text="Flipper length between 185-200mm and mass between 4600-5200g" >
 
 Are there any intervals of flipper length that contains a darker blue? The darker the colour, the more counts of penguins in the given interval range.
 
 </opt>
 
-<opt text="Flipper length between 190-192mm and mass between 3600-3800g" correct="true">
+<opt text="Flipper length between 185-200mm and mass between 3200-4000g" correct="true">
 
 Nice, this is right!
 
 </opt>
 
-<opt text="Flipper length between 190-192mm and mass between 3800-4000g" >
+<opt text="Flipper length between 205-220mm and mass between 3200-4000g" >
 
-Are there any intervals of flipper length and mass that contains a darker blue? The darker the colour, the more counts of penguins in the given interval range.
+This flipper length interval may be a bit high. 
 
 </opt>
 
-<opt text="Flipper length between 186-188mm and mass between 3200-3400g" >
+<opt text="Flipper length between 205-220mm and mass between 4600-5200" >
 
-Are there any intervals of flipper length and mass that contains a darker blue? The darker the colour, the more counts of penguins in the given interval range.
-
+These intervals seem rather high? Maybe inspect flipper length and mass that are lower in value.
 </opt>
 
 </choice>
@@ -340,6 +336,11 @@ and submit it to validate if you were correct.**
 
 We are going to explore the different types of pokemon. You may remember this dataset from the previous Programming in Python for Data Science course. 
 This time we are going to take a look at the different generations and pokemon types and see which ones are most prominent. 
+
+For those less familiar with Pokemon, a Pokemon's generation is determined by the ara it was introduced. For example the first generation spans Pokemon characters that were released in video games from 1996-1999. The 7th generation are Pokemon introduced from games released between 2016-2019.
+
+According to [Wikipedia](https://en.wikipedia.org/wiki/Gameplay_of_Pok%C3%A9mon#Pok%C3%A9mon_types), A Pokémon's type is *"an elemental attribute determining the strengths and weaknesses of each Pokémon and its moves. Pokémon take double damage from attacking moves of types they are weak to and half damage from moves they resist. These type matchups offset one another in rock–paper–scissors-style relationships."*
+
 
 <codeblock id="pokemon">
 
@@ -406,7 +407,7 @@ Take a look at the size and colour of the circles.
 
 **Question 2**      
 
-Which Generation has no dragon Pokemon?
+Which generation has no dragon Pokemon?
 
 <choice id="2" >
 <opt text="Generation 1" >
@@ -454,15 +455,15 @@ This generation has no ground Pokemon.
 <opt text="True" correct="true">
 
 Perfect! Let's see what we are dealing with! 
+
 </opt>
 
 
-<opt text="False"  >
+<opt text="False">
 
 It's important to see what our data looks like! 
 
 </opt>
-
 
 </choice>
 
@@ -479,7 +480,7 @@ Perfect!
 
 <opt text="False" >
 
-Are you sure? *Fun Fact*: Co-creator of this course, Hayley Boyce once **lost** marks for having plots that were too pretty in her EDA. 
+Are you sure? *Fun Fact*: Co-creator of this course, Hayley Boyce once **lost** marks for having plots that were "too pretty"" in her EDA. 
 
 </opt>
 
@@ -488,7 +489,7 @@ Are you sure? *Fun Fact*: Co-creator of this course, Hayley Boyce once **lost** 
 </exercise>
 
 
-<exercise id="10" title="Which graph is appropriate?">
+<exercise id="10" title="Exploring EDA">
 
 **Question 1**      
 Which of the following is not a part of EDA?
@@ -509,8 +510,8 @@ It's important to have an idea of what values are missing from your data and ide
 <opt text="Visualizing the data" >
 
 Visualizing the data is a crucial part of communicating information about the data.
-</opt>
 
+</opt>
 
 <opt text="Creating a predictive model from the data" correct="true">
 
@@ -602,13 +603,13 @@ Do any of the distributions look bimodal (2 bell shapes)?
 <choice id="1" >
 <opt text="Yes" correct='true'>
 
-The 2 bumps suggest bimodality.
+The 2 bumps suggest bimodality. The `culmen_length_mm` and `flipper_length_mm` distributions both appear to be bimodal. 
 
 </opt>
 
 <opt text="No">
 
-Do you see 2 "bumps" in any of the plots?
+Do you see 2 "bumps" in any of the plots? Maybe look at the `culmen_length_mm` and `flipper_length_mm` distributions. 
 
 </opt>
 
@@ -624,28 +625,7 @@ Do you see 2 "bumps" in any of the plots?
 
 <exercise id="13" title="Repeating Categorical Columns Quick Questions!">
 
-**True or False**       
-*We start EDA by displaying a few rows from the data.*
-
-
-<choice id="1" >
-
-<opt text="True" correct="true">
-
-Perfect! Let's see what we are dealing with! 
-</opt>
-
-
-<opt text="False"  >
-
-It's important to see what our data looks like! 
-
-</opt>
-
-
-</choice>
-
-**True or False**       
+**Question 1: True or False**       
 *Repeating charts is the same as facetting them.*
 
 <choice id="2" >
@@ -739,7 +719,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 </codeblock>
 
 
-**Question**      
+**Question 1**      
 
 Are their approximately the same number of female and male penguins for each penguin species?
 
@@ -759,11 +739,11 @@ Are you comparing the circle size and colours of each species in the `sex` vs `s
 </choice>
 
 
-**Question**      
+**Question 2**      
 
 What species of penguins and from what island are most prominent in our data?
 
-<choice id="1" >
+<choice id="2" >
 <opt text="The Adelie species on Biscoe island are most prominent penguin in the data.">
 
 Although the Adelie species are present on Biscoe island, they are not the most occuring in our data.
