@@ -4,11 +4,11 @@ import pandas as pd
 
 income_df = pd.read_csv('data/income_expenditure.csv')
 
-income_plot = alt.Chart(____).____(____).encode(
-    alt.Y(____,
+income_plot = alt.Chart(income_df).mark_circle(____).encode(
+    alt.Y('tot_income',
           axis=____,
           title=____),
-    alt.X(____,
+    alt.X('education_expenditure',
           axis=____,
           title=____)
 ).properties(title=____)

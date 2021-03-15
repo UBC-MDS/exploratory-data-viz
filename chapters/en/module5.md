@@ -1,5 +1,5 @@
 ---
-title: 'Module 5: Designing plots for communication'
+title: 'Module 5: Designing Plots for Communication'
 description:
   'In this module we will be learning about how to design effective plots for communication purposes.'
 prev: ../../module4
@@ -70,29 +70,29 @@ Depending on colour, size and presentation, data can be displayed to sway the au
 <exercise id="3" title="Which Graph is Effective?">
 
 **Question 1**      
-When comparing categories, which visual channel is most effective in plotting?
+When comparing numeric values among categories, which visual channel is most effective in plotting?
 
 <choice id="1" >
-<opt text="Angles">
+<opt text="Angle">
 
-This can be used to visualize a single column's distribution.
+Angle can sometimes be difficult to compare, think about the exercise we did in Module 2. 
 
 </opt>
 
-<opt text="Colours" >
+<opt text="Colour" >
 
-This can be used to visualize a single column's distribution.
+Categories are easily compared with colour but if we are trying to compare numeric values, colour may not be the best channel. 
 
 </opt>
 
 <opt text="Volume" >
 
-This can be used to visualize a single column's distribution.
+We saw in a previous exercise in Module 2 that volume is not easily to assess all the time. 
 
 </opt>
 
 
-<opt text="Positions" correct="true">
+<opt text="Position" correct="true">
 
 You got it!
 
@@ -147,7 +147,7 @@ Nice!
 <exercise id="5" title="True or False: Titles and Formatting (T/F)?">
 
 **True or False**       
-*All plots should have a subtitle that adds additional details*
+*All plots should have a subtitle that adds additional details.*
 
 
 <choice id="1" >
@@ -189,7 +189,7 @@ This does work in other plotting tools, but in Altair, we separate our title and
 
 
 **True or False**       
-*Not very axis and legend needs to have a title.*
+*Not all axes and legends needs to have a title.*
 
 <choice id="3" >
 
@@ -335,7 +335,12 @@ The [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-
 
 For this question let's create a stacked histogram of the values in the `culmen_depth_mm` column for different penguin species.
 
-***([Culmen](https://allisonhorst.github.io/palmerpenguins/articles/articles/art.html): the upper ridge of a bird's beak)***
+Remember is the previous module we discussed that the culmen is also sometimes referred to as the bill and is [upper ridge of a bird's beak](https://allisonhorst.github.io/palmerpenguins/articles/articles/art.html). 
+Here is the diagram we showed you in an earlier module that was made by [Allison Horst](https://twitter.com/allison_horst).
+
+<center>
+<img src="/module3/penguin_culmen.jpg" width="60%"></img>
+</center>
 
 Tasks: 
 
@@ -351,14 +356,45 @@ Fill in the blanks in the code below so that the following gets accomplished:
 
 <codeblock id="05_07">
 
-- Are you setting `alt.Y('species', title=None)` in the base plot?
-- Are you setting `alt.X('count()', title='something')` in the base plot?
 - In the text plot, are you coding `.mark_text(align='center', dx=10)`?
 - In the text plot, are you specifying `alt.Text('count()'`?
 - for the titles formatting are you making sure to use the arguments `subtitle`, `fontSize` and `subtitleColor`?
 
 
 </codeblock>
+
+**Question**      
+
+The base plot of the code above looks like this: 
+
+<center>
+<img src="/module5/base_plot.svg" width="60%"></img>
+</center>
+
+
+Which question can you now answer confidently using the formatted plot above, that you could not before with just the base plot?
+
+
+<choice id="1" >
+<opt text="Which penguin species is most prominent in the artic base on the data collected?" >
+
+We could answer this question using the base plot since the position channel informed us on this. Comparing categories with the bars was still possible. 
+
+</opt>
+
+<opt text="How many Gentoo Penguins were observed in the data?" correct="true">
+
+This would have been much harder to answer with our 
+
+</opt>
+
+<opt text="Which island has the most diverse penguin population?"  >
+
+Neither plot, shows any information regarding the `island` column. 
+
+</opt>
+
+</choice>
 
 
 </exercise>
@@ -378,13 +414,13 @@ Fill in the blanks in the code below so that the following gets accomplished:
 
 <opt text="True"  correct="true">
 
-You've been paying attention here!
+You've been paying attention here! It's important to know that we should be careful we we do this, as sometimes we risk inflating differences among categories or measures. 
 
 </opt>
 
 <opt text="False" >
 
-Sometimes we need to see values within a certain range to identify any variable or relationships within the data. 
+Although we should be careful we we do this, as sometimes we risk inflating differences among categories or measures but sometimes we need to see values within a certain range to identify any variable or relationships within the data. 
 
 </opt>
 
@@ -412,7 +448,7 @@ Sometimes a large value can affect the scale on an axis and make it difficult to
 
 
 **True or False**       
-*Log transforming an axis is a good option to use if there is a large range to displayed and you don't want to compress the smaller values into the bottom of the graph and with all possible values.*
+*Log transforming an axis is a good option to use if there is a large range of values to displayed that incorporates zero and you don't want to compress the smaller values into the bottom of the graph.*
 
 <choice id="3" >
 
@@ -436,7 +472,7 @@ You are on fire!
 <exercise id="10" title="Transformations and Presentations">
 
 **Question 1**      
-Which of the following arguments will exclude data from a plot?
+Which of the following arguments will exclude points from a plot?
 
 <choice id="1" >
 <opt text="<code>clip</code>"  correct="true">
@@ -453,7 +489,7 @@ We can use `.Scale()` and the `domain` argument to specify the domain of the plo
 
 <opt text="<code>domain</code>">
 
-Although this specifies the domain for the plot, the data will still display with
+Although this specifies the domain for the plot, the points will still be displayed if you do not clip the plot.
 
 </opt>
 
@@ -474,13 +510,13 @@ How do you add interactivity to a plot?
 <choice id="2" >
 <opt text="<code>interactive=True</code>" >
 
-You would not add interactivity with this argument.
+You would need something more than an argument. Perhaps a method? 
 
 </opt>
 
 <opt text="<code>.interactivity()</code>">
 
-Close but not quite!
+Close but not quite! You are on the right track with a method. 
 
 </opt>
 
@@ -546,25 +582,25 @@ Which type of transformation do you think would be the best fitting here?
 
 
 <choice id="1" >
-<opt text="Logarithmic" >
+<opt text="Logarithmic,  <code>alt.Scale(type='log')</code>" >
 
 Are you sure? Some people may spend 0 PHP on education.
 
 </opt>
 
-<opt text="Symmetric Logarithmic" correct="true">
+<opt text="Symmetric Logarithmic, <code>alt.Scale(type='symlog')</code>" correct="true">
 
 You got it! `Symlog` is best here since some people spend 0 PHP on education. 
 
 </opt>
 
-<opt text="Exponential"  >
+<opt text="Exponential, <code>alt.Scale(type='pow', exponent=2)</code>"  >
 
 Maybe it's a good idea to refer to the notes. 
 
 </opt>
 
-<opt text="Absolute Value">
+<opt text="Square Root, <code>alt.Scale(type='sqrt')</code>">
 
 It doesn't make sense to have negative income or expenditures in this situation. 
 
@@ -609,13 +645,13 @@ There appears to be an upward slope between the data points.
 
 <opt text="Negative" >
 
-Are you sure here?
+Are you sure here? Maybe maybe take a look at the direction the points are forming (low to high?).
 
 </opt>
 
 <opt text="No Relationship"  >
 
-There appears to be some sort of relationship between the variables!
+There appears to be some sort of relationship between the variables, maybe take a look at the direction the points are forming (low to high?).
 
 </opt>
 
@@ -677,7 +713,7 @@ Is using strictly colour mapping inclusive to people who can't interpret them?
 <exercise id="14" title="Colour Coordination Questions">
 
 **Question 1**      
-When is it a good idea to use custom colour schemes?
+When is it most effective to use custom colour schemes?
 
 <choice id="1" >
 <opt text="When colours are already naturally associated with certain categories or values."  correct="true">
@@ -709,8 +745,8 @@ I can understand this one but not necessarily the number one reason.
 
 
 **Question 2**      
-How many colours (approximately by a rule of thumb) should you begin to reconsider colour as an effective channel to represent your data?
 
+ **After** how many colours (approximately by a rule of thumb) should you begin to reconsider colour as an effective channel to represent your data? 
 
 <choice id="2" >
 <opt text="3" >
@@ -784,26 +820,21 @@ Fill in the blanks in the code below so that the following gets accomplished:
 </codeblock>
 
 **Question**      
-Which penguin species tend to have the shortest culmen length?
+If you removed the colour channel, would you be able to answer the question *"Which two penguin species are the most similar size in terms of mass and flipper length"* ? 
 
 
 <choice id="1" >
-<opt text="Adelie" correct="true">
+<opt text="Yes" correct="true">
 
-Great!
-
-</opt>
-
-<opt text="Chintrap" >
-Hmmm, maybe not this penguin species.
+Since we added a shape channel, we could still differentiate between the species of penguins. 
 
 </opt>
 
-<opt text="Gentoo">
-
-Not this species!
+<opt text="No" >
+Hmmm, Have you tried plotting it without? What about the <code>Shape</code> channel?
 
 </opt>
+
 
 
 </choice>
@@ -868,28 +899,22 @@ It's often better to use a palette with few colours designed specifically to dis
 **Question 1**      
 If you are plotting data for a particular variable where there is no difference in importance between the high and low values, which colour should be assigned to the highest variable given the colours below?
 
-<svg width="20" height="20" ><rect width="20" height="20" style="fill:#440154FF;stroke-width:2;stroke:rgb(0,0,0)" /></svg>  &nbsp; Indigo <br>
-<svg width="20" height="20" ><rect width="20" height="20" style="fill:#30568CFF;stroke-width:2;stroke:rgb(0,0,0)" /></svg>  &nbsp; Blue <br>
-<svg width="20" height="20" ><rect width="20" height="20" style="fill:#55C667FF;stroke-width:2;stroke:rgb(0,0,0)" /></svg>  &nbsp; Green <br>
-<svg width="20" height="20" ><rect width="20" height="20" style="fill:#FDE725FF;stroke-width:2;stroke:rgb(0,0,0)" /></svg>  &nbsp; Yellow
-
-
 
 
 <choice id="1" >
-<opt text="💜- Indigo"  correct="true">
+<opt text="🔮- Indigo"  correct="true">
 
 Cool! This is the darkest colour and thus has the largest contrast with the background which gets assigned to the highest values.
 
 </opt>
 
 
-<opt text="🔵 - Blue">
+<opt text="🧢 - Blue">
 
 We need to assign the colour with the most contrast to the highest values. Is this the darkest colour?
 
 </opt>
-<opt text="✅ - Green">
+<opt text="♻️- Green">
 
 We need to assign the colour with the most contrast to the highest values. Is this the darkest colour?
 
@@ -947,13 +972,13 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-The University of British Columbia is based in Vancouver and we are lucky enough to have a relatively mild climate (mild climate, but rainy). This made us think of our country's wonderful capital Ottawa and how they are not so fortunate. This question will be using the data obtained from the [Governement of Canada](https://climate.weather.gc.ca/). The data we have collected is from 2008-2010.
+The University of British Columbia is based in Vancouver and we are lucky enough to have a relatively mild climate (mild climate, but rainy) but not all cities and towns in British Columbia have this luck. This made us think of a city further north of BC - **Kamloops** who's climate is more varied. This question will be using the data obtained from the [Governement of Canada](https://climate.weather.gc.ca/). The data we have collected is from 2009-2012.
 
 <codeblock id="temperatures">
 
 </codeblock>
 
- Let's observe and visualize the mean monthly temperature of Ottawa and see if there is any relationship between rainfall, the season and temperature. 
+Let's observe and visualize the mean monthly temperature of Kamloops and see if there is any relationship between rainfall, the season and temperature. 
 
 Tasks: 
 
@@ -978,7 +1003,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 </codeblock>
 
 **Question**      
-Do colder months tend to have higher or lower levels of rainfall?
+Now that we can use colour to distinguishe between hotter and colder months, do colder months tend to have higher or lower levels of rainfall?
 
 
 <choice id="1" >
@@ -996,7 +1021,7 @@ Maybe take a look at your graph?
 
 </choice>
 
-Can you think of why this might occurs?
+Can you think of why this might occur?
 
 </exercise>
 
@@ -1133,14 +1158,14 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-Let's take a look again at the [Government of Canada](https://climate.weather.gc.ca/) data that contains the weather in Ottawa from 2008-2010.
+Let's take a look again at the [Government of Canada](https://climate.weather.gc.ca/) data that contains the weather in Kamloops from 2009-2012.
 We left off seeing that precipitation was higher in the hotter months.
 
 <codeblock id="temperatures2">
 
 </codeblock>
 
-For the 3 years of data, Let's find out the total rainfall in each month. So between the years 2008 and 2010, how much precipitation was there in total during all the Januarys, Februarys, etc?  Remember that we will have to aggregate values here. 
+For the 4 years of data, Let's find out the total rainfall in each month. So between the years 2009 and 2012, how much precipitation was there in total during all the Januarys, Februarys, etc?  Remember that we will have to aggregate values here. 
 
 Tasks: 
 
@@ -1158,7 +1183,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 - Are you using `mark_bar()`?
 - Are you setting `alt.X('sum(total_precipitate_mm)', title="Total precipitate per month (mm)")`?
 - Are you setting `alt.Y('month', sort=list(month_name), title=None)`?
-- Are you setting `color=alt.condition(alt.datum.month == 'September', alt.value('colour1'), alt.value('colour2')`?
+- Are you setting `color=alt.condition(alt.datum.month == 'May', alt.value('colour1'), alt.value('colour2')`?
 - Are you setting a title in `.properties()`?
 - In the text plot, are you coding `mark_text(align='left', dx=5)`?
 - Are you setting ` text=alt.Text('sum(total_precipitate_mm)', format='d')`?
@@ -1169,16 +1194,16 @@ Fill in the blanks in the code below so that the following gets accomplished:
 
 
 **Question**      
-Now we know the month with the highest rainfall collectively, what kind of plot would you expect for snowfall?
+In this plot would it make sense to sort the values on the x axis instead of highlighting the month?
 
 <choice id="1" >
-<opt text="A similarly shaped plot." >
+<opt text="Yes, since we are interested in the month with the greatest precipitate we should be sorting in ascending order." >
 
-If it's raining, it's likely not snowing in Ottawa.
+What about the x-axis? Does it have a natural order already?
 
 </opt>
 
-<opt text="A plot that looks like the inverse of this one." correct="true">
+<opt text="No, highlighting the value makes more sense since the x-axis has a natural order that should be followed." correct="true">
 
 Nice!
 

@@ -5,13 +5,13 @@ import pandas as pd
 penguins_df = pd.read_csv('data/penguins.csv')
 
 
-# Add a base plot 
+# The base plot 
 base = alt.Chart(penguins_df).mark_bar().encode(
     alt.Y('species', title=None),
     alt.X('count()', title='Number of penguins'))
 base
 
-# Add text plot
+# Create added text 
 text = alt.Chart(penguins_df).mark_text(align='center', dx=10).encode(
     alt.Y('species'),
     alt.X('count()'),
