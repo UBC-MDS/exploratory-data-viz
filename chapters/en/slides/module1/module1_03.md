@@ -4,9 +4,8 @@ type: slides
 
 # How Can We Visualize Data?
 
-Notes:
-
-<br>
+Notes: There are many different data visualization strategies so which
+one should we choose when visualizing our data?
 
 ---
 
@@ -54,6 +53,8 @@ becomes quite laborious when we need to plot larger dataframes, or
 create more complex visualizations.
 
 ---
+
+## The data we will be plotting
 
 <center>
 <table style="width:40%;">
@@ -356,7 +357,7 @@ import altair as alt
 alt.Chart(cars).mark_point()
 ```
 
-<iframe src="/module1/charts/03/unnamed-chunk-4.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/03/unnamed-chunk-4.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Here we assigned a shorter name (`alt`) to the Altair library
@@ -374,6 +375,10 @@ Since we have not specified which columns should be used for the x and y
 axes, we appear to only see one point in this plot since all the data is
 plotted on top of each other in the same location.
 
+To the right of the chart there is a button with three dots on it. don’t
+worry about it right now, we will explain what this is for at the end of
+the chapter.
+
 ---
 
 ## Encoding columns as visual channels
@@ -385,15 +390,27 @@ alt.Chart(cars).mark_point().encode(
     x='Weight_in_lbs')
 ```
 
-<iframe src="/module1/charts/03/unnamed-chunk-5.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/03/unnamed-chunk-5.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: To visually separate the points, we can encode columns in the
 dataframe as visual channels, such as the axes or colours of the plot.
+
 Here, we *encode* the column `Miles_per_Gallon` as the x-axis. For
 Pandas data frames, Altair automatically determines an appropriate data
 type for the mapped column, which in this case is quantitative (or
 numerical) and shows the numbers under the axis.
+
+You can see that there are several short black lines spread out evenly
+on the x-axis. These are called axis ticks and help us see where the
+values of this dataframe column lie along the axis.
+
+The faint gray lines are called grid lines and extend the locations of
+the axis ticks so that it is easy to compare their position to the
+points.
+
+This is particularly useful when they points might be further away from
+the axis ticks, such as in the next slide.
 
 ---
 
@@ -405,7 +422,7 @@ alt.Chart(cars).mark_point().encode(
     y='Miles_per_Gallon')
 ```
 
-<iframe src="/module1/charts/03/unnamed-chunk-6.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/03/unnamed-chunk-6.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: By spreading out the data along both the x and y-axis, we can
@@ -438,7 +455,7 @@ alt.Chart(cars).mark_point().encode(
     color='Horsepower')
 ```
 
-<iframe src="/module1/charts/03/unnamed-chunk-7.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/03/unnamed-chunk-7.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes:
@@ -479,7 +496,7 @@ alt.Chart(cars).mark_point().encode(
     color='Origin')
 ```
 
-<iframe src="/module1/charts/03/unnamed-chunk-8.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/03/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: In the previous slide, a continuous, gradually increasing colour
@@ -509,7 +526,7 @@ alt.Chart(cars).mark_point().encode(
     shape='Origin')
 ```
 
-<iframe src="/module1/charts/03/unnamed-chunk-9.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/03/unnamed-chunk-9.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Although Altair’s colour scales are designed to be effective and
@@ -534,7 +551,7 @@ alt.Chart(cars).mark_point().encode(
     size='Horsepower')
 ```
 
-<iframe src="/module1/charts/03/unnamed-chunk-10.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/03/unnamed-chunk-10.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Sometimes a visualization tries to do too much. In this example,
@@ -549,6 +566,38 @@ Later we will learn more about how to efficiently load a visualization
 with an appropriate amount of information, and what the research
 indicates regarding which visual channels are the most efficient for
 communicating information visually.
+
+---
+
+## The action button can be used to save the plot
+
+``` python
+alt.Chart(cars).mark_point().encode(
+    x='Weight_in_lbs',
+    y='Miles_per_Gallon',
+    color='Origin',
+    shape='Origin',
+    size='Horsepower')
+```
+
+<iframe src="/module1/charts/03/unnamed-chunk-11.html" width="100%" height="420px" style="border:none;">
+</iframe>
+
+Notes: This is the same visualization as from the last slide, and we
+will just use it an example.
+
+The button to the right of the chart with three dots on it is called the
+“action button”. and clicking it will bring up a menu.
+
+The first two items in ’s menu can be used to save the chart, either in
+an image-based PNG-format or a text-based SVG-format.
+
+We will also be learning about programmatic ways to save our charts
+later in the course.
+
+The last three menu items relate to the library VegaLite, which is what
+we mentioned Altair is built upon, but we will not be using these in
+this course.
 
 ---
 

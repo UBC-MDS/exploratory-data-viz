@@ -25,7 +25,7 @@ alt.Chart(cars).mark_point().encode(
     color='Origin')
 ```
 
-<iframe src="/module1/charts/07/unnamed-chunk-1.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/07/unnamed-chunk-1.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Throughout this course we will explore many different datasets,
@@ -62,7 +62,7 @@ alt.Chart(cars).mark_point().encode(
     color='Origin')
 ```
 
-<iframe src="/module1/charts/07/unnamed-chunk-2.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/07/unnamed-chunk-2.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: To plot the means of weight and mileage, we could use pandas to
@@ -138,7 +138,7 @@ alt.Chart(cars).mark_point().encode(
     y='mean(Miles_per_Gallon)')
 ```
 
-<iframe src="/module1/charts/07/unnamed-chunk-4.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/07/unnamed-chunk-4.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: To visualize the mean mileage for each year of all cars, we want
@@ -162,7 +162,7 @@ alt.Chart(cars).mark_point().encode(
     y='Miles_per_Gallon')
 ```
 
-<iframe src="/module1/charts/07/unnamed-chunk-5.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/07/unnamed-chunk-5.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: As a comparison with the previous slide, if we instead of the
@@ -180,7 +180,7 @@ alt.Chart(cars).mark_point().encode(
     color='Origin')
 ```
 
-<iframe src="/module1/charts/07/unnamed-chunk-6.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/07/unnamed-chunk-6.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: If we try to explore the mileage over time while grouping the
@@ -201,7 +201,7 @@ alt.Chart(cars).mark_line().encode(
     color='Origin')
 ```
 
-<iframe src="/module1/charts/07/unnamed-chunk-7.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/07/unnamed-chunk-7.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: One key advantage of line plots is that they connect all the
@@ -237,7 +237,7 @@ point = alt.Chart(cars).mark_point().encode(
 line + point
 ```
 
-<iframe src="/module1/charts/07/unnamed-chunk-8.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/07/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes:
@@ -276,7 +276,7 @@ line = alt.Chart(cars).mark_line().encode(
 line + line.mark_point()
 ```
 
-<iframe src="/module1/charts/07/unnamed-chunk-9.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/07/unnamed-chunk-9.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: We can also create a layered plot by reusing a previous chart
@@ -302,7 +302,7 @@ line = alt.Chart(cars).mark_line().encode(
 line + line.mark_point().encode(y='Miles_per_Gallon')
 ```
 
-<iframe src="/module1/charts/07/unnamed-chunk-10.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/07/unnamed-chunk-10.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: When we are combing plots in layers, we can not only change the
@@ -339,7 +339,7 @@ line = alt.Chart(cars).mark_line().encode(
 line + line.mark_point().encode(y='Miles_per_Gallon')
 ```
 
-<iframe src="/module1/charts/07/unnamed-chunk-11.html" width="100%" height="400px" style="border-width:0;">
+<iframe src="/module1/charts/07/unnamed-chunk-11.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: We have already seen that the x and y encoding remain the same in
