@@ -403,6 +403,10 @@ Since we have not specified which columns should be used for the x and y axes,
 we appear to only see one point in this plot
 since all the data is plotted on top of each other in the same location.
 
+To the right of the chart there is a button with three dots on it.
+don't worry about it right now,
+we will explain what this is for at the end of the chapter.
+
 ---
 
 ## Encoding columns as visual channels
@@ -574,6 +578,36 @@ with an appropriate amount of information,
 and what the research indicates
 regarding which visual channels are the most efficient
 for communicating information visually.
+
+---
+
+## The action button can be used to save the plot
+
+```{python}
+alt.Chart(cars).mark_point().encode(
+    x='Weight_in_lbs',
+    y='Miles_per_Gallon',
+    color='Origin',
+    shape='Origin',
+    size='Horsepower')
+```
+
+Notes:
+This is the same visualization as from the last slide,
+and we will just use it an example.
+
+The button to the right of the chart with three dots on it
+is called the "action button".
+and clicking it will bring up a menu.
+
+The first two items in 's menu can be used to save the chart,
+either in an image-based PNG-format or a text-based SVG-format.
+
+We will also be learning about programmatic ways to save our charts later in the course.
+
+The last three menu items relate to the library VegaLite,
+which is what we mentioned Altair is built upon,
+but we will not be using these in this course.
 
 ---
 
