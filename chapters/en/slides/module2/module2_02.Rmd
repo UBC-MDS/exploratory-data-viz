@@ -1,0 +1,279 @@
+---
+params:
+  dynamictitle: "module2_02"
+title: "`r params$dynamictitle`"
+output:
+  md_document:
+    variant: gfm
+    pandoc_args: "--markdown-headings=atx"
+---
+
+```{r setup, include=FALSE}
+source('../../../../slide-setup.R')
+# Remember to also manually update the YAML title above
+```
+
+type: slides
+
+# Creating area charts
+
+Notes:
+In this module
+we will be learning how to create area charts 
+and when they are a suitable alternative to use
+instead of line charts.
+
+---
+
+## Global Development Data
+
+| Column                | Description                                                                                  |
+|-----------------------|----------------------------------------------------------------------------------------------|
+| country               | Country name                                                                                 |
+| year                  | Year of observation                                                                          |
+| population            | Population in the country at each year                                                       |
+| region                | Continent the country belongs to                                                             |
+| sub_region            | Sub-region the country belongs to                                                            |
+| income_group          | Income group [as specified by the world bank in 2018]                                        |
+| life_expectancy       | The mean number of years a newborn would <br>live if mortality patterns remained constant    |
+| income                | GDP per capita (in USD) <em>adjusted <br>for differences in purchasing power</em>            |
+| children_per_woman    | Average number of children born per woman                                                    |
+| child_mortality       | Deaths of children under 5 years <break>of age per 1000 live births                          |
+| pop_density           | Average number of people per km<sup>2</sup>                                                  |
+| co2_per_capita        | CO2 emissions from fossil fuels (tonnes per capita)                                          |
+| years_in_school_men   | Mean number of years in primary, secondary,<br>and tertiary school for 25-36 years old men   |
+| years_in_school_women | Mean number of years in primary, secondary,<br>and tertiary school for 25-36 years old women |
+
+[as specified by the world bank in 2018]: https://datahelpdesk.worldbank.org/knowledgebase/articles/378833-how-are-the-income-group-thresholds-determined
+
+Notes:
+We will be visualizing global health and population data for a number of countries.
+This is the same data we are working with in the assignments for the first two modules.
+
+We will be looking at many different data sets in later labs,
+but we're sticking to a familiar one for now
+so that we can focus on laying down a solid understanding
+of the visualization principles
+with data we already know.
+
+## Reading in the data with pandas
+
+```{python}
+import pandas as pd
+
+
+url = 'https://raw.githubusercontent.com/UofTCoders/workshops-dc-py/master/data/processed/world-data-gapminder.csv'
+gm = pd.read_csv(url, parse_dates=['year'])
+gm = gm[gm['country'].isin(gm[gm['year'] == '2018'].nlargest(10, ['population'])['country'])]
+gm
+```
+
+Notes:
+This dataset is made available via an URL
+and we can download and read it into pandas
+with `read_csv`.
+
+Here we also tell pandas to read in the `year` column as a date,
+rather than an integer,
+which is the default behavior.
+
+Remember that Altair uses the pandas data types
+to infer the data it is working with.
+Integers would show up on the Altair chart axes as `1,990, 2,000, etc`
+whereas dates are shown as `1990, 2000, etc`
+
+---
+
+## Using `info` to view dataframe columns
+
+```{python}
+gm.info()
+```
+
+Notes:
+When reading in a new dataset,
+it is always a good idea to have a look at a few rows
+like we did in the previous slide
+to get an idea of how the data looks.
+
+Another helpful practice is to use the `.info()` method
+to get an overview of the column types
+and see if there are any `NaNs` (missing values).
+
+---
+
+## A line chart is a good choice for trends over time
+
+```{python}
+import altair as alt
+
+
+alt.Chart(gm).mark_line().encode(
+    x='year',
+    y='population')
+```
+
+Notes:
+Since the data reaches all the way back to the 1800s,
+it would be really interesting to plot
+how the world population have been growing up until today.
+We could use a line plot for this
+as we learned in the first module.
+
+Why does the plot look so weird?
+Because for every year in the dataset,
+we have plotted the population for every single country
+and connected them with a vertical line.
+That's not what we want!
+
+---
+
+## The `sum` aggregate method will show us the trend of the entire world
+
+```{python}
+alt.Chart(gm).mark_line().encode(
+    x='year',
+    y='sum(population)')
+```
+
+Notes:
+We want to see how the **world** population has been changing.
+We can calculate this by summing up all the countries'
+populations for each year via the `sum` aggregation method in Altair.
+
+That looks much better!
+Interestingly,
+it seem like the world population have been growing in two distinct phases.
+We will talk more about that in a few slides,
+but first,
+let's recreate this chart as an area chart.
+
+---
+
+## Area charts are also effective at visualizing trends over time
+
+```{python}
+alt.Chart(gm).mark_area().encode(
+    x='year',
+    y='sum(population)')
+```
+
+Notes:
+Thanks to Altair's consistent visualization grammar,
+the modification we need to make to the code are minor.
+Replace `mark_line` with `mark_area` and we're done.
+
+For showing a singe trend over time,
+the choice between a line and area chart comes down to asthetics.
+They are both effective choices for communicating
+
+However,
+when visualizing the trends over time for multiple groups,
+lines and areas have different advantages,
+as we will see next.
+
+---
+
+## Area charts are preferred when the total of the groups is the most important
+
+```{python}
+alt.Chart(gm).mark_area().encode(
+    x='year',
+    y='sum(population)',
+    color='region')
+```
+
+Notes:
+The y-axis range of this chart
+is the same as the one on the previous slide,
+so it is easy to see how the total world population has changed over time.
+
+From the stacked colored regions,
+we also get a rough idea of how each region has grown,
+but it is hard to compare exactly,
+especially for regions that are not stacked next to each other.
+For example,
+we can't really tell if Europe, Africa, or the Americas
+has the largest population in the most recent year.
+
+---
+
+## Line charts are preferred when the values of the individual groups are the most important
+
+```{python}
+alt.Chart(gm).mark_line().encode(
+    x='year',
+    y='sum(population)',
+    color='region')
+```
+
+Notes:
+Using a line chart
+is the preferred choice when we want to view the exact values of each group
+and don't care as much about the total of the groups added together.
+
+For example,
+here it is immediately clear that Africa has a bigger population 
+than Europe and the America,
+and we can see that the populations shifted around year 2000.
+
+On the other hand,
+it's quite cognitively demanding
+to try to reconstruct the total world population
+by adding all the lines up together,
+especially over time!
+
+---
+
+## When will the world's population stop growing?
+
+```{python}
+alt.Chart(gm).mark_area().encode(
+    x='year',
+    y='sum(population)')
+```
+
+Notes:
+Going back to the area chart with one group,
+let's look closer at the growth curve of the world's population.
+
+First,
+there is a slow linear phase,
+but soon after the end of the second world war,
+it the growth starts increasing much more rapidly
+(but still in a straight line).
+
+Will the world population keep growing like this for much longer?
+
+---
+
+## The world population is predicted to stabilize around 11 billion
+
+```{python}
+alt.Chart(gm).mark_area().encode(
+    x='year',
+    y='mean(children_per_woman)')
+```
+
+Notes:
+Fortunately,
+the world population is predicted
+to stabilize around 11 billion people at the end of the century.
+
+Why?
+Because as living conditions improve around the world,
+child mortality is going down,
+which means that the number of children per women is decreasing
+towards a level than means that the current population will be sustained
+rather than increase.
+
+If you're interested in knowing more about the world population predictions,
+you can use Gapminders online resources,
+for example [this video on population growh](https://www.gapminder.org/answers/how-did-the-world-population-change/)
+and [this one on why it will slow down](https://www.gapminder.org/answers/the-rapid-growth-of-the-world-population-when-will-it-slow-down/).
+
+---
+
+# Let's apply what we learned!
+
+Notes: <br>
