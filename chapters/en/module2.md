@@ -14,7 +14,7 @@ id: 2
 
 
 <exercise id="1" title="Effective Use of Visual Channels" type="slides,video">
-<slides source="module2/module2_01" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module2/module2_01" shot="1" start="40:1800" end="51:5400"> </slides>
 </exercise>
 
 <exercise id="2" title="True or False: Effective Visual Channels">
@@ -132,7 +132,7 @@ This can help, but it's not always acceptable.
 </exercise>
 
 <exercise id="4" title="Area Charts" type="slides,video">
-<slides source="module2/module2_04" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module2/module2_04" shot="1" start="52:0300" end="70:4900"> </slides>
 </exercise>
 
 <exercise id="5" title="True or False: Area and Lines">
@@ -371,7 +371,7 @@ Efficiency is definitely increasing but are you sure it tripled from 1970-1982?
 </exercise>
 
 <exercise id="8" title="Bar Charts and Histograms" type="slides,video">
-<slides source="module2/module2_08" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module2/module2_08" shot="1" start="70:5800" end="86:5510"> </slides>
 </exercise>
 
 
@@ -594,7 +594,7 @@ Tasks:
 
 
 <exercise id="13" title="Creating Subplots via Faceting" type="slides,video">
-<slides source="module2/module2_13" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module2/module2_13" shot="1" start="87:0520" end="100:4500"> </slides>
 </exercise>
 
 

@@ -14,7 +14,7 @@ id: 1
 
 
 <exercise id="1" title="What is Data Visualization?" type="slides,video">
-<slides source="module1/module1_01" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module1/module1_01" shot="1" start="0:003" end="05:31"> </slides>
 </exercise>
 
 <exercise id="2" title="True or False: Data Visualization">
@@ -63,7 +63,7 @@ Summaries are helpful but don't get us a full picture like a visualization can.
 
 
 <exercise id="3" title="How Can We Visualize Data?" type="slides,video">
-<slides source="module1/module1_03" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module1/module1_03" shot="1" start="5:4008" end="26:2200"> </slides>
 </exercise>
 
 <exercise id="4" title="Test Your Knowledge: Visualization Libraries">
@@ -210,7 +210,7 @@ Tasks:
 
 
 <exercise id="7" title="Aggregations, Lines, and Layers" type="slides,video">
-<slides source="module1/module1_07" shot="1" start="0:003" end="07:12"></slides>
+<slides source="module1/module1_07" shot="1" start="26:3200" end="40:07"></slides>
 </exercise>
 
 
