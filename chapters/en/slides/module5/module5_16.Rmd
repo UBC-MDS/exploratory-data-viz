@@ -261,6 +261,40 @@ is to use the [turbo rainbow color scheme](https://ai.googleblog.com/2019/08/tur
 [this blog post]: https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/
 [this series of posts]: https://mycarta.wordpress.com/2012/05/12/the-rainbow-is-dead-long-live-the-rainbow-part-1/
 
+---
+
+## Color is most effectively used to represent a separate dataframe column
+
+```{python}
+alt.Chart(cars).mark_circle(size=50).encode(
+    alt.X('Horsepower', title='Engine power (hp)'),
+    alt.Y('Miles_per_Gallon', title='Mileage (miles/gallon)'),
+    color=alt.Color('Weight_in_lbs', title='Weight (lbs)'))
+```
+
+Notes:
+In the previous slides we encoded the same dataframe column
+in both the `x` and `color` channel
+so that it was easy for us
+to directly compare the colors to the points position on the x-axis.
+
+However,
+this is rarely done in practice,
+where it is often more effective to encode a separate dataframe column
+as the color of the points.
+
+In this slide
+we have encoded the weight of the cars as the color.
+As we talked about in a previous module,
+it is difficult to see exactly which value a color represents,
+but we can effectively communicate roughly how heavy the cars are
+as well as clearly highlight trends in the data.
+
+In this plot the trend is that the points get gradually darker
+the further towards the bottom right corner they lie.
+This means that heavier cars
+are the ones with more powerful engines
+and poorer gas mileage.
 
 ---
 
