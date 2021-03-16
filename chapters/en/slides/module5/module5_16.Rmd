@@ -45,18 +45,18 @@ when looking at the changing colors.
 
 ## Lightness is more effective than hue to communicate changes in quantitative data
 
-```{python}
-# TODO hide code
+```{python echo=FALSE}
 import altair as alt
 from vega_datasets import data
 
 cars = data.cars()
 chart = alt.Chart(cars).mark_point(size=50, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
+    alt.X('Horsepower', title='Engine power (hp)'),
+    alt.Y('Miles_per_Gallon', title='Mileage (miles/gallon)'),
     color=alt.Color('Origin', title=None))
-((chart.encode(alt.Color('Horsepower', scale=alt.Scale(scheme='tableau10')))
-| chart.encode(alt.Color('Horsepower')))
+((chart.encode(alt.Color('Horsepower', title='Engine power (hp)',
+                         scale=alt.Scale(scheme='tableau10')))
+| chart.encode(alt.Color('Horsepower', title='Engine power (hp)')))
  .resolve_scale(color='independent'))
 ```
 
@@ -85,10 +85,10 @@ even when it is easy to see the overall trend).
 
 ## Combining lightness variation with a slight variation in hue highlights detail in the data
 
-```{python}
-# TODO hide code
-((chart.encode(alt.Color('Horsepower'))
-| chart.encode(alt.Color('Horsepower', scale=alt.Scale(scheme='viridis', reverse=True))))
+```{python echo=FALSE}
+((chart.encode(alt.Color('Horsepower', title='Engine power (hp)'))
+| chart.encode(alt.Color('Horsepower', title='Engine power (hp)',
+                         scale=alt.Scale(scheme='viridis', reverse=True))))
  .resolve_scale(color='independent'))
 ```
 
@@ -122,10 +122,11 @@ import altair as alt
 from vega_datasets import data
 
 cars = data.cars()
-alt.Chart(cars).mark_point(size=50, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
-    color=alt.Color('Horsepower', scale=alt.Scale(scheme='viridis', reverse=True)))
+alt.Chart(cars).mark_circle(size=50).encode(
+    alt.X('Horsepower', title='Engine power (hp)'),
+    alt.Y('Miles_per_Gallon', title='Mileage (miles/gallon)'),
+    color=alt.Color('Horsepower', title='Engine power (hp)',
+                    scale=alt.Scale(scheme='viridis', reverse=True)))
 ```
 
 Notes:
@@ -160,10 +161,11 @@ including the design choice behind viridis.
 ## Some color schemes are designed specifically for people with color vision deficiencies
 
 ```{python}
-alt.Chart(cars).mark_point(size=50, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
-    color=alt.Color('Horsepower', scale=alt.Scale(scheme='cividis', reverse=True)))
+alt.Chart(cars).mark_circle(size=50).encode(
+    alt.X('Horsepower', title='Engine power (hp)'),
+    alt.Y('Miles_per_Gallon', title='Mileage (miles/gallon)'),
+    color=alt.Color('Horsepower', title='Engine power (hp)',
+                    scale=alt.Scale(scheme='cividis', reverse=True)))
 ```
 
 Notes:
@@ -197,13 +199,13 @@ If you are unsure how your plot will look for someone who sees colors differentl
 ## Additional hue variation brings out further detail, but distorts the perceptual uniformity
 
 ```{python}
-alt.Chart(cars).mark_point(size=50, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
-    color=alt.Color('Horsepower', scale=alt.Scale(scheme='turbo')))
+alt.Chart(cars).mark_circle(size=50).encode(
+    alt.X('Horsepower', title='Engine power (hp)'),
+    alt.Y('Miles_per_Gallon', title='Mileage (miles/gallon)'),
+    color=alt.Color('Horsepower', title='Engine power (hp)',
+                    scale=alt.Scale(scheme='turbo')))
 ```
 
-<!-- #region -->
 Notes:
 If minor variation in the data is of uttermost importance,
 it is possible to use sequential color schemes with additional hues.
@@ -234,7 +236,6 @@ because it introduces artificial banding and highlighting of values.
 The take home message here is that there are valid use cases for modern rainbow maps,
 but you should be confident that there is no better alternative before reaching for this tool,
 and be careful when interpreting rainbow colored plots in general.
-
 
 The jet rainbow colormap should be avoided for many reasons,
 including that the sharp transitions between colors introduces visual threshold
@@ -281,22 +282,19 @@ This design is useful for values with natural cycles
 such as degrees of an angle of month of the year,
 where the end and beginning are close to each other.
 
-TODO technically this is the wrong blue, the vega one is completely stright I belive
-
 ---
 
 ## Temperature data can be represented with a sequential color scheme
-<!-- #endregion -->
 
 ```{python}
 import pandas as pd
 
 
 toronto_temp = pd.read_csv('weatherstats_toronto_daily.csv', parse_dates=['date'])[['date', 'avg_temperature']]
-alt.Chart(toronto_temp).mark_point().encode(
-    x='date',
-    y='avg_temperature',
-    color=alt.Color('avg_temperature'))
+alt.Chart(toronto_temp).mark_circle(size=50).encode(
+    alt.X('date', title=None),
+    alt.Y('avg_temperature', title='Average temperature (°C)'),
+    color=alt.Color('avg_temperature', title='Average temperature (°C)'))
 ```
 
 Notes:
@@ -319,10 +317,12 @@ and when it was positive.
 ## A diverging colorscheme effectively highlights values at the extreme temperatures
 
 ```{python}
-alt.Chart(toronto_temp).mark_point().encode(
-    x='date',
-    y='avg_temperature',
-    color=alt.Color('avg_temperature', scale=alt.Scale(scheme='blueorange', domainMid=0)))
+alt.Chart(toronto_temp).mark_circle(size=50).encode(
+    alt.X('date', title=None),
+    alt.Y('avg_temperature', title='Average temperature (°C)'),
+    color=alt.Color('avg_temperature',
+                    title='Average temperature (°C)',
+                    scale=alt.Scale(scheme='blueorange', domainMid=0)))
 ```
 
 Notes:
@@ -350,10 +350,12 @@ for people with the most common types of color vision deficiencies.
 ## An explicit domain can be defined to adjust colors at the extremes
 
 ```{python}
-alt.Chart(toronto_temp).mark_point().encode(
-    x='date',
-    y='avg_temperature',
-    color=alt.Color('avg_temperature', scale=alt.Scale(scheme='blueorange', domain=[-30, 30])))
+alt.Chart(toronto_temp).mark_circle(size=50).encode(
+    alt.X('date', title=None),
+    alt.Y('avg_temperature', title='Average temperature (°C)'),
+    color=alt.Color('avg_temperature',
+                    title='Average temperature (°C)',
+                    scale=alt.Scale(scheme='blueorange', domain=[-30, 30])))
 ```
 
 Notes:
