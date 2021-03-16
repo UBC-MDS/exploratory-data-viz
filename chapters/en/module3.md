@@ -13,7 +13,7 @@ id: 3
 </exercise>
 
 <exercise id="1" title="How To Visualize Data From a Single Column" type="slides,video">
-<slides source="module3/module3_01" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module3/module3_01" shot="1" start="100:5401" end="109:1017"> </slides>
 </exercise>
 
 
@@ -288,7 +288,7 @@ Why don’t you compare the bars on a per colour basis?
 
 
 <exercise id="6" title="Visulize Distributions with Density Plots" type="slides,video">
-<slides source="module3/module3_06" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module3/module3_06" shot="1" start="109:1900" end="120:5922"> </slides>
 </exercise>
 
 
@@ -538,7 +538,7 @@ Dream island inhabits penguins of only the Chinstrap species and this body mass 
 </exercise>
 
 <exercise id="10" title="Comparing Multiple Distributions" type="slides,video">
-<slides source="module3/module3_10" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module3/module3_10" shot="1" start="121:0900" end="135:1904"> </slides>
 </exercise>
 
 
