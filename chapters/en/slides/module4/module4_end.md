@@ -15,7 +15,7 @@ Notes:
 In this module students will learn how to
 
 - Create heatmaps to visualize 2D distributions
-- Visualize correlations and counts of categorical variables.
+- Visualize correlations and counts of categorical dataframe columns.
 - Use repeated plot grids to investigate multiple data frame columns in the same plot.
 
 Notes:
