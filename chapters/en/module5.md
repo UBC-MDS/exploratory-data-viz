@@ -787,14 +787,14 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-We are about to talk our typically black and white [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) and brighten these birds up a bit!  Using what we learned in the last 2 sections, let's identify if there are any relationships between the flipper and culmen length and the different species of Antarctic penguins. 
+We are about to talk our typically black and white [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) and brighten these birds up a bit!  Using what we learned in the last 2 sections, let's see if knowing flipper and body mass length can help us identify the species of penguin. 
 
 <codeblock id="penguins">
 
 </codeblock>
 
 
-Let's plot the `culmen_length_mm` and `flipper_length_mm` but this time, let's add a colour and shape channel to the species and explore if there are appears to be anything telling. 
+Let's plot the `body_mass_g` and `flipper_length_mm` but this time, let's add a colour and shape channel to the species and explore if there are appears to be anything telling. 
 
 Tasks: 
 
@@ -802,7 +802,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 
 
 - In a plot named `colour_plot`, use the data source `penguins_df` to make a scatter plot (`mark_point`) with points that are size 10.
-- Map the flipper length on the x-axis and the culmen length on the y-axis. 
+- Map the flipper length on the x-axis and the body mass on the y-axis. 
 - Map the penguin species to both a colour and a shape channel.
 - Select a [desired colour scheme](https://vega.github.io/vega/docs/schemes/), and assign it to the colour channel. 
 - In this plot, it might be a good idea to restrict the axis ranges. Select an appropriate domain for both the x and y-axis. 
@@ -811,8 +811,8 @@ Fill in the blanks in the code below so that the following gets accomplished:
 <codeblock id="05_15">
 
 - Are you using `mark_point(size=10)`?
-- Are you setting `alt.X('flipper_length_mm', scale=alt.Scale(domain=[140, 240]), title="Flipper length (mm)")`?
-- Are you setting `alt.X(''culmen_length_mm', scale=alt.Scale(domain=[25, 65]), title='Culmen length (mm)')`?
+- Are you setting `alt.X('flipper_length_mm', scale=alt.Scale(domain=[160, 240]), title="Flipper length (mm)")`?
+- Are you setting `alt.X(''body_mass_g', scale=alt.Scale(domain=[2500, 6500]), title='Mass (grams)')`?
 - In the  plot, are you coding ` alt.Color('species', title='Penguin species', scale=alt.Scale(scheme='desired-set-name'))`?
 - Are you setting `alt.Shape('species')`?
 - Are you setting a title in `properties()`?
@@ -989,7 +989,6 @@ Fill in the blanks in the code below so that the following gets accomplished:
 - Map the date on the x-axis and the total rainfall levels on the y-axis. 
 - Map the mean temperature to a colour channel and select an appropriate [colour scheme](https://vega.github.io/vega/docs/schemes/). Is a diverging or sequential scheme more appropriate?
 - Make sure you are giving the channels all proper labels and the plot a title. 
-- In a plot named `line_plot`, make a line plot mapping the same variables but specify a line size of 1 and a grey colour. 
 
 <codeblock id="05_19">
 
@@ -998,7 +997,6 @@ Fill in the blanks in the code below so that the following gets accomplished:
 - Are you setting `alt.Y('total_rain_mm',title='rainfall total for the month (mm)')`?
 - In the  plot, are you coding `alt.Color('mean_temp', title=' Mean Temperature', scale=alt.Scale(scheme='blueorange'))`?
 - Are you setting a title in `properties()`?
-- In `line_plot` are you specifying `mark_line(size=1, color='grey')`?
 
 </codeblock>
 

@@ -14,9 +14,5 @@ temp_plot = alt.Chart(temps_df).mark_circle(size=50).encode(
         scale=alt.Scale(scheme='blueorange'))
     ).properties(title='Hotter months tend to have higher levels of rainfall')
 
-line_plot = alt.Chart(temps_df).mark_line(size=1, color='grey').encode(
-    alt.X('date'),
-    alt.Y('total_rain_mm'))
-
-temp_plot + line_plot
+temp_plot
 
