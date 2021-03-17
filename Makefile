@@ -21,19 +21,19 @@ m7 : $(M7)
 
 chapters/en/slides/module1/%.md : chapters/en/slides/module1/%.Rmd
 	@echo
-	@rm -rf static/module4/charts/$$(echo $@ | grep -oP "(?<=/module[0-9]_)[0-9]{2}(?=\.md)")/
+	@rm -rf static/module1/charts/$$(echo $@ | grep -oP "(?<=/module[0-9]_)[0-9]{2}(?=\.md)")/
 	@echo "Removed previous chart files. Knitting and creating new charts..."
 	Rscript format_slides.R --input=$<
 
 chapters/en/slides/module2/%.md : chapters/en/slides/module2/%.Rmd
 	@echo
-	@rm -rf static/module4/charts/$$(echo $@ | grep -oP "(?<=/module[0-9]_)[0-9]{2}(?=\.md)")/
+	@rm -rf static/module2/charts/$$(echo $@ | grep -oP "(?<=/module[0-9]_)[0-9]{2}(?=\.md)")/
 	@echo "Removed previous chart files. Knitting and creating new charts..."
 	Rscript format_slides.R --input=$<
 
 chapters/en/slides/module3/%.md : chapters/en/slides/module3/%.Rmd
 	@echo
-	@rm -rf static/module4/charts/$$(echo $@ | grep -oP "(?<=/module[0-9]_)[0-9]{2}(?=\.md)")/
+	@rm -rf static/module3/charts/$$(echo $@ | grep -oP "(?<=/module[0-9]_)[0-9]{2}(?=\.md)")/
 	@echo "Removed previous chart files. Knitting and creating new charts..."
 	Rscript format_slides.R --input=$<
 
@@ -45,18 +45,18 @@ chapters/en/slides/module4/%.md : chapters/en/slides/module4/%.Rmd
 
 chapters/en/slides/module5/%.md : chapters/en/slides/module5/%.Rmd
 	@echo
-	@rm -rf static/module4/charts/$$(echo $@ | grep -oP "(?<=/module[0-9]_)[0-9]{2}(?=\.md)")/
+	@rm -rf static/module5/charts/$$(echo $@ | grep -oP "(?<=/module[0-9]_)[0-9]{2}(?=\.md)")/
 	@echo "Removed previous chart files. Knitting and creating new charts..."
 	Rscript format_slides.R --input=$<
 
 chapters/en/slides/module6/%.md : chapters/en/slides/module6/%.Rmd
 	@echo
-	@rm -rf static/module4/charts/$$(echo $@ | grep -oP "(?<=/module[0-9]_)[0-9]{2}(?=\.md)")/
+	@rm -rf static/module6/charts/$$(echo $@ | grep -oP "(?<=/module[0-9]_)[0-9]{2}(?=\.md)")/
 	@echo "Removed previous chart files. Knitting and creating new charts..."
 	Rscript format_slides.R --input=$<
 
 chapters/en/slides/module7/%.md : chapters/en/slides/module7/%.Rmd
 	@echo
-	@rm -rf static/module4/charts/$$(echo $@ | grep -oP "(?<=/module[0-9]_)[0-9]{2}(?=\.md)")/
+	@rm -rf static/module7/charts/$$(echo $@ | grep -oP "(?<=/module[0-9]_)[0-9]{2}(?=\.md)")/
 	@echo "Removed previous chart files. Knitting and creating new charts..."
 	Rscript format_slides.R --input=$<
