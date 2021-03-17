@@ -208,7 +208,7 @@ before presenting the figure.
 
 ---
 
-## Axis titles should be capitalized proper words
+## Axis titles should be capitalized regular words rather than dataframe column names
 
 ```{python}
 alt.Chart(stocks, title=stock_title).mark_line().encode(
@@ -225,12 +225,13 @@ and it is often clear to you what titles mean
 as long as you have given your dataframe reasonable column names.
 
 In communication however,
-your plots need to be interpretable by other people,
+your plots need to be interpreted by other people,
 often on their own without your explanation.
 Setting descriptive titles adds significantly to this interpretability.
 
-Axis titles should be proper words that are descriptive, capitalized, and contain spaces instead of underscores,
-so cryptic lower case column names with underscores
+Axis titles should be regular words that are
+descriptive, capitalized, and contain spaces instead of underscores.
+Cryptic lower case column names with underscores
 are not at all effective for communication figures
 and look unprofessional.
 
@@ -259,6 +260,7 @@ Notes:
 For axis titles that encode a temporal variable
 we rarely need a title
 as it is clear that the x-axis represents time.
+Here we remove the title text by setting the parameter to `None`.
 
 Similarly,
 axis and legend titles that denote a categorical variable
@@ -277,7 +279,7 @@ texts = alt.Chart(stock_max_date).mark_text(align='left', dx=2).encode(
     x='date',
     y='price',
     text='symbol',
-    color='symbol')
+    color=alt.Color('symbol', legend=None))
 
 lines + texts
 ```
@@ -295,6 +297,10 @@ We use `align` to attach the left part of the label to the data point at the end
 and then `dx` (delta x) to add a little whitespace
 between the label and the end of the line.
 
+To show both the lines and text labels,
+we layer the chart `lines` that we created in the last slide
+with the chart `texts` that we create here. 
+
 ---
 
 ## To solve overlapping text labels we have to manually specify their position
@@ -306,7 +312,7 @@ texts = alt.Chart(stock_max_date).mark_text(align='left', dx=2).encode(
     x='date',
     y='price',
     text='symbol',
-    color='symbol')
+    color=alt.Color('symbol', legend=None))
 
 lines + texts
 ```
@@ -314,6 +320,11 @@ lines + texts
 Notes:
 There is no way to automatically separate the labels in Altair,
 so we have to manually specify new y-axis values for the text of the overlapping labels.
+
+Here we modify the dataframme we created in the last slide
+by setting the value for the IBM text label to 140
+and the value for the AMZN text label to 110
+so that they are no longer overlapping.
 
 ---
 
@@ -338,8 +349,6 @@ but because we overwrote the default formatting of the axis,
 it changed the labels to scientific notation
 instead of standard international units.
 
-TODO I *think* that technically what happens here is that we are overwriting the default in vega/vegalite and falling back to the default in D3, so I am trying to explain that without saying any of those things =)
-
 ---
 
 ## Axis formatting labels can be combined
@@ -352,6 +361,8 @@ lines = alt.Chart(stocks, title=stock_title).mark_line().encode(
 
 lines + texts
 ```
+
+[All Altair's label format strings can be found here](https://github.com/d3/d3-format#locale_format).
 
 Notes:
 To revert back to displaying the full number instead of using scentific formatting,
@@ -373,7 +384,7 @@ Other useful format strings include `%` for including a percentage sign,
 `d` to force integer format,
 `~` which removes trailing zeros (e.g. 1.0 becomes 1),
 and `,` which adds a comma as the thousands separator.
-[All labels format strings can be found here](https://github.com/d3/d3-format#locale_format).
+[All label format strings can be found here](https://github.com/d3/d3-format#locale_format).
 
 ---
 
@@ -395,7 +406,9 @@ in order to achieve a specific effect,
 such as a more clean looking plot.
 
 Here we reduce the number of ticks along the x-axis
-to only show three of the years.
+to only show three of the years,
+by setting `tickCount=3` in `alt.Axis()`.
+
 Note that Altair will round the number of ticks to a number that works well with your data,
 so you might not always get the exact number you ask for
 (e.g. it wouldn't make much sense to have 4 ticks here
@@ -423,10 +436,11 @@ There are still situations where we might want to remove them.
 
 In our plot on the last slide,
 we might not like the appearance of the single gridline in the middle
-and then reall close to the right axis,
-so we can turn them off with `grid=False`.
+and the one really close to the right axis,
+so we can turn off the vertical gridlines by passing `grid=False`
+to the `axis` parameter of `alt.X`.
 
-To remove the grey box outlining the entire figure,
+To remove the gray box outlining the entire figure,
 we can set the `strokeWidth` of the layered chart.
 
 ---
@@ -454,8 +468,11 @@ but it is possible to zoom in if really needed.
 
 If you are making a figure for print,
 it is recommended to increase the font sizes
-to make sure that your figure is readable,
-especially if you are presenting it in a poster.
+to make sure that your figure is readable
+for the context you are presenting it in.
+
+It is advisable to err on the side of larger rather than smaller,
+for those members of the audience that have a hard time discerning small text.
 
 In this figure,
 you can see several examples of how to set fontsizes for titles and labels,
