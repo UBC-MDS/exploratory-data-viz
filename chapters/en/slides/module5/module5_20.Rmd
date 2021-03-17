@@ -28,16 +28,10 @@ and highlight important features.
 ## Understanding the periodic variations in the Wikipedia donations
 
 ```{python}
-# TODO save wrangled data?
 import pandas as pd
 import altair as alt
-from vega_datasets import data
 
-donations = (
-    pd.read_csv("https://frdata.wikimedia.org/donationdata-vs-day.csv", parse_dates=['date'])
-    .query('2020 < date < 2021')
-    .assign(week_day=lambda df: df['date'].dt.day_name().str[:3]))
-
+donations = pd.read_csv('data/donations.csv', parse_dates=['date'])
 alt.Chart(donations, title='Wikipedia donations peak during Christmas').mark_line().encode(
     alt.X('date', title=None),
     alt.Y('sum', axis=alt.Axis(format='$s'), title='Amount donated per day'))
@@ -55,7 +49,6 @@ such as weekday or day of the month.
 
 ```{python}
 from calendar import day_abbr
-
 
 alt.Chart(donations).mark_bar().encode(
     alt.Y('week_day', sort=list(day_abbr), title=None),
@@ -273,6 +266,8 @@ alt.themes.enable('dark');
  .configure_title(subtitleColor='white'))
 ```
 
+[View samples of all themes here.](https://vega.github.io/vega-themes/)
+
 Notes:
 To style multiple visual components of our charts in the same command,
 we can use the built-in themes in Altair.
@@ -290,8 +285,8 @@ but here we use `configure_title` instead.
 The `configure_*` chart methods are useful when 
 we want to make a modification to an already existing chart
 without copying and pasting all the code,
-but in general it is preferred to change these parameters direclty in the main chart code instead
-([you can read this section of the docs to find out more](https://altair-viz.github.io/user_guide/customization.html#user-guide-customization)].
+but in general it is preferred to change these parameters directly in the main chart code instead
+[you can read this section of the docs to find out more](https://altair-viz.github.io/user_guide/customization.html#user-guide-customization).
 
 All the available themes can be shown with `alt.themes.names()`,
 and currently they are

@@ -82,22 +82,26 @@ to decide whether the colors we use should be muted/desaturated or vivid/saturat
 
 ## Hues are used to distinguish categorical values
 
-```{python}
-# This code cell should be hidden but echo=False does not work with the knitr output hook
+```{python echo=FALSE}
 import altair as alt
 from vega_datasets import data
 
-
 cars = data.cars()
-chart = alt.Chart(cars).mark_point(size=70, filled=True).encode(
+chart = (alt.Chart(cars).mark_point(size=70, filled=True).encode(
     alt.X('Horsepower', title='Engine power (hp)'),
     alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles/gallon)'),
     color=alt.Color('Origin', title=None))
+    .properties(width=380))
 
-(chart
- | chart.encode(
-    alt.Color('Origin', scale=alt.Scale(scheme='blues'), title=None))).resolve_scale(color='independent')
+chart_to_save = ((
+    chart
+    | chart.encode(
+    alt.Color('Origin', scale=alt.Scale(scheme='blues'), title=None)))
+    .resolve_scale(color='independent'))
+chart_to_save.save('../../../../static/module5/charts/categorical-hues.html')
 ```
+
+<iframe src="/module5/charts/categorical-hues.html" width="100%" height="420px" style="border:none;"></iframe>
 
 Notes:
 Hue is useful to distinguish between categories,
@@ -190,8 +194,11 @@ since the color is already used for the categorical groups,
 it can make your visualization more effective
 since it makes the points more distinct from each other.
 
-For line plots we could achieve a similar effect via the `strokeDash` encoding
-instead of `shape`,
+Note that `shape=` is only available to use with `mark_point`,
+not `mark_circle`, `mark_square`, etc.
+
+For line plots we could achieve a similar effect
+by using the `strokeDash` encoding instead of `shape`,
 which together with direct labeling from the previous slide deck
 can facilitate interpretation of these plots.
 
@@ -293,6 +300,7 @@ we could also have used the tooltip here as we saw in a previous module.
 ## Redundant coding of bar charts can be disorienting
 
 ```{python}
+# Scroll down on the chart to see all the bars
 cars['Brand'] = cars['Name'].str.split().str[0]  # Extract brand from the name column
 chart = alt.Chart(cars, width=200, height=450).mark_bar().encode(
     alt.Y('Brand', title=None, sort='x'),

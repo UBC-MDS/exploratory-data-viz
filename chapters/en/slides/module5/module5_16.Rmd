@@ -25,7 +25,7 @@ This slide deck describes how to choose color to accurately represent numerical 
 
 ## Repetition of hue, lightness, and saturation
 
-<center><img src="/module5/hsl-questions.png" width="60%"></img></center>
+<center><img src="/module5/hsl-questions.png" width="70%"></img></center>
 
 Notes:
 In the last slide deck we varied hues to represent categorical values,
@@ -50,15 +50,20 @@ import altair as alt
 from vega_datasets import data
 
 cars = data.cars()
-chart = alt.Chart(cars).mark_point(size=50, filled=True).encode(
+chart = (alt.Chart(cars).mark_point(size=50, filled=True).encode(
     alt.X('Horsepower', title='Engine power (hp)'),
     alt.Y('Miles_per_Gallon', title='Mileage (miles/gallon)'),
     color=alt.Color('Origin', title=None))
-((chart.encode(alt.Color('Horsepower', title='Engine power (hp)',
+    .properties(width=380))
+chart_to_save = ((chart.encode(alt.Color('Horsepower', title='Engine power (hp)',
                          scale=alt.Scale(scheme='tableau10')))
 | chart.encode(alt.Color('Horsepower', title='Engine power (hp)')))
  .resolve_scale(color='independent'))
+
+chart_to_save.save('../../../../static/module5/charts/lightness-vs-hues.html')
 ```
+
+<iframe src="/module5/charts/lightness-vs-hues.html" width="100%" height="420px" style="border:none;"></iframe>
 
 Notes:
 In the plots on this slide,
@@ -86,11 +91,15 @@ even when it is easy to see the overall trend).
 ## Combining lightness variation with a slight variation in hue highlights detail in the data
 
 ```{python echo=FALSE}
-((chart.encode(alt.Color('Horsepower', title='Engine power (hp)'))
+chart_to_save = ((chart.encode(alt.Color('Horsepower', title='Engine power (hp)'))
 | chart.encode(alt.Color('Horsepower', title='Engine power (hp)',
                          scale=alt.Scale(scheme='viridis', reverse=True))))
  .resolve_scale(color='independent'))
+
+chart_to_save.save('../../../../static/module5/charts/lightness-and-hues.html')
 ```
+
+<iframe src="/module5/charts/lightness-and-hues.html" width="100%" height="420px" style="border:none;"></iframe>
 
 Notes:
 The leftmost plot here uses the same default color scheme as in the previous slide.
@@ -327,7 +336,6 @@ where the end and beginning are close to each other.
 
 ```{python}
 import pandas as pd
-
 
 toronto_temp = pd.read_csv('weatherstats_toronto_daily.csv', parse_dates=['date'])[['date', 'avg_temperature']]
 alt.Chart(toronto_temp).mark_circle(size=50).encode(
