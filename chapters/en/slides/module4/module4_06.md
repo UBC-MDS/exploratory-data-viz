@@ -87,9 +87,9 @@ Notes:
 What if we wanted to ask a more complex question that involves
 visualizing the combinatorial counts of two categorical columns?
 
-Our data contains the MPAA rating for each movie, which is
+Our data contains the MPAA rating for each movie, which is a
 classification given by the Motion Picture Association indicating what
-age groups a movie is suitable for:
+age groups, a movie is suitable for:
 
 -   G – General Audiences
 -   PG – Parental Guidance Suggested
@@ -102,9 +102,9 @@ between movie genres?
 For example, we might already have a hypothesis that there won’t be any
 horror movies that are appropriate for children.
 
-To find out, we could color the bars according to the MPAA rating as in
+To find out, we could colour the bars according to the MPAA rating as in
 this slide. However, one aspect of our chart is not very intuitive: the
-color legend and the stacked bar segments are not sorted in the same
+colour legend and the stacked bar segments are not sorted in the same
 order.
 
 ---
@@ -137,8 +137,8 @@ differences in the **proportions** of MPAA ratings **between** movie
 genres?
 
 While we can roughly see the relative proportions within a single bar,
-it is quite hard to compare the colored segments between bars as
-proportions since the bars are of different length.
+it is quite hard to compare the coloured segments between bars as
+proportions since the bars are of different lengths.
 
 It is also impossible to see the proportions in the genres with fewer
 movies.
@@ -164,12 +164,12 @@ normalize/rescale each bar to span the entire length of the x-axis and
 label it as a proportion.
 
 The plot looks quite unordered, because ‘x’ is not a meaningful way to
-sort the bars when they are all the same length. Instead we would like
-to sort them by the length of one of the colored segments.
+sort the bars when they are all the same length. Instead, we would like
+to sort them by the length of one of the coloured segments.
 
 ---
 
-## Sorting by the length of one of the colored segments make the chart easier to rea
+## Sorting by the length of one of the coloured segments make the chart easier to read
 
 ``` python
 sort_order = ['Adventure', 'Musical', 'Comedy', 'Romantic Comedy', 'Action',
@@ -191,13 +191,13 @@ That’s much better! Sorting the chart in an intuitive order has once
 again shown to be crucial for making our plot easier to interpret.
 
 In a normalized stacked bar chart it makes sense to sort by either the
-first or the last colored segment. Since not all genres have movies
+first or the last coloured segment. Since not all genres have movies
 rated `'G'`, we chose to set the order based on `'R'` instead.
 
 If you are more interested in one genre than others, you could also
 choose to sort by that genre.
 
-Now we can directly compare the the length of individual bar segments
+Now we can directly compare the length of individual bar segments
 between the genres. We see that there certainly are differences in the
 proportions of MPAA ratings between movies in different genres.
 
@@ -206,7 +206,7 @@ differences are, and we can see that all black comedies are rated R,
 while almost no adventure movies receive this rating.
 
 It is a little bit harder to compare the other rating because the
-colored segments do not share the same baseline. We can still see that
+coloured segments do not share the same baseline. We can still see that
 concerts and performance movies has the highest proportions of movies
 that are kids-friendly at 50%, while musicals, documentaries, and action
 movies have around 20% kids-friendly movies.
@@ -244,9 +244,9 @@ alt.Chart(movies_extended[movies_extended['MPAA Rating'].isin(['G', 'PG'])]).mar
 <iframe src="/module4/charts/06/unnamed-chunk-7.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: As with all charts, there are shortcoming to normalized stacked
+Notes: As with all charts, there are shortcomings to normalized stacked
 bar charts as well. We saw in the last slide that it was a bit harder to
-compare the colored segments that did not share a baseline versus the
+compare the coloured segments that did not share a baseline versus the
 segments at the ends where the baseline is the same.
 
 This means that normalized stacked bar charts are ideal when there are
@@ -254,12 +254,12 @@ only two categories, since both segments will be easy to compare between
 categories.
 
 We can see an example in this slide where we filtered the dataset to
-contain only movies rated either `'G'` or `'PG'`. It is easy to make
+contain only movies rated either `'G'` or `'PG'`. It is easy to make a
 comparison for both the blue and the orange segments.
 
-Stacked bar charts also work fine for 3-4 categories, but beyond that
-they are usually ineffective. Even for 3-4 categories it is often
-preferred to show the bars side by side instead of stacked.
+Stacked bar charts also work fine for 3-4 categories, but beyond that,
+they are usually ineffective. Even for 3-4 categories, it is often
+preferred to show the bars side-by-side instead of stacked.
 
 ---
 
@@ -282,20 +282,20 @@ Notes: It is not (yet) possible to pass a different value to `stack`,
 which would put the bars next to each other. Instead, we could use
 faceting as in this slide.
 
-Here, we have also removed some of the axis title to make the figure
+Here, we have also removed some of the axis titles to make the figure
 more compact and less crowded with text. You will learn more about
 customizing elements such as titles in the next module.
 
 By resolving the x-scale to be independent between the plots, the bar
-height is not relative the max in each facet. This makes them easier to
-compare **as proportions** both within and between facets while still
+height is not relative to the max in each facet. This makes them easier
+to compare **as proportions** both within and between facets while still
 retaining an indication of the count on the x-axis.
 
 If we wanted to compare the absolute counts between facets, we would
-leave the axis axis at its default value: “shared”.
+leave the axis at its default value: “shared”.
 
 This type of visualization is effective when we want to accurately
-compare the heights of bars **within** a genre. For example to answer
+compare the heights of bars **within** a genre. For example, to answer
 the question: “Which are the most common MPAA ratings for each genre?”.
 
 ---
@@ -319,21 +319,21 @@ Notes: If we instead wanted to answer the question: “Which are the most
 common genres for each MPAA Rating?”, we would switch the faceting and y
 columns.
 
-Here, we kept the color column as the MPAA Rating so that it is
+Here, we kept the colour column as the MPAA Rating so that it is
 consistent with the previous figures, and because with this many
-categories, it would look quite messy if we colored by the Major Genre
+categories, it would look quite messy if we coloured by the Major Genre
 instead.
 
-We can see that the most common G-rated movies are adventure films, and
+We can see that the most common G-rated movies are adventure films and
 that most PG-13 rated movies are Comedies, Dramas and action movies. It
-is important to remember that genres have more movies in total, so we
+is important to remember that genres have more movies in total, so, we
 would expect them to show up highly in all the facets. Whether this is
 desired or not depends on the question we are asking, but it does make
 sense here.
 
 ---
 
-## Heatmaps are effective for visualizing counts of two dimensional categorical data
+## Heatmaps are effective for visualizing counts of two-dimensional categorical data
 
 ``` python
 alt.Chart(movies_extended).mark_rect().encode(
@@ -349,33 +349,33 @@ Notes:
 
 If we want to get an overview of the information from both the faceted
 plots in the previous two slides, we could create a heatmap. In this
-heatmap the color represents the combinatorial counts of two categorical
-columns, such as how many movies are both rated G and in the comedy
-genre.
+heatmap the colour represents the combinatorial counts of two
+categorical columns, such as how many movies are both rated G and in the
+comedy genre.
 
 Comparing squares vertically in this heatmap is similar to the first
 faceted plot we made and comparing them horizontally is similar to the
 faceted visualization in the last slide.
 
 In other words, if we want to compare which genre is most common for a
-certain rating, we compare the colors *column-wise* in the heatmap. If
+certain rating, we compare the colours *column-wise* in the heatmap. If
 we instead are interested in the most common rating assigned to a movie
 we compare the columns *row-wise*. We can quickly see that most dramas
 are rated PG-13 or R and most horror movies are rated R.
 
-Sorting on color/count puts the genres with many observations close
+Sorting on colour/count puts the genres with many observations close
 together, similar to how we sorted on `'x'` and `'y'` in previous
 modules. We could sort the x-axis also, but since it has a natural order
 to it, we have decided to keep it as is here.
 
 This visualization is effective for quickly communicating the main
 takeaways from the two questions and giving us an overview of the data,
-but it is harder to tell that exact count for each color so if that is
+but it is harder to tell that exact count for each colour so, if that is
 of great importance a bar chart is more suitable.
 
 ---
 
-## Using both the color and marker size to indicate the count creates a more effective visualization
+## Using both the colour and marker size to indicate the count creates a more effective visualization
 
 ``` python
 alt.Chart(movies_extended).mark_circle().encode(
@@ -389,18 +389,18 @@ alt.Chart(movies_extended).mark_circle().encode(
 </iframe>
 
 Notes: One potential concern with heatmaps is that they rely solely on
-color to communicate the value of interest.
+colour to communicate the value of interest.
 
-We cannot perceive small variations in color as accurately as we can for
-other visual channels, such as position of size.
+We cannot perceive small variations in colour as accurately as we can
+for other visual channels, such as the position or size.
 
-Color can also be problematic for people with color vision deficiencies,
-which is almost 10% of the population, which we will talk more about in
-a later module.
+Colour can also be problematic for people with colour vision
+deficiencies, which is almost 10% of the population, which we will talk
+more about in a later module.
 
 To ameliorate these issues, we can use the same marks as when creating
 scatter plots, such as `mark_circle` or `mark_square`, which allows us
-to change the size of each mark in addition to its color.
+to change the size of each mark in addition to its colour.
 
 This visualization is highly effective in answering both of the
 questions we posed initially, and if we wanted to, we could now facet by
