@@ -4,7 +4,7 @@ import pandas as pd
 
 pokemon_df = pd.read_csv('data/pokemon.csv')
 
-pokemon_cicleplot = alt.____(____).____().____(
+pokemon_circleplot = alt.____(____).____().____(
     alt.X(____, ____),
     alt.Y(____, ____),
     alt.____(____, title='Number of Pokemon'),
