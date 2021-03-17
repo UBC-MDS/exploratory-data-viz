@@ -2,7 +2,7 @@
 type: slides
 ---
 
-# Effective use of color for quantitative data
+# Effective use of colour for quantitative data
 
 Notes: This slide deck describes how to choose color to accurately
 represent numerical data.
@@ -131,7 +131,7 @@ color that we will be discussing in this slide deck.
 
 ---
 
-## Some color schemes are designed specifically for people with color vision deficiencies
+## Some colour schemes are designed specifically for people with colour vision deficiencies
 
 ``` python
 alt.Chart(cars).mark_circle(size=50).encode(
@@ -234,7 +234,7 @@ scheme](https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.ht
 
 ---
 
-## Color is most effectively used to represent a separate dataframe column
+## Colour is most effectively used to represent a separate dataframe column
 
 ``` python
 alt.Chart(cars).mark_circle(size=50).encode(
@@ -266,7 +266,7 @@ mileage.
 
 ---
 
-## Diverging color schemes are suitable for plots with a natural midpoint.
+## Diverging colour schemes are suitable for plots with a natural midpoint
 
 <center>
 <img src=/module5/color-schemes-lightness.png width=70%></img>
@@ -289,7 +289,7 @@ year, where the end and beginning are close to each other.
 
 ---
 
-## Temperature data can be represented with a sequential color scheme
+## Temperature data can be represented with a sequential colour scheme
 
 ``` python
 import pandas as pd
@@ -318,7 +318,7 @@ negative and when it was positive.
 
 ---
 
-## A diverging colorscheme effectively highlights values at the extreme temperatures
+## A diverging colourscheme effectively highlights values at the extreme temperatures
 
 ``` python
 alt.Chart(toronto_temp).mark_circle(size=50).encode(
@@ -351,7 +351,7 @@ with the most common types of color vision deficiencies.
 
 ---
 
-## An explicit domain can be defined to adjust colors at the extremes
+## An explicit domain can be defined to adjust colours at the extremes
 
 ``` python
 alt.Chart(toronto_temp).mark_circle(size=50).encode(

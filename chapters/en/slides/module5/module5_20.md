@@ -2,7 +2,7 @@
 type: slides
 ---
 
-# Annotating with text and color
+# Annotating with text and colour
 
 Notes: In this module we will be learning how to use color and text to
 annotate our visualizations and highlight important features.
@@ -57,7 +57,7 @@ highlight it.
 
 ---
 
-## Color can be used to highlight specific features of a visualization
+## Colour can be used to highlight specific features of a visualization
 
 ``` python
 top_day = donations.groupby('week_day')['sum'].sum().idxmax()
