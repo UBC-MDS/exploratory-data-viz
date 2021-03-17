@@ -83,17 +83,19 @@ Notes:
 Zooming in on an axis is useful
 when we want to highlight a certain region.
 The easiest way to achieve this
-is usually to filter the data we pass to `Chart` as in this example.
+is often to filter the data with pandas
+before passing it `alt.Chart` as in this example.
 
 ---
 
 ## We can zoom in to highlight a region of an axes
 
 ```{python}
-title_text = 'Wikipedia donations peak during Christmas'
-alt.Chart(donations[donations['date'].between("2020", "2020-07")], title=title_text).mark_circle(clip=True).encode(
+alt.Chart(donations_2020_until_july, title=title_text).mark_circle(clip=True).encode(
     alt.X('date', title=None),
-    alt.Y('sum', axis=alt.Axis(format='$s'), title='Amount donated per day', scale=alt.Scale(domain=[0, 100_000])))
+    alt.Y('sum', axis=alt.Axis(format='$s'),
+          title='Amount donated per day',
+          scale=alt.Scale(domain=[0, 100_000])))
 ```
 
 Notes:
@@ -102,6 +104,16 @@ so it is good to know how to change the axis range directly in Altair.
 For this,
 we could modify the domain of the axis' scale.
 
+When we modify the scale,
+we need to set `clip=True` inside the mark.
+Without it,
+we would still see the circles extending beyond the range of the chart.
+
+This also serves as a reminder
+to think twice about limiting the displayed points
+because it can skew the perception of the data
+as we saw with bar chart in the previous slide deck.
+
 When we used `alt.Axis` previously,
 the changes we made were cosmetic,
 such as tick numbers,
@@ -109,22 +121,15 @@ label formatting etc.
 
 Now that were are modifying the range of the actual displayed values,
 we need to use `alt.Scale` instead.
-It also works for colors and sizes in a legend,
-just like `alt.Axis`.
+Here we place `alt.Scale` within `alt.Y`
+to specify that we are changing the scale of the y-axis.
+It also works the same way with `alt.Color` and `alt.Size`,
+which changes the display of the these in the legend.
 
-Finally we need to set `clip=True` in the axis,
-to be explicit about that we are excluding data.
-Without it,
-we would still see the circles extending beyond the range of the chart.
-
-This ensures that we are intentional about our data exclusion,
-and it is something we should think twice about because it can skew the perception of the data.
-For example,
-as we saw in the previous slide deck,
-we should not do in to a bar chart that shows counts or proportions.
-
-After zooming in on the y-axis,
+After zooming in on the y-axis as in this slide,
 we can more clearly see the variation in the lower value data points.
+We can see that more money is often donated at the beginning of each month,
+except for the month of July.
 
 ---
 
@@ -144,8 +149,10 @@ and not create for example bar plot that are cut off
 which makes difference appear much bigger than they actually are.
 
 However,
-there are also good reasons for setting the range based on the extent of the data,
-e.g. do be able to show the variation fully.
+there are also good reasons for setting the range based on the extent of the data.
+when your data is compressed in a narrow range far from zero,
+e.g. plotting time on one axis
+and having all observations fall between 10 and 11 in the evening.
 
 In this slide we can see that showing only the days with high total donations
 only uses about half of the vertical space available in the chart.
@@ -165,6 +172,12 @@ If we wanted to use the full range,
 we could set the domain explicitly like before,
 but the shortcut `zero=False` allows us to adjust the axis
 to the min and max values of the data with less typing.
+
+We need to be careful when doing this
+since it can make small difference appear much bigger than they are.
+On the previous slide 
+the point at 4.7M was about twice as far from the x-axis as the point at 2.5M from the x-axis.
+In this slide it is about 20 times further away from the x-axis!
 
 ---
 
@@ -206,7 +219,12 @@ and zoom in on the points of interest as needed.
 We will learn more about interactive visualizations in the last module,
 this is just a sample of what is possible.
 
-How can we solve the problem of a large axis range in a static figure?
+Neat ey?
+Now let's get back to the current task at hand,
+how can we solve the problem of a large axis range in a static figure?
+As sometimes,
+we need a static figure,
+e.g. when we print images on paper or display them in a static file-type, such as a PDF.
 
 ---
 
