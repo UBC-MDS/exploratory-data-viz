@@ -12,7 +12,7 @@ represent numerical data.
 ## Repetition of hue, lightness, and saturation
 
 <center>
-<img src="/module5/hsl-questions.png" width="70%"></img>
+<img src="/module5/hsl-questions.png" width="60%"></img>
 </center>
 
 Notes: In the last slide deck we varied hues to represent categorical
