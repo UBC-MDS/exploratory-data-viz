@@ -39,8 +39,8 @@ movies_extended
 ```
 
 Notes: We’re continuing to work with the movies data set. Here we have
-done some additional preprocessing steps to to the data and saved it to
-disk beforehand so that we can load it in directly on this slide.
+done some additional preprocessing steps to the data and saved it to
+disk beforehand so that we can load it indirectly on this slide.
 
 This is largely the same dataset as before, but we filtered out some
 additional NaNs and a few categories that contained problematic values.
@@ -58,14 +58,14 @@ alt.Chart(movies_extended).mark_point().encode(
 <iframe src="/module4/charts/01/unnamed-chunk-2.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: In the last module we saw how to visualize the distribution of a
+Notes: In the last module, we saw how to visualize the distribution of a
 single numerical dataframe column. What if we instead want to compare
 the distributions of two columns with each other?
 
-A question we could answer with this type of comparison is “Are movies
-rated similarly on different online platforms?”
+A question we could answer with this type of comparison is *“Are movies
+rated similarly on different online platforms?”*
 
-In this slide we are showing the movie rating from both
+In this slide, we are showing the movie rating from both
 <https://www.imdb.com/> and <https://www.rottentomatoes.com>. These are
 both websites where people can rate movies.
 
@@ -76,14 +76,14 @@ The first thing that stands out is the overall pattern of the points
 which is resembles a diagonal line with some variation around it.
 
 When the points in a scatter plot lines up in a pattern that resembles a
-diagonal line as in this chart, it means that the there is a
-relationship between the two dataframe columns we have visualized.
+diagonal line as in this chart, it means that there is a relationship
+between the two dataframe columns we have visualized.
 
 In other words, we can clearly see that as one of the ratings goes up,
 so does the other and there are only a few exceptions to this.
 
 The relationship in this plot would be considered strong because we can
-clearly the diagonal trend that the points follow.
+see clearly the diagonal trend that the points follow.
 
 ---
 
@@ -101,17 +101,17 @@ alt.Chart(movies_extended).mark_point().encode(
 Notes: The relationship in the previous slide followed a straight line
 and we would refer to it as a “linear” relationship.
 
-However, not all relationships are linear. In this slide we can see that
-there appears to be a clear pattern between the rating and the number of
-votes a movie receives but it follows a bent curve rather than a
-straight line.
+However, not all relationships are linear. In this slide, we can see
+that there appears to be a clear pattern between the rating and the
+number of votes a movie receives but it follows a bent curve rather than
+a straight line.
 
 This still appears to be a pretty strong relationship, but it is a bit
 hard to tell because of the many points in a big chunk at the bottom.
 
 When a relationship is not following a straight line, we say that it is
 non-linear. There are many types of non-linear relationships, but we
-will not delve into them in course.
+will not delve into them in this course.
 
 ---
 
@@ -126,14 +126,14 @@ alt.Chart(movies_extended).mark_point().encode(
 <iframe src="/module4/charts/01/unnamed-chunk-4.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: If the relationship between two column was really strong, the
+Notes: If the relationship between two columns was really strong, the
 points would be very close together and there would be little variation.
 
-In this plot we have visualized the same column for both the X and Y
+In this plot, we have visualized the same column for both the X and Y
 axis, which means the relationship is perfect.
 
 We would never expect to see this strong of a relationship in real data,
-but it is good to know what are the extreme cases.
+but it is good to know what are extreme cases.
 
 On that topic, let’s see what a plot looks like when there appears to be
 no relationship between the plotted dataframe columns.
@@ -153,7 +153,7 @@ alt.Chart(movies_extended.reset_index()).mark_point().encode(
 
 Notes: Here, we have plotted the IMDB Rating against the row number in
 the dataframe (remember that when you reset the index of a dataframe a
-new column is created with the previous index / row number).
+new column is created with the previous index/row number).
 
 Unless the data had been ordered in a specific manner previously, we
 would expect there to be no relationship between these two dataframe
@@ -215,22 +215,22 @@ alt.Chart(movies_extended).mark_point().encode(
 </iframe>
 
 Notes: As we have seen, scatter plots are generally effective for
-visualizing two dimensional relationships. However, as with all plots,
+visualizing two-dimensional relationships. However, as with all plots,
 they have their shortcomings.
 
-Most notably, when the bulk of the points become concentrated to a small
+Most notably, when the bulk of the points become concentrated in a small
 region of the chart, 2D scatter plots become saturated in the same way
 as the 1D scatter and rug plots we saw in the previous module.
 
 In this slide we’re trying to answer the question: “Do high grossing
 movies tend to have a high production budget?”
 
-In the scatter plot you can see that it it is impossible to tell if
-there are more points close to 80 million or 0 on the x-axis, and
-likewise 200 million or 0 on the y-axis.
+In the scatter plot you can see that it is impossible to tell if there
+are more points close to 80 million or 0 on the x-axis, and likewise,
+200 million or 0 on the y-axis.
 
-So although we can discern a trend for the points outside the saturated
-area we do not know how they data is spread out inside the blue blob.
+So, although we can discern a trend for the points outside the saturated
+area we do not know how the data is spread out inside the blue blob.
 
 To solve this issue, we can create a two-dimensional histogram in the
 form of a heatmap.
@@ -258,7 +258,7 @@ These bins will look like a grid or mesh overlayed on the image, similar
 to the pattern of the faint grey gridlines in the previous slide.
 
 Within each rectangle of this grid, we will count the number of
-observations and represent the count value with a color.
+observations and represent the count value with a colour.
 
 The result of these operations is the heatmap shown in this slide, which
 enables us to see a level of detail we could not perceive in the scatter
@@ -266,8 +266,8 @@ plot.
 
 Here it is clear that there are many fewer movies with a production
 budget of 80 million compared to the area close to 0, and most movies
-seem to be around 10-15 million. Likewise the grossing of most movies is
-around 0-50 million, not 200 million.
+seem to be around 10-15 million. Likewise, the grossing of most movies
+is around 0-50 million, not 200 million.
 
 ---
 
@@ -291,7 +291,7 @@ in the previous slide and the advantages and disadvantages are similar
 to those between one-dimensional histograms and density plots.
 
 As with 1D density plots, the values of the density themselves are not
-helpful, but we have included them here in the colorbar as an example.
+helpful, but we have included them here in the colour bar as an example.
 
 ---
 
