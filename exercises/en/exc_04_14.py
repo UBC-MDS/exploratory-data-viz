@@ -8,7 +8,7 @@ penguins_df = pd.read_csv('data/penguins.csv')
 # Name the list cat_cols
 ____ = ____
 
-# Next repeat a histogram plot for every categorical column on the x axis
+# Next create histogram pairplots for every categorical column
 categorical_plots = alt.Chart(____).____().encode(
      alt.X(____, type=____),
      alt.Y(____, type=____),
