@@ -2,7 +2,7 @@
 type: slides
 ---
 
-# Effective use of color for categorical data
+# Effective use of colour for categorical data
 
 Notes: In this slide deck you will learn how to select colors that
 accurately represents your data and effectively communicate it to the
@@ -10,7 +10,7 @@ reader.
 
 ---
 
-## Color choices can have profound impact on the interpretation of the results
+## Colour choices can have profound impact on the interpretation of the results
 
 ![](/module5/color-importance-vessels.png)
 
@@ -25,7 +25,7 @@ for the data you are visualizing.
 
 ---
 
-## Color can be broken down into hue, lightness, and saturation
+## Colour can be broken down into hue, lightness, and saturation
 
 <center>
 <img src="/module5/hsl-cylinder.png" width="90%"></img>
@@ -48,7 +48,7 @@ parameters represent.
 
 ---
 
-## Hue, lightness, and saturation describes different properties of colors
+## Hue, lightness, and saturation describes different properties of colours
 
 <center>
 <img src="/module5/hsl-questions.png" width="60%"></img>
@@ -97,7 +97,7 @@ difficult to tell which points are which shade of blue.
 
 ---
 
-## It is often better to use established color schemes instead of making your own
+## It is often better to use established colour schemes instead of making your own
 
 <center>
 <img src=/module5/color-schemes.png></img>
@@ -126,7 +126,7 @@ here](https://vega.github.io/vega/docs/schemes/).
 
 ---
 
-## Specifying color schemes in Altair
+## Specifying colour schemes in Altair
 
 ``` python
 alt.Chart(cars).mark_point(size=70, filled=True).encode(
@@ -183,7 +183,7 @@ these plots.
 
 ---
 
-## Specifying custom colors
+## Specifying custom colours
 
 ``` python
 colors = ['coral', '#4682b4', 'rebeccapurple']
@@ -318,7 +318,7 @@ plot on the slide.
 
 ---
 
-## Use consistent coloring between subplots even when it is redundant
+## Use consistent colouring between subplots even when it is redundant
 
 ``` python
 chart = alt.Chart(cars).mark_bar().encode(
