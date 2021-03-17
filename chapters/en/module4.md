@@ -708,7 +708,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 - Make sure to give the size and colour channels independent scales. 
 
 
-<codeblock id="04_13">
+<codeblock id="04_14">
 
 - Are you using `.mark_circle()`?
 - Are you setting `alt.X(alt.repeat('column'), type='nominal')`?
