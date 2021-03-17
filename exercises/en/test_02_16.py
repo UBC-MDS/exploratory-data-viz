@@ -14,11 +14,11 @@ def test():
     assert penguin_facet.facet.column in {'species', 'species:nominal', 'species:N'}, "Make sure you are facetting by 'species' for the columns."
     assert penguin_facet.facet.row in {'island', 'island:nominal', 'island:N'}, "Make sure you are facetting by 'island' for the rows."
     assert penguin_facet.spec.mark == 'bar', "Make sure you are using the bar mark type."
-    assert (penguin_facet.spec.encoding.x.shorthand in {'body_mass_g', 'body_mass_g:quantitative', 'body_mass_g;Q'} or 
-            penguin_facet.spec.encoding.x.field in {'body_mass_g', 'body_mass_g:quantitative', 'body_mass_g;Q'}), "Make sure you are using 'body_mass_g' as the x-axis encoding."
+    assert (penguin_facet.spec.encoding.x.shorthand in {'body_mass_g', 'body_mass_g:quantitative', 'body_mass_g:Q'} or 
+            penguin_facet.spec.encoding.x.field in {'body_mass_g', 'body_mass_g:quantitative', 'body_mass_g:Q'}), "Make sure you are using 'body_mass_g' as the x-axis encoding."
     assert penguin_facet.spec.encoding.x.bin != alt.utils.schemapi.Undefined, "Make sure you are specifying the bin argument for the x-axis encoding for the histogram."
-    assert (penguin_facet.spec.encoding.y.field in {'count()', 'count():quantitative', 'count:Q'} or 
-            penguin_facet.spec.encoding.y.shorthand in {'count()', 'count():quantitative', 'count:Q'}), "Make sure you are using 'count()' as the y-axis encoding."
+    assert (penguin_facet.spec.encoding.y.field in {'count()', 'count():quantitative', 'count():Q'} or 
+            penguin_facet.spec.encoding.y.shorthand in {'count()', 'count():quantitative', 'count():Q'}), "Make sure you are using 'count()' as the y-axis encoding."
     assert type(penguin_facet.spec.title) == str and len(penguin_facet.spec.title) >= 5, "Make sure you specify a descriptive title for the penguin_bar plot."
     assert penguin_facet.spec.height == 100, "Make sure you specify the plot height of 100."
     assert penguin_facet.spec.width == 150, "Make sure you specify the plot width of 150."
