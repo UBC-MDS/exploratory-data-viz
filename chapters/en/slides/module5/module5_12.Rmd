@@ -1,6 +1,6 @@
 ---
 params:
-  dynamictitle: "module5_04"
+  dynamictitle: "module5_12"
 title: "`r params$dynamictitle`"
 output:
   md_document:
@@ -82,20 +82,26 @@ to decide whether the colors we use should be muted/desaturated or vivid/saturat
 
 ## Hues are used to distinguish categorical values
 
-```{python}
-# This code cell should be hidden but echo=False does not work with the knitr output hook
+```{python echo=FALSE}
 import altair as alt
 from vega_datasets import data
 
-
 cars = data.cars()
-chart = alt.Chart(cars).mark_point(size=50, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
+chart = (alt.Chart(cars).mark_point(size=70, filled=True).encode(
+    alt.X('Horsepower', title='Engine power (hp)'),
+    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles/gallon)'),
     color=alt.Color('Origin', title=None))
+    .properties(width=380))
 
-(chart | chart.encode(alt.Color('Origin', scale=alt.Scale(scheme='blues'), title=None))).resolve_scale(color='independent')
+chart_to_save = ((
+    chart
+    | chart.encode(
+    alt.Color('Origin', scale=alt.Scale(scheme='blues'), title=None)))
+    .resolve_scale(color='independent'))
+chart_to_save.save('../../../../static/module5/charts/categorical-hues.html')
 ```
+
+<iframe src="/module5/charts/categorical-hues.html" width="100%" height="420px" style="border:none;"></iframe>
 
 Notes:
 Hue is useful to distinguish between categories,
@@ -104,7 +110,7 @@ We can see that blue, orange, red, etc are different and don’t easily mix them
 
 The leftmost plot uses different hues
 to separate the points belonging to different categories.
-We can quickly identify that there is a tota of three distinct colors being used here
+We can quickly identify that there is a total of three distinct colors being used here
 even without looking at the legend.
 
 In the plot to the right
@@ -146,8 +152,8 @@ but is now one of the most common categorical color schemes used in data visuali
 
 ```{python}
 alt.Chart(cars).mark_point(size=70, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
+    alt.X('Horsepower', title='Engine power (hp)'),
+    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles/gallon)'),
     color=alt.Color('Origin', title=None, scale=alt.Scale(scheme='set1')))
 ```
 
@@ -155,7 +161,7 @@ Notes:
 You can change the color scheme of a plot by specifying its name as a string
 to the `scheme` parameter inside `alt.Scale`.
 
-To easier see the changes we are making to the colors,
+To more easily see the changes we are making to the colors,
 we also increase the size of all points 
 via the `size` parameter of the mark.
 
@@ -165,8 +171,8 @@ via the `size` parameter of the mark.
 
 ```{python}
 alt.Chart(cars).mark_point(size=70, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
+    alt.X('Horsepower', title='Engine power (hp)'),
+    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles/gallon)'),
     color=alt.Color('Origin', title=None, scale=alt.Scale(scheme='set1')),
     shape='Origin')
 ```
@@ -175,9 +181,9 @@ Notes:
 Although many of the color schemes in Altair 
 are designed according to the guidelines for effective color uses,
 they can sometimes be difficult to interpret 
-for people with color vision deficiences.
+for people with color vision deficiencies.
 
-Esppecially color schemes that mix red and green
+Especially color schemes that mix red and green
 as the one in the previous slide.
 
 In addition to using a more suitable color scheme (such as the default),
@@ -185,10 +191,14 @@ we could also change the shape of the points for each category.
 
 Although this is technically redundant
 since the color is already used for the categorical groups,
-it can make your visualization more effective.
+it can make your visualization more effective
+since it makes the points more distinct from each other.
 
-For line plots we could achieve a similar effect via the `strokeDash` encoding
-instead of `shape`,
+Note that `shape=` is only available to use with `mark_point`,
+not `mark_circle`, `mark_square`, etc.
+
+For line plots we could achieve a similar effect
+by using the `strokeDash` encoding instead of `shape`,
 which together with direct labeling from the previous slide deck
 can facilitate interpretation of these plots.
 
@@ -199,11 +209,13 @@ can facilitate interpretation of these plots.
 ```{python}
 colors = ['coral', '#4682b4', 'rebeccapurple']
 alt.Chart(cars).mark_point(size=70, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
-    color=alt.Color('Origin', title=None, scale=alt.Scale(range=colors)))
+    alt.X('Horsepower', title='Engine power (hp)'),
+    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles/gallon)'),
+    color=alt.Color('Origin', title=None, scale=alt.Scale(range=colors)),
+    shape='Origin')
 ```
 
+<!-- #region -->
 Notes:
 Most of the time it is a good idea to stick to the predefined color scheme
 because of the advantages mentioned in the previous slide.
@@ -235,7 +247,10 @@ and [are easiest chosen via color pickers such as this one](https://colorpicker.
 
 Notes:
 Although many of the categorical color schemes contain ten or more hues,
-if is often not a good idea to use all that many.
+if is often not a good idea to use all that many
+because it becomes near impossibe to distinguish
+the different hues from each other.
+
 
 The guidelines on what is too many hues differ between different sources
 and also depends on your use case.
@@ -252,11 +267,12 @@ you will rarely, if ever, be able to go this high.
 ---
 
 ## Too many hues are impossible to distinguish
+<!-- #endregion -->
 
 ```{python}
 alt.Chart(cars).mark_point(size=70, filled=True).encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
+    alt.X('Horsepower', title='Engine power (hp)'),
+    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles/gallon)'),
     color=alt.Color('Name', title=None))
 ```
 
@@ -284,18 +300,20 @@ we could also have used the tooltip here as we saw in a previous module.
 ## Redundant coding of bar charts can be disorienting
 
 ```{python}
-cars['Brand'] = cars['Name'].str.split().str[0]  # Extract brand from name column
+# Scroll down on the chart to see all the bars
+cars['Brand'] = cars['Name'].str.split().str[0]  # Extract brand from the name column
 chart = alt.Chart(cars, width=200, height=450).mark_bar().encode(
     alt.Y('Brand', title=None, sort='x'),
     alt.X('mean(Horsepower)'))
-alt.hconcat(chart, chart.encode(alt.Color('Brand', legend=None, scale=alt.Scale(scheme='tableau20'))))
+chart | chart.encode(alt.Color('Brand', legend=None, scale=alt.Scale(scheme='tableau20')))
 ```
 
 Notes:
 A few slides ago we saw how encoding the same variable as both shape and color
-could make our figures more effective.
+could make our figures more effective
+although it is technically redundant.
 
-Quite frequently,
+Similarly,
 you might come across bar charts where the author of the visualization
 has added a distinct color for each bar.
 
@@ -313,6 +331,9 @@ is broken down into subcategories
 where each location has multiple bars based on another categorical variable,
 then color can help.
 
+You can also see that the car brands are not systematically named
+and we would need to clean this data to unify e.g. 'vw', 'vokswagen', and 'volkswagen'.
+
 ---
 
 ## Use consistent coloring between subplots even when it is redundant
@@ -321,8 +342,8 @@ then color can help.
 chart = alt.Chart(cars).mark_bar().encode(
     alt.X('Origin', title=None),
     alt.Y('mean(Horsepower)'),
-    alt.Color('Origin'))
-alt.hconcat(chart, chart.mark_line().encode(x='Year', strokeDash='Origin'))
+    alt.Color('Origin', title=None))
+(chart | chart.mark_line().encode(alt.X('Year', title=None), alt.StrokeDash('Origin', title=None)))
 ```
 
 Notes:
