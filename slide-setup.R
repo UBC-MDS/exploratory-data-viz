@@ -15,7 +15,9 @@ knitr::knit_hooks$set(
     source = function(code_chunk, options) {
         # Using element-wise `&&` to avoid raising warning for multi-line R code chunks.
         # Python chunks are always one line.
-        if (options$engine == "python" && grepl("alt.Chart(", code_chunk, fixed = T)) {
+        if ((options$engine == "python" && grepl("alt.Chart(", code_chunk, fixed = T))
+            || (options$engine == "python" && grepl("chart.", code_chunk, fixed = T))
+            || (options$engine == "python" && grepl("mark_", code_chunk, fixed = T))) {
             # We can use the chunk option `fig.path` to find the name of the
             # directory for the executed scripts, which contains the module and
             # chapter names.
