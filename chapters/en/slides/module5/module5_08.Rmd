@@ -232,8 +232,9 @@ e.g. when we print images on paper or display them in a static file-type, such a
 
 ```{python}
 alt.Chart(donations).mark_point().encode(
-    alt.X('date'),
-    alt.Y('sum', axis=alt.Axis(format='$'), scale=alt.Scale(type='log')),
+    alt.X('date', title=None),
+    alt.Y('sum', title='Amount donated per day (log-transformed)',
+          axis=alt.Axis(format='$s'), scale=alt.Scale(type='log')),
     alt.Tooltip('week_day'))
 ```
 
@@ -265,62 +266,76 @@ rather than in a subject area
 where participants might be more used
 to seeing this transformation.
 
+If you find yourself situation
+make sure that you clearly label the axis as log-transformed
+and add any explanatory text to help a general audience 
+interpret your visualization.
+
 ---
 
 ## The log transformation does not work for data containing the value zero
 
 ```{python}
-donations.loc[4461, 'sum'] = 0
+donations.loc[0, 'sum'] = 0
 alt.Chart(donations).mark_point().encode(
-    alt.X('date'),
-    alt.Y('sum', axis=alt.Axis(format='$'), scale=alt.Scale(type='log')))
+    alt.X('date', title=None),
+    alt.Y('sum', title='Amount donated per day (log-transformed)',
+          axis=alt.Axis(format='$'), scale=alt.Scale(type='log')))
 ```
 
 Notes:
 The way the logarithmic transform is defined
 means that it cannot be calculated for the value 0.
 
-We can see this is we artificially introduce a 0 in our dataset.
+We can see this if we artificially introduce a 0 in our dataset.
 
-All the datapoints are compressed at the top,
-because the log of 0 is interpretes as a value of negative infinity.
+All the data points are compressed at the top,
+because the log of 0 is interpreted as a value of negative infinity.
 
 ---
 
-## The symlog transformation work around the problem with zeroes in the data
+## The symlog transformation avoids the problem with zeroes in the data
 
 ```{python}
 alt.Chart(donations).mark_point().encode(
-    alt.X('date'),
-    alt.Y('sum', axis=alt.Axis(format='$'), scale=alt.Scale(type='symlog')))
+    alt.X('date', title=None),
+    alt.Y('sum', title='Amount donated per day (symlog-transformed)',
+          axis=alt.Axis(format='$s'), scale=alt.Scale(type='symlog')))
 ```
 
 Notes:
 Fortunately there is a symmetrical variant of the log transformation (symlog)
-which works around the issues with zeroes by definining a linear range for values close to 0,
-and a logarithmic range above and beyond these valules.
+which works around the issues with zeroes by defining a linear range for values close to 0,
+and a logarithmic range all other values.
 
-We can see that the y-axis still looks a bit cryptic when using this transformation,
-but it allows us to plot the values sucessfully
-even when they contain zero.
+We can see that the y-axis looks different here
+as it explicitly includes the value zero,
+and the tick values are set differently for symlog
+compared to the regular log transform.
 
 ---
 
 ## Remember to use the correct mark for your data
 
 ```{python}
-alt.Chart(donations.drop(4461)).mark_line().encode(
-    alt.X('date'),
-    alt.Y('sum', axis=alt.Axis(format='$'), scale=alt.Scale(type='log')))
+alt.Chart(donations.drop(0)).mark_line().encode(
+    alt.X('date', title=None),
+    alt.Y('sum', title='Amount donated per day (log-transformed)',
+          axis=alt.Axis(format='$s'), scale=alt.Scale(type='log')))
 ```
 
 Notes:
-So far we have been plotting our timeseries data using a circles.
+In this slide we're dropping the artificial 0
+we introduced earlier
+to bring attention to another important aspect of visualization:
+the choice of mark.
+
+So far we have been plotting our timeseries data using circles.
 This has been useful to illustrate the points above,
-but it is not the most effective choice for visualizting temporal data.
+but it is not the most effective choice for visualizing temporal data.
 
 By changing the mark to a line
-it is much easier for us to follow the trend going from one point from another
+it is much easier for us to follow the trend going from one point to another
 and we can immediately spot a curios pattern!
 
 What are those repeated ups and down?
