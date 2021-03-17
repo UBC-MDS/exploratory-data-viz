@@ -73,7 +73,8 @@ We can't know from looking at this plot.
 
 ```{python}
 title_text = 'Wikipedia donations peak during Christmas'
-alt.Chart(donations[donations['date'].between("2020", "2020-07")], title=title_text).mark_circle().encode(
+donations_2020_until_july = donations[donations['date'].between("2020", "2020-07")]
+alt.Chart(donations_2020_until_july, title=title_text).mark_circle().encode(
     alt.X('date', title=None),
     alt.Y('sum', axis=alt.Axis(format='$s'), title='Amount donated per day'))
 ```
