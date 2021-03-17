@@ -15,7 +15,9 @@ def test():
             "Miles_per_Gallon" in fuel_efficiency_org.encoding.y.shorthand), "Make sure you are using mean of the 'Miles_per_Gallon' as the y-axis encoding."
     assert ((fuel_efficiency_org.encoding.y.field == 'Miles_per_Gallon' and fuel_efficiency.encoding.y.aggregate == 'mean') or 
             fuel_efficiency_org.encoding.y.shorthand in {'mean(Miles_per_Gallon)', 'mean(Miles_per_Gallon):quantitative', 'mean(Miles_per_Gallon):Q'}), "You're very close. Make sure that you are using the mean aggregate for the y-axis encoding."
-    assert (fuel_efficiency_org.encoding.color.field in {'Origin', 'Origin:nominal', 'Origin:N'} or 
-            fuel_efficiency_org.encoding.color.shorthand in {'Origin', 'Origin:nominal', 'Origin:N'}), "Make sure you are using 'Origin' as the color encoding."
+    assert fuel_efficiency_org.encoding.color != alt.utils.schemapi.Undefined and (
+        fuel_efficiency_org.encoding.color.field in {'Origin', 'Origin:nominal', 'Origin:N'} or 
+        fuel_efficiency_org.encoding.color.shorthand in {'Origin', 'Origin:nominal', 'Origin:N'}
+    ), "Make sure you are using 'Origin' as the color encoding."
     assert type(fuel_efficiency_org.title) == str and len(fuel_efficiency_org.title) >= 5, "Make sure you specify a descriptive title for the fuel_efficiency_org plot." 
     __msg__.good("You're correct, well done!")
