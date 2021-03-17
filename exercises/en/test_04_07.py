@@ -10,8 +10,10 @@ def test():
     assert pokemon_circleplot.mark == 'circle', "Make sure you are using the 'mark_circle' to generate a circleplot."
 
     assert (
-        pokemon_circleplot.encoding.x.shorthand in {'gen:ordinal', 'gen:O'} or 
-        pokemon_circleplot.encoding.x.field in {'gen:ordinal', 'gen:O'}
+        pokemon_circleplot.encoding.x.shorthand in {'gen:ordinal', 'gen:O'} or
+        (pokemon_circleplot.encoding.x.shorthand == 'gen' and pokemon_circleplot.encoding.x.type == 'ordinal') or 
+        pokemon_circleplot.encoding.x.field in {'gen:ordinal', 'gen:O'} or
+        (pokemon_circleplot.encoding.x.field == 'gen' and pokemon_circleplot.encoding.x.type == 'ordinal')
     ), "Make sure you are using 'gen' as the x-axis encoding and specify that it is an ordinal (`O`) value."
     assert type(pokemon_circleplot.encoding.x.title) == str and not pokemon_circleplot.encoding.x.title.islower(), "Make sure you give a descriptive legend title with appropriate capitalization for the x-axis encoding. Hint: use title argument."
     
