@@ -28,17 +28,21 @@ and how log transforming an axis can help increase resolution of small values.
 
 ## Read in the data containing the daily sum of donations to Wikipedia in 2020
 
-```{python}
-# TODO save wrangled data?
+```{python include=FALSE}
 import pandas as pd
-import altair as alt
-from vega_datasets import data
 
 donations = (
     pd.read_csv("https://frdata.wikimedia.org/donationdata-vs-day.csv", parse_dates=['date'])
     .query('2020 < date < 2021')
     .assign(week_day=lambda df: df['date'].dt.day_name().str[:3]))
+donations.to_csv('data/donations.csv', index=False)
+```
 
+```{python}
+import pandas as pd
+import altair as alt
+
+donations = pd.read_csv('data/donations.csv', parse_dates=['date'])
 alt.Chart(donations, title='Wikipedia donations peak during Christmas').mark_circle().encode(
     alt.X('date', title=None),
     alt.Y('sum', axis=alt.Axis(format='$s'), title='Amount donated per day'))
