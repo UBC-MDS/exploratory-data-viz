@@ -46,9 +46,9 @@ about the most frequently occurring categorical values in each of the
 columns. We use `exclude` to indicate that we want to use all other
 columns except the numerical ones.
 
-We can already here see what the most commons values are for each
-column, but let’s visualize these in a bar chart and cross-reference
-this table with our plot on the next slide.
+We can already see what the most commons values are for each column, but
+let’s visualize these in a bar chart and cross-reference this table with
+our plot on the next slide.
 
 ---
 
@@ -77,12 +77,12 @@ The syntax here is very similar to when we created the histograms, but
 we don’t use any bins, and the axis type is now nominal instead of
 quantitative.
 
-We can see that most movies are dramas and comedies, and fall withing
-the R and PG-13 ratings.
+We can see that most movies are dramas and comedies, and fall within the
+R and PG-13 ratings.
 
 We could have included the title column here to check that no two movies
-have the same title. After that we can safely skip that subplot since it
-is rather messy with all the hundreds titles.
+have the same title. After that, we can safely skip that subplot since
+it is rather messy with hundreds of titles.
 
 However, since this is EDA and not a plot created for communication, we
 could also have left it in and carried on.
@@ -108,13 +108,13 @@ Notes: The same repeat principles can be used to count combinations of
 categoricals, helping us get more resolution into where the data lies.
 
 This plot should be read similarly to the pairplot we made earlier, so
-we only look at the one plot below the diagonal. In this case it means
+we only look at the one plot below the diagonal. In this case, it means
 we could have just made a single plot, but if you have more than two
 categories to repeat over, there would be additional plots under the
 diagonal.
 
-In this plot we can see that comedies rated PG-13 and dramas rated R are
-the most common combinations in our data.
+In this plot, we can see that comedies rated PG-13 and dramas rated R
+are the most common combinations in our data.
 
 In fact, there are so many more of these than some of the others that we
 should be careful if we proceed to perform any statistical tests on this
@@ -150,9 +150,9 @@ the principles we have learned so far in the course.
 Now we can answer questions such as which the most popular genres are
 within each of the ratings.
 
-As we might have expected, the top genres differs depending on the MPAA
+As we might have expected, the top genres differ depending on the MPAA
 Rating, and there are many genres that are not even present for the
-famiy rated G movies.
+family-rated G movies.
 
 ---
 

@@ -44,7 +44,7 @@ movies_extended
 ```
 
 Notes: In this slide deck, you will see how EDA allows us to identify
-interesting relationships that we want to study closer, suggest
+interesting relationships that we want to study closer, suggest a
 hypothesis to test, assess assumptions of the data, and inform further
 data collection.
 
@@ -85,13 +85,12 @@ memory usage: 39.2+ KB
 Notes: Next, it is a good idea to check the type of data in each column
 and how many missing values there are.
 
-From looking looking at the values in the table, we already have an idea
-of what the column data types are, and this matches the output from the
-`info` method. The columns with categorical data are referred to as
-“objects” and the numerical columns are read in as decimal numbers or
-“floats”.
+From looking at the values in the table, we already have an idea of what
+the column data types are, and this matches the output from the `info`
+method. The columns with categorical data are referred to as “objects”
+and the numerical columns are read in as decimal numbers or “floats”.
 
-Although it seem unnecessary in this case, it is good practice to
+Although it seems unnecessary in this case, it is good practice to
 perform this check since there are rare cases where pandas might
 interpret a column differently from what we think.
 
@@ -106,7 +105,7 @@ you specify `parse_dates=['column_name']` to `read_csv`.
 
 Speaking of missing values, this is the next thing to check for. Columns
 that are missing some values might need to be imputed or dropped for
-machine learning tasks, and when we performing statistical test, we need
+machine learning tasks, and when we perform statistical tests, we need
 to know how many observations we have with data.
 
 Importantly, patterns in missing values can also give hints to which
@@ -118,7 +117,7 @@ Here, it looks like there are some NaNs in many of the columns, and the
 IMDB ratings and votes seems to have the most: about 60 rows are missing
 a value.
 
-The IMDB rating and number of votes have the exact same amount of
+The IMDB rating and the number of votes have the exact same amount of
 missing values, and it makes sense that movies without votes can’t have
 a rating. But if we didn’t know how these columns were related, how
 could we check?
@@ -159,7 +158,7 @@ a single categorical column in the dataframe, which we can use on the
 y-axis in Altair. The index column will be used to give each column the
 same numbers on the x-axis.
 
-Since this reshape operations makes our dataframe longer than 5000 rows,
+Since this reshape operation makes our dataframe longer than 5000 rows,
 we need to disable the max rows warning in Altair, which otherwise would
 prevent us from making this chart.
 
@@ -186,8 +185,8 @@ Notes: By visualizing the missing values for each column next to each
 other, we can quickly see if there are similar patterns between columns.
 
 A common cause for such correlations, could for example be due to the
-same day or hour missing for several columns when working with time
-series data.
+same day or hour missing for several columns when working with
+time-series data.
 
 This information could help us decide whether we might want to remove an
 entire row from our analysis (when most column values for that
@@ -196,11 +195,11 @@ missing value (if most column values for that observation look OK).
 
 Here we can confirm that the missing values from IMDB ratings and votes
 are indeed missing for the same rows in the data frame, since the orange
-lines show up on the same positions throughout the index, which suggests
+lines show up in the same positions throughout the index, which suggests
 that these columns are linked in the data collection process.
 
-The reason we specified the stroke encoding in this plot is to color the
-outline of each rectangle, which is white by default.
+The reason we specified the stroke encoding in this plot is to colour
+the outline of each rectangle, which is white by default.
 
 Before continuing with our analysis we could consider dropping the NaN
 values, but it might also be a good idea to create all our
@@ -251,8 +250,8 @@ available for cross-reference when visualizing the data and also give us
 an idea of what to expect when creating our visualization.
 
 After visualizing the data, we can also go back and look at these
-numbers to ensure ourselves that they align and that we don’t have a
-typo somewhere causing an error.
+numbers to ensure that they align and that we don’t have a typo
+somewhere causing an error.
 
 ---
 
@@ -278,7 +277,7 @@ trying to understand the data ourselves through an interactive
 explorative process, rather than making the figures look appealing in a
 presentation (we will see how to do that later).
 
-To create these overview visualizations, it is helpful make the same
+To create these overview visualizations, it is helpful to make the same
 type of plot for several dataframe columns and lay them out as subplots
 within a figure.
 
@@ -310,13 +309,13 @@ one place that could indicate measurement errors, etc).
 To do this, we here create a histogram chart and repeat it for each of
 the numerical columns.
 
-This overview tells us that most movies have a runtime around 90-130
+This overview tells us that most movies have a runtime of around 90-130
 min, but there are some that are shorter and some that are longer.
 
 Most movies have less than 80,000 votes, but there are some that have a
 really high number.
 
-The distribution for the IMDB ratings is centered around 6, with few
+The distribution for the IMDB ratings is centred around 6, with few
 extreme values on either end and no notable shift in either direction.
 
 Our EDA is already helping us finding interesting aspects of the data!
@@ -349,7 +348,7 @@ scatter plot of these two dataframe columns. Here, we can ask that same
 question of all columns in the dataset.
 
 This is helpful both for our general knowledge about the data and if we
-have a specific goal in mine, maybe we would want to predict the movie
+have a specific goal in mind, maybe we would want to predict the movie
 ratings, but we are not sure which other dataframe columns would be
 useful to have in the prediction model?
 
@@ -359,7 +358,7 @@ of them to be able to answer the same question for all pairs of columns.
 To create this visualization, we need to use `alt.repeat` on both the
 axes, instead of just one as for the histograms.
 
-In the last slide we used `alt.repeat` without arguments, which means
+In the last slide, we used `alt.repeat` without arguments, which means
 that we are repeating over all the columns. Here we specifically set the
 rows and columns attributes to ensure that our repeated chart will
 include all the pairwise combinations of the dataframe columns.
@@ -403,7 +402,7 @@ relationships between any of the column pairs.
 
 In addition to the relationship between the two ratings, there IMDB
 Rating and the Running Time appears to be related and the number of
-votes number of votes also seem to be related to the IMDB rating.
+votes also seems to be related to the IMDB rating.
 
 Pairs of columns that appear correlated in this visualization are good
 candidates to explore further e.g. with formal statistical testing to
@@ -418,14 +417,14 @@ would be directly causative).
 However, as interesting to explore later could be columns that we had
 expected to be correlated, but appears not to be in this plot.
 
-Note that we set the color title to `None` to save some space between
-the subplots, and since it is the same for each color bar (“Count of
+Note that we set the colour title to `None` to save some space between
+the subplots, and since it is the same for each colour bar (“Count of
 records”).
 
 To get more resolution of the counts for each column pair, we resolve
-the colorscale to be set individually for each subplot. Otherwise the
+the colour scale to be set individually for each subplot. Otherwise the
 high counts in the few bins of diagonals would drown out the counts in
-the other plots which would have the same color almost everywhere.
+the other plots which would have the same colour almost everywhere.
 
 ---
 
@@ -448,24 +447,22 @@ Notes: In addition to repeating charts with numerical data only, we can
 use the same principles to explore the relationships between the
 categorical and the numerical columns in our dataset.
 
-Here, we spread out the three categorical dataframe columns along the
-columns of the plot to be able to answer questions regarding how the
-different categories compare, e.g. how does different genres impact
-movie runtime?
+Here, we spread out the three categorical dataframe columns along with
+the columns of the plot to be able to answer questions regarding how the
+different categories compare, e.g. how do different genres impact movie
+runtime?
 
-The categories labeled “null” are the ones which are missing a value in
+The categories labelled “null” are the ones which are missing a value in
 that categorical column in the dataframe, but still has values in the
 numerical column that is plotted on the x-axis.
 
 We have also removed the “Title” item from the list of categorical
 columns, as well as dropped it from the dataframe, since we would have
-created a giant plot if all thousands titles were included.
+created a giant plot if thousands of titles were included.
 
 So what is the answer to our question, how does genres impact movie
-runtime? It seems like Westerns, Musicals, and Dramas have the longest
-run times. For the other categories it seems like it is Dramatization
-and Historical Fiction as well as PG-13 an R rated movies that run the
-longest.
+runtime? It seems like Musicals, and Dramas have the longest run times.
+Whereas for Ratings, PG-13 and R-rated movies appear to run the longest.
 
 As we have discussed before, it is often easier to compare plots where
 the values are sorted.
