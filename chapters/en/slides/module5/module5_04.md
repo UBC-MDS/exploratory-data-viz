@@ -61,7 +61,7 @@ stock_title = "Google's stock experiencing heavier fluctuations than competitors
 alt.Chart(stocks, title=stock_title).mark_line().encode(
     alt.X('date'),
     alt.Y('price'),
-    color='symbol')
+    color='symbol').properties(height=275)
 ```
 
 <iframe src="/module5/charts/04/unnamed-chunk-4.html" width="100%" height="420px" style="border:none;">
@@ -108,11 +108,11 @@ which we then pass to the `title` parameter in `Chart`.
 ## Titles can be aligned according the the presentation context
 
 ``` python
-stock_title = alt.TitleParams(
+stock_title_left = alt.TitleParams(
     "Google's stock experiencing heavier fluctuations than competitors",
      subtitle = "Prices have been surging since 2009, but have still not reached an all-time high",
      anchor='start')
-alt.Chart(stocks, title=stock_title).mark_line().encode(
+alt.Chart(stocks, title=stock_title_left).mark_line().encode(
     alt.X('date'),
     alt.Y('price'),
     color='symbol')
@@ -131,10 +131,10 @@ This is done via the `anchor` parameter in Altair.
 ## Breaking titles into multiple line can improve readability
 
 ``` python
-stock_title = alt.TitleParams(
+stock_title_linebreak = alt.TitleParams(
     "Google's stock experiencing heavier fluctuations than competitors",
-     subtitle = ["Prices have been surging since 2009", "but have still not reached the same levels as in late 2007."])
-alt.Chart(stocks, title=stock_title).mark_line().encode(
+     subtitle = ["Prices have been surging since 2009 but have still", "not reached the same levels as in late 2007."])
+alt.Chart(stocks, title=stock_title_linebreak).mark_line().encode(
     alt.X('date'),
     alt.Y('price'),
     color='symbol')
@@ -147,12 +147,14 @@ Notes: If we have a really long title, we can improve readability by
 breaking it into multiple lines. Altair converts lists of strings into
 multiline titles.
 
-The title to this figure does not look great because they go from a wide
-main title, to a narrow first line of the subtitle and then another wide
-line.
+When creating a multiline title, is is advisable to try to keep all
+lines about the same length. Generally it also looks better if the lines
+are ordered by length, for example from the longest to the shortest as
+in this slide.
 
-To make this figure more visually pleasing, we should try to rewrite
-these titles before presenting the figure.
+For this chart, the single line subtitle still looks more appealing due
+to all the whitespace on the sides of the subtitle in this slide, so we
+will go back to a single line subtitle in the next slide.
 
 ---
 
@@ -259,7 +261,6 @@ texts = alt.Chart(stock_max_date).mark_text(align='left', dx=2).encode(
     y='price',
     text='symbol',
     color=alt.Color('symbol', legend=None))
-
 lines + texts
 ```
 
@@ -408,8 +409,7 @@ stock_title = alt.TitleParams(
 lines = alt.Chart(stocks, title=stock_title).mark_line().encode(
     alt.X('date', title=None, axis=alt.Axis(tickCount=3, grid=False)),
     alt.Y('price', title='Closing price', axis=alt.Axis(format='$s', labelFontSize=12, titleFontSize=16)),
-    color=alt.Color('symbol', legend=None))
-
+    color=alt.Color('symbol', legend=None)).properties(height=275)
 (lines + texts).configure_view(strokeWidth=0)
 ```
 
