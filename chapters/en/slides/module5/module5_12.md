@@ -28,7 +28,7 @@ for the data you are visualizing.
 ## Color can be broken down into hue, lightness, and saturation
 
 <center>
-<img src="/module5/hsl-cylinder.png" width="100%"></img>
+<img src="/module5/hsl-cylinder.png" width="90%"></img>
 </center>
 
 Notes: There are several different ways to represent colors. You might
@@ -51,7 +51,7 @@ parameters represent.
 ## Hue, lightness, and saturation describes different properties of colors
 
 <center>
-<img src="/module5/hsl-questions.png" width="70%"></img>
+<img src="/module5/hsl-questions.png" width="60%"></img>
 </center>
 
 Notes: We could verbalize the changes we saw in the previous slide in
@@ -282,11 +282,10 @@ the tooltip here as we saw in a previous module.
 ## Redundant coding of bar charts can be disorienting
 
 ``` python
-# Scroll down on the chart to see all the bars
 cars['Brand'] = cars['Name'].str.split().str[0]  # Extract brand from the name column
-chart = alt.Chart(cars, width=200, height=450).mark_bar().encode(
+chart = alt.Chart(cars).mark_bar().encode(
     alt.Y('Brand', title=None, sort='x'),
-    alt.X('mean(Horsepower)'))
+    alt.X('mean(Horsepower)')).properties(width=200, height=350)
 chart | chart.encode(alt.Color('Brand', legend=None, scale=alt.Scale(scheme='tableau20')))
 ```
 
@@ -314,7 +313,8 @@ categorical variable, then color can help.
 
 You can also see that the car brands are not systematically named and we
 would need to clean this data to unify e.g. ‘vw’, ‘vokswagen’, and
-‘volkswagen’.
+‘volkswagen’. The reason we’re setting the height is just to fit the
+plot on the slide.
 
 ---
 
