@@ -15,8 +15,8 @@ def test():
     assert (penguin_hist.encoding.x.shorthand in {'flipper_length_mm', 'flipper_length_mm:quantitative', 'flipper_length_mm:Q'} or 
             penguin_hist.encoding.x.field in {'flipper_length_mm', 'flipper_length_mm:quantitative', 'flipper_length_mm:Q'}), "Make sure you are using 'flipper_length_mm' as the x-axis encoding."
     assert penguin_hist.encoding.x.bin != alt.utils.schemapi.Undefined, "Make sure you are specifying the bin argument for the x-axis encoding for the histogram."
-    assert (penguin_hist.encoding.y.field in {'count()', 'count():quantitative', 'count:Q'} or 
-            penguin_hist.encoding.y.shorthand in {'count()', 'count():quantitative', 'count:Q'}), "Make sure you are using 'count()' as the y-axis encoding."
+    assert (penguin_hist.encoding.y.field in {'count()', 'count():quantitative', 'count():Q'} or 
+            penguin_hist.encoding.y.shorthand in {'count()', 'count():quantitative', 'count():Q'}), "Make sure you are using 'count()' as the y-axis encoding."
     assert type(penguin_hist.title) == str and len(penguin_hist.title) >= 5, "Make sure you specify a descriptive title for the penguin_hist plot."
     assert penguin_hist.height == 150, "Make sure you specify the plot height of 150."
     assert penguin_hist.width == 300, "Make sure you specify the plot width of 300." 
