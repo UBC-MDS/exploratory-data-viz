@@ -14,6 +14,7 @@ source('../../../../slide-setup.R')
 ```
 
 ```{python include=FALSE}
+# Silence warning
 import pandas as pd
 pd.options.mode.chained_assignment = None
 ```
@@ -27,6 +28,81 @@ Notes:
 In this slide deck we will see
 how we can change different aesthetic elements of the plot
 to cater to communication in various settings.
+
+---
+
+## Charts without titles are hard to interpret
+
+```{python echo=FALSE}
+import altair as alt
+from vega_datasets import data
+
+stocks = data.stocks()
+stock_title = "Google's stock experiencing heavier fluctuations than competitors"
+no_labels = alt.Chart(stocks).mark_line().encode(
+    alt.X('date', title=None),
+    alt.Y('price', title='Dollar'),
+    color='symbol')
+
+stock_max_date = stocks[stocks['date'] == stocks['date'].max()]
+texts = alt.Chart(stock_max_date).mark_text(align='left', dx=2).encode(
+    x='date',
+    y='price',
+    text='symbol',
+    color=alt.Color('symbol', legend=None))
+
+lines = alt.Chart(stocks,title=stock_title).mark_line().encode(
+    alt.X('date', title=None, axis=alt.Axis(tickCount=3, grid=False)),
+    alt.Y('price', title='Closing price', axis=alt.Axis(format='$s')),
+    color=alt.Color('symbol', legend=None))
+
+chart_to_save = no_labels
+chart_to_save.save('../../../../static/module5/charts/chart-without-titles.html')
+```
+
+<iframe src="/module5/charts/chart-without-titles.html" width="100%" height="420px" style="border:none;"></iframe>
+
+Notes:
+Why do we need to add chart titles and labels to our plots?
+
+Let's find out by looking at an example.
+To the left you can see a poorly labeled chart.
+There y-axis label is not very descriptive,
+there is no overall chart title
+and we have even forgotten to include the legend.
+
+It is impossible to tell what this figure is showing!
+
+---
+
+## Descriptive titles make charts more effective
+
+```{python echo=FALSE}
+chart_to_save = (lines + texts).configure_view(strokeWidth=0)
+chart_to_save.save('../../../../static/module5/charts/chart-with-titles.html')
+```
+
+<iframe src="/module5/charts/chart-with-titles.html" width="100%" height="420px" style="border:none;"></iframe>
+
+Notes:
+In this slide we have a chart with a descriptive title
+that convey the main take home message of our visualization.
+The y-axis is also clearly titled
+while its unit (`$`) is embedded in the axis label.
+
+This figure makes it immediately clear
+why we have made this visualization
+and what question we are trying to answer.
+
+This is a major goal when making visualizations:
+there should be no supplementary text needed
+to explain why we made the figure 
+and what its main takeaways are.
+
+Properly used chart and axis titles are a big help for to reach this goal.
+
+In this slide deck we will gradually build up to creating a figure
+like the one you can see in this slide.
 
 ---
 
