@@ -15,11 +15,12 @@ for communication and see how we can implement these using Altair.
 
 ## Figure design allows us to tell different stories from the same data
 
+[From
+Infoworld](https://www.infoworld.com/article/3088166/why-how-to-lie-with-statistics-did-us-a-disservice.html)
+
 <center>
 <img src="/module5/iraqs-bloody-toll.png" width="35%"></img>
 </center>
-
-<http://www.simonscarr.com/iraqs-bloody-toll>
 
 Notes: When designing figures for presentation, we have the possibility
 to tell different stories from the same underlying data.
@@ -38,11 +39,12 @@ Now let’s look at another figure of the same data.
 
 ## Figure design allows us to tell different stories from the same data
 
+[From
+Infoworld](https://www.infoworld.com/article/3088166/why-how-to-lie-with-statistics-did-us-a-disservice.html)
+
 <center>
 <img src="/module5/iraq-death-on-the-decline.png" width="35%"></img>
 </center>
-
-<https://www.infoworld.com/article/3088166/why-how-to-lie-with-statistics-did-us-a-disservice.html>
 
 Notes: This figure paints an entirely different picture of the event. It
 focuses on the recent declining trend in deaths, uses a positive green
@@ -59,6 +61,9 @@ figures made by others.
 ---
 
 ## Figure design should be adopted to the target audience and situation
+
+[From Kieran Healy’s Data Visualization: A practical
+introduction](https://socviz.co/lookatdata.html#lookatdata)
 
 <center>
 <img src="/module5/napoleon.png" width="100%"></img>
@@ -90,42 +95,20 @@ lost.
 
 ## Figure design should be adopted to the target audience and situation
 
+[From Kieran Healy’s Data Visualization: A practical
+introduction](https://socviz.co/lookatdata.html#lookatdata)
+
 <center>
 <img src="/module5/napoleon-pie.png" width="50%"></img>
 </center>
-
-<https://socviz.co/lookatdata.html#lookatdata>
 
 Notes: In the board meeting, this pie chart is likely more effective in
 communicating the take home message: the Napolean army was decimated as
 a result of this military campaign.
 
-This infomation is simple enough that a pie is effective, but in general
-we should be careful when using pie charts
-
----
-
-## Including many categories in pie charts makes them hard to interpret
-
-<center>
-<img src="/module5/pie-bar-categories.png" width="70%"></img>
-</center>
-
-<https://github.com/glosophy/CatoDataVizGuidelines/blob/master/PocketStyleBook.pdf>
-
-Notes: When there are too many categories in a pie chart, it becomes
-difficult to compare them with each other. Both because the colors can
-be hard to distinguish and because the angle and area of the pie slices
-is not
-
-In most cases, it is more effective to use position as the visual
-channel to convey a comparison instead area and angle.
-
-A bar chart is often a superior alternative to a pie chart, and when in
-doubt chose the bar chart for counts, percentages, and proportions.
-
-``` python
-```
+Although we said earlier in this course that we should generally avoid
+using pie charts, here the information is simple enough that a pie chart
+is very effective.
 
 ---
 
