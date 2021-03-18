@@ -292,10 +292,9 @@ them.
 To achieve this in Altair, we say that we *repeat* the same `Chart`
 setup for multiple columns.
 
-Instead of typing each chart out manually out manually we specify which
-columns we want to use via the `.repeat` method of a `Chart` object, and
-indicate with `alt.repeat()` where these repeated columns should be
-used.
+Instead of typing each chart out manually, we specify which columns we
+want to use via the `.repeat` method of a `Chart` object, and indicate
+with `alt.repeat()` where these repeated columns should be used.
 
 Since we are not using the dataframe column directly, we also need to
 specify which type the repeated columns are.
