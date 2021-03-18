@@ -4,7 +4,7 @@ type: slides
 
 # Effective use of colour for quantitative data
 
-Notes: This slide deck describes how to choose color to accurately
+Notes: This slide deck describes how to choose colour to accurately
 represent numerical data.
 
 ---
@@ -16,15 +16,15 @@ represent numerical data.
 </center>
 
 Notes: In the last slide deck we varied hues to represent categorical
-values, with a focus on the distinction between color hues/categories.
-When choosing a color scheme to represent quantitative data, we will
+values, with a focus on the distinction between colour hues/categories.
+When choosing a colour scheme to represent quantitative data, we will
 instead focus on sequential, perceptually uniform changes in lightness.
 
 Sequential changes in lightness ensures that uniform changes in the
-values of the data are perceived as uniform changes in the color space.
-In other words, we want it to be intuitive how the colors relate the
+values of the data are perceived as uniform changes in the colour space.
+In other words, we want it to be intuitive how the colours relate the
 numerical values they represent, so that we can accurately understand
-how the data values vary when looking at the changing colors.
+how the data values vary when looking at the changing colours.
 
 ---
 
@@ -34,24 +34,24 @@ how the data values vary when looking at the changing colors.
 </iframe>
 
 Notes: In the plots on this slide, we have encoded the same variable
-(Horsepower) to be represented by both the x-axis and the color. This is
-rarely done in practice, but it is useful to contrast and understand
-color schemes because we know that the colors of the points should
+(Horsepower) to be represented by both the x-axis and the colour. This
+is rarely done in practice, but it is useful to contrast and understand
+colour schemes because we know that the colours of the points should
 change in a perceptually uniform manner as we move from left to right
 along the x-axis.
 
-In the leftmost plot in this slide we used the default categorical color
-scheme. As you can see this is not at all well suited to represent
-numerical data as the sharp transitions between hues makes it appear as
-if there are groups in the data, whereas we know that these values are
-changing gradually from left to right on the x-axis.
+In the leftmost plot in this slide we used the default categorical
+colour scheme. As you can see this is not at all well suited to
+represent numerical data as the sharp transitions between hues makes it
+appear as if there are groups in the data, whereas we know that these
+values are changing gradually from left to right on the x-axis.
 
-In the plot to the right, we have used the default sequential color
+In the plot to the right, we have used the default sequential colour
 scheme for quantitative data in Altair. This conveys the gradual change
 in the Horsepower values in a perceptually uniform manner. We can
-clearly see that color is changing gradually from light to dark along
+clearly see that colour is changing gradually from light to dark along
 the x-axis, although it can be hard to pinpoint exactly which number a
-particular color is (remember that color is not as good as position to
+particular colour is (remember that colour is not as good as position to
 convey an exact value even when it is easy to see the overall trend).
 
 ---
@@ -61,11 +61,11 @@ convey an exact value even when it is easy to see the overall trend).
 <iframe src="/module5/charts/lightness-and-hues.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: The leftmost plot here uses the same default color scheme as in
+Notes: The leftmost plot here uses the same default colour scheme as in
 the previous slide.
 
-The plot on the right has a color scheme that adds a slight variation in
-hue while keeping the perceptually uniform variation in lightness.
+The plot on the right has a colour scheme that adds a slight variation
+in hue while keeping the perceptually uniform variation in lightness.
 
 The reason for this is to highlight small variations in the data when
 this is of great importance. We can see the effect of this buy studying
@@ -75,11 +75,11 @@ transition from yellow to green in the rightmost plot we can more
 clearly perceive detail in this range.
 
 Although the hue shifts in this plots are more gradual than in the plot
-with the categorical color scheme in the previous slide, it may still
+with the categorical colour scheme in the previous slide, it may still
 introduce a slight bias towards seeing groupings where there are none,
 which is something to keep in mind.
 
-In practice, both of these color schemes are used often to represent
+In practice, both of these colour schemes are used often to represent
 quantitative data.
 
 ---
@@ -102,22 +102,22 @@ alt.Chart(cars).mark_circle(size=50).encode(
 </iframe>
 
 Notes: To decide whether the highest or lowest values should be at the
-lightest or darkest end of a sequential color schemes, it is advisable
+lightest or darkest end of a sequential colour schemes, it is advisable
 to set it so that the most important values has the most contrast to the
 background.
 
 Often there is no difference in importance between high and low values;
 then the convention is to set the highest values to have the most
-contrast with the background, which is the case for most Altair color
+contrast with the background, which is the case for most Altair colour
 schemes by default.
 
-However, for the “viridis” color scheme that we are using here, goes
+However, for the “viridis” colour scheme that we are using here, goes
 from dark to light by default so we need to pass `reverse=True` to
 `alt.Scale` (this technique could be used to reverse any scale in
 Altair, including the value along one of the axes).
 
-The viridis color scheme was designed by the developers of matplotlib
-(another Python plotting package). In addition to the color schemes
+The viridis colour scheme was designed by the developers of matplotlib
+(another Python plotting package). In addition to the colour schemes
 linked in the previous slide deck, more details and examples are
 available in the [matplotlib
 documentation](http://matplotlib.org/users/colormaps.html), and many of
@@ -127,7 +127,7 @@ choice behind viridis.
 
 Note that we are using filled circular marks and the `size` parameter to
 enlarge the points slightly and make it easier to see the changes in
-color that we will be discussing in this slide deck.
+colour that we will be discussing in this slide deck.
 
 ---
 
@@ -144,31 +144,31 @@ alt.Chart(cars).mark_circle(size=50).encode(
 <iframe src="/module5/charts/16/unnamed-chunk-4.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: Both viridis, the default blue color scheme, and most of the
-quantitative color schemes available in Altair are well perceived by
-people with color vision deficiencies since the data variation is mostly
-represented as variation in lightness.
+Notes: Both viridis, the default blue colour scheme, and most of the
+quantitative colour schemes available in Altair are well perceived by
+people with colour vision deficiencies since the data variation is
+mostly represented as variation in lightness.
 
-However, there are also some color schemes that are designed to look
-almost exactly the same for people with the most common color vision
+However, there are also some colour schemes that are designed to look
+almost exactly the same for people with the most common colour vision
 deficiences also when it comes to the hue variation.
 
-`'cividis'` is one of these color schemes and you can see how it looks
+`'cividis'` is one of these colour schemes and you can see how it looks
 in this plot.
 
 Nearly 10% of the population is colour vision deficient; red-green
 colour blindness in particular affects 8% of men and 0.5% of women.
 Guidelines for making your visualizations more accessible to those with
-reduced color vision, will in many cases also improve the
-interpretability of your graphs for people who have standard color
+reduced colour vision, will in many cases also improve the
+interpretability of your graphs for people who have standard colour
 vision.
 
 Fortunately, many of these are followed by the default settings in
-Altair, and we don’t need to change the color scheme for this reason.
+Altair, and we don’t need to change the colour scheme for this reason.
 
-If you are unsure how your plot will look for someone who sees colors
+If you are unsure how your plot will look for someone who sees colours
 differently than you, [this website lets you upload and image and
-simulate different color vision
+simulate different colour vision
 deficiencies](https://www.color-blindness.com/coblis-color-blindness-simulator/).
 
 ---
@@ -187,26 +187,26 @@ alt.Chart(cars).mark_circle(size=50).encode(
 </iframe>
 
 Notes: If minor variation in the data is of uttermost importance, it is
-possible to use sequential color schemes with additional hues.
+possible to use sequential colour schemes with additional hues.
 
-In this plot, we use a modern rainbow color scheme to highlight small
-changes in the Horsepower variable. While both the previous color
+In this plot, we use a modern rainbow colour scheme to highlight small
+changes in the Horsepower variable. While both the previous colour
 schemes were gradually increasing in lightness, this is not the case for
 this rainbow map.
 
-Here the lightest colors are in the middle and the darkest at both
-extremes of the color schemes. This is particularly a negative for
-people with color vision deficiencies, which can no longer rely on the
+Here the lightest colours are in the middle and the darkest at both
+extremes of the colour schemes. This is particularly a negative for
+people with colour vision deficiencies, which can no longer rely on the
 gradual lightness change and the varying hues therefore make this plot
 less accessible.
 
-In addition to losing the overall intuitiveness of the color scheme, the
-many hues mean that we’re likely to perceive changes in the color in a
-non-uniform manner, and see groups where they are none.
+In addition to losing the overall intuitiveness of the colour scheme,
+the many hues mean that we’re likely to perceive changes in the colour
+in a non-uniform manner, and see groups where they are none.
 
-Importantly, the rainbow map we have used here is a modern color scheme
+Importantly, the rainbow map we have used here is a modern colour scheme
 called “turbo”, which was recently developed by Google. Most rainbow
-color schemes you will see on plots in the wild use a color scheme
+colour schemes you will see on plots in the wild use a colour scheme
 called “jet”, which used to be the default in many plotting packages but
 is not a good choice for any data, because it introduces artificial
 banding and highlighting of values.
@@ -214,10 +214,10 @@ banding and highlighting of values.
 The take home message here is that there are valid use cases for modern
 rainbow maps, but you should be confident that there is no better
 alternative before reaching for this tool, and be careful when
-interpreting rainbow colored plots in general.
+interpreting rainbow coloured plots in general.
 
-The jet rainbow colormap should be avoided for many reasons, including
-that the sharp transitions between colors introduces visual threshold
+The jet rainbow colourmap should be avoided for many reasons, including
+that the sharp transitions between colours introduces visual threshold
 that do not represent the underlying continuous data. Another issue is
 luminance (brightness). For example, your eye is drawn to the yellow and
 cyan regions, because the luminance is higher. This can have the
@@ -229,7 +229,7 @@ post](https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/)
 and [this series of
 posts](https://mycarta.wordpress.com/2012/05/12/the-rainbow-is-dead-long-live-the-rainbow-part-1/).
 A better alternative when you really need small differences in your data
-to stand out is to use the [turbo rainbow color
+to stand out is to use the [turbo rainbow colour
 scheme](https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html).
 
 ---
@@ -248,16 +248,17 @@ alt.Chart(cars).mark_circle(size=50).encode(
 
 Notes: In the previous slides we encoded the same dataframe column in
 both the `x` and `color` channel so that it was easy for us to directly
-compare the colors to the points position on the x-axis.
+compare the colours to the points position on the x-axis.
 
 However, this is rarely done in practice, where it is often more
-effective to encode a separate dataframe column as the color of the
+effective to encode a separate dataframe column as the colour of the
 points.
 
-In this slide we have encoded the weight of the cars as the color. As we
-talked about in a previous module, it is difficult to see exactly which
-value a color represents, but we can effectively communicate roughly how
-heavy the cars are as well as clearly highlight trends in the data.
+In this slide we have encoded the weight of the cars as the colour. As
+we talked about in a previous module, it is difficult to see exactly
+which value a colour represents, but we can effectively communicate
+roughly how heavy the cars are as well as clearly highlight trends in
+the data.
 
 In this plot the trend is that the points get gradually darker the
 further towards the bottom right corner they lie. This means that
@@ -273,17 +274,17 @@ mileage.
 </center>
 
 Notes: In this slide, you see the lightness variation among all the
-color schemes we have covered. Categorical colors are discretely
-separated, perceptually uniform color schemes vary lightness linearly
+colour schemes we have covered. Categorical colours are discretely
+separated, perceptually uniform colour schemes vary lightness linearly
 throughout the range, whereas rainbow maps peak lightness in the middle
-and have dark colors at the extremes.
+and have dark colours at the extremes.
 
-The color scheme to the far right is called a diverging color scheme,
+The colour scheme to the far right is called a diverging colour scheme,
 which are useful when there is a natural midpoint in the data as we will
 see next.
 
-There is also one other type of color scheme, cyclical, which starts and
-ends in both the same lightness and hue. This design is useful for
+There is also one other type of colour scheme, cyclical, which starts
+and ends in both the same lightness and hue. This design is useful for
 values with natural cycles such as degrees of an angle of month of the
 year, where the end and beginning are close to each other.
 
@@ -305,14 +306,14 @@ alt.Chart(toronto_temp).mark_circle(size=50).encode(
 </iframe>
 
 Notes: Examples of data that is effectively represented by diverging
-color schemes include temperature, correlations, and differences, where
+colour schemes include temperature, correlations, and differences, where
 zero often can be a natural midpoint.
 
 Here we are plotting data from the last few years of the average daily
 temperature (C) in Toronto, Canada [downloaded from
 weatherstats.ca](https://toronto.weatherstats.ca/download.html).
 
-As you can see, a sequential color scheme can be used to visualize this
+As you can see, a sequential colour scheme can be used to visualize this
 data, but it does not get a good sense for when the temperature was
 negative and when it was positive.
 
@@ -332,11 +333,11 @@ alt.Chart(toronto_temp).mark_circle(size=50).encode(
 <iframe src="/module5/charts/16/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: When using a diverging colors scheme as in this slide, it is
+Notes: When using a diverging colours scheme as in this slide, it is
 clear which days had the extreme negative and the extreme positive
 temperatures.
 
-This is because diverging color schemes vary in lightness from dark at
+This is because diverging colour schemes vary in lightness from dark at
 the extremes to light in the middle, and use different hues for values
 on each side of the midpoint.
 
@@ -347,7 +348,7 @@ we specify this manually.
 The default diverging coor scheme uses orange and blue hues, but there
 are many other effective combinations. You should avoid using green and
 red, because these are practically impossible to tell apart for people
-with the most common types of color vision deficiencies.
+with the most common types of colour vision deficiencies.
 
 ---
 
@@ -365,21 +366,22 @@ alt.Chart(toronto_temp).mark_circle(size=50).encode(
 <iframe src="/module5/charts/16/unnamed-chunk-9.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: When setting the midpoint of the diverging color scheme, the
+Notes: When setting the midpoint of the diverging colour scheme, the
 extremes data values on either side are given the darkest lightness
 values.
 
 This means that the positive side of the scale is longer, and only
-points 30 degrees away from the midpoint are colored in the darkest
-orange color,
+points 30 degrees away from the midpoint are coloured in the darkest
+orange colour,
 
 On the other hand, for the negative values it is sufficient to be only
-20 degrees away from the midpoint to be color in the darkest blue color.
+20 degrees away from the midpoint to be colour in the darkest blue
+colour.
 
-This coloring strategy is often effective, but it is also possible for
-us to set the explicit domain over which the colors are defined, so that
-points as many steps on either side of the midpoint are assigned the
-same lightness values.
+This colouring strategy is often effective, but it is also possible for
+us to set the explicit domain over which the colours are defined, so
+that points as many steps on either side of the midpoint are assigned
+the same lightness values.
 
 For temperature data, either approach is fine and it depends on what we
 want to highlight.
@@ -388,7 +390,7 @@ For correlation data, which can never be over 1 or under -1, it would
 more often than not be sensible to set these limits as the domain
 values.
 
-[If you are interested in reading more about how color choices
+[If you are interested in reading more about how colour choices
 determines what we see, this is an educational
 article](https://eos.org/features/visualizing-science-how-color-determines-what-we-see).
 

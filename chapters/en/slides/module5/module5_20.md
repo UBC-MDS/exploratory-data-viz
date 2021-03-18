@@ -4,7 +4,7 @@ type: slides
 
 # Annotating with text and colour
 
-Notes: In this module we will be learning how to use color and text to
+Notes: In this module we will be learning how to use colour and text to
 annotate our visualizations and highlight important features.
 
 ---
@@ -52,7 +52,7 @@ We can see that most contributions seem to be donated in the middle of
 the week and the Wed stands out as the day where the highest amount of
 money is donated.
 
-To draw additional attention to this bar, we could use color to
+To draw additional attention to this bar, we could use colour to
 highlight it.
 
 ---
@@ -64,7 +64,7 @@ top_day = donations.groupby('week_day')['sum'].sum().idxmax()
 alt.Chart(donations).mark_bar().encode(
     alt.Y('week_day', sort=list(day_abbr), title=None),
     alt.X('sum(sum)', axis=alt.Axis(format='$s'), title='Total donated amount'),
-    color = alt.condition(alt.datum.week_day == top_day,
+    color=alt.condition(alt.datum.week_day == top_day,
                           alt.value('coral'),
                           alt.value('steelblue')))
 ```
@@ -72,11 +72,11 @@ alt.Chart(donations).mark_bar().encode(
 <iframe src="/module5/charts/20/unnamed-chunk-3.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: To add a highlight color, we could create a new column in our
+Notes: To add a highlight colour, we could create a new column in our
 dataframe that has a unique value for the bars we want to highlight and
 the same value for everything else.
 
-Then we could use this as a categorical column to color by via the
+Then we could use this as a categorical column to colour by via the
 `color` encoding.
 
 The downside of this is that we need to modify the dataframe, which
@@ -93,7 +93,7 @@ Conceptually, you can think of `alt.condition` like this:
 
 So here we are checking if the `week_day` column has the value `'Wed'`,
 and if it does we use the `'coral'` color, otherwise we use the default
-`'steelblue'` color.
+`'steelblue'` colour.
 
 Instead of typing out `'Wed'` each time we calculate the day with the
 highest sum of donations using pandas and extract it using the
@@ -102,7 +102,7 @@ value. This way, we can reuse our code in the future even if the top
 donation day is no long Wednesday.
 
 We need to `alt.value` to tell Altair that we want to use this specific
-color name, rather than looking for a column in the dataframe with this
+colour name, rather than looking for a column in the dataframe with this
 name.
 
 `alt.datum` is a way to unambiguously access a column name in
@@ -117,10 +117,10 @@ confused for just that string of letters.
 chart = alt.Chart(donations).mark_bar().encode(
     alt.Y('week_day', sort=list(day_abbr), title=None),
     alt.X('sum(sum)', axis=alt.Axis(format='$s'), title='Total donated amount'),
-    color = alt.condition(alt.datum.week_day == top_day,
+    color=alt.condition(alt.datum.week_day == top_day,
                           alt.value('coral'),
                           alt.value('steelblue')))
-(chart 
+(chart
  + chart
  .mark_text(align='left', dx=-125, dy=-15)
  .encode(text=alt.condition(alt.datum.week_day == top_day,
@@ -132,7 +132,7 @@ chart = alt.Chart(donations).mark_bar().encode(
 </iframe>
 
 Notes: We can add a custom text annotation to the plot in the same way
-that we added a custom color. This annotation could be an explanatory
+that we added a custom colour. This annotation could be an explanatory
 label, for example when an event happened on a time axis, or as the
 label that we made up for this chart.
 
@@ -216,7 +216,7 @@ title = alt.TitleParams(
 chart = alt.Chart(donations, title=title).mark_bar().encode(
     alt.Y('week_day', sort=list(day_abbr), title=None),
     alt.X('sum(sum)', axis=None),
-    color = alt.condition(alt.datum.week_day == top_day,
+    color=alt.condition(alt.datum.week_day == top_day,
                           alt.value('coral'),
                           alt.value('steelblue')))
 (chart + chart.mark_text(align='left', dx=2).encode(text=alt.Text('sum(sum)', format='$.3s'))).configure_view(strokeWidth=0)
@@ -259,10 +259,10 @@ alt.themes.enable('dark');
 
 Notes: To style multiple visual components of our charts in the same
 command, we can use the built-in themes in Altair. Here we set the theme
-to dark, which automatically changes the color of the y-axis labels and
+to dark, which automatically changes the colour of the y-axis labels and
 chart title.
 
-Unfortunately, the subtitle color does not yet change automatically, so
+Unfortunately, the subtitle colour does not yet change automatically, so
 we need to change this manually.
 
 We could have rewritten the entire plot from last slide and added

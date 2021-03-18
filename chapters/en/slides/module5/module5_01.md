@@ -27,7 +27,7 @@ to tell different stories from the same underlying data.
 
 On this slide, you can see an award winning figure describing the
 “bloody toll” from the American war in Iraq. This figure has been
-purposely designed to draw your attention to the blood-like red color
+purposely designed to draw your attention to the blood-like red colour
 and the downward facing bars which brings up association with dripping
 blood.
 
@@ -48,7 +48,7 @@ Infoworld](https://www.infoworld.com/article/3088166/why-how-to-lie-with-statist
 
 Notes: This figure paints an entirely different picture of the event. It
 focuses on the recent declining trend in deaths, uses a positive green
-color, and has the bars facing upwards.
+colour, and has the bars facing upwards.
 
 Both figures are correct and both use the same data, but they convey
 starkly distinct messages.
@@ -74,9 +74,9 @@ how Napoleon’s army gradually shrank in numbers as the march against the
 Russian empire in the early 1800s.
 
 The width of the line is the number of soldiers in the army and the
-color represents whether the are marching against Moscow (gold/brown) or
-retreating back to France (black). The bottom of the chart shows how the
-temperature changed during the campaign.
+colour represents whether the are marching against Moscow (gold/brown)
+or retreating back to France (black). The bottom of the chart shows how
+the temperature changed during the campaign.
 
 It does take a few seconds to digest the graph when you first see it,
 but once you have familiarized yourself with it, you appreciate how you
@@ -146,18 +146,19 @@ which is an effective way to learn.
 </iframe>
 
 Notes: On this slide we have represented the values of one of the
-dataframe columns with different color combinations. Using the correct
-color combination might at first seem like a matter of aesthetics rather
-than an important part of data visualization, but it can have a profound
-impact on how we interpret plots.
+dataframe columns with different colour combinations. Using the correct
+colour combination might at first seem like a matter of aesthetics
+rather than an important part of data visualization, but it can have a
+profound impact on how we interpret plots.
 
-Without knowing the details of how the color combinations in this slide
-were created or even what makes for a good combination of colors, we can
-immediately see that it is easier to interpret the plot on the right.
+Without knowing the details of how the colour combinations in this slide
+were created or even what makes for a good combination of colours, we
+can immediately see that it is easier to interpret the plot on the
+right.
 
 Having the slight variation from light to dark blue is a more natural
 mapping for a range of values compared to the wide array of different
-colors used in the left plot.
+colours used in the left plot.
 
 We will learn why this is in a few slide decks!
 

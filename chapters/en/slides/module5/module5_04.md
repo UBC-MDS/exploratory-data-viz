@@ -236,10 +236,10 @@ lines + texts
 </iframe>
 
 Notes: In this graph, we could label the lines directly instead of
-relying on the legend text and additional colored lines marks.
+relying on the legend text and additional coloured lines marks.
 
 This has the advantage that we don’t have to go back and forth between
-the legend and the plot, and avoids issues from matching up the colors
+the legend and the plot, and avoids issues from matching up the colours
 incorrectly.
 
 We use `align` to attach the left part of the label to the data point at
@@ -331,7 +331,7 @@ each stock.
 
 In addition to being used in the x and y axis, axis formatting can be
 applied to any aspect of Altair that uses `alt.Axis`, including legends
-for colors and sizes.
+for colours and sizes.
 
 Other useful format strings include `%` for including a percentage sign,
 `e` to force scientific format, `d` to force integer format, `~` which
@@ -430,7 +430,7 @@ those members of the audience that have a hard time discerning small
 text.
 
 In this figure, you can see several examples of how to set fontsizes for
-titles and labels, as well as how to change the font color and weight.
+titles and labels, as well as how to change the font colour and weight.
 
 This figure does not necessarily look good as a whole, but serves to
 demonstrate how to set multiple of these properties at once.
