@@ -4,7 +4,7 @@ type: slides
 
 # Effective use of colour for categorical data
 
-Notes: In this slide deck you will learn how to select colors that
+Notes: In this slide deck you will learn how to select colours that
 accurately represents your data and effectively communicate it to the
 reader.
 
@@ -14,13 +14,13 @@ reader.
 
 ![](/module5/color-importance-vessels.png)
 
-Notes: In module 2 we discussed how changing the colorscheme drastically
-improved a clinical outcome by almost doubling physician’s detection
-rate of blodd vessles regions indicative of potential future heart
-disease (from 40% to 70%).
+Notes: In module 2 we discussed how changing the colourscheme
+drastically improved a clinical outcome by almost doubling physician’s
+detection rate of blodd vessles regions indicative of potential future
+heart disease (from 40% to 70%).
 
 In this slide deck we will discuss some of the consideration that goes
-into evaluating if a colorscheme (also called a colormap) is suitable
+into evaluating if a colourscheme (also called a colourmap) is suitable
 for the data you are visualizing.
 
 ---
@@ -31,12 +31,12 @@ for the data you are visualizing.
 <img src="/module5/hsl-cylinder.png" width="90%"></img>
 </center>
 
-Notes: There are several different ways to represent colors. You might
+Notes: There are several different ways to represent colours. You might
 arleady have heard of RGB (red, green, blue) or CMYK (cyan, magenta,
-yellow, black) where different amount of a set of base colors are
-combined to create all possible colors.
+yellow, black) where different amount of a set of base colours are
+combined to create all possible colours.
 
-When discussing colors in the context of data visualization, We will be
+When discussing colours in the context of data visualization, We will be
 describing them with the parameters “hue”, “saturation” and “lightness”.
 
 The left schematic in this slide is a 2D circular representation
@@ -57,13 +57,13 @@ parameters represent.
 Notes: We could verbalize the changes we saw in the previous slide in
 the following manner:
 
-Hue is what we traditionally think of as the “color”, is it red, blue,
+Hue is what we traditionally think of as the “colour”, is it red, blue,
 etc?
 
 Each hue can have a varying saturation, which ranges from a dull,
 greyish appearance to a vibrant fully saturated hue.
 
-Lightness is how bright the color is. For every hue, it starts at black
+Lightness is how bright the colour is. For every hue, it starts at black
 (no lightness) and ends at white (full lightness).
 
 Hue and lightness are the most important from a data visualization
@@ -71,7 +71,7 @@ perspective, and we use them for categorical and quantitative data,
 respectively.
 
 Saturation is often used more as a stylistic choice to decide whether
-the colors we use should be muted/desaturated or vivid/saturated.
+the colours we use should be muted/desaturated or vivid/saturated.
 
 ---
 
@@ -87,7 +87,7 @@ mix them up.
 
 The leftmost plot uses different hues to separate the points belonging
 to different categories. We can quickly identify that there is a total
-of three distinct colors being used here even without looking at the
+of three distinct colours being used here even without looking at the
 legend.
 
 In the plot to the right we used lightness within a single hue (blue) to
@@ -104,24 +104,24 @@ difficult to tell which points are which shade of blue.
 </center>
 
 Notes: There are many different hues we could use to represent our
-colors and some might not go as well together as others, so how do we
+colours and some might not go as well together as others, so how do we
 decide which ones to use?
 
-Fortunately, we don’t have to design our own combination of colors to
+Fortunately, we don’t have to design our own combination of colours to
 use, but can pick from combinations designed by experts to be easy to
-tell apart and in most cases also suitable for people with color vision
+tell apart and in most cases also suitable for people with colour vision
 deficiencies.
 
-These color combinations are referred to as color schemes in Altair, but
-you might also hear them being called colormaps or color palettes.
+These colour combinations are referred to as colour schemes in Altair,
+but you might also hear them being called colourmaps or colour palettes.
 
-In this slide, you can see some of the color schemes for categorical
+In this slide, you can see some of the colour schemes for categorical
 values that are built into Altair.
 
 The default one is “tableau10” and it was named this way because it was
 originally designed by the company Tableau, but is now one of the most
-common categorical color schemes used in data visualization. [All Altair
-color schemes can be viewed
+common categorical colour schemes used in data visualization. [All
+Altair colour schemes can be viewed
 here](https://vega.github.io/vega/docs/schemes/).
 
 ---
@@ -138,10 +138,10 @@ alt.Chart(cars).mark_point(size=70, filled=True).encode(
 <iframe src="/module5/charts/12/unnamed-chunk-2.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: You can change the color scheme of a plot by specifying its name
+Notes: You can change the colour scheme of a plot by specifying its name
 as a string to the `scheme` parameter inside `alt.Scale`.
 
-To more easily see the changes we are making to the colors, we also
+To more easily see the changes we are making to the colours, we also
 increase the size of all points via the `size` parameter of the mark.
 
 ---
@@ -159,17 +159,19 @@ alt.Chart(cars).mark_point(size=70, filled=True).encode(
 <iframe src="/module5/charts/12/unnamed-chunk-3.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: Although many of the color schemes in Altair are designed
-according to the guidelines for effective color uses, they can sometimes
-be difficult to interpret for people with color vision deficiencies.
+Notes: Although many of the colour schemes in Altair are designed
+according to the guidelines for effective colour uses, they can
+sometimes be difficult to interpret for people with colour vision
+deficiencies.
 
-Especially color schemes that mix red and green as the one in the
+Especially colour schemes that mix red and green as the one in the
 previous slide.
 
-In addition to using a more suitable color scheme (such as the default),
-we could also change the shape of the points for each category.
+In addition to using a more suitable colour scheme (such as the
+default), we could also change the shape of the points for each
+category.
 
-Although this is technically redundant since the color is already used
+Although this is technically redundant since the colour is already used
 for the categorical groups, it can make your visualization more
 effective since it makes the points more distinct from each other.
 
@@ -199,25 +201,26 @@ alt.Chart(cars).mark_point(size=70, filled=True).encode(
 <!-- #region -->
 
 Notes: Most of the time it is a good idea to stick to the predefined
-color scheme because of the advantages mentioned in the previous slide.
+colour scheme because of the advantages mentioned in the previous slide.
 
-However, sometimes the categories we are representing might have a color
-already associated with them, such as political parties or sports team.
+However, sometimes the categories we are representing might have a
+colour already associated with them, such as political parties or sports
+team.
 
-In these cases, it is often better to design a custom color scheme using
-the colors naturally associated with each category.
+In these cases, it is often better to design a custom colour scheme
+using the colours naturally associated with each category.
 
-In Altair we can create a custom color scheme by passing a list of
-colors to the `range` parameter of `alt.Scale`.
+In Altair we can create a custom colour scheme by passing a list of
+colours to the `range` parameter of `alt.Scale`.
 
-You can specify colors either by their HTML/CSS name (such as ‘coral’)
-or their hex code (such as ‘\#4682b4’). [All HTML/CSS color names can be
-found in the image in this
+You can specify colours either by their HTML/CSS name (such as ‘coral’)
+or their hex code (such as ‘\#4682b4’). [All HTML/CSS colour names can
+be found in the image in this
 post](https://stackoverflow.com/a/37232760/2166823).
 
-Hex codes are defines over the range `#000000` for black (“zero color”)
-to `#ffffff` for white (“full color”) and [are easiest chosen via color
-pickers such as this one](https://colorpicker.me/).
+Hex codes are defines over the range `#000000` for black (“zero colour”)
+to `#ffffff` for white (“full colour”) and [are easiest chosen via
+colour pickers such as this one](https://colorpicker.me/).
 
 ---
 
@@ -227,7 +230,7 @@ pickers such as this one](https://colorpicker.me/).
 <img src=/module5/hue-guidelines.png></img>
 </center>
 
-Notes: Although many of the categorical color schemes contain ten or
+Notes: Although many of the categorical colour schemes contain ten or
 more hues, if is often not a good idea to use all that many because it
 becomes near impossibe to distinguish the different hues from each
 other.
@@ -239,9 +242,9 @@ the best way to represent your data or if you could split it up into
 multiple visualizations instead.
 
 If the data is neatly organized in well-separated clusters, it is
-possible that you could visualize more than five colors (maybe even ten)
-effectively, but in data where the datapoints are more mixed, you will
-rarely, if ever, be able to go this high.
+possible that you could visualize more than five colours (maybe even
+ten) effectively, but in data where the datapoints are more mixed, you
+will rarely, if ever, be able to go this high.
 
 ---
 
@@ -260,19 +263,19 @@ alt.Chart(cars).mark_point(size=70, filled=True).encode(
 </iframe>
 
 Notes: This is an example of what happens when too many categorical hues
-are used. In this plot, we can not separate the colors even if we spent
+are used. In this plot, we can not separate the colours even if we spent
 a considerable amount of effort studying the chart.
 
-As we saw on the last slide, categorical color schemes have a limited
+As we saw on the last slide, categorical colour schemes have a limited
 amount of hues so in addition of it being hard to differentiate this
 many hues in general, it become practically impossible in cases where
-there are more categories than coor hues, since the color scheme starts
+there are more categories than coor hues, since the colour scheme starts
 repeating as in the chart.
 
 A better approach here would have been to label specific points of
-interest directly and keeping the rest as either a single color or using
-a categorical variable with fewer values, e.g. by grouping the cars into
-brands rather than their full model name.
+interest directly and keeping the rest as either a single colour or
+using a categorical variable with fewer values, e.g. by grouping the
+cars into brands rather than their full model name.
 
 Since Altair allows for interactive elements, we could also have used
 the tooltip here as we saw in a previous module.
@@ -293,23 +296,23 @@ chart | chart.encode(alt.Color('Brand', legend=None, scale=alt.Scale(scheme='tab
 </iframe>
 
 Notes: A few slides ago we saw how encoding the same variable as both
-shape and color could make our figures more effective although it is
+shape and colour could make our figures more effective although it is
 technically redundant.
 
 Similarly, you might come across bar charts where the author of the
-visualization has added a distinct color for each bar.
+visualization has added a distinct colour for each bar.
 
 This can work when there are relatively few bars, but it usually does
 not add anything and can become directly disorienting when there are
 many bars as in this slide.
 
-It is usually preferable to color all the bars in the same color (or
+It is usually preferable to colour all the bars in the same colour (or
 after another categorical variable, such as “Origin” in this data), and
 let the axis labels alone identify which category the bar belongs too.
 
 One exception to this is if each axis label is broken down into
 subcategories where each location has multiple bars based on another
-categorical variable, then color can help.
+categorical variable, then colour can help.
 
 You can also see that the car brands are not systematically named and we
 would need to clean this data to unify e.g. ‘vw’, ‘vokswagen’, and
@@ -334,18 +337,18 @@ chart = alt.Chart(cars).mark_bar().encode(
 Notes:
 
 When creating a figure that contains several subplots, it is important
-to be consistent in the coloring between these even if the coloring is
+to be consistent in the colouring between these even if the colouring is
 redundant in one of the subplots.
 
-Here we have colored the bars to match the lines although we could tell
+Here we have coloured the bars to match the lines although we could tell
 the categories only from reading the axis labels.
 
-It is important to not use different colors for the same categories
+It is important to not use different colours for the same categories
 between subplots. For example, if we made an additional subplot which
 only contained Japan and USA, then we should make sure that these are
-still colored in orange and red. Since the default Altair color scheme
+still coloured in orange and red. Since the default Altair colour scheme
 will always start with blue, we would need to manually specify the
-colors in this case.
+colours in this case.
 
 ---
 

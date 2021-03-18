@@ -5,7 +5,7 @@ type: slides
 # Comparing many distributions
 
 Notes: To compare multiple distributions we have seen have we can use
-faceting for histograms and either faceting or coloring for density
+faceting for histograms and either faceting or colouring for density
 plots.
 
 So far we only studied these plots with up to three different
@@ -227,7 +227,7 @@ observations stacked on top of each other?
 
 This plot is saturated, something we will discuss in detail in the next
 module. We could use transparency to alleviate this issue to some
-extend, but it is more effective to use color for representing the
+extend, but it is more effective to use colour for representing the
 counts, such as in a heatmap.
 
 ---
@@ -245,27 +245,27 @@ counts, such as in a heatmap.
 </iframe>
 
 Notes: A heatmap of the number of observations is very similar to a
-histogram, but the count is mapped to the color instead of to the height
-on the y-axis.
+histogram, but the count is mapped to the colour instead of to the
+height on the y-axis.
 
 This heatmap shows the histogram for each of the genres right next to
 each other so that they are easy to compare and contrast, by looking at
-the varying colors.
+the varying colours.
 
 We can see that some genres appear to have most of their observations
 close to zero, such as Comedy and Drama, whereas others are more spread
 out, such as Adventure movies.
 
-This is a pretty effective visualization, but since the color scale is
+This is a pretty effective visualization, but since the colour scale is
 the same for each genre and some genres have many more observations than
 others, it can be difficult to accurately interpret the distribution of
 those genres that have few observations.
 
 For example, we wouldn’t be able to distinguish between regions with
-10-20 and 40-50 observations since the colors are so similar.
+10-20 and 40-50 observations since the colours are so similar.
 
 Remember that comparing positions is more effective than than comparing
-colors, so how can we use position to compare multiple distributions?
+colours, so how can we use position to compare multiple distributions?
 
 ---
 

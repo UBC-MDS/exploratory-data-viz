@@ -176,12 +176,12 @@ x-axis, those are the more informative in a density plot.
 <iframe src="/module3/charts/06/unnamed-chunk-3.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: If we want to split and color the densities by a categorical
+Notes: If we want to split and colour the densities by a categorical
 dataframe column, we need to explicitly specify a dataframe column to
 the `groupby` parameter when calculating the density.
 
-Setting this parameter to the same column we use for the color encoding
-will compute one density for each of the differently colored areas.
+Setting this parameter to the same column we use for the colour encoding
+will compute one density for each of the differently coloured areas.
 
 This plot effectively conveys the differences between runtimes of movies
 from different genres.
@@ -341,7 +341,8 @@ interpreting a density plot.
 ## Densities can be combined with plotting individual data points
 
 ``` python
-(density.mark_area(opacity=0.7) + alt.Chart(movies[:10]).mark_tick(color='black', yOffset=140).encode(x='runtime'))
+(density.mark_area(opacity=0.7)
+ + alt.Chart(movies[:10]).mark_tick(color='black', yOffset=140).encode(x='runtime'))
 ```
 
 <iframe src="/module3/charts/06/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
