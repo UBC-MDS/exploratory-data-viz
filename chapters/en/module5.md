@@ -16,7 +16,7 @@ id: 5
 <slides source="module5/module5_00" shot="0" start="3:5707" end="4:5306"> </slides>
 </exercise>
 
-<exercise id="1" title="Effective Figure Design" type="slides,video">
+<exercise id="1" title="Effective Figures for Communication" type="slides,video">
 <slides source="module5/module5_01" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
@@ -399,7 +399,7 @@ Neither plot, shows any information regarding the `island` column.
 
 </exercise>
 
-<exercise id="8" title="Defining and transforming axis ranges" type="slides,video">
+<exercise id="8" title="Defining and Transforming Axis Ranges" type="slides,video">
 <slides source="module5/module5_08" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
