@@ -1024,7 +1024,7 @@ Can you think of why this might occur?
 
 </exercise>
 
-<exercise id="20" title="Using Colour to Highlight Data" type="slides,video">
+<exercise id="20" title="Anotating With Text and Colour" type="slides,video">
 <slides source="module5/module5_20" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
