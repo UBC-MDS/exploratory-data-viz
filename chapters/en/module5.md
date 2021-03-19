@@ -399,7 +399,7 @@ Neither plot, shows any information regarding the `island` column.
 
 </exercise>
 
-<exercise id="8" title="Defining and transforming axis ranges" type="slides,video">
+<exercise id="8" title="Defining and Transforming Axis Ranges" type="slides,video">
 <slides source="module5/module5_08" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
