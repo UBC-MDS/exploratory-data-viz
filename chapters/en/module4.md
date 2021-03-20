@@ -13,7 +13,7 @@ id: 4
 </exercise>
 
 <exercise id="1" title="Visualizing Multidimensional Distributions" type="slides,video">
-<slides source="module4/module4_01" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module4/module4_01" shot="2" start="0:003" end="09:17"> </slides>
 </exercise>
 
 <exercise id="2" title="True or False: Plotting Multiple Numerical Columns">
@@ -322,7 +322,7 @@ These intervals seem rather high? Maybe inspect flipper length and mass that are
 </exercise>
 
 <exercise id="6" title="Visualizing Categorical Distributions" type="slides,video">
-<slides source="module4/module4_06" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module4/module4_06" shot="2" start="9:2501" end="22:1100"> </slides>
 </exercise>
 
 <exercise id="7" title="Return of the Pokemon">
@@ -440,7 +440,7 @@ This generation has no ground Pokemon.
 
 
 <exercise id="8" title="Exploratory Data Analysis" type="slides,video">
-<slides source="module4/module4_08" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module4/module4_08" shot="2" start="22:2100" end="39:4924"> </slides>
 </exercise>
 
 
@@ -619,7 +619,7 @@ Do you see 2 "bumps" in any of the plots? Maybe look at the `culmen_length_mm` a
 
 
 <exercise id="12" title="Exploratory Data Analysis on Categorial Data" type="slides,video">
-<slides source="module4/module4_12" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module4/module4_12" shot="2" start="39:5810" end="44:3200"> </slides>
 </exercise>
 
 
