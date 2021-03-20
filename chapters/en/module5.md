@@ -996,7 +996,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 - Are you using `mark_point(size=50)`?
 - Are you setting `alt.X('date', title="Date"))`?
 - Are you setting `alt.Y('total_rain_mm',title='rainfall total for the month (mm)')`?
-- In the  plot, are you coding `alt.Color('mean_temp', title=' Mean Temperature', scale=alt.Scale(scheme='blueorange'))`?
+- In the  plot, are you coding `alt.Color('mean_temp', title=' Mean Temperature', scale=alt.Scale(scheme='blueorange', domainMid=0))`?
 - Are you setting a title in `properties()`?
 
 </codeblock>
