@@ -140,7 +140,7 @@ Nice!
 
 
 <exercise id="4" title="Descriptive Titles and Labels" type="slides,video">
-<slides source="module5/module5_04" shot="2" start="48:47" end="57:51"> </slides>
+<slides source="module5/module5_04" shot="2" start="48:08" end="57:51"> </slides>
 </exercise>
 
 
