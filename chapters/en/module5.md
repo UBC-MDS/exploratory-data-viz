@@ -17,7 +17,7 @@ id: 5
 </exercise>
 
 <exercise id="1" title="Effective Figures for Communication" type="slides,video">
-<slides source="module5/module5_01" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_01" shot="2" start="44:4606" end="47:57"> </slides>
 </exercise>
 
 
@@ -140,7 +140,7 @@ Nice!
 
 
 <exercise id="4" title="Descriptive Titles and Labels" type="slides,video">
-<slides source="module5/module5_04" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_04" shot="2" start="48:47" end="57:51"> </slides>
 </exercise>
 
 
@@ -400,7 +400,7 @@ Neither plot, shows any information regarding the `island` column.
 </exercise>
 
 <exercise id="8" title="Defining and Transforming Axis Ranges" type="slides,video">
-<slides source="module5/module5_08" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_08" shot="2" start="57:57" end="67:02"> </slides>
 </exercise>
 
 
@@ -661,7 +661,7 @@ There appears to be some sort of relationship between the variables, maybe take 
 </exercise>
 
 <exercise id="12" title="Effective Use of Colour for Categorical Data" type="slides,video">
-<slides source="module5/module5_12" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_12" shot="2" start="67:09" end="78:2829"> </slides>
 </exercise>
 
 
@@ -845,7 +845,7 @@ Hmmm, Have you tried plotting it without? What about the <code>Shape</code> chan
 </exercise>
 
 <exercise id="16" title="Effective Use of Colour for Quantitative Data" type="slides,video">
-<slides source="module5/module5_16" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_16" shot="2" start="78:4228" end="92:24"> </slides>
 </exercise>
 
 
@@ -1025,7 +1025,7 @@ Can you think of why this might occur?
 </exercise>
 
 <exercise id="20" title="Anotating With Text and Colour" type="slides,video">
-<slides source="module5/module5_20" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_20" shot="2" start="92:3622" end="99:45"> </slides>
 </exercise>
 
 
