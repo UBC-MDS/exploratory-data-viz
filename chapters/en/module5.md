@@ -988,7 +988,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 
 - In a plot named `temp_plot`, use the data source `temps_df` to make a scatter plot (`mark_point`) with points that are size 50.
 - Map the date on the x-axis and the total rainfall levels on the y-axis. 
-- Map the mean temperature to a colour channel and select an appropriate [colour scheme](https://vega.github.io/vega/docs/schemes/). Is a diverging or sequential scheme more appropriate?
+- Map the mean temperature to a colour channel and select an appropriate [colour scheme](https://vega.github.io/vega/docs/schemes/). Is a diverging or sequential scheme more appropriate? What is an appropriate mid-point value?
 - Make sure you are giving the channels all proper labels and the plot a title. 
 
 <codeblock id="05_19">
