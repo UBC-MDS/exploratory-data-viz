@@ -6,7 +6,7 @@ type: slides
 
 Notes: In this slide deck, we will see how defining an explicit axis
 range is beneficial when we need to zoom into a region of a plot, and
-how log transforming an axis can help increase resolution of small
+how log transforming an axis can help increase the resolution of small
 values.
 
 ---
@@ -31,9 +31,9 @@ all donations received by Wikipedia in the year 2020. When do you think
 Wikipedia receives the largest amount of donated money?
 
 From this overview of the data we can see that the most money is donated
-around Christmas and new years.
+around Christmas and New Years’.
 
-There also seems to be a higher amount donated during the fall than
+There also seems to be a higher amount donated during the fall then
 during spring and winter.
 
 However, we cannot see exactly which values the data points during the
@@ -42,7 +42,7 @@ know from looking at this plot.
 
 ---
 
-## We can zoom in to highlight a region of an axes by filtering the data
+## We can zoom in to highlight a region of an axis by filtering the data
 
 ``` python
 title_text = 'Wikipedia donations peak during Christmas'
@@ -87,7 +87,7 @@ the chart.
 
 This also serves as a reminder to think twice about limiting the
 displayed points because it can skew the perception of the data as we
-saw with bar chart in the previous slide deck.
+saw with the bar chart in the previous slide deck.
 
 When we used `alt.Axis` previously, the changes we made were cosmetic,
 such as tick numbers, label formatting etc.
@@ -96,7 +96,7 @@ Now that were are modifying the range of the actual displayed values, we
 need to use `alt.Scale` instead. Here we place `alt.Scale` within
 `alt.Y` to specify that we are changing the scale of the y-axis. It also
 works the same way with `alt.Color` and `alt.Size`, which changes the
-display of the these in the legend.
+display of these in the legend.
 
 After zooming in on the y-axis as in this slide, we can more clearly see
 the variation in the lower value data points. We can see that more money
@@ -118,16 +118,16 @@ alt.Chart(donations[donations['sum'] > 2.5e6]).mark_circle().encode(
 
 Notes: You might have noticed from previous modules that Altair often
 includes 0 in the axis, even if our data does not have any values close
-to 0. The reason for this is to enforce good habits and not create for
-example bar plot that are cut off which makes difference appear much
-bigger than they actually are.
+to 0. The reason for this is to enforce good habits and not create, for
+example, a bar plot that is cut off which makes the difference appear
+much bigger than they actually are.
 
 However, there are also good reasons for setting the range based on the
 extent of the data. when your data is compressed in a narrow range far
 from zero, e.g. plotting time on one axis and having all observations
 fall between 10 and 11 in the evening.
 
-In this slide we can see that showing only the days with high total
+In this slide, we can see that showing only the days with high total
 donations only uses about half of the vertical space available in the
 chart.
 
@@ -148,11 +148,11 @@ Notes: If we wanted to use the full range, we could set the domain
 explicitly like before, but the shortcut `zero=False` allows us to
 adjust the axis to the min and max values of the data with less typing.
 
-We need to be careful when doing this since it can make small difference
-appear much bigger than they are. On the previous slide the point at
-4.7M was about twice as far from the x-axis as the point at 2.5M from
-the x-axis. In this slide it is about 20 times further away from the
-x-axis!
+We need to be careful when doing this since it can make small
+differences appear much bigger than they are. On the previous slide, the
+point at 4.7M was about twice as far from the x-axis as the point at
+2.5M from the x-axis. In this slide, it is about 20 times further away
+from the x-axis!
 
 ---
 
@@ -167,10 +167,10 @@ alt.Chart(donations, title='Wikipedia donations peak during Christmas').mark_cir
 <iframe src="/module5/charts/08/unnamed-chunk-7.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: So far, we have seen how we can zoom in to reveal detail of a
+Notes: So far, we have seen how we can zoom in to reveal the detail of a
 specific region of the chart.
 
-What if we want to show all the chart, but still be able to see details
+What if we want to show all the chart, but still, be able to see details
 for the days with lower total donations?
 
 ---
@@ -186,7 +186,7 @@ alt.Chart(donations, title='Wikipedia donations peak during Christmas').mark_cir
 <iframe src="/module5/charts/08/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: One of Altair’s stong suites is that it is not limited to static
+Notes: One of Altair’s strong suites is that it is not limited to static
 visualizations.
 
 By simply appending the `interactive()` method to our chart we can use
@@ -204,7 +204,7 @@ or display them in a static file-type, such as a PDF.
 
 ---
 
-## A log transformed axis can reveal detail across a large range of values
+## A log-transformed axis can reveal detail across a large range of values
 
 ``` python
 alt.Chart(donations).mark_point().encode(
@@ -227,7 +227,7 @@ differences in the data values, such as in our case here.
 Log scales are also useful to show data that has been obtained from
 multiplication or division, such as ratios.
 
-The default log transformaton in Altair uses the base 10 which is the
+The default log transformation in Altair uses the base 10 which is the
 most common choice. Every step on a log scale is referred to as a
 difference of an “order of magnitude”.
 
@@ -280,10 +280,10 @@ alt.Chart(donations).mark_point().encode(
 <iframe src="/module5/charts/08/unnamed-chunk-11.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: Fortunately there is a symmetrical variant of the log
+Notes: Fortunately, there is a symmetrical variant of the log
 transformation (symlog) which works around the issues with zeroes by
 defining a linear range for values close to 0, and a logarithmic range
-all other values.
+of all other values.
 
 We can see that the y-axis looks different here as it explicitly
 includes the value zero, and the tick values are set differently for
@@ -303,17 +303,17 @@ alt.Chart(donations.drop(0)).mark_line().encode(
 <iframe src="/module5/charts/08/unnamed-chunk-12.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: In this slide we’re dropping the artificial 0 we introduced
+Notes: In this slide, we’re dropping the artificial 0 we introduced
 earlier to bring attention to another important aspect of visualization:
 the choice of mark.
 
-So far we have been plotting our timeseries data using circles. This has
-been useful to illustrate the points above, but it is not the most
+So far we have been plotting our time-series data using circles. This
+has been useful to illustrate the points above, but it is not the most
 effective choice for visualizing temporal data.
 
 By changing the mark to a line it is much easier for us to follow the
 trend going from one point to another and we can immediately spot a
-curios pattern!
+curious pattern!
 
 What are those repeated ups and down? Are those random fluctuations or
 are there particular days of the month where people are more likely to
@@ -321,9 +321,6 @@ donate?
 
 We will return to this data in the last slide deck of this module to
 find out!
-
-``` python
-```
 
 ---
 

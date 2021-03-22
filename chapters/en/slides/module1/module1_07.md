@@ -261,8 +261,8 @@ In this slide, we start by defining each chart separately:
 
 first a line plot, <br> then a point plot.
 
-We can then use `+` (plus) operator to combine the two into a layered
-chart.
+We can then use the `+` (plus) operator to combine the two into a
+layered chart.
 
 ---
 

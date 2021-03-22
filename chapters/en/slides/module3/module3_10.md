@@ -41,11 +41,11 @@ movies_extended
 [2926 rows x 16 columns]
 ```
 
-Notes: For this exercise we will use an extended movies dataset
+Notes: For this exercise, we will use an extended movies dataset
 containing additional genres.
 
 We load in that dataset from the vega sample repository and drop all the
-rows that have an NaN value in the column `"Major Genre"`, since we are
+rows that have a NaN value in the column `"Major Genre"`, since we are
 only interested in comparing the movies that we know belong to a genre.
 
 The question we will try to answer in this slide deck is “Which genres
@@ -71,8 +71,8 @@ multiple distributions, and not at all with this many different groups.
 Most genres have a low worldwide gross and because our histograms are
 stacked on top of each other the left-most bar dominates with around
 2000 movies. It extends the y-axis so that it is hard to see how many
-observations there are for highest x-values (but we know there are some
-since the axis extends that far).
+observations there are for the highest x-values (but we know there are
+some since the axis extends that far).
 
 ---
 
@@ -144,7 +144,7 @@ generated from three different distributions (B, C, or D).
 
 If we just looked at the bar chart, we could not tell which of the
 distributions it came from, but looking at the points directly we would
-arrive at widely different conclusion regarding our data.
+arrive at a widely different conclusion regarding our data.
 
 In sample B, the points seem to on average be slightly different between
 the two groups, although there is significant overlap between the
@@ -155,8 +155,8 @@ mean significantly for its group, but most of the other points are
 pretty similar between the two groups.
 
 In D, both groups have their data distributed bimodally (in two peaks).
-Maybe this means that there is a third group in this data which all the
-high values belong too?
+Maybe this means that there is a third group in this data to which all
+the high values belong too?
 
 All this valuable information about our data, is lost when visualizing
 it as a bar chart. Remember, bar charts are best suited for displaying
@@ -187,7 +187,7 @@ Notes: One approach would be to show the individual observations, such
 as in this chart. This is a compact plot, which makes it easy to compare
 the different genres, since they are close to each other in the chart.
 
-We can also clearly see the reason for why the x-axis goes up to such a
+We can also clearly see the reason why the x-axis goes up to such a
 large max value: There are two movies that grossed highly above the
 rest!
 
@@ -212,8 +212,8 @@ addition to having a robust visualization grammar, it also provides a
 grammar for interactive features.
 
 We will dive deep into more complex interactivity in the last module in
-this course, but for now we can simply add a tooltip and answer the
-question we just posed by hovering with the mouse over the two highly
+this course, but for now, we can simply add a tooltip and answer the
+question we just posed by hovering with the mouse over the two highest
 grossing movies. Try it!
 
 (We need the `:N` because there are some title values that makes Altair
@@ -264,12 +264,12 @@ those genres that have few observations.
 For example, we wouldn’t be able to distinguish between regions with
 10-20 and 40-50 observations since the colours are so similar.
 
-Remember that comparing positions is more effective than than comparing
+Remember that comparing positions is more effective than comparing
 colours, so how can we use position to compare multiple distributions?
 
 ---
 
-## Boxplots show several key statistic from a distribution
+## Boxplots show several key statistics from a distribution
 
 [Jhguch at en.wikipedia via Wikimedia
 Commons](https://commons.wikimedia.org/wiki/File:Boxplot_vs_PDF.svg)
@@ -287,8 +287,8 @@ Instead of showing just the mean or median as with a bar plot, a box
 plot shows 5 summary statistics.
 
 The box represents three values, the median in the middle and the lower
-and upper quartile at the edges This means that means that 50% of the
-data points lie within the box.
+and upper quartile at the edges This means that 50% of the data points
+lie within the box.
 
 The lines extending from the box are called whiskers and they can
 represent a few different statistics. Sometimes, they are showing the
@@ -333,8 +333,8 @@ Notes: Here we show a boxplot next to the barplot we created initially.
 The `|` operator works similarly to the `+` operator, but instead of
 layering charts on top of each other, it puts them next to each other.
 
-We can see that the box plots provides us with the same clear positional
-comparison as in the barplot, but we now also has access to additional
+We can see that the box plots provide us with the same clear positional
+comparison as in the barplot, but we now also have access to additional
 information about each genres’ distribution. We can ensure ourselves
 that the distributions are roughly the same shape and view potential
 outliers.
@@ -344,7 +344,7 @@ Adventure genre generates the highest revenue both in terms of the
 medians and the overall position of the boxes.
 
 It seems like Action is the second most highly grossing genre, but after
-that it becomes hard to compare. We could make this visualization even
+that, it becomes hard to compare. We could make this visualization even
 more effective by sorting the boxes according to their median value.
 
 ---
@@ -364,7 +364,7 @@ alt.Chart(movies_extended).mark_boxplot().encode(
 Notes: Altair does not support sorting boxplots via the “x” or “-x”
 shortcut.
 
-Instead we need to create a list of the genres, ordered by value.
+Instead, we need to create a list of the genres, ordered by value.
 
 We can do this with pandas by grouping the dataframe, computing the
 median for the grossing columns, sorting the values, and then extracting
@@ -392,8 +392,8 @@ alt.Chart(filtered_movies).mark_boxplot().encode(
 </iframe>
 
 Notes: Here we can compare the distributions more clearly, and it really
-looks like there is no large differences in the medians between the five
-genres behind Adventure and Action.
+looks like there are no large differences in the medians between the
+five genres behind Adventure and Action.
 
 We will need to keep in mind that there are two additional data points
 that we have excluded from this visualization, but neither the median
@@ -428,7 +428,7 @@ comedies.
 
 However, it also makes it hard to tell where the lines of the median and
 the boxes are for many of the distributions. A better alternative could
-be to not scale the boxes and instead include a bar chart with the
+be to not scale the boxes and instead, include a bar chart with the
 number of observations per genre together with the boxplot.
 
 ---

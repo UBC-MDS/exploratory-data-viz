@@ -278,7 +278,7 @@ consistent grammar that also allows us to add interactive components to
 our plots, such as tooltips and selections.
 
 We have also included some of the most common visualization packages for
-the web which are built in Javascript and coloured in white.
+the web which are built-in Javascript and coloured in white.
 
 The reason we mention these is that the Altair library is a little bit
 of Python code connected to an already existing powerful JavaScript
@@ -379,9 +379,9 @@ Since we have not specified which columns should be used for the x and y
 axes, we appear to only see one point in this plot since all the data is
 plotted on top of each other in the same location.
 
-To the right of the chart there is a button with three dots on it. don’t
-worry about it right now, we will explain what this is for at the end of
-the chapter.
+To the right of the chart, there is a button with three dots on it.
+don’t worry about it right now, we will explain what this is for at the
+end of the chapter.
 
 ---
 
@@ -413,7 +413,7 @@ The faint gray lines are called grid lines and extend the locations of
 the axis ticks so that it is easy to compare their position to the
 points.
 
-This is particularly useful when they points might be further away from
+This is particularly useful when the points might be further away from
 the axis ticks, such as in the next slide.
 
 ---
@@ -588,7 +588,7 @@ alt.Chart(cars).mark_point().encode(
 </iframe>
 
 Notes: This is the same visualization as from the last slide, and we
-will just use it an example.
+will just use it as an example.
 
 The button to the right of the chart with three dots on it is called the
 “action button”. and clicking it will bring up a menu.
@@ -606,5 +606,3 @@ this course.
 ---
 
 # Let’s apply what we learned!
-
-Notes: <br>
