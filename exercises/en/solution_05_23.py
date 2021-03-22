@@ -17,7 +17,7 @@ rain_plot = alt.Chart(temps_df).mark_bar().encode(
 ).properties(
     title='Between 2009-2012, May had the greatest total rainfall collectively')
 
-text_plot = rain_plot.mark_text(align='left', dx=4).encode(
+text_plot = rain_plot.mark_text(align='left', dx=5).encode(
     text=alt.Text('sum(total_rain_mm)', format='d'),
     color = alt.value('black'))
 
