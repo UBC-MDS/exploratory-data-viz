@@ -16,8 +16,8 @@ id: 5
 <slides source="module5/module5_00" shot="0" start="3:5707" end="4:5306"> </slides>
 </exercise>
 
-<exercise id="1" title="Effective Figure Design" type="slides,video">
-<slides source="module5/module5_01" shot="1" start="0:003" end="07:12"> </slides>
+<exercise id="1" title="Effective Figures for Communication" type="slides,video">
+<slides source="module5/module5_01" shot="2" start="44:4606" end="47:57"> </slides>
 </exercise>
 
 
@@ -140,7 +140,7 @@ Nice!
 
 
 <exercise id="4" title="Descriptive Titles and Labels" type="slides,video">
-<slides source="module5/module5_04" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_04" shot="2" start="48:08" end="57:51"> </slides>
 </exercise>
 
 
@@ -352,7 +352,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 - Display the base plot and take a look at what it's communicating.
 - Create text by using `mark_text()` and save this in an object named `text`. It should have the same x and y mapping as the base plot but this time you want to make sure the count is displayed on the side of each species bar. Make sure it's centered in alignment and located at `dx=10`.
 - After observing the plot create and object named `penguin_title` using `.TitleParams()`. In this method, you will need to specify an insightful title, and subtitle, give the title a fontsize of 18, and set the subtitle colour to `firebrick`.
-- Remove emove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method. 
+- Remove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method. 
 
 <codeblock id="05_07">
 
@@ -399,8 +399,8 @@ Neither plot, shows any information regarding the `island` column.
 
 </exercise>
 
-<exercise id="8" title="Defining and transforming axis ranges" type="slides,video">
-<slides source="module5/module5_08" shot="1" start="0:003" end="07:12"> </slides>
+<exercise id="8" title="Defining and Transforming Axis Ranges" type="slides,video">
+<slides source="module5/module5_08" shot="2" start="57:57" end="67:02"> </slides>
 </exercise>
 
 
@@ -466,6 +466,10 @@ You are on fire!
 
 </choice>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 </exercise>
 
 
@@ -660,7 +664,7 @@ There appears to be some sort of relationship between the variables, maybe take 
 </exercise>
 
 <exercise id="12" title="Effective Use of Colour for Categorical Data" type="slides,video">
-<slides source="module5/module5_12" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_12" shot="2" start="67:09" end="78:2829"> </slides>
 </exercise>
 
 
@@ -844,7 +848,7 @@ Hmmm, Have you tried plotting it without? What about the <code>Shape</code> chan
 </exercise>
 
 <exercise id="16" title="Effective Use of Colour for Quantitative Data" type="slides,video">
-<slides source="module5/module5_16" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module5/module5_16" shot="2" start="78:4228" end="92:24"> </slides>
 </exercise>
 
 
@@ -985,17 +989,17 @@ Tasks:
 Fill in the blanks in the code below so that the following gets accomplished:
 
 
-- In a plot named `temp_plot`, use the data source `temps_df` to make a scatter plot (`mark_point`) with points that are size 50.
+- In a plot named `temp_plot`, use the data source `temps_df` to make a scatter plot (`mark_circle`) with points that are size 50.
 - Map the date on the x-axis and the total rainfall levels on the y-axis. 
-- Map the mean temperature to a colour channel and select an appropriate [colour scheme](https://vega.github.io/vega/docs/schemes/). Is a diverging or sequential scheme more appropriate?
+- Map the mean temperature to a colour channel and select an appropriate [colour scheme](https://vega.github.io/vega/docs/schemes/). Is a diverging or sequential scheme more appropriate? What is an appropriate mid-point value?
 - Make sure you are giving the channels all proper labels and the plot a title. 
 
 <codeblock id="05_19">
 
-- Are you using `mark_point(size=50)`?
+- Are you using `mark_circle(size=50)`?
 - Are you setting `alt.X('date', title="Date"))`?
 - Are you setting `alt.Y('total_rain_mm',title='rainfall total for the month (mm)')`?
-- In the  plot, are you coding `alt.Color('mean_temp', title=' Mean Temperature', scale=alt.Scale(scheme='blueorange'))`?
+- In the  plot, are you coding `alt.Color('mean_temp', title=' Mean Temperature', scale=alt.Scale(scheme='blueorange', domainMid=0))`?
 - Are you setting a title in `properties()`?
 
 </codeblock>
@@ -1023,8 +1027,8 @@ Can you think of why this might occur?
 
 </exercise>
 
-<exercise id="20" title="Using Colour to Highlight Data" type="slides,video">
-<slides source="module5/module5_20" shot="1" start="0:003" end="07:12"> </slides>
+<exercise id="20" title="Anotating With Text and Colour" type="slides,video">
+<slides source="module5/module5_20" shot="2" start="92:3622" end="99:45"> </slides>
 </exercise>
 
 
@@ -1174,7 +1178,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 - Map the month on the y-axis and the sum of all the precipitation for each month on the x-axis. Print your chart first and examine which month has the most precipitation.
 - Color `rain_plot` by designating a different colour bar to the month with the highest rainfall.
 - Make sure you are giving the x-axis an appropriate label and the plot a title. 
-- In a second plot named `text_plot`, add text to each bar that shows the aggregate precipitation for each month and format it so it includes integer values only. Make sure it is aligned to the left and located 4 units to the right of the bar (use `dx` for this).  Set the text colour as black.
+- In a second plot named `text_plot`, add text to each bar that shows the aggregate precipitation for each month and format it so it includes integer values only. Make sure it is aligned to the left and located 5 units to the right of the bar (use `dx` for this).  Set the text colour as black.
 
 <codeblock id="05_23">
 

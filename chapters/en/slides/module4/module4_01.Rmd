@@ -16,12 +16,14 @@ source('../../../../slide-setup.R')
 type: slides
 
 
-# Visualizing multidimensional and categorical distributions
+# Visualizing Multidimensional Distributions
 
 Notes:
 In this slide deck,
-we will be extending what we learned previously about distributions 
-to two-dimensional and categorical data.
+we will extend what we learned in the previous module
+about visualizing individual quantitative dataframe columns
+as one-dimensional distributions
+to also be able to visualize two-dimensional distributions.
 
 ---
 
@@ -29,53 +31,196 @@ to two-dimensional and categorical data.
 
 ```{python}
 import altair as alt
-from vega_datasets import data
+import pandas as pd
 
-
-movies_extended = (
-    data.movies()
-    .dropna(subset=['Major Genre', 'MPAA Rating', 'Running Time min'])
-    .query('`MPAA Rating` != ["Not Rated", "NC-17"]'))
+movies_extended = pd.read_csv('data/movies-extended.csv')
 movies_extended
 ```
 
-We're continuing to work with the movies data set,
-but in contrast to last module we're filtering out some categories
-that contains few or problematic values.
-TODO filter the dataset beforehand?
+
+Notes:
+We're continuing to work with the movies data set.
+Here we have done some additional preprocessing steps to the data
+and saved it to disk beforehand
+so that we can load it indirectly on this slide.
+
+This is largely the same dataset as before,
+but we filtered out some additional NaNs
+and a few categories that contained problematic values.
 
 ---
 
-## Visualizing a single numerical columns with points leads to overplotting
+## Scatter plots are effective visualizations for 2D distributions
 
 ```{python}
 alt.Chart(movies_extended).mark_point().encode(
-    alt.X('Production Budget'))
+    alt.X('IMDB Rating'),
+    alt.Y('Rotten Tomatoes Rating'))
 ```
 
 Notes:
-In the last slide deck we saw how to visualize the distribution
+In the last module, we saw how to visualize the distribution
 of a single numerical dataframe column.
 What if we instead want to compare the distributions
 of two columns with each other?
 
 A question we could answer with this type of comparison is
-"Do higer grossing movies tend to have a high production budget?"
+*"Are movies rated similarly on different online platforms?"*
 
-Let's start the same way we did when visualizing a single distribution,
-by laying out all the individual observations as points across
-an axis.
+In this slide, we are showing the movie rating from both
+https://www.imdb.com/ and https://www.rottentomatoes.com.
+These are both websites where people can rate movies.
 
-We can see that the there are so many observation that this plot is saturated,
-and we can't tell if there are more movies with a production budget of 80 million or 0.
+There is clearly a pattern in this scatter plot,
+but how can we interpret it?
 
-As we learned previously,
-a histogram, density plot, or boxplot would help us here
-if we were only interested in visualizing this single numerical column.
+The first thing that stands out
+is the overall pattern of the points
+which is resembles a diagonal line with some variation around it.
+
+When the points in a scatter plot lines up in a pattern
+that resembles a diagonal line as in this chart,
+it means that there is a relationship
+between the two dataframe columns we have visualized.
+
+In other words,
+we can clearly see that as one of the ratings goes up,
+so does the other
+and there are only a few exceptions to this.
+
+The relationship in this plot would be considered strong
+because we can see clearly the diagonal trend
+that the points follow.
 
 ---
 
-## Visualizing two numerical columns with points leads to overplotting
+## Non-linear relationships follow a predictable pattern that is not a straight line
+
+```{python}
+alt.Chart(movies_extended).mark_point().encode(
+    alt.X('IMDB Rating'),
+    alt.Y('IMDB Votes'))
+```
+
+Notes:
+The relationship in the previous slide followed a straight line
+and we would refer to it as a "linear" relationship.
+
+However,
+not all relationships are linear.
+In this slide, we can see that there appears to be a clear pattern
+between the rating and the number of votes a movie receives
+but it follows a bent curve
+rather than a straight line.
+
+This still appears to be a pretty strong relationship,
+but it is a bit hard to tell
+because of the many points in a big chunk at the bottom.
+
+When a relationship is not following a straight line,
+we say that it is non-linear.
+There are many types of non-linear relationships,
+but we will not delve into them in this course.
+
+---
+
+## The stronger the relationship, the closer together the points are
+
+```{python}
+alt.Chart(movies_extended).mark_point().encode(
+    alt.X('IMDB Rating'),
+    alt.Y('IMDB Rating'))
+```
+
+Notes:
+If the relationship between two columns was really strong,
+the points would be very close together
+and there would be little variation.
+
+In this plot, we have visualized the same column for both the X and Y axis,
+which means the relationship is perfect.
+
+We would never expect to see this strong of a relationship in real data,
+but it is good to know what are extreme cases.
+
+On that topic,
+let's see what a plot looks like
+when there appears to be no relationship 
+between the plotted dataframe columns.
+
+---
+
+## When there is no relationship, there is also no pattern in the plotted points
+
+```{python}
+alt.Chart(movies_extended.reset_index()).mark_point().encode(
+    alt.X('IMDB Rating'),
+    alt.Y('index'))
+```
+
+Notes:
+Here,
+we have plotted the IMDB Rating
+against the row number in the dataframe
+(remember that when you reset the index of a dataframe
+a new column is created with the previous index/row number).
+
+Unless the data had been ordered in a specific manner previously,
+we would expect there to be no relationship
+between these two dataframe columns
+and that is exactly what we see in this plot.
+
+There is no distinct pattern here,
+just a cloud of points.
+In other words,
+by knowing the value on the x-axis,
+there is no way we could know the value on the y-axis.
+
+For example,
+a movie with an IMDB Rating of 4-5 could have an index number
+anywhere from 0 to 1200.
+
+Let's contrast this with the first visualization we created. 
+
+---
+
+## A strong relationship means that the value on one axis gives information about the value on the other axis
+
+```{python}
+alt.Chart(movies_extended).mark_point().encode(
+    alt.X('IMDB Rating'),
+    alt.Y('Rotten Tomatoes Rating'))
+```
+
+Notes:
+Here,
+knowing the IMDB Rating for a movie
+is informative for knowing the Rotten Tomatoes Rating.
+
+For example,
+if we know that the IMDB Rating is 4-5,
+we can be quite sure that the Rotten Tomatoes Rating
+will not exceed 50,
+and there are just a few exceptions to this.
+
+However,
+we must be careful not to claim
+that there is a causal relationship between these two dataframe columns.
+All we know is that they have a strong relationship,
+we don't know the details of why.
+
+There are formal ways of measure how strong these relationships are,
+but they often come with some caveats
+and it is generally more informative to look at the visualizations
+to understand how the two columns are related to each other.
+
+Remember what we learned in module 1,
+people are generally better at detecting visual patterns
+than interpreting individual numbers summarizing these relationships.
+
+---
+
+## Saturated scatter plots are difficult to interpret
 
 ```{python}
 alt.Chart(movies_extended).mark_point().encode(
@@ -84,259 +229,110 @@ alt.Chart(movies_extended).mark_point().encode(
 ```
 
 Notes:
-Since we are interested in comparing two columns,
-we will add the second column to the y-axis.
-
-Sometimes this is enough to avoid overplotting
-since we are now spreading the points across two dimensions
-instead of one.
-
+As we have seen,
+scatter plots are generally effective for visualizing two-dimensional relationships.
 However,
-as you can see in the plot on this slide,
-it is still impossible to tell
-if there are more points close to 80 million of 0,
-and likewise 200 million or 0 on the y-axis.
+as with all plots,
+they have their shortcomings.
 
-So although we can discern a trend
+Most notably,
+when the bulk of the points become concentrated in a small region of the chart,
+2D scatter plots become saturated in the same way
+as the 1D scatter and rug plots we saw in the previous module.
+
+In this slide we're trying to answer the question:
+"Do high grossing movies tend to have a high production budget?"
+
+In the scatter plot you can see
+that it is impossible to tell
+if there are more points close to 80 million or 0 on the x-axis,
+and likewise, 200 million or 0 on the y-axis.
+
+So, although we can discern a trend
 for the points outside the saturated area
-we do not know how they data is spread out inside the blue blob. 
+we do not know how the data is spread out inside the blue blob. 
 
-We saw previously that 
-histograms can help when we have saturated plots.
-But if we were to make a histogram
-of each column separately
-we would have two one-dimensional histogram 
-but no information of how these relate to eachother.
-
-Instead,
-what we need here is a single two-dimensional histogram
-of the scatter plot above.
+To solve this issue,
+we can create a two-dimensional histogram
+in the form of a heatmap.
 
 ---
 
-## A heatmap allows us to visualize the relationship between two distributions
+## A heatmap can visualize the relationship between two distributions without saturation
 
 ```{python}
 alt.Chart(movies_extended).mark_rect().encode(
     alt.X('Production Budget', bin=alt.Bin(maxbins=60)),
     alt.Y('Worldwide Gross', bin=alt.Bin(maxbins=60)),
-    alt.Tooltip('Worldwide Gross', bin=alt.Bin(maxbins=60)),
     alt.Color('count()'))
 ```
 
 Notes:
 What's involved in creating a two-dimensional histogram?
-First, we need to bin both axes instead of just one.
-The bins will look like a grid or mesh
-overlayed on the image,
-similar to the faint grey gridlines in the previous slide.
 
-Wihtin each rectangle of this grid,
+This is similar to when we several heatmaps
+to compare multiple 1D distributions,
+but here we need to bin both the x and y-axis.
+
+These bins will look like a grid or mesh
+overlayed on the image,
+similar to the pattern of the faint grey gridlines in the previous slide.
+
+Within each rectangle of this grid,
 we will count the number of observations
-and represent the count value with a color.
+and represent the count value with a colour.
 
 The result of these operations is the heatmap shown in this slide,
 which enables us to see a level of detail we could not perceive in the scatter plot.
+
 Here it is clear that there are many fewer movies with a production budget of 80 million
-comared to the area close to 0,
+compared to the area close to 0,
 and most movies seem to be around 10-15 million.
-Likewise the grossing of most movies is around 0-50 million,
+Likewise, the grossing of most movies is around 0-50 million,
 not 200 million.
 
 ---
 
-## A density plot can also be extended to two dimensions
+## A 2D density plot can also visualize the relationship between two distributions without saturation
 
 <img src="/module4/unnamed-chunk-5-1.png" width="48%" />
 
-```{python}
-import seaborn as sns
+```{python include=FALSE}
+# import seaborn as sns
 
-sns.kdeplot(
-    data=movies_extended,
-    x='Production Budget',
-    y='Worldwide Gross',
-    fill=True, cmap='YlGn', cut=0)
-sns.despine()
+# ax = sns.kdeplot(
+#     data=movies_extended,
+#     x='Production Budget',
+#     y='Worldwide Gross',
+#     fill=True, cmap='YlGn', cut=0, cbar=True)
+# sns.despine()
+# ax.figure.savefig('../../../../static/module4/unnamed-chunk-5-1.png')
 ```
 
 Notes:
-In addition to making 2D histograms,
-we can also make 2D density plots.
-Each kernel is now two dimensionalal
-and look like a bell or the top of a circus tent,
-rather than a bell-shaped one dimensional curve.
+In addition to representing 2D distributions as heatmaps,
+we can also represent them as density plots.
 
-Altair cannot yet make thes plots,
-so here we're showing an example from another plotting library called seaborn,
+Altair cannot yet make these plots,
+so here we're showing an example created 
+from another plotting library called seaborn,
 so that you can get a sense of what this visualization would look like for our data.
 
-TODO testing to involve seaborn as per our discussion today.
+In a 2D density plot,
+each bin is now two dimensional
+and look like a bell in a clocktower
+or the top of a circus tent,
+rather than a bell-shaped one-dimensional curve.
 
----
+This type of visualization gives us similar information
+as the heatmap in the previous slide
+and the advantages and disadvantages
+are similar to those between one-dimensional histograms
+and density plots.
 
-## Bar charts are effective for visualizing categorical "distributions" of a single column
-
-```{python}
-alt.Chart(movies_extended).mark_bar().encode(
-    alt.X('count()'),
-    alt.Y('Major Genre', sort='x'))
-```
-
-Notes:
-TODO this is clearly a new topic, maybe its own slide deck even if the previous one is short? Alternatively move the previous one into the end of mod 3 (but we will show 2D categorical below).
-
-For categorical data,
-we usually don't say that we visualize "distributions"
-but rather counts of observations.
-We have already seen examples of this in the bar charts we made in previous chapters.
-
-Here we have made a bar chart to answer the question
-"Which is the most common genre among movies in this dataset?".
-
-We can see that the data set consists of mostly comedies and dramas
-with very few movies of concerts/performances.
-
-It is important to understand that a density plot
-would not be appropriate for categorical data.
-Densities are only suitable for contiuous data,
-where it makes sense to smoothen the distribution.
-Here it would not make sense to smoothen the categories into each other.
-
-TODO could densities be OK/semi-OK for ordinal data like weekdays? So it is order vs unorder rather than contious vs categorical that is the issue?
-
----
-
-## Visualizing counts for combinations of two categorical columns can be done via faceting but it's not always effective
-
-```{python}
-(alt.Chart(movies_extended).mark_bar().encode(
-    alt.X('count()'),
-    alt.Y('Major Genre', sort='x'))
- .properties(width=150)
- .facet('MPAA Rating'))
-```
-
-Notes:
-TODO shorter title or break into two slides (1=look faceting, 2=but not great)
-
-What if we wanted to ask a more complex question
-that involves visualizing the combinatorial counts of two categorical columns?
-
-Our data contains the MPAA rating for each movie,
-which indicates what age groups the movie is suitable for.
-We might want to visualize the count of genres per MPAA rating group
-to find out if movies of difference genres recevieve different MPAA ratings.
-
-For example,
-we might already have a hypothesis
-that there won't be many horror movies that are appropriate for children.
-
-One approach to address this question is to facet based on the MPAA rating
-as we have done in this slide.
-Here we can see that most movies that are appropriate for families (G)
-are adventure movies and comedies
-whereas there is much more spread among the movies that are rated R.
-
-Since we are using bar graphs,
-we can accurately tell the exact number of observations for each bar,
-but at first glance it is a bit difficult to get a good overview
-of the take home message from this visualization.
-
-While the facetted plot makes it easy to answer the question:
-"Which is the most common movie genre within each MPAA rating group?",
-it is harder to answer the question:
-"Which is the most common MPAA rating assigned to movies of a particular genre?".
-
-To better answer the second question,
-we could have switched which column we facetted by and which we have on the y-axis,
-but there is no great solution for getting the best of both worlds in a faceted chart.
-
----
-
-## Heatmaps are effective for visualizing counts of two dimensional categorical data
-
-```{python}
-alt.Chart(movies_extended).mark_rect().encode(
-    alt.Color('count()'),
-    alt.X('MPAA Rating'),
-    alt.Y('Major Genre', sort='color'))
-```
-
-Notes:
-
-To be able to effectively answer both the questions from the previous slide
-with a single visualization,
-we can represent the count with color
-instead of mapping it to one of the axes.
-
-Using `mark_rect`,
-we can now create a heatmap where 
-the two categorical are mapped to one axis each
-and we don't need to facet.
-Sorting on color/count puts the genres with many observations close together,
-similar to how we sorted on `'x'` and `'y'` in previous modules.
-
-If we want to compare which genre is most common for a certain rating,
-we compare the colors in the same *column*.
-If we instead are interested in the most common rating assigned to a movie
-we compare the columns *row-wise*.
-We can quickly see that most dramas are rated PG-13 or R
-and most horror movies are rated R.
-
-This visualization is effective
-for quickly communicating the main takeaways from the two questions
-and giving us an overview of the data,
-but it is harder  to tell that exact count for each color
-so if that is of great importance a bar chart is more suitable.
-
-As you can see the default colorscale is different from the marks we have used so far.
-We will talk more about colorscale in a later module,
-but briefly the change in hue from one color to another
-allows for more resolution in being able to tell
-which color corresponds to a certain value.
-
-For the same reasons a density plot was not an appropriate replacement of the categorical barchart,
-we cannot replace this categorical heatmap with a 2D denity plot.
-
----
-
-## Using both the color and marker size to indicate the count creates a more effective visualization.
-
-```{python}
-# Sort since according to the natural order of the ratings
-mpaa_ordered = ['G', 'PG', 'PG-13', 'R']
-alt.Chart(movies_extended).mark_circle().encode(
-    alt.Color('count()'),
-    alt.Size('count()'),
-    alt.X('MPAA Rating', sort=mpaa_ordered),
-    alt.Y('Major Genre', sort='x'))
-```
-
-Notes:
-TODO an alternative strategy is to not teach mark_rect for categorical and go straight to this plot... I like mentioning it to contrast it with this, but not sure if there would be confusion or if the heatmap for some reason implies continuous data.
-
-One potential concern with heatmaps
-is that they rely solely on color to communicate the value of interest.
-
-We cannot perceive small variations in color
-as accurately as we can for other visual channels,
-such as positions of size.
-
-Color can also be problematic for people with color vision deficiencies,
-which is almost 10% of the population.
-
-To ameliorate these issues,
-we can use `map_square` or `map_circle` in Altair,
-which allows us to change the size of each mark in addition to its color.
-
-This visualization is highly effective in answering both of the questions we posed initially,
-and if we wanted to,
-we could now facet by a third categorical column 
-such as the movie distributor,
-to interrogate three categorical columns simultaneously.
-
-TODO should we include something with relative counts? aka normalize per row or column, I belive this would be a manual preprocess step or custom js in altair via transform_calculate, quite useful but maybe too much (this module is short though)
+As with 1D density plots,
+the values of the density themselves are not helpful,
+but we have included them here in the colour bar as an example.
 
 ---
 

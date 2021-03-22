@@ -11,7 +11,7 @@ temp_plot = alt.Chart(temps_df).mark_circle(size=50).encode(
         title='rainfall total for the month (mm)'),
     alt.Color('mean_temp',
         title=' Mean Temperature',
-        scale=alt.Scale(scheme='blueorange'))
+        scale=alt.Scale(scheme='blueorange', domainMid=0))
     ).properties(title='Hotter months tend to have higher levels of rainfall')
 
 temp_plot

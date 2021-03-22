@@ -1,10 +1,10 @@
 import altair as alt
-from vega_datasets import ___
+from vega_datasets import data
 
 
-stocks = ___
+cars = data.cars()
 
-alt.Chart(___).___.encode(
+alt.Chart(___).mark___.encode(
     x=___,
     y=___,
     color=___)

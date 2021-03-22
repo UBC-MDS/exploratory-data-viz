@@ -23,14 +23,17 @@ export default ({ lang = 'en' }) => {
                     <Layout isHome lang={lang}>
                         <Logo className={classes.logo} />
                         <section>
-                                <h1 className={classes.subtitle}><center>Exploratory Data Visualization</center></h1>
+                                <h1 className={classes.subtitle}><center>Data Visualization</center></h1>
                             <div className={classes.introduction}>
                                 
                                         <p>
                                         <center>
-                                        Welcome to Exploratory Data Visualization!
-                                        This course is part of the  <u><strong><a href="https://extendedlearning.ubc.ca/programs/key-capabilities-data-science">Key Capabilities for Data Science program</a></strong></u> and covers topics related to data visualization. 
-                                        ...........TBD
+                                        Welcome to Data Visualization! This course is part of the  <u><strong><a href="https://extendedlearning.ubc.ca/programs/key-capabilities-data-science">Key Capabilities for Data Science program</a></strong></u> and covers topics related to data visualization.
+                                        </center>
+                                         </p>
+                                         <p> 
+                                         <center>
+ In this course we will learn how to (and how not to) visualize data. We will learn about visualization grammar and how it's implemented in the "Altair" package to create our figures. In addition to common statistical visualizations, we will learn how to tell stories with data, create geographical visualizations, and bring out plots to life by adding interactive elements. Together, these skills will allow us to create effective data visualizations that strengthen our own exploratory data analysis skills and our ability to communicate insights to others.
                                         </center>
                                         </p>
                                         <p>

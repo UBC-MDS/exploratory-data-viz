@@ -1,0 +1,363 @@
+---
+params:
+  dynamictitle: "module2_13"
+title: "`r params$dynamictitle`"
+output:
+  md_document:
+    variant: gfm
+    pandoc_args: "--markdown-headings=atx"
+---
+
+```{r setup, include=FALSE}
+source('../../../../slide-setup.R')
+# Remember to also manually update the YAML title above
+```
+
+type: slides
+
+# Creating subplots via faceting
+
+
+Notes:
+In this slide deck, we will be learning how we can use facets,
+or subplots, to compare different groups in the data.
+
+---
+
+## How does life expectancy differ between regions?
+
+```{python}
+import pandas as pd
+import altair as alt
+
+gm = pd.read_csv('data/world-data-gapminder.csv', parse_dates=['year'])
+gm2018 = gm[gm['year'] == '2018']
+
+alt.Chart(gm2018).mark_bar().encode(
+    alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    alt.Y('count()'))
+```
+
+Notes:
+
+Here we have the life expectancy plot that we saw from the last slide deck. 
+
+But what if we wanted to see how each continent's bar distribution "stacks up" compared to each other? 
+
+---
+
+## Stacked histograms make it hard to compare between groups
+
+```{python}
+alt.Chart(gm2018).mark_bar().encode(
+    alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    alt.Y('count()'),
+    alt.Color('region'))
+```
+
+Notes:
+
+We have previously seen how we can explore categorical dataframe columns
+by encoding them as the colour channel of our plots.
+
+Altair creates a stacked bar chart by default
+when we when encode a dataframe column as the `color` channel.
+Notice we are now using the helper functions we saw before but now with `alt.Color`.
+(This must be spelt without the "U")
+
+Just like with the stacked area chart,
+this is good when the total height of each bar
+is the most important,
+but it is not ideal when the main focus of our visualization
+is to compare the coloured groups against each other.
+
+The reason it is difficult to compare
+the length of the coloured segments against each other
+(both within a bar and between bars),
+is that they don't share the same baseline
+so we can't just compare the position of the top part of the bars,
+but have to try to estimate their lengths.
+
+For these reasons,
+it is difficult to tell the difference between the regions
+in this plot
+and it is not an effective visualization.
+
+---
+
+## Layered histograms are also difficult to compare
+
+```{python}
+alt.Chart(gm2018).mark_bar(opacity=0.7).encode(
+    alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    alt.Y('count()', stack=False),
+    alt.Color('region'))
+```
+
+Notes:
+If we tell Altair not to stack the bar along the y-axis,
+it will instead layer them behind each other.
+To be able to see all groups,
+we need to add some opacity to the bar mark.
+
+Although the bars share the same baseline here,
+they are still difficult to compare against each other,
+because there is so much overlap with different colours.
+
+Layered histograms and bar charts can be effective
+when there are few groups and clear separation between them,
+but that is not the case here
+and this plot is even harder to interpret than the previous one.
+
+---
+
+## Creating a separate subplot for each region facilitate comparisons between them
+
+```{python}
+alt.Chart(gm2018).mark_bar().encode(
+    alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    alt.Y('count()'),
+    alt.Color('region')
+).properties(width=200, height=150
+).facet('region')
+```
+
+Notes:
+Faceting creates one facet/subplot
+for each group in the specified dataframe column.
+To ensure that the entire grid of facets fit on the slide,
+we're also shrinking the dimensions of each subplot.
+
+From this chart,
+we can more easily compare the regions.
+For example,
+we can see that that most European countries
+have a higher life expectancy
+than most African countries.
+
+However,
+it is a little bit more demanding 
+to see exactly how much of the two distributions are overlapping
+and we would need to look at the number of the axes
+while scanning left and right on the grid.
+
+
+---
+
+## Laying out facets vertically makes it easier to compare position on the x-axis
+
+```{python}
+alt.Chart(gm2018).mark_bar().encode(
+    alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    alt.Y('count()', title=None),
+    alt.Color('region')
+).properties(width=200, height=50
+).facet('region', columns=1)
+```
+
+Notes:
+To make it easier to compare overlap between histograms on the x-axis,
+we can lay out the facets vertically in a single column.
+
+The vertical layout is preferred in this case since
+we are the most interested to compare position on the x-axis between the groups.
+If we instead wanted to compare position on the y-axis,
+a single row would have been better.
+
+Here,
+we immediately see that there is a long region of
+overlap between European and African countries,
+but that the bulk of each distribution is separated.
+
+Compare this with the stacked and layered histogram
+we made in the first few slides
+and you will realize just how much easier it is 
+to compare the groups here!
+
+---
+
+## Subplots are often laid out in even grids
+
+```{python}
+alt.Chart(gm2018).mark_bar().encode(
+    alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    alt.Y('count()'),
+    alt.Color('region')
+).properties(width=200, height=140
+).facet('region', columns=3)
+```
+
+Notes:
+
+If we are interested in comparing both x and y values between plots,
+or are presenting the visualization in a context
+where we do not have the room
+to create a single column or row for all the plots,
+a good alternative
+is to create an even (or near even) grid of facets,
+as in this slide.
+
+As you can see,
+the default behaviour for Altair is to leave the last position empty,
+but include the x-axis line
+so that we can use it to read the plot in the top row.
+
+---
+
+## Faceting on two categorical dataframe columns allows us to answer more complex questions
+
+```{python}
+alt.Chart(gm2018[gm2018['income_group'].isin(['High', 'Low'])]).mark_bar().encode(
+    alt.X('life_expectancy', bin=alt.Bin(maxbins=30)),
+    alt.Y('count()'),
+    alt.Color('region')
+).properties(width=200, height=140
+).facet(column='region', row='income_group')
+```
+
+Notes:
+
+Instead of using the `columns` parameter,
+we could specify one categorical dataframe column each
+for the `row` and `column` parameters (note no "s").
+Altair will then spread the data out accordingly.
+
+With this strategy,
+we can answer more complex questions such as
+"How does child mortality differ between low and high income countries
+in different continents?".
+
+We can see that the countries with low life expectancy in all regions
+are mostly low-income countries,
+whereas those with a high life expectancy
+are mostly high incomes countries
+(we have filtered the income groups to save space on the slide).
+
+---
+
+## Coloring can also group data within each facet
+
+```{python}
+income_order = ['High', 'Upper middle', 'Lower middle', 'Low']
+alt.Chart(gm2018[gm2018['region'].isin(['Africa'])]).mark_point().encode(
+    alt.X('children_per_woman'),
+    alt.Y('child_mortality'),
+    alt.Color('income_group', sort=income_order),
+).properties(width=200, height=140
+).facet('sub_region')
+```
+
+Notes:
+So far we have encoded the same dataframe column
+in both the facet and colour channels.
+This is technically redundant
+but can be helpful to emphasize the groups in the data.
+
+If we wanted to drill down in the data further,
+we could instead separate each facet
+into groups by colouring according to another dataframe column.
+
+This would allow us to answer questions of similar complexity
+as in the previous slide,
+without faceting into both rows and columns.
+
+Here we will connect back to what we discussed
+at the end of the last slide deck
+and answer the question
+"How does child mortality and the number of children per woman
+differ between income groups and subregions within Africa".
+
+In our faceted plot, we can first see that
+there are many more countries and much more spread among them in Sub-Saharan Africa
+than in Northern Africa.
+This visualization reveals that there is lower child mortality, fewer children per woman,
+and higher-income seem to be correlated.
+
+However,
+we would not want to draw any conclusions
+before performing formal statistical tests,
+and investigating the literature to understand 
+if these relationships are also causative.
+
+If there were so many categories that the colours become hard to tell apart,
+it would be worthwhile to try to facet by that dataframe column 
+instead of encoding it as colour.
+
+---
+
+## As with histograms stacked colours are not effective for categorical bar charts
+
+```{python}
+alt.Chart(gm2018[gm2018['region'] == 'Africa']).mark_bar().encode(
+    alt.X('count()', title='Number of countries'),
+    alt.Y('sub_region'),
+    alt.Color('income_group', sort=income_order)
+).properties(width=200)
+```
+
+Notes:
+In the plot on the previous slide,
+we saw that there were many more countries
+within one of the sub-regions compared to the other,
+but exactly how many more?
+
+To answer this question,
+we could create a stacked bar chart.
+
+Layering wouldn't make sense here either,
+as that would just hide the bars behind each other.
+What we would want to do is adding a small offset to each colour
+so that they dodge each other and are placed side by side.
+
+This offset functionality does not yet exist in Altair,
+but since it is a quite commonly used visualization,
+we will show you how to create it using facets instead.
+
+---
+
+## Faceting can anchor coloured bars to the same baseline and facilitate comparisons
+
+```{python}
+alt.Chart(gm2018[gm2018['region'] == 'Africa']).mark_bar().encode(
+    alt.X('count()', title='Number of countries'),
+    alt.Y('income_group', sort=income_order),
+    alt.Color('income_group', sort=income_order, legend=None)
+).properties(width=200
+).facet('sub_region')
+```
+
+
+Notes:
+By spreading the sub-regions out as facets,
+and encoding the same dataframe column in both the y and colour channel,
+we can create where the bars share the same baseline
+and are easy to compare.
+
+In this chart, it is immediately clear how many countries
+there are for each region and income group.
+
+We have removed the redundant colour legend
+in favour of the direct labels on the y-axis.
+We will talk more about direct labelling versus legends in a future module,
+but in general,
+direct labelling is often clearer.
+
+We could combine this strategy by using `row` and `column` in facet,
+which would allow us to create visualizations
+that split data across three different channels:
+rows, columns, and colour.
+
+When visualizing so many dataframe columns,
+it is often useful to use colour for the most important comparison,
+since these groups will be the closest to each other 
+making them easier to compare.
+
+It is not always that simple
+and in general, you should be careful to avoid creating plots
+that are so complex that they are hard to interpret.
+
+---
+
+# Let's apply what we learned!
+
+Notes: <br>

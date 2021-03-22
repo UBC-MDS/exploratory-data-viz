@@ -10,17 +10,15 @@ Notes:
 
 ---
 
-
 # Module Learning Outcomes
 
 In this module students will learn how to
 
 - Explain the importance of data visualizations.
-- Understand the grammar of graphics presented here.
+- Use the grammar of graphics presented here.
 - Create point and line visualizations in Altair.
 - Transform data directly in Altair instead of pandas.
 - Combine graphical marks via layering.
-
 
 Notes:
 
