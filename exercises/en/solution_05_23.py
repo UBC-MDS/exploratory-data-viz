@@ -5,7 +5,7 @@ from calendar import month_name
 temps_df = pd.read_csv('data/temperature.csv', parse_dates=['date'])
 temps_df = temps_df.assign(month=temps_df['date'].dt.month_name())
 
-top_month = temps_df.groupby('month')['total_precipitate_mm'].sum().idxmax()
+top_month = temps_df.groupby('month')['total_rain_mm'].sum().idxmax()
 
 rain_plot = alt.Chart(temps_df).mark_bar().encode(
     alt.X('sum(total_rain_mm)',
@@ -15,7 +15,7 @@ rain_plot = alt.Chart(temps_df).mark_bar().encode(
                         alt.value('darkslateblue'),
                         alt.value('powderblue'))
 ).properties(
-    title='Between 2009-2012, May had the greatest total precipitation collectively')
+    title='Between 2009-2012, May had the greatest total rainfall collectively')
 
 text_plot = rain_plot.mark_text(align='left', dx=4).encode(
     text=alt.Text('sum(total_rain_mm)', format='d'),
