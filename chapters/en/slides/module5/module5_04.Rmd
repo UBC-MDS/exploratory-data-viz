@@ -25,7 +25,7 @@ type: slides
 # Descriptive titles and labels
 
 Notes:
-In this slide deck we will see
+In this slide deck, we will see
 how we can change different aesthetic elements of the plot
 to cater to communication in various settings.
 
@@ -66,8 +66,8 @@ Notes:
 Why do we need to add chart titles and labels to our plots?
 
 Let's find out by looking at an example.
-To the left you can see a poorly labeled chart.
-There y-axis label is not very descriptive,
+To the left, you can see a poorly labelled chart.
+The y-axis label is not very descriptive,
 there is no overall chart title
 and we have even forgotten to include the legend.
 
@@ -85,8 +85,8 @@ chart_to_save.save('../../../../static/module5/charts/chart-with-titles.html')
 <iframe src="/module5/charts/chart-with-titles.html" width="100%" height="420px" style="border:none;"></iframe>
 
 Notes:
-In this slide we have a chart with a descriptive title
-that convey the main take home message of our visualization.
+In this slide, we have a chart with a descriptive title
+that conveys the main take-home message of our visualization.
 The y-axis is also clearly titled
 while its unit (`$`) is embedded in the axis label.
 
@@ -99,14 +99,14 @@ there should be no supplementary text needed
 to explain why we made the figure 
 and what its main takeaways are.
 
-Properly used chart and axis titles are a big help for to reach this goal.
+Properly used chart and axis titles are a big help to reach this goal.
 
-In this slide deck we will gradually build up to creating a figure
-like the one you can see in this slide.
+In this slide deck, we will gradually build up to creating a figure
+like the one, you can see in this slide.
 
 ---
 
-## Chart titles should convey the main take home message
+## Chart titles should convey the main take-home message
 
 ```{python}
 import altair as alt
@@ -122,10 +122,10 @@ alt.Chart(stocks, title=stock_title).mark_line().encode(
 
 Notes:
 The title of the chart should clearly convey
-the take home message of the figure to the reader.
+the take-home message of the figure to the reader.
 It should answer the question you posed before making the visualization.
 
-It you made a more general visualization
+If you made a more general visualization
 or answered multiple questions,
 it is ok with a more general title.
 Note however such general visualizations
@@ -159,7 +159,7 @@ which we then pass to the `title` parameter in `Chart`.
 
 ---
 
-## Titles can be aligned according the the presentation context
+## Titles can be aligned according to the presentation context
 
 ```{python}
 stock_title_left = alt.TitleParams(
@@ -174,13 +174,13 @@ alt.Chart(stocks, title=stock_title_left).mark_line().encode(
 
 Notes:
 Depending on the context in which we are presenting the figure,
-it can look more appealing to left align the title.
+it can look more appealing to left-align the title.
 
 This is done via the `anchor` parameter in Altair.
 
 ---
 
-## Breaking titles into multiple line can improve readability
+## Breaking titles into multiple lines can improve readability
 
 ```{python}
 stock_title_linebreak = alt.TitleParams(
@@ -198,14 +198,14 @@ we can improve readability by breaking it into multiple lines.
 Altair converts lists of strings into multiline titles.
 
 When creating a multiline title,
-is is advisable to try to keep all lines about the same length.
-Generally it also looks better if the lines are ordered by length,
+it is advisable to try to keep all lines about the same length.
+Generally, it also looks better if the lines are ordered by length,
 for example from the longest to the shortest as in this slide.
 
 For this chart,
 the single line subtitle still looks more appealing
 due to all the whitespace on the sides of the subtitle in this slide,
-so we will go back to a single line subtitle in the next slide.
+so we will go back to a single-line subtitle in the next slide.
 
 ---
 
@@ -225,7 +225,7 @@ since you are the primary person interpreting them
 and it is often clear to you what titles mean
 as long as you have given your dataframe reasonable column names.
 
-In communication however,
+In communication, however,
 your plots need to be interpreted by other people,
 often on their own without your explanation.
 Setting descriptive titles adds significantly to this interpretability.
@@ -272,7 +272,7 @@ we change the title of the legend in the same way that we change the axis titles
 
 ---
 
-## Direct labeling is often preferred over legend when applicable
+## Direct labelling is often preferred over legend when applicable
 
 ```{python}
 stock_max_date = stocks[stocks['date'] == stocks['date'].max()]
@@ -288,7 +288,7 @@ lines + texts
 Notes:
 In this graph,
 we could label the lines directly
-instead of relying on the legend text and additional coloured lines marks.
+instead of relying on the legend text and additional coloured line marks.
 
 This has the advantage that
 we don't have to go back and forth between the legend and the plot,
@@ -321,7 +321,7 @@ Notes:
 There is no way to automatically separate the labels in Altair,
 so we have to manually specify new y-axis values for the text of the overlapping labels.
 
-Here we modify the dataframme we created in the last slide
+Here we modify the dataframe we created in the last slide
 by setting the value for the IBM text label to 140
 and the value for the AMZN text label to 110
 so that they are no longer overlapping.
@@ -341,7 +341,7 @@ lines + texts
 
 Notes:
 Instead of writing measurement units in parenthesis in the axis title,
-they can be incorporated directly in each axis label
+they can be incorporated directly into each axis label
 by setting the axis format.
 
 You can see that the dollar sign was prefixed each numerical label on the y-axis,
@@ -365,7 +365,7 @@ lines + texts
 [All Altair's label format strings can be found here](https://github.com/d3/d3-format#locale_format).
 
 Notes:
-To revert back to displaying the full number instead of using scentific formatting,
+To revert back to displaying the full number instead of using scientific formatting,
 we can combine the dollar sign with the format string `s`,
 which stands for SI-units.
 
@@ -375,12 +375,12 @@ and we can either remove it or (preferably) improve it.
 
 Here we add more detail to indicate that this is the closing price of each stock.
 
-In addition to being used in the x and y axis, 
+In addition to being used in the x and y-axis, 
 axis formatting can be applied to any aspect of Altair that uses `alt.Axis`,
 including legends for colours and sizes.
 
 Other useful format strings include `%` for including a percentage sign,
-`e` to force scientific format,
+`e` to force a scientific format,
 `d` to force integer format,
 `~` which removes trailing zeros (e.g. 1.0 becomes 1),
 and `,` which adds a comma as the thousands separator.
@@ -403,7 +403,7 @@ Notes:
 Altair usually picks a suitable number of axis ticks,
 but sometimes we might want to tweak this
 in order to achieve a specific effect,
-such as a more clean looking plot.
+such as a more clean-looking plot.
 
 Here we reduce the number of ticks along the x-axis
 to only show three of the years,
@@ -412,7 +412,7 @@ by setting `tickCount=3` in `alt.Axis()`.
 Note that Altair will round the number of ticks to a number that works well with your data,
 so you might not always get the exact number you ask for
 (e.g. it wouldn't make much sense to have 4 ticks here
-since that would mean year "2002.5" and "2007.5").
+since that would mean the year "2002.5" and "2007.5").
 
 ---
 
@@ -437,7 +437,7 @@ There are still situations where we might want to remove them.
 In our plot on the last slide,
 we might not like the appearance of the single gridline in the middle
 and the one really close to the right axis,
-so we can turn off the vertical gridlines by passing `grid=False`
+so we can turn off the vertical gridlines bypassing `grid=False`
 to the `axis` parameter of `alt.X`.
 
 To remove the gray box outlining the entire figure,
@@ -468,13 +468,13 @@ but it is possible to zoom in if really needed.
 If you are making a figure for print,
 it is recommended to increase the font sizes
 to make sure that your figure is readable
-for the context you are presenting it in.
+for the context, you are presenting it in.
 
 It is advisable to err on the side of larger rather than smaller,
 for those members of the audience that have a hard time discerning small text.
 
 In this figure,
-you can see several examples of how to set fontsizes for titles and labels,
+you can see several examples of how to set font sizes for titles and labels,
 as well as how to change the font colour and weight.
 
 This figure does not necessarily look good as a whole,

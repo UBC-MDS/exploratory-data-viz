@@ -4,23 +4,23 @@ type: slides
 
 # Effective use of colour for categorical data
 
-Notes: In this slide deck you will learn how to select colours that
+Notes: In this slide deck, you will learn how to select colours that
 accurately represents your data and effectively communicate it to the
 reader.
 
 ---
 
-## Colour choices can have profound impact on the interpretation of the results
+## Colour choices can have a profound impact on the interpretation of the results
 
 ![](/module5/color-importance-vessels.png)
 
-Notes: In module 2 we discussed how changing the colourscheme
+Notes: In module 2 we discussed how changing the colour scheme
 drastically improved a clinical outcome by almost doubling physician’s
-detection rate of blodd vessles regions indicative of potential future
+detection rate of blood vessels regions indicative of potential future
 heart disease (from 40% to 70%).
 
-In this slide deck we will discuss some of the consideration that goes
-into evaluating if a colourscheme (also called a colourmap) is suitable
+In this slide deck, we will discuss some of the consideration that goes
+into evaluating if a colour scheme (also called a colourmap) is suitable
 for the data you are visualizing.
 
 ---
@@ -32,19 +32,19 @@ for the data you are visualizing.
 </center>
 
 Notes: There are several different ways to represent colours. You might
-arleady have heard of RGB (red, green, blue) or CMYK (cyan, magenta,
-yellow, black) where different amount of a set of base colours are
+already have heard of RGB (red, green, blue) or CMYK (cyan, magenta,
+yellow, black) where different amounts of a set of base colours are
 combined to create all possible colours.
 
 When discussing colours in the context of data visualization, We will be
 describing them with the parameters “hue”, “saturation” and “lightness”.
 
 The left schematic in this slide is a 2D circular representation
-including only hue and saturation. When we add lightness this circle
-grows into cylinder with lightness as the height.
+including only hue and saturation. When we add lightness, this circle
+grows into a cylinder with lightness as the height.
 
-On the next slide we will break down exactly what each of these three
-parameters represent.
+On the next slide, we will break down exactly what each of these three
+parameters represents.
 
 ---
 
@@ -80,10 +80,10 @@ the colours we use should be muted/desaturated or vivid/saturated.
 <iframe src="/module5/charts/categorical-hues.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: Hue is useful to distinguish between categories, because it is
-often relatively easy for us to to say that different hues are distinct.
-We can see that blue, orange, red, etc are different and don’t easily
-mix them up.
+Notes: Hue is useful to distinguish between categories because it is
+often relatively easy for us to say that different hues are distinct. We
+can see that blue, orange, red, etc are different and don’t easily mix
+them up.
 
 The leftmost plot uses different hues to separate the points belonging
 to different categories. We can quickly identify that there is a total
@@ -119,7 +119,7 @@ In this slide, you can see some of the colour schemes for categorical
 values that are built into Altair.
 
 The default one is “tableau10” and it was named this way because it was
-originally designed by the company Tableau, but is now one of the most
+originally designed by the company Tableau but is now one of the most
 common categorical colour schemes used in data visualization. [All
 Altair colour schemes can be viewed
 here](https://vega.github.io/vega/docs/schemes/).
@@ -178,9 +178,9 @@ effective since it makes the points more distinct from each other.
 Note that `shape=` is only available to use with `mark_point`, not
 `mark_circle`, `mark_square`, etc.
 
-For line plots we could achieve a similar effect by using the
+For line plots, we could achieve a similar effect by using the
 `strokeDash` encoding instead of `shape`, which together with direct
-labeling from the previous slide deck can facilitate interpretation of
+labelling from the previous slide deck can facilitate interpretation of
 these plots.
 
 ---
@@ -205,7 +205,7 @@ colour scheme because of the advantages mentioned in the previous slide.
 
 However, sometimes the categories we are representing might have a
 colour already associated with them, such as political parties or sports
-team.
+teams.
 
 In these cases, it is often better to design a custom colour scheme
 using the colours naturally associated with each category.
@@ -232,7 +232,7 @@ colour pickers such as this one](https://colorpicker.me/).
 
 Notes: Although many of the categorical colour schemes contain ten or
 more hues, if is often not a good idea to use all that many because it
-becomes near impossibe to distinguish the different hues from each
+becomes near impossible to distinguish the different hues from each
 other.
 
 The guidelines on what is too many hues differ between different sources
@@ -244,7 +244,7 @@ multiple visualizations instead.
 If the data is neatly organized in well-separated clusters, it is
 possible that you could visualize more than five colours (maybe even
 ten) effectively, but in data where the datapoints are more mixed, you
-will rarely, if ever, be able to go this high.
+will rarely if ever, be able to go this high.
 
 ---
 
@@ -267,10 +267,10 @@ are used. In this plot, we can not separate the colours even if we spent
 a considerable amount of effort studying the chart.
 
 As we saw on the last slide, categorical colour schemes have a limited
-amount of hues so in addition of it being hard to differentiate this
-many hues in general, it become practically impossible in cases where
-there are more categories than coor hues, since the colour scheme starts
-repeating as in the chart.
+amount of hues so in addition to it being hard to differentiate this
+many hues in general, it becomes practically impossible in cases where
+there are more categories than colour hues, since the colour scheme
+starts repeating as in the chart.
 
 A better approach here would have been to label specific points of
 interest directly and keeping the rest as either a single colour or
@@ -308,7 +308,7 @@ many bars as in this slide.
 
 It is usually preferable to colour all the bars in the same colour (or
 after another categorical variable, such as “Origin” in this data), and
-let the axis labels alone identify which category the bar belongs too.
+let the axis labels alone identify which category the bar belongs to.
 
 One exception to this is if each axis label is broken down into
 subcategories where each location has multiple bars based on another
@@ -344,11 +344,11 @@ Here we have coloured the bars to match the lines although we could tell
 the categories only from reading the axis labels.
 
 It is important to not use different colours for the same categories
-between subplots. For example, if we made an additional subplot which
-only contained Japan and USA, then we should make sure that these are
-still coloured in orange and red. Since the default Altair colour scheme
-will always start with blue, we would need to manually specify the
-colours in this case.
+between subplots. For example, if we made an additional subplot that
+only contained Japan and the USA, then we should make sure that these
+are still coloured in orange and red. Since the default Altair colour
+scheme will always start with blue, we would need to manually specify
+the colours in this case.
 
 ---
 

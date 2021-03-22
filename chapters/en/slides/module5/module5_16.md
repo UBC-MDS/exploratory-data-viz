@@ -15,14 +15,14 @@ represent numerical data.
 <img src="/module5/hsl-questions.png" width="60%"></img>
 </center>
 
-Notes: In the last slide deck we varied hues to represent categorical
+Notes: In the last slide deck, we varied hues to represent categorical
 values, with a focus on the distinction between colour hues/categories.
 When choosing a colour scheme to represent quantitative data, we will
 instead focus on sequential, perceptually uniform changes in lightness.
 
 Sequential changes in lightness ensures that uniform changes in the
 values of the data are perceived as uniform changes in the colour space.
-In other words, we want it to be intuitive how the colours relate the
+In other words, we want it to be intuitive how the colours relate to the
 numerical values they represent, so that we can accurately understand
 how the data values vary when looking at the changing colours.
 
@@ -40,7 +40,7 @@ colour schemes because we know that the colours of the points should
 change in a perceptually uniform manner as we move from left to right
 along the x-axis.
 
-In the leftmost plot in this slide we used the default categorical
+In the leftmost plot in this slide, we used the default categorical
 colour scheme. As you can see this is not at all well suited to
 represent numerical data as the sharp transitions between hues makes it
 appear as if there are groups in the data, whereas we know that these
@@ -68,13 +68,13 @@ The plot on the right has a colour scheme that adds a slight variation
 in hue while keeping the perceptually uniform variation in lightness.
 
 The reason for this is to highlight small variations in the data when
-this is of great importance. We can see the effect of this buy studying
+this is of great importance. We can see the effect of this by studying
 the values in the 60-80 range in both plots. It is hard to see the
 differences between these in the leftmost plot, but thanks to the hue
 transition from yellow to green in the rightmost plot we can more
 clearly perceive detail in this range.
 
-Although the hue shifts in this plots are more gradual than in the plot
+Although the hue shifts in these plots are more gradual than in the plot
 with the categorical colour scheme in the previous slide, it may still
 introduce a slight bias towards seeing groupings where there are none,
 which is something to keep in mind.
@@ -102,7 +102,7 @@ alt.Chart(cars).mark_circle(size=50).encode(
 </iframe>
 
 Notes: To decide whether the highest or lowest values should be at the
-lightest or darkest end of a sequential colour schemes, it is advisable
+lightest or darkest end of a sequential colour scheme, it is advisable
 to set it so that the most important values has the most contrast to the
 background.
 
@@ -116,14 +116,14 @@ from dark to light by default so we need to pass `reverse=True` to
 `alt.Scale` (this technique could be used to reverse any scale in
 Altair, including the value along one of the axes).
 
-The viridis colour scheme was designed by the developers of matplotlib
+The Viridis colour scheme was designed by the developers of matplotlib
 (another Python plotting package). In addition to the colour schemes
 linked in the previous slide deck, more details and examples are
 available in the [matplotlib
 documentation](http://matplotlib.org/users/colormaps.html), and many of
 the core design principles are outlined in [this entertaining
 talk](https://www.youtube.com/watch?v=xAoljeRJ3lU), including the design
-choice behind viridis.
+choice behind Viridis.
 
 Note that we are using filled circular marks and the `size` parameter to
 enlarge the points slightly and make it easier to see the changes in
@@ -151,13 +151,13 @@ mostly represented as variation in lightness.
 
 However, there are also some colour schemes that are designed to look
 almost exactly the same for people with the most common colour vision
-deficiences also when it comes to the hue variation.
+deficiencies also when it comes to the hue variation.
 
 `'cividis'` is one of these colour schemes and you can see how it looks
 in this plot.
 
 Nearly 10% of the population is colour vision deficient; red-green
-colour blindness in particular affects 8% of men and 0.5% of women.
+colour blindness, in particular, affects 8% of men and 0.5% of women.
 Guidelines for making your visualizations more accessible to those with
 reduced colour vision, will in many cases also improve the
 interpretability of your graphs for people who have standard colour
@@ -167,13 +167,13 @@ Fortunately, many of these are followed by the default settings in
 Altair, and we don’t need to change the colour scheme for this reason.
 
 If you are unsure how your plot will look for someone who sees colours
-differently than you, [this website lets you upload and image and
+differently than you, [this website lets you upload an image and
 simulate different colour vision
 deficiencies](https://www.color-blindness.com/coblis-color-blindness-simulator/).
 
 ---
 
-## Additional hue variation brings out further detail, but distorts the perceptual uniformity
+## Additional hue variation brings out further detail but distorts the perceptual uniformity
 
 ``` python
 alt.Chart(cars).mark_circle(size=50).encode(
@@ -195,10 +195,10 @@ schemes were gradually increasing in lightness, this is not the case for
 this rainbow map.
 
 Here the lightest colours are in the middle and the darkest at both
-extremes of the colour schemes. This is particularly a negative for
-people with colour vision deficiencies, which can no longer rely on the
-gradual lightness change and the varying hues therefore make this plot
-less accessible.
+extremes of the colour schemes. This is particularly negative for people
+with colour vision deficiencies, which can no longer rely on the gradual
+lightness change and the varying hues, therefore, makes this plot less
+accessible.
 
 In addition to losing the overall intuitiveness of the colour scheme,
 the many hues mean that we’re likely to perceive changes in the colour
@@ -211,13 +211,13 @@ called “jet”, which used to be the default in many plotting packages but
 is not a good choice for any data, because it introduces artificial
 banding and highlighting of values.
 
-The take home message here is that there are valid use cases for modern
+The take-home message here is that there are valid use cases for modern
 rainbow maps, but you should be confident that there is no better
 alternative before reaching for this tool, and be careful when
-interpreting rainbow coloured plots in general.
+interpreting rainbow-coloured plots in general.
 
 The jet rainbow colourmap should be avoided for many reasons, including
-that the sharp transitions between colours introduces visual threshold
+that the sharp transitions between colours introduce a visual threshold
 that do not represent the underlying continuous data. Another issue is
 luminance (brightness). For example, your eye is drawn to the yellow and
 cyan regions, because the luminance is higher. This can have the
@@ -246,7 +246,7 @@ alt.Chart(cars).mark_circle(size=50).encode(
 <iframe src="/module5/charts/16/unnamed-chunk-6.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: In the previous slides we encoded the same dataframe column in
+Notes: In the previous slides, we encoded the same dataframe column in
 both the `x` and `color` channel so that it was easy for us to directly
 compare the colours to the points position on the x-axis.
 
@@ -260,7 +260,7 @@ which value a colour represents, but we can effectively communicate
 roughly how heavy the cars are as well as clearly highlight trends in
 the data.
 
-In this plot the trend is that the points get gradually darker the
+In this plot, the trend is that the points get gradually darker the
 further towards the bottom right corner they lie. This means that
 heavier cars are the ones with more powerful engines and poorer gas
 mileage.
@@ -285,8 +285,8 @@ see next.
 
 There is also one other type of colour scheme, cyclical, which starts
 and ends in both the same lightness and hue. This design is useful for
-values with natural cycles such as degrees of an angle of month of the
-year, where the end and beginning are close to each other.
+values with natural cycles such as degrees of an angle of the month of
+the year, where the end and beginning are close to each other.
 
 ---
 
@@ -319,7 +319,7 @@ negative and when it was positive.
 
 ---
 
-## A diverging colourscheme effectively highlights values at the extreme temperatures
+## A diverging colour scheme effectively highlights values at the extreme temperatures
 
 ``` python
 alt.Chart(toronto_temp).mark_circle(size=50).encode(
@@ -341,11 +341,11 @@ This is because diverging colour schemes vary in lightness from dark at
 the extremes to light in the middle, and use different hues for values
 on each side of the midpoint.
 
-By default the midpoint would be set in the middle of the max and min
+By default, the midpoint would be set in the middle of the max and min
 values in our data (so around +5 here). Since 0 is a natural midpoint,
 we specify this manually.
 
-The default diverging coor scheme uses orange and blue hues, but there
+The default diverging colour scheme uses orange and blue hues, but there
 are many other effective combinations. You should avoid using green and
 red, because these are practically impossible to tell apart for people
 with the most common types of colour vision deficiencies.
@@ -374,7 +374,7 @@ This means that the positive side of the scale is longer, and only
 points 30 degrees away from the midpoint are coloured in the darkest
 orange colour,
 
-On the other hand, for the negative values it is sufficient to be only
+On the other hand, for the negative values, it is sufficient to be only
 20 degrees away from the midpoint to be colour in the darkest blue
 colour.
 

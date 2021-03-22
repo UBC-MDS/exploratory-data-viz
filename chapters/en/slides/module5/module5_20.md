@@ -4,8 +4,8 @@ type: slides
 
 # Annotating with text and colour
 
-Notes: In this module we will be learning how to use colour and text to
-annotate our visualizations and highlight important features.
+Notes: In this slide deck, we will be learning how to use colour and
+text to annotate our visualizations and highlight important features.
 
 ---
 
@@ -92,8 +92,8 @@ Conceptually, you can think of `alt.condition` like this:
 `alt.condition(IF this is true, DO this, ELSE DO this)`.
 
 So here we are checking if the `week_day` column has the value `'Wed'`,
-and if it does we use the `'coral'` color, otherwise we use the default
-`'steelblue'` colour.
+and if it does we use the `'coral'` colour, otherwise, we use the
+default `'steelblue'` colour.
 
 Instead of typing out `'Wed'` each time we calculate the day with the
 highest sum of donations using pandas and extract it using the
@@ -137,9 +137,9 @@ label, for example when an event happened on a time axis, or as the
 label that we made up for this chart.
 
 To add this annotation we use a `mark_text` in the same way as when we
-used direct labeling for line graphs a few slide deck ago. We add the
-`text` encoding but the the rest the same and use `dx` and `dy` to
-position the label relative the top of the bar.
+used direct labelling for line graphs a few slide decks ago. We add the
+`text` encoding and use `dx` and `dy` to position the label relative to
+the top of the bar.
 
 ---
 
@@ -153,7 +153,7 @@ chart + chart.mark_text(align='left').encode(text='sum(sum)')
 </iframe>
 
 Notes: As we saw in a previous slide deck, it is possible to add text
-annotations directly on the plots.
+annotations directly to the plots.
 
 This is beneficial when we want to communicate the exact value to our
 audience, and can give the plot a different look and feel.
@@ -174,10 +174,10 @@ chart + chart.mark_text(align='left', dx=2).encode(text=alt.Text('sum(sum)', for
 </iframe>
 
 Notes: `alt.Text` uses the `format` parameter directly instead of within
-`alt.Axis`. Here we add a thousands separator (`,`) and round the values
+`alt.Axis`. Here we add a thousand separator (`,`) and round the values
 to integers (`d`) to remove the decimals.
 
-We also use `dx` to indtroduce some whitespace between the bar and the
+We also use `dx` to introduce some whitespace between the bar and the
 label.
 
 This makes the labels easier to read, but since we have thousands of
@@ -198,7 +198,7 @@ Notes: The `s` format string changes the values to millions as per the
 standard international units convention that we discussed earlier.
 
 We use `.3` to indicate that we want three significant digits for each
-label, otherwise they would all be printed with six decimals or so,
+label, otherwise, they would all be printed with six decimals or so,
 which is hard to read.
 
 We also specify `~`, which removes trailing zero, e.g. the top bar says
@@ -229,13 +229,13 @@ Notes: We can make our chart stand out by styling it further. Here we
 remove the x-axis, which is now redundant as we have included its
 information directly in the text annotations.
 
-We add a title to the plot with the take home message and explain what
+We add a title to the plot with the take-home message and explain what
 the values are in the subtitle. We anchor the title to the start (left)
 of the plot and use `dx` to align it with the bottom of the bars since
-this often looks more visually appealing for horizontal bar chart.
+this often looks more visually appealing for horizontal bar charts.
 
 We use `dy` to add additional whitespace between the subtitle and the
-topmost bar and remove the grey ourline by setting the `strokeWidth` to
+topmost bar and remove the grey outline by setting the `strokeWidth` to
 0.
 
 ---
@@ -265,19 +265,19 @@ chart title.
 Unfortunately, the subtitle colour does not yet change automatically, so
 we need to change this manually.
 
-We could have rewritten the entire plot from last slide and added
+We could have rewritten the entire plot from the last slide and added
 `subtitleColor` to `alt.TitleParams`, but here we use `configure_title`
 instead.
 
 The `configure_*` chart methods are useful when we want to make a
 modification to an already existing chart without copying and pasting
-all the code, but in general it is preferred to change these parameters
+all the code, but in general, it is preferred to change these parameters
 directly in the main chart code instead [you can read this section of
 the docs to find out
 more](https://altair-viz.github.io/user_guide/customization.html#user-guide-customization).
 
 All the available themes can be shown with `alt.themes.names()`, and
-currently they are
+currently, they are
 `['dark', 'default', 'fivethirtyeight', 'ggplot2', 'latimes', 'none', 'opaque', 'quartz', 'urbaninstitute', 'vox']`.
 You can [see samples of what these themes look like
 here](https://vega.github.io/vega-themes/).
