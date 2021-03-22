@@ -33,7 +33,7 @@ def test():
     assert type(text_plot) == alt.Chart, "text_plot does not appear to be an Altair Chart object. Have you assigned the Altair Chart object for the plot annotation to the correct variable?"
     assert text_plot.mark != alt.utils.schemapi.Undefined and (
         text_plot.mark.align== 'left' and
-        text_plot.mark.dx== 4 and
+        text_plot.mark.dx== 5 and
         text_plot.mark.type == 'text'
     ), "Make sure you are using mark_text and specify `left` alignment and location at dx=4 for text_plot."
     assert (
