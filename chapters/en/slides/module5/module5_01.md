@@ -8,7 +8,7 @@ Notes: So far we have learned how to understand Altair’s visualization
 grammar, how to create several different types of plots, and how to use
 these when exploring data on our own.
 
-In this module we will learn the principles of effective figure design
+In this module, we will learn the principles of effective figure design
 for communication and see how we can implement these using Altair.
 
 ---
@@ -25,11 +25,11 @@ Infoworld](https://www.infoworld.com/article/3088166/why-how-to-lie-with-statist
 Notes: When designing figures for presentation, we have the possibility
 to tell different stories from the same underlying data.
 
-On this slide, you can see an award winning figure describing the
+On this slide, you can see an award-winning figure describing the
 “bloody toll” from the American war in Iraq. This figure has been
 purposely designed to draw your attention to the blood-like red colour
-and the downward facing bars which brings up association with dripping
-blood.
+and the downward-facing bars which brings up an association with
+dripping blood.
 
 The title also clearly highlights the negative aspects of this data.
 
@@ -69,18 +69,18 @@ introduction](https://socviz.co/lookatdata.html#lookatdata)
 <img src="/module5/napoleon.png" width="85%"></img>
 </center>
 
-Notes: This is an elegant figure that goes into excquisite detail about
+Notes: This is an elegant figure that goes into exquisite detail about
 how Napoleon’s army gradually shrank in numbers as the march against the
 Russian empire in the early 1800s.
 
 The width of the line is the number of soldiers in the army and the
-colour represents whether the are marching against Moscow (gold/brown)
+colour represents whether they are marching against Moscow (gold/brown)
 or retreating back to France (black). The bottom of the chart shows how
 the temperature changed during the campaign.
 
 It does take a few seconds to digest the graph when you first see it,
-but once you have familiarized yourself with it, you appreciate how you
-can see in detail the army progress as it moved through Europe.
+but once you have familiarised yourself with it, you appreciate how you
+can see in detail the army’s progress as it moved through Europe.
 
 This is a great visualization when the reader has time to sit down with
 the plot for a while and when you believe your target audience will
@@ -88,7 +88,7 @@ appreciate this level of detail?
 
 But what if you are presenting this as part of a slide deck in a board
 meeting and only can spend a few seconds describing the plot? It would
-likely be too complicated to digest and the take home message might be
+likely be too complicated to digest and the take-home message might be
 lost.
 
 ---
@@ -103,7 +103,7 @@ introduction](https://socviz.co/lookatdata.html#lookatdata)
 </center>
 
 Notes: In the board meeting, this pie chart is likely more effective in
-communicating the take home message: the Napolean army was decimated as
+communicating the take-home message: the Napolean army was decimated as
 a result of this military campaign.
 
 Although we said earlier in this course that we should generally avoid
@@ -121,16 +121,16 @@ Economist](https://medium.economist.com/mistakes-weve-drawn-a-few-8cdd8a42d368)
 <img src="/module5/broken-axis.png" width="70%"></img>
 </center>
 
-Notes: In this module we will also visit a few best practices in
+Notes: In this module, we will also visit a few best practices in
 visualization design and learn why they are effective.
 
 We can see one of these on this slide. Breaking the value axis of a
 chart can lead to that the differences between the values look much
 bigger than they are.
 
-In the left chart of this slide the value axis is broken resulting in
-the top bar being only 1.5x longer than the second longest bar when the
-difference is in fact more than 5x as can be seen in the right most
+In the left chart of this slide, the value axis is broken resulting in
+the top bar being only 1.5x longer than the second-longest bar when the
+difference is in fact more than 5x as can be seen in the right-most
 chart.
 
 This example is from [an article in The Economist where they critique
@@ -145,7 +145,7 @@ which is an effective way to learn.
 <iframe src="/module5/charts/lightness-vs-hues.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: On this slide we have represented the values of one of the
+Notes: On this slide, we have represented the values of one of the
 dataframe columns with different colour combinations. Using the correct
 colour combination might at first seem like a matter of aesthetics
 rather than an important part of data visualization, but it can have a
@@ -183,7 +183,7 @@ Even if our audience would have the time to study this figure in detail
 and read all the text, it will likely not be as memorable without the
 striking title.
 
-Later in this module we will learn not just how to create effective
+Later in this module, we will learn not just how to create effective
 figure titles but also how to label our axes effectively.
 
 ---

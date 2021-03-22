@@ -45,7 +45,7 @@ plot.
 Is there a specific question you are trying to answer, like comparing
 the relationship between two dataframe columns? Or are you creating a
 plot to help you understand the structure of your data more in general,
-such as plotting the distribution of each dataframe columns?
+such as plotting the distribution of each dataframe column?
 
 In either case, it can be extremely helpful to draw out your plot with
 pen and paper first. This helps you think about if the plot you are

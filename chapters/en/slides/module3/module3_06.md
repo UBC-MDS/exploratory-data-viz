@@ -4,8 +4,8 @@ type: slides
 
 # Using density plots to visualize distributions
 
-Notes: In this module we will see how to use density plots instead of
-histograms to represent distributions of data.
+Notes: In this slide deck, we will see how to use density plots instead
+of histograms to represent distributions of data.
 
 ---
 
@@ -25,8 +25,8 @@ black tick marks on the bottom and they are the same in both subplots.
 The only reason the histograms appear to be different is that the
 borders between the bins are shifted in the rightmost picture.
 
-As we can see here, a histogram is not an as unbiased plot as we might
-think at first, especially not if we have few data points, where the
+As we can see here, a histogram is not as unbiased of a plot as we might
+think at first. Especially if we have few data points, where the
 inclusion or exclusion of just a few points makes a big difference for
 the bar heights.
 
@@ -34,13 +34,13 @@ the bar heights.
 
 ## Centering the bins on the data can help create more accurate distribution plots
 
-[From Kimberly Fessel’s dataviz
+[From Kimberly Fessel’s DataViz
 videos](https://www.youtube.com/watch?v=DCgPRaIDYXA)
 
 <img src=/module3/kde-buildup.gif></img>
 
 Notes: Instead of setting fixed lines along the axis and then count
-points fully in one bin or another, we can create bins that are centered
+points fully in one bin or another, we can create bins that are centred
 on the data and then add the bins together.
 
 When we center bins on the data, we often use bell-shaped bins instead
@@ -122,13 +122,13 @@ import altair as alt
 Notes: To create a density plot, we need to complete two tasks:
 
 1.  Place the bell-shaped bins and add them together as in the animation
-    as few slides ago.
+    a few slides ago.
 2.  Plot a line or area mark for the newly calculated sum of bins.
 
 In Altair, these operations are done in two explicit steps, using
 `transform_density` for the calculation.
 
-First we specify which dataframe column we want to use for the
+First, we specify which dataframe column we want to use for the
 calculation. Then we use the `as_` parameter to name the newly
 calculated values, which we here refer to as `'density'`.
 
@@ -186,9 +186,9 @@ will compute one density for each of the differently coloured areas.
 This plot effectively conveys the differences between runtimes of movies
 from different genres.
 
-Notably we can see that the peaks are are different locations on the
-x-axis for the three genres. This indicates that the most common movie
-lengths are different between genres.
+Notably, we can see that the peaks are different locations on the x-axis
+for the three genres. This indicates that the most common movie lengths
+are different between genres.
 
 This difference appears to be around 20 min, but it does not necessarily
 tell us where the mean and median would fall, since that also depends on
@@ -224,19 +224,19 @@ distributions.
 
 Notes: The density areas don’t suffer the same issues as the histograms
 when made transparent. The continuous solid shape for each group is
-easier to follow even when it is semi transparent and overlaps with the
+easier to follow even when it is semi-transparent and overlaps with the
 other areas.
 
 The transparency gives us the advantage of knowing that there is not
 small density area completely hiding behind a bigger one and we can also
 see the range of all the distributions.
 
-For example we can tell that there are some Fantasy movies that are
-almost as long as the longest History movies, whereas ther is not a
+For example, we can tell that there are some Fantasy movies that are
+almost as long as the longest History movies, whereas there is not a
 single Animation movie that is longer than 120 minutes.
 
 However, if we had more distributions to compare, a semi-transparent
-density plot would become hard to decipher. In such cases we could
+density plot would become hard to decipher. In such cases, we could
 either filter the data to plot fewer distributions or facet them
 vertically as we saw with the histograms previously.
 
@@ -264,12 +264,12 @@ vertically as we saw with the histograms previously.
 Notes: In the previous slide, we can see that the density curves are a
 bit jagged rather than perfectly smooth.
 
-This is because in the calculation of the density, we can indicate how
+This is because, in the calculation of the density, we can indicate how
 many steps along the curve the density should be calculated for. This
 can be more intuitive to understand if we think of the extreme cases:
 
 If we calculated a density for only a single step, there would be a
-straight line between the start and end point, and for two steps there
+straight line between the start and endpoint, and for two steps there
 the curve would have a single sharp peak like a triangle as you can see
 in this slide.
 
@@ -297,7 +297,7 @@ density curves appear smoother. Since a density is an approximation of
 the true distribution underlying our data, it makes sense to set the
 number of steps so that the areas appear smooth.
 
-However, more steps takes more computing power since there are more
+However, more steps take more computing power since there are more
 calculations to make. If we are working with a large data set or
 creating many plots, we might therefore want to decrease this value
 slightly.
@@ -327,11 +327,11 @@ When looking at this plot, are you be able to tell that the density is
 made up of just ten observations?
 
 In Altair, a hint that a density is made up of few observations is the
-sharp borders of the areas. This happens because the default behavior in
-Altair is to end the density where the data ends, which often creates
+sharp borders of the areas. This happens because the default behaviour
+in Altair is to end the density where the data ends, which often creates
 sharp borders for low numbers of observations.
 
-Many other plotting packages instead extend the density beyond the
+Many other plotting packages instead, extend the density beyond the
 observations in the dataset to make it appear smoother and it is
 therefore paramount to always ask how many observations there are before
 interpreting a density plot.
@@ -341,8 +341,7 @@ interpreting a density plot.
 ## Densities can be combined with plotting individual data points
 
 ``` python
-(density.mark_area(opacity=0.7)
- + alt.Chart(movies[:10]).mark_tick(color='black', yOffset=140).encode(x='runtime'))
+(density.mark_area(opacity=0.7) + alt.Chart(movies[:10]).mark_tick(color='black', yOffset=140).encode(x='runtime'))
 ```
 
 <iframe src="/module3/charts/06/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
@@ -358,7 +357,7 @@ individual data points.
 
 Here we are using `mark_tick` to plot every single observation along the
 x-axis and making the density area transparent so that we can see the
-tick marks. By default the ticks would be in the middle of the plot, so
+tick marks. By default, the ticks would be in the middle of the plot, so
 we are using `yOffset` to align them with the x-axis.
 
 With as few as 10 observations, we actually don’t need the density at

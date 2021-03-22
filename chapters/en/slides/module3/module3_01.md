@@ -4,10 +4,10 @@ type: slides
 
 # Visualizing data from one column
 
-Notes: In the previous modules we have learned how to use graphical
-marks to create plots and seen which visual channels are effective for
-displaying data. Equipped these new skills, we will dive deeper into
-when it is appropriate to use certain charts instead of others.
+Notes: In the previous modules, we have learned how to use graphical
+marks to create plots and see which visual channels are effective for
+displaying data. Equipped with these new skills, we will dive deeper
+into when it is appropriate to use certain charts instead of others.
 
 ---
 
@@ -44,7 +44,7 @@ of production, and average user rating.
 Upon glancing at the dataframe table in this slide, there are several
 questions that might come to mind, e.g.
 
--   Are high budget movies more profitable?
+-   Are high-budget movies more profitable?
 -   Do some countries make more movies of certain genres?
 -   Are some genres rated higher than others?
 
@@ -85,7 +85,7 @@ slide.
 
 ---
 
-## Single axis plots can become saturated when there is a lot of data to plot
+## Single-axis plots can become saturated when there is a lot of data to plot
 
 ``` python
 alt.Chart(movies[:50]).mark_point().encode(
@@ -100,12 +100,12 @@ many there are at different locations along the axis, since the circular
 marks are overlapping with each other.
 
 When it becomes hard to tell individual observations apart, we say that
-a plot become “saturated” or “overplotted”. We will talk more about this
-concept in the next module.
+a plot becomes “saturated” or “overplotted”. We will talk more about
+this concept in the next module.
 
 ---
 
-## Thinner marks avoids saturation
+## Thinner marks avoid saturation
 
 ``` python
 alt.Chart(movies[:50]).mark_tick().encode(
@@ -128,9 +128,9 @@ This type of plot with vertical tick marks along one axis is so common
 that it is sometimes referred to by a special name: “rugplot”.
 
 Instead of solely remembering plot by their specific names, the
-visualization grammar of Altair let’s us think about visualizations more
+visualization grammar of Altair lets us think about visualizations more
 intuitively by how they are composed, which makes it easy to see the
-similarities between this plots and the one on the previous slide.
+similarities between these plots and the one on the previous slide.
 
 ---
 
@@ -164,19 +164,19 @@ alt.Chart(movies).mark_bar().encode(
 </iframe>
 
 Notes: Instead of visualizing each individual observation, we can use
-the histograms we learned about in last module. Histograms divide one
-axis into groups (or “bins”) and represent the count of observations in
-each group with a bar.
+the histograms we learned about in the last module. Histograms divide
+one axis into groups (or “bins”) and represent the count of observations
+in each group with a bar.
 
 In this plot, we can directly see that most movies are around 100 min in
-length, because all the highest bars are around this value. We would say
-that this distribution has a single peak around 100 min.
+length because all the highest bars are around this value. We would say
+that this distribution has a single peak of around 100 min.
 
-Some distributions has multiple peaks which are not necessarily in the
+Some distributions have multiple peaks which are not necessarily in the
 center of the distribution, and some have no distinct peaks at all, but
 are instead more uniformly distributed.
 
-We also see wide variation in the length of movies in the plot, The
+We also see a wide variation in the length of movies in the plot, The
 shortest movie is just 20-30 min long, while the longest is somewhere
 between 2010 and 220 minutes.
 
@@ -217,13 +217,13 @@ compared to the UK, it is quite hard to tell if there are any meaningful
 differences between movies from the two countries.
 
 The location of the two distributions on the x-axis look quite similar,
-but from this visualizations alone, we don’t have enough information to
+but from these visualizations alone, we don’t have enough information to
 tell if the location, number of peaks, and the overall shape is the same
 between the two distributions.
 
 ---
 
-## Independent y-axis scales let’s us study each distribution in more detail
+## Independent y-axis scales let us study each distribution in more detail
 
 ``` python
 (alt.Chart(movies).mark_bar().encode(
@@ -260,12 +260,10 @@ UK and create multiple visualizations each with a different number of
 Maybe there are other categorical dataframe columns that would better
 explain the spread in movie length seen in the initial histogram?
 
-In the next module we will explore if there are more distinct
+In the next module, we will explore if there are more distinct
 differences in movie length based on which genre the movies belong to
 rather than its production country.
 
 ---
 
 # Let’s apply what we learned!
-
-Notes: <br>
