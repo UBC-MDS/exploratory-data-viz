@@ -8,7 +8,7 @@ temp_plot = alt.Chart(temps_df).mark_circle(size=50).encode(
     alt.X('date', 
         title="Date"),
     alt.Y('total_rain_mm',
-        title='rainfall total for the month (mm)'),
+        title='Total rainfall for the month (mm)'),
     alt.Color('mean_temp',
         title=' Mean Temperature',
         scale=alt.Scale(scheme='blueorange', domainMid=0))
