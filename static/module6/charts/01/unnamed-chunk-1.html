@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-a65b946d701e56cf4c7b2138c2b37eda"}, "mark": "line", "encoding": {"x": {"type": "temporal", "field": "decade"}, "y": {"type": "quantitative", "field": "cumulative_hectar_lost_millions"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-a65b946d701e56cf4c7b2138c2b37eda": [{"decade": "1700-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 19}, {"decade": "1710-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 38}, {"decade": "1720-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 57}, {"decade": "1730-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 76}, {"decade": "1740-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 95}, {"decade": "1750-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 114}, {"decade": "1760-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 133}, {"decade": "1770-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 152}, {"decade": "1780-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 171}, {"decade": "1790-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 190}, {"decade": "1800-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 209}, {"decade": "1810-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 228}, {"decade": "1820-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 247}, {"decade": "1830-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 266}, {"decade": "1840-01-01T00:00:00", "hectar_lost_millions": 19, "cumulative_hectar_lost_millions": 285}, {"decade": "1850-01-01T00:00:00", "hectar_lost_millions": 30, "cumulative_hectar_lost_millions": 315}, {"decade": "1860-01-01T00:00:00", "hectar_lost_millions": 30, "cumulative_hectar_lost_millions": 345}, {"decade": "1870-01-01T00:00:00", "hectar_lost_millions": 30, "cumulative_hectar_lost_millions": 375}, {"decade": "1880-01-01T00:00:00", "hectar_lost_millions": 30, "cumulative_hectar_lost_millions": 405}, {"decade": "1890-01-01T00:00:00", "hectar_lost_millions": 30, "cumulative_hectar_lost_millions": 435}, {"decade": "1900-01-01T00:00:00", "hectar_lost_millions": 30, "cumulative_hectar_lost_millions": 465}, {"decade": "1910-01-01T00:00:00", "hectar_lost_millions": 30, "cumulative_hectar_lost_millions": 495}, {"decade": "1920-01-01T00:00:00", "hectar_lost_millions": 115, "cumulative_hectar_lost_millions": 610}, {"decade": "1930-01-01T00:00:00", "hectar_lost_millions": 115, "cumulative_hectar_lost_millions": 725}, {"decade": "1940-01-01T00:00:00", "hectar_lost_millions": 115, "cumulative_hectar_lost_millions": 840}, {"decade": "1950-01-01T00:00:00", "hectar_lost_millions": 116, "cumulative_hectar_lost_millions": 956}, {"decade": "1960-01-01T00:00:00", "hectar_lost_millions": 116, "cumulative_hectar_lost_millions": 1072}, {"decade": "1970-01-01T00:00:00", "hectar_lost_millions": 116, "cumulative_hectar_lost_millions": 1188}, {"decade": "1980-01-01T00:00:00", "hectar_lost_millions": 151, "cumulative_hectar_lost_millions": 1339}, {"decade": "1990-01-01T00:00:00", "hectar_lost_millions": 78, "cumulative_hectar_lost_millions": 1417}, {"decade": "2000-01-01T00:00:00", "hectar_lost_millions": 51, "cumulative_hectar_lost_millions": 1468}, {"decade": "2010-01-01T00:00:00", "hectar_lost_millions": 47, "cumulative_hectar_lost_millions": 1515}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

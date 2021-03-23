@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-6d2475caf273240ab43a84841e9c4dbb"}, "mark": "bar", "encoding": {"x": {"type": "quantitative", "field": "deforestation_hectares"}, "y": {"type": "nominal", "field": "Entity", "sort": "x", "title": ""}}, "title": "Palm oil was the leading cause of deforestation between 2003 and 2013 in Indonesia", "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-6d2475caf273240ab43a84841e9c4dbb": [{"Entity": "Grassland", "Code": 0.0, "Year": 18072, "deforestation_hectares": 683822}, {"Entity": "Large scale plantations", "Code": 0.0, "Year": 18072, "deforestation_hectares": 330853}, {"Entity": "Logging road and secondary forests", "Code": 0.0, "Year": 18072, "deforestation_hectares": 461461}, {"Entity": "Oil palm plantations", "Code": 0.0, "Year": 18072, "deforestation_hectares": 1613470}, {"Entity": "Other", "Code": 0.0, "Year": 18072, "deforestation_hectares": 263415}, {"Entity": "Small-scale clearing", "Code": 0.0, "Year": 18072, "deforestation_hectares": 1190758}, {"Entity": "Timber plantations", "Code": 0.0, "Year": 18072, "deforestation_hectares": 888508}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

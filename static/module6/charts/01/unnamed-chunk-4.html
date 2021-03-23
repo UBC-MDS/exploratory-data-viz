@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-cd72d87090474264a9deefd035ec4957"}, "mark": "bar", "encoding": {"x": {"type": "quantitative", "field": "deforestation_hectares"}, "y": {"type": "nominal", "field": "type", "sort": "x", "title": ""}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-cd72d87090474264a9deefd035ec4957": [{"type": "commercial_crops", "Year": 20085, "deforestation_hectares": 1808000}, {"type": "fire", "Year": 20085, "deforestation_hectares": 1866000}, {"type": "flooding_due_to_dams", "Year": 20085, "deforestation_hectares": 112000}, {"type": "mining", "Year": 20085, "deforestation_hectares": 57000}, {"type": "natural_disturbances", "Year": 20085, "deforestation_hectares": 340000}, {"type": "other_infrastructure", "Year": 20085, "deforestation_hectares": 100000}, {"type": "pasture", "Year": 20085, "deforestation_hectares": 13454000}, {"type": "roads", "Year": 20085, "deforestation_hectares": 258000}, {"type": "selective_logging", "Year": 20085, "deforestation_hectares": 1022000}, {"type": "small-scale_clearing", "Year": 20085, "deforestation_hectares": 3075000}, {"type": "tree_plantations_including_palm", "Year": 20085, "deforestation_hectares": 357000}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
