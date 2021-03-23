@@ -16,6 +16,8 @@ from the end of the last slide deck. We are saving these as variables so
 that we can use them to practice laying out plots on the following
 slides.
 
+TODO fix so that this code shows up correctly on the slide
+
 ---
 
 ## Placing plots next to each other allows us to make more direct comparisons
@@ -113,4 +115,15 @@ centered_map_title = alt.TitleParams(text='Map comparison', anchor='middle')
 ```
 
 Notes: To make our visualization easier to interpret, we can add
-descriptive titles. These are often particularly important for
+descriptive titles. These are often particularly important when we
+create more complex figures since there are now several panels within
+each figure to keep track of.
+
+This doesn’t mean that each panel absolutely needs a title, but when in
+doubt it is better to add one title too many than one too few.
+
+---
+
+# Let’s apply what we learned!
+
+Notes: <br>
