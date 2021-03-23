@@ -20,6 +20,10 @@ id: 6
 <slides source="module6/module6_02" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
+<exercise id="3" title="Figure layouts" type="slides,video">
+<slides source="module6/module6_03" shot="1" start="0:003" end="07:12"> </slides>
+</exercise>
+
 <exercise id="24" title="What Did We Just Learn?" type="slides, video">
 <slides source="module6/module6_end" shot="0" start="04:5307" end="05:5911"></slides>
 </exercise>
