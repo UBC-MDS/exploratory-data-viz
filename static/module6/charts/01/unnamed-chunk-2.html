@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-d9d8e2dcc4e259add3962b535ffb6e06"}, "mark": "bar", "encoding": {"x": {"type": "quantitative", "field": "Share of commodity-driven deforestation"}, "y": {"type": "nominal", "field": "Entity", "sort": "x", "title": ""}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-d9d8e2dcc4e259add3962b535ffb6e06": [{"Entity": "Africa", "Code": null, "Share of commodity-driven deforestation": 17.456108399999998}, {"Entity": "Americas (excl. Brazil and Mexico)", "Code": null, "Share of commodity-driven deforestation": 20.848144899999998}, {"Entity": "Asia and Pacific (excl. Indonesia and India)", "Code": null, "Share of commodity-driven deforestation": 11.2094465}, {"Entity": "Brazil", "Code": "BRA", "Share of commodity-driven deforestation": 33.1182152}, {"Entity": "India", "Code": "IND", "Share of commodity-driven deforestation": 1.41274847}, {"Entity": "Indonesia", "Code": "IDN", "Share of commodity-driven deforestation": 13.9439744}, {"Entity": "Mexico", "Code": "MEX", "Share of commodity-driven deforestation": 2.0113621}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://vega.github.io/vega-datasets/data/us-10m.json", "format": {"feature": "states", "type": "topojson"}}, "mark": "geoshape", "encoding": {"color": {"type": "quantitative", "field": "population"}}, "projection": {"type": "albersUsa"}, "transform": [{"lookup": "id", "from": {"data": {"name": "data-5e8a6d8b918c50e57a84d4f86f71cbcd"}, "key": "id", "fields": ["population"]}}], "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-5e8a6d8b918c50e57a84d4f86f71cbcd": [{"state": "Alabama", "id": 1, "population": 4863300, "latitude": 32.7794, "longitude": -86.8287}, {"state": "Alaska", "id": 2, "population": 741894, "latitude": 64.0685, "longitude": -152.2782}, {"state": "Arizona", "id": 4, "population": 6931071, "latitude": 34.2744, "longitude": -111.6602}, {"state": "Arkansas", "id": 5, "population": 2988248, "latitude": 34.8938, "longitude": -92.4426}, {"state": "California", "id": 6, "population": 39250017, "latitude": 37.1841, "longitude": -119.4696}, {"state": "Colorado", "id": 8, "population": 5540545, "latitude": 38.9972, "longitude": -105.5478}, {"state": "Connecticut", "id": 9, "population": 3576452, "latitude": 41.6219, "longitude": -72.7273}, {"state": "Delaware", "id": 10, "population": 952065, "latitude": 38.9896, "longitude": -75.505}, {"state": "District of Columbia", "id": 11, "population": 681170, "latitude": 38.9101, "longitude": -77.0147}, {"state": "Florida", "id": 12, "population": 20612439, "latitude": 28.6305, "longitude": -82.4497}, {"state": "Georgia", "id": 13, "population": 10310371, "latitude": 32.6415, "longitude": -83.4426}, {"state": "Hawaii", "id": 15, "population": 1428557, "latitude": 20.2927, "longitude": -156.3737}, {"state": "Idaho", "id": 16, "population": 1683140, "latitude": 44.3509, "longitude": -114.613}, {"state": "Illinois", "id": 17, "population": 12801539, "latitude": 40.0417, "longitude": -89.1965}, {"state": "Indiana", "id": 18, "population": 6633053, "latitude": 39.8942, "longitude": -86.2816}, {"state": "Iowa", "id": 19, "population": 3134693, "latitude": 42.0751, "longitude": -93.496}, {"state": "Kansas", "id": 20, "population": 2907289, "latitude": 38.4937, "longitude": -98.3804}, {"state": "Kentucky", "id": 21, "population": 4436974, "latitude": 37.5347, "longitude": -85.3021}, {"state": "Louisiana", "id": 22, "population": 4681666, "latitude": 31.0689, "longitude": -91.9968}, {"state": "Maine", "id": 23, "population": 1331479, "latitude": 45.3695, "longitude": -69.2428}, {"state": "Maryland", "id": 24, "population": 6016447, "latitude": 39.055, "longitude": -76.7909}, {"state": "Massachusetts", "id": 25, "population": 6811779, "latitude": 42.2596, "longitude": -71.8083}, {"state": "Michigan", "id": 26, "population": 9928300, "latitude": 44.3467, "longitude": -85.4102}, {"state": "Minnesota", "id": 27, "population": 5519952, "latitude": 46.2807, "longitude": -94.3053}, {"state": "Mississippi", "id": 28, "population": 2988726, "latitude": 32.7364, "longitude": -89.6678}, {"state": "Missouri", "id": 29, "population": 6093000, "latitude": 38.3566, "longitude": -92.458}, {"state": "Montana", "id": 30, "population": 1042520, "latitude": 47.0527, "longitude": -109.6333}, {"state": "Nebraska", "id": 31, "population": 1907116, "latitude": 41.5378, "longitude": -99.7951}, {"state": "Nevada", "id": 32, "population": 2940058, "latitude": 39.3289, "longitude": -116.6312}, {"state": "New Hampshire", "id": 33, "population": 1334795, "latitude": 43.6805, "longitude": -71.5811}, {"state": "New Jersey", "id": 34, "population": 8944469, "latitude": 40.1907, "longitude": -74.6728}, {"state": "New Mexico", "id": 35, "population": 2081015, "latitude": 34.4071, "longitude": -106.1126}, {"state": "New York", "id": 36, "population": 19745289, "latitude": 42.9538, "longitude": -75.5268}, {"state": "North Carolina", "id": 37, "population": 10146788, "latitude": 35.5557, "longitude": -79.3877}, {"state": "North Dakota", "id": 38, "population": 757952, "latitude": 47.4501, "longitude": -100.4659}, {"state": "Ohio", "id": 39, "population": 11614373, "latitude": 40.2862, "longitude": -82.7937}, {"state": "Oklahoma", "id": 40, "population": 3923561, "latitude": 35.5889, "longitude": -97.4943}, {"state": "Oregon", "id": 41, "population": 4093465, "latitude": 43.9336, "longitude": -120.5583}, {"state": "Pennsylvania", "id": 42, "population": 12784227, "latitude": 40.8781, "longitude": -77.7996}, {"state": "Rhode Island", "id": 44, "population": 1056426, "latitude": 41.6762, "longitude": -71.5562}, {"state": "South Carolina", "id": 45, "population": 4961119, "latitude": 33.9169, "longitude": -80.8964}, {"state": "South Dakota", "id": 46, "population": 865454, "latitude": 44.4443, "longitude": -100.2263}, {"state": "Tennessee", "id": 47, "population": 6651194, "latitude": 35.85800000000001, "longitude": -86.3505}, {"state": "Texas", "id": 48, "population": 27862596, "latitude": 31.4757, "longitude": -99.3312}, {"state": "Utah", "id": 49, "population": 3051217, "latitude": 39.3055, "longitude": -111.6703}, {"state": "Vermont", "id": 50, "population": 624594, "latitude": 44.0687, "longitude": -72.6658}, {"state": "Virginia", "id": 51, "population": 8411808, "latitude": 37.5215, "longitude": -78.8537}, {"state": "Washington", "id": 53, "population": 7288000, "latitude": 47.3826, "longitude": -120.4472}, {"state": "West Virginia", "id": 54, "population": 1831102, "latitude": 38.6409, "longitude": -80.6227}, {"state": "Wisconsin", "id": 55, "population": 5778708, "latitude": 44.6243, "longitude": -89.9941}, {"state": "Wyoming", "id": 56, "population": 585501, "latitude": 42.9957, "longitude": -107.5512}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
