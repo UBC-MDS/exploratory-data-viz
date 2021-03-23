@@ -14,13 +14,10 @@ Notes:
 
 In this module students will learn how to
 
-- Follow guidelines for best practices in visualization design.
-- Adjust axes extents and formatting.
-- Modify titles of figure elements.
-- Choose appropriate color schemes for your data.
-- Use pre-made and custom color schemes.
-- Selectively highlight and annotate data with color and text.
-- Directly label data instead of using legends.
+- Craft engaging narratives for your visualizations
+- Visualize geographical data
+- Link geographical data to dataframes
+- Layout plots in panels of a figure grid
 
 Notes:
 
