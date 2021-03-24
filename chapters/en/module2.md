@@ -9,7 +9,7 @@ id: 2
 ---
 
 <exercise id="0" title="Module Learning Outcomes"  type="slides, video">
-<slides source="module2/module2_00" shot="0" start="3:5707" end="4:5306"> </slides>
+<slides source="module2/module2_00" shot="0" start="5:37" end="6:02"> </slides>
 </exercise>
 
 
@@ -784,6 +784,6 @@ This is the only species on Torgersen Island.
 
 
 <exercise id="17" title="What Did We Just Learn?" type="slides, video">
-<slides source="module2/module2_end" shot="0" start="04:5307" end="05:5911">
+<slides source="module2/module2_end" shot="0" start="06:04" end="06:46">
 </slides>
 </exercise>

@@ -10,7 +10,7 @@ id: 0
 
 <exercise id="1" title="Exploratory Data Visualization" type="slides,video">
 
-<slides source="module0/module0_00" shot="0" start="0:002" end="3:5706">
+<slides source="module0/module0_00" shot="0" start="0:002" end="3:40">
 </slides>
 
 </exercise>

@@ -13,7 +13,7 @@ id: 5
 </head>
 
 <exercise id="0" title="Module Learning Outcomes"  type="slides, video">
-<slides source="module5/module5_00" shot="0" start="3:5707" end="4:5306"> </slides>
+<slides source="module5/module5_00" shot="0" start="9:35" end="10:16"> </slides>
 </exercise>
 
 <exercise id="1" title="Effective Figures for Communication" type="slides,video">
@@ -1217,5 +1217,5 @@ Snow in July?
 </exercise>
 
 <exercise id="24" title="What Did We Just Learn?" type="slides, video">
-<slides source="module5/module5_end" shot="0" start="04:5307" end="05:5911"></slides>
+<slides source="module5/module5_end" shot="0" start="10:17" end="10:57"></slides>
 </exercise>

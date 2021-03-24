@@ -9,7 +9,7 @@ id: 1
 ---
 
 <exercise id="0" title="Module Learning Outcomes"  type="slides, video">
-<slides source="module1/module1_00" shot="0" start="3:5707" end="4:5306"> </slides>
+<slides source="module1/module1_00" shot="0" start="3:42" end="4:35"> </slides>
 </exercise>
 
 
@@ -373,6 +373,6 @@ instead of giving each company its own line.
 
 
 <exercise id="11" title="What Did We Just Learn?" type="slides, video">
-<slides source="module1/module1_end" shot="0" start="04:5307" end="05:5911">
+<slides source="module1/module1_end" shot="0" start="04:37" end="05:35">
 </slides>
 </exercise>

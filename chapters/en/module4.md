@@ -9,7 +9,7 @@ id: 4
 ---
 
 <exercise id="0" title="Module Learning Outcomes"  type="slides, video">
-<slides source="module4/module4_00" shot="0" start="3:5707" end="4:5306"> </slides>
+<slides source="module4/module4_00" shot="0" start="8:21" end="09:05"> </slides>
 </exercise>
 
 <exercise id="1" title="Visualizing Multidimensional Distributions" type="slides,video">
@@ -775,6 +775,6 @@ There are no records of Gentoo penguins on Dream island in the data.
 
 
 <exercise id="15" title="What Did We Just Learn?" type="slides, video">
-<slides source="module4/module4_end" shot="0" start="04:5307" end="05:5911">
+<slides source="module4/module4_end" shot="0" start="09:07" end="09:34">
 </slides>
 </exercise>

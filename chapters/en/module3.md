@@ -9,7 +9,7 @@ id: 3
 ---
 
 <exercise id="0" title="Module Learning Outcomes"  type="slides, video">
-<slides source="module3/module3_00" shot="0" start="3:5707" end="4:5306"> </slides>
+<slides source="module3/module3_00" shot="0" start="6:48" end="7:30"> </slides>
 </exercise>
 
 <exercise id="1" title="How To Visualize Data From a Single Column" type="slides,video">
@@ -786,6 +786,6 @@ Nope!
 
 
 <exercise id="12" title="What Did We Just Learn?" type="slides, video">
-<slides source="module3/module3_end" shot="0" start="04:5307" end="05:5911">
+<slides source="module3/module3_end" shot="0" start="07:32" end="08:20">
 </slides>
 </exercise>
