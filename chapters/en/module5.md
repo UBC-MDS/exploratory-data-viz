@@ -350,9 +350,10 @@ Fill in the blanks in the code below so that the following gets accomplished:
 - Map the species on the y-axis and the count on the x-axis. 
 - In the base plot make sure to give a label to the x-axis. Since the species is categorical, do not set a label for the y-axis.
 - Display the base plot and take a look at what it's communicating.
-- Create text by using `mark_text()` and save this in an object named `text`. It should have the same x and y mapping as the base plot but this time you want to make sure the count is displayed on the side of each species bar. Make sure it's centred in alignment and located at `dx=10`.
-- After observing the plot create an object named `penguin_title` using `.TitleParams()`. In this method, you will need to specify an insightful title, and subtitle, give the title a font size of 18, and set the subtitle colour to `firebrick`.
-- Remove emove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method. 
+- Create text by using `mark_text()` and save this in an object named `text`. It should have the same x and y mapping as the base plot but this time you want to make sure the count is displayed on the side of each species bar. Make sure it's centered in alignment and located at `dx=10`.
+- After observing the plot create and object named `penguin_title` using `.TitleParams()`. In this method, you will need to specify an insightful title, and subtitle, give the title a fontsize of 18, and set the subtitle colour to `firebrick`.
+- Remove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method.
+
 
 <codeblock id="05_07">
 
@@ -836,11 +837,7 @@ Hmmm, Have you tried plotting it without? What about the <code>Shape</code> chan
 
 </opt>
 
-
-
 </choice>
-
-
 
 </exercise>
 
@@ -986,14 +983,14 @@ Tasks:
 Fill in the blanks in the code below so that the following gets accomplished:
 
 
-- In a plot named `temp_plot`, use the data source `temps_df` to make a scatter plot (`mark_point`) with points that are size 50.
+- In a plot named `temp_plot`, use the data source `temps_df` to make a scatter plot (`mark_circle`) with points that are size 50.
 - Map the date on the x-axis and the total rainfall levels on the y-axis. 
 - Map the mean temperature to a colour channel and select an appropriate [colour scheme](https://vega.github.io/vega/docs/schemes/). Is a diverging or sequential scheme more appropriate? What is an appropriate mid-point value?
 - Make sure you are giving the channels all proper labels and the plot a title. 
 
 <codeblock id="05_19">
 
-- Are you using `mark_point(size=50)`?
+- Are you using `mark_circle(size=50)`?
 - Are you setting `alt.X('date', title="Date"))`?
 - Are you setting `alt.Y('total_rain_mm',title='rainfall total for the month (mm)')`?
 - In the  plot, are you coding `alt.Color('mean_temp', title=' Mean Temperature', scale=alt.Scale(scheme='blueorange', domainMid=0))`?
@@ -1175,7 +1172,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 - Map the month on the y-axis and the sum of all the precipitation for each month on the x-axis. Print your chart first and examine which month has the most precipitation.
 - Color `rain_plot` by designating a different colour bar to the month with the highest rainfall.
 - Make sure you are giving the x-axis an appropriate label and the plot a title. 
-- In a second plot named `text_plot`, add text to each bar that shows the aggregate precipitation for each month and format it so it includes integer values only. Make sure it is aligned to the left and located 4 units to the right of the bar (use `dx` for this).  Set the text colour as black.
+- In a second plot named `text_plot`, add text to each bar that shows the aggregate precipitation for each month and format it so it includes integer values only. Make sure it is aligned to the left and located 5 units to the right of the bar (use `dx` for this).  Set the text colour as black.
 
 <codeblock id="05_23">
 
