@@ -74,7 +74,7 @@ What is another way of describing high-level visualization libraries?
 <choice id="1" >
 <opt text="Imperative">
 
-This is low level plotting.
+This is low-level plotting.
 
 </opt>
 
@@ -112,7 +112,7 @@ This is a data structure and not quite a plotting structure.
 
 <opt text="Block Components">
 
-Think more language oriented.
+Think more language-oriented.
 
 </opt>
 
@@ -125,7 +125,7 @@ You got it!
 
 <opt text="Grouping Components">
 
-I'm note entirely sure what a grouping component is since we made this up!
+I'm not entirely sure what a grouping component is since we made this up!
 
 </opt>
 
@@ -138,7 +138,7 @@ I'm note entirely sure what a grouping component is since we made this up!
 
 
 **True or False**    
-*A low level visualization library focuses on plot construction details.*
+*A low-level visualization library focuses on plot construction details.*
 
 <choice id="1" >
 <opt text="True"  correct="true">
@@ -149,14 +149,14 @@ Great job!
 
 <opt text="False">
 
-Hmmm. It's possible you got mixed up with high level visualization. 
+Hmmm. It's possible you got mixed up with high-level visualization. 
 
 </opt>
 
 </choice>
 
 **True or False**    
-*A high level visualization library focuses on data and relationships.*
+*A high-level visualization library focuses on data and relationships.*
 
 <choice id="2" >
 
@@ -168,7 +168,7 @@ Nice work!
 
 <opt text="False">
 
-High level visualization libraries concentrate on the data and the relationships between them. 
+High-level visualization libraries concentrate on the data and the relationships between them. 
 
 </opt>
 
@@ -179,7 +179,7 @@ High level visualization libraries concentrate on the data and the relationships
 <exercise id="6" title="Your First Plot">
 
 **Instructions:**    
-Be patient when running a coding exercise for the first time, it can take a few minutes.. 
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
 
 **When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
 and submit it to validate if you were correct.**
@@ -262,7 +262,7 @@ Nailed it!
 
 
 **Instructions:**    
-Be patient when running a coding exercise for the first time, it can take a few minutes.. 
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
 
 **When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
 and submit it to validate if you were correct.**
@@ -279,7 +279,7 @@ Tasks:
 - Import the correct library from `vega_datasets`.
 - ***Before going further Click <font style="color:blue">Run code</font>   to take a look at the stock data before uncommenting the plot code and creating the visualization.***
 - Create a line plot with the stocks' date on the x-axis and their price on the y-axis. Save the plot in an object named `price_lineplot`.
-- You should color the lines by the stock symbol,
+- You should colour the lines by the stock symbol
 so that you can compare the stock development for the different companies.
 
 <codeblock id="01_09a">
@@ -344,7 +344,7 @@ and then use this name to combine a line plot and a point plot.
 <exercise id="10" title="Plotting an Aggregated Value">
 
 **Instructions:**    
-Be patient when running a coding exercise for the first time, it can take a few minutes.. 
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
 
 **When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
 and submit it to validate if you were correct.**
@@ -356,16 +356,16 @@ for all five companies.
 
 Tasks:
 
-- Creat a line plot with the average value of all stocks over time,
+- Create a line plot with the average value of all stocks over time,
 instead of giving each company its own line. 
-*Hint: This will requite aggregating using mean for your x-axis values.*
+*Hint: This will require aggregating using the mean for your x-axis values.*
 
 
 <codeblock id="01_10">
 
 - Remember that the column names should be in quotes, e.g. `y='price'`.
 - Look at the dataframe by typing `stocks.columns` if you are unsure about the exact column names.
-- Remember that the string syntax for creating and average is `'mean(column_name)'`
+- Remember that the string syntax for creating an average is `'mean(column_name)'`
 
 </codeblock>
 </exercise>

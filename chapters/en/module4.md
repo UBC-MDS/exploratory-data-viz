@@ -47,7 +47,7 @@ You've been paying attention!
 
 <opt text="True"  >
 
-Altair currently cannot be used to create 2D density plots, but can be done using a plotting package called Seaborn. 
+Altair currently cannot be used to create 2D density plots but can be done using a plotting package called Seaborn. 
 
 </opt>
 
@@ -296,7 +296,7 @@ What flipper length and mass are most common among the penguins in our data (wit
 <choice id="2" >
 <opt text="Flipper length between 185-200mm and mass between 4600-5200g" >
 
-Are there any intervals of flipper length that contains a darker blue? The darker the colour, the more counts of penguins in the given interval range.
+Are there any intervals of flipper length that contain a darker blue? The darker the colour, the more counts of penguins in the given interval range.
 
 </opt>
 
@@ -337,7 +337,7 @@ and submit it to validate if you were correct.**
 We are going to explore the different types of pokemon. You may remember this dataset from the previous Programming in Python for Data Science course. 
 This time we are going to take a look at the different generations and pokemon types and see which ones are most prominent. 
 
-For those less familiar with Pokemon, a Pokemon's generation is determined by the ara it was introduced. For example the first generation spans Pokemon characters that were released in video games from 1996-1999. The 7th generation are Pokemon introduced from games released between 2016-2019.
+For those less familiar with Pokemon, a Pokemon's generation is determined by the ara it was introduced. For example, the first generation spans Pokemon characters that were released in video games from 1996-1999. The 7th generation are Pokemon introduced from games released between 2016-2019.
 
 According to [Wikipedia](https://en.wikipedia.org/wiki/Gameplay_of_Pok%C3%A9mon#Pok%C3%A9mon_types), A Pokémon's type is *"an elemental attribute determining the strengths and weaknesses of each Pokémon and its moves. Pokémon take double damage from attacking moves of types they are weak to and half damage from moves they resist. These type matchups offset one another in rock–paper–scissors-style relationships."*
 
@@ -480,7 +480,7 @@ Perfect!
 
 <opt text="False" >
 
-Are you sure? *Fun Fact*: Co-creator of this course, Hayley Boyce once **lost** marks for having plots that were "too pretty"" in her EDA. 
+Are you sure? *Fun Fact*: Co-creator of this course, Hayley Boyce once **lost** marks for having plots that were "too pretty" in her EDA. 
 
 </opt>
 
@@ -523,7 +523,7 @@ This is not a formal part of exploratory data analysis.
 
 
 **Question 2**      
-Which code will help us create multiple plots, that maps every numeric column to a specified axis?
+Which code will help us create multiple plots, that map every numeric column to a specified axis?
 
 
 <choice id="2" >
@@ -657,7 +657,7 @@ I can understand the confusion since quantitative was used for numeric columns b
 
 <opt text="<code>'object'</code>">
 
-This is a pandas dtype and not a reconizable Altair type.
+This is a pandas dtype and not a recognizable Altair type.
 
 </opt>
 
@@ -701,9 +701,9 @@ Tasks:
 
 Fill in the blanks in the code below so that the following gets accomplished.
 
-- Use the data source `penguins_df` to make a circle plots for each pair of categorical columns.
+- Use the data source `penguins_df` to make a circle plot for each pair of categorical columns.
 - Assign the plot to an object named `categorical_plots`. 
-- Map and repeat every categorical column on both the x and y axis.
+- Map and repeat every categorical column on both the x and y-axis.
 - Map the counts to both a `Color` and `Size` channel and indicate that no title should be assigned.
 - Make sure to give the size and colour channels independent scales. 
 
@@ -721,7 +721,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 
 **Question 1**      
 
-Are their approximately the same number of female and male penguins for each penguin species?
+Are there approximately the same number of female and male penguins for each penguin species?
 
 <choice id="1" >
 <opt text="Yes" correct='true'>
@@ -746,7 +746,7 @@ What species of penguins and from what island are most prominent in our data?
 <choice id="2" >
 <opt text="The Adelie species on Biscoe island are most prominent penguin in the data.">
 
-Although the Adelie species are present on Biscoe island, they are not the most occuring in our data.
+Although the Adelie species are present on Biscoe island, they are not the most occurring in our data.
 
 </opt>
 
@@ -759,7 +759,7 @@ Nice work!
 
 <opt text="The Chinstrap species on Dream island are most prominent penguin in the data.">
 
-This is the second most occuring penguin in the data but not the first.
+This is the second most occurring penguin in the data but not the first.
 
 </opt>
 
