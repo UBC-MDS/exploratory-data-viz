@@ -352,7 +352,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 - Display the base plot and take a look at what it's communicating.
 - Create text by using `mark_text()` and save this in an object named `text`. It should have the same x and y mapping as the base plot but this time you want to make sure the count is displayed on the side of each species bar. Make sure it's centered in alignment and located at `dx=10`.
 - After observing the plot create and object named `penguin_title` using `.TitleParams()`. In this method, you will need to specify an insightful title, and subtitle, give the title a fontsize of 18, and set the subtitle colour to `firebrick`.
-- Remove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method. 
+- Remove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method.
 
 <codeblock id="05_07">
 
