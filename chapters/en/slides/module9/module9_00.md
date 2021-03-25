@@ -43,6 +43,7 @@ Special thanks must be attributed to the following individuals and organizations
 - <a href="https://ines.io/" target="_blank">Ines Montani</a> 
 - <a href="https://www.tiffanytimbers.com/" target="_blank"> Tiffany Timbers</a> 
 - <a href="https://www.linkedin.com/in/elijah-willie-203845b9/?originalSubdomain=ca" target="_blank">Elijah Willie</a>
+- <a href="https://www.linkedin.com/in/junghoo/" target="_blank">Junghoo Kim</a>
 
 - The Master of Data Science Program at UBC
 - Our friends, family and colleagues for supporting us and cheering us on!

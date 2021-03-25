@@ -380,7 +380,7 @@ axes, we appear to only see one point in this plot since all the data is
 plotted on top of each other in the same location.
 
 To the right of the chart, there is a button with three dots on it.
-don’t worry about it right now, we will explain what this is for at the
+Don’t worry about it for now, we will explain what this is for at the
 end of the chapter.
 
 ---

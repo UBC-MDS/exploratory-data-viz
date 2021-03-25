@@ -13,7 +13,7 @@ id: 5
 </head>
 
 <exercise id="0" title="Module Learning Outcomes"  type="slides, video">
-<slides source="module5/module5_00" shot="0" start="3:5707" end="4:5306"> </slides>
+<slides source="module5/module5_00" shot="0" start="9:35" end="10:16"> </slides>
 </exercise>
 
 <exercise id="1" title="Effective Figures for Communication" type="slides,video">
@@ -87,7 +87,7 @@ Categories are easily compared with colour but if we are trying to compare numer
 
 <opt text="Volume" >
 
-We saw in a previous exercise in Module 2 that volume is not easily to assess all the time. 
+We saw in a previous exercise in Module 2 that volume is not easy to assess all the time. 
 
 </opt>
 
@@ -189,7 +189,7 @@ This does work in other plotting tools, but in Altair, we separate our title and
 
 
 **True or False**       
-*Not all axes and legends needs to have a title.*
+*Not all axes and legends need to have a title.*
 
 <choice id="3" >
 
@@ -335,7 +335,7 @@ The [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-
 
 For this question let's create a stacked histogram of the values in the `culmen_depth_mm` column for different penguin species.
 
-Remember is the previous module we discussed that the culmen is also sometimes referred to as the bill and is [upper ridge of a bird's beak](https://allisonhorst.github.io/palmerpenguins/articles/articles/art.html). 
+Remember in the previous module we discussed that the culmen is also sometimes referred to as the bill and is [upper ridge of a bird's beak](https://allisonhorst.github.io/palmerpenguins/articles/articles/art.html). 
 Here is the diagram we showed you in an earlier module that was made by [Allison Horst](https://twitter.com/allison_horst).
 
 <center>
@@ -353,6 +353,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 - Create text by using `mark_text()` and save this in an object named `text`. It should have the same x and y mapping as the base plot but this time you want to make sure the count is displayed on the side of each species bar. Make sure it's centered in alignment and located at `dx=10`.
 - After observing the plot create and object named `penguin_title` using `.TitleParams()`. In this method, you will need to specify an insightful title, and subtitle, give the title a fontsize of 18, and set the subtitle colour to `firebrick`.
 - Remove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method.
+
 
 <codeblock id="05_07">
 
@@ -376,9 +377,9 @@ Which question can you now answer confidently using the formatted plot above, th
 
 
 <choice id="1" >
-<opt text="Which penguin species is most prominent in the artic base on the data collected?" >
+<opt text="Which penguin species is most prominent in the Arctic based on the data collected?" >
 
-We could answer this question using the base plot since the position channel informed us on this. Comparing categories with the bars was still possible. 
+We could answer this question using the base plot since the position channel informed us of this. Comparing categories with the bars was still possible. 
 
 </opt>
 
@@ -390,7 +391,7 @@ This would have been much harder to answer with our
 
 <opt text="Which island has the most diverse penguin population?"  >
 
-Neither plot, shows any information regarding the `island` column. 
+Neither plot shows any information regarding the `island` column. 
 
 </opt>
 
@@ -414,13 +415,13 @@ Neither plot, shows any information regarding the `island` column.
 
 <opt text="True"  correct="true">
 
-You've been paying attention here! It's important to know that we should be careful we we do this, as sometimes we risk inflating differences among categories or measures. 
+You've been paying attention here! It's important to know that we should be careful when we do this, as sometimes we risk inflating differences among categories or measures. 
 
 </opt>
 
 <opt text="False" >
 
-Although we should be careful we we do this, as sometimes we risk inflating differences among categories or measures but sometimes we need to see values within a certain range to identify any variable or relationships within the data. 
+Although we should be careful when we do this, as sometimes we risk inflating differences among categories or measures but sometimes we need to see values within a certain range to identify any variable or relationships within the data. 
 
 </opt>
 
@@ -646,7 +647,7 @@ There appears to be an upward slope between the data points.
 
 <opt text="Negative" >
 
-Are you sure here? Maybe maybe take a look at the direction the points are forming (low to high?).
+Are you sure here? Maybe take a look at the direction the points are forming (low to high?).
 
 </opt>
 
@@ -676,7 +677,7 @@ There appears to be some sort of relationship between the variables, maybe take 
 
 <opt text="True">
 
-It's often better to use colour schemes designed by experts in a way to be easy to tell apart and in most cases also suitable for people with color vision deficiencies.
+It's often better to use colour schemes designed by experts in a way to be easy to tell apart and in most cases also suitable for people with colour vision deficiencies.
 
 </opt>
 
@@ -690,7 +691,7 @@ It's often better to use colour schemes designed by experts in a way to be easy 
 </choice>
 
 **True or False**       
-*Adding an additional channel like "shape" to an existing column mapping, is often recommended to help people with color vision deficiencies.*
+*Adding an additional channel like "shape" to an existing column mapping, is often recommended to help people with colour vision deficiencies.*
 
 <choice id="2" >
 
@@ -836,11 +837,7 @@ Hmmm, Have you tried plotting it without? What about the <code>Shape</code> chan
 
 </opt>
 
-
-
 </choice>
-
-
 
 </exercise>
 
@@ -973,7 +970,7 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-The University of British Columbia is based in Vancouver and we are lucky enough to have a relatively mild climate (mild climate, but rainy) but not all cities and towns in British Columbia have this luck. This made us think of a city further north of BC - **Kamloops** who's climate is more varied. This question will be using the data obtained from the [Governement of Canada](https://climate.weather.gc.ca/). The data we have collected is from 2009-2012.
+The University of British Columbia is based in Vancouver and we are lucky enough to have a relatively mild climate (mild climate, but rainy) but not all cities and towns in British Columbia have this luck. This made us think of a city further north of BC - **Kamloops** whose climate is more varied. This question will be using the data obtained from the [Governement of Canada](https://climate.weather.gc.ca/). The data we have collected is from 2009-2012.
 
 <codeblock id="temperatures">
 
@@ -1002,7 +999,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 </codeblock>
 
 **Question**      
-Now that we can use colour to distinguishe between hotter and colder months, do colder months tend to have higher or lower levels of rainfall?
+Now that we can use colour to distinguish between hotter and colder months, do colder months tend to have higher or lower levels of rainfall?
 
 
 <choice id="1" >
@@ -1193,7 +1190,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 
 
 **Question**      
-In this plot would it make sense to sort the values on the x axis instead of highlighting the month?
+In this plot would it make sense to sort the values on the x-axis instead of highlighting the month?
 
 <choice id="1" >
 <opt text="Yes, since we are interested in the month with the greatest precipitate we should be sorting in ascending order." >
@@ -1220,5 +1217,5 @@ Snow in July?
 </exercise>
 
 <exercise id="24" title="What Did We Just Learn?" type="slides, video">
-<slides source="module5/module5_end" shot="0" start="04:5307" end="05:5911"></slides>
+<slides source="module5/module5_end" shot="0" start="10:17" end="10:57"></slides>
 </exercise>
