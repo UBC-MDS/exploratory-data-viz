@@ -4,9 +4,10 @@ import pandas as pd
 
 penguins_df = pd.read_csv('data/penguins.csv')
 
-mass_boxplot = alt.Chart(___).___().encode(
-    alt.X(___),
-    alt.Y(___).properties(
-        ___, ___)
+penguin_hist = alt.Chart(____).____().encode(
+    x=alt.X(____, ____),
+    y='____',
+    ).properties(____='Flipper length among Penguins', ____=300, height=____)
 
-____
+penguin_hist
+

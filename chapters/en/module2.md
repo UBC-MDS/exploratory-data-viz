@@ -519,7 +519,7 @@ We are interested in obtaining the number of penguins we collected of each speci
 
 Tasks: 
 
-- Using a bar plot, visualize the count of penguins for each species in the data. 
+- Using a bar plot, visualize the count of penguins for each species using the dataframe `penguins_df`. 
 - Choose the appropriate rotation, given the axis labels. 
 - Sort your bars in an appropriate order. 
 - Make sure to give it a title and set the dimensions to a height of 150 and a width of 300.
@@ -576,7 +576,7 @@ Let's now see what the distribution of penguin flipper length looks like.
 
 Tasks: 
 
-- Using bars, show the counts of the `flipper_length_mm` values. 
+- Using bars, show the counts of the `flipper_length_mm` values using the `penguins_df` dataframe
 - Make sure to give it a title and set the dimensions to a height of 150 and a width of 300.
 - Save your plot in an object named `penguin_hist`.
 
@@ -727,7 +727,7 @@ Ok, let's facet our penguin dataset now.
 
 Tasks: 
 
-- Using bars, show the distribution of the `body_mass_g` values. 
+- Using bars, show the distribution of the `body_mass_g` values from the `penguins_df` dataset.
 - Make sure to give it a title and set the dimensions to a height of 100 and a width of 150.
 - Facet your plots by `species` for the columns and by `island` for the rows.
 - Save your plot in an object named `penguin_facet`.

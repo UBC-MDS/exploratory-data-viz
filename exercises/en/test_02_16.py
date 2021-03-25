@@ -10,7 +10,7 @@ def test():
     # Maybe even for later exercises.
     assert not penguin_facet is None, "Your answer does not exist. Have you passed in the correct variable?"
     assert type(penguin_facet) == alt.vegalite.v4.api.FacetChart, "Your answer is not an Altair FacetChart object. Check to make sure that you have assigned an alt.Chart object to penguin_facet and that you are facetting by 'species' for the columns and by 'island' for the rows."
-    assert penguin_facet.data.equals(penguins) and penguin_facet.data.shape == (344, 7), "Make sure you are using the penguins dataset."
+    assert penguin_facet.data.equals(penguins_df) and penguin_facet.data.shape == (344, 7), "Make sure you are using the penguins dataset."
     assert penguin_facet.facet.column in {'species', 'species:nominal', 'species:N'}, "Make sure you are facetting by 'species' for the columns."
     assert penguin_facet.facet.row in {'island', 'island:nominal', 'island:N'}, "Make sure you are facetting by 'island' for the rows."
     assert penguin_facet.spec.mark == 'bar', "Make sure you are using the bar mark type."

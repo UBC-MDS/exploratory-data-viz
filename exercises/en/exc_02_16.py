@@ -2,8 +2,12 @@ import altair as alt
 import pandas as pd
 
 
-penguins = pd.read_csv('data/penguins.csv')
+penguins_df = pd.read_csv('data/penguins.csv')
 
-____ = ____
+penguin_facet = alt.Chart(____).____().encode(
+    x=____('body_mass_g', ____),
+    y=____,
+    ).properties(____='Penguin mass', ____, ____
+    ).____(____=____, ____='island')
 
-____
+penguin_facet

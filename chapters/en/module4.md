@@ -80,7 +80,7 @@ This can be used to visualize a single numeric column's distribution.
 
 </opt>
 
-<opt text="boxplot" >
+<opt text="Boxplot" >
 
 This can be used to visualize a single numeric column's distribution.
 
