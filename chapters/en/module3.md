@@ -197,7 +197,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 
 **Question**      
 
-Which species of penguin tend to have shallower culmen depths?
+Which species of penguin tend to have more shallow culmen?
 
 <choice id="1" >
 <opt text="Chinstrap">
@@ -246,7 +246,7 @@ Tasks:
 
 Fill in the blanks in the code below so that the following gets accomplished.
 
-- Use the data source `penguins` to make a **layered** histogram plot and make sure to give it an appropriate opacity.
+- Use the data source `penguins_df` to make a **layered** histogram plot named `culmen_layered_plot` and make sure to give it an appropriate opacity.
 - Plot the counts of the `culmen_depth_mm`  and distinguish the penguin `species` using the colour channel.
 - Make sure to set the `maxbins` argument to something appropriate and any other arguments needed to make a layered plot. 
 - Give it an appropriate title and facet by the `sex` column making sure that there is only 1 column so the graphs are stacked vertically. 
@@ -431,7 +431,7 @@ Tasks:
 
 Fill in the blanks in the code below so that the following gets accomplished.
 
-- Use the data source `penguins` to make the plot.
+- Use the data source `penguins_df` to make a plot assigned to an object named `mass_density_plot`.
 - Calculate the KDE of the `body_mass_g` column and make sure to split it up by the categorical column `island`. When you create your new values for the calculation make sure to name them `density`.
 - Set the step size to 100.
 - Give the area plot an appropriate opacity.
@@ -484,7 +484,7 @@ Create a density plot for the `body_mass_g` column for penguins located on diffe
 
 Tasks: 
 
-- Use the data source `penguins` to make the plot and assign it to an object named `mass_faceted_plot`.
+- Use the data source `penguins_df` to make the plot and assign it to an object named `mass_faceted_plot`.
 - Calculate the KDE of the `body_mass_g` column and make sure to split it up by the categorical column `island` and penguin `species`. When you create your new values for the calculation make sure to name them `density`. 
 - Set the step size to 100. 
 - Give the area plot an appropriate opacity.
@@ -687,7 +687,7 @@ Tasks:
 
 Fill in the blanks in the code below so that the following gets accomplished.
 
-- Use the data source `penguins` to make **boxplots** for the body mass values among the different penguin species.
+- Use the data source `penguins_df` to make **boxplots** for the body mass values among the different penguin species.
 - Make sure to give it an appropriate title and set the plot dimensions to a height of 200 and a width of 400.
 - Remember to assign the `species` to the y-axis and the `body_mass_g` to the y-axis since we want to read the labels easily as we learned in the previous module.
 
