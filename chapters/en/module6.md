@@ -12,14 +12,14 @@ id: 6
 <slides source="module6/module6_00" shot="0" start="3:5707" end="4:5306"> </slides>
 </exercise>
 
-<exercise id="1" title="Telling Stories with Visualization" type="slides,video">
+<exercise id="1" title="Telling stories with visualization" type="slides,video">
 <slides source="module6/module6_01" shot="1" start="0:003" end="07:12"> </slides>
 </exercise>
 
 <exercise id="2" title="True or False: Is it Effective?">
 
 **True or False**       
-*When telling a narrative for data analysis, *
+*It's important to include as much information on a plot as possible.*
 
 
 <choice id="1" >
