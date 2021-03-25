@@ -33,7 +33,7 @@ You got it!
 
 <opt text="False"  >
 
-when explaining insights, it's important that we communicate it in a way that the audience understands.
+when explaining insights, it's important that we communicate them in a way that the audience understands.
 
 </opt>
 
@@ -65,24 +65,24 @@ Stories and narratives attempt to answer an initial question but can sometimes l
 <exercise id="3" title="...Happily Ever After: Narrative Components">
 
 **Question**      
-What in *NOT* an effective method to help make your story telling more effective?
+What is *NOT* an effective method to help make your storytelling more effective?
 
 <choice id="1" >
 <opt text="Concentrating on the most exciting discoveries of your analysis and exagerate them." correct="true">
 
-Yike! Never exagerate any of your findings. Remember the reading is trusting you to represent the data truthfully. 
+Yikes! Never exaggerate any of your findings. Remember the reading is trusting you to represent the data truthfully. 
 
 </opt>
 
 <opt text="Using striking visualizations to capture the audience's attention."  >
 
-This can be effective  asking follow up questions can help tell a story.
+This can be effective since and follow-up questions can help tell a story.
 
 </opt>
 
 <opt text="Recaping the insignts discovered at the end of your analysis." >
 
-This is a great thing to do to remind the reader what was covered. 
+This is a great thing to do to remind the reader of what was covered. 
 
 </opt>
 
@@ -116,7 +116,7 @@ Which of the following is the best narrative approach to the visualization above
 <choice id="1" >
 <opt text="Due to the majority of single stays being business related, it's clear that single guest stays need less advanced booking time then bookings with multiple guests.">
 
-This narrative is jumping to conclusions regarding the single stays being business related. We have no information on that displayed here.
+This narrative is jumping to conclusions regarding the single stays being business-related. We have no information on that displayed here.
 
 </opt>
 
@@ -134,7 +134,7 @@ You got it!
 
 <opt text="Single guest bookings generally are booked far less in advance than multiple guest bookings." >
 
-This is just an observation here, there doesn't seem to be any story telling or narrative to keep the readers engagement.
+This is just an observation here, there doesn't seem to be any storytelling or narrative to keep the readers' engagement.
 
 </opt>
 
@@ -143,7 +143,7 @@ This is just an observation here, there doesn't seem to be any story telling or 
 
 **Question 2**      
 
-We then follow up on our dataset and decide to answer some questions that were brought to light. Are most bookings for a single guest business related? This lead up to make the following visualizations. 
+We then follow up on our dataset and decide to answer some questions that were brought to light. Are most bookings for a single guest business-related? This leads up to make the following visualizations. 
 
 
 
@@ -187,7 +187,7 @@ Nice!
 <exercise id="6" title="True or False: Getting Geo With It!">
 
 **True or False**       
-*If we are interested in certain contries, Altair gives up the ability to display these locations zoomed in.*
+*If we are interested in certain countries, Altair gives up the ability to display these locations zoomed-in.*
 
 
 <choice id="1" >
@@ -209,7 +209,7 @@ Clever!
 </choice>
 
 **True or False**       
-*With Altair geographical visualizations, we are restricted to chloropleth maps.*
+*With Altair geographical visualizations, we are restricted to choropleth maps.*
 
 <choice id="2" >
 
@@ -237,7 +237,7 @@ Below we see a map showing the location of all the airports in the USA.
 <br>
 [**Attribution**](https://altair-viz.github.io/gallery/airports.html)
 
-Which of the following projections types would have been used to create this plot?
+Which of the following projection types would have been used to create this plot?
 
 
 <iframe src="/module6/airports.html" width="100%" height="580px">
@@ -258,7 +258,7 @@ This is a U.S.-centric configuration of "conicEqualArea" and would not produce a
 
 <opt text="<code>equalEarth</code>">
 
-This type is use with the `countries` feature type and focuses on correctly representing the relative areas of all landmasses.
+This type is used with the `countries` feature type and focuses on correctly representing the relative areas of all landmasses.
 
 </opt>
 
@@ -317,7 +317,7 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-We were introduced to the Gapminder dataset in previous modules as well as the assignments as although we have data about the world, we have yet to actually plot is as a map! 
+We were introduced to the Gapminder dataset in previous modules as well as the assignments as although we have data about the world, we have yet to actually plot it as a map! 
 
 We have altered this dataset a bit to only include data from 2018 (there should only be 1 row for each country now) and we also added a new `id` column which contains the [ISO 3166-1 numeric code](https://en.wikipedia.org/wiki/ISO_3166-1_numeric) for each country. 
 
@@ -326,9 +326,9 @@ We have altered this dataset a bit to only include data from 2018 (there should 
 </codeblock>
 
 
-We have looked at various statistics in the passed, but for this question, let's look at each country's average life expectancy.
-We want to visualize all the countries and if they are above of below the global average life expectancy of 72 years (in 2018).
-This might help us see clearly if there are any particular geographical location that are higher or lower than the global average.
+We have looked at various statistics in the past, but for this question, let's look at each country's average life expectancy.
+We want to visualize all the countries and if they are above or below the global average life expectancy of 72 years (in 2018).
+This might help us see clearly if there are any particular geographical locations that are higher or lower than the global average.
 
 Tasks: 
 
@@ -337,7 +337,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 - Load 2 sources of data; the `gapminder_codes.csv` data that contains all the global statistics, and the `countries` TopoJSON file from the `vega_datasets` library. Name each data source `gapminder_df`and `world_df` respectively. 
 - In a plot named `world_plot`, use the data source `world_df` to make a "geo_shape" visualization that maps the `life_expectancy` of each country to a colour channel. Use a [colour scheme](https://vega.github.io/vega/docs/schemes/) you find appropriate (we recommend a diverging scheme) with the domain midpoint at the global average (72 years) and assign the `life_expectancy` and  `country` to a tooltip channel. 
 - In order to combine the two sources, you will need to use `transform_lookup()` to lookup the two columns `life_expectancy` and  `country` from the `gapminder_df` data using `id` as the connecting column.
-- Finally makesure that your are projecting using an `equalEarth` map appearance. 
+- Finally, make sure that you are projecting using an `equalEarth` map appearance and the plot has the height and width dimensions of 580 and 400, respectively. 
 
 <codeblock id="06_08">
 
@@ -352,32 +352,32 @@ Fill in the blanks in the code below so that the following gets accomplished:
 
 **Question**      
 
-The base plot of the code above looks like this: 
-
-<center>
-<img src="/module5/base_plot.svg" width="60%"></img>
-</center>
-
-
-Which question can you now answer confidently using the formatted plot above, that you could not before with just the base plot?
+Which narrative would you derive from the plot above?
 
 
 <choice id="1" >
-<opt text="Which penguin species is most prominent in the artic base on the data collected?" >
+<opt text="Countries from continents that are developped such as North America and Oceania show higher life expectancies in comparison to develloping countries in continents such as Asia and Africa where we can see that life expectancies are much lower. This could be the result of more available healthcare as well as higher standards of living."  correct="true">
 
-We could answer this question using the base plot since the position channel informed us on this. Comparing categories with the bars was still possible. 
-
-</opt>
-
-<opt text="How many Gentoo Penguins were observed in the data?" correct="true">
-
-This would have been much harder to answer with our 
+Nice
 
 </opt>
 
-<opt text="Which island has the most diverse penguin population?"  >
+<opt text="Although countries in Africa appear to have lower life expectancies than the global average, they also tend to have a higher rate of population." >
 
-Neither plot, shows any information regarding the `island` column. 
+We cannot jump to this conclusion without seeing any evidence of it!
+
+</opt>
+
+<opt text="Countries in Africa appear to have the most countries with below global average life expectancy. That being said over life and with many releif aids, these number have been increasing steadily."  >
+
+We cannot jump to this conclusion without seeing any evidence of it!
+
+</opt>
+
+
+<opt text="In Canada, our life expectancy is soring over others across the world. This could be related to some degree with Canada' global healthcare, standard of living or even active lifestyle. ">
+
+Although this is a good narrative, concentrating around a Canadian narrative may not provide the strongest support for the visualization.
 
 </opt>
 
@@ -391,24 +391,24 @@ Neither plot, shows any information regarding the `island` column.
 </exercise>
 
 
-<exercise id="10" title="True or False: Is it Effective?">
+<exercise id="10" title="True or False: Concatenating Plots">
 
 **True or False**       
-*It's important to include as much information on a plot as possible.*
+*Using `alt.hconcat()` and `&` will both arrange plots side by side horizontally.*
 
 
 <choice id="1" >
 
 <opt text="True" >
 
-Sometimes removing categories can help communicate better and more effectively.
+ `&` concatenates plots vertically.
 
 </opt>
 
 
 <opt text="False"  correct="true">
 
-Clever!
+🏅
 
 </opt>
 
@@ -416,19 +416,19 @@ Clever!
 </choice>
 
 **True or False**       
-*Data can convey different messages depending on how it's visualized.*
+*When concatenating plots, each visualization in the presentation should have its own separate title.*
 
 <choice id="2" >
 
-<opt text="True"  correct="true">
+<opt text="True"  >
 
-It's important to be aware of this!
+When plotting for communication, sometimes having a single title for multiple plots communicates your insights most effectively. 
 
 </opt>
 
-<opt text="False" >
+<opt text="False" correct="true">
 
-Depending on colour, size and presentation, data can be displayed to sway the audience with a certain message.
+Nice. 
 
 </opt>
 
@@ -437,34 +437,44 @@ Depending on colour, size and presentation, data can be displayed to sway the au
 </exercise>
 
 
-<exercise id="11" title="Which Graph is Effective?">
+<exercise id="11" title="Lay it All Out!">
+
+Bringing back the hotel data that we saw from exercise 4, We've made a couple of different layouts with 3 visualizations. 
+
+(Attribution: These plots were created using [a Kaggle dataset](https://www.kaggle.com/jessemostipak/hotel-booking-demand?select=hotel_bookings.csv) where the data was originally obtained from the article [Hotel Booking Demand Datasets](https://www.sciencedirect.com/science/article/pii/S2352340918315191), written by Nuno Antonio, Ana Almeida, and Luis Nunes for Data in Brief, Volume 22, February 2019.)
 
 **Question 1**      
-When comparing numeric values among categories, which visual channel is most effective in plotting?
+Looking at the presentation below which code will produce the layout shown?
+
+
+<img src="/module6/layout1.svg" width="100%"></img>
+
 
 <choice id="1" >
-<opt text="Angle">
 
-Angle can sometimes be difficult to compare, think about the exercise we did in Module 2. 
+<opt text="<code>plot_A | plot_B & plot_C</code>">
 
-</opt>
-
-<opt text="Colour" >
-
-Categories are easily compared with colour but if we are trying to compare numeric values, colour may not be the best channel. 
+Remember that the `&` operator has a higher priority than `|`!
 
 </opt>
 
-<opt text="Volume" >
+<opt text="<code>plot_A | (plot_B & plot_C)</code>" >
 
-We saw in a previous exercise in Module 2 that volume is not easily to assess all the time. 
+Maybe switch up where the brackets should be?
 
 </opt>
 
 
-<opt text="Position" correct="true">
+<opt text="<code>(plot_A | plot_B) & plot_C</code>" correct="true">
 
-You got it!
+Nailed it!
+
+</opt>
+
+
+<opt text="<code>(plot_A & plot_B) | plot_C</code>">
+
+I think you got the symbols mixed up!
 
 </opt>
 
@@ -472,35 +482,37 @@ You got it!
 
 
 **Question 2**      
-Which plot is most effective in answer the question "Which countries do most NHL hockey players originate from?
 
-#### Plot A
+How would we combine the plots `plot_A`, `plot_B` and  `plot_C` to create the layout below?
 
+(*Hint: Two options are possible!*)
 
-<center>
-<img src="/module5/hockey1.svg" width="60%"></img>
-</center>
-
-
-#### Plot B 
-
-
-<center>
-<img src="/module5/hockey2.svg" width="60%"></img>
-</center>
-
-
+<img src="/module6/layout2.svg" width="100%"></img>
 
 <choice id="2" >
-<opt text="Plot A" >
+<opt text="<code>plot_A | plot_B & plot_C</code>" correct="true">
 
-Do we need to know all the categories?
+Good work! We could also have done <code>plot_A | (plot_B & plot_C)</code>
 
 </opt>
 
-<opt text="Plot B" correct="true">
+<opt text="<code>plot_A | (plot_B & plot_C)</code>"  correct="true">
 
-Nice!
+Nice! code>plot_A | plot_B & plot_C</code> could also work too since the `&` operator has higher priority than `|`!
+
+</opt>
+
+
+<opt text="<code>plot_A & (plot_B | plot_C)</code>">
+
+I think you are mixing up your symbols!
+
+</opt>
+
+
+<opt text="<code>(plot_A | plot_B) & plot_C</code>">
+
+Check if you've got brackets in the right place!
 
 </opt>
 
@@ -509,7 +521,7 @@ Nice!
 </exercise>
 
 
-<exercise id="12" title="Formatting Fun!">
+<exercise id="12" title="Placing Penguins Properly">
 
 
 **Instructions:**    
@@ -519,75 +531,30 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-The [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) that we see time and time again is going to help us practice with formatting in this question.
+We've worked with the penguin dataset quite a lot in this course and it only makes sense now to combine some of the plots we've made already into one combined presentation. 
 
 <codeblock id="penguins">
 
 </codeblock>
 
+Here we have 4 plots that we have made in the previous modules (or similar to these) that we want to combine together so that the first plots lies at the top of the presentation followed by a second row that contains 2 plots side by side and end with a bottom row with the last plot.
+It should appear something like this: 
 
-For this question let's create a stacked histogram of the values in the `culmen_depth_mm` column for different penguin species.
-
-Remember is the previous module we discussed that the culmen is also sometimes referred to as the bill and is [upper ridge of a bird's beak](https://allisonhorst.github.io/palmerpenguins/articles/articles/art.html). 
-Here is the diagram we showed you in an earlier module that was made by [Allison Horst](https://twitter.com/allison_horst).
-
-<center>
-<img src="/module3/penguin_culmen.jpg" width="60%"></img>
-</center>
+<img src="/module6/penguins_layout.svg" width="100%"></img>
 
 Tasks: 
 
 Fill in the blanks in the code below so that the following gets accomplished:
 
-- In a plot named `base`, use the data source `penguins_df` to make a histogram of the different quantities of penguin species in the data. 
-- Map the species on the y-axis and the count on the x-axis. 
-- In the base plot make sure to give a label to the x-axis. Since the species is categorical, do not set a label for the y-axis.
-- Display the base plot and take a look at what it's communicating.
-- Create text by using `mark_text()` and save this in an object named `text`. It should have the same x and y mapping as the base plot but this time you want to make sure the count is displayed on the side of each species bar. Make sure it's centered in alignment and located at `dx=10`.
-- After observing the plot create and object named `penguin_title` using `.TitleParams()`. In this method, you will need to specify an insightful title, and subtitle, give the title a fontsize of 18, and set the subtitle colour to `firebrick`.
-- Remove the grey box outlining the entire figure by setting the argument `strokeWidth` in the `.configure_view()` method.
+- From the given plots `mass_density_plot`, `masss_boxplot`, `penguin_heatmap` and `culmen_facet_plot`, arrange them so they look like the image above. 
 
 <codeblock id="06_12">
 
-- In the text plot, are you coding `.mark_text(align='center', dx=10)`?
-- In the text plot, are you specifying `alt.Text('count()'`?
-- for the titles formatting are you making sure to use the arguments `subtitle`, `fontSize` and `subtitleColor`?
+- Are you specifying `culmen_facet_plot` first and combining `mass_boxplot` and  `penguin_heatmap` together with brackets followed by `mass_density_plot`?
+- Are you using the `&` operator to stack charts vertically and `|` to align them side by side?
 
 
 </codeblock>
-
-**Question**      
-
-The base plot of the code above looks like this: 
-
-<center>
-<img src="/module5/base_plot.svg" width="60%"></img>
-</center>
-
-
-Which question can you now answer confidently using the formatted plot above, that you could not before with just the base plot?
-
-
-<choice id="1" >
-<opt text="Which penguin species is most prominent in the artic base on the data collected?" >
-
-We could answer this question using the base plot since the position channel informed us on this. Comparing categories with the bars was still possible. 
-
-</opt>
-
-<opt text="How many Gentoo Penguins were observed in the data?" correct="true">
-
-This would have been much harder to answer with our 
-
-</opt>
-
-<opt text="Which island has the most diverse penguin population?"  >
-
-Neither plot, shows any information regarding the `island` column. 
-
-</opt>
-
-</choice>
 
 </exercise>
 
