@@ -335,7 +335,7 @@ Tasks:
 Fill in the blanks in the code below so that the following gets accomplished:
 
 - Load 2 sources of data; the `gapminder_codes.csv` data that contains all the global statistics, and the `countries` TopoJSON file from the `vega_datasets` library. Name each data source `gapminder_df`and `world_df` respectively. 
-- In a plot named `world_plot`, use the data source `world_df` to make a `geo_shape` visualization that maps the `life_expectancy` of each country to a colour channel. Use a [colour scheme](https://vega.github.io/vega/docs/schemes/) you find appropriate (we recommend a diverging scheme) with the domain midpoint at the global average (72 years) and assign the `life_expectancy` and  `country` to a tooltip channel. 
+- In a plot named `world_plot`, use the data source `world_df` to make a `.geo_shape()` visualization that maps the `life_expectancy` of each country to a colour channel. Use a [colour scheme](https://vega.github.io/vega/docs/schemes/) you find appropriate (we recommend a diverging scheme) with the domain midpoint at the global average (72 years) and assign the `life_expectancy` and  `country` to a tooltip channel. 
 - In order to combine the two sources, you will need to use `transform_lookup()` to lookup the two columns `life_expectancy` and  `country` from the `gapminder_df` data using `id` as the connecting column.
 - Finally, make sure that you are projecting using an `equalEarth` map appearance and the plot has the height and width dimensions of 580 and 400, respectively. 
 
