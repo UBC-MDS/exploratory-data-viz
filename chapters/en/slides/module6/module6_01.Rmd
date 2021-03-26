@@ -138,12 +138,11 @@ How much of this deforestation is really driven by local needs? And how much is 
 ## A large part of deforestation is driven by exported commodities
 
 ```{python}
-# TODO save wrangled data
-deforestation_exported = pd.read_csv('data/share-deforestation-exported.csv', parse_dates=['Year']).query('Entity in ["Brazil", "Indonesia"]') 
+deforestation_exported = pd.read_csv('data/share-deforestation-exported.csv', parse_dates=['Year'])
 alt.Chart(deforestation_exported).mark_line().encode(
-    y='share_deforestation_exported',
-    x=alt.Y('Year', title=''),
-    color=alt.Color('Entity'))
+    alt.X('Year', title=''),
+    alt.Y('share_deforestation_exported', title='Exported deforestation (%)'),
+    color='Region')
 ```
 
 Notes:
