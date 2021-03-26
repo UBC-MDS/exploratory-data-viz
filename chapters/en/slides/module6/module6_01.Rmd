@@ -180,7 +180,7 @@ story here!
 brazil_drivers = pd.read_csv('data/drivers-deforestation_2003-2013_brazil.csv')
 alt.Chart(brazil_drivers).mark_bar().encode(
     alt.X('deforestation_hectares', title='Deforested area (ha)'),
-    alt.Y('type', title='', sort='x'))
+    alt.Y('driver', title='', sort='x'))
 ```
 
 Notes:
@@ -194,8 +194,18 @@ to create pastures for cattle grazing.
 
 There is also a smaller contributions from small scale clearings,
 fires, and commercial crops.
+Small scale clearings results in land used for combination of purposes
+such as residencies, orchards, croplands, and pastures.
 
-Although beef is the major culprit in rain forest deforestation,
+Importantly,
+our data does not contain information
+about how much of each commodity is due to demand outside Brazil,
+so we should refrain from drawing conclusions about this.
+However,
+export data for each commodity would be useful data to collect next
+if we were aiming to explore our story in this direction.
+
+Although beef is the major contributor to rain forest deforestation,
 it could be the case that our demand for more food has simply increased
 and cattle herds are an effective use of land to create food for human consumption.
 Let's flip to the next slide to find out!
@@ -213,8 +223,16 @@ alt.Chart(land_use).mark_bar().encode(
 ```
 
 Notes:
-The plot in this slide reveals that herding cattle for the purpose of beef production
-is one of the most inefficient ways to produce food for human consumption.
+The plot in this slide reveals
+that raising cattle for the purpose of beef production
+is one of the most inefficient ways
+to produce food for human consumption.
+
+Armed with this knowledge (and the data to back it up),
+we could suggest that one way to decrease deforestation in Brazil
+may be to decrease the global demand for beef,
+while increasing the demand for other protein-rich foods
+that can be grown in Brazil in a more efficient way. 
 
 Together with the large demand for beef products
 this inefficient use of land creates an unfortunate situation in Brazil
@@ -225,13 +243,12 @@ it is important to not jump to conclusions
 or suggest that solutions to problems are simpler than what they might really be.
 
 So far we have seen that beef is a major contributing factor to deforestation in Brazil,
-but there are many more aspect of the food production chain that we have not considered,
-such as the use of other resources
+but there are many more aspect of the food production chain that we have not considered.
 
-Changing beef for other products would be highly beneficial,
-but how achievable it is 
-and what cost is associated with making the change
-we don't know from the data we have explored here.
+Changing beef for other products could be highly beneficial,
+but it could also be challenging and costly up front to implement.
+In telling this story,
+it would be important to also include these uncertainties and potential challenges.
 
 Let's continue our story by looking at the same breakdown for Indonesia,
 is beef production the biggest issue there as well?
@@ -244,8 +261,8 @@ is beef production the biggest issue there as well?
 # TODO save wrangled data
 indonesia_drivers = pd.read_csv('data/deforestation-drivers-indonesia.csv').query('2013 > Year > 2003').groupby('Entity').sum().reset_index()
 alt.Chart(indonesia_drivers, title='Palm oil was the leading cause of deforestation between 2003 and 2013 in Indonesia').mark_bar().encode(
-    x='deforestation_hectares',
-    y=alt.Y('Entity', title='', sort='x'))
+    alt.X('deforestation_hectares', title='Deforested area (ha)'),
+    alt.Y('Entity', title='', sort='x'))
 ```
 
 Notes:
