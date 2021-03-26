@@ -15,7 +15,7 @@ source('../../../../slide-setup.R')
 
 type: slides
 
-<!-- #region -->
+
 # Telling stories with visualizations
 
 Notes:
@@ -41,14 +41,15 @@ through the most important insights that we have found.
 Notes:
 An effective story often peaks the readers' interest up front,
 and makes them want to learn more.
-To do this,  we could start with a striking figure,
+To do this,
+we could start with a striking figure,
 an important problem that begs for a solution,
 or reveal data that challenges the reader's previous knowledge.
 
 When making a data story exciting
-it is important that is remains based in fact. We do not want 
-our story tp resemble headlines
-of a clickbait article.
+it is important that is remains based in fact.
+We do not want our story
+to resemble headlines of a clickbait article.
 
 When telling a story,
 it is also important to tailor it to the audience and context.
@@ -58,11 +59,9 @@ To practice storytelling,
 we will explore an [example based on articles on deforestation
 from Our World in Data](https://ourworldindata.org/forests-and-deforestation).
 
-
 ---
 
 ## A tail of global deforestation
-<!-- #endregion -->
 
 ```{python}
 import pandas as pd
@@ -215,11 +214,10 @@ Let's flip to the next slide to find out!
 ## Beef is highly inefficient use of land to generate calories
 
 ```{python}
-# TODO save wrangled data
-land_use = pd.read_csv('data/land-use-kcal-poore.csv').rename(columns={'Land use per 1000kcal (Poore & Nemecek, 2018)': 'Land use per 1000kcal (m2)'}).query('Entity in ["Barley", "Maize", "Rice", "Tofu (soybeans)", "Cassava", "Bananas", "Eggs", "Poultry Meat", "Dark Chocolate", "Milk", "Cheese", "Coffee", "Lamb & Mutton", "Beef (beef herd)"]')
+land_use = pd.read_csv('data/land-use-per-kcal.csv')
 alt.Chart(land_use).mark_bar().encode(
     alt.X('Land use per 1000kcal (m2)'),
-    alt.Y('Entity', sort='x', title=''))
+    alt.Y('Commodity', sort='x', title=''))
 ```
 
 Notes:
@@ -258,11 +256,10 @@ is beef production the biggest issue there as well?
 ## Palm oil is the biggest contributor to deforestation in Indonesia
 
 ```{python}
-# TODO save wrangled data
-indonesia_drivers = pd.read_csv('data/deforestation-drivers-indonesia.csv').query('2013 > Year > 2003').groupby('Entity').sum().reset_index()
-alt.Chart(indonesia_drivers, title='Palm oil was the leading cause of deforestation between 2003 and 2013 in Indonesia').mark_bar().encode(
+indonesia_drivers = pd.read_csv('data/drivers-deforestation_2003-2013_indonesia.csv')
+alt.Chart(indonesia_drivers).mark_bar().encode(
     alt.X('deforestation_hectares', title='Deforested area (ha)'),
-    alt.Y('Entity', title='', sort='x'))
+    alt.Y('driver', title='', sort='x'))
 ```
 
 Notes:
@@ -270,20 +267,25 @@ This slide shows the biggest drivers of deforestation in Indonesia
 between the years 2003 and 2013.
 
 Here,
-it is palm oil that drives most of the deforestation,
-although small scale clearings, timber plantation, and grasslands also contribute substantially.
-You might have read many negative things about palm oil already,
-as it has been in media's focus due to its link to tropical deforestation.
+we see that most of the deforested land in Indonesia
+is used for palm oil plantations.
+Much of deforested land is also used for small scale clearings, timber plantations, and grasslands.
 
-From this chart alone it surely seems that decreasing palm oil production
-would lead to less deforestation.
+Perhaps you have have read or heard
+negative things about palm oil in the past? 
+It has been of focus of late in the media,
+due to its link to tropical deforestation.
 
-But if palm oil production would decrease
-while the world's demand for vegetable oils remains constant,
-another oil crop would need to take its place.
+From this chart alone,
+we might want to recommend that decreasing palm oil production
+might be a good intervention to reduce deforestation in Indonesia.
 
-Similar to what we did for beef,
-let's explore how efficient palm oil and its alternatives are
+However,
+if this were to be done,
+we would need another oil crop would need to take its place 
+to keep up with the world's demand for vegetable oils.
+
+Let's explore how efficient palm oil and its alternatives are
 when it comes to land use versus yield.
 
 ---
@@ -293,7 +295,7 @@ when it comes to land use versus yield.
 ```{python}
 oil_land_use = pd.read_csv('data/area-land-needed-to-global-oil.csv')
 alt.Chart(oil_land_use).mark_bar().encode(
-    alt.Y('Entity', title='', sort='x'),
+    alt.Y('Commodity', title='', sort='x'),
     alt.X('Area needed to meet global vegetable oil demand (ha)'))
 ```
 
@@ -302,15 +304,15 @@ This chart shows how many hectares
 would be needed for the crops of common vegetable oils
 to meet the entire world's oil demands.
 
-It turns out that palm oil is the most efficient use of land
-for the amount of oil produced!
-If we wanted to replace it with e.g. olive oil,
-we would need almost 10x the land used.
+For example,
+if we wanted to replace it with olive oil,
+we would need almost 10x the land to do so!
 
-Just as with beef,
-the story of palm oil is more complex that we can show in a single visualization
-and it is not as easy as saying that we should use palm oil
-solely based on the criteria of efficiency.
+Just as with Brazil
+and it's use of pasture from deforested land
+to raise cattle for beef,
+the story of palm oil is more complex 
+then we can illustrate in a single visualization. 
 
 For example,
 the type of land where the oil crop grows matters.
@@ -323,11 +325,16 @@ than switching to other oil crops on already cultivated land elsewhere in the wo
 
 ## Summary and recap
 
-TODO Not a 100% of what to put in this slide, bullets points of the transcript? Or maybe the bullets points from the first slide again.
+- Peak your audience's interest
+- Make the reader curious about the next figure
+- Present facts in an engaging way without hyperbole
+- Tailor it to the audience you have in mind
 
 Notes:
+This slide recaps the main points about how to tell an effective story.
+
 When writing a data narrative,
-it can be effective to recap what you have said in the end.
+it can be effective to summarize what you have said in the end.
 This doesn't have to involve showing the plots again,
 and you could choose to highlight some of the key messages in text.
 
