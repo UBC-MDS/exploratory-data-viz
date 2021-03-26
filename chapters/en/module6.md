@@ -80,7 +80,7 @@ This can be effective since and follow-up questions can help tell a story.
 
 </opt>
 
-<opt text="Recaping the insignts discovered at the end of your analysis." >
+<opt text="Recaping the insights discovered at the end of your analysis." >
 
 This is a great thing to do to remind the reader of what was covered. 
 
@@ -101,7 +101,7 @@ It's a great idea to try and supply the ready with answers they may want.
 <exercise id="4" title="Analysis Narrative - Short Stories">
 
 **Question 1**      
-Take a look at the plot below that contains the data for hotel bookings and the number of days in advance they were booked. 
+Take a look at the plot below that visualizes hotel bookings data, in particular the number of guests and the number of days rooms were booked in advance.
 
 <center>
 <img src="/module6/hotel.svg" width="70%"></img>
@@ -126,7 +126,7 @@ Again this seems to be jumping to conclusions on a very specific reason that may
 
 </opt>
 
-<opt text="Looking at the hotel bookings from single guests, it appears that they require less advance notice for their stays. This leads us to further questions regarding the nature of the booking. Are they booked through travel agents or by a corporate company? How long are they stays on average?" correct="true">
+<opt text="Looking at the hotel bookings from single guests, the distribution appears to have a large peak at values less than 50 days in advance. This leads us to further questions regarding the nature of the booking. Are they booked through travel agents or by a corporate company? How long are they stays on average?" correct="true">
 
 You got it!
 
@@ -169,7 +169,7 @@ Do we need to know all the categories?
 
 </opt>
 
-<opt text="Now that we can see the porportion of booking methods more clearly, it appears that less than 20% of single guest stays, are booked through a corporate setting. Other reasons beside business that might reflect the need for less time in advance to book could be that it's easier to book for single individuals as it requires less scheduling alignment. Single individuals may also be more flexible since they have less arrangements to make with other responsibilities such as childcare." correct="true">
+<opt text="Now that we can see the porportion of booking methods more clearly, it appears that a much large  porportion of single guest stays, are booked through a corporate setting than for multiple guest bookings. However, it is possible that the data is underestimating the the number of business-related bookings for single guest travel stays, as not all business-stays need to be booked via corporate booking services but without additional data, we cannot confirm this." correct="true">
 
 Nice!
 
@@ -187,21 +187,21 @@ Nice!
 <exercise id="6" title="True or False: Getting Geo With It!">
 
 **True or False**       
-*If we are interested in certain countries, Altair gives up the ability to display these locations zoomed-in.*
+*If we want to look more closely at certain countries instead of the whole globe, Altair uses the `scale` argument to zoom in to our desire geographical area.*
 
 
 <choice id="1" >
 
-<opt text="True" >
+<opt text="True" correct="true">
 
-Sometimes removing categories can help communicate better and more effectively.
+Killing it here!
 
 </opt>
 
 
-<opt text="False"  correct="true">
+<opt text="False"  >
 
-Clever!
+We can use the arguments `scale` and `translate` to zoom and pan closer into a map. 
 
 </opt>
 
@@ -317,6 +317,8 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
+
+
 We were introduced to the Gapminder dataset in previous modules as well as the assignments as although we have data about the world, we have yet to actually plot it as a map! 
 
 We have altered this dataset a bit to only include data from 2018 (there should only be 1 row for each country now) and we also added a new `id` column which contains the [ISO 3166-1 numeric code](https://en.wikipedia.org/wiki/ISO_3166-1_numeric) for each country. 
@@ -326,8 +328,26 @@ We have altered this dataset a bit to only include data from 2018 (there should 
 </codeblock>
 
 
-We have looked at various statistics in the past, but for this question, let's look at each country's average life expectancy.
-We want to visualize all the countries and if they are above or below the global average life expectancy of 72 years (in 2018).
+Before we start plotting the data from the `gapminder_df`, let's first make sure we know how to make a map of the world without any statistics. 
+
+Tasks: 
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+- Load the `countries` TopoJSON file from the `vega_datasets` library and save it as an object named `world_df` respectively. 
+-  In a plot named `world_plot`, use the data source `world_df` to make a `.geo_shape()` visualization with a projection type of `equalEarth`. Make sure the plot has the height and width dimensions of 580 and 400 respectively. 
+
+<codeblock id="06_08a">
+
+- Are you using the method `.topo_feature()` to load in the lada and selecting `countries`? 
+- In the plot, are you using `.mark_geoshape()`?
+- Are you setting `type="equalEarth"` within `.project()`?
+- We are 
+
+</codeblock>
+
+Great we have a map! What if we want to add some statistics though? We have looked at various statistics in the past, but for this question, let's look at each country's population density.
+We want to visualize all the countries and if they are above or below the global median of  life expectancy of 72 years (in 2018).
 This might help us see clearly if there are any particular geographical locations that are higher or lower than the global average.
 
 Tasks: 
@@ -335,49 +355,41 @@ Tasks:
 Fill in the blanks in the code below so that the following gets accomplished:
 
 - Load 2 sources of data; the `gapminder_codes.csv` data that contains all the global statistics, and the `countries` TopoJSON file from the `vega_datasets` library. Name each data source `gapminder_df`and `world_df` respectively. 
-- In a plot named `world_plot`, use the data source `world_df` to make a `.geo_shape()` visualization that maps the `life_expectancy` of each country to a colour channel. Use a [colour scheme](https://vega.github.io/vega/docs/schemes/) you find appropriate (we recommend a diverging scheme) with the domain midpoint at the global average (72 years) and assign the `life_expectancy` and  `country` to a tooltip channel. 
-- In order to combine the two sources, you will need to use `transform_lookup()` to lookup the two columns `life_expectancy` and  `country` from the `gapminder_df` data using `id` as the connecting column.
-- Finally, make sure that you are projecting using an `equalEarth` map appearance and the plot has the height and width dimensions of 580 and 400, respectively. 
+- In a plot named `pop_dense_plot`, use the data source `world_df` to make a `.geo_shape()` visualization that maps the `pop_density` of each country to a colour channel. Use a [colour scheme](https://vega.github.io/vega/docs/schemes/) you find appropriate (we recommend a diverging scheme) with the domain midpoint at the global median (81).
+- In order to combine the two sources, you will need to use `transform_lookup()` to lookup the two columns `pop_density` from the `gapminder_df` data using `id` as the connecting column.
+- Finally, make sure that you are zooming in with a scale of 80 and panning to , respectively. 
 
-<codeblock id="06_08">
+<codeblock id="06_08b">
 
-- In the text plot, are you using `.mark_geoshape()`?
-- In the text plot, are you specifying ` alt.Color("life_expectancy:Q", scale=alt.Scale(scheme="redblue", domainMid=72))`?
-- Are you setting the tooltip channel to `tooltip=[alt.Tooltip("country:N", title="Country"),alt.Tooltip("life_expectancy:Q", title="Life Expectancy (years)")]`?
-- Are you setting `lookup="id"` and `from_=alt.LookupData(gapminder_df, "id", ["life_expectancy", 'country'])` within `.transform_lookup()`?
-- Are you setting `type="equalEarth"` within `.project()`?
+- In the plot, are you using `.mark_geoshape()`?
+- In the plot, are you specifying ` alt.Color('pop_density:Q', scale=alt.Scale(scheme='blueorange', domainMid=81))`?
+- Are you setting `lookup='id'` and `from_=alt.LookupData(gapminder_df, "id", ['pop_density'])` within `.transform_lookup()`?
+- Are you setting `scale=80` within `.project()`?
 
 
 </codeblock>
 
 **Question**      
 
-Which narrative would you derive from the plot above?
+Looking at the plot above, which narrative is most appropriate?
 
 
 <choice id="1" >
-<opt text="Countries from continents that are developped such as North America and Oceania show higher life expectancies in comparison to develloping countries in continents such as Asia and Africa where we can see that life expectancies are much lower. This could be the result of more available healthcare as well as higher standards of living."  correct="true">
+<opt text="Countries from Europe and parts of Asia and Africa appear to have population densities above the global average. This could be due to higher populations or less land area. In comparison, Canada (our home and native land) has a relatively low population density."  correct="true">
 
 Nice
 
 </opt>
 
-<opt text="Although countries in Africa appear to have lower life expectancies than the global average, they also tend to have a higher rate of population." >
+<opt text="Although countries in South America appear to have the lowest population density globally, it's appears they also have the greatest range of densities spanning from as low as 2 all the way over 1000." >
 
-We cannot jump to this conclusion without seeing any evidence of it!
-
-</opt>
-
-<opt text="Countries in Africa appear to have the most countries with below global average life expectancy. That being said over life and with many releif aids, these number have been increasing steadily."  >
-
-We cannot jump to this conclusion without seeing any evidence of it!
+We cannot jump to this conclusion without seeing any evidence of it!It's not clear that there is a large range of population densities for countries in South America.
 
 </opt>
 
+<opt text="Countries in Oceania appear to have the most countries with the highest population densities. That being said, these countries also tend to be farming countries and responsible to the export of grains and food products."  >
 
-<opt text="In Canada, our life expectancy is soring over others across the world. This could be related to some degree with Canada' global healthcare, standard of living or even active lifestyle. ">
-
-Although this is a good narrative, concentrating around a Canadian narrative may not provide the strongest support for the visualization.
+We cannot jump to this conclusion without seeing any evidence of it! This statement was completely fabricated.
 
 </opt>
 
@@ -446,9 +458,9 @@ Bringing back the hotel data that we saw from exercise 4, We've made a couple of
 **Question 1**      
 Looking at the presentation below which code will produce the layout shown?
 
-
-<img src="/module6/layout1.svg" width="100%"></img>
-
+<center>
+<img src="/module6/layout1.svg" width="80%"></img>
+</center>
 
 <choice id="1" >
 
@@ -482,12 +494,12 @@ I think you got the symbols mixed up!
 
 
 **Question 2**      
-
-How would we combine the plots `plot_A`, `plot_B` and  `plot_C` to create the layout below?
-
+How would we combine the plots `plot_A`, `plot_B` and  `plot_C` to create the layout below?     
 (*Hint: Two options are possible!*)
 
-<img src="/module6/layout2.svg" width="100%"></img>
+<center>
+<img src="/module6/layout2.svg" width="80%"></img>
+</center>
 
 <choice id="2" >
 <opt text="<code>plot_A | plot_B & plot_C</code>" correct="true">
@@ -540,7 +552,9 @@ We've worked with the penguin dataset quite a lot in this course and it only mak
 Here we have 4 plots that we have made in the previous modules (or similar to these) that we want to combine together so that the first plots lies at the top of the presentation followed by a second row that contains 2 plots side by side and end with a bottom row with the last plot.
 It should appear something like this: 
 
-<img src="/module6/penguins_layout.svg" width="100%"></img>
+<center>
+<img src="/module6/penguin_layout.svg" width="70%"></img>
+</center>
 
 Tasks: 
 

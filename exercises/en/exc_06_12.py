@@ -2,7 +2,10 @@ import altair as alt
 import pandas as pd
 from vega_datasets import data
 
-#Loading in the data
+
+# Scroll to the bottom of this cell to layout the next 4 plots
+
+# Loading in the data
 penguins_df = pd.read_csv('data/penguins.csv').dropna(subset=['sex', 'species'])
 
 # Density plot
@@ -44,6 +47,8 @@ titles = alt.TitleParams(
     "We've discovered many insights from the Penguins dataset",
      subtitle = ["We've learned that the Adelie and Chinstrap penguin",
                  " species are have similar culmen depth and body mass, however quite different culmen length"],
-     fontSize=18, ____='center', anchor='middle')
+     fontSize=18, align='center', anchor='middle')
 
-(____).____(title=____)
+
+# Organize the plots above so it looks like the example provided above.
+(____).____(title=titles)

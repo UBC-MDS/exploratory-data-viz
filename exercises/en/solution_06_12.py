@@ -2,7 +2,10 @@ import altair as alt
 import pandas as pd
 from vega_datasets import data
 
-#Loading in the data
+
+# Scroll to the bottom of this cell to layout the next 4 plots
+
+# Loading in the data
 penguins_df = pd.read_csv('data/penguins.csv').dropna(subset=['sex', 'species'])
 
 # Density plot
@@ -46,5 +49,7 @@ titles = alt.TitleParams(
                  " species are have similar culmen depth and body mass, however quite different culmen length"],
      fontSize=18, align='center', anchor='middle')
 
-(culmen_facet_plot & (mass_boxplot | penguin_heatmap) & mass_density_plot
+
+# Organize the plots above so it looks like the example provided above.
+(mass_density_plot & (mass_boxplot | penguin_heatmap) & culmen_facet_plot
 ).properties(title=titles)
