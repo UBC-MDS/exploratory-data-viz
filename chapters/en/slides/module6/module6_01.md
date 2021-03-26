@@ -250,9 +250,11 @@ Indonesia between the years 2003 and 2013.
 
 Here, we see that most of the deforested land in Indonesia is used for
 palm oil plantations. Much of deforested land is also used for small
-scale clearings, timber plantations, and grasslands. Again, it is
-important to remember that we don’t have the data for how much of each
-commodity is exported, so we can make claims about this.
+scale clearings, timber plantations, and grasslands.
+
+Again, it is important to remember that we don’t have the data for how
+much of each commodity is exported, so we cannot make any claims about
+this.
 
 Perhaps you have have read or heard negative things about palm oil in
 the past? It has been of focus of late in the media, due to its link to
