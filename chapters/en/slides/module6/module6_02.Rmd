@@ -128,7 +128,7 @@ far from how the `mercator` projection draws this - it draws them
 
 ---
 
-## The fill and border colors of countries can be changed
+## The fill and border colours of countries can be changed
 
 ```{python}
 alt.Chart(world_map).mark_geoshape(
@@ -214,7 +214,7 @@ placement of Alaska and Hawaii close to the rest of the country.
 
 ---
 
-## Coloring individual regions differently
+## Colouring individual regions differently
 
 ```{python}
 (alt.Chart(state_map).mark_geoshape().encode(
@@ -258,7 +258,7 @@ if we specified it as ordinal or nominal.
 ```{python}
 import pandas as pd
 
-state_pop = pd.read_csv('data/us_population_and_coordinates.csv')
+state_pop = pd.read_csv('data/us_population_coordinates_asthma-cases.csv')
 state_pop[:5]
 ```
 
@@ -362,6 +362,94 @@ we remove the square grey outline by setting the stroke to `None`.
 Now it is much easier to see that many of the states in Eastern USA
 have a population several times that of the states in the Midwest,
 although their area is smaller.
+
+---
+
+## Some measures can be influenced by the population size
+
+```{python}
+us_map = (alt.Chart(state_map).mark_geoshape(color='lightgray', stroke='white')
+          .project(type='albersUsa'))
+points = alt.Chart(state_pop).mark_circle().encode(
+    longitude='longitude',
+    latitude='latitude',
+    size=alt.Size('number_of_asthma_cases', title='Asthma cases'))
+(us_map + points).configure_view(stroke=None)
+```
+
+Notes:
+Whether we are using a choropleth or a map with circular markers,
+we need to be careful when plotting variables that depend on the population size.
+
+In this plot we have plotted the number of people suffering from asthma
+in each of the states.
+
+As you can see,
+this looks almost identical to the map in the last slide showing the population per state.
+The reason is that for any condition,
+a state with more people is likely to show more cases,
+unless there is a strong dependence on another factor that differs between the states.
+
+It would be more interesting to see how many people get asthma per capita,
+which means dividing the number of asthma cases
+with the population in each state.
+
+Let's do that next!
+
+---
+
+## For these measures it is important to control for the size of population
+
+```{python}
+state_pop['asthma_cases_per_capita'] = state_pop['number_of_asthma_cases'] / state_pop['population']
+us_map = (alt.Chart(state_map).mark_geoshape(color='lightgray', stroke='white')
+          .project(type='albersUsa'))
+points = alt.Chart(state_pop).mark_circle().encode(
+    longitude='longitude',
+    latitude='latitude',
+    size=alt.Size('asthma_cases_per_capita', title='Asthma cases'))
+(us_map + points).configure_view(stroke=None)
+```
+
+Notes:
+When we control for the size of the population in each state,
+we can see that the appearance of the map is quite different.
+
+Most state has a rather similar number of asthma cases per capita,
+differing at most with around 1.5 - 2x.
+
+It a bit hard to see the exact with the size of the circles
+since the scale starts from zero.
+
+---
+
+## Setting the domain of the scale can help highlight small important difference
+
+```{python}
+state_pop['asthma_cases_per_capita'] = state_pop['number_of_asthma_cases'] / state_pop['population']
+us_map = (alt.Chart(state_map).mark_geoshape(color='lightgray', stroke='white')
+          .project(type='albersUsa'))
+points = alt.Chart(state_pop).mark_circle().encode(
+    longitude='longitude',
+    latitude='latitude',
+    size=alt.Size('asthma_cases_per_capita', title='Asthma cases', scale=alt.Scale(domain=[0.02, 0.09])))
+(us_map + points).configure_view(stroke=None)
+```
+
+Notes:
+If these small differences are important,
+we can set the domain of the size scale
+in the same way we saw in previous modules
+how we could adjust the domain for the x and y scales.
+
+As we learned then,
+we have to be careful when we are doing this
+so that we don't exaggerate small differences.
+
+Here we should look at the number 
+to ensure that we keep relative differences between states consistent
+and those with twice as many asthma cases per capita
+appear to have dots of double the size.
 
 ---
 
