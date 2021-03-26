@@ -22,9 +22,10 @@ Notes:
 In this module we will see how we can add a narrative to our visualizations.
 Together,
 our narrative and our visualizations
-will be telling a data story.
+will tell a data story.
+
 This does not mean
-that we will be making up fairy tales about our data
+that we will be making up fairy tales about our data,
 but that we will guide the reader
 through the most important insights that we have found.
 
@@ -34,26 +35,26 @@ through the most important insights that we have found.
 
 - Start with an have a hook
 - explain
-- Leave the reader curios about the next fig
+- Leave the reader curious about the next figure
 
 Notes:
 An effective story often peaks the readers' interest up front,
-and makes them interested in reading further.
-For example, we could start with a visually striking figure,
+and makes them want to learn more.
+To do this,  we could start with a striking figure,
 an important problem that begs for a solution,
 or reveal data that challenges the reader's previous knowledge.
 
 When making a data story exciting
-it is important to still remain fact-based
-to avoid that our story comes across as the headlines
+it is important that is remains based in fact. We do not want 
+our story tp resemble headlines
 of a clickbait article.
 
 When telling a story,
-it is also important to tailor it to the audience and context
-to ensure that it is of the right technical difficulty and detail.
+it is also important to tailor it to the audience and context.
+This ensures that it is of the right technical difficulty and detail.
 
 To practice storytelling,
-we will show an [example based on articles on deforestation
+we will explore an [example based on articles on deforestation
 from Our World in Data](https://ourworldindata.org/forests-and-deforestation).
 
 
@@ -76,9 +77,9 @@ alt.Chart(forest_loss).mark_line().encode(
 ```
 
 Notes:
-As we can see in this slide
-the total forest loss during the last 300 years
-is about 1.5 billion hectare.
+As we can see in this slide,
+the total global forest loss during the last 300 years
+is about 1.5 billion hectares.
 That's almost twice the area of Australia!
 
 To put this into a historical perspective
@@ -86,13 +87,13 @@ the world has lost 1/6 of its forest in the last 100 years,
 which is as much as in the previous 9000 years combined.
 
 Although we can see that global deforestation
-has been slowing down since the 80s,
+has been slowing down since the 1980s,
 it is still progressing at an unsustainable rate.
 
-Of the deforestation today,
-95% occurs in tropical regions,
-which is particularly severe
-since old rain forests are not easily replaced after they are cut down.
+
+95% of the deforestation today, occurs in tropical regions. 
+This is particularly alarming, given that trees in the tropical 
+rain forests are not easily replaced after they are cut down.
 
 ---
 
@@ -101,7 +102,7 @@ since old rain forests are not easily replaced after they are cut down.
 ```{python}
 deforestation_regions = pd.read_csv('data/region-share-tropical-deforestation.csv')
 alt.Chart(deforestation_regions).mark_bar().encode(
-    x='Share of commodity-driven deforestation',
+    x='Percent share of commodity-driven deforestation',
     y=alt.Y('Entity', title='', sort='x'))
 ```
 
@@ -110,15 +111,15 @@ Permanent loss of forest (or "deforestation") is a big problem
 that leads to species extinction,
 land erosion, and accelerates climate change.
 
-Although the consequences of deforestation has global consequences,
+Although the consequences of deforestation are of global impact,
 we can see in this chart that forest loss is not evenly distributed across the world.
 
 In particular,
-Brazil and Indonesia stand out as the two countries account
-for about half of the commodity-driven deforestation around the world.
+Brazil and Indonesia stand. These the two countries account
+for roughly half of the commodity-driven deforestation around the world.
 
 Notably,
-the chart above only shows deforestation
+this chart only shows deforestation
 that is driven by commodities,
 such as the need for new pastures for cattle
 or fields to grow crops,
@@ -126,11 +127,10 @@ but this accounts for most of the tropical deforestation.
 
 It would be easy to jump to conclusions
 upon seeing a chart like this 
-and blaming the countries with high local deforestation rate,
+and only blame the countries with high local deforestation rates,
 but it that really fair?
 
-How much of this deforestation is really driven by local needs
-versus how much is due to exports to other countries?
+How much of this deforestation is really driven by local needs? And how much is due to exports to other countries?
 
 ---
 
@@ -146,33 +146,32 @@ alt.Chart(deforestation_exported).mark_line().encode(
 ```
 
 Notes:
-This chart shows the share of deforestation that is due to exported goods
-from 2005 to 2013.
+This chart shows the percentage share of deforestation that is due to exported goods
+from 2005 to 2013 for Brazil and Indonesia.
 
 As we can see,
 a large part of the deforestation in both countries
-is driven by other countries.
-Particularly in Indonesia,
-where around half the country's deforestation
-stems from interest outside Indonesia.
+is driven by the demand from other countries.
+This is most striking in Indonesia,
+where the materials from around half the country's deforestation
+ends up in exported goods.
 
-To recap,
-this story has shown us 
+So far,
+this story has shown us that
 global forest areas are at an all time low
-and still shrinking.
-And although much of the deforestation localized to just a few countries,
-it is driven by global interests.
+and likely still shrinking.
+Much of the deforestation appears to be localized to just a few countries,
+yet it is driven by global demands for forest products.
 
 This could be the end of our story
-if the main aspect we wanted to highlight
-was that much of deforestation is a global problem
-that needs to be solved through international collaborations.
+if the main narrative we want to communicate is that deforestation is truly
+a global problem that needs to be solved through international collaborations.
 
-If we wanted to tell a longer story,
-we next as "Which are the commodities that drive most of the deforestation?",
-which is something that the reader might already have in mind since the previous slide.
-Let's explore this next.
-
+However, our story seems to leave some questions unanswered that our 
+audience will likely be asking, such as
+which are the commodities that drive most of the deforestation?
+Given that we have data to answer this question, let's not end our
+story here!
 ---
 
 ## Demand for beef is the biggest reason for deforestation in Brazil
