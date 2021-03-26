@@ -19,10 +19,9 @@ type: slides
 # Visualizing Geographic Data
 
 Notes:
-In this module we will see how we can plot maps with Altair,
-both as single color backgrounds
-and by linking values to different countries
-and states on the maps.
+In this module we will see how we can plot maps with Altair.
+We will also learn how to colour these maps to link our data
+to geographical regions.
 
 ---
 
@@ -47,16 +46,20 @@ and states on the maps.
 ```
 
 Notes:
-Up until now,
-all the data we have plotted in Altair have been read from CSV-file
-as tidy dataframes.
-To visualize data on maps we will be using
-file formats that are designed specifically for geographic data.
+So far, we have sourced
+all of the data we have visualized using Altair from 
+spreadsheet-like `.csv` files. We have then worked with 
+the data in Python as tidy data frames.
 
-These are called GeoJSON and TopoJSON
-and are saved as plain text file,
-but with rules for how store geographic data such as coordinates.
-You can see an example of how they look in this slide.
+To easily visualize data on maps we will learn about and use
+new file formats that are designed specifically for geographic data.
+
+These are called GeoJSON and TopoJSON. Like `.csv`'s, they
+and are saved as plain text files, however, they are formatted 
+differently, and they have specific rules for how store geographic 
+data such as positional coordinates, like latitude and longitude.
+
+You can see an example of one here in this slide.
 
 ---
 
@@ -71,21 +74,21 @@ alt.Chart(world_map).mark_geoshape()
 ```
 
 Notes:
-The vega sample data sets contain a TopoJSON dataset for the world and the US,
-so let's use that here.
+The vega sample data sets contains data sets we can use to create
+maps for the world and the US. There are stored in the TopoJSON format. 
+We will now demonstrate how we can use such data with Altair.
 
-Altair work directly with GeoJSON files,
-so to use the TopoJSON sample data,
-we use the `alt.topo_feature` help function
-so that Altair can read the TopoJSON file correctly.
+To use the TopoJSON data,
+we need the `alt.topo_feature` helper function
+to allow Altair to correctly parse the TopoJSON file. We then use 
+`mark_geoshape` to visualize this geographic TopoJSON data
+in the form of a map. 
 
-We then use `mark_geoshape` to visualize this geographic TopoJSON data
-in the form of a map.
-Since the data contains the border coordinates of each country,
+Because, the data contains the border coordinates of each country,
 we can see these drawn as white lines in the chart on this slide.
 
-But why does Antarctica look so much bigger
-than the rest of the world?
+Looking at this map however, you might wonder why Antarctica 
+looks so much bigger than the rest of the world?
 
 ---
 
@@ -96,30 +99,32 @@ alt.Chart(world_map).mark_geoshape().project(type='equalEarth')
 ```
 
 Notes:
-Since the Earth is a sphere
+Given that the Earth is a sphere
 it is not entirely straightforward
 how to represent the areas of the different parts of the world
-on a 2D visualization.
+on a two dimensional visualization.
 
-The reason Antarctica looked so giant in the previous slide
-is because of how the spheres is being stretched 
-when it is projected onto a 2D surface.
+The reason that Antarctica looked so big in the previous slide
+is because of how the sphere is being stretched 
+when it is projected onto a two dimensional visualization surface.
 
-The default projection method for maps is often `mercator`,
-but it causes heavy distortion of the relative areas of land masses,
-which get worse the closer to the poles we come.
+`mercator` is often used as the default projection method for maps.
+However, it causes heavy distortion of the relative areas of land masses,
+and in particular, this distortion gets much worse closer to the poles.
 
 Fortunately,
-many people are moving away from using the projection
-because it gives an incorrect impression of how the world looks.
-A commonly used alternative is the `equalEarth` projection,
-which focuses on correctly representing the relative areas of all landmasses.
+many people are moving away from using this projection
+because it gives a distorted impression of what the world looks like.
+A commonly used alternative is the `equalEarth` projection.
+This projection focuses on correctly representing the relative areas of all landmasses.
 
 Some of the most noticeable differences in this projection
 are that Africa appears much bigger
-and Greenland, Antarctica and Russia appear notably smaller.
-Africa is in fact 15x the area of Greenland,
-far from the `mercator` projection which shows them as roughly the same size.
+and Greenland, Antarctica as well as Russia appear notably smaller.
+
+Africa is in fact 15x the area of Greenland, this is far
+far from how the `mercator` projection draws this - it draws them
+ as roughly the same size.
 
 ---
 
@@ -132,15 +137,18 @@ alt.Chart(world_map).mark_geoshape(
 ```
 
 Notes:
-We can change the color of both the filled are and the border 
-for each country.
-Just like with other colors in Altair,
-we can use either a named color
+We can change the colour of both the filled maps areas and the 
+geographical borders.
+
+And similar to other colour mappings in Altair,
+we can use either a named colour
 or and exact hex-code.
 
-Here we also make the stroke width slightly larger 
-so that it is easier to see
-the country borders.
+Here we use the named colour black, with the `color` 
+argument to fill the map areas black, and a hexcode
+with the `stroke` argument to change the geographical borders
+to a grey colour. We also set `strokeWidth` to 1, so that 
+it is easier to see the country borders.
 
 ---
 
@@ -156,9 +164,14 @@ Notes:
 By default Altair automatically adjusts the projection
 so that all the data fits within the width and height of the chart.
 
-We can change this via the projections parameters `scale` (zoom level) and `translate` (panning).
-Here we adjust them to zoom in and center the map on Europe.
-Getting the panning right when zooming in can take a bit of fiddling.
+We can change this by setting custom values for the projections 
+parameters `scale`, which sets the zoom level, and `translate`,
+which sets where to pan to.  
+
+Here we adjust these so that we can zoom in and centre the map on Europe.
+
+Have patience with yourself and Altair while doing this, as getting the panning 
+and zooming just right can take a bit of fiddling.
 
 ---
 
@@ -171,16 +184,16 @@ alt.Chart(state_map).mark_geoshape().project(type='equalEarth')
 
 Notes:
 If we want information on regions within a country,
-we have to use a geo/topojson file that contains this info.
-There is already one in the vega demo datasets for the US,
-which is the one we are using here.
+we have to use a geoJSON or topoJSON file that contains this information.
+The vega demo datasets has such a file for the United States, so we use 
+that to demonstrate how to do this here.
 
-The loading of the data is exactly the same as previously,
-but as you can see,
-the `equalEarth` projection is not very suitable for a single country.
+We load the data in the same way as before, however, you can see
+that the `equalEarth` projection doesn't seem to work well here.
 
-The US it is very small and both Alaska and Hawaii 
-are shown far away from the rest of the country.
+Using it leads to the country being quite small, and not centred.
+Furthermore, it leads to both Alaska and Hawaii being spaced quite
+far from the rest of the country.
 
 ---
 
@@ -191,12 +204,13 @@ alt.Chart(state_map).mark_geoshape().project(type='albersUsa')
 ```
 
 Notes:
-There special US projection `albersUsa`
-is much preferred when only showing this country.
-You might recognize the projection from maps that you have seen elsewhere
-such as on the news.
-Characteristic is the placement of Alaska and Hawaii
-close to the rest of the country.
+To fix this, we can use a special projection `albersUsa`
+that was created to visualize maps of the United States. 
+It is a much preferred projection when only showing this country.
+
+You might recognize the projection from maps that you have seen 
+outside of this course, such as on the news. Of note, is the characteristic
+placement of Alaska and Hawaii close to the rest of the country.
 
 ---
 
@@ -209,10 +223,9 @@ close to the rest of the country.
 ```
 
 Notes:
-So far we have seen how to visualize region in a uniform color,
-but often we want to use color to represent amounts within regions
-so that we can contrast them with each other.
-How can we do this in Altair?
+So far we have seen how to visualize regions with a uniform colour,
+but often we want to use colour to map values or summary statistics
+from our data to different geographic regions. How can we do this in Altair?
 
 As you can see in this slide,
 we can use `encode` together with `mark_geojson`,
@@ -220,15 +233,21 @@ the same way we have used it with the other marks.
 This type of visualization can be thought of as a geographical heatmap
 and is often referred to as a "choropleth map".
 
-The `'id'` field here comes from the sample topojson file.
+To introduce how we can do this - we will map the states identification
+number from our topoJSON file we loaded, to the corresponding 
+geographic region for each state. Normally, we would not do this, 
+but instead map some other data to each geographic region. We will
+do that in the following slides.
+
+The `'id'` field here comes from the sample topoJSON file.
 If we opened up and looked at this file,
-we would find that it does contains a field called `'id'`,
+we would find that it contains a field called `'id'`,
 which is a numerical identifier for each state 
 in alphabetical order.
 
 Because we are not using a pandas dataframe,
 we mush specify the type of data in the column.
-Here we are specifying it a quantitative for demonstration purposes
+Here we are specifying it as a quantitative for demonstration purposes
 because the legend would become very long
 if we specified it as ordinal or nominal.
 
@@ -245,15 +264,14 @@ state_pop[:5]
 
 Notes:
 So far we have learned how to visualize maps,
-but we haven't really been able to ask and answer any data question.
+but we haven't really been able to ask and answer any interesting questions.
 
-Although any arbitrary information could be put in a geojson file,
-they often only contain spatial coordinates
-and we need to link any variables of interest from another data set
-together with the JSON file.
+Although any arbitrary information could be put in a topoJSON, or geoJSON file,
+they often only contain spatial coordinates. Thus, we often need to link 
+our variables of interest from another data set with the data in the topoJSON, or geoJSON file.
 
 For example,
-we might have this table with the population for each state.
+we might have a table like this, with the population for each state and wish to visualize it on a map?
 So how do we link these two tables together?
 
 ---
@@ -271,7 +289,7 @@ So how do we link these two tables together?
 Notes:
 We could perform the linkage manually,
 by adding the relevant fields to the json file,
-but this would be a tedious process.
+but this would be a tedious and error-prone process.
 
 There are some libraries,
 such as geopandas
@@ -281,17 +299,17 @@ but we could also use Altair directly to save time.
 To link two datasets together,
 Altair uses the `transform_lookup` method
 to *look up* the data column we want to use from the dataframe
-via a shared key column
-and add it to the plotted data.
+via a shared key column.
+And then adds it to the plotted data.
 This process is similar to using `merge` in pandas.
 
 You could see in the previous slide that there exists an ID column
-and this contain the state IDs in alphabetical order,
-just like the geojson so we can use that for the lookup.
+and this contains the state IDs in alphabetical order,
+just like the topoJSON file - and so we can use that for the lookup.
 
-The columns we want to fetch from the dataframe are passed in a list,
-and here we have specified only the population,
-which we use to color the states accordingly to how many people live in each state.
+The columns we want to fetch from the data frame are passed in a list,
+and here we have specified only the population, We will use that to 
+colour the states accordingly to how many people live in each state.
 
 ---
 
@@ -315,34 +333,34 @@ even if it is unrelated to the measure we are studying.
 For example,
 just because the states in the midwest of the US have a large area,
 they are very prominent in the choropleth map we made on the last slide
-although their population is actually really small.
+although their population is actually quite small.
 
 On the other hand,
 if there was a state that had a small area,
 but a large population,
-we would not see it in the choropleth map.
+we might not even see it on the choropleth map.
 These issues are often discussed around the US election,
 where different approach are used to illustrate that the weight
-of each states vote is not tied to the area of the state.
+of each states' vote is not tied to the geographical area of the state.
 
-On effective way to convey this message is to use
+One effective way to convey this message is to use
 a map as a background
 and plot points on top that are scaled according to the measure of interest.
 
 To achieve this in Altair,
-we need one pair of coordinates to plot for each state,
-which we have in the column `latitude` and `longitude`
-(these represent the geometric center of each state).
+we need one pair of coordinates to plot for each state. For this
+we can use the columns `latitude` and `longitude` which represent the 
+geometric centre of each state).
 
 We then plot these coordinates on top of a map
 using the special `longitude` and `latitude` parameters
-and set the size of the points to be relative the population parameter.
+and set the size of the points to be relative the population.
 
 Finally,
 we remove the square grey outline by setting the stroke to `None`.
 
 Now it is much easier to see that many of the states in Eastern USA
-have a population several times that in the Midwest,
+have a population several times that of the states in the Midwest,
 although their area is smaller.
 
 ---
