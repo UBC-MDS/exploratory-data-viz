@@ -67,13 +67,12 @@ from Our World in Data](https://ourworldindata.org/forests-and-deforestation).
 import pandas as pd
 import altair as alt
 
-# TODO save wrangled data and change to area plot shoing both tropical and temperate deforestation
 forest_loss = pd.read_csv('data/global-forest-loss.csv', parse_dates=['decade'])
-forest_loss['cumulative_hectar_lost_millions'] = forest_loss['hectar_lost_millions'].cumsum()
-
-alt.Chart(forest_loss).mark_line().encode(
-    x='decade',
-    y=alt.Y('cumulative_hectar_lost_millions'))
+title = 'Forest loss is still increasing rapidly world wide'
+alt.Chart(forest_loss, title=title).mark_line().encode(
+    alt.X('decade', title=''),
+    alt.Y('cumulative_hectar_lost_millions',
+            title='Cumulative lost forest area (million ha)'))
 ```
 
 Notes:
