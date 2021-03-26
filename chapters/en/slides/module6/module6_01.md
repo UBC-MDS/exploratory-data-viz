@@ -250,7 +250,9 @@ Indonesia between the years 2003 and 2013.
 
 Here, we see that most of the deforested land in Indonesia is used for
 palm oil plantations. Much of deforested land is also used for small
-scale clearings, timber plantations, and grasslands.
+scale clearings, timber plantations, and grasslands. Again, it is
+important to remember that we don’t have the data for how much of each
+commodity is exported, so we can make claims about this.
 
 Perhaps you have have read or heard negative things about palm oil in
 the past? It has been of focus of late in the media, due to its link to
@@ -285,17 +287,29 @@ alt.Chart(oil_land_use, title=title).mark_bar().encode(
 Notes: This chart shows how many hectares would be needed for the crops
 of common vegetable oils to meet the entire world’s oil demands.
 
-For example, if we wanted to replace it with olive oil, we would need
-almost 10x the land to do so!
+It turns out that palm oil is the most efficient use of land for the
+amount of oil produced! For example, if we wanted to replace it with
+olive oil, we would need almost 10x the land to do so!
+
+So does it make sense for Indonesia to keep clearing forests and
+creating more palm plantations because they are the most efficient oil
+crop?
+
+No, our conclusions cannot stop here. Things are not so simple. The type
+of land where the oil crop grows also matters.
+
+Replacing tropical forests containing rich biodiversity with palm oil
+plantations has a more severe, negative impact on the environment
+compared to changing the type of oil crops being grown on land that has
+already been deforested and used for agriculture elsewhere in the world.
+
+Therefore it is important that palm oil plantages are grown in a
+sustainable way that is compatible with preserving the tropical forests
+in Indonesia.
 
 Just as with Brazil and it’s use of pasture from deforested land to
 raise cattle for beef, the story of palm oil is more complex then we can
 illustrate in a single visualization.
-
-For example, the type of land where the oil crop grows matters.
-Replacing tropical forests containing rich biodiversity with palm oil
-plantages has a more severe impact than switching to other oil crops on
-already cultivated land elsewhere in the world.
 
 ---
 
