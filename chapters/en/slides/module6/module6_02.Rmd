@@ -432,7 +432,7 @@ us_map = (alt.Chart(state_map).mark_geoshape(color='lightgray', stroke='white')
 points = alt.Chart(state_pop).mark_circle().encode(
     longitude='longitude',
     latitude='latitude',
-    size=alt.Size('asthma_cases_per_capita', title='Asthma cases', scale=alt.Scale(domain=[0.02, 0.09])))
+    size=alt.Size('asthma_cases_per_capita', title='Asthma cases', scale=alt.Scale(domain=[0.04, 0.09])))
 (us_map + points).configure_view(stroke=None)
 ```
 
