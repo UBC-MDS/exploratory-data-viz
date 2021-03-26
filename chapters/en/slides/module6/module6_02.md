@@ -422,34 +422,73 @@ differing at most with around 1.5 - 2x.
 It a bit hard to see the exact with the size of the circles since the
 scale starts from zero.
 
+If these small differences are important, we could set the domain of the
+size scale in the same way we saw in previous modules how we could
+adjust the domain for the x and y scales.
+
+However, there is a bigger issue with this visualization. Look at the
+circles in the Eastern US, many of them are overlapping which makes the
+chart hard to read.
+
+We make all points smaller by setting the range of the size scale, but
+there would still be a lot of overlap.
+
+In these cases, a choropleth map would be a better choice since there
+won’t be any overlap.
+
 ---
 
-## Setting the domain of the scale can help highlight small important difference
+## A choropleth map avoids overlap for large values close to each other
 
 ``` python
-state_pop['asthma_cases_per_capita'] = state_pop['number_of_asthma_cases'] / state_pop['population']
-us_map = (alt.Chart(state_map).mark_geoshape(color='lightgray', stroke='white')
-          .project(type='albersUsa'))
-points = alt.Chart(state_pop).mark_circle().encode(
-    longitude='longitude',
-    latitude='latitude',
-    size=alt.Size('asthma_cases_per_capita', title='Asthma cases', scale=alt.Scale(domain=[0.04, 0.09])))
-(us_map + points).configure_view(stroke=None)
+(alt.Chart(state_map).mark_geoshape().transform_lookup(
+    lookup='id',
+    from_=alt.LookupData(state_pop, 'id', ['asthma_cases_per_capita']))
+.encode(color='asthma_cases_per_capita:Q')
+.project(type='albersUsa'))
 ```
 
 <iframe src="/module6/charts/02/unnamed-chunk-13.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: If these small differences are important, we can set the domain
-of the size scale in the same way we saw in previous modules how we
-could adjust the domain for the x and y scales.
+Notes: In this choropleth we can see the values of the states in Eastern
+US are no longer overlapping so it is easier to see the value of each
+state.
 
-As we learned then, we have to be careful when we are doing this so that
-we don’t exaggerate small differences.
+We still have the issue of some states being really, so ideally when
+using either a choropleth or dots to show values like this, it would be
+a good idea to complement them with a bar chart in the same figure,
+which we will see how to do in the next slide deck.
 
-Here we should look at the number to ensure that we keep relative
-differences between states consistent and those with twice as many
-asthma cases per capita appear to have dots of double the size.
+Note that the colorscale does not start at 0. Remember that this is good
+for highlighting small important differences, but can also give a
+misleading impression since difference often appear larger than they
+really are.
+
+---
+
+## Explicitly setting the colour scale to start from zero is less misleading
+
+``` python
+(alt.Chart(state_map).mark_geoshape().transform_lookup(
+    lookup='id',
+    from_=alt.LookupData(state_pop, 'id', ['asthma_cases_per_capita']))
+.encode(color=alt.Color('asthma_cases_per_capita:Q', scale=alt.Scale(zero=True)))
+.project(type='albersUsa'))
+```
+
+<iframe src="/module6/charts/02/unnamed-chunk-14.html" width="100%" height="420px" style="border:none;">
+</iframe>
+
+Notes: A cut of scale is often less of an issue with color than with an
+axis, since we need to look at the colorbar anyways in order to
+interpret the different colors.
+
+However, it can still be a good idea to set the scale to explicitly
+start from zero to more truly represent the data and the relative
+differences between states.
+
+We can do this using `alt.Scale(zero=True)` as shown in this slide.
 
 ---
 
