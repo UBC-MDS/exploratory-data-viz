@@ -91,20 +91,20 @@ Although we can see that global deforestation
 has been slowing down since the 1980s,
 it is still progressing at an unsustainable rate.
 
-
-95% of the deforestation today, occurs in tropical regions. 
-This is particularly alarming, given that trees in the tropical 
-rain forests are not easily replaced after they are cut down.
+95% of the deforestation today occurs in tropical regions. 
+This is particularly alarming
+given that trees in the tropical rain forests
+are not easily replaced after they are cut down.
 
 ---
 
 ## Half of the tropical deforestation is localized to only two countries
 
 ```{python}
-deforestation_regions = pd.read_csv('data/region-share-tropical-deforestation.csv')
-alt.Chart(deforestation_regions).mark_bar().encode(
-    x='Percent share of commodity-driven deforestation',
-    y=alt.Y('Entity', title='', sort='x'))
+top_deforestation_regions = pd.read_csv('data/region-share-tropical-deforestation.csv')
+alt.Chart(top_deforestation_regions).mark_bar().encode(
+    x='Share of commodity-driven deforestation (%)',
+    y=alt.Y('Region', title='', sort='x'))
 ```
 
 Notes:
