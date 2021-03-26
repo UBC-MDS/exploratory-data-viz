@@ -177,12 +177,10 @@ story here!
 ## Demand for beef is the biggest reason for deforestation in Brazil
 
 ```{python}
-# TODO save wrangled data
-brazil_drivers = pd.read_csv('data/drivers-forest-loss-brazil-amazon.csv').query('Year > 2003')
-brazil_drivers = brazil_drivers.melt(id_vars=['Entity', 'Code', 'Year'], var_name='type', value_name='deforestation_hectares').groupby('type').sum().reset_index()
+brazil_drivers = pd.read_csv('data/drivers-deforestation_2003-2013_brazil.csv')
 alt.Chart(brazil_drivers).mark_bar().encode(
-    x='deforestation_hectares',
-    y=alt.Y('type', title='', sort='x'))
+    alt.X('deforestation_hectares', title='Deforested area (ha)'),
+    alt.Y('type', title='', sort='x'))
 ```
 
 Notes:
