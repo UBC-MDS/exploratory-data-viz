@@ -100,7 +100,8 @@ are not easily replaced after they are cut down.
 
 ```{python}
 top_deforestation_regions = pd.read_csv('data/region-share-tropical-deforestation.csv')
-alt.Chart(top_deforestation_regions).mark_bar().encode(
+title = 'Brazil and Indonesia account for almost half of global deforestation'
+alt.Chart(top_deforestation_regions, title=title).mark_bar().encode(
     x='Share of commodity-driven deforestation (%)',
     y=alt.Y('Region', title='', sort='x'))
 ```
@@ -137,7 +138,8 @@ How much of this deforestation is really driven by local needs? And how much is 
 
 ```{python}
 deforestation_exported = pd.read_csv('data/share-deforestation-exported.csv', parse_dates=['Year'])
-alt.Chart(deforestation_exported).mark_line().encode(
+title = 'Exported commodities contribute heavily to deforestation'
+alt.Chart(deforestation_exported, title=title).mark_line().encode(
     alt.X('Year', title=''),
     alt.Y('share_deforestation_exported', title='Exported deforestation (%)'),
     color='Region')
@@ -170,13 +172,15 @@ audience will likely be asking, such as
 which are the commodities that drive most of the deforestation?
 Given that we have data to answer this question, let's not end our
 story here!
+
 ---
 
 ## Demand for beef is the biggest reason for deforestation in Brazil
 
 ```{python}
 brazil_drivers = pd.read_csv('data/drivers-deforestation_2003-2013_brazil.csv')
-alt.Chart(brazil_drivers).mark_bar().encode(
+title = 'Cattle pasture was the biggest deforestation driver in Brazil 2003-2013'
+alt.Chart(brazil_drivers, title=title).mark_bar().encode(
     alt.X('deforestation_hectares', title='Deforested area (ha)'),
     alt.Y('driver', title='', sort='x'))
 ```
@@ -214,7 +218,8 @@ Let's flip to the next slide to find out!
 
 ```{python}
 land_use = pd.read_csv('data/land-use-per-kcal.csv')
-alt.Chart(land_use).mark_bar().encode(
+title = 'Beef require the most land per 1000 kcal of food generated'
+alt.Chart(land_use, title=title).mark_bar().encode(
     alt.X('Land use per 1000kcal (m2)'),
     alt.Y('Commodity', sort='x', title=''))
 ```
@@ -256,7 +261,8 @@ is beef production the biggest issue there as well?
 
 ```{python}
 indonesia_drivers = pd.read_csv('data/drivers-deforestation_2003-2013_indonesia.csv')
-alt.Chart(indonesia_drivers).mark_bar().encode(
+title = 'Palm oil was the biggest contribtutor in Indonesia 2003-2013' 
+alt.Chart(indonesia_drivers, title=title).mark_bar().encode(
     alt.X('deforestation_hectares', title='Deforested area (ha)'),
     alt.Y('driver', title='', sort='x'))
 ```
@@ -293,7 +299,8 @@ when it comes to land use versus yield.
 
 ```{python}
 oil_land_use = pd.read_csv('data/area-land-needed-to-global-oil.csv')
-alt.Chart(oil_land_use).mark_bar().encode(
+title = 'Palm trees are a the most efficient oil crop'
+alt.Chart(oil_land_use, title=title).mark_bar().encode(
     alt.Y('Commodity', title='', sort='x'),
     alt.X('Area needed to meet global vegetable oil demand (ha)'))
 ```
