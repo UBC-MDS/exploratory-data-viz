@@ -48,7 +48,7 @@ figure panel to look aesthetically pleasing.
 bars = (alt.Chart(state_pop).mark_bar().encode(
     alt.X('state', sort='-y', title=''),
     alt.Y('asthma_cases_per_capita', title='Asthma cases per capita'))
-    .properties(width=500, height=80))
+    .properties(width=500, height=75))
 bars
 ```
 
