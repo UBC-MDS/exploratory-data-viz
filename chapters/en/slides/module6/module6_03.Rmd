@@ -1,0 +1,241 @@
+---
+params:
+  dynamictitle: "module6_03"
+title: "`r params$dynamictitle`"
+output:
+  md_document:
+    variant: gfm
+    pandoc_args: "--markdown-headings=atx"
+---
+
+```{r setup, include=FALSE}
+source('../../../../slide-setup.R')
+# Remember to also manually update the YAML title above
+```
+
+type: slides
+
+
+# Figure composition
+
+Notes:
+In this module we will see how we layout plots together
+in a panel, instead of showing only one at a time.
+
+---
+
+## Loading in the data
+
+```{python}
+import altair as alt
+import pandas as pd
+from vega_datasets import data
+
+state_map = alt.topo_feature(data.us_10m.url, 'states')
+state_pop = pd.read_csv('data/us_population_coordinates_asthma-cases.csv')
+state_pop['asthma_cases_per_capita'] = state_pop['number_of_asthma_cases'] / state_pop['population']
+choropleth = (alt.Chart(state_map).mark_geoshape().transform_lookup(lookup='id',
+    from_=alt.LookupData(state_pop, 'id', ['asthma_cases_per_capita']))
+.encode(color=alt.Color('asthma_cases_per_capita:Q', title='Asthma cases per capita'))
+.project(type='albersUsa')
+.properties(width=500, height=180))
+choropleth
+```
+
+Notes:
+On this slide we are recreating the choropleth pointplot map
+from the end of the last slide deck.
+We are saving it as an object so that we can use it to practice
+laying out plots together in a panel on the following slides.
+
+We set the width of this map because we will be combining it 
+with other figures later and we want them all to be of the same width
+for the figure panel to look aesthetically pleasing.
+
+---
+
+# A barchart is able to represent small differences in more detail
+
+```{python}
+bars = (alt.Chart(state_pop).mark_bar().encode(
+    alt.X('state', sort='-y', title=''),
+    alt.Y('asthma_cases_per_capita', title='Asthma cases per capita'))
+    .properties(width=500, height=80))
+bars
+```
+
+Notes:
+At the end of the last slide deck
+we mentioned that it would good to couple our map with a bar char
+since this would make it easier to compare the states more precisely.
+
+Here we create that bar chart and as you can see,
+we can now tell apart small differences between the states
+and we are able to clearly see the values also for states with small areas,
+such as Rhode Island which is barely visible on the map.
+
+While having the labels on the x-axis makes them harder to read
+it will make our bar plot fit in better with the map in the figure layout,
+which is why we have opted for this encoding here.
+
+We're setting a pretty low height so that this chart will work well 
+with the figures we are creating in later on in this slide deck.
+
+---
+
+## Placing plots next to each other allows us to make more direct comparisons
+
+```{python}
+# alt.vconcat(choropleth, bars)
+choropleth & bars
+```
+
+Notes:
+To place these two plots in a vertical layout
+we can use the ampersand (`&`) operator.
+You may have already seen us using this operator occasionally in previous modules.
+
+We could also accomplish the same thing by using the `alt.vconcat(choropleth, points_on_map)` 
+syntax.
+Here, we chose however to opt for the pipe operator as it is more efficient (keystroke-wise). 
+
+Now we can study both figures in the same view.
+These figures also complement each other in the sense that the choropleth
+highlights small differences due to the colorscale not starting at zero
+and the bar chart shows the actual size of the differences
+since each bar starts from zero.
+
+---
+
+## Plots can also be concatenated horizontally
+
+```{python}
+# alt.hconcat(choropleth, bars)
+choropleth.properties(width=250) | bars.properties(width=450)
+```
+
+Notes:
+To place plots in a panel stacked horizontally instead of vertically,
+we can use the pipe (`|`) operator.
+
+We could also have used the `alt.hconcat(choropleth, points_on_map)`,
+but again, using the operator is a bit more efficient.
+
+We have to shrink the plot widths a bit to fit them on this slide.
+This makes it hard to read the bar chart x-labels
+so a horizontal layout is not as good as a vertical layout for this particular figure.
+
+Note where the legends for these plots get placed when we do this;
+they are placed to the right of both plots.
+
+---
+
+## Vertical and horizontal concatenation can be combined
+
+```{python}
+us_map = (alt.Chart(state_map).mark_geoshape(color='lightgray', stroke='white')
+          .project(type='albersUsa'))
+points = alt.Chart(state_pop).mark_circle().encode(
+    longitude='longitude',
+    latitude='latitude',
+    size='population').properties(width=240, height=100)
+
+choropleth_small = choropleth.properties(width=240, height=100)
+choropleth_small | us_map + points & bars
+```
+
+Notes:
+Often we want to create more complex figure layouts
+where visualizations are stacked both horizontally and vertically.
+Such layouts allow us to present connected, or related information near to one another,
+and can be useful if there is a key comparison we want to make
+between multiple visualizations. 
+
+Yes, we could always place each visualization on its own slide or page 
+(when sharing figures on paper),
+however, our working memories are only so good. 
+We often forget key details about visualizations we 
+just saw when it is removed and we are presented with a new one.
+
+In Altair,
+we can create the figure layout
+by combining the vertical and the horizontal concatenation operators.
+
+In this slide,
+we create a barplot of the population in each state
+that we want to place under the two maps.
+But as we can see in this slide,
+this places the barplot under only the rightmost map.
+Why is that?
+
+---
+
+## Parentheses can be used to indicate groupings in complex layouts
+
+```{python}
+(choropleth_small | (us_map + points)) & bars
+```
+
+Notes:
+The reason that the plot in the previous slide did not look like we wanted it to, 
+was that the `&` operator has higher priority than `|` operator.
+
+The resulted in the choropleth and barplot being vertically concatenated
+before the point map was horizontally concatenated.
+
+What we really want is the horizontal concatenation between the maps 
+to occur first, followed by the vertical concatenation of the barplot.
+
+Just as we use parentheses in mathematics to change the default order 
+of mathematical operations, we can use parentheses to change the default order 
+of concatenation operations.
+
+You can see an example of that in this slide,
+where we place the parentheses around different parts of the expression
+to force the horizontal concatenation between the maps 
+to occur first, and that leads us to get the barplot to show up below both the maps
+as desired.
+
+---
+
+## Redundant colouring can make it clearer which charts represent the same values
+
+```{python}
+(choropleth_small | (us_map + points)) & bars.encode(color='asthma_cases_per_capita')
+```
+
+Notes:
+To make it clearer that the bars and the choropleth map
+both represent the asthma cases,
+we could add redundant colouring to the bars.
+
+Now it is clear that they are distinct from the point map,
+whereas they has the same blue colour in the previous slide.
+
+---
+
+## Titles can be added to each level of the layout to clarify what each chart represents
+
+```{python}
+choropleth_with_title = choropleth_small.properties(title='Asthma cases per capita')
+pointmap_with_title = (us_map + points).properties(title='Population')
+bars_with_title = (bars.encode(color='asthma_cases_per_capita').properties(title='Asthma cases per capita'))
+figure_panel = (choropleth_with_title | pointmap_with_title) & bars_with_title
+figure_panel_title = alt.TitleParams(text='Asthma cases and population', dx=220)
+figure_panel.properties(title=figure_panel_title)
+```
+
+Notes:
+To make our visualization easier to interpret,
+we can add descriptive titles.
+These are often particularly important when we create more complex figures
+since there are now several panels within each figure to keep track of.
+
+This doesn't mean that each panel absolutely needs a title,
+but when in doubt it is better to add one title too many than one too few.
+
+---
+
+# Let's apply what we learned!
+
+Notes: <br>

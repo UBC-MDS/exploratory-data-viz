@@ -17,6 +17,7 @@ knitr::knit_hooks$set(
         # Python chunks are always one line.
         if ((options$engine == "python" && grepl("alt.Chart(", code_chunk, fixed = T))
             || (options$engine == "python" && grepl("chart.", code_chunk, fixed = T))
+            || (options$engine == "python" && grepl("choropleth", code_chunk, fixed = T))
             || (options$engine == "python" && grepl("mark_", code_chunk, fixed = T))) {
             # We can use the chunk option `fig.path` to find the name of the
             # directory for the executed scripts, which contains the module and
