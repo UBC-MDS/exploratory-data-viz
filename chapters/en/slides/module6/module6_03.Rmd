@@ -24,7 +24,7 @@ in a panel, instead of showing only one at a time.
 
 ---
 
-## Loading in the data
+## Recreating the chart from last slide deck
 
 ```{python}
 import altair as alt
@@ -38,7 +38,7 @@ choropleth = (alt.Chart(state_map).mark_geoshape().transform_lookup(lookup='id',
     from_=alt.LookupData(state_pop, 'id', ['asthma_cases_per_capita']))
 .encode(color=alt.Color('asthma_cases_per_capita:Q', title='Asthma cases per capita'))
 .project(type='albersUsa')
-.properties(width=500, height=180))
+.properties(width=500, height=150))
 choropleth
 ```
 
@@ -54,7 +54,7 @@ for the figure panel to look aesthetically pleasing.
 
 ---
 
-# A barchart is able to represent small differences in more detail
+# A barchart is able to represent relative differences more precisely
 
 ```{python}
 bars = (alt.Chart(state_pop).mark_bar().encode(
@@ -83,7 +83,7 @@ with the figures we are creating in later on in this slide deck.
 
 ---
 
-## Placing plots next to each other allows us to make more direct comparisons
+## Placing plots next to each other allows us to make direct comparisons
 
 ```{python}
 # alt.vconcat(choropleth, bars)
@@ -99,7 +99,9 @@ We could also accomplish the same thing by using the `alt.vconcat(choropleth, po
 syntax.
 Here, we chose however to opt for the pipe operator as it is more efficient (keystroke-wise). 
 
-Now we can study both figures in the same view.
+Now we can study both figures in the same view,
+instead of flipping back and fourth between slides.
+
 These figures also complement each other in the sense that the choropleth
 highlights small differences due to the colorscale not starting at zero
 and the bar chart shows the actual size of the differences
@@ -111,7 +113,7 @@ since each bar starts from zero.
 
 ```{python}
 # alt.hconcat(choropleth, bars)
-choropleth.properties(width=250) | bars.properties(width=450)
+choropleth.properties(width=250) | bars.properties(width=400)
 ```
 
 Notes:
@@ -124,6 +126,11 @@ but again, using the operator is a bit more efficient.
 We have to shrink the plot widths a bit to fit them on this slide.
 This makes it hard to read the bar chart x-labels
 so a horizontal layout is not as good as a vertical layout for this particular figure.
+
+In general,
+whether to choose a horizontal or vertical layout depends on the available space you have for the figure. 
+For example, in this lecture material we're limited by the size of the slides
+and have to adjust our figure layouts to work well within this space.
 
 Note where the legends for these plots get placed when we do this;
 they are placed to the right of both plots.

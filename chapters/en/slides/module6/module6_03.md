@@ -9,7 +9,7 @@ panel, instead of showing only one at a time.
 
 ---
 
-## Loading in the data
+## Recreating the chart from last slide deck
 
 ``` python
 import altair as alt
@@ -23,7 +23,7 @@ choropleth = (alt.Chart(state_map).mark_geoshape().transform_lookup(lookup='id',
     from_=alt.LookupData(state_pop, 'id', ['asthma_cases_per_capita']))
 .encode(color=alt.Color('asthma_cases_per_capita:Q', title='Asthma cases per capita'))
 .project(type='albersUsa')
-.properties(width=500, height=180))
+.properties(width=500, height=150))
 choropleth
 ```
 
@@ -41,7 +41,7 @@ figure panel to look aesthetically pleasing.
 
 ---
 
-# A barchart is able to represent small differences in more detail
+# A barchart is able to represent relative differences more precisely
 
 ``` python
 bars = (alt.Chart(state_pop).mark_bar().encode(
@@ -63,13 +63,16 @@ small differences between the states and we are able to clearly see the
 values also for states with small areas, such as Rhode Island which is
 barely visible on the map.
 
-While having the lablels on the x-axis makes them harder to read it will
+While having the labels on the x-axis makes them harder to read it will
 make our bar plot fit in better with the map in the figure layout, which
 is why we have opted for this encoding here.
 
+We’re setting a pretty low height so that this chart will work well with
+the figures we are creating in later on in this slide deck.
+
 ---
 
-## Placing plots next to each other allows us to make more direct comparisons
+## Placing plots next to each other allows us to make direct comparisons
 
 ``` python
 # alt.vconcat(choropleth, bars)
@@ -87,11 +90,13 @@ We could also accomplish the same thing by using the
 `alt.vconcat(choropleth, points_on_map)` syntax. Here, we chose however
 to opt for the pipe operator as it is more efficient (keystroke-wise).
 
-Now we can study both figures in the same view. These figures also
-complement each other in the sense that the choropleth highlights small
-differences due to the colorscale not starting at zero and the bar chart
-shows the actual size of the differences since each bar starts from
-zero.
+Now we can study both figures in the same view, instead of flipping back
+and fourth between slides.
+
+These figures also complement each other in the sense that the
+choropleth highlights small differences due to the colorscale not
+starting at zero and the bar chart shows the actual size of the
+differences since each bar starts from zero.
 
 ---
 
@@ -99,7 +104,7 @@ zero.
 
 ``` python
 # alt.hconcat(choropleth, bars)
-choropleth.properties(width=250) | bars.properties(width=450)
+choropleth.properties(width=250) | bars.properties(width=400)
 ```
 
 <iframe src="/module6/charts/03/unnamed-chunk-4.html" width="100%" height="420px" style="border:none;">
@@ -114,6 +119,11 @@ but again, using the operator is a bit more efficient.
 We have to shrink the plot widths a bit to fit them on this slide. This
 makes it hard to read the bar chart x-labels so a horizontal layout is
 not as good as a vertical layout for this particular figure.
+
+In general, whether to choose a horizontal or vertical layout depends on
+the available space you have for the figure. For example, in this
+lecture material we’re limited by the size of the slides and have to
+adjust our figure layouts to work well within this space.
 
 Note where the legends for these plots get placed when we do this; they
 are placed to the right of both plots.
@@ -181,13 +191,13 @@ mathematical operations, we can use parentheses to change the default
 order of concatenation operations.
 
 You can see an example of that in this slide, where we place the
-parentheses around the `points_on_map | choropleth` to force the
+parentheses around different parts of the expression to force the
 horizontal concatenation between the maps to occur first, and that leads
 us to get the barplot to show up below both the maps as desired.
 
 ---
 
-## Redundant coloring can make it clearer which charts represent the same values
+## Redundant colouring can make it clearer which charts represent the same values
 
 ``` python
 (choropleth_small | (us_map + points)) & bars.encode(color='asthma_cases_per_capita')
@@ -197,10 +207,11 @@ us to get the barplot to show up below both the maps as desired.
 </iframe>
 
 Notes: To make it clearer that the bars and the choropleth map both
-represent the asthma cases, we could add redundant coding to the bars.
+represent the asthma cases, we could add redundant colouring to the
+bars.
 
 Now it is clear that they are distinct from the point map, whereas they
-has the same blue color in the previous slide.
+has the same blue colour in the previous slide.
 
 ---
 
