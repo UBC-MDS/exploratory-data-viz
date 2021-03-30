@@ -2,7 +2,7 @@
 type: slides
 ---
 
-# Congratulations on completing Exploratory Data Visualization!
+# Congratulations on completing Data Visualization!
 
 Notes: 
 
