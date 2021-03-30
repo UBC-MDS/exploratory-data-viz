@@ -2,7 +2,7 @@
 type: slides
 ---
 
-# Congratulations on completing Exploratory Data Visualization!
+# Congratulations on completing Data Visualization!
 
 Notes: 
 
@@ -12,7 +12,7 @@ Notes:
 
 # You did it!
 
-We covered a lot of ground but you managed to finished all 8 Modules. It's important to celebrate this success. 
+We covered a lot of ground but you managed to finished all 7 Modules. It's important to celebrate this success. 
 
 
 Notes:
@@ -23,7 +23,8 @@ Notes:
 
 ## Attribution
 
-- Material from UBC's <a href="https://github.com/UBC-MDS/DSCI_531_viz-1" target="_blank">DSCI 531: Data Visualization I</a> by <a href="https://joelostblom.com/" target="_blank">Joel Ostblom</a>.
+- Material from UBC's <a href="https://github.com/UBC-MDS/DSCI_531_viz-1" target="_blank">DSCI 531: Data Visualization I</a> by <a href="https://joelostblom.com/" target="_blank">Joel Ostblom</a>
+- Material from UBC's <a href="https://github.com/UBC-MDS/DSCI_532_viz-2" target="_blank">DSCI 532: Data Visualization II</a> by <a href="https://joelostblom.com/" target="_blank">Joel Ostblom</a>.
 
 
 Notes: 

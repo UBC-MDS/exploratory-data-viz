@@ -2,15 +2,15 @@
 title: 'Module Closing Remarks'
 description:
   'Well done on finishing Exploratory Data Visualization.'
-prev: /module8
+prev: /module7
 next: null
 type: chapter
-id: 9
+id: 8
 ---
 
 <exercise id="0" title="Congratulations!" type="slides, video">
 
-<slides source="module9/module9_00" shot="0" start="13:43" end="15:26">
+<slides source="module8/module8_00" shot="0" start="13:43" end="15:26">
 </slides>
 
 </exercise> 
