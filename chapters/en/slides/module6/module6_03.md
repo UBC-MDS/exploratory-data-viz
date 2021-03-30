@@ -2,7 +2,7 @@
 type: slides
 ---
 
-# Figure composition
+# Figure Composition
 
 Notes: In this module we will see how we layout plots together in a
 panel, instead of showing only one at a time.
@@ -19,7 +19,8 @@ from vega_datasets import data
 state_map = alt.topo_feature(data.us_10m.url, 'states')
 state_pop = pd.read_csv('data/us_population_coordinates_asthma-cases.csv')
 state_pop['asthma_cases_per_capita'] = state_pop['number_of_asthma_cases'] / state_pop['population']
-choropleth = (alt.Chart(state_map).mark_geoshape().transform_lookup(lookup='id',
+choropleth = (alt.Chart(state_map).mark_geoshape().transform_lookup(
+    lookup='id',
     from_=alt.LookupData(state_pop, 'id', ['asthma_cases_per_capita']))
 .encode(color=alt.Color('asthma_cases_per_capita:Q', title='Asthma cases per capita'))
 .project(type='albersUsa')
@@ -56,7 +57,7 @@ bars
 
 Notes: At the end of the last slide deck we mentioned that it would good
 to couple our map with a bar char since this would make it easier to
-compare the states more precisely.
+compare the relative differences between the states more precisely.
 
 Here we create that bar chart and as you can see, we can now tell apart
 small differences between the states and we are able to clearly see the
@@ -67,8 +68,8 @@ While having the labels on the x-axis makes them harder to read it will
 make our bar plot fit in better with the map in the figure layout, which
 is why we have opted for this encoding here.
 
-We’re setting a pretty low height so that this chart will work well with
-the figures we are creating in later on in this slide deck.
+We’re setting a pretty low height so that this chart will work well in
+the multi-panel figures we are creating in later on in this slide deck.
 
 ---
 
@@ -125,8 +126,8 @@ the available space you have for the figure. For example, in this
 lecture material we’re limited by the size of the slides and have to
 adjust our figure layouts to work well within this space.
 
-Note where the legends for these plots get placed when we do this; they
-are placed to the right of both plots.
+Note where the color legend for the plots get placed when we do this; it
+is placed to the right of both plots.
 
 ---
 
@@ -135,10 +136,11 @@ are placed to the right of both plots.
 ``` python
 us_map = (alt.Chart(state_map).mark_geoshape(color='lightgray', stroke='white')
           .project(type='albersUsa'))
-points = alt.Chart(state_pop).mark_circle().encode(
+points = (alt.Chart(state_pop).mark_circle().encode(
     longitude='longitude',
     latitude='latitude',
-    size='population').properties(width=240, height=100)
+    size=alt.Size('number_of_asthma_cases', title='Total asthma case', scale=alt.Scale(range=(2,100))))
+    .properties(width=240, height=100))
 
 choropleth_small = choropleth.properties(width=240, height=100)
 choropleth_small | us_map + points & bars
@@ -161,9 +163,13 @@ when it is removed and we are presented with a new one.
 In Altair, we can create the figure layout by combining the vertical and
 the horizontal concatenation operators.
 
-In this slide, we create a barplot of the population in each state that
-we want to place under the two maps. But as we can see in this slide,
-this places the barplot under only the rightmost map. Why is that?
+In this slide, we create a pointmap to indicate the total amount of
+asthma cases in each state, and adjust the size range of the circles to
+avoid them overlapping on the map.
+
+Now we would like to place the barplot under the two maps by using the
+`&` operator, but as we can see in this slide, this places the barplot
+under only the rightmost map. Why is that?
 
 ---
 
@@ -195,6 +201,10 @@ parentheses around different parts of the expression to force the
 horizontal concatenation between the maps to occur first, and that leads
 us to get the barplot to show up below both the maps as desired.
 
+We also add a parenthesis around the two charts that we are layering
+together, to make it clear which objects the `+` operator is operating
+on.
+
 ---
 
 ## Redundant colouring can make it clearer which charts represent the same values
@@ -210,19 +220,25 @@ Notes: To make it clearer that the bars and the choropleth map both
 represent the asthma cases, we could add redundant colouring to the
 bars.
 
-Now it is clear that they are distinct from the point map, whereas they
-has the same blue colour in the previous slide.
+Now it is clear that the bars are the same as the choropleth and
+separate from the pointmap, whereas they has the same blue colour as the
+pointmap in the previous slide which could be confusing.
+
+We still had the y-axis label correctly indicating what the bars
+represented in the previous slide so this redundant colouring is not
+strictly necessary, but it can help to remove ambiguity from your
+figures, particularly as they get more complex.
 
 ---
 
-## Titles can be added to each level of the layout to clarify what each chart represents
+## Titles can be added to each chart in the layout to clarify what they represent
 
 ``` python
 choropleth_with_title = choropleth_small.properties(title='Asthma cases per capita')
-pointmap_with_title = (us_map + points).properties(title='Population')
+pointmap_with_title = (us_map + points).properties(title='Total ashtma cases')
 bars_with_title = (bars.encode(color='asthma_cases_per_capita').properties(title='Asthma cases per capita'))
 figure_panel = (choropleth_with_title | pointmap_with_title) & bars_with_title
-figure_panel_title = alt.TitleParams(text='Asthma cases and population', dx=220)
+figure_panel_title = alt.TitleParams(text='Asthma cases among US states', dx=200)
 figure_panel.properties(title=figure_panel_title)
 ```
 
@@ -234,8 +250,21 @@ descriptive titles. These are often particularly important when we
 create more complex figures since there are now several panels within
 each figure to keep track of.
 
-This doesn’t mean that each panel absolutely needs a title, but when in
-doubt it is better to add one title too many than one too few.
+If we have already taken steps to reduce the ambiguity of the charts in
+our figure (as we did in the previous slides), we might not need a title
+for each chart in the figure, but when in doubt it is better to add one
+title too many than one too few.
+
+We should at least add an overall title to the figure as we learned in
+previous modules. Here we use `dx` to center this figure over the charts
+in the figure, rather than having it to the left or centered over the
+entire charts + legends.
+
+We here make the overall title more general, but could also have
+highlighted a specific take home message, such as that there is no clear
+geographical distribution of asthma cases or that the relative
+differences between most states is rather small. Which title we chose
+would depend on the narrative we are building with the figure.
 
 ---
 
