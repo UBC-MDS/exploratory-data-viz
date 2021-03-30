@@ -20,7 +20,7 @@ type: slides
 
 Notes:
 In this module we will see how we layout plots together
-instead of showing only one at a time.
+in a panel, instead of showing only one at a time.
 
 ---
 
@@ -54,8 +54,8 @@ points_on_map = us_map + points
 Notes:
 On this slide we are recreating the choropleth and pointplot map
 from the end of the last slide deck.
-We are saving these as variables so that we can use them to practice
-laying out plots on the following slides.
+We are saving these as objects so that we can use them to practice
+laying out plots together in a panel on the following slides.
 
 TODO fix so that this code shows up correctly on the slide
 
@@ -68,14 +68,14 @@ choropleth | points_on_map
 ```
 
 Notes:
-To place plot side by side,
-vi can use the pipe (`|`) operator.
-You have already seen us using this occasionally in previous modules.
+To place these two plots side by side,
+we can use the pipe (`|`) operator.
+You may have already seen us using this operator occasionally in previous modules.
 
-We could also have used the `alt.hconcat(choropleth, points_on_map)`,
-but it takes less typing to use the operator.
+We could also accomplish the same thing by using the `alt.hconcat(choropleth, points_on_map)` 
+syntax. Here, we chose however to opt for the pipe operator as it is more efficient (keystroke-wise). 
 
-We can see that the legends are stacked to the right of both plots.
+Note where the legends for these plots get placed when we do this; they are placed to the right of both plots.
 
 ---
 
@@ -86,11 +86,11 @@ choropleth & points_on_map
 ```
 
 Notes:
-To place plots next to each other vertically,
+To place plots in a panel stacked vertically instead of horizontally,
 we can use the ampersand (`&`) operator.
 
 We could also have used the `alt.vconcat(choropleth, points_on_map)`,
-but it takes less typing to use the operator.
+but again, using this operator is a bit more efficient.
 
 ---
 
@@ -107,12 +107,16 @@ points_on_map | choropleth & bars
 
 Notes:
 Often we want to create more complex figure layouts
-where plots are concatenated both horizontally and vertically.
-This allow to present relevant information next to each other
+where visualizations are stacked both horizontally and vertically.
+Such layouts allow us to present connected, or related information near to one another,
 and can be useful if there is a key comparison we want to make
-between multiple slots on a single slide
-instead of flipping between slides
-which can be harder to follow.
+between multiple visualizations. 
+
+Yes, we could always place each visualization on its own slide or page 
+(when sharing figures on paper),
+however, our working memories are only so good. 
+We often forget key details about visualizations we 
+just saw when it is removed and we are presented with a new one.
 
 In Altair,
 we can create the figure layout
@@ -139,19 +143,23 @@ bars = alt.Chart(state_pop).mark_bar().encode(
 ```
 
 Notes:
-The reason the plot in the previous slide did not looks as we desired
-is that the `&` operator has higher priority than `|`,
-so the choropleth and barplot are first vertically concatenated
-before being horizontally concatenated to the point map.
+The reason that the plot in the previous slide did not look like we wanted it to, 
+was that the `&` operator has higher priority than `|` operator.
 
-We want the horizontal concatenation between the maps 
-to occur first
-and just like with mathematical expression,
-we can use parenthesis to indicate 
-which operations should have priority.
+The resulted in the choropleth and barplot being vertically concatenated
+before the point map was horizontally concatenated.
+
+What we really want is the horizontal concatenation between the maps 
+to occur first, followed by the vertical concatenation of the barplot.
+
+Just as we use parentheses in mathematics to change the default order 
+of mathematical operations, we can use parentheses to change the default order 
+of concatenation operations.
 
 You can see an example of that in this slide,
-where we get the barplot to show up below both the maps
+where we place the parentheses around the `points_on_map | choropleth`
+to force the horizontal concatenation between the maps 
+to occur first, and that leads us to get the barplot to show up below both the maps
 as desired.
 
 ---
