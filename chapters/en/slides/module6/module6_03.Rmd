@@ -26,83 +26,122 @@ in a panel, instead of showing only one at a time.
 
 ## Loading in the data
 
-```{python echo=FALSE}
+```{python}
 import altair as alt
 import pandas as pd
 from vega_datasets import data
 
 state_map = alt.topo_feature(data.us_10m.url, 'states')
-state_pop = pd.read_csv('data/us_population_and_coordinates.csv')
-
-choropleth = (alt.Chart(state_map).mark_geoshape().transform_lookup(
-    lookup='id',
-    from_=alt.LookupData(state_pop, 'id', ['population']))
-.encode(color='population:Q')
-.project(type='albersUsa')).properties(height=200, width=300)
-
-us_map = (alt.Chart(state_map).mark_geoshape(color='lightgray', stroke='white')
-          .project(type='albersUsa'))
-
-points = alt.Chart(state_pop).mark_circle().encode(
-    longitude='longitude',
-    latitude='latitude',
-    size='population')
-
-points_on_map = us_map + points
+state_pop = pd.read_csv('data/us_population_coordinates_asthma-cases.csv')
+state_pop['asthma_cases_per_capita'] = state_pop['number_of_asthma_cases'] / state_pop['population']
+choropleth = (alt.Chart(state_map).mark_geoshape().transform_lookup(lookup='id',
+    from_=alt.LookupData(state_pop, 'id', ['asthma_cases_per_capita']))
+.encode(color=alt.Color('asthma_cases_per_capita:Q', title='Asthma cases per capita'))
+.project(type='albersUsa')
+.properties(width=500, height=180))
+choropleth
 ```
 
 Notes:
-On this slide we are recreating the choropleth and pointplot map
+On this slide we are recreating the choropleth pointplot map
 from the end of the last slide deck.
-We are saving these as objects so that we can use them to practice
+We are saving it as an object so that we can use it to practice
 laying out plots together in a panel on the following slides.
 
-TODO fix so that this code shows up correctly on the slide
+We set the width of this map because we will be combining it 
+with other figures later and we want them all to be of the same width
+for the figure panel to look aesthetically pleasing.
+
+---
+
+# A barchart is able to represent small differences in more detail
+
+```{python}
+bars = (alt.Chart(state_pop).mark_bar().encode(
+    alt.X('state', sort='-y', title=''),
+    alt.Y('asthma_cases_per_capita', title='Asthma cases per capita'))
+    .properties(width=500, height=80))
+bars
+```
+
+Notes:
+At the end of the last slide deck
+we mentioned that it would good to couple our map with a bar char
+since this would make it easier to compare the states more precisely.
+
+Here we create that bar chart and as you can see,
+we can now tell apart small differences between the states
+and we are able to clearly see the values also for states with small areas,
+such as Rhode Island which is barely visible on the map.
+
+While having the labels on the x-axis makes them harder to read
+it will make our bar plot fit in better with the map in the figure layout,
+which is why we have opted for this encoding here.
+
+We're setting a pretty low height so that this chart will work well 
+with the figures we are creating in later on in this slide deck.
 
 ---
 
 ## Placing plots next to each other allows us to make more direct comparisons
 
 ```{python}
-choropleth | points_on_map
+# alt.vconcat(choropleth, bars)
+choropleth & bars
 ```
 
 Notes:
-To place these two plots side by side,
-we can use the pipe (`|`) operator.
+To place these two plots in a vertical layout
+we can use the ampersand (`&`) operator.
 You may have already seen us using this operator occasionally in previous modules.
 
-We could also accomplish the same thing by using the `alt.hconcat(choropleth, points_on_map)` 
-syntax. Here, we chose however to opt for the pipe operator as it is more efficient (keystroke-wise). 
+We could also accomplish the same thing by using the `alt.vconcat(choropleth, points_on_map)` 
+syntax.
+Here, we chose however to opt for the pipe operator as it is more efficient (keystroke-wise). 
 
-Note where the legends for these plots get placed when we do this; they are placed to the right of both plots.
+Now we can study both figures in the same view.
+These figures also complement each other in the sense that the choropleth
+highlights small differences due to the colorscale not starting at zero
+and the bar chart shows the actual size of the differences
+since each bar starts from zero.
 
 ---
 
-## Plots can also be concatenated vertically
+## Plots can also be concatenated horizontally
 
 ```{python}
-choropleth & points_on_map
+# alt.hconcat(choropleth, bars)
+choropleth.properties(width=250) | bars.properties(width=450)
 ```
 
 Notes:
-To place plots in a panel stacked vertically instead of horizontally,
-we can use the ampersand (`&`) operator.
+To place plots in a panel stacked horizontally instead of vertically,
+we can use the pipe (`|`) operator.
 
-We could also have used the `alt.vconcat(choropleth, points_on_map)`,
-but again, using this operator is a bit more efficient.
+We could also have used the `alt.hconcat(choropleth, points_on_map)`,
+but again, using the operator is a bit more efficient.
+
+We have to shrink the plot widths a bit to fit them on this slide.
+This makes it hard to read the bar chart x-labels
+so a horizontal layout is not as good as a vertical layout for this particular figure.
+
+Note where the legends for these plots get placed when we do this;
+they are placed to the right of both plots.
 
 ---
 
 ## Vertical and horizontal concatenation can be combined
 
 ```{python}
-bars = alt.Chart(state_pop).mark_bar().encode(
-    y='population',
-    x=alt.Y('state', sort='y', title=None),
-    color='population').properties(height=100, width=625)
+us_map = (alt.Chart(state_map).mark_geoshape(color='lightgray', stroke='white')
+          .project(type='albersUsa'))
+points = alt.Chart(state_pop).mark_circle().encode(
+    longitude='longitude',
+    latitude='latitude',
+    size='population').properties(width=240, height=100)
 
-points_on_map | choropleth & bars
+choropleth_small = choropleth.properties(width=240, height=100)
+choropleth_small | us_map + points & bars
 ```
 
 Notes:
@@ -134,12 +173,7 @@ Why is that?
 ## Parentheses can be used to indicate groupings in complex layouts
 
 ```{python}
-bars = alt.Chart(state_pop).mark_bar().encode(
-    y='population',
-    x=alt.Y('state', sort='y', title=None),
-    color='population').properties(height=100, width=625)
-
-(points_on_map | choropleth) & bars
+(choropleth_small | (us_map + points)) & bars
 ```
 
 Notes:
@@ -157,18 +191,38 @@ of mathematical operations, we can use parentheses to change the default order
 of concatenation operations.
 
 You can see an example of that in this slide,
-where we place the parentheses around the `points_on_map | choropleth`
+where we place the parentheses around different parts of the expression
 to force the horizontal concatenation between the maps 
 to occur first, and that leads us to get the barplot to show up below both the maps
 as desired.
 
 ---
 
-## Titles can be added to each level of the layout
+## Redundant colouring can make it clearer which charts represent the same values
 
 ```{python}
-centered_map_title = alt.TitleParams(text='Map comparison', anchor='middle')
-((points_on_map | choropleth) .properties(title=centered_map_title) & bars).properties(title='US population by state')
+(choropleth_small | (us_map + points)) & bars.encode(color='asthma_cases_per_capita')
+```
+
+Notes:
+To make it clearer that the bars and the choropleth map
+both represent the asthma cases,
+we could add redundant colouring to the bars.
+
+Now it is clear that they are distinct from the point map,
+whereas they has the same blue colour in the previous slide.
+
+---
+
+## Titles can be added to each level of the layout to clarify what each chart represents
+
+```{python}
+choropleth_with_title = choropleth_small.properties(title='Asthma cases per capita')
+pointmap_with_title = (us_map + points).properties(title='Population')
+bars_with_title = (bars.encode(color='asthma_cases_per_capita').properties(title='Asthma cases per capita'))
+figure_panel = (choropleth_with_title | pointmap_with_title) & bars_with_title
+figure_panel_title = alt.TitleParams(text='Asthma cases and population', dx=220)
+figure_panel.properties(title=figure_panel_title)
 ```
 
 Notes:
