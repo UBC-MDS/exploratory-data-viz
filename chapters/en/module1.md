@@ -358,7 +358,7 @@ Tasks:
 
 - Create a line plot with the average value of all stocks over time,
 instead of giving each company its own line. 
-*Hint: This will require aggregating using the mean for your x-axis values.*
+*Hint: This will require aggregating using the mean for your y-axis values.*
 
 
 <codeblock id="01_10">
