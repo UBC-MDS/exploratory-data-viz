@@ -51,4 +51,6 @@ titles = alt.TitleParams(
 
 
 # Organize the plots above so it looks like the example provided above.
-(____).____(title=titles)
+combined_plot = (____).____(title=titles)
+
+combined_plot

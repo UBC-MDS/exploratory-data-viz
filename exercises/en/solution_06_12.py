@@ -51,5 +51,7 @@ titles = alt.TitleParams(
 
 
 # Organize the plots above so it looks like the example provided above.
-(mass_density_plot & (mass_boxplot | penguin_heatmap) & culmen_facet_plot
+combined_plot = (mass_density_plot & (mass_boxplot | penguin_heatmap) & culmen_facet_plot
 ).properties(title=titles)
+
+combined_plot
