@@ -8,7 +8,7 @@ def test():
     assert not world_df is None, "Your answer for world_df does not exist. Have you loaded the TopoJSON data to the correct variable name?"
     assert "topo_feature" in __solution__, "The loaded data should be in TopoJSON format. In order to read TopoJSON file correctly, you need to use the alt.topo_feature() function."
     assert type(world_df) == alt.UrlData, "world_df does not appear to be an Altair UrlData object. Have you assigned the Altair UrlData object for the TopoJSON data to the correct variable?"
-    assert world_df.url == data.world_110m.url, "Make sure you are loading the data from correct url."
+    assert world_df.url == data.world_110m.url, "Make sure you are loading the data from the correct url."
     assert (world_df.format !=  alt.utils.schemapi.Undefined and 
             world_df.format.type == 'topojson'
     ), "The loaded data should be in TopoJSON format. In order to read TopoJSON file correctly, you need to use the alt.topo_feature() function."
