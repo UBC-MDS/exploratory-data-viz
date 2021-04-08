@@ -9,7 +9,7 @@ id: 3
 ---
 
 <exercise id="0" title="Module Learning Outcomes"  type="slides, video">
-<slides source="module3/module3_00" shot="0" start="3:5707" end="4:5306"> </slides>
+<slides source="module3/module3_00" shot="0" start="6:48" end="7:30"> </slides>
 </exercise>
 
 <exercise id="1" title="How To Visualize Data From a Single Column" type="slides,video">
@@ -171,7 +171,7 @@ Below, we've included a diagram made by [Allison Horst](https://twitter.com/alli
 <img src="/module3/penguin_culmen.jpg" width="60%"></img>
 </center>
 
-The culmen measurements can useful for predicting the sex between penguin species, however it may be interesting to see if it's indicative of species as well!
+The culmen measurements can useful for predicting the sex between penguin species, however, it may be interesting to see if it's indicative of species as well!
 
 
 For this question let's create a stacked histogram of the values in the `culmen_depth_mm` column for different penguin species and determine if there is any type of relationship between the culmen depth and the species of penguin. 
@@ -182,7 +182,7 @@ Tasks:
 Fill in the blanks in the code below so that the following gets accomplished.
 
 - Use the data source `penguins` to make a **stacked** histogram plot.
-- Plot the counts of the `culmen_depth_mm`  and distinguise the penguin `species` using the color channel.
+- Plot the counts of the `culmen_depth_mm`  and distinguish the penguin `species` using the colour channel.
 - Make sure to set the `maxbins` argument to something appropriate. 
 - Give it an appropriate title. 
 
@@ -197,12 +197,12 @@ Fill in the blanks in the code below so that the following gets accomplished.
 
 **Question**      
 
-Which species of penguin tend to have shallower culmen depths?
+Which species of penguin tend to have more shallow culmen?
 
 <choice id="1" >
 <opt text="Chinstrap">
 
-This species actually has a lot of over lap with the Adelie species. 
+This species actually has a lot of overlap with the Adelie species. 
 
 </opt>
 
@@ -214,7 +214,7 @@ These penguins tend to have a shorter culmen depth.
 
 <opt text="Adelie" >
 
-This species actually has a lot of over lap with the Chinstrap species. 
+This species actually has a lot of overlap with the Chinstrap species. 
 
 </opt>
 
@@ -233,23 +233,23 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-Using the [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) dataset again, we are going to try create a layered historgram. 
+Using the [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) dataset again, we are going to try to create a layered histogram. 
 
 
 <codeblock id="penguins">
 
 </codeblock>
 
-We want to understand how penguins culmen depth differs over different penguin species. This means we will need to layer the histogram shapes of the `culmen_depth_mm` column. We also want to facet on the `sex` columm to see if this has a effect on the distribution. 
+We want to understand how penguins' culmen depth differs over different penguin species. This means we will need to layer the histogram shapes of the `culmen_depth_mm` column. We also want to facet on the `sex` column to see if this affects the distribution. 
 
 Tasks: 
 
 Fill in the blanks in the code below so that the following gets accomplished.
 
-- Use the data source `penguins` to make a **layered** histogram plot and make sure to give it an appropriate opacity.
-- Plot the counts of the `culmen_depth_mm`  and distinguise the penguin `species` using the color channel.
+- Use the data source `penguins_df` to make a **layered** histogram plot named `culmen_layered_plot` and make sure to give it an appropriate opacity.
+- Plot the counts of the `culmen_depth_mm`  and distinguish the penguin `species` using the colour channel.
 - Make sure to set the `maxbins` argument to something appropriate and any other arguments needed to make a layered plot. 
-- Give it an appropriate title and facet by the `sex` column making sure that there is only 1 columns so the graphs are stacked vertically. 
+- Give it an appropriate title and facet by the `sex` column making sure that there is only 1 column so the graphs are stacked vertically. 
 - Make sure to give each faceted plot an independent axis.
 
 <codeblock id="03_05">
@@ -309,7 +309,7 @@ You got it!
 
 <opt text="False">
 
-If we have more bins for a histogram, the shape may differ from a histogram using less bins. 
+If we have more bins for a histogram, the shape may differ from a histogram using fewer bins. 
 
 </opt>
 
@@ -323,7 +323,7 @@ If we have more bins for a histogram, the shape may differ from a histogram usin
 
 <opt text="True"  correct="true">
 
-You got it! Since we don't show the number of obervations in the plot, the plots can appear smooth like plots that have many observation which is not the case. 
+You got it! Since we don't show the number of observations in the plot, the plots can appear smooth like plots that have many observations which is not the case. 
 
 </opt>
 
@@ -373,7 +373,7 @@ Take a quick look at slide 3 for more information on this.
 
 
 **Question 2**      
-Unlike other plots using Altair, making a density plot requires 2 steps. The first step involves generating a new column of samples of the estimated densities. Which of the following code is needed to calculated the estimated densities?
+Unlike other plots using Altair, making a density plot requires 2 steps. The first step involves generating a new column of samples of the estimated densities. Which of the following code is needed to calculate the estimated densities?
 
 
 
@@ -431,12 +431,12 @@ Tasks:
 
 Fill in the blanks in the code below so that the following gets accomplished.
 
-- Use the data source `penguins` to make the plot.
+- Use the data source `penguins_df` to make a plot assigned to an object named `mass_density_plot`.
 - Calculate the KDE of the `body_mass_g` column and make sure to split it up by the categorical column `island`. When you create your new values for the calculation make sure to name them `density`.
 - Set the step size to 100.
 - Give the area plot an appropriate opacity.
-- Map `body_mass_g` and `density` to the x and y axis and make sure to specify that `density` consists of quantitative values . 
-- Map the island to the colour (color) channel. 
+- Map `body_mass_g` and `density` to the x and y-axis and make sure to specify that `density` consists of quantitative values. 
+- Map the island to the colour (colour) channel. 
 - Make sure to give your plot a title.
 
 <codeblock id="03_09a">
@@ -453,7 +453,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 
 **Question**      
 
-Which island tend to have penguins with a higher body mass?
+Which island tends to have penguins with higher body masses?
 
 <choice id="1" >
 <opt text="Biscoe" correct="true">
@@ -484,12 +484,12 @@ Create a density plot for the `body_mass_g` column for penguins located on diffe
 
 Tasks: 
 
-- Use the data source `penguins` to make the plot and assign it to an object named `mass_faceted_plot`.
+- Use the data source `penguins_df` to make the plot and assign it to an object named `mass_faceted_plot`.
 - Calculate the KDE of the `body_mass_g` column and make sure to split it up by the categorical column `island` and penguin `species`. When you create your new values for the calculation make sure to name them `density`. 
 - Set the step size to 100. 
 - Give the area plot an appropriate opacity.
-- Map `body_mass_g` and `density` to the x and y axis and make sure to specify that `density` consists of quantitative values.
-- Map the island to the colour (color) channel. 
+- Map `body_mass_g` and `density` to the x and y-axis and make sure to specify that `density` consists of quantitative values.
+- Map the island to the colour (colour) channel. 
 - Make sure to give your plot a title and set the width of the plot to 200 and height to 100.
 - Facet the plot by the penguin `species` and display them all in a single column. 
 
@@ -515,14 +515,14 @@ Based on the plot we just made, what did we learn?
 <choice id="2" >
 <opt text="The Chinstrap species of penguin is available on Dream and Torgersen island.">
 
-Chinstrap species of penguin is only on Dream island.
+The Chinstrap penguin species is only on Dream island.
 
 </opt>
 
 
 <opt text="The Gentoo penguin species appears to have higher body mass compared to other species."  correct="true">
 
-This species only inhabits on Gentoo island and appears to have a heavier body mass distribution.
+This species only inhabits Gentoo island and appears to have a heavier body mass distribution.
 
 </opt>
 
@@ -644,13 +644,13 @@ Which of the following statistics is **NOT** displayed in a boxplot?
 
 <opt text="Maximum">
 
-This is displayed at the end of the top (or right) wisker. 
+This is displayed at the end of the top (or right) whisker. 
 
 </opt>
 
 <opt text="Minimum">
 
-This is displayed at the end of the bottom (or left) wisker. 
+This is displayed at the end of the bottom (or left) whisker. 
 
 </opt>
 
@@ -687,7 +687,7 @@ Tasks:
 
 Fill in the blanks in the code below so that the following gets accomplished.
 
-- Use the data source `penguins` to make **boxplots** for the body mass values among the different penguin species.
+- Use the data source `penguins_df` to make **boxplots** for the body mass values among the different penguin species.
 - Make sure to give it an appropriate title and set the plot dimensions to a height of 200 and a width of 400.
 - Remember to assign the `species` to the y-axis and the `body_mass_g` to the y-axis since we want to read the labels easily as we learned in the previous module.
 
@@ -786,6 +786,6 @@ Nope!
 
 
 <exercise id="12" title="What Did We Just Learn?" type="slides, video">
-<slides source="module3/module3_end" shot="0" start="04:5307" end="05:5911">
+<slides source="module3/module3_end" shot="0" start="07:32" end="08:20">
 </slides>
 </exercise>

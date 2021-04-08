@@ -9,7 +9,7 @@ id: 2
 ---
 
 <exercise id="0" title="Module Learning Outcomes"  type="slides, video">
-<slides source="module2/module2_00" shot="0" start="3:5707" end="4:5306"> </slides>
+<slides source="module2/module2_00" shot="0" start="5:37" end="6:02"> </slides>
 </exercise>
 
 
@@ -336,7 +336,7 @@ Tasks:
 - Are you assigning the plot to an object named`fuel_efficiency_org`?
 - Are you specifying `mean(Miles_per_Gallon)` on the y-axis?
 - Are you specifying `Year` on the x-axis?
-- Are you specifying `color = 'Origin'`?
+- Are you specifying `colour = 'Origin'`?
 - Are you giving the plot a title using `.properties()`?
 
 </codeblock>
@@ -350,7 +350,7 @@ Which origin's fuel efficiency improved the most between the years 1970 to 1982?
 
 <opt text="Europe">
 
-Europe has improvedimproved, but other origins have improved by greater amounts. 
+Europe has improved, but other origins have improved by greater amounts. 
 
 </opt>
 
@@ -519,7 +519,7 @@ We are interested in obtaining the number of penguins we collected of each speci
 
 Tasks: 
 
-- Using a bar plot, visualize the count of penguins for each species in the data. 
+- Using a bar plot, visualize the count of penguins for each species using the dataframe `penguins_df`. 
 - Choose the appropriate rotation, given the axis labels. 
 - Sort your bars in an appropriate order. 
 - Make sure to give it a title and set the dimensions to a height of 150 and a width of 300.
@@ -576,7 +576,7 @@ Let's now see what the distribution of penguin flipper length looks like.
 
 Tasks: 
 
-- Using bars, show the counts of the `flipper_length_mm` values. 
+- Using bars, show the counts of the `flipper_length_mm` values using the `penguins_df` dataframe
 - Make sure to give it a title and set the dimensions to a height of 150 and a width of 300.
 - Save your plot in an object named `penguin_hist`.
 
@@ -601,7 +601,7 @@ Tasks:
 <exercise id="14" title="True or False: Facets">
 
 **True or False**       
-*If you faceting and assign a color channel to the same column, you will obtain subplots all in different colours*
+*If you faceting and assign a colour channel to the same column, you will obtain subplots all in different colours*
 
 <choice id="1" >
 
@@ -613,7 +613,7 @@ Got it!
 
 <opt text="False" >
 
-Setting a colour channel column to the same column as the facet, will change each of the faceted plots to different colours.
+Setting a colour channel to the same column as the facet will change each of the faceted plots to different colours.
 
 </opt>
 
@@ -723,11 +723,11 @@ Be patient when running a coding exercise for the first time, it can take a few 
 and submit it to validate if you were correct.**
 
 
-Ok let's facet our penguin dataset now.
+Ok, let's facet our penguin dataset now.
 
 Tasks: 
 
-- Using bars, show the distribution of the `body_mass_g` values. 
+- Using bars, show the distribution of the `body_mass_g` values from the `penguins_df` dataset.
 - Make sure to give it a title and set the dimensions to a height of 100 and a width of 150.
 - Facet your plots by `species` for the columns and by `island` for the rows.
 - Save your plot in an object named `penguin_facet`.
@@ -772,7 +772,7 @@ These are the 2 species present on Biscoe island.
 
 <opt text="Only Adelie">
 
-This is the only species on Torgorsen island.  
+This is the only species on Torgersen Island.  
 
 </opt>
 
@@ -784,6 +784,6 @@ This is the only species on Torgorsen island.
 
 
 <exercise id="17" title="What Did We Just Learn?" type="slides, video">
-<slides source="module2/module2_end" shot="0" start="04:5307" end="05:5911">
+<slides source="module2/module2_end" shot="0" start="06:04" end="06:46">
 </slides>
 </exercise>

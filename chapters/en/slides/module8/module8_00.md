@@ -2,7 +2,7 @@
 type: slides
 ---
 
-# Congratulations on completing Exploratory Data Visualization!
+# Congratulations on completing Data Visualization!
 
 Notes: 
 
@@ -12,7 +12,7 @@ Notes:
 
 # You did it!
 
-We covered a lot of ground but you managed to finished all 8 Modules. It's important to celebrate this success. 
+We covered a lot of ground but you managed to finished all 7 Modules. It's important to celebrate this success. 
 
 
 Notes:
@@ -23,7 +23,8 @@ Notes:
 
 ## Attribution
 
-- Material from UBC's <a href="https://github.com/UBC-MDS/DSCI_531_viz-1" target="_blank">DSCI 531: Data Visualization I</a> by <a href="https://joelostblom.com/" target="_blank">Joel Ostblom</a>.
+- Material from UBC's <a href="https://github.com/UBC-MDS/DSCI_531_viz-1" target="_blank">DSCI 531: Data Visualization I</a> by <a href="https://joelostblom.com/" target="_blank">Joel Ostblom</a>
+- Material from UBC's <a href="https://github.com/UBC-MDS/DSCI_532_viz-2" target="_blank">DSCI 532: Data Visualization II</a> by <a href="https://joelostblom.com/" target="_blank">Joel Ostblom</a>.
 
 
 Notes: 
@@ -40,9 +41,11 @@ Special thanks must be attributed to the following individuals and organizations
 
 - <a href="https://www.tomasbeuzen.com/" target="_blank"> Tom Beuzen</a> 
 - <a href="https://betatim.github.io/" target="_blank">Tim Head</a>  
+- <a href="https://www.linkedin.com/in/junghoo/" target="_blank">Junghoo Kim</a>
 - <a href="https://ines.io/" target="_blank">Ines Montani</a> 
 - <a href="https://www.tiffanytimbers.com/" target="_blank"> Tiffany Timbers</a> 
 - <a href="https://www.linkedin.com/in/elijah-willie-203845b9/?originalSubdomain=ca" target="_blank">Elijah Willie</a>
+
 
 - The Master of Data Science Program at UBC
 - Our friends, family and colleagues for supporting us and cheering us on!
