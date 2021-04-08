@@ -9,7 +9,7 @@ M6 = $(wildcard chapters/en/slides/module6/*.md)
 M7 = $(wildcard chapters/en/slides/module7/*.md)
 
 ## all : Regenerate all modules
-all : $(M1) $(M2) $(M3) $(M4) $(M5) $(M6) #$(M7)
+all : $(M1) $(M2) $(M3) $(M4) $(M5) $(M6) $(M7)
 
 m1 : $(M1)
 m2 : $(M2)
