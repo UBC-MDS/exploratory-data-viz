@@ -20,6 +20,10 @@ id: 7
 <slides source="module7/module7_02" shot="3" start="0:003" end="10:59"> </slides>
 </exercise>
 
+<exercise id="3" title="Using Widgets to Control Selections" type="slides,video">
+<slides source="module7/module7_03" shot="3" start="0:003" end="10:59"> </slides>
+</exercise>
+
 <exercise id="5" title="What Did We Just Learn?" type="slides, video">
 <slides source="module7/module7_end" shot="0" start="04:5307" end="05:5911"></slides>
 </exercise>
