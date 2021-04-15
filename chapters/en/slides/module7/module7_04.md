@@ -23,16 +23,21 @@ chart = alt.Chart(cars).mark_circle().encode(
 chart.save('cars-scatterplot.html')
 ```
 
-Notes: The easiest way to save Altair charts is as HTML document via the
-`save` method as we have done in this slide. This file an either be
-incorporated in a web page or sent to anyone via e.g. email.
+Notes: The easiest way to save Altair charts is as an HTML document via
+the `save` method. That is what we demonstrate here in this slide.
 
-When they open the file in a web browser they will see the
-visualization, including any interactivity you have used!
+An HTML file then can either be incorporated in a web page or sent to
+anyone via email. When someone opens an HTML file containing an Altair
+chart in a web browser they will see the visualization, including any
+interactivity you have used!
 
-This is all you need to know for sharing your visualizations with others
-outside the Jupyter Notebook, but read on for more technical details
-about how this work and how you can save to other formats than HTML.
+This is all you need to know for sharing your visualizations to be
+viewed on a computer with others outside of Jupyter, but read on for
+more technical details about how this works and how you can save to
+other formats than HTML.
+
+Other formats than HTML can be important when you want to share the
+visualization on a paper medium as opposed to in a digital environment.
 
 ---
 
@@ -44,8 +49,10 @@ about how this work and how you can save to other formats than HTML.
 
 Notes: It might surprise you that it is easier to save as an HTML
 document than an image file in PNG or JPG format. After all, plots are
-images aren’t they? To understand this, let’s look into how Altair
-visualizations are constructed.
+images aren’t they?
+
+To understand this, let’s look into how Altair visualizations are
+constructed.
 
 In the beginning we mentioned that Altair uses the JavaScript library
 Vega-Lite to generate its visualizations. This is great because we get
@@ -114,22 +121,51 @@ in the JSON file for it to be valid Vega-Lite code, which is referred to
 as the “specification” (or “spec” for short).
 
 You can see an example of how this looks for an Altair visualization by
-using the `to_json` method as we have done in this slide. You can see
-that the words are the same we use in Altair, but the format of the JSON
-specification is a bit more verbose than the Altair syntax.
+using the `to_json` method as we have done in this slide.
+
+You can see that the words are the same we use in Altair, but the format
+of the JSON specification is a bit more verbose than the Altair syntax.
 
 You can paste this JSON directly into Vega-Lite online editor and you
 will see that it renders correctly. We included a link for this in the
 slide that you can try.
 
-This is the same that happens if we click the “Open in Vega Editor”
-entry in the three dot action button that is automatically included in
-each Altair chart.
+You can also click the three dot action button and select the “Open in
+Vega Editor” entry to achieve the same result, try it out!
 
-If you look at the HTML file we saved in the previous step you will see
-that this JSON spec is included together with some additional code that
-tells your browser to use Vega-Lite’s web libraries to render this JSON
-spec.
+## The JSON spec is part of the saves HTML file
+
+``` html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://vega.github.io/vega-datasets/data/cars.json"}, "mark": "circle", "encoding": {"x": {"type": "quantitative", "field": "Horsepower"}, "y": {"type": "quantitative", "field": "Miles_per_Gallon"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json"};
+...
+```
+
+Notes: If you look at the HTML file we saved in the previous step you
+will see that the JSON spec from the previous slide is included as you
+can see in this slide.
+
+Also included is some additional code that tells your browser to use
+Vega-Lite’s web libraries to render this JSON spec.
+
+We cut the HTML off here to fit it on the slide, but if you open the
+file you will see that there is also a section on how to emit error
+messages.
 
 ---
 
@@ -143,9 +179,17 @@ spec.
 
         alt.renderers.enable('mimetype')
 
-Notes: Since displaying the JSON spec correctly depends on a the
-Vega-Lite web libraries, this means that our charts will only render if
-we have an internet connection.
+-   This does not change how your chart appears, it only includes a an
+    image-representation of the chart which is saved as a string of
+    characters in the notebook.
+
+    ``` text
+    "image/png": "iVBORw0KGgoAAAANSUhEUgAAAfQAAAF3CAMAAABkLEnOAAADAFBMVEUAAAABAQECAgIDAwMEBAQFBQUGBgYHBwcICAgJCQkKCgoLCwsMDAwNDQ0ODg4...
+    ```
+
+Notes: Given that displaying the JSON spec correctly depends on a the
+Vega-Lite web libraries, our charts will only render if we have an
+internet connection.
 
 If you are working offline and want to render charts in JupyterLab,
 there are a few different options.
@@ -156,26 +200,30 @@ to your machine. [The steps for installing this extension are outlined
 in the Altair
 documentation](https://altair-viz.github.io/user_guide/display_frontends.html#displaying-in-jupyterlab)
 
-If you are OK with seeing a static version of your charts when you are
-offline, you could instruct Altair to use the Vega-Lite libraries only
-if there is an active internet connection and otherwise use and image
-for the plot. To do this, you can include the code from this slide on
-top of your notebook, just after your import statements.
+If you are happy with seeing a static version of your charts when you
+are offline, you could instruct Altair to use the Vega-Lite libraries
+only if there is an active internet connection and otherwise use and
+image for the plot.
+
+To do this, you can include the code from this slide on top of your
+notebook, just after your import statements. This will not cause any
+changes to the appearance of your chart.
 
 ---
 
 ## What if we want to save our charts as images instead?
 
--   The three dots action buttong can be used to save images manually
--   `altair_saver` can be used to save charts programatically
+-   The three dots action buttong can be used to save images manually.
+-   `altair_saver` enables saving of PNG and SVG charts .
     -   [Instructions for how to install and work with Altair saver can
         be found here](https://github.com/altair-viz/altair_saver/).
+    -   The syntax is the same as before `chart.save('my-chart.png')`
 
-Notes: If we want to save a chart as a PNG image file (or an SVG vector
-text file similar to a PDF), we can use the three dot action button as
-we saw in the very first module of this course. When we are clicking the
-“Save as PNG” entry in this menu, the browser converts the Vega-Lite
-spec into a PNG image that is downloaded to our computer.
+Notes: If we want to save a chart as a PNG image file we can use the
+three dot action button as we saw in the very first module of this
+course. When we are clicking the “Save as PNG” entry in this menu, the
+browser converts the Vega-Lite spec into a PNG image that is downloaded
+to our computer.
 
 If we want to save an image as a PNG programatically we need to use a
 helper package called `altair_saver`. This package let’s Altair access
@@ -185,6 +233,48 @@ the thee dot action button.
 [Instructions for how to install and work with Altair saver can be found
 here](https://github.com/altair-viz/altair_saver/). After it is
 installed, you can save as PNG by typing `chart.save('my-chart.png')`.
+
+---
+
+## What is the difference between saving in different formats?
+
+-   PNG is a bitmap/raster format
+    -   Use to store data in a fixed grid of pixels
+    -   Good for photos and complex illustrations
+    -   Zooming in causes the image to become blurry/pixelated
+    -   The file size depends on the number of pixels
+-   SVG is a scalable graphics / vector format
+    -   Stores data as text with mathematical formulas
+    -   Good for simpler illustration
+    -   Zooming in retains perfect quality
+    -   The file size depends on the number of objects and their
+        complexity
+
+Notes: In additional to saving as PNG, we could also have saved as SVG
+by changing the file extension accordingly.
+
+What is the difference between these two options?
+
+-   PNG is a bitmap/raster format
+    -   Stores data in a grid of pixels of different colors
+    -   Zooming in causes the image to become blurry/pixelated
+    -   The file size depends on the number of pixels
+    -   Often ideal for photos and complex illustrations
+-   SVG is a scalable graphics / vector format
+    -   Stores data as text by describing objects with mathematical
+        formulas
+    -   Zooming in retains perfect quality
+    -   The file size depends on the number of objects and their
+        complexity
+    -   Often ideal for simpler illustration such as most charts
+
+Saving as HTML has similar advantages and disadvantages as SVG. In fact
+HTML uses SVG for creating the graphics.
+
+Another common format is PDF, which can be a combination of raster
+images and scalable graphics formats. `altair_saver` allows you to save
+as pdf, but you have to follow specific installation steps in the
+instructions we linked to in the last slide.
 
 ---
 
@@ -229,18 +319,30 @@ You can see the JSON chart spec printed in this slide again. Note that
 the data here is just a string value pointing to a URL because we used
 `data.cars.url` to create the chart.
 
-If we instead of a URL would use a pandas dataframe (e.g. `data.cars()`)
-**all** the data would be included in the chart specification. In the
-JSON format, this is almost 4500 lines of code! There is not enough room
-to show that in this slide, but you can click the link under the code to
-see an example of what it would look like.
+If we had used a pandas dataframe (e.g. `data.cars()`) to create the
+chart (instead of a URL) **all** the data would be included in the chart
+specification.
+
+This means that there would be almost 4500 lines of code in the JSON
+spec! Vega-Lite can handle this large files without issues, but is not
+enough room to show that in this slide. If you want to see how it you
+can click the link under the code in this slide.
 
 ---
 
 ## Including large data sets in chart
 
+Warning when plotting &gt; 5000 rows:
+
+``` text
+MaxRowsError: The number of rows in your dataset is greater than the maximum
+              allowed (5000). For information on how to plot larger datasets
+              in Altair, see the documentation.
+```
+
+Disable the warning:
+
 ``` python
-# Disable the warning
 alt.data_transformers.disable_max_rows()
 ```
 
@@ -257,35 +359,55 @@ to plot a dataset with more than 5000 rows. If you are sure you want to
 plot a dataframe with more rows than that, you can disable the warning
 with the line of code on the top of this slide.
 
-However, your plots would still be very big. If you would like to avoid
-creating big plots, you can use a URL as we did in the first slide and
-in module three.
+However, as discussed in the last slide, your charts would still be very
+big because the data would be included in the spec for the chart. If you
+would like to avoid creating big plots, you can use a URL as we did in
+the first slide and in module three.
 
 An URL is not always an option, and it is not convenient if you need to
 do some data wrangling with pandas first.
+
+In the next slide we will discuss another way to manage this challenge.
 
 ---
 
 ## Working with large datasets without including all the data in the chart
 
+Use the data server:
+
 ``` python
-# Use the data server
 alt.data_transformers.enable('data_server')
-# Optional to use with the data transformer to show plots without Python running
+```
+
+Output in the spec:
+
+``` json
+"data": {
+    "url": "http://localhost:21319/4d45d69bbd706eda330e96e79ad4bf46.json"
+  },
+```
+
+Optionally you could use the mimtype renderer with the data transformer
+to show plots without Python running:
+
+``` python
 alt.renderers.enable('mimetype')
 ```
 
-Notes: To work around this issue, the Altair developers have created a
+Notes: As we mentioned previously, the Altair developers have created a
 helper package called `altair_server`, which you can activate on the top
 of your notebook with the line of code in this slide.
 
 The Altair server works by linking the chart to the dataframe via an
-active Python process. This mean that as long as you are running Python
-you can see the chart. When you stop Python, e.g. by shutting down your
-notebook, Altair can no longer see the data and no plots will be shown
-the next time you open the notebook, until you rerun your code.
+active Python process. This process is serving the data as a json file
+at a temporary location on your computer.
 
-If you want a static version of the plots to be always visible in the
+This mean that as long as you are running Python you can see the chart.
+When you stop Python, for example by shutting down your notebook, Altair
+can no longer see the data and no charts will be shown the next time you
+open the notebook, until you rerun your code.
+
+If you want a static version of the charts to be always visible in the
 notebook you can include the second line in this slide, which is the
 same we used a few slides ago to include the PNG fallback when the main
 chart is not accessible.
