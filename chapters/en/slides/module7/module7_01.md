@@ -145,14 +145,14 @@ when we click a point, we will open a browser at that web address.
 
 ---
 
-## Zooming in can help resolve detail in crowded areas of the chart
+## Zooming and panning helps the audience explore the data
 
 ``` python
 alt.Chart(cars).mark_circle().encode(
     alt.X('Horsepower', title='Enging power (hp)'),
     alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),
     href='URL',
-    tooltip='Name').interactive()
+    tooltip=['Name', 'URL']).interactive()
 ```
 
 <iframe src="/module7/charts/01/unnamed-chunk-5.html" width="100%" height="420px" style="border:none;">
@@ -269,7 +269,7 @@ points = (alt.Chart(cars).mark_circle().encode(
     alt.X('Horsepower', title='Enging power (hp)'),
     alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),
     color=alt.condition(brush, 'Origin', alt.value('lightgray')))
-.add_selection(brush))
+.add_selection(brush)).properties(height=225, width=300)
 
 points | points.encode(y='Weight_in_lbs', x='Acceleration')
 ```
@@ -318,7 +318,7 @@ points = (alt.Chart(cars).mark_circle().encode(
     alt.X('Horsepower', title='Enging power (hp)'),
     alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),
     color=alt.condition(brush, 'Origin', alt.value('lightgray')))
-.add_selection(brush))
+.add_selection(brush)).properties(height=225, width=300)
 
 points | points.encode(y='Weight_in_lbs', x='Acceleration')
 ```

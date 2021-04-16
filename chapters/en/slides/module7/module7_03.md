@@ -407,7 +407,7 @@ base = alt.Chart(movies_1995_2010).mark_area().encode(
     alt.Y('mean(Worldwide_Gross)', title='Gross worldwide'))
 select_year = alt.selection_interval()
 
-lower = base.properties(height=60).add_selection(select_year)
+lower = base.properties(height=50).add_selection(select_year)
 upper = base.encode(alt.X('Release_Year', title=None, scale=alt.Scale(domain=select_year))).properties(height=200)
 upper & lower
 ```
