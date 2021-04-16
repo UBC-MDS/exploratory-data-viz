@@ -41,6 +41,10 @@ Notes: To demonstrate how we can use widgets in Altair we will be using
 an abbreviated version of the movies dataset which you can see in this
 slide.
 
+This data contains how much each movie made, when it was released, its
+genre, maturity rating, and user ratings on two online sites: IMDB and
+Rotten Tomatoes.
+
 ---
 
 ## Interactive selections can make charts with many categories more effective
@@ -52,7 +56,7 @@ points = alt.Chart(movies).mark_circle().encode(
     alt.X('Rotten_Tomatoes_Rating', title='Rotten Tomatoes rating'),
     alt.Y('IMDB_Rating', title='IMDB rating'),
     alt.Color('Major_Genre', title='Major genre'),
-    opacity=alt.condition(select_genre, alt.value(0.7), alt.value(0.1))).properties(height=200)
+    opacity=alt.condition(select_genre, alt.value(0.7), alt.value(0.05))).properties(height=200)
 points.add_selection(select_genre)
 ```
 
@@ -61,17 +65,22 @@ points.add_selection(select_genre)
 
 Notes: We saw in the previous slide deck how we could use the `bind`
 parameter of a selection to link it to the legend of the plot and
-highlight points by clicking the legend.
+highlight points by clicking on categories in the legend.
 
 Here we create that same type of plot using the movie data set that we
-saw previously.
+just saw in the last slide.
 
-If this chart would have been static, it would not have been very
-effective since the many colors makes it hard to distinguish the
-different genres.
+At first glance, this chart does not look very effective, as the many
+genre categories are mapped to more colours than we can easily
+distinguish between. However, the chart we created is not static!
 
-But since we can click the legend to show the points from only a
-specific genre, this problem is alleviated.
+We used `alt.selection_single` and `alt.condition` to make it
+interactive, so that we can click the legend to show the points from
+only a specific genre. This alleviates the problem of having too many
+colour encodings that we cannot distinguish between.
+
+If we wanted to select multiple genres in the legend, we could have used
+`alt.selection_multi` instead of `alt.selection_single`.
 
 ---
 
@@ -83,7 +92,7 @@ dropdown = alt.binding_select(name='Genre ', options=genres)
 select_genre = alt.selection_single(fields=['Major_Genre'], bind=dropdown)
 
 points.add_selection(select_genre).encode(
-    opacity=alt.condition(select_genre, alt.value(0.7), alt.value(0.1)))
+    opacity=alt.condition(select_genre, alt.value(0.7), alt.value(0.05)))
 ```
 
 <iframe src="/module7/charts/03/unnamed-chunk-3.html" width="100%" height="420px" style="border:none;">
@@ -91,15 +100,15 @@ points.add_selection(select_genre).encode(
 
 Notes: Driving our interactions via a dropdown instead of a legend could
 be useful if we have too many categories to show in the legend, or if we
-wanted to have a different dataframe column in the dropdown and in the
-legend.
+wanted to have a different dataframe column in the dropdown from what we
+use in the legend.
 
-Here we use the same column as for coloring the points, so that you can
-clearly see how the interaction works.
+Here we use the same column for both, so that you can clearly see how
+the interaction works.
 
-We can create a dropdown selection widget via `alt.binding_select`.
-Then, instead of binding `alt.selection_single` to the legend we can
-pass the dropdown to the `bind` parameter.
+In this slide, We create a dropdown selection widget via
+`alt.binding_select`. Then, instead of binding `alt.selection_single` to
+the legend we can pass the dropdown to the `bind` parameter.
 
 The dropdown requires an array to be passed to the options parameter;
 here we sort the genres alphabetically before passing them to the
@@ -122,19 +131,22 @@ select_genre = alt.selection_single(
     fields=['Major_Genre'], bind=dropdown, init={'Major_Genre': 'Comedy'})
 
 points.add_selection(select_genre).encode(
-    opacity=alt.condition(select_genre, alt.value(0.7), alt.value(0.1)))
+    opacity=alt.condition(select_genre, alt.value(0.7), alt.value(0.05)))
 ```
 
 <iframe src="/module7/charts/03/unnamed-chunk-4.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: If we don’t specify a default value in a widget, the first value
-in the options array show up in the widget, but it is not used for
-selection until we interact with the dropdown.
+in `select_genre` will be shown in the widget, but it is not used to
+select points until we click the dropdown.
 
 If we wanted to set a specific default value and immediately use it to
 highlight the data, we could specify which column and value to use via
 the `init` parameter as we have done in this slide.
+
+Because we did this, the chart initially displays only the comedy genre,
+instead of all the points.
 
 ---
 
@@ -142,22 +154,22 @@ the `init` parameter as we have done in this slide.
 
 ``` python
 mpaa_rating = sorted(movies['MPAA_Rating'].unique())
-dropdown_mpaa = alt.binding_radio(name='MPAA Rating ', options=mpaa_rating)
+radiobuttons_mpaa = alt.binding_radio(name='MPAA Rating ', options=mpaa_rating)
 dropdown_genre = alt.binding_select(name='Genre ', options=genres)
 select_genre_and_mpaa = alt.selection_single(
     fields=['Major_Genre', 'MPAA_Rating'],
-    bind={'Major_Genre': dropdown_genre, 'MPAA_Rating': dropdown_mpaa})
+    bind={'Major_Genre': dropdown_genre, 'MPAA_Rating': radiobuttons_mpaa})
 
 points.add_selection(select_genre_and_mpaa).encode(
-    opacity=alt.condition(select_genre_and_mpaa, alt.value(0.7), alt.value(0.1)))
+    opacity=alt.condition(select_genre_and_mpaa, alt.value(0.7), alt.value(0.05)))
 ```
 
 <iframe src="/module7/charts/03/unnamed-chunk-5.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Sometimes we want to highlight our data based on more than a
-single widget. For example, we might want to show only comedies that are
-rated as suitable for children to watch.
+single criteria. For example, we might want to show only comedies that
+are rated as suitable for children to watch.
 
 We have already seen how to perform such breakdowns via faceting, but we
 could also do it by combining multiple interactive widgets.
@@ -165,9 +177,10 @@ could also do it by combining multiple interactive widgets.
 Here we’re adding a set of radio buttons for the maturity rating of the
 movies and a dropdown button for the genre selection.
 
-We create the radio buttons and dropdown separately, and then add then
-bind them both to the `selection_single` object to their respective
-fields.
+First we create the radio buttons and the dropdown as two separate
+widgets. We then use both these widgets to the `selection_single`
+object, so that the dropdown is bound to the `'Major_Genre'` dataframe
+column and the radio buttons are bound to `'MPAA_Rating`.
 
 To trigger a selection, we now need to both click a radio button **and**
 make a selection in the dropdown.
@@ -183,7 +196,7 @@ select_rating = alt.selection_single(
     bind=slider)
 
 points.encode(
-    opacity=alt.condition(select_rating, alt.value(0.7), alt.value(0.1))
+    opacity=alt.condition(select_rating, alt.value(0.7), alt.value(0.05))
 ).add_selection(select_rating)
 ```
 
@@ -196,15 +209,14 @@ quantitative values, we can use a slider.
 
 Adding a slider is similar to adding a dropdown or set of radio buttons,
 and we do it via `binding_range()`. Here we link the slider to the same
-column as on the x-axis, so that you can see how it works.
+column that is mapped to the x-axis, so that you can see how it works.
 
-If you drag the slider around, you can see that the default behavior is
-to only highlight points that are of the exact values as the slider.
+If you drag the slider around, you can see that the default behaviour is
+to only highlight points that exactly match the value of the slider.
 
-This is useful for selection widgets like the dropdown, but for the
-slider we want to make comparisons such as bigger and smaller than.
-
-Let’s see how to do that in the next slide.
+Now that we understand how we can create a slider, let’s next see how to
+use it in a slightly more realistic setting, such as highlighting values
+above or below a threshold.
 
 ---
 
@@ -214,16 +226,17 @@ Let’s see how to do that in the next slide.
 points.encode(
     opacity=alt.condition(
         alt.datum.Rotten_Tomatoes_Rating < select_rating.Rotten_Tomatoes_Rating,
-        alt.value(0.7), alt.value(0.1))
+        alt.value(0.7), alt.value(0.05))
 ).add_selection(select_rating)
 ```
 
 <iframe src="/module7/charts/03/unnamed-chunk-7.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: To highlight values that are smaller than the slider, we need to
-compare the current value of the slider with the value of the data
-points.
+Notes: Let’s say that we want to create a chart where we highlight
+values which are smaller than the value specified by the slider. To do
+this we need to compare the current value of the slider with the
+observations’ values in the column we are filtering on.
 
 The current value of the slider can be accessed via
 `select_rating.Rotten_Tomatoes_Rating`, and Altair has a special `datum`
@@ -244,41 +257,53 @@ highlighted that have a value less than the slider value.
 ## Customizing a slider widget
 
 ``` python
-slider = alt.binding_range(name='Tomatometer ', min=10, max=60, step=10)
+slider = alt.binding_range(name='IMDB rating ', min=1, max=10, step=0.5)
 select_rating = alt.selection_single(
-    fields=['Rotten_Tomatoes_Rating'],
+    fields=['IMDB_Rating'],
     bind=slider,
-    init={'Rotten_Tomatoes_Rating': 20})
+    init={'IMDB_Rating': 4})
 
 points.encode(
     opacity=alt.condition(
-        alt.datum.Rotten_Tomatoes_Rating < select_rating.Rotten_Tomatoes_Rating,
-        alt.value(0.7), alt.value(0.1))
+        alt.datum.IMDB_Rating < select_rating.IMDB_Rating,
+        alt.value(0.7), alt.value(0.05))
 ).add_selection(select_rating)
 ```
 
 <iframe src="/module7/charts/03/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: Just as with dropdowns we can set an explicit start value to have
-an active selection when the chart first appears.
+Notes: By default the range for the slider is from 0 to 100. This
+happens to work well for the ratings from Rotten Tomatoes, but what if
+we wanted to use it for the IMDB ratings instead?
 
-For slider widgets we can also define the range and step size for the
-slider as we have done in this slide.
+Since the slider does not automatically adjust to the range of the data,
+we need to define the range manually. Here we set the minimum to be 1
+(there is no 0 rating for IMDB), the maximum to be 10.
 
-Now that we drag the slider handle it jumps ten steps at a time, instead
-of the default single step.
+We also demonstrate how to change the step size. Now that we drag the
+slider handle it jumps half a step at a time, instead of the default
+step size of 1, which gives us increased precision in which movies we
+are selecting.
+
+Just as with dropdowns we could set an explicit start value to have an
+active selection when the chart first appears.
+
+Here we have specified the slider to be set at 4 when the chart first
+loads via setting `init={'IMDB_Rating': 4})` in `alt.selection_single`.
 
 ---
 
 ## It is more useful to bind a slider to a dataframe column not displayed on the chart axes
 
 ``` python
-slider = alt.binding_range(name='Year')
-select_rating = alt.selection_single(fields=['Release_Year'], bind=slider)
+slider = alt.binding_range(name='Worldwide Gross ', max=100_000_000, step=1_000_000)
+select_rating = alt.selection_single(fields=['Worldwide_Gross'], bind=slider)
 
 points.encode(
-    opacity=alt.condition( select_rating, alt.value(0.7), alt.value(0.1))
+    opacity=alt.condition(
+        alt.datum.Worldwide_Gross < select_rating.Worldwide_Gross,
+        alt.value(0.7), alt.value(0.05))
 ).add_selection(select_rating)
 ```
 
@@ -292,13 +317,38 @@ However, when creating an interactive visualization it is often the most
 useful to bind the slider to a dataframe column that is not already
 included on one of the axes.
 
-In this slide we try to use the slider widget to highlight movies based
-on the year they were produced, so that we can effectively explore
+In this slide, we instead filter on the worldwide gross. Since the range
+for this is outside 0 - 100, we explicitly set the max to a higher
+value, and adjust the stepsize to something more meaningful.
+
+Now we can use the slider to filter movies on the amount they grossed.
+However, since we cannot select a range on the slider, we’re limited to
+selecting all movies either bigger than or smaller than the slider value
+
+---
+
+## Sliders only work with numerical data
+
+``` python
+slider = alt.binding_range(name='Year')
+select_rating = alt.selection_single(fields=['Release_Year'], bind=slider)
+
+points.encode(
+    opacity=alt.condition(select_rating, alt.value(0.7), alt.value(0.05))
+).add_selection(select_rating)
+```
+
+<iframe src="/module7/charts/03/unnamed-chunk-10.html" width="100%" height="420px" style="border:none;">
+</iframe>
+
+Notes: In this slide we try to use the slider widget to highlight movies
+based on the year they were produced, so that we can effectively explore
 movies from different time periods separately.
 
 However, as you can see it doesn’t work as we expected and nothing
 happens when we drag the slider handle back and fourth. The reason for
-this is that sliders don’t work well with temporal data in Altair.
+this is that sliders only work with numerical data and support for
+temporal data is not yet implemented. in Altair.
 
 As an alternative to the slider, we can use another plot to to select
 data, which has several other advantages as you will see in the next
@@ -306,25 +356,26 @@ slide.
 
 ---
 
-## Driving slider-like selections from another plot is more effective
+## Driving range selections from another plot is more effective
 
 ``` python
 select_year = alt.selection_interval()
 bar_slider = (alt.Chart(movies).mark_bar().encode(
     alt.X('Release_Year', title='Release Year'),
     alt.Y('count()'),
-    opacity=alt.condition(select_year, alt.value(0.7), alt.value(0.1)))
+    opacity=alt.condition(select_year, alt.value(0.7), alt.value(0.05)))
 .properties(height=50).add_selection(select_year))
 
-points.encode(opacity=alt.condition(select_year, alt.value(0.7), alt.value(0.1))) & bar_slider
+points.encode(opacity=alt.condition(select_year, alt.value(0.7), alt.value(0.05))) & bar_slider
 ```
 
-<iframe src="/module7/charts/03/unnamed-chunk-10.html" width="100%" height="420px" style="border:none;">
+<iframe src="/module7/charts/03/unnamed-chunk-11.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
-Notes: Instead of having a a slider, it is more effective to use a
-histogram for the selection since this is also gives us information
-about the distribution of the movies over the years.
+Notes: With range selection in general, and especially for temporal
+data, it is more effective to use a histogram instead of a slider. This
+is because the histogram gives us information about how many movies we
+have data for each year and it also lets us select a range of years.
 
 We can use what we learned in the last slide deck to link the selection
 between the two plots. The biggest difference here is that instead of a
@@ -361,7 +412,7 @@ upper = base.encode(alt.X('Release_Year', title=None, scale=alt.Scale(domain=sel
 upper & lower
 ```
 
-<iframe src="/module7/charts/03/unnamed-chunk-11.html" width="100%" height="420px" style="border:none;">
+<iframe src="/module7/charts/03/unnamed-chunk-12.html" width="100%" height="420px" style="border:none;">
 </iframe>
 
 Notes: Particularly when visualizing data over long time periods, it can
