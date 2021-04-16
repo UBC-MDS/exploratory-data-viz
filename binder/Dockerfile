@@ -7,7 +7,7 @@ RUN pip install --no-cache --upgrade pip && \
        "black==19.10b0" \
        "altair_saver>=0.5.0" \
        "vega_datasets>=0.8.0" \
-       "xlrd>=1.0.0" \
+       "xlrd==1.2.0" \
        "pandas==1.0.5"
 
 # create user with a home directory
