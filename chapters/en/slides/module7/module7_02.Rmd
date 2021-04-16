@@ -175,6 +175,11 @@ as we would expect!
 Note that we can still click and drag in the scatterplot
 since our `brush` selection is unchanged from before.
 
+The same principles that we showed here
+can be applied to create a linked selection 
+from the scatterplot to the barchart,
+which we will see an example of in a few slides.
+
 ---
 
 ## A selection can be bound to the legend instead of a particular chart
@@ -315,15 +320,15 @@ state_map = alt.topo_feature(data.us_10m.url, 'states')
 state_pop = pd.read_csv('data/us_population_coordinates_asthma-cases.csv')
 state_pop['asthma_cases_per_capita'] = state_pop['number_of_asthma_cases'] / state_pop['population']
 
-map_hover = alt.selection_single(fields=['state'], on='mouseover')
+hover = alt.selection_single(fields=['state'], on='mouseover')
 choropleth = (alt.Chart(state_map).mark_geoshape().transform_lookup(
     lookup='id',
     from_=alt.LookupData(state_pop, 'id', ['number_of_asthma_cases', 'state']))
 .encode(
     color=alt.Color('number_of_asthma_cases:Q', title='Asthma cases'),
-    opacity=alt.condition(map_hover, alt.value(1), alt.value(0.2)),
+    opacity=alt.condition(hover, alt.value(1), alt.value(0.1)),
     tooltip=['state:N', alt.Tooltip('number_of_asthma_cases:Q', title='Asthma cases')])
-.add_selection(map_hover)
+.add_selection(hover)
 .project(type='albersUsa')
 .properties(height=150, width=300))
 choropleth
@@ -362,7 +367,7 @@ Note that we set the dimensions of the plot to fit on the slide.
 points = (alt.Chart(state_pop).mark_circle(size=70).encode(
     alt.X('asthma_cases_per_capita', title='Asthma cases / capita', scale=alt.Scale(zero=False)),
     alt.Y('number_of_asthma_cases', title='Asthma cases'),
-    stroke=alt.condition(map_hover, alt.value('black'), alt.value('#ffffff')),
+    stroke=alt.condition(hover, alt.value('black'), alt.value('#ffffff')),
     color='number_of_asthma_cases')).properties(height=150, width=300)
 choropleth & points
 ```
@@ -389,6 +394,37 @@ since we might already have an intuition
 for where different states are located on the map
 and don't have to go through each of the point's tooltip
 looking for the state name of interest.
+
+---
+
+## Two way interactivity between the map and scatter plot
+
+```{python}
+choropleth & points.encode(tooltip='state').add_selection(hover)
+```
+
+Notes:
+Linking the interactive elements from the map to the points
+begs the question of how we could link interaction the other way
+and control the map from the points.
+
+In the case of our visualization,
+it could be helpful to show a tooltip of each state's name
+and highlight the corresponding state on the map
+when hovering over the a point.
+
+In this slide we add the same hover selection to the scatterplot.
+We don't need to change the encoded dataframe columns
+since the opacity is already set to change
+when we use the hover object,
+regardless of whether it is used on the map
+or on the scatter plot.
+
+As you can see,
+Altair's grammar remains consistent between different types of plots,
+such as scatterplots, maps, and barcharts.
+This allows us to build on the same principles we learned earlier 
+and expand our grammar of interactivity no matter which plots we work with.
 
 ---
 
