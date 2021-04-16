@@ -133,6 +133,8 @@ slide that you can try.
 You can also click the three dot action button and select the “Open in
 Vega Editor” entry to achieve the same result, try it out!
 
+---
+
 ## The JSON spec is part of the saves HTML file
 
 ``` html
