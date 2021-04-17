@@ -215,7 +215,7 @@ changes to the appearance of your chart.
 
 ## What if we want to save our charts as images instead?
 
--   The three dots action buttong can be used to save images manually.
+-   The three dots action button can be used to save images manually.
 -   `altair_saver` enables saving of PNG and SVG charts .
     -   [Instructions for how to install and work with Altair saver can
         be found here](https://github.com/altair-viz/altair_saver/).

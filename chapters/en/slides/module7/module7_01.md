@@ -271,7 +271,7 @@ points = (alt.Chart(cars).mark_circle().encode(
     color=alt.condition(brush, 'Origin', alt.value('lightgray')))
 .add_selection(brush)).properties(height=225, width=300)
 
-points | points.encode(y='Weight_in_lbs', x='Acceleration')
+points | points.encode(x='Acceleration', y=alt.Y('Weight_in_lbs', title='Weight'))
 ```
 
 <iframe src="/module7/charts/01/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
@@ -295,11 +295,11 @@ However, if we could highlight points of interest in one chart, and then
 see the same observations highlighted in the other chart - we would be
 able to answer such a question!
 
-Altair lets us do this by
-
 As you can see in this slide selections are automatically linked between
-plots that are created from the same dataframe, so we don’t need to add
-any code to link the selection between the charts in this case.
+the two charts. The reason this worked was because both these charts
+have one point for each observation in the data, so that we selected a
+point in one of the scatterplots the corresponding point for that same
+observation could automatically be highlighted in the other scatterplot.
 
 Now we can answer our question! Highlighting the observations where the
 cars have high engine power and low mileage shows that they are mostly
@@ -320,7 +320,7 @@ points = (alt.Chart(cars).mark_circle().encode(
     color=alt.condition(brush, 'Origin', alt.value('lightgray')))
 .add_selection(brush)).properties(height=225, width=300)
 
-points | points.encode(y='Weight_in_lbs', x='Acceleration')
+points | points.encode(x='Acceleration', y=alt.Y('Weight_in_lbs', title='Weight'))
 ```
 
 <iframe src="/module7/charts/01/unnamed-chunk-9.html" width="100%" height="420px" style="border:none;">
