@@ -13,7 +13,7 @@ id: 7
 </exercise>
 
 <exercise id="1" title="Tooltips, Zoom, and Selections" type="slides,video">
-<slides source="module7/module7_01" shot="4" start="0:003" end="10:59"> </slides>
+<slides source="module7/module7_01" shot="4" start="0:003" end="18:4115"> </slides>
 </exercise>
 
 
@@ -158,7 +158,7 @@ Nice work! Adding a tooltip would only be useful if here if we had unique identi
 </exercise>
 
 <exercise id="4" title="Advanced Selections" type="slides,video">
-<slides source="module7/module7_02" shot="4" start="0:003" end="10:59"> </slides>
+<slides source="module7/module7_02" shot="4" start="18:5227" end="42:5422"> </slides>
 </exercise>
 
 
@@ -304,13 +304,311 @@ Nice work! Was it easier to answer this question correctly when you clicked on t
 
 
 <exercise id="8" title="Using Widgets to Control Selections" type="slides,video">
-<slides source="module7/module7_03" shot="4" start="0:003" end="10:59"> </slides>
+<slides source="module7/module7_03" shot="4" start="43:0610" end="68:3710"> </slides>
 </exercise>
 
-<exercise id="9" title="Sharing Altair Visualizations" type="slides,video">
-<slides source="module7/module7_04" shot="4" start="0:003" end="10:59"> </slides>
+
+<exercise id="9" title="True or False: Controls">
+
+**True or False**       
+*If we create a scatter plot of two quantitative variables, but also have 10, or more, categories that we would like to visualize this for, facetting or using interactive selections can make such charts more effective compared to colouring the points by category?*
+
+
+<choice id="1" >
+
+<opt text="True" correct="true">
+
+ Great work! Indeed 10, or more, categories are far too many for us to effectively use colour along to differentiate points on a scatter plot. Instead interactivity or faceting are great ways to improve the effectiveness of such a visualization!
+
+
+</opt>
+
+
+<opt text="False" >
+
+Try again! In the previous slides we discuss this!
+
+</opt>
+
+
+</choice>
+
+**True or False**       
+*In Altair, sliders can be used to concurrently set an upper and lower threshold to select a range of observations to highlight.*
+
+<choice id="2" >
+
+<opt text="True" >
+
+Not quite! Sadly this is not yet possible in Altair.
+
+</opt>
+
+<opt text="False"  correct="true">
+
+Great work! This is not yet possible in Altair. However, instead of using a slider to do this, we can instead use a selection interval from another chart to do this.
+
+</opt>
+
+</choice>
+
 </exercise>
 
-<exercise id="10" title="What Did We Just Learn?" type="slides, video">
+<exercise id="10" title="Minimap Muti-choice">
+
+**Question**      
+Creating a “minimap” for interval selection and chart navigation (i.e., using one chart to drive zooming in another chart, where the charts are identical) can be effective when:
+
+<choice id="1" >
+<opt text="Visualizing a chlorepleth map with many small geographical regions">
+
+ You are close! This is one scenario where this can be effective, but there is one more!
+
+</opt>
+
+<opt text="Visualizing count data in a simple bar chart"  >
+
+Try again! You don't really need complex interaction here to effectively visualize count data in a simple bar chart.
+
+</opt>
+
+<opt text="Visualizing lengthy time series" >
+
+You are close! This is one scenario where this can be effective, but there is one more!
+
+</opt>
+
+<opt text="A & C" correct="true">
+
+Nice work! "minimaps" are effective for interval selections with ***both*** lengthy time series and chlorepleth map with many small geographical regions. 
+
+</opt>
+
+</choice>
+
+</exercise>
+
+<exercise id="11" title="Slipping and Sliding Penguins">
+
+**Instructions:**
+Be patient when running a coding exercise for the first time, it can take a few minutes.
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.**
+
+Let’s now look at the [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) data set again and see how the Penguins of each species were studied on each island.
+
+Let’s take a look!
+
+<codeblock id="penguins">
+
+</codeblock>
+
+Create a scatter plot from the Penguins data set that visualizes culmen depth (y-axis) vs culmen length (x-axis).
+
+Tasks: 
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+- Create a scatter plot named `slider_scatter` that maps culmen length on the x-axis and culmen depth on the y-axis.
+- Colour the points by species. 
+- Add a slider assigned to an object `slider` that allows you to set a threshold so that you can highlight the observations where the penguins body mass (in grams) is under the threshold specified by the slider and set the maximum slider value to the maximum value found in the body mass column. Name the slider "Body mass (g)".
+
+<codeblock id="07_10">
+
+- Are you setting `alt.binding_range()` to build your sliding tool?
+- Are you setting the max of the slider to `max=max(penguins_df['body_mass_g'])` ? 
+- Are you using `selection_single` to make `select_rating`?
+- Are you binding the `selection_single` to `slider`? 
+- Are you setting `alt.datum.body_mass_g < select_rating.body_mass_g` as your expression in `alt.condition()`?
+- Are you calling `select_rating` in `.add_selection()`?
+
+</codeblock>
+
+
+**Question**      
+
+How many Gentoo penguins have a body mass less than 3000 grams?
+
+
+<choice id="1" >
+<opt text="0" >
+
+Try again! Make sure you set the slider at 3000.
+
+</opt>
+
+<opt text="3"  >
+
+Try again! Make sure you set the slider at 3000.
+
+</opt>
+
+<opt text="5" >
+
+Try again! Make sure you set the slider at 3000.
+
+</opt>
+
+
+<opt text="9" correct="true">
+
+Nice work! That would be a lot harder to answer without the nifty slider, eh?
+
+</opt>
+
+</choice>
+
+</exercise>
+
+<exercise id="12" title="Sharing Altair Visualizations" type="slides,video">
+<slides source="module7/module7_04" shot="4" start="68:5010" end="91:18"> </slides>
+</exercise>
+
+<exercise id="13" title="True or False: Saving and Sharing">
+
+**True or False**       
+*It is easier to save Altair charts as a `.png` or `.svg` image file than as a plain text data file (e.g., `.html` or `.json` file).*
+
+
+<choice id="1" >
+
+<opt text="True" >
+
+Try again! Go back to the slides and review how Altair charts are constructed.
+
+
+</opt>
+
+
+<opt text="False" correct="true">
+
+Great work! Given how Altair charts are constructed, it's actually easier to save them as  plain text data files!
+
+</opt>
+
+
+</choice>
+
+**True or False**       
+*The SVG image file format stores data as text with mathematical formulas and is good for photos and complex illustrations.*
+
+<choice id="2" >
+
+<opt text="True" >
+
+Try again! SVG image files are really not great for photos or complex illustrations! 
+
+
+</opt>
+
+
+<opt text="False" correct="true">
+
+Great work! SVG image files do store data as text with mathematical formulas, however this means that they are really not great for photos or complex illustrations! 
+
+</opt>
+
+</choice>
+
+</exercise>
+
+<exercise id="14" title="How to Save? Let Me Count the Ways">
+
+**Question**      
+In Altair, a chart like the one below can be saved as an image file via which of the following ways?
+
+
+<center>
+<img src="/module7/q14.png" width="80%"></img>
+</center>
+
+<choice id="1" >
+<opt text="Using Altair's <code>.save()</code> method (e.g. <code>alt.save(chart_name, 'my-chart.png', 'PNG')</code>)">
+
+ Try again! You can save Altair charts programmatically, but not with this syntax!
+
+</opt>
+
+<opt text="By clicking the three dots and selecting 'Save as SVG' or 'Save as PNG'"  >
+
+ Try again! Yes, you can save Altair charts interactively, but it's not the only way to save them!
+
+</opt>
+
+<opt text="Using the <code>altair_saver</code> method (e.g., <code>chart_name.save('my-chart.png')</code>)" >
+
+Try again! Yes, you can save Altair charts programmatically, but it's not the only way to save them!
+
+</opt>
+
+<opt text="A & B">
+
+Try again! There is a way to do this both interactively and programmatically, but not with this syntax.
+</opt>
+
+<opt text="B & C" correct="true">
+
+Nice work! There is a way to do this both interactively and programmatically!
+
+</opt>
+
+</choice>
+
+</exercise>
+
+<exercise id="15" title="Difficulties with Data">
+
+**Question 1**      
+Visualizing larger data in Altair takes care and can be challenging because:
+
+<choice id="1" >
+<opt text="Data is included in that Altair chart specifications" correct="true">
+
+Nice work! And because data is included in that Altair chart specifications, bigger data means bigger chart objects!
+
+</opt>
+
+<opt text="Visualizing larger data is always challenging"  >
+
+Try again! We're asking about what makes this specifically challenging in Altair.
+
+</opt>
+
+<opt text="Altair charts can only support 5000 observations in a single chart" >
+
+Try again! You do get a warning if you try to visualize a data frame with over 5000 rows, however, there are strategies that allow you to have Altair charts with more than this many rows.
+
+</opt>
+
+</choice>
+
+**Question 2**      
+Which of the strategies listed below is **NOT** a way to visualizing larger data in Altair?
+
+<choice id="2" >
+<opt text=" Use the <code>altair_server</code> package to link the chart to the data frame via an active Python process">
+
+Try again! This is a legitimate strategy for visualizing larger data in Altair.
+
+</opt>
+
+<opt text="Convert the pandas dataframe into an Altair dataframe, via <code>.datatransform()</code>"   correct="true">
+
+Nice work! We made this up! There is no such thing as an Altair dataframe!
+
+</opt>
+
+<opt text="Make the data accessible via a URL, and pass the data to Altair via a URL instead of via a data frame." >
+
+Try again! This is a legitimate strategy for visualizing larger data in Altair.
+
+</opt>
+
+</choice>
+
+</exercise>
+
+
+<exercise id="16" title="What Did We Just Learn?" type="slides, video">
 <slides source="module7/module7_end" shot="0" start="13:13" end="13:42"></slides>
 </exercise>
