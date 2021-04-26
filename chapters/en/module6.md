@@ -574,6 +574,6 @@ Fill in the blanks in the code below so that the following gets accomplished:
 
 
 
-<exercise id="24" title="What Did We Just Learn?" type="slides, video">
+<exercise id="13" title="What Did We Just Learn?" type="slides, video">
 <slides source="module6/module6_end" shot="0" start="11:38" end="12:27"></slides>
 </exercise>
