@@ -13,7 +13,7 @@ id: 6
 </exercise>
 
 <exercise id="1" title="Telling Stories with Visualization" type="slides,video">
-<slides source="module6/module6_01" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module6/module6_01" shot="3" start="0:003" end="10:58"> </slides>
 </exercise>
 
 <exercise id="2" title="True or False: Once Upon a Time ...">
@@ -181,7 +181,7 @@ Nice!
 
 
 <exercise id="5" title="Visualizing geographical data" type="slides,video">
-<slides source="module6/module6_02" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module6/module6_02" shot="3" start="11:11" end="24:23"> </slides>
 </exercise>
 
 <exercise id="6" title="True or False: Getting Geo With It!">
@@ -399,7 +399,7 @@ We cannot jump to this conclusion without seeing any evidence of it! This statem
 
 
 <exercise id="9" title="Figure layouts" type="slides,video">
-<slides source="module6/module6_03" shot="1" start="0:003" end="07:12"> </slides>
+<slides source="module6/module6_03" shot="3" start="24:35" end="32:08"> </slides>
 </exercise>
 
 
