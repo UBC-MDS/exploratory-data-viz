@@ -455,10 +455,11 @@ Notes: In this choropleth we can see the values of the states in Eastern
 US are no longer overlapping so it is easier to see the value of each
 state.
 
-We still have the issue of some states being really, so ideally when
-using either a choropleth or dots to show values like this, it would be
-a good idea to complement them with a bar chart in the same figure,
-which we will see how to do in the next slide deck.
+We still have the issue of some states being really small or hard to
+distinguish, so ideally when using either a choropleth or dots to show
+values like this, it would be a good idea to complement them with a bar
+chart in the same figure, which we will see how to do in the next slide
+deck.
 
 Note that the colorscale does not start at 0. Remember that this is good
 for highlighting small important differences, but can also give a
