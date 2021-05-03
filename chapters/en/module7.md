@@ -427,7 +427,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 
 **Question**      
 
-How many Gentoo penguins have a body mass less than 3000 grams?
+How many Gentoo penguins have a body mass of 3000 grams or less?
 
 
 <choice id="1" >
