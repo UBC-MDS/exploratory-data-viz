@@ -544,6 +544,7 @@ Try again! Yes, you can save Altair charts programmatically, but it's not the on
 <opt text="A & B">
 
 Try again! There is a way to do this both interactively and programmatically, but not with this syntax.
+
 </opt>
 
 <opt text="B & C" correct="true">
