@@ -431,9 +431,9 @@ How many Gentoo penguins have a body mass of 3000 grams or less?
 
 
 <choice id="1" >
-<opt text="0" >
+<opt text="0" correct="true">
 
-Try again! Make sure you set the slider at 3000.
+Nice work! That would be a lot harder to answer without the nifty slider, eh?
 
 </opt>
 
@@ -450,9 +450,9 @@ Try again! Make sure you set the slider at 3000.
 </opt>
 
 
-<opt text="9" correct="true">
+<opt text="9" >
 
-Nice work! That would be a lot harder to answer without the nifty slider, eh?
+Try again! Make sure you set the slider at 3000.
 
 </opt>
 
