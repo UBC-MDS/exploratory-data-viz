@@ -842,7 +842,7 @@ Hmmm, Have you tried plotting it without? What about the <code>Shape</code> chan
 </exercise>
 
 <exercise id="16" title="Effective Use of Colour for Quantitative Data" type="slides,video">
-<slides source="module5/module5_16" shot="2" start="78:4228" end="92:24"> </slides>
+<slides source="module5/module5_16" shot="2" start="78:4228" end="92:15"> </slides>
 </exercise>
 
 
@@ -1022,7 +1022,7 @@ Can you think of why this might occur?
 </exercise>
 
 <exercise id="20" title="Anotating With Text and Colour" type="slides,video">
-<slides source="module5/module5_20" shot="2" start="92:3622" end="99:45"> </slides>
+<slides source="module5/module5_20" shot="2" start="92:28" end="99:37"> </slides>
 </exercise>
 
 
@@ -1199,17 +1199,10 @@ What about the x-axis? Does it have a natural order already?
 
 </opt>
 
-<opt text="No, highlighting the value makes more sense since the x-axis has a natural order that should be followed." correct="true">
+<opt text="No, highlighting the value makes more sense since the y-axis has a natural order that should be followed." correct="true">
 
 Nice!
 
-</opt>
-
-<opt text="A uniform looking distribution (all similar argregated values)." >
-
-Snow in July?
-
-</opt>
 
 </choice>
 
