@@ -63,7 +63,7 @@ You are on a roll!
 </exercise>
 
 
-<exercise id="3" title="Multple Choice Questions on Single Column Plots">
+<exercise id="3" title="Multiple Choice Questions on Single Column Plots">
 
 **Question 1**   
 This is a rugplot: 
@@ -785,7 +785,7 @@ Nope!
 </exercise>
 
 
-<exercise id="12" title="What Did We Just Learn?" type="slides, video">
+<exercise id="14" title="What Did We Just Learn?" type="slides, video">
 <slides source="module3/module3_end" shot="0" start="07:32" end="08:20">
 </slides>
 </exercise>
