@@ -628,7 +628,7 @@ Do you see 2 "bumps" in any of the plots? Maybe look at the `culmen_length_mm` a
 **Question 1: True or False**       
 *Repeating charts is the same as facetting them.*
 
-<choice id="2" >
+<choice id="1" >
 
 <opt text="True">
 
