@@ -4,7 +4,7 @@ type: slides
 
 # Welcome 
 
-Notes: Welcome to Introduction to Exploratory Data Visualization.
+Notes: Welcome to Data Visualization.
 
 ---
 
