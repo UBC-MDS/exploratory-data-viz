@@ -1,5 +1,5 @@
 ---
-title: 'Module 0: Exploratory Data Visualization'
+title: 'Module 0: Data Visualization'
 description:
   'Course introduction, summary of course learning outcomes and prerequisite validation.' 
 prev: null
@@ -22,7 +22,7 @@ Have you taken the prerequisite **Programming in Python for Data Science**?
 
 
 <choice>
-<opt text="Yes I have and I am ready to take Exploratory Data Visualization." correct="true">
+<opt text="Yes I have and I am ready to take Data Visualization." correct="true">
 
 Great! Let's get started. Please continue on to Module 1.
 
