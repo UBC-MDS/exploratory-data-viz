@@ -61,13 +61,29 @@ alt.Chart(gm2018).mark_bar().encode(
 ```
 
 Notes:
-Bar charts are often avoided when showing summary statistics such as the mean
-because they hide any variation,
-something we will talk more about in later modules.
+A bar chart is a good choice for representing summary statistics
+such as counts of observations and summations
+The reason for this is that for such data,
+a single summary statistic can well describe it.
+For example,
+the height of a bar in a bar chart
+can clearly communicate the number of people living in a country
+at a specific point in time.
+There is no missing information here
+that we might need to communicate using another mark.
 
-But they are fine for showing statistics
-such as counts of observations, summations, or individual values
-(e.g. the number of people in a country for a specific year).
+Bar charts are often avoided when visualizing summary statistics
+such as the mean and median,
+as the purpose of these summary statistics
+is to describe a distribution.
+However,
+the mean and median only describe one aspect of a distribution
+(the central tendency, meaning where most values are found).
+Thus,
+to graphically depict a distribution
+we also need to illustrate the spread of the distribution
+(the range of the values that were observed).
+We will cover how to effectively visualize this later in the course.
 
 Here we create a bar chart of a single value per country,
 which represents the sum of all the countries' populations.
