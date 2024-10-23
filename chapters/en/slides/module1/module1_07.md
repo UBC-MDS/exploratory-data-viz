@@ -76,7 +76,7 @@ Fortunately, Altair has shortcuts for plotting simple aggregations where
 you provide the name of the aggregation together with the name of the
 column inside a string as in the example in this slide.
 
-<a href="https://altair-viz.github.io/user_guide/encoding.html#binning-and-aggregation" target="_blank">The
+<a href="https://altair-viz.github.io/user_guide/encodings/index.html#aggregation-functions" target="_blank">The
 Altair documentation includes a table with all available
 aggregations</a> (scroll down a little on the linked page).
 
