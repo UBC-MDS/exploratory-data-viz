@@ -1,5 +1,4 @@
 ---
-title: "Welcome"
 format: revealjs
 revealjs:
   slide-level: 2
@@ -8,6 +7,18 @@ revealjs:
 include-in-header:
   - text: |
       <style>
+      .absolute-center {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 90%;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
       .reveal .slides section h1 {
         font-size: 2.0em;  
         color: #333;     
@@ -31,6 +42,14 @@ include-in-header:
       }
       </style>
 ---
+
+## <span class="absolute-center" style="font-size: 3.0em; text-align: center;">Welcome</span> {.slide}
+
+<blockquote>
+<strong>Transcript:</strong> Welcome to Data Visualization
+</blockquote>
+
+___
 
 ## Course Learning Outcomes {.slide}
 
