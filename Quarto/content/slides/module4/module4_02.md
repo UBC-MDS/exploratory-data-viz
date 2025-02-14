@@ -1,0 +1,624 @@
+---
+type: slides
+---
+
+# Exploratory data analysis
+
+Notes: Exploratory data analysis (EDA), refers to an early phase in the
+data analysis pipeline where you are actively exploring and getting to
+know the data. It can be contrasted with formal statistical hypothesis
+testing (confirmatory data analysis) and routine analysis that you do
+over and over on known data set.
+
+Being able to perform EDA effectively is a key part of most data science
+positions!
+
+---
+
+## Reading in and filtering the movies data
+
+``` python
+import altair as alt
+from vega_datasets import data
+
+
+movies_extended = (
+    data.movies()
+#     .dropna(subset=['Major Genre', 'MPAA Rating', 'Running Time min', 'IMDB Rating', 'IMDB Votes', 'Rotten Tomatoes Rating'])
+    .dropna(subset=['Running Time min'])
+    .query('`MPAA Rating` != ["Not Rated", "NC-17"]')
+    [['Major Genre', 'Creative Type', 'MPAA Rating', 'Title', 'Running Time min', 'Rotten Tomatoes Rating', 'IMDB Rating', 'IMDB Votes']]
+    .reset_index(drop=True)).sample(500, random_state=32489)
+# TODO remove the samling once we switch to HTML render
+movies_extended
+```
+
+```out
+     Major Genre         Creative Type MPAA Rating                      Title  Running Time min  Rotten Tomatoes Rating  IMDB Rating  IMDB Votes
+884        Drama         Dramatization           R                   Redacted              90.0                    44.0          6.1      5759.0
+586    Adventure  Contemporary Fiction       PG-13            The Italian Job             111.0                    73.0          6.9     76835.0
+935       Comedy  Contemporary Fiction       PG-13      School for Scoundrels             101.0                    26.0          6.0     15536.0
+564      Musical    Historical Fiction           R                   Idlewild             121.0                    47.0          5.8      3056.0
+1070      Action       Science Fiction       PG-13               Transformers             140.0                    57.0          7.3    197131.0
+...          ...                   ...         ...                        ...               ...                     ...          ...         ...
+323        Drama    Historical Fiction       PG-13  The Count of Monte Cristo             131.0                    74.0          7.6     40605.0
+1033       Drama  Contemporary Fiction       PG-13                    Step Up              98.0                    19.0          6.1     21691.0
+735      Musical    Historical Fiction       PG-13               Moulin Rouge             123.0                     NaN          7.3      2105.0
+276    Adventure               Fantasy          PG              City of Ember              94.0                    53.0          6.4     14905.0
+882       Horror               Fantasy           R                The Reaping             100.0                     8.0          5.6     19881.0
+
+[500 rows x 8 columns]
+```
+
+Notes: TODO Sampling because of knitr/vegawidget error, plots might look
+sligtlhy different from ll data TODO not sure if should talk about what
+we are doing here or prep the data before hand so tha twe can just read
+it in with no wrangling.
+
+---
+
+## Glancing at the values in the dataframe is a good first step to get familiar with a new dataset
+
+``` python
+movies_extended
+```
+
+```out
+     Major Genre         Creative Type MPAA Rating                      Title  Running Time min  Rotten Tomatoes Rating  IMDB Rating  IMDB Votes
+884        Drama         Dramatization           R                   Redacted              90.0                    44.0          6.1      5759.0
+586    Adventure  Contemporary Fiction       PG-13            The Italian Job             111.0                    73.0          6.9     76835.0
+935       Comedy  Contemporary Fiction       PG-13      School for Scoundrels             101.0                    26.0          6.0     15536.0
+564      Musical    Historical Fiction           R                   Idlewild             121.0                    47.0          5.8      3056.0
+1070      Action       Science Fiction       PG-13               Transformers             140.0                    57.0          7.3    197131.0
+...          ...                   ...         ...                        ...               ...                     ...          ...         ...
+323        Drama    Historical Fiction       PG-13  The Count of Monte Cristo             131.0                    74.0          7.6     40605.0
+1033       Drama  Contemporary Fiction       PG-13                    Step Up              98.0                    19.0          6.1     21691.0
+735      Musical    Historical Fiction       PG-13               Moulin Rouge             123.0                     NaN          7.3      2105.0
+276    Adventure               Fantasy          PG              City of Ember              94.0                    53.0          6.4     14905.0
+882       Horror               Fantasy           R                The Reaping             100.0                     8.0          5.6     19881.0
+
+[500 rows x 8 columns]
+```
+
+Notes: In this slide deck, you will see how EDA allows us to identify
+interesting relationships that we want to study closer, suggest
+hypothesis and how to test them, assess assumptions of the data, and
+inform further data collection.
+
+The very first thing we do in EDA, is often to glance at the dataframe
+by printing out a few values like in this slide.
+
+This gives us an idea about which columns are numerical and categorical
+as well as the size of the dataframe.
+
+---
+
+## Viewing the column data types and missing values protects us from errors later on
+
+``` python
+movies_extended.info()
+```
+
+```out
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 500 entries, 884 to 882
+Data columns (total 8 columns):
+ #   Column                  Non-Null Count  Dtype  
+---  ------                  --------------  -----  
+ 0   Major Genre             497 non-null    object 
+ 1   Creative Type           496 non-null    object 
+ 2   MPAA Rating             497 non-null    object 
+ 3   Title                   500 non-null    object 
+ 4   Running Time min        500 non-null    float64
+ 5   Rotten Tomatoes Rating  421 non-null    float64
+ 6   IMDB Rating             480 non-null    float64
+ 7   IMDB Votes              480 non-null    float64
+dtypes: float64(4), object(4)
+memory usage: 35.2+ KB
+```
+
+Notes: Next, it is a good idea to check the type of data in each column
+and how many missing values there are.
+
+From looking looking at the values in the table, we already have an idea
+of what the column data types are, and this matches the output from the
+`info` method. The categorical column are referred to as “objects” and
+the numerical columns are read in as decimal numbers or “floats”.
+
+Although it seem unnecessary in this case, it is good practice to
+perform this check since there are rare cases where pandas might
+interpret a column differently from what we think,
+
+A common example of this is when people use a text string to encode
+missing values, which makes pandas treat a column as an object, but
+unless we were fortunate and missing values showed up in the few rows we
+printed, we would only see numbers and expect it to be a float.
+
+This can also happen with dates, which might be parsed as numbers unless
+you specify `parse_dates=['column_name']` to `read_csv`.
+
+Speaking about missing values, this is the next thing to check for. It
+looks here like there are some in most columns, and the ratings from
+Rotten Tomatoes seems to have the most, almost 200 rows don’t have value
+in that column.
+
+The IMDB rating and number of votes have the exact same amount of
+missing values, and it makes sense that movies without votes can’t have
+a rating. But if we didn’t know how these columns were related, how
+could we check?
+
+---
+
+## Visualizing missing values helps us identify potential issues with the data
+
+``` python
+# Todo saving a sjson might be the best eventual solution
+alt.data_transformers.disable_max_rows()
+# Melt the movies into a long format so that it is easy to visualize the column along an axis
+# The index is used to give each column the same numbers on the x-axis
+```
+
+```out
+DataTransformerRegistry.enable('default')
+```
+
+``` python
+movies_nans = movies_extended.isna().reset_index().melt(id_vars='index', var_name='column', value_name='NaN')
+alt.Chart(movies_nans).mark_rect(height=17).encode(
+    x='index:O',
+    y='column',
+    color='NaN',
+    stroke='NaN').properties(width=800)
+```
+
+<iframe src="/module4/charts/02/unnamed-chunk-4.html" width="100%" height="420px" style="border:none;">
+</iframe>
+
+Notes: The IMDB rating and number of votes have the same amount of
+missing values, and it makes sense that movies without votes also don’t
+have a rating. But if we didn’t know how these columns were related, how
+could we check?
+
+By visualizing the missing values for each column next to each other, we
+can quickly see if there are similar patterns between columns. A common
+cause for such correlations, could for example be due to the same day or
+hour missing for several columns when working with time series data.
+
+To create this visualization in Altair, we must first melt the data into
+a format where the column names become a single categorical column in
+the dataframe, so that we can use this on the y-axis in Altair. We set
+the stroke encoding to remove the whitespace that are present around
+each rectangle by default.
+
+Here we can confirm that the missing values from IMDB ratings and votes
+are indeed missing for the same rows in the data frame, since the orange
+lines show up on the same positions throughout the index.
+
+We could consider dropping the NaN values before moving on, but it might
+also be a good idea to plot both with and without them, to see if any of
+our conclusions changes and then look into as to why that is.
+
+Ultimately, domain expertise should also be involved in the decision to
+drop the NaN-values if possible and understanding why they are present
+is important before deciding whether to get rid of them.
+
+---
+
+## A statistcal summary is useful to complement visualizations
+
+``` python
+movies_extended.describe()
+```
+
+```out
+       Running Time min  Rotten Tomatoes Rating  IMDB Rating     IMDB Votes
+count        500.000000              421.000000   480.000000     480.000000
+mean         110.688000               51.439430     6.257083   39356.354167
+std           19.827883               25.651497     1.125484   43170.968439
+min           72.000000                1.000000     2.200000      33.000000
+25%           96.000000               30.000000     5.575000   11617.000000
+50%          108.000000               52.000000     6.400000   26498.500000
+75%          122.000000               73.000000     7.100000   52527.000000
+max          222.000000              100.000000     8.800000  364077.000000
+```
+
+Notes: Now that we are aware of what data types we are working with and
+how the missing values are distributed, let’s start visualizing the data
+that is not missing!
+
+Visualization is a critical component throughout EDA as it is key in
+communicating information about the data to us.
+
+We will start by visualizing the distributions of numerical data, in
+order to familiarize ourself with how the values are spread out for each
+numerical column.
+
+Before doing so we will print out the summary statistics for these
+numerical columns.
+
+While it is difficult to make statements about how the data is
+distributed by only looking at these numbers, they are useful to have
+available for crossrefernce when visualizing the data and also give us
+an idea of what to expect when creating our visualization.
+
+After visualizing the data, we can go back and look at these numbers to
+ensure ourselves that they align and that we don’t have a typo somewhere
+causing an error.
+
+TODO Should we show this before visualizing to set expectations or after
+as a control? If we do before, one can technically scroll back in the
+notebook which is probably what happens in reality, but hard to
+represent in a linear slide show.
+
+---
+
+## Visualizing the distributions of all numerical columns helps us understand the data
+
+``` python
+numerical_columns = movies_extended.select_dtypes('number').columns.tolist()
+(alt.Chart(movies_extended)
+ .mark_bar().encode(
+     alt.X(alt.repeat(), type='quantitative', bin=alt.Bin(maxbins=25)),
+     y='count()')
+ .properties(width=250, height=150)
+ .repeat(numerical_columns))
+```
+
+<iframe src="/module4/charts/02/unnamed-chunk-6.html" width="100%" height="420px" style="border:none;">
+</iframe>
+
+Notes: Specific to EDA visualization is that we often to create quick
+overview charts (similar to the table we just printed), and worry less
+about the details such as axis labels and titles.
+
+To create these overviews, we can create the same type of plot for
+several columns and lay them out as subplots within a figure.
+
+Previously, we have made subplots via faceting, which uses a categorical
+column to filter subsets of the data in each subplot, and all subplots
+have the same columns mapped to the X and Y axes.
+
+Here, we will see how we can create figures where the X and Y axes are
+different between subplots, and all the data is present in each one of
+them.
+
+To achieve this in Altair, we say that we *repeat* the same `Chart`
+setup for multiple columns.
+
+Instead of typing each chart out manually out manually we specify which
+columns we want to use via the `.repeat` method of a `Chart` object, and
+indicate with `alt.repeat()` where these repeated columns should be
+used.
+
+Since we are not using the dataframe column directly, we also need to
+specify which type the repeated columns are.
+
+A great first step is to visualize the distribution of each of the
+numerical variables to get an overview of how our data is spread out. To
+do this, we here create a histogram chart and repeat it for each of the
+numerical columns.
+
+This overview tells us that most movies have a runtime around 90-130
+min, but there are some that are shorter and some that are longer. Most
+movies have less than 80,000 votes, but there are some that have a
+really high number, skewing this distribution.
+
+Interestingly, the distributions of the ratings from IMDB and from
+Rotten Tomatoes don’t look at all the same! The Rotten Tomatoes ratings
+are much more evenly spread out than the IMDB ratings and only fall off
+towards the extreme ends of the rating range. This is unexpected since
+they are both the result of people voting on movies online.
+
+When we discover such particularities during EDA, we would take note of
+them as something to investigate further later, and then keep it in the
+back of our head when interpreting the rest of our EDA.
+
+Our EDA is already helping us finding interesting aspects of the data!
+
+TODO should we do densities instead? I personally don’t like the extra
+steps invoved in creating them in altair.
+
+---
+
+## Repeating columns of both X and Y lets us effectively explore pairwise relationships between columns
+
+``` python
+(alt.Chart(movies_extended)
+ .mark_point().encode(
+     alt.X(alt.repeat('column'), type='quantitative'),
+     alt.Y(alt.repeat('row'), type='quantitative'))
+ .properties(width=150, height=150)
+ .repeat(column=numerical_columns, row=numerical_columns))
+```
+
+<iframe src="/module4/charts/02/unnamed-chunk-7.html" width="100%" height="420px" style="border:none;">
+</iframe>
+
+Notes: Equipped with the information about each column’s data
+distribution, we move on to exploring the pairwise relationships between
+columns.
+
+This type of visualization will help us understand which columns are
+correlated to each other. For example, we might hypothesize that the
+ratings on IMDB and Rotten Tomatoes are correlated in the sense that
+movies received either a high or low rating in both, although the exact
+values might not be the same.
+
+Instead of looking at just this one relationship, we visulize all of
+them to be able to answer the same question for all pairs of columns. To
+create this visualization, we need to use `alt.repeat` on both the axes.
+
+In the last slide we used it without arguments, which means that we are
+repeating all the columns. Here we specifically set the rows and columns
+attributes to ensure that our repeated chart will include all the
+pairwise combinations of the dataframe columns.
+
+In the resulting visualization, the diagonal compares the column against
+itself, so this is not very interesting. The same pairwise comparisons
+are also repeated above and below the diagonal, so we will focus our
+attention only on the six plots below the diagonal.
+
+This type of visualization is often referred to as a scatterplot matrix
+or pairplot.
+
+Unfortunately, these plots are saturated, so although we can see that
+there might be some correlative relationships, we should remake this
+plot as a 2D histogram heatmap, using the techniques we learned in the
+previous slide deck.
+
+---
+
+## Repeating columns of both X and Y lets us effectively explore pairwise relationships between columns
+
+``` python
+(alt.Chart(movies_extended)
+ .mark_rect().encode(
+     alt.X(alt.repeat('column'), type='quantitative', bin=alt.Bin(maxbins=30)),
+     alt.Y(alt.repeat('row'), type='quantitative', bin=alt.Bin(maxbins=30)),
+     alt.Color('count()', title=None))
+ .properties(width=150, height=150)
+ .repeat(column=numerical_columns, row=numerical_columns)).resolve_scale(color='independent')
+```
+
+<iframe src="/module4/charts/02/unnamed-chunk-8.html" width="100%" height="420px" style="border:none;">
+</iframe>
+
+Notes: Here, we observe that the ratings from the two online movie sites
+indeed appear to be correlated. We can also see that the range of the
+ratings is compressed along the IMDB axis, just as we saw in the
+histogram.
+
+Thanks to our repeated charts, we can quickly assess if there are clear
+correlation between any other of the column pairs.
+
+There seems to be a correlation between the IMDB Rating and the Running
+Time and also one between the IMDB Rating and the number of votes
+(although this one might not be correlated in a straight line).
+
+Pairs of columns that appear correlated in this visualization are good
+candidates to explore further with formal statistcal testing to assess
+the strength of these correlations.
+
+We should also use our domain expertise to understand why these columns
+might correlate and the nature of their relationship (for example, if
+one directly causes the other one to change values the relationship
+would be directly causative).
+
+However, as interesting to explore later could be columns that we had
+expected to be correlated, but appears not to be in this plot.
+
+Note that we the colour title to `None` to save some space between the
+subplots, and since it is the same for each colour bar (“Count of
+records”).
+
+To get more resolution of the counts for each column pair, we resolve
+the colourscale to be set individually for each subplot. Otherwise the
+high counts in the few bins of diagonals would drown out the counts in
+the other plots which would have the same colour almost everywhere.
+
+TODO I am guessing it is too complicated to show df.corr() and talk
+about pearson and spearman here?
+
+---
+
+## Repeat also allows us to explore the relationship between categorical and numerical columns
+
+``` python
+categorical_columns = movies_extended.select_dtypes('object').columns.tolist()
+categorical_columns = [col for col in categorical_columns if col != 'Title']
+(alt.Chart(movies_extended.drop(columns='Title'))
+ .mark_boxplot().encode(
+     alt.X(alt.repeat('column'), type='quantitative'),
+     alt.Y(alt.repeat('row'), type='nominal'))
+ .repeat(column=numerical_columns, row=categorical_columns))
+```
+
+<iframe src="/module4/charts/02/unnamed-chunk-9.html" width="100%" height="420px" style="border:none;">
+</iframe>
+
+Notes: In addition to repeating charts with numerical data only, we can
+use the same principles to explore the relationships between the
+categorical and the numerical columns in our dataset.
+
+Here, we spread the three categorical variables out along the columns of
+the plot to be able to answer questions regarding how the different
+categories compare, e.g. which genre has the longest running movies?
+
+The categories labeled “null” are the ones which are missing a value in
+that categorical column in the dtaframe, but still has values in the
+numiercal column that is plotted on the x-axis.
+
+We have also removed the “Title” item from the list of categorical
+columns, as well as dropped it from the dataframe, since it would become
+a giant plot if all thuosands titles were included without limiting the
+plot height. sort the columns according to their
+
+So what is the answer to our question, which genre has the longest
+running movies? It seems like Westerns, Musicals, and Dramas have the
+longest run times and we can also see that for the other plots it is
+Dramatization and Historical Fcition as well as PG-13 an R rated movies
+tha run the longest.
+
+You might have noticed that it was a bit hard to compare the boxes
+because they were not sorted. Since Altair requires a list of names to
+sort boxplots, we would have needed to pass a list of all the names from
+all the categorical columns, which would have looked like this:
+
+``` python
+running_time_order = []
+for groupby_col in ['Major Genre', 'Creative Type', 'MPAA Rating']:
+    running_time_order.extend(
+        movies_extended
+        .groupby(groupby_col)
+        .median()
+        ['Running Time min']
+        .sort_values()
+        .index
+        .to_list())
+...
+alt.Y(alt.repeat('row'), type='nominal', sort=running_time_order))
+...
+```
+
+TODO I will revisit to name dataframe columns something else since it
+gets messy here when we have plot columns and dataframe columns. Maybe
+“variabe” as Tiff originally suggested, but that can be ambiguous when
+there are variables outside the dataframe. Feature is a bit ambiguous
+too, the most specific might be “field”, but that’s probably also the
+lest used… might just go with ‘variable’.
+
+---
+
+## Exploring the categorical columns helps us understand the data further
+
+``` python
+movies_extended.describe(exclude='number')
+```
+
+```out
+       Major Genre         Creative Type MPAA Rating             Title
+count          497                   496         497               500
+unique          11                     8           4               500
+top         Comedy  Contemporary Fiction       PG-13  Secondhand Lions
+freq           122                   271         213                 1
+```
+
+Notes: Next we look into the categorical columns. As we saw in last
+chapter, we look at the counts of observations for the values in each of
+the columns.
+
+As above, we start by printing information about the most frequently
+occuring categorical values in each of the columns.
+
+We can already here see what the most commons values are for each
+column, but let’s visualize these in a bar chart and crossreference this
+table with our plot on the next slide.
+
+---
+
+## Visualizing the counts of all categorical columns helps us understand the data
+
+``` python
+# TODO remove this line when the box plots work
+categorical_columns = movies_extended.select_dtypes('object').columns.tolist()
+(alt.Chart(movies_extended.drop(columns='Title'))
+ .mark_bar().encode(
+     alt.X('count()'),
+     alt.Y(alt.repeat(), type='nominal', sort='x'))
+ .properties(width=200, height=150)
+ .repeat(categorical_columns))
+```
+
+<iframe src="/module4/charts/02/unnamed-chunk-11.html" width="100%" height="420px" style="border:none;">
+</iframe>
+
+Notes: To answer how the counts are distributed between different
+categorical vaules, we will create a bar chart for each categorical
+dataframe column.
+
+The syntax here is very similar to when we created the histograms, but
+we don’t use any bins, and the axis type is now nominal instead of
+quantitative.
+
+We can see that most movies are dramas and comedies, and fall withing
+the R and PG-13 ratings. Our plot for the titles look horrible because
+there is not enough room to plot one line per title.
+
+We could have incuded the title column here to check that no two movies
+have the same title. After that we can safely skip that subplot since it
+is rather messy with all the hundreds titles.
+
+However, since this is EDA and not a plot created for communication, we
+could also have left it in and carried on.
+
+---
+
+## Repeat can also be used to explore the counts of combinations of categorical columns
+
+``` python
+(alt.Chart(movies_extended.drop(columns='Title'))
+ .mark_circle().encode(
+     alt.X(alt.repeat('column'), type='nominal', sort='-size'),
+     alt.Y(alt.repeat('row'), type='nominal', sort='size'),
+     alt.Color('count()', title=None),
+     alt.Size('count()', title=None))
+ .repeat(row=categorical_columns, column=categorical_columns)).resolve_scale(color='independent', size='independent')
+```
+
+<iframe src="/module4/charts/02/unnamed-chunk-12.html" width="100%" height="420px" style="border:none;">
+</iframe>
+
+Notes: The same repeat principles can be used to count combinations of
+categoricals, helping us get more resolution into where the data lies.
+
+This plot should be read similarly to the pairplot we made earlier, so
+ony look at the three plots below the diagonal.
+
+In this plot we can see that Contermporary Comedies, as well as comedies
+rated PG-13 and dramas rated R are the most common combinations in our
+data.
+
+In the fact, there are so many more of these than some of the others
+that we should be careful if we proceed to perform any statistical tests
+on this data as many such tests are not robust against samples sizes
+that are this unequal and we need to adapt our testing strategy
+accordingly.
+
+---
+
+## Altair’s grammar allows us to repeat facetted charts
+
+``` python
+(alt.Chart(movies_extended.drop(columns='Title').query('`MPAA Rating` == ["G", "R"]'))
+ .mark_boxplot().encode(
+     alt.X('Running Time min', type='quantitative'),
+     alt.Y(alt.repeat('row'), type='nominal'),
+     alt.Color('MPAA Rating'))
+ .facet(column='MPAA Rating')
+ .repeat(row=['Major Genre', 'Creative Type']))
+```
+
+<iframe src="/module4/charts/02/unnamed-chunk-13.html" width="100%" height="420px" style="border:none;">
+</iframe>
+
+Notes: Thanks to the flexible grammar of graphics in Altair, we are able
+to repeat complex charts, such as those already containing facets.
+
+In this case, we are interested in comparing the counts of the Major
+Genres and Create Types within each of the `G` and `R` MPAA RAtings.
+
+To achieve this, we first facet the chart and then repeat it, combing
+the principles we have learned so far in the course.
+
+Now we can answer questions such as which the most popular genres are
+within each of the ratings.
+
+As we might have expected, the top genres differs depending on the MPAA
+Rating, and there are many genres that are not even present for the
+famiy rated G movies.
+
+---
+
+# Let’s apply what we learned!
+
+Notes: <br>

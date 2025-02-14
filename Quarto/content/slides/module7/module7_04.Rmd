@@ -1,0 +1,469 @@
+---
+params:
+  dynamictitle: "module7_04"
+title: "`r params$dynamictitle`"
+output:
+  md_document:
+    variant: gfm
+    pandoc_args: "--markdown-headings=atx"
+---
+
+```{r setup, include=FALSE}
+source('../../../../slide-setup.R')
+# Remember to also manually update the YAML title above
+```
+
+type: slides
+
+
+# Sharing Altair Visualizations
+
+Notes:
+In this module
+we will learn how we can share our visualizations 
+with others,
+both online and offline.
+
+---
+
+## Charts are easily saved as HTML files
+
+```python
+import altair as alt
+from vega_datasets import data
+
+cars = data.cars.url
+chart = alt.Chart(cars).mark_circle().encode(
+    alt.X('Horsepower:Q'),
+    alt.Y('Miles_per_Gallon:Q'))
+
+chart.save('cars-scatterplot.html')
+```
+
+Notes:
+The easiest way to save Altair charts is as an HTML document
+via the `save` method.
+That is what we demonstrate here in this slide.
+
+An HTML file then can either be incorporated in a web page 
+or sent to anyone via email.
+When someone opens an HTML file containing an Altair chart in a web browser
+they will see the visualization,
+including any interactivity you have used!
+
+This is all you need to know for sharing your visualizations
+to be viewed on a computer with others outside of Jupyter,
+but read on for more technical details about how this works
+and how you can save to other formats than HTML. 
+
+Other formats than HTML can be important when you want to share
+the visualization on a paper medium
+as opposed to in a digital environment.
+
+---
+
+## How are Altair visualization rendered?
+
+- Altair does not create images to represent charts
+- Instead if create Vega-Lite code
+- Your browser knows how to render Vega-Lite code as graphics
+
+Notes:
+It might surprise you that it is easier to save as an HTML document
+than an image file in PNG or JPG format.
+After all, plots are images aren't they?
+
+To understand this,
+let's look into how Altair visualizations are constructed.
+
+In the beginning we mentioned that Altair
+uses the JavaScript library Vega-Lite to generate its visualizations.
+This is great because we get access to many interactive features
+that build on web technologies such as JavaScript and HTML,
+and our visualizations can easily be incorporated in online contexts.
+
+This also means that what Altair does under the hood
+is not to generate an image of the visualization,
+but the Vega-Lite code required to construct the chart.
+
+This is similar to how graphical elements work on webpages.
+All the buttons, banners, etc that you see when you go to a web page
+are not images but HTML code
+that your browser can convert into a graphical elements such as buttons.
+
+Vega-Lite code is rendered in a similar way.
+Modern browsers know how to draw graphical elements from the Vega-Lite code,
+so we never need to create any images.
+
+So what does this Vega-Lite code look like?
+
+---
+
+## The Vega-Lite JSON specification for charts
+
+```python
+print(chart.to_json())
+```
+
+```json
+{
+  "config": {
+    "view": {
+      "continuousHeight": 300,
+      "continuousWidth": 400
+    }
+  },
+  "data": {
+    "url": "https://vega.github.io/vega-datasets/data/cars.json"
+  },
+  "encoding": {
+    "x": {
+      "field": "Horsepower",
+      "type": "quantitative"
+    },
+    "y": {
+      "field": "Miles_per_Gallon",
+      "type": "quantitative"
+    }
+  },
+  "mark": "circle"
+}
+```
+
+[Open the Chart in the Vega Editor](https://vega.github.io/editor/#/url/vega-lite/N4IgJAzgxgFgpgWwIYgFwhgF0wBwqgegIDc4BzJAOjIEtMYBXAI0poHsDp5kTykBaADZ04JACyUAHJQCMlAFYQ2AOxAAaEFBUAzGmTShiNOAHcDmlZhrKGbBhAAScPVjQBmAAweNW5VZt2EADqNAAm9GhiXgC+0RqhSJgoqKAMAE6CaBjYeIS8FNR0jCzs+QIJSRBwmBAEFUgEUEhpEApKqnEgcMpaodb6KSAAHua6cIKhWQ5sLXA4bCZwaeogmACeOHBZAI4MSH50iTSkIJ1ro8YTWQCyNIJwEAD6m2mPAOJIgoIqK+ubO3sDkkrCdYhpkGkANZZKA0NJQe6nIA)
+
+Notes:
+Instead of creating a new programming language to store its code,
+Vega-Lite uses the established JSON file format.
+
+JSON is already widely used on the web as a storage format for text data,
+so this approach means that Vega-Lite does not need to reinvent the wheel.
+Instead, there are rules for which words are allows to appear in the JSON
+file for it to be valid Vega-Lite code,
+which is referred to as the "specification" (or "spec" for short).
+
+You can see an example of how this looks for an Altair visualization
+by using the `to_json` method as we have done in this slide.
+
+You can see that the words are the same we use in Altair,
+but the format of the JSON specification
+is a bit more verbose than  the Altair syntax.
+
+You can paste this JSON directly into Vega-Lite online editor
+and you will see that it renders correctly.
+We included a link for this in the slide that you can try.
+
+You can also click the three dot action button
+and select the "Open in Vega Editor" entry
+to achieve the same result,
+try it out!
+
+---
+
+## The JSON spec is part of the saves HTML file
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://vega.github.io/vega-datasets/data/cars.json"}, "mark": "circle", "encoding": {"x": {"type": "quantitative", "field": "Horsepower"}, "y": {"type": "quantitative", "field": "Miles_per_Gallon"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json"};
+...
+```
+
+Notes:
+If you look at the HTML file we saved in the previous step
+you will see that the JSON spec from the previous slide is included 
+as you can see in this slide.
+
+Also included is some additional code
+that tells your browser
+to use Vega-Lite's web libraries to render this JSON spec.
+
+We cut the HTML off here to fit it on the slide,
+but if you open the file you will see
+that there is also a section on how to emit error messages.
+
+---
+
+## Charts can be rendered offline
+
+- [Link to install the offline Vega-Lite extension in JupyterLab](https://altair-viz.github.io/user_guide/display_frontends.html#displaying-in-jupyterlab)
+- Code to include a fallback image representation of your chart for offline rendering:
+
+    ```
+    alt.renderers.enable('mimetype')
+    ```
+    
+- This does not change how your chart appears, it only includes a an image-representation of the chart which is saved as a string of characters in the notebook.
+
+    ```text
+    "image/png": "iVBORw0KGgoAAAANSUhEUgAAAfQAAAF3CAMAAABkLEnOAAADAFBMVEUAAAABAQECAgIDAwMEBAQFBQUGBgYHBwcICAgJCQkKCgoLCwsMDAwNDQ0ODg4...
+    ```
+
+Notes:
+Given that displaying the JSON spec correctly depends on a the Vega-Lite web libraries,
+our charts will only render if we have an internet connection.
+
+If you are working offline and want to render charts in JupyterLab,
+there are a few different options.
+
+If you want interactive chart elements to work,
+you need to install a JupyterLab extension
+that downloads the the Vega-Lite rendering library to your machine.
+[The steps for installing this extension are outlined in the Altair documentation](https://altair-viz.github.io/user_guide/display_frontends.html#displaying-in-jupyterlab)
+
+If you are happy with seeing a static version of your charts when you are offline,
+you could instruct Altair to use the Vega-Lite libraries
+only if there is an active internet connection
+and otherwise use and image for the plot.
+
+To do this,
+you can include the code from this slide on top of your notebook,
+just after your import statements.
+This will not cause any changes to the appearance of your chart.
+
+---
+
+## What if we want to save our charts as images instead?
+
+- The three dots action button can be used to save images manually.
+- `altair_saver` enables saving of PNG and SVG charts .
+    - [Instructions for how to install and work with Altair saver can be found here](https://github.com/altair-viz/altair_saver/).
+    - The syntax is the same as before `chart.save('my-chart.png')`
+
+Notes:
+If we want to save a chart as a PNG image file
+we can use the three dot action button
+as we saw in the very first module of this course.
+When we are clicking the "Save as PNG" entry in this menu,
+the browser converts the Vega-Lite spec into a PNG image
+that is downloaded to our computer.
+
+If we want to save an image as a PNG programatically
+we need to use a helper package called `altair_saver`.
+This package let's Altair access the save functionality of the browser
+in a similar way as when you click the thee dot action button.
+
+[Instructions for how to install
+and work with Altair saver can be found here](https://github.com/altair-viz/altair_saver/).
+After it is installed,
+you can save as PNG by typing `chart.save('my-chart.png')`.
+
+---
+
+## What is the difference between saving in different formats?
+
+- PNG is a bitmap/raster format
+    - Use to store data in a fixed grid of pixels
+    - Good for photos and complex illustrations
+    - Zooming in causes the image to become blurry/pixelated
+    - The file size depends on the number of pixels
+    
+- SVG is a scalable graphics / vector format
+    - Stores data as text with mathematical formulas
+    - Good for simpler illustration
+    - Zooming in retains perfect quality
+    - The file size depends on the number of objects and their complexity
+
+Notes:
+In additional to saving as PNG,
+we could also have saved as SVG
+by changing the file extension accordingly.
+
+What is the difference between these two options?
+
+- PNG is a bitmap/raster format
+    - Stores data in a grid of pixels of different colors
+    - Zooming in causes the image to become blurry/pixelated
+    - The file size depends on the number of pixels
+    - Often ideal for photos and complex illustrations
+    
+- SVG is a scalable graphics / vector format
+    - Stores data as text by describing objects with mathematical formulas
+    - Zooming in retains perfect quality
+    - The file size depends on the number of objects and their complexity
+    - Often ideal for simpler illustration such as most charts
+    
+Saving as HTML has similar advantages and disadvantages as SVG.
+In fact HTML uses SVG for creating the graphics.
+
+Another common format is PDF,
+which can be a combination of raster images and scalable graphics formats.
+`altair_saver` allows you to save as pdf,
+but you have to follow specific installation steps in the instructions
+we linked to in the last slide.
+
+---
+
+## Working with large datasets
+
+```python
+print(chart.to_json())
+```
+
+```json
+{
+  "config": {
+    "view": {
+      "continuousHeight": 300,
+      "continuousWidth": 400
+    }
+  },
+  "data": {
+    "url": "https://vega.github.io/vega-datasets/data/cars.json"
+  },
+  "encoding": {
+    "x": {
+      "field": "Horsepower",
+      "type": "quantitative"
+    },
+    "y": {
+      "field": "Miles_per_Gallon",
+      "type": "quantitative"
+    }
+  },
+  "mark": "circle"
+}
+```
+
+[View spec with the full data instead of the URL in the Vega Editor](https://vega.github.io/editor/#/url/vega-lite/N4Igxg9gdgZglgcxALlANzgUwO4tJKAFzigFcJSBnAdTgBNCALFAFgAY2AacaYsiygAlMiRoRQBmDgF9p3OgENCCvCCgKAtphQhFygLQw2AJhYBWNgoBGANgCMLAJyW7EmxLN2A7ArZ3nLHY2xh4gciAaCgBOANY6YHBRYAA22tyYUJB0JEioIAAeqoQAngAO2sggAI6kCkRwysRoaSDwmMl0OoIQUZSYpRDYmFFh3MVFZRXVtfWNcM0g3G0dOgCycKmUAPrlUVsA4grJydBh4QAklGCMmJE6YoSllMgA9C-NCAoAdAgNjKRWL5wCAvK43SLvTCffTJBqYd4sL4ADi+di+ACtKKd5EoFH1CJRVHoFIYTOZLLYHM4FK53J4fH4AkEQmYUABtUAAOU0U2umDQUQgqUIAAI+c1jpgRZFYVZSIsQOtNjthgcjicoCg7EjuABhYqwqB0YaE5A6kAAETglFKyQUYFuGXEyCkXm43V6-UGwy1Um41BECDEWxIW2SVlNHjYLG4AEEwA7UlElMDNcg7MZuABNTDRHT+LxsfR+Yt2AAqHGQlY4CoA8lFECQdABVADKsdGXJ5OjlcDAMRFlBiBuiA4kxjYCqVmG2uzVx1O6bMeoNJGNvRQ5qtNrtDq0REkFndPT6AyGI3TNmXIADokIIagYYjkhsjgkcYT7WGKcXdjR15zPNKgLIsSz8Cs2CrSCa24etGzTEA2w7OQuy0HRbWKDQKCYQclHaWFCBaadZ1VQ4FzTbUV0NddTS3a1bXtR0DxdSiQA9U9vQvOwjxvQNg1DcNIxYNwP0Tb9iF-Oxs1zC8QBA0tSwgqCoLrBtfgQpDOxAbk0MqTQwBFKJMCsdpB0ocRuGIlU9jIjUtRsKi1xNTduG3Bi9ydSRo2PT0zx9JcuF4u8HyfISJHfEB4zE5MJIozMQEA2T5LA8tq2gydYLUptKk0lDtO7SoYB6OgRUIHoSAgKcNhnaz5zs9M3RAfVqOcs1XPo3cmOdKR4vYr1zy1dh-T4+8BOfF0WCcUSvxi1MtTYL4AJk-NHELBTwLSlTMvglt2y0nSpiKqISs+O18iwEULAyxVqpImz1V-a9mqcjc2stDrGP3Z0WGMRwfI4gb00cc1byDUbH0E1gJECaakx-CjAsSla1pSpS0tUnacr2vKDviG4BSFTBRTgDRSiOFRLNu2rbN-GMmtXI1WrondPs85BzDpvq-IvYwJ2G4KxtNYSzDpqKZvhlA-oS5bgNW0C7EUzaYJAOD1N25DOFQqYMKw0gcJgUgomKEU4FNqrlTnGmKLp57Gde5n3K61ghrYk9+v84xuP5sGQsh9mJAzWHxLms1FukoC5Ll9bUvSraVayjTsc1-LdJAAZ6ntMVcUNCmbot0iHutxy7do9qWY85jzGvLnOJQXnr1B-iIfGybjGvMW4di+bw6SqPUaV67VeyxCk61nR9JFTQrDxSgFDoHoRToW1zZqy3C61J6GZolz3vLp2XWcf73a4w+gp9wXJCRHiO+DxcUSWiPkoVjbY+VofE41sfKgSQhBQyRfKD6E9iKMmxw8QrzunVRcZBjjF23uzMujsvq+gijXQGf4G4jV9uNKQp8b6zV-F4MO0tH592fjHZSb8E46AAKKGwgOUfaBVwD40FMKMU+N8JSgIJAQ2lARQAApKDYAAJQQOpuvZAMDkhwKZogzqyCXQ8TQf5IImCBbNyFg4eK+CJbpn-D3ZG8tFav0HtQrGn8U6HWKqVcqUAICCOEWIym+d7rkRQNI2R9t5Gs2Yh4KSrtfK1yXBFRu4NQqsDYNDIOBCKIBKRrLFG5C0bpQxmrCxTDU462wowXChFjhwkcaI8Ra93FSNILA+mLVvG7yQWzCQSJUFu25lqLw6jz6aNYEEBykVPydxDnYBaD9e5JJMZQsxmMR6WNxnpDQBkjImWSGZUUQjikuNXgXMpniqkvVLrUhR9SbCBRUVxNp3sm4RJdFfQKuiu76MMYk4xL9xlpOHrlZOMzdAQDoAgbhjB1QZF+VEQcREqalPql7HZJcd5uQOX4xpR8WkNUCmE7BkYzDuBiXowZDzI6jOeejba6SpmZO1skTCOSRQAHIwCkEUCKaG10rLgtpl4vZsLfHdRdic+yKKsEXxdEcqWtyQ7mgSXip5FDCXx0me8r+rQbEaCoMoKACARRWAgJQfhPUSmbPqts228CHZwu6iYRFwSHB8o0Zc8KZgIoirvrip+YzpXv3VqSvG-I2FE2lLwbh0QTi6rcRCze1T2UfQrt9Dg5r0E8VRQKiQXh7BYruY4Yh4rnUEtSUSt5o8rE9lIH2AcM5GhSmwAoBA0AinOLzhs4NrKoVGp8ZG1gZhq7NOCfXc54S-ZSCRD0h1CMnVkJddmmVxK5X5sqGVYoEBlBih6NABQ0pRwmzgEGqBaZTBstYM2-ef4mlBMBo4dpFy-YhC8Dovpt8KLDKMdHFJcc3WVAAFIKDJpqHGzDsl61yXQZVPp1mQKtnXeKhrWo9I5S2oG5oeXIBPd2tFddGn2uvbEje6aZYSofQPV5H8PWzIMowHoUAiYbpA+mc04HXqQYjfuxwUs4OrUQwK4wXgvCizQ9iswmHSH4qlWO59JKv2pyOiVSIzQGz9nI5Iz2O7kC0b3ooicxyO2AyvixzpyA25IkaoO+yw7+OPqobKvNny9CUFIFAEByRPBMrBXqxcbH5N0yg-vZjgSAb+SRCDflWnPZ+l6dFbFiI72PJw6YvDOg30foIyANAQoYjCIrf-A9dhF7tFIPkKUfRFCaiAxIspxgenUaFnuxRHm4MsB6fGrT2oPAppDhOXjIzJXGYmcSuhgpGEie1pgUgvy52XWjDJorobdm7v2ZyrUOLPPH03I1WrlziuXsa4Qlr97+6RZzQhLrDDtC9fHnSuAIpBlsBFMkQkBWWVbptlvVqrm6OKMGY1JjVqOnLeEjcrjdyHAbfC1tl5O3aH0J6x85hs9rAigY6C1xm667jehQgqb0HBmczU-5BDZ8z3jQve3H7AyiFhew4D115iQB7bB-KqwGhsAihU8YUb9VisufK2zDMAS4MHs08tkInHgu-eMP9knyTcPA8qJTg74PU4TwQEZDQhomdOYCaVlAim6nMX8IxjHF5T5LfPTYFg5p9NLkM21sX47c3TOYWJkUMA272bhxR2bqu3pucUW4VTR6PaQv1y3ew+OBcDLphmkdWan3k8nZ88UxswATiV0OxtciUf71dDGj20bsc9pbomgdBPHpm4i0Dy3+HDuVHnj8qUdAVMJ5m-J4102WKwZ13XWbfuhYNKvUH38EhheZoExH0z1vU6MBOxmDgnRruObTFLV3DfoNSHR97k+oS-OXJYF4cca2KL30L6TwTkezPMIs1Zmzdna-acaq7x7Sm2aVZb2aXz1rz2uG+9362ffVrkNHYP4lMW6hxbijeqigfDLohDKzMrT7Ias4p7PbcoP565r7nrFb87iy-Y8bE4Fjf7h4mYTpH6pwzpzrLqQCCjqAX5twwHu7s6uDp666nrZ6mi8zGDG755FwkIjLYED64HDz-6frS7WLHQgIkBlTkGI7wI34a7OjAy0EeIVIyJZ5IbabRh57v5ahSyh5eCcHtZRYZJl7xaJbJa-LWaWa7DqqYBEypCnbeAX4Gr3avQSEmqSyvYP5G485+wFgsGqFKGGZaEW5CaS5xay7y6K5T71oUSz52Gmjq6OHaZb5zZIpnZuG47uCoH9I94+FF5k5D5xY-o4Szz5IETcLKoQAaAX5BDybRGN5drxEWpsD0GKHQwSDCqsEYaYFf6ZEH7ZF6FAGEyijihcIrqyjyihHw4NQVFs7MQO4yHpiZ7t6SDjjNFeHcSf6aEdG-5W5xa25lQNj2LDaO51qjH+DjGwFsxTE1HqZP4fa9o9Tb6tEZH77rGl78HjxzIrrKDzwjAjHO5UaRFq4THOghC9QP6JEKEJrMGeFoEDIYH3Gi7bYl7urdGsK9EmykzkxlF3ZhowpPb1LKLAlXhJFCwTiLGQm-jxQaG+FwlCZR7fq8BwCZxgDZwkDLpWCCgDb-KlFfGSIOD17-GRJe5eanL1ECqTSG63H6IrEUnF5Un4ECEnTkznRShXTok8knF+KeDTHcSr7P4tzcSpE3q+gSlrHcFPHyq5G5IGxGxrrrqcllLclJ41JUF+KsRc5xpIEtxsCOAqEkkUQRTklGkdYbF6EV6-K+rqCQDVplFga-Fu7YnwqHoClahIjvY45CwnqB7ekzaGkPHGkInPGFQ2K8JECWmUA1CJBSirI1qQFhG+gqmOlRr8nzbIoEmsAcZelpFxQwk-45m6F5lpy0mZyzwwDRAnYVllERRz68nsyZ5c5nKglaaeAuwm6BzsHIySlZF4HD5TATzEZRCkaig2g9DKAap6wRk2kQo-GYkKaTk6Yalt5umMGeld4Znpi95tGrHZkBkmlTosJerImgGnm1rAayZRmXkOGN6WrTGrZzmfZsAQntlqGdk4Gfm5mmn9kGTwALKJCT6AWFYQoRGXmVHQZnFc6zH3mSDMFPnwWm4rmJJrmdEbmbGKrKp1BIBnm-gXkTZXmqkAm4nL6biXEpmSCuDElUV-Zvl0WPEoXflaBJCGyx7voNj04cD7FAVFbjnRlgWo68zTH9rNnaa8xv7Pl2l+kfk6HCa9n7ZLL+AQEObVnaYcVI6aX7rlHnGY7JkMGt4hBinGVYZYH+lmUBF6HlADaYBDaL4X6BbX6TleDa58XICFh6UTgcbeVpriX+Xi4U6g5S7yrwBKCnamBWARWBRRXcX8WQU1ZkVKH4lBZGWhaIVcHIUS5ZVxaEHzokFCh2j5U2VO6SIByUGxnOiaHTHVVzENSb4pX1XaEZW8FxYn7Wbj4qW4WLgNb2llalXxVAlxWvh6VBA0E1WiViq+XtGmXTXvoAF6EJbJBJblpGG+rGhWV-jkFX4aWTn35bXuWKH1Z6noZAyTV+Hk6BW9lmlihSYxBkZsVbolYvXrWOCc4P4JXQXuFplinNZpUnXwk9nyqtXEGLrqAij-LHRlSlDkEYmcVOXPZ7VMZCn+ZsZwX6lLgrHGDpUY0gAzVBnfIhmQDJCigE0MAMKiH9W37MSrTEJwZJmJUZhtn03eCGZM3o3Smbk6CXXXUpbWYlDlAMrkHqWgWvXOFxUiyJVtzfV6IhCM3M3+HNWIm-nsKgHkHFXQ11mDQNlIqIHamMHsB00-X+Bm3y2H6K35mCGlDCEOJRBWbWDYTkEq4O0DVajaWuUXi6WI2468xS1e02A+2wlSl+2AFInsIkygK5xVmHHa2cXz6p68UJmXjU3r5sbG2C6y3m3Z1BVoVZzKA5zKmrVYlC31kamzmjXCQab7XS1klHWXqN1dFA3kq6z6xyVWllFiHJ6O1N4amulu1dIrVLmvkN2+0T05U2KnQKAKl7Ed0TnrX+Ir1alXE6m-TeW+mj1y2Z3rmBm9kTxTwzxzwLxaoWQ4U3atK1kx0ujeTx0bwfUJo2BQVLkGI0V4oP1dmNXmXyoyW0qWmRBRCllXY-1QH3Kd0xnd2sA33ANKECUeXszuCoZLHxL33j0MV6G9j9gXYzjWBGRijFEcmYN2V7Wn1L1Rgr3V1+zkiUXS1b3QMFiwNIVmXUmpxCh0CUBYRWDVQZbc3Lo+aGQQDFBHCw4HHO4gWl2Tk8OENBCgNaaTQYq30Z1wMSMyl4xGyUBJgiikbYADBRCiiCjqPJBjn-14NTnO0Wqu1X1Cw-SCNe1C5vliMNWWP+0RAKAABe9KUQ+QxgC6pAjCENCFODEUS9CNTGi2lVIQgWm95j4jp1sWehE8kQ7xC8o5qT1FXDADi+K9RjNqSIjgQT2KIT29j99Fz98qPR7C-RkoC6mQFAvQAFRdzuJdSOZdHubAetldr+el7A0hQ9XtIeVDO9NDvZtucudQtiOxDiVT7DxdnjkhXkm1czLs-dv0ddAyPSGhYTU1LNkjZKFKv6eS+EhStK5kJRoztlhxpNkzejzpwJq9-jkS7G3lqzfG9z-1u935l1CWp25g5ZTiZRDl4hk5HOt58Uo1v04UELhT4TGVgN8qythh-8gQ6WBzYzwFgtJz6YcmhDSaiVngASS5h1UL1Dw8xL35wVg2ooFgLAPzPVRWUdOt614+OlOTa92mq0Il0tqVHTFjRLltvZRk6gFSooGYQrWjsmUNYrS9npw1UsOL2ocrXt7LIy0LlJANKre9gdwd2rqlzOOjjlGLcdYtFV0rIQWOS5tzaznTklmN35c1l0gyjrS1W6aLD2ut0xLThtPm3ljUdznLCEbNvZhBesONpBy6qDA4ps4bv9sRtLMRErhDHmOLFgqdIWBLDzQmab8qwZ3CQoKyKL1TzBxbjeSzYtjTL+opyz3GirRTjzVj06ajRBC6bCnVhj52VLvzFGzmOD5Nd+szjZCbSdjBIJvrNbMLf+Z1fB1Oha9DDoRAs9UYHjODUzOJPj6CfdlVgQmem9hmEgKbUlnyZTuIHxJ90Zl7fiQDLpPbOC4DrTv2UDGhz76z3T35vTPqMocAco57tTXj+jXO5gelTRa7j7Ijq04HAb3ZCD35WzyYatdilU1TdpiHdLNxBjiaCz0YwHweKxOHSrw7kTjbE70APqnzZUbD1LtpC9DpdTQLcV3EAHkY7GemLR9LjHL7QbnySDs9qD6D6qrJQYmgkZxzMRP0sVczSz-dJ69Hkk0nEHX50eudnHClfY3CdoWqfYCH37k57A17qiILgl7M1W1zpJT7Mn+Hnytu3N2FvHEKEzTaZ96pBjZgxDihwkmK-bv2d9fGTHQ7CtORU9lKFpxs2zxhmAeWX7l5P73UQnczLnJDP0NHsXDHb5iXhLLHOdNjdjDjIos6sQwwynFAqnPHc7XJwXi9ADk0TnPMvud7m+6ZollDCX3nTzBaRaIoX4YAv8YBbcLDXzHXwrEKLrIXS9Vc0x1RenYXkDXnxnr7zCr9Gg08WqH9wKLJbX7JdneXejRyvdfDOCSIDL+3WHm+E3I7acqXrzaARwdJB4ZHUbNG15FBBjdRaHmL5Xv46dlXn3kT0Hoo9if3S33HZRernFhF+8xFwJpF0r44Xgnt2KFryMVXtbTdL9rxO5e5qLxxS9gJGpePoLMrqH0PFEfr43h3snNuiqCgkmRatPODWPymFdq7kXCaJgrLknQQRnuH8Dk3lQwN-65kgGhz873XIP4rXbCBT3D5QDvrB3cvETcWpLN1-8JhLXJkFhmjTrTmGPrrMNK7SK1WO1J6hlVFDLYH3n3Lpn1tPq+daJZHoruj61jnDTCzDGEnSxkLIyZPO7kHvnBZFARZ4wZH63PXXjYfBj4DEfbAVbgusvzHyXQVP3OEXH3zlmcoUQhVZHGv4aSHD3BjCN-dV4HnPphvRfFP8q0jsjEA8jlhGA5kxBod1oqvgXnnF7ejovCR4t67zsDG3l7T73cf1rsLb7rxcutwIRavXJwPUR15cRJFondchPZrA7y-8PLVY7bVw5ZBbb9t+rADb1lda7OLbGZ-v26ho9K-Wdky9bUHZnEAlCELqdcRWHbVHPATipQUcW7AKXksQVYX8uePnY-EoEszWZ7Ai1QtnHRKpL1BkzeOKo4Dpg4tE0H-G5oXyS7k5-+cnQ+nE3yASBBeruDJgAyyYIFj+2mDMG3wNJw8kBVAnnvayICkcd+tpfCmTTdZnNV2uvOuAHHd7S1d8iAo3hlQV4RBhgyDeSqUEUpoAbAkdOngA24jtphOMzRKhvgM5sEveSApQblU1amBBwTjPohQBSZCDmc9vdFjDXwGV0-GrnFOiN2lrQl5BnfSZD72YSI9QyhELOFEBOCDh56GnRvMh2BKs9+6sFEwTWT8EUC1+NJDOAZEy4lR1BcAQoGR2cEZ86WWfODOAQWa00xSCAswQoJq56FLB+VJEOQREEO8l6NgNwY2Smhz9KMOfNnmoXIHVcLa3WbKt+UsoroiAIA1bk5n+YuDcBLlODLey9bcQie6BPoeTwCG2tvyCgY7Kdg4CXY7a4A5ykvncEBIK2L3CFh31SGdZ1hnyeFg4gcAsBcwZRJodMN0EMsucy5HFv2iWFQkVh8fXbFcOPwc0q80QPoqwyiGT8z6hXRsiJzQ5NFSBkkc4f0K77flIcVgaHI4FSAk19hz2V4cCTvJesbAjfJcjH1J7e9-hBBa-jm1XRmx7+OgrxtxB6Rc446HwwwT0JfI-DV+u7EphZQ6C99++UoEosALKLB8AWoXfromTYFuA+2b3Kof4I2amlS+f6ADJ8UcFOYH+mPDFtrwIGSCWIZqVkTLzfIsBL+tQ3nvz2kxtthR8CYXqcWnIP5tkHw2ckuSTaj1DR5gr7tuRIzg0VR4RWkXSwZ7g82Bv0PwN5Q54jIXR1Q4vr2WCHI9xhOrPjj6JiI48DBEo8KPn0JyGYwxsohPigIJCn4rAnsTAVgz6qLtoq2nRst0NGr+Br40vL-nxgzEXCeCe7RivwJEJtsCh9hMQTpQDHmA4BRlWHumKNHpsKR7HMBF1QLF2U4iOA5gXDS2raj6sqY5XP2J4GNiraBMG2oKLbb8c1quAyAZXXmHM8jaSQsYu9zrGIi0hqcYIf00sKwc5QYoazpQFs75D4xVRafrUQlGE8exolJ0bWIHHyp32FTZUeP3Z5PiiKEXW8hKPcCHjWIGhE8asLlE8sFRbzApKEL6AskcgDA6MlaMmJg8SK2otwHtS3YGifxBHfekR12YVR0e0QhfLqJQ5sDAgMMPUcSMSQwTfhR3VOHQwHDHtCAs9ZIFlioAFssGnDezqKPD6dDqsC-BiSsWYkcisxqcNju1T3Ko9vms7CYWwQo4xEA4bQhIsVyi7mAo+RlYRtBKImJ9BCmXMibsWUmxiIUUwwoepOolxDaJ7gL4TD0XHhikR6-AyOUwu78SOG1kgTkhz-bAtaJbcPSaJV8GGTXRkTTYdkDtwQA8hXouuE8OjauCdKl9TwZ7DhHs9JJpIwYSbwMJm9rMigSgDcAAmgCnBWItmDFWGpStme-gGLkuTCnOjsp+2OLCMMiBjDyCbYrcU-yd7BJCeiVKQDIJWZZSkBgQ8kbOjaq40YxtvNMEWMnFeMmWhDMwNi0qpBAOhBElyZmNTbLjeyIbTQmONGITjo6XjBFIQ2TSdCVM5DIyjWNDHedeBskwEQum5rkE9+k2A1mKPirajPYYPIkcNNclnjDodJKwQ0Lba+SupXjU+HMM+l4DvKDU78SNLJEAy8qHA0qGAA6nlTNcsw+Gp9NMDzjTBjU+GTlL0LEYjQxBeYA+PinaZQZr0l4e9PLa5MjcGUjeBtPrFbSuR8qSvtEGGIUyWcxY8VrBVjapSSG3rD8T4N+mbTos20nKoDJFD5A0QjgCKhaKSmZNSxSKcsbk2UrBjmZp4y4YTMnovMcIf3WEHUBBHLdHhwE7HthJ15ocUCms97mYCMlBDAB9jCAH93QkEVryL49BBD06HQwzAjMy8IZntkRS4s8nFBkuiSDMAyOm4v4utUTG7jlp+PYSIeM96j0g5f0uCcZPEx89hgAvKOebJF7vToBlVAOKBL1GVDU5DsrJC3QZJt0mSFE8EZtxtHCdm+d7AkU5LiQrE054s7nueKdmLJJ4iQMEWpJiGezVE8Qu9n1zOF2zK5zzaerkiyF245K9c4eQvkhFaTaJTgduYNE7kzydAfnQgAF1KkNoV55dacec3F7GMrwIUoRjvODm0ND2HEp0EvLI7PV3ZscosW8IlHOBr5P1FOXxi7kszWJvIJEu0D6KcIBm14rmYBIMxC8PZ70wZLhOaY-ziet89OTJK3KvFPJn7PObAtjmlzP5aHTfINOxTXTkYAC7WegvQgIT0ubs9UbHMtlajCFg9JcqQsSTkLYJlCyoOxMHDDh-k2AOIOaPzmnEP5uIiUVEn9mQoNC7CliT3OAV+9RQWEKANEzAIABqRnDSIbkANis4ghIniOZ7jhXu0vAyRXLvmbMmKQ-VVGulu4h9uGdk4TgQ1GoBxtqeokev-N3mjtxpWbDqlNIjYJT0ZUhHqYDD3GeDvAIstOoHNumSziJzYwQdAqLa8ztx70k6Ti3cASKvxIyaRdJJM7HcN+wRJsBotdyYSASh-XHgGNhqcCA5080xahQyGTxzIgoLWv4qdqQUL5y2P2ZBLkFSL3FIAbGuxzv7cyqZyOXAdEjLaet9xhYSCcYrcVLi2ZcLPKarUXh4hipAtBJU-0LnHDcmvMS6aJT7FVK0Ffw3WQ21QGn49pmI1ZXSKOJltqpngkWN4K9rpKyFkS2ZZnKEICDaFSOIpa0jPmNk6ZXrYGBUrEoRLqlcyq6mS2szJgrA8jb+nEoIZzS6WEM+GmwP8BlciRQK-ZSDkOUbDXiZMB0CVJUlpNClB-HRcEg8EkNxwf4RNmiu7nICZcWws7LsLbZ19qZFy-Qe4M+mvgAVb5TJb-x1nNSgq-WPlsNhYCNLzldLUtmLVaXnoT0yC37A8rYVNSqcIKhFqYBYB0B3GbbdPu2PFY4iCBkq3HIQLuXVsuVCqoYZ8hRFoiMRG4ppfS2+W6L2VQ1PUVMoyUmq4sxM+lAkAwAGQwAaABMBFSZVDKn+tq4JHah2oxVDVsq1BdSrumIzNWAcZ6dapew6Uxlng9zjDJWI2AXVehEYdZX2nzto5Aai5QyIfxIgNlXrAysGK+CsK8UGagmXysjEWcrFVq0VSWx3E-KE5+4swBA2l6Igq1BYGteitkU6A5JzbNGc2s7aaTepxrTZW2kTZfA5V1a7pWq02Hc18qhAdVdzNfmiC+ZQa9TILMUIGVIJPGeLiMn7XUrRpci1cZx3AVXj-uN4lIDPHJlxLvAxCE+dM1ZVQiLmd7T2OGoGTHrkYp6wBYOvLwPT5JPqK7myTU6PjNFSHNeRam0nClrKt9QzABooXZKZcmCj9j0HnovqhJtiw4VCL5g+zHyZjXtatBQ0cK0NspEUKZO2LkSyOdVaDZRzC4ul21rnH6JCiXJC4SeiScjTIppWzzKUhsgHtCqPlbpNV+-ehe+oSJM9XO44PFnqJ4yMSF1wK33peqR4uyfFWA8TTHPp6jyuI3sxxR4G2XS0GNGhXjVkqAV7yTROcs0QMqEWTEm5L-Utfor8CQSiEIY-9d0vdG7lPRMKpfoSvfnErj0Yi5hdL3c3IbulF4zhIQEIiNDrVg9ODEtMSpRIf1TmIXK4pPWRanZ2ACAN8lT4DKcNj-cGROsBiN8TWUoyTrzFRARaVNzCNAHTghVQq4tY66DAiqgFIq3wMqhjhls821rFVnyN1aTM9V+rrVsNaYiGs6HeAfWYWr4Epr7VPLzqO0h6XiHKBZc9huC+ngwrmYyayVV4MJdiiITzr5ttW0TCRLqBzxl0QYOku8stFwKWlaHTtRUr-mZaTt2sFus0BPbJhBw6IVFoVroW6b4Fei2TYblS2ZSetPGrzdisYjAo6ALwddU+qJz2aeKJWzHLhORWzruNymgdfxqVrzLbqjWhoI0L+3NDupkFZza521DfTpe6WmrdjvPVDrjl1mKwEAkGQRVtNBaulglsRWu88EYW2nVGqiWfJel7VMBPGpa3uZAl-kYJULL0EVq5tZGhbfu2iXZDg6HU4nc8LpGtqkURcr1hilB0GkPNEO17bjuSDKrzA62uFSW0CwkVWNZK6EQprnX87ANmVTFZ8mBqXVogUodQbcCwDAo0AwMimYJLu4QiUdXEeDVpiaKLkjFXwcHVjupVKDeWoVfliNjI6JStVuAwjRKutkI0TcnsStU7tQ0Yq61WNIcbm0bWB609Em3AaY3B56qHy+TaXrDJe3Y7o1OgJBtlxnD6ATISi+nEmQwZPrdlAW3Aa0I1KEbHFL3Yhb9nTpHaFdfW01UELngbBdwIKDAJKHR7q6bJI8+BbP37oNJJ9AyIXGN2b3x6vuMeMUKztr6UTy68C8edK3YAzqXFBeijZZoDolQYAeA6xSKNsVBbVEgWcfTnsb1P6+NSgtjnQDOyf6NugnUPSA0IUP7UV73czTys4UgBBtIoQdAWR9WozqmAcDfenqf7QGFMdeuuNGH12UYViXgRXXFm4UjDrQpAaJqQEUZZYbeviwBgmopWEMd9uTWXRJMx0FgKDxuyoEuo1aXRqNa6iKp1OZV0tKpi0og5Rip1LEUQhuvFPwbp0IyqF+s3JNEEFB04EA-e0TQjlwNgyxV7rBAsmqFkDS01b5FQyftY6M67c+gMNv8kIDXBp4tmuJeFEMOSGYiXO9ra71Z5bteDq0aw87tb3fwnZDJHIQ6FvEPqsDgexHYxtslSaLUt+-RT5n32klyD3SnvnIwUa0o11M8QcMk3lzMHC2MtBI1UUb4ELRJefdI96Pe7BHC9QGr5JXlDL2gHE4G9rthvzX5chKBBhwNqLom1GDSM+9jN0tDmx42u0QVrhBpW6WSC85RqiT-q4h-6v1026PvnvqNZb5FgzXhBuBfmeGuKAOsCQ9sI1bt5doxgQyAG4VDgRwsQO2gcc+WxEd1qiAzcXJ+ikGZepGi49joT0ISPdzDcvrMemkEqMJoPJI17PAkN6lih2wzA0ef1NHCO52xQL9vzWPG45Py2Qx4HkNXTYT3S9OMQEzgLych+QC7D9qg2vq2YxQ4Epwbv3lq9RaII-cjDhPAHT9TsxRaEIZLhCHEdoEmVAv0MM1ujU-eBS3Lv1qJvKaIc48yYs1NHrgdXFriQXnjTwujV+xRFSeE6kqou44D4zTs2OXGti-wO2PI2OjLzcNdTZjXEKnV37bU+LKw90tN4LKCdJstHm20r1eHO2kui8H1Mm2EChj6YUzaPSlNIGDlxenli3TQFGmSovCBwTCoY2W7wK5puKq-1yYcZfTLlDQoGafqUadAwuxdCONhAwBCArhgRdzIkMc6Yiz-RstLv3XFYPjKIWPXwcoPGjBCSqCxWqnzbGA1FohA40u01xa7gkzTRKm0g+M8ZAj3xmwznW2P9EYtJRwsUMlG0EGYuOLOovttlW4nLjw6ldRoBeBAmWDHh-NT2akIEHkl6sh0Y3o2PpnulHM0OovHh38nIqR0+FR6bVzXKSG-gULUsXTqSnGzvZe07dUKnLLsDc58XRVifPxVZD6U1M4iEZOJIMzXTYM-1uzFoCRQJa3NTSw226CXeVyxKiWo+P+m+MsFwNqzUF3MIacdOccGwGtLcyoGcZrSs8a4hA6hZRyVM1xrXOqHXdzCSILE2XTxN9Awq80QcaYHHTAdAYy9KmadVMnvzJLPHf-EdOKSNAi8LAH0FvP4r-Y1W4C3fnemuFvT7558nnrfJIhM1ZiwQm0CH7iG1LNF9zAubMOfUkykF2bYZgMuXHOL9KBAMkAMj3UmDbO5ENaq9OJbbdn1YGB8bTTnHHLLe4i7JLsN5iw2CAOKe4eCvxbwTUugMTM1TOKGHLkl78qgY9V9gxQmBsy4rLwPgy6LauJFbZbl3pWZli27vjyJyOWE8jd43CBqGmOdHU9Gxik5MUqOiKYR1VeqSsVCvjn2aLR7ILaBKJKBHh9lhY6nlg3oJP1+PYbmY3rOrR+rzupQeMdaMRzqNo+TTVg2azs6ejgDJY76EtP6LO1zF7y+92WuNGcdivFuqUGIwZBchpJ8a+zrRMiKDBuEu1EFZj0VWfjrJ7Y5AvuOonryjmn5WjrgPS86zP1ga0Zbf0KBEg7JwRJsLKiVl+Tu1pHcQaSWfTPSw586xoUuvwnrrCqYy3DaiAI2BEbUlGypbbjmWHzLapJeBdEtpqQreJv40KE92A30b+lRK-polFfZZ1i1wnpDq9XQAFT41wZa9cOvwYJR+Y-m1DZWtfduFnE2ejaEwAJAjg9x0s69eKszFcJe+tNaOfxssnIma16Jv0EYDFA8VcxrdAtBemHGtFINpFIPUcUpWK1Ixw29KcJtscVtGQX7ZrbBPHGfZwQVK47outC2djNiWHcpatuJkabb83TX0bH1vHZsvV6C3indtBmX9P5NTSEP9RcmLsdQRQHyZUve09rejb2Sh1wnvGFrctq60oO4VGRToNgw8kkw1oCIuJ1fCAJTejsNQQ7Q+rRW9bmYjU3j-h6Pczb1M2IDY7d7axwxRAFX6+lHOxXMyaLWzvZkDb66HfXMPTIgCAMgPJeyxlF4j7Vgrn0dmvM8PaYlkO3ja2PZ2pzsWwC-OeGrgXuD60je79ciY5ns2T1bsxixGVU1mWhI7tevavuVWld5mOw+fjbZEJ2dB5mbCrJJUvn91FhiSW7YyvmYHpJRKAJRfcMLRXTZZ8CuXaxmG0oTtVPq90uF3tA+wl20UPmcLP2hizMKhkwmt-tWzzpngXC7jdHrp3MzEs55d+gQmzxSgTjWJajd7zQOMWNenCYOZHsfnL7nDrIzVb74KMh+UQDCjllisiPzrFl57AmZf6fSr4Hx8La-ehtHKcx1mFTPoEoDqOqbveXBzA-0RwPj0CD1jPfvxZfGuHcFnh1VY2FbCroqForAtH9XXhhl2twZHutYyNJUzPGNx4Zakum6HEKBVywfc5tBB4yBGtHVHqWK94lDHhGJ8iIUBQ4GMrlmc3ZTz2lm7HUPN4Z9LDVpqUHc+nIgKqT0igjkLAWxuvpesYsYuXOeTY4vvb62a7BN+nZUF-Pm8EggoBMMI5Us4H9zk5Ac4y3J2vmGMdl6J3U6JnQB6U6BwQskCsfd3fo395KadKfsb1pe6dbJ0tdQfpCCTBkVIG1P4SaDI6Dxg-iE8G749TAON8444DGMqDZ6ptu6xbaafjXbbaJh2-2axu86FDQD0eh8-HvE34bvAEUHxe5lC5-V5TvsxcWwtgujKRCP9Ykihdv3AirxHhBHaWRaD7+69vu14z9FvZrZPViGxC74y4vjHwbZbSrfQEa3Ob1RKo4ZoAcyPTnMVa+8ASziRGrOMRpJ5NbfUakVj+PJEBk6MqKbDMDL+W5E33klQeThdg+18FLP7WqOjI467JsvQfHe87zz57JUtILzFOhaPQ8XcH2mmkOOjqEQ0jQ7I1HVdLkZAq9rtfc2O5kL4IZChDWhftpdkPRK8QXEPQpLr5GG64Jt12H5M3IfqEJupVoLJwJy8G1ZtdMb4FD+3fdy5IdfGI3RtpsZGeT6-xjYJZQtMw0TcsHligp0LiE5+i0cDaEk7F3ilzce2lBwQyBdEZs4GRy3pRtNAG-p7dDGRuEo5MOfldZa5TwKVINPFIK2JsA1mAAAJJMU+3kw4nIKPsvh03X8mV6JUbcFhm3Gdpo-VsMjWAoVclhWSm6K2c6HHUu+ZwFexOiUjXKz3spEHyAuW3LjB-e9gagvxai1M413qeaWI8YBbe77h6+nCtTANzPNJQC4boenvsDPGTdSTuK2djXeHGwBw+7xelNXiNoRIA0BvNf3Bl5TnVS-wDHgNIno7pyyoI738Ju90TBlBPi7ODKgnugk6XMKccR67Uvp5rKnd3e5Po8i+sBAZHaAfEP6Iqtd0ongVg9HFzgVM0QnQ+Mu3dDTobAKy-tiPxW9EuYTe4TSIbWRpgDh-S94-MJsjijuq3rAauzwmrHRm7oyvPc2KtFnVggbzdOOVadTGhYDx46aPA0dycAaJtiApnQwyXtN-B9zZQAin9xKmau+9zc+EXfjGh-GuVB89q0wA9Az93s9wEEPfD50+3T9JzfdKQ2+Ys97bbsc+HK6Q9r1iYFTO9vyPYV3h6Jmln1KLtsHvz1i9G3a3nFJrENyZtkf6fH3B7abjcbtCxALsJMOEIfKpsogCP4j7WxqdYykfbZrn-l8iR-gSw22KIQFxi3GoGNnnHatY0ZTRA7vZW8jmRrVf5FaBPgzVqzyWc0egnxWG3yp4OYfbU7zzkLvE7dfuuYPtnSbvcwmrtcu0AxbaXGQaSA92mGtx7wndU0CCpf8D5VCWpNHxYz6kyBnsaeOxF2dVCISQdoBFVnvxar3F4MrStM9JbyyDgRhHyA4nM33otd9vz4fofuMsAxpbXq20RJ8Yedpdh6QRFSgffvhqn0xkOVaw5M+BdNXi9QK6W9dwVv33qbyR69Mv3Q8-PxV-m7twk32Tauib2p-pvYWAD4L7j8DHNwtu3RBLkW8VBJpfBkXk32NmIqiQo0FoWv2X+69Y7MvVt41uezpq0VbaflyYktd5RRDw+df+7wm1FJOyOc-H9Ufzyb8d73bMvGHM88T598geXdIZoXUOPknLoaHRZonYV5-v4bfvg59gwz+HQ2+CboRqJlxaafFYz3ofjPYXM+kiw3Nn+fP3xsL8hs7M+NKD4wFT-YGEPGusVZcqYz+XnHIy+qXn5j-ueiLgv7M4n9zN2gvLqntLwQarOsYazaaxa3X49uF-nLl2tyxfmqwavOfp0qGcnZm2kbl-vvhvyBpHWQObPiHsVRI9x56OHv6x+XUf9j8gG7D+X8HzbYStc+Ja+-+AWG9liP-h-hfoe6yWXbtkAzg7QF3ZJuk0Mb6jamluBawUpBnnre+iPlMCHu-5i1wCIoAUpYQBLBsJATWWjhpbTEWlsQJHOXhKbRIBPXt47RSvjvwgYBiluAFmWjHm6ytebHsthu8KVE96kI--oRaDOyguj7GggCDR7047AKN7d295he4tqP7iV4sBvaGcS56aINH7IB9wGs5DaOViJznYiTuD6IgZTq9TMBO1NchmMCgaT56EQhiuqpAnJu+7FOoxOwAX+nft4bBe5SJUgVijSAY7QBfPkP7cBahpUBXmDBmqp+qV3uIHumVUjD61mg-uc6pwCWCrT46oPiJpU2aaOn7rUsznBjBAegdI6yurgTL7uBeHDwF5eCPtEwfeu5kLgd+EGB059GcRDiyw0qZhKahBRgU+4xMtAvoBeA1Gpa47OveEUGvQgllIbwKO2vuo-QZ1oz6ZB8DIX6-wcAKQCkwuSL-CNBUZpYEUYK1PgGa4JhombgWV0GmrW+AwQFSeBRNuJjMUlipAAsk09qMSm02gar7TEdorkzOA7Dvt5cBeHEoKoGGziIGfeQuCr5peoFjrpheGLp+LVB1Xl45u6CEkZBGygPBuoBeAQajgrUYtEQL0y7waLLw+VrL75RufXsOADe9DqjYnO4vjpTgh+IiQG9iE1jL4whT-h67LaDYDOAig8btZjduO1iObfekgW2qJUQdviwP+uIcP6tu4Rg0DLe3MsIzkuYqrd5dW50vq6L82-nz4Mh0Xl9zA0fwcJpFUTDvYHSu-UjpaiUQuIf6Ch1wV9y9KyjsKARUaaE754O0GNIaJasht4Dg2MjvKFhBAmq8zXAmgMTTYGtjjM5UhqsuiE1SumB8afmefgqHy8X3FlZkyBkK-hB+y1DxgahRXq15IqSaKmbp01vs6FmUhft4FeW5fqTqnS0gbjh58LgcT6hhxTN8GIWp+K-5NeH-rv5-uX1vSFGhY-p4qlQlHlHafeMJupbMQiQQ-jJB50nUQye6QUdQvceYZUBr+1Gm+4Iu7hl+5lhUhK166hgVnN71hSYSzSF+nnvF5VobYXeaIgbQUYYls6XiV5hONNKh7rGhodC4lQM4CQSigLALgApeTwVD5Zh1YakE7Kv-pHANhy4TG5rh9OJHLcyaaJaH7OSQZ9J62OngtDQhdptJbWY6IETDKAI2p2HzQ9gclSZekIUNJL+A4QMLx+zCCYGasSIFg7jhkPnSLAugMKcFes5Fn04ChigZUCoG3ujxLGgfgZOFumqOCyKQyhtN-4kOuYTUEl6BYSj77BMwY8EJq-Moyx3hVYjI6JhjYboAv+HAJY5eW14TMI4+80CR4LhJDoxEkR0lHUHLowQCS5+eaIEcEV+kFLaGeCdIJ751hnAUBGUCYHuhCKeyemYD8I7dhqgKWYAcWEsGzBLHZbq24trY0m+iqUIPh2If2EoRIAOarSezQUm62EwIfuhEeUIgxb7qZVg7rERbFiBHhBQoAiyYBGPoBa9213tuI-h1llp5ZuolGminOx4V5EIWSPm1RGQNnMiYbieAcFG6CI+pt5hR-mNJ58h0UYpF-8ykeXh2GKFiujnQdwCDJAh-2hhbWhFqInZ-KHXl7S94-EV8GgOJFtG5K2RsOQRUR6FhS4D2Lkbza8Robs1Hyehngo58iLDPkZaoF2HZF6RKIWK5XsjPLhK8hZck6HdKiJuoCvu9xu06xysEd5iYmNRrOohhY7sUC2MLXJO7RAVaOZ6+eCOvyEchCYq76O2ldjS48uq0ZcYXifPP9xj8qNvEEzCktkmb4iq9tWL8hOIQt59MH0bCAtcJIU9RsGf0eBaG4wdnlGgx5nEJotcTNPPBYan7jDE6U4Fk0QhByEZcb4mdJAZDogKmOdh9Azfs4at+dDgrJYxHBlX7-uWIYBG5eBIYpYgozWnMHOgrgJKHSRQsktIOhr0cz41KlziAhveuQtDFfhS4BL6DmmIQdQCxI0adowupNnC6T2hsBRGyY24Zrq0yvfv5j9oDoRZEKRYdoS6CEvgYyqohhDPBEuaMsfTSo0csXL4XUL4Ue6QquHrpGFsIkBLEIKUka7yz8vVpcH5RvKnFFTAzYa5ZeqrDBdjs+LXo-bJad7rIKHhb5n7ENio-k2FCRLYSHGmy2Br6E6Bkcd6Ya+mLsDGWRAkT8GxeXngl7Sgo-JbafeP0boIzhZYnOHLYGYOw5PhFHia7Gw5KFAAkmLsYWISRO4XMJ0+0cfcryRvcDFHyxUwJg7ncxhCqjKKMstMG9UXcXSKZ6xak-YRRnXoz7xxrMimEj4ygWgasEhvtgazxYqnhGEO50hODsOK8UxEf23ihFQax+8bP4BirzhWpLhLUa6qbx2VrEbuGlcUVZBB3ps9GyutsVdaF+boZ6qI2esJ3Zs6EcTGGu838aG6Nxj8UGSs+0VvkGux78fCq6B3pjt4HhTMQXFtR03B1Etxw3oRD3BekUDbisHvpt5lK+4dLSOh+MYLHDCY0bkameBRgkDfggiP5HJA2AYgnsuVYWLS4SfgAY6-xkbqybjuDDFO5VoWgIoAFI10ciGUhsbNrFtKMocvF8Jebk2YnQRHA14dxJTttH08JSsJzvCuTM4Fw+Cibr7v2ifhQ4MkohqAnuxsPqMo0hkCTfIPxAvuvHgeIGgTRAo9ODHriGEoWiH9SOcdu4GJsIX9Y32mgBdHixHMRvBSx50mwF6izXlQnDxVms2bbBaqBoEbqCaqi7eYWUctgxUkTnnEGxlxoe5B0-YMkyb+V8eWagWSWpl4NRJtFoG+JsftkEPSyYKiS-I5iSEkvk3MYbRoJ0tOJFVJjIV9y24RHEChi6TSeKrw0uroxZ9xKCojFvR+MMW4OGXoTNIZx4rN37FqMieeiM2ZcvrGDxq8QiQAAurIBAAA)
+
+Notes:
+Now that we know how Altair creates charts,
+we can also understand why there is an issue with large datasets.
+
+You can see the JSON chart spec printed in this slide again.
+Note that the data here is just a string value pointing to a URL
+because we used `data.cars.url` 
+to create the chart.
+
+If we had used a pandas dataframe (e.g. `data.cars()`)
+to create the chart (instead of a URL)
+**all** the data would be included in the chart specification.
+
+This means that there would be almost 
+4500 lines of code in the JSON spec!
+Vega-Lite can handle this large files
+without issues,
+but is not enough room to show that in this slide.
+If you want to see how it
+you can click the link under the code
+in this slide.
+
+---
+
+## Including large data sets in chart
+
+Warning when plotting > 5000 rows:
+
+```text
+MaxRowsError: The number of rows in your dataset is greater than the maximum
+              allowed (5000). For information on how to plot larger datasets
+              in Altair, see the documentation.
+```
+
+Disable the warning:
+
+```python
+alt.data_transformers.disable_max_rows()
+```
+
+[More details about how to work with large datasets can be found in the docs](https://altair-viz.github.io/user_guide/faq.html#maxrowserror-how-can-i-plot-large-datasets)
+
+Notes:
+Including all the data is great for reproducibility
+and it works well with small to medium sized data.
+However,
+with large datasets
+the size of each chart would become really big,
+and with many charts in the same notebook
+the overall file size would be huge.
+
+To avoid this happening by mistake
+Altair shows a warning when you try to plot a dataset 
+with more than 5000 rows.
+If you are sure you want to plot a dataframe 
+with more rows than that,
+you can disable the warning with the line of code on the top of this slide.
+
+However,
+as discussed in the last slide,
+your charts would still be very big
+because the data would be included in the spec for the chart.
+If you would like to avoid creating big plots,
+you can use a URL as we did in the first slide and in module three.
+
+An URL is not always an option,
+and it is not convenient
+if you need to do some data wrangling with pandas first.
+
+In the next slide
+we will discuss another way to manage this challenge.
+
+---
+
+## Working with large datasets without including all the data in the chart
+
+Use the data server:
+
+```python
+alt.data_transformers.enable('data_server')
+```
+
+Output in the spec:
+
+```json
+"data": {
+    "url": "http://localhost:21319/4d45d69bbd706eda330e96e79ad4bf46.json"
+  },
+```
+
+Optionally you could use the mimtype renderer
+with the data transformer to show plots without Python running:
+
+```python
+alt.renderers.enable('mimetype')
+```
+
+Notes:
+As we mentioned previously,
+the Altair developers have created a helper package called `altair_server`,
+which you can activate on the top of your notebook 
+with the line of code in this slide.
+
+The Altair server works by linking the chart to the dataframe 
+via an active Python process.
+This process is serving the data as a json file
+at a temporary location on your computer.
+
+This mean that as long as you are running Python
+you can see the chart.
+When you stop Python,
+for example by shutting down your notebook,
+Altair can no longer see the data and no charts will be shown 
+the next time you open the notebook,
+until you rerun your code.
+
+If you want a static version of the charts to be always visible in the notebook
+you can include the second line in this slide,
+which is the same we used a few slides ago to include the PNG fallback
+when the main chart is not accessible.
+
+---
+
+# Let's apply what we learned
+
+Notes: <br>

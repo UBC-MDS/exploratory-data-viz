@@ -1,0 +1,433 @@
+---
+params:
+  dynamictitle: "module7_02"
+title: "`r params$dynamictitle`"
+output:
+  md_document:
+    variant: gfm
+    pandoc_args: "--markdown-headings=atx"
+---
+
+```{r setup, include=FALSE}
+source('../../../../slide-setup.R')
+# Remember to also manually update the YAML title above
+```
+
+type: slides
+
+
+# Advanced Selections
+
+Notes:
+In this chapter we will learn how to create new types of selections
+such as clicking on or hovering over points to select them.
+
+We will also see how to link selections between charts
+that do not stem from the same base chart,
+and how to add selections to geographical visualizations.
+
+---
+
+## Selections can be triggered on clicks instead of dragging with the mouse
+
+```{python}
+import altair as alt
+from vega_datasets import data
+
+cars = data.cars()
+click = alt.selection_multi()
+bars = (alt.Chart(cars).mark_bar().encode(
+    alt.X('count()', title='Number of cars'),
+    alt.Y('Origin', title='Region'),
+    alt.Color('Origin', title=None),
+    opacity=alt.condition(click, alt.value(0.9), alt.value(0.2)))
+.add_selection(click)).properties(width=300)
+
+bars
+```
+
+Notes:
+To demonstrate the functionality in this slide deck,
+we will continue to work with the car dataset from the previous deck.
+
+When creating certain visualizations, such as bar charts and maps, 
+it is often more intuitive to be able to click
+the objects to highlight or select them, 
+rather than dragging with the cursor to select an area.
+
+In this slide we use `selection_multi`
+to create a selection based on what we click with our cursor
+If we hold the shift key,
+we can select multiple items.
+
+If you do not want to allow for multiple selection in your visualization,
+you can instead opt to use `selection_single` instead of `selection_multi`.
+
+Here,
+we named our  `alt.selection_multi()` object `click`, 
+and linked it to a visible change in the chart,
+by passing it inside `alt.condition`
+to the opacity parameter.
+
+This has the effect that when an object is clicked on,
+that object gets a high opacity value,
+and the objects that are not clicked on get a low opacity value.
+ 
+In the last slide deck
+we used the colour instead of the opacity parameter
+with `alt.condition`
+when we used a selection interval to highlight points in our charts.
+
+We could have
+also used opacity there as well and whether we change 
+the colour or opacity on selection is mostly an aesthetic choice.
+
+In this slide,
+we have assigned the chart to a variable name because 
+we will reuse it in several later slides in this slide deck.
+
+---
+
+## Combining charts with different selections
+
+```{python}
+brush = alt.selection_interval()
+points = (alt.Chart(cars).mark_circle().encode(
+    alt.X('Horsepower', title='Enging power (hp)'),
+    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),
+    color=alt.condition(brush, 'Origin', alt.value('lightgray')))
+.add_selection(brush)).properties(width=300, height=200)
+
+points & bars
+```
+
+Notes:
+To add two charts together,
+we can use what we learned previously about Altair's layout operators.
+To concatenate the bar chart and scatterplot vertically,
+we're here using the `&` operator.
+
+When we linked the two scatterplots together in the previous slide deck,
+we simply added the selection,
+without the need to specify which fields to use,
+why can't we do that hear?
+
+The reason this worked was because both those plots
+had one point for each observation in the data,
+so that we selected a point in one of the scatterplots
+the corresponding point for that same observation
+could automatically be highlighted in the other scatterplot.
+
+The bar chart in this slide
+is made from counting the observations in the raw data
+and then drawing exactly three bars, one per region of origin.
+Since the individual observations do not exist in the bar chart
+it is impossible to automatically link the two charts together.
+
+It could be very useful to create a linked selection between these charts,
+so that when we select a region of origin in the bar chart
+the points in the scatter plot that are from the same origin would be highlighted.
+
+This way we could study observations from each Origin separately,
+so how can we perform this linkage in Altair?
+
+---
+
+## Linking selections from separate charts requires explicit columns to select on
+
+```{python}
+click = alt.selection_multi(fields=['Origin'])
+bars = bars.add_selection(click)
+points = points.encode(opacity=alt.condition(click, alt.value(0.9), alt.value(0.2)))
+
+points & bars
+```
+
+Notes:
+To link the three bars to the individual observations in the scatter plot,
+we need to be explicit about what should happen
+when a selection is made.
+
+For example,
+to link a click of a bar 
+to a selection in the scatterplot,
+we need to say which column in the dataframe should be used to select on.
+
+In this case, `"Origin"` is the column that we want to use 
+for the selection, as it is the common encoding between 
+both charts. 
+
+If there were two or more data frame columns that were common
+encodings in both charts, then you would select the one 
+that made more sense for the question you were asking.
+
+To successfully link this selection
+we need to do three things:
+
+1. Create a new selection that specifies which columns should be used for selections (the `fields` parameter).
+2. Add this new selection to the bar plot
+3. Add an encoding to the scatterplot that depends on the new `click` selections. Here we use `opacity`.
+
+Now that we click the bars
+the opacity of the corresponding points changes
+as we would expect!
+
+Note that we can still click and drag in the scatterplot
+since our `brush` selection is unchanged from before.
+
+The same principles that we showed here
+can be applied to create a linked selection 
+from the scatterplot to the barchart,
+which we will see an example of in a few slides.
+
+---
+
+## A selection can be bound to the legend instead of a particular chart
+
+```{python}
+click_legend = alt.selection_multi(fields=['Origin'], bind='legend')
+points = points.encode(opacity=alt.condition(click_legend, alt.value(0.9), alt.value(0.2)))
+
+points.add_selection(click_legend)
+```
+
+Notes:
+We don't always have a bar chart to drive the selections from.
+What if we only create a scatterplot,
+but still want to be able to select data from different origins?
+
+Instead of using a separate chart,
+we could use the legend to make the selections.
+We can tell Altair that we want to make the legend interactive,
+by binding `selection_multi` to it.
+
+We then need to link this new selection
+to the points opacity encoding and add it to the plot.
+
+Now if you click the legend,
+it will select the corresponding observations in the scatterplot!
+
+---
+
+## Legend selections can be added to multiple charts
+
+```{python}
+bars = bars.encode(opacity=alt.condition(click_legend, alt.value(0.9), alt.value(0.2)))
+(points & bars).add_selection(click_legend) 
+```
+
+Notes:
+The syntax for linking legend interactivity to a layout of charts 
+is the same as to a single chart,
+but we need to add the selection to both charts
+since the legend belongs to both of them.
+
+We could do this one by one,
+or both at once as we do in this slide,
+and there is no difference in choosing one approach over the other.
+
+---
+
+## Instead of highlighting, a selection can be used for filtering data
+
+```{python}
+bars = bars.transform_filter(brush)
+(points & bars).add_selection(click_legend) 
+```
+
+Notes:
+So far we have seen how to change graphical encodings such as color and opacity
+to highlight observations or groups of observations.
+Another useful type of interactivity is to actually filter the data
+based on a selection,
+rather than just styling the chart appearance.
+
+For example,
+we may use a brush selection on 
+a scatter plot to highlight particular observations, 
+and then wonder how many observations are in our
+brushed selection for each region?
+To answer this question,
+we can change the bar chart to update dynamically 
+as we select points in the scatterplot!
+
+Transform filters can filter data similarly to what we might do in pandas
+and are often referred to as "dynamic queries".
+Note that but this type of filtering
+is best used in this kind of interactive setting,
+as it is not as powerful
+as the filtering available to you via pandas.
+
+Since we have conditions in the charts' encodings
+that depend on the `legend_click` selection variable,
+we need to also add this selection
+to the charts to avoid an error,
+even if it is not the focus of what we are learning in this slide.
+
+Now that we have select points by dragging in the scatter plot
+we can see that the barchart updates the count
+to reflect the number of points we have selected of each color,
+neat!
+
+---
+
+## Fixing the extent of the x-axis makes the bars easier to compare
+
+```{python}
+bar_chart_max = cars.groupby('Origin').size().max()
+bars = bars.encode(alt.X('count()', scale=alt.Scale(domain=[0, bar_chart_max])))
+(points & bars).add_selection(click_legend) 
+```
+
+Notes:
+It is a bit non-intuitive that the x-axis keep changing its extent
+as we select different number of points,
+and it makes the bar heights harder to compare
+as we move the selection around.
+Ideally only the bars would change length,
+but the axis would stay the same.
+
+In this slide we calculate the max number of cars
+from any region
+and then use this number to fix the extent of the x-axis.
+Now that we select in the scatterplot,
+only the lengths of the bars changes,
+but the range of the axis remains the same.
+
+It is a bit unintuitive that the x-axis keeps changing its range
+as we make brush selections that contain different numbers of observations. 
+
+This also makes the bar heights harder to compare
+as we move the selection around.
+Ideally only the bars would change length,
+but the axis would stay the same.
+
+To fix this,
+we here calculate the maximum number of cars from any region
+and then use this number to set the range of the x-axis.
+After doing this,
+brush selections of observations in the scatterplot,
+only change the lengths of the bars,
+while the range of the x-axis remains the same.
+
+---
+
+## Interactive features work with all charts
+
+```{python}
+import pandas as pd
+state_map = alt.topo_feature(data.us_10m.url, 'states')
+state_pop = pd.read_csv('data/us_population_coordinates_asthma-cases.csv')
+state_pop['asthma_cases_per_capita'] = state_pop['number_of_asthma_cases'] / state_pop['population']
+
+hover = alt.selection_single(fields=['state'], on='mouseover')
+choropleth = (alt.Chart(state_map).mark_geoshape().transform_lookup(
+    lookup='id',
+    from_=alt.LookupData(state_pop, 'id', ['number_of_asthma_cases', 'state']))
+.encode(
+    color=alt.Color('number_of_asthma_cases:Q', title='Asthma cases'),
+    opacity=alt.condition(hover, alt.value(1), alt.value(0.1)),
+    tooltip=['state:N', alt.Tooltip('number_of_asthma_cases:Q', title='Asthma cases')])
+.add_selection(hover)
+.project(type='albersUsa')
+.properties(height=150, width=300))
+choropleth
+```
+
+Notes:
+Selections work with all types of charts in Altair.
+In this slide we have recreated one of the maps we made in module 6,
+which communicates the number of asthma cases per state as a choropleth map.
+
+We have added interactivity to this map in the form of a helpful tooltip
+that shows which state we are hovering over
+as well as the exact number of asthma cases in that state,
+which would be hard to read out precisely from the color mapping alone.
+
+We used `alt.Tooltip` to change the title in the tooltip,
+just as when we change the title of an axis or legend.
+
+We also added a `selection_single` interaction,
+but instead of binding it to cursor clicks (the default),
+we bound it to `'mouseover'`,
+which is when we are hovering over a state with our cursor.
+
+In this slide we can use this interaction
+to highlight a particular state in the choropleth map
+and in the next slide
+we will see how we can also link it to another chart.
+
+Note that we set the dimensions of the plot to fit on the slide.
+
+---
+
+## Linking a map selection to another chart
+
+```{python}
+points = (alt.Chart(state_pop).mark_circle(size=70).encode(
+    alt.X('asthma_cases_per_capita', title='Asthma cases / capita', scale=alt.Scale(zero=False)),
+    alt.Y('number_of_asthma_cases', title='Asthma cases'),
+    stroke=alt.condition(hover, alt.value('black'), alt.value('#ffffff')),
+    color='number_of_asthma_cases')).properties(height=150, width=300)
+choropleth & points
+```
+
+Notes:
+To link an interaction on a map to another chart,
+we use the same logic as we did in previous slides
+for linking the barchart and scatterplot.
+
+Here we create a separate scatterplot
+where the stroke color (outline) of each points depends on
+whether we have selected that state on the map or not.
+
+By default
+all states on the map are selected 
+so all the points have a black outline.
+As we hover over a state in the map,
+the outline changes to white for the points
+whose states are not selected in the map.
+
+Using the map to identify states can be more helpful
+than just adding a tooltip to the scatterplot
+since we might already have an intuition 
+for where different states are located on the map
+and don't have to go through each of the point's tooltip
+looking for the state name of interest.
+
+---
+
+## Two way interactivity between the map and scatter plot
+
+```{python}
+choropleth & points.encode(tooltip='state').add_selection(hover)
+```
+
+Notes:
+Linking the interactive elements from the map to the points
+begs the question of how we could link interaction the other way
+and control the map from the points.
+
+In the case of our visualization,
+it could be helpful to show a tooltip of each state's name
+and highlight the corresponding state on the map
+when hovering over the a point.
+
+In this slide we add the same hover selection to the scatterplot.
+We don't need to change the encoded dataframe columns
+since the opacity is already set to change
+when we use the hover object,
+regardless of whether it is used on the map
+or on the scatter plot.
+
+As you can see,
+Altair's grammar remains consistent between different types of plots,
+such as scatterplots, maps, and barcharts.
+This allows us to build on the same principles we learned earlier 
+and expand our grammar of interactivity no matter which plots we work with.
+
+---
+
+# Let's apply what we learned!
+
+Notes: <br>
