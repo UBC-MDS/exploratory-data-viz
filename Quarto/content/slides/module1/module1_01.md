@@ -1,68 +1,143 @@
 ---
-type: slides
+format: revealjs
+revealjs:
+  slide-level: 2
+  preview-links: true
+  margin: 0.05
+include-in-header:
+  - text: |
+      <style>
+      .absolute-center {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 90%;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .reveal .slides section h1 {
+        font-size: 2.0em;  
+        color: #333;     
+      }
+      .reveal .slides section h2,
+      .reveal .slides section h3 {
+        font-size: 0.9em;  
+        color: #333;     
+      }
+      .reveal .slides section p, .reveal .slides section li {
+        font-size: 0.6em;  
+        color: #333;     
+      }
+      .reveal .slides section blockquote {
+        font-size: 0.4em;  
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 10px 0;
+        text-align: left;
+      }
+      table {
+        font-size: 0.6em; /* Smaller font size for table data */
+        width: auto; /* Auto width to fit content */
+        margin-right: 5px; /* Reduced margin between tables */
+        float: left; /* Keep tables inline */
+      }
+      .reveal .slides section .content-container {
+        display: flex;
+        align-items: flex-start; /* Ensures both elements align at the top */
+        justify-content: space-between; /* Distributes space between image and transcript */
+      }
+      .reveal .slides section .content-container img {
+        width: 80%; /* Keeps the image width */
+        height: auto; /* Ensures it scales proportionally */
+      }
+      .reveal .slides section .right-aligned-transcript {
+        float: right;
+        width: 30%;
+        font-size: 0.7em;
+        text-align: left;
+        padding: 0 10px;
+        border-left: 4px solid #888; /* Only the container will have a left border */
+        margin-left: 5px;
+        color: #888 !important;
+        align-self: flex-start;
+      }
+      .reveal .slides section .right-aligned-transcript * {
+        border-left: none !important; /* Ensuring no child elements have borders */
+        padding: 0; /* Remove padding from children if needed */
+        margin: 0; /* Adjust margin for child elements if necessary */
+        color: inherit; /* Children inherit the text color */
+      }
+      .reveal .slides section .img-transcript {
+        width: 45%; /* Adjust width to fit alongside image */
+        font-size: 0.7em;
+        text-align: left;
+        padding: 0 10px;
+        border-left: 4px solid #888;
+        color: #888 !important;
+        max-height: 100%; /* Ensure transcript doesn't get cut off */
+        overflow: auto; /* In case of overflow, allow scrolling */
+      }
+      </style>
 ---
 
-# What is Data Visualization?
+## <span class="absolute-center" style="font-size: 3.0em; text-align: center;">What is Data Visualization ?</span> {.slide}
 
-<head>
-<base target="_blank">
-</head>
-<head>
-<base target="_blank">
-</head>
-
-Notes: At its core, data visualization is about representing numbers
+<blockquote>
+<strong>Transcript:</strong> At its core, data visualization is about representing numbers
 with graphical elements such as the position of a line, the length of a
 bar, or the colour of a point.
-
 We often use visualizations to explore data ourselves, and to
 effectively communicate our insights to others, as we will learn in
 later modules of this course.
+</blockquote>
 
 ---
 
-## What is the purpose of visualizing data?
+## What is the purpose of visualizing data? {.slide}
 
 Visualizing data can be used to
 
--   Answer a specific question
--   Explore data more generally to generate new questions
+- Answer a specific question
+- Explore data more generally to generate new questions
 
 To create an effective visualization, start by
 
--   Looking at the data
--   Thinking about what you want to achieve by making the visualization
--   Drawing it out with pen and paper
+- Looking at the data
+- Thinking about what you want to achieve by making the visualization
+- Drawing it out with pen and paper
 
-Notes: We often visualize data in order to help us answer a specific
+<blockquote>
+<strong>Transcript:</strong> We often visualize data in order to help us answer a specific
 question we have about our dataset, but it can also help us generate new
-questions.
-
+questions.<br>
 Before creating a visualization, it is important that you think about
 why you are making it, and what you want to achieve from creating this
-plot.
-
+plot.<br>
 Is there a specific question you are trying to answer, like comparing
 the relationship between two dataframe columns? Or are you creating a
 plot to help you understand the structure of your data more in general,
-such as plotting the distribution of each dataframe column?
-
+such as plotting the distribution of each dataframe column?<br>
 In either case, it can be extremely helpful to draw out your plot with
 pen and paper first. This helps you think about if the plot you are
 creating makes sense or if there is another plot better suited for the
-task at hand.
-
+task at hand.<br>
 Drawing with pen and paper also makes it easier to write the code
 afterwards, since you clearly know what you are expecting the
 visualization to look like.
+</blockquote>
 
 ---
 
-## Why bother visualizing data instead of showing raw numbers?
+## Why bother visualizing data instead of showing raw numbers? {.slide}
 
-### Can you see any differences in the general trends of these four sets of numbers?
+**Can you see any differences in the general trends of these four sets of numbers?**
 
-<table border="1" style="width:70px; float:left; margin-right:40px">
+<table border="1" style="width:40px; float:left; margin-right:10px">
 <thead style="text-align: center">
 <tr>
 <th colspan="2" halign="left">
@@ -491,39 +566,26 @@ Y
 </tbody>
 </table>
 
-Notes: Why do we need visualizations to help answer our questions?
-
-Is it not enough to look at numbers in tables?
-
-To understand why visualizations are so powerful, it is helpful to
-remember that to answer a question, we often have to put the data in a
-format that is easy for us humans to interpret.
-
-Because our number systems have only been around for about 5,000 years,
-we need to assert effort and train ourselves to recognize structure in
-numerical data.
-
-Visual systems, on the other hand, have undergone refinement during
-500,000,000 years of evolution, so we can instinctively recognize visual
-patterns and accurately estimate visual properties such as colours and
-distances.
-
+<div class="right-aligned-transcript">
+<strong>Transcript:</strong> Why do we need visualizations to help answer our questions?<br>
+Is it not enough to look at numbers in tables?<br>
+To understand why visualizations are so powerful, it is helpful to remember that to answer a question, we often have to put the data in a format that is easy for us humans to interpret.<br>
+Because our number systems have only been around for about 5,000 years, we need to assert effort and train ourselves to recognize numerical data.<br> 
+Visual systems, on the other hand, have undergone refining during 500,000,000 years of evolution, so we can instinctively recognize visual properties such as colours and distances.<br>
 Practically, this means that we can arrive at correct conclusions faster
 from studying visual rather than numerical representations of the same
-data.
-
+data.<br>
 For example, have a look at the four sets of numbers in the table on the
 slide. Can you see the differences in the general trends between these
 four sets of numbers? This is a slightly modified version of the
-original,
-<a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank">which
-was put together by statistician Francis Anscombe in the 70s.</a>
+original, <a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank" style="text-decoration: underline; color: blue;">which was put together by statistician Francis Anscombe in the 70s</a>.
+</div>
 
 ---
 
-## Although summary statistics are often useful, they don’t tell the whole story
+## Although summary statistics are often useful, they don’t tell the whole story {.slide}
 
-### C is the only set with a different mean and standard deviation
+**C is the only set with a different mean and standard deviation**
 
 <table border="1" style="width:70px; float:left; margin-right:40px">
 <thead style="text-align: center">
@@ -706,70 +768,69 @@ std
 </tbody>
 </table>
 
-Notes: Summaries, such as the mean and standard deviation, are helpful
+<blockquote>
+<strong>Transcript:</strong> Summaries, such as the mean and standard deviation, are helpful
 statistical tools that are often useful for detecting the differences
-between datasets.
-
+between datasets.<br>
 However, since they collapse the data into just a few numbers,
 statistical summaries can’t tell the whole story about the data and
 there can be important differences between datasets that summaries fail
-to reveal.
-
+to reveal.<br>
 Here, the mean and standard deviation indicate that set C is slightly
 different from the other sets of data in terms of the centre of the
 sample distribution and the spread of that distribution, while the
-remaining three sets of data have a similar centre and spread.
+remaining three sets of data have a similar centre and spread.<br>
+</blockquote>
 
 ---
 
-## Plotting the data immediately reveals patterns in the data
+## Plotting the data immediately reveals patterns in the data {.slide}
 
-### We could not detect these patterns from only looking at the raw numbers or summary statistics
+**We could not detect these patterns from only looking at the raw numbers or summary statistics**
 
-<img src="/module1/modified-anscombes.svg" alt="" width="60%"></img>
+<div class="content-container">
+  <img src="/static/module1/modified-anscombes.svg" alt="">
 
-Notes: Humans are not good at detecting patterns in raw numbers, and we
-don’t have good intuition about how different distributions of data can
-contribute to identical statistical summaries.
-
-But guess what we excel at?
-
-Detecting visual patterns!
-
-It is immediately clear to us how these sets of numbers differ once they
-are shown as graphical elements instead of textual objects.
-
-This is one of the main reasons why data visualization is such a
-powerful tool for data exploration and communication.
-
-In our example here, we would come to widely different conclusions about
-the behaviour of the data for the four different data sets.
-
-Sets A and C are roughly linearly increasing at similar rates, whereas
-set B reaches a plateau and starts to drop, and set D has a constant
-X-value for all numbers except one big outlier.
+  <div class="right-aligned-transcript">
+  <span data-notes>
+    <strong>Transcript:</strong> Humans are not good at detecting patterns in raw numbers, and we
+    don’t have good intuition about how different distributions of data can
+    contribute to identical statistical summaries.<br>
+    But guess what we excel at?
+    <strong>Detecting visual patterns!</strong><br>
+    It is immediately clear to us how these sets of numbers differ once they
+    are shown as graphical elements instead of textual objects.<br>
+    This is one of the main reasons why <strong>data visualization</strong> is such a
+    powerful tool for data exploration and communication.<br>
+    In our example here, we would come to widely different conclusions about
+    the behaviour of the data for the four different data sets.<br>
+    Sets <strong>A</strong> and <strong>C</strong> are roughly linearly increasing at similar rates, whereas
+    set <strong>B</strong> reaches a plateau and starts to drop, and set <strong>D</strong> has a constant
+    X-value for all numbers except one big outlier.
+  </span>
+</div>
+</div>
 
 ---
 
-## More examples of plotting versus statistical summaries
+## More examples of plotting versus statistical summaries {.slide}
 
 ![](https://blog.revolutionanalytics.com/downloads/DataSaurus%20Dozen.gif)
 
-<a href="https://www.autodesk.com/research/publications/same-stats-different-graphs" target="_blank">Source:
+<a href="<https://www.autodesk.com/research/publications/same-stats-different-graphs>" style="font-size: 0.6em" target="_blank">Source:
 Matejka and Fitzmaurice, 2017</a>
 
-Notes: A more recent and dynamic illustration of how graphical
+<blockquote>
+<strong>Transcript:</strong> A more recent and dynamic illustration of how graphical
 representations are much easier for us to interpret compared to
-statistical summaries, is the Datasaurus GIF
-<a href="https://www.autodesk.com/research/publications/same-stats-different-graphs" target="_blank">from
-Autodesk’s research team</a> in this slide.
-
+statistical summaries, is the Datasaurus GIF <a href="https://www.autodesk.com/research/publications/same-stats-different-graphs" target="_blank">from
+Autodesk’s research team</a> in this slide.<br>
 It displays several different datasets, all with the same mean, standard
 deviation and correlation between X and Y, but looking at the data
 graphically shows us how different these datasets actually are.
+</blockquote>
 
 ---
 
-# Let’s apply what we learned!
+## <span class="absolute-center" style="font-size: 3.0em; text-align: center;">Let's apply what we learned!</span> {.slide}
 
-Notes: <br>
