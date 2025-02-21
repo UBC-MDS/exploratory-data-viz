@@ -789,7 +789,7 @@ remaining three sets of data have a similar centre and spread.<br>
 **We could not detect these patterns from only looking at the raw numbers or summary statistics**
 
 <div class="content-container">
-  <img src="/static/module1/modified-anscombes.svg" alt="">
+  <img src="../../../static/module1/modified-anscombes.svg" alt="">
 
   <div class="right-aligned-transcript">
   <span data-notes>
