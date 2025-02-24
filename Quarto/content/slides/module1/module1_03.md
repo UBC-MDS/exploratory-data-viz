@@ -38,7 +38,7 @@ include-in-header:
         position: absolute;
         bottom: 0;
         width: 100%;
-        padding: 10px 0;
+        padding: 10px 0 10px 15px;
         text-align: left;
       }
       .small-code {
@@ -52,7 +52,7 @@ include-in-header:
       }
       .reveal .slides section .content-container {
         display: flex;
-        align-items: center;  /* Center vertically */
+        align-items: center; 
         justify-content: space-between;
         margin-top: 40px; 
       }

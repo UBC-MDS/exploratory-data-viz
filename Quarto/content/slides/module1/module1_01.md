@@ -37,7 +37,7 @@ include-in-header:
         position: absolute;
         bottom: 0;
         width: 100%;
-        padding: 10px 0;
+        padding: 10px 0 10px 15px;
         text-align: left;
       }
       table {
