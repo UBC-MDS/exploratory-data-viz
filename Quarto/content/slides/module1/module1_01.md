@@ -85,7 +85,7 @@ include-in-header:
       </style>
 ---
 
-## <span class="absolute-center" style="font-size: 3.0em; text-align: center;">What is Data Visualization ?</span> {.slide}
+## <span class="absolute-center" style="font-size: 3.0em; text-align: center;">What is Data Visualization?</span> {.slide}
 
 <blockquote>
 <strong>Transcript:</strong> At its core, data visualization is about representing numbers
