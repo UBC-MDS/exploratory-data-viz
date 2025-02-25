@@ -4,6 +4,8 @@ revealjs:
   slide-level: 2
   preview-links: true
   margin: 0.05
+  controls: true
+  plugins : [menu]
 include-in-header:
   - text: |
       <style>

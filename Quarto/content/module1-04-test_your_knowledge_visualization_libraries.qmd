@@ -1,8 +1,11 @@
 ---
+engine: knitr
 format: 
-  html:
-    page-layout: full
+  live-html
 ---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
 ## Test Your Knowledge: Visualization Libraries
 
 **Question 1**<br>
@@ -34,4 +37,110 @@ Exlanation for the incorrect answer choices:<br>
 - "Dictionary Keys": This refers to a data structure, not a plotting structure.<br>
 - "Block Components": Consider a more language-oriented approach.<br>
 - "Grouping Components": This term doesn’t have a clear definition—we made it up!
+:::
+
+<br><br>
+
+## True or False: Visualization Libraries
+
+**True or False**<br>
+*A low-level visualization library focuses on plot construction details.*
+
+a) True
+a) False
+
+
+::: {.callout-tip title="Answer" collapse="true"}
+The right answer is **"True"**.<br>
+If you got this wrong, you may have confused it with high-level visualization.
+:::
+
+**True or False**<br>
+*A high-level visualization library focuses on data and relationships.*
+
+a) True
+a) False
+
+::: {.callout-tip title="Answer" collapse="true"}
+The right answer is **"True"**.
+:::
+
+<br><br>
+
+## Your First Plot
+
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+Let's use the same vehicle dataset we saw in the lecture, but visualize the relationship between two different columns.
+
+The data has already been imported for you in this exercise.
+
+Here is what it looks like:
+
+```{pyodide}
+import altair as alt
+from vega_datasets import data
+
+
+cars = data.cars()
+
+print(cars.columns)
+cars.head()
+```
+
+**Tasks:**<br>
+
+- Fill out the missing fields in the Altair plot in order to create a scatter plot.<br>
+- The cars' `Horsepower` should be on the y-axis and their `Weight_in_lbs` on the x-axis.<br>
+- Color the points by the `Origin` of the cars.
+
+
+```{pyodide}
+#| exercise: ex_1_6
+import altair as alt
+from vega_datasets import data
+
+
+cars = data.cars()
+
+alt.Chart(___).mark___.encode(
+    x=___,
+    y=___,
+    color=___)
+```
+
+::: { .hint exercise="ex_1_6"}
+::: { .callout-note collapse="false"}
+## Hint 1
+
+Are the column names expressed in quotes, e.g. `y='Horsepower'`?
+
+:::
+:::
+
+
+::: { .solution exercise="ex_1_6" }
+::: { .callout-tip collapse="false"}
+## Fully worked solution:
+
+```{pyodide}
+import altair as alt
+from vega_datasets import data
+
+
+cars = data.cars()
+
+alt.Chart(cars).mark_point().encode(
+    x='Weight_in_lbs',
+    y='Horsepower',
+    color='Origin')
+```
+
+:::
 :::
