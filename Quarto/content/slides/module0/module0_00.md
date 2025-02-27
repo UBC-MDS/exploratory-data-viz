@@ -4,8 +4,7 @@ revealjs:
   slide-level: 2
   preview-links: true
   margin: 0.05
-  controls: true
-  plugins : [menu]
+  controls: auto
 include-in-header:
   - text: |
       <style>
@@ -20,6 +19,9 @@ include-in-header:
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+      reveal .controls {
+        display: block !important;
       }
       .reveal .slides section h1 {
         font-size: 2.0em;  

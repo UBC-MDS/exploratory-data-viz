@@ -1,7 +1,11 @@
 ---
 engine: knitr
+execute: 
+  echo: true  
 format: 
   live-html
+resources:
+  - utils.py
 ---
 
 {{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
@@ -87,7 +91,6 @@ Here is what it looks like:
 import altair as alt
 from vega_datasets import data
 
-
 cars = data.cars()
 
 print(cars.columns)
@@ -100,22 +103,39 @@ cars.head()
 - The cars' `Horsepower` should be on the y-axis and their `Weight_in_lbs` on the x-axis.<br>
 - Color the points by the `Origin` of the cars.
 
-
 ```{pyodide}
-#| exercise: ex_1_6
+#| setup: true
+#| exercise: your_first_plot
+from utils import *
 import altair as alt
 from vega_datasets import data
 
-
 cars = data.cars()
-
-alt.Chart(___).mark___.encode(
-    x=___,
-    y=___,
-    color=___)
 ```
 
-::: { .hint exercise="ex_1_6"}
+```{pyodide}
+#| exercise: your_first_plot
+alt.Chart(______).mark_point().encode(
+    x=______,
+    y=______,
+    color=_____
+)
+```
+
+```{pyodide}
+#| exercise: your_first_plot
+#| check: true
+
+solution = alt.Chart(cars).mark_point().encode(
+    x='Weight_in_lbs',
+    y='Horsepower',
+    color='Origin'
+)
+assert_chart_equal(solution, result)
+
+```
+
+::: { .hint exercise="your_first_plot"}
 ::: { .callout-note collapse="false"}
 ## Hint 1
 
@@ -124,23 +144,18 @@ Are the column names expressed in quotes, e.g. `y='Horsepower'`?
 :::
 :::
 
-
-::: { .solution exercise="ex_1_6" }
+::: { .solution exercise="your_first_plot" }
 ::: { .callout-tip collapse="false"}
 ## Fully worked solution:
 
 ```{pyodide}
-import altair as alt
-from vega_datasets import data
-
-
-cars = data.cars()
-
 alt.Chart(cars).mark_point().encode(
     x='Weight_in_lbs',
     y='Horsepower',
-    color='Origin')
+    color='Origin'
+)
 ```
 
 :::
 :::
+
