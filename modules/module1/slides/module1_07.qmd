@@ -1,31 +1,26 @@
 ---
-params:
-  dynamictitle: "module1_07"
-title: "`r params$dynamictitle`"
-output:
-  md_document:
-    variant: gfm
----
-
-```{r setup, include=FALSE}
-source('../../../../slide-setup.R')
-# Remember to also manually update the YAML title above
-```
-
-
-type: slides
-
-
-# Aggregations, lines, and layers
-
-Notes:
-
-In this slide deck, we will see how to aggregate data in Altair
-(to plot the mean, median, etc),
-how to create lineplots via `mark_line()`,
-and how to combine line and point plots together
-via layers.
-
+engine: knitr
+format:
+  revealjs:
+    transition: slide
+    show-notes: true
+    slide-number: true
+    width: 100%
+title: Aggregations, lines, and layers
+title-slide-attributes:
+  data-notes: |
+    In this slide deck, we will see how to aggregate data in Altair
+    (to plot the mean, median, etc),
+    how to create lineplots via `mark_line()`,
+    and how to combine line and point plots together
+    via layers.
+include-in-header:
+  - text: |
+      <style>
+      .reveal.show-notes .speaker-notes {
+        font-size: 0.3em;
+      }
+      </style>
 ---
 
 ## Including all the data can hinder visualization of general trends
@@ -41,7 +36,13 @@ alt.Chart(cars).mark_point().encode(
     color='Origin')
 ```
 
-Notes:
+::: {.notes}
+In this slide deck, we will see how to aggregate data in Altair
+(to plot the mean, median, etc),
+how to create lineplots via `mark_line()`,
+and how to combine line and point plots together
+via layers.
+
 Throughout this course
 we will explore many different datasets,
 but for now, we will stick to the `cars`
@@ -70,6 +71,7 @@ we can create plots of statistical summaries,
 such as means and medians.
 
 In Altair (and pandas) these are referred to as data aggregations.
+:::
 
 ---
 
@@ -82,7 +84,7 @@ alt.Chart(cars).mark_point().encode(
     color='Origin')
 ```
 
-Notes:
+::: {.notes}
 To plot the means of weight and mileage,
 we could use pandas to first calculate the mean values,
 and then plot the resulting dataframe in Altair.
@@ -106,6 +108,7 @@ which was not discernible when we plotted all the points.
 Whether this difference is big enough to reach a different conclusion
 than when inspecting the previous plots
 depends on our application and the purpose of the data exploration.
+:::
 
 ---
 
@@ -115,7 +118,7 @@ depends on our application and the purpose of the data exploration.
 cars
 ```
 
-Notes:
+::: {.notes}
 Aggregations are often helpful when comparing trends over time,
 especially when there are multiple groups in the data.
 In the cars dataset,
@@ -133,6 +136,7 @@ Presumably, they should be,
 but does it differ depending on where the car was made?
 
 Let's find out!
+:::
 
 ---
 
@@ -144,7 +148,7 @@ alt.Chart(cars).mark_point().encode(
     y='mean(Miles_per_Gallon)')
 ```
 
-Notes:
+::: {.notes}
 To visualize the mean mileage for each year of all cars,
 we want to perform the aggregation on the `Miles_per_Gallon` column
 while leaving the `Year` column intact.
@@ -155,6 +159,7 @@ for each year in the dataframe.
 Here we can see that the observations in this dataframe span the years 1970-1982
 and it does indeed look like the mileage is getting better over time
 as we expected!
+:::
 
 ---
 
@@ -166,11 +171,12 @@ alt.Chart(cars).mark_point().encode(
     y='Miles_per_Gallon')
 ```
 
-Notes:
+::: {.notes}
 As a comparison with the previous slide,
 if we instead of the mean would plot all the data points for each year,
 it would be much more difficult to see the pattern over time
 as you can see here.
+:::
 
 ---
 
@@ -183,7 +189,7 @@ alt.Chart(cars).mark_point().encode(
     color='Origin')
 ```
 
-Notes:
+::: {.notes}
 If we try to explore the mileage over time
 while grouping the cars according to their origin,
 it is a bit difficult to immediately recognize
@@ -193,6 +199,7 @@ In fact,
 using points for visualizing trends is not ideal,
 and lines are often preferred
 as we will see in the next slide.
+:::
 
 ---
 
@@ -205,7 +212,7 @@ alt.Chart(cars).mark_line().encode(
     color='Origin')
 ```
 
-Notes:
+::: {.notes}
 One key advantage of line plots is that they connect
 all the observations that belong to the same group
 presenting them as one unified graphical object (one line),
@@ -224,6 +231,7 @@ In this plot, we can clearly compare the mileage trends over time
 to conclude that cars from all origins improved their mileage,
 and that the trajectory and mileage values
 are the most similar between Europe and Japan.
+:::
 
 ---
 
@@ -241,8 +249,7 @@ point = alt.Chart(cars).mark_point().encode(
 line + point
 ```
 
-Notes:
-
+::: {.notes}
 To augment a line plot,
 it is sometimes helpful to add `point` marks for each data point along the line,
 to emphasize where the observations fall.
@@ -269,6 +276,7 @@ then a point plot.
 
 We can then use the `+` (plus) operator
 to combine the two into a layered chart.
+:::
 
 ---
 
@@ -282,7 +290,7 @@ line = alt.Chart(cars).mark_line().encode(
 line + line.mark_point()
 ```
 
-Notes:
+::: {.notes}
 We can also create a layered plot
 by reusing a previous chart definition.
 
@@ -295,6 +303,7 @@ which is a special case for getting points on a line
 since it is such a common operation,
 but the layering grammar extends to other plots,
 so it is more helpful to focus on learning that.
+:::
 
 ---
 
@@ -309,7 +318,7 @@ line + line.mark_point().encode(y='Miles_per_Gallon')
 ```
 
 
-Notes:
+::: {.notes}
 When we are combing plots in layers,
 we can not only change the mark,
 but also the encodings.
@@ -332,6 +341,7 @@ which is often helpful for elucidating what the data tells us.
 
 It is also a good check to make sure nothing unexpected is
 going on with the raw values as we saw in the introductory example with Anscombe's quartet.
+:::
 
 ---
 
@@ -346,7 +356,7 @@ line = alt.Chart(cars).mark_line().encode(
 line + line.mark_point().encode(y='Miles_per_Gallon')
 ```
 
-Notes:
+::: {.notes}
 We have already seen that the x and y encoding remain the same
 in any subsequently created plots.
 
@@ -358,9 +368,8 @@ unless they are specifically overwritten.
 
 If we would only have added colour to the point chart,
 there would still have been a single line instead of three.
+:::
 
 ---
 
 # Let's apply what we learned!
-
-Notes: <br>
