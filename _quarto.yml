@@ -2,7 +2,8 @@ project:
   type: website
   title: "Data Visualization"
   render:
-    # This will render modules, slides, and exercises into _site
+    - modules/index.qmd
+    # This renders modules, slides, and exercises into `_site`
     - modules/**/*.qmd
 resources:
   - static/
@@ -32,6 +33,9 @@ website:
           - href: modules/module1/module1-08-questions_on_how_plots_are_created.qmd
           - href: modules/module1/module1-11-what_did_we_just_learn.qmd
 
+# Since we are declaring options for two formats here (html and revealjs)
+# each qmd file needs to include a yaml block including which format to use for that file.
+# https://github.com/quarto-dev/quarto-cli/issues/4583
 format:
   html:
     theme: [united, styles.scss]
