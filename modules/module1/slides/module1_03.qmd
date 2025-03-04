@@ -1,27 +1,36 @@
 ---
-params:
-  dynamictitle: "module1_02"
-title: "`r params$dynamictitle`"
-output:
-  md_document:
-    variant: gfm
+format: revealjs
+title: How Can We Visualize Data?
+title-slide-attributes:
+  data-notes: |
+    There are many different data visualization strategies
+    so which one should we choose when visualizing our data?
 ---
 
-```{r setup, include=FALSE}
-source('../../../../slide-setup.R')
-# Remember to also manually update the YAML title above
+```{python}
+#| echo: false
+import pandas as pd
+import numpy as np
+
+
+pd.set_option('display.width', 350)
+np.set_printoptions(linewidth=400)
+pd.set_option('display.max_columns', 50)
+pd.set_option('display.max_rows', 15)
+
+
+import altair as alt
+
+@alt.theme.register("increase_font_size", enable=True)
+def increase_font_size() -> alt.theme.ThemeConfig:
+    return {
+    'config': {
+        'view': {'continuousWidth': 400, 'continuousHeight': 300},
+        'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14},
+        'axis': {'titleFontSize': 14, 'labelFontSize': 12},
+        'header': {'titleFontSize': 16, 'labelFontSize': 14},
+        'encoding': {'x': {'scale': {'zero': False}}}}}
 ```
-
-type: slides
-
-
-# How Can We Visualize Data?
-
-Notes:
-There are many different data visualization strategies
-so which one should we choose when visualizing our data?
-
----
 
 ## There are two types of visualization approaches
 
@@ -31,8 +40,7 @@ it is helpful to distinguish between the following two approaches to visualizati
 1. Imperative
 2. Declarative 
 
-Notes: 
-
+::: {.notes}
 There are a plethora of visualization packages in Python.
 
 This rich selection can be beneficial
@@ -42,7 +50,7 @@ especially when starting out and trying to decide which package to choose.
 When learning about data visualization,
 it is helpful to distinguish between plotting packages that follow either an
 *imperative* or a *declarative* visualization philosophy.
-
+:::
 
 ---
 
@@ -55,8 +63,7 @@ it is helpful to distinguish between plotting packages that follow either an
       a blue point for every observation that has value Y in column A, etc."
 - Minute control over plotting details, but laborious for complex visualization.
 
-Notes:
-
+::: {.notes}
 **Imperative** (or **low level**) plotting packages
 focus on plot construction details
 such as *how* to implement the visualization
@@ -65,6 +72,7 @@ in terms of for-loops, low-level drawing commands, etc.
 This approach gives us minute control over what is plotted,
 but it becomes quite laborious when we need to plot larger dataframes,
 or create more complex visualizations.
+:::
 
 ---
 
@@ -98,13 +106,13 @@ or create more complex visualizations.
 </table></center>
 
 
-Notes:
-
+::: {.notes}
 In the example in the next slide,
 we will plot the area and the population
 for the three largest countries in the world
 to see how they compare.
 This is the table we are plotting.
+:::
 
 ---
 
@@ -118,7 +126,8 @@ for row_number, row_data in enumerate(dataframe):
     plot.add_point(x=row_data['Area'], y=row_data['Population'], color=colors[row_number])
 ```
 
-```{python echo=FALSE}
+```{python}
+#|echo: false
 import pandas as pd
 import altair as alt
 from io import StringIO
@@ -138,15 +147,10 @@ df = pd.read_table(StringIO(data), sep='|')
     alt.Y('Population'),
     alt.Color('Country', legend=None, scale=alt.Scale(range=['steelblue', 'coral', '#FFDB58'])))
  .configure_axis(grid=False)
- .configure_view(stroke=None)
- .save('../../../../static/module1/pseudocode-plot.svg'))
+ .configure_view(stroke=None))
 ```
 
-<img src="/module1/pseudocode-plot.svg" alt="" width="52%"></img>
-
-Notes:
-
-
+::: {.notes}
 For this example,
 we will use Python-inspired pseudocode,
 which is code that is made up
@@ -175,6 +179,7 @@ it is not possible to know which colour represents which country.
 
 We could add a legend by creating it explicitly 
 and adding one coloured dot per iteration in the loop.
+:::
 
 ---
 
@@ -186,8 +191,7 @@ and adding one coloured dot per iteration in the loop.
     - "Assign colors based on the values in column A"
 - Smart defaults give us what we want without complete control over minor plotting details.
 
-Notes:
-
+::: {.notes}
 **Declarative** (or **high level**) plotting packages
 declare links between dataframe columns and visual channels,
 such as the x-axis, y-axis, colour, *etc*.
@@ -196,9 +200,10 @@ This means that you can provide a high-level specification
 of *what* you want the visualization to include,
 and the plot details are handled automatically.
 
-In summary, <br>
+In summary,
 declarative visualization tools let you think about **data and relationships**,
 while imperative visualization tools focus on **plot construction details**.
+:::
 
 ---
 
@@ -209,25 +214,24 @@ while imperative visualization tools focus on **plot construction details**.
 point_plot(data=dataframe, x='Area', y='Population', color='Country')
 ```
 
-```{python echo=FALSE}
+```{python}
+#|echo: false
 (alt.Chart(df).mark_circle(size=200).encode(
     alt.X('Area'),
     alt.Y('Population'),
     alt.Color('Country', scale=alt.Scale(range=['steelblue', 'coral', '#FFDB58'])))
  .configure_axis(grid=False)
- .configure_view(stroke=None)
- .save('../../../../static/module1/pseudocode-plot-with-legend.svg'))
+ .configure_view(stroke=None))
 ```
 
-<img src="/module1/pseudocode-plot-with-legend.svg" alt="" width="65%"></img>
-
-Notes:
+::: {.notes}
 The visualization on this page is an example of what a plot could look like
 when run with real code similar to our pseudocode.
 
 You will notice that this time the plot also includes a legend
 without us having to create it explicitly,
 which is a common convenience in declarative plotting packages.
+:::
 
 ---
 
@@ -244,7 +248,7 @@ which is a common convenience in declarative plotting packages.
 chart(dataframe).add_points().encode_columns(x='Area', y='Population', color='Country')`.
 ```
 
-Notes:
+::: {.notes}
 The declarative plotting concept can be implemented in different ways.
 
 In the previous slide, we had a dedicated function for creating the pointplot,
@@ -281,6 +285,7 @@ without memorizing a unique function for each plot type.
 Thanks to this grammatical visualization approach,
 we also only require minimal changes to our code
 to change the type of plot.
+:::
 
 ---
 
@@ -290,9 +295,9 @@ to change the type of plot.
 <br>
 <br>
 
-<img src="/module1/py-plotting-landscape.png" alt="The Python plotting landscape" width="100%"></img>
+<img src="../../../static/py-plotting-landscape.png" alt="The Python plotting landscape" width="100%"></img>
 
-Notes:
+::: {.notes}
 Now that we know the basic concepts of how data can be visualized,
 let's select a Python package and get coding!
 
@@ -334,6 +339,7 @@ they don't yet support every single plot type out there,
 but they more than make up for it with their ease of use
 and support for powerful interactive visualizations,
 as we will see later.
+:::
 
 ---
 
@@ -346,7 +352,7 @@ cars = data.cars()
 cars
 ```
 
-Notes:
+::: {.notes}
 Before we start visualizing data,
 we need to select a dataset and often also a question we want to answer.
 
@@ -378,6 +384,7 @@ and how good gas mileage it has
 Before starting to code the visualization,
 take a few seconds and think about
 what you would expect the relationship between these two columns to look like when you plot it.
+:::
 
 ---
 
@@ -389,7 +396,7 @@ import altair as alt
 alt.Chart(cars).mark_point()
 ```
 
-Notes:
+::: {.notes}
 Here we assigned a shorter name (`alt`)
 to the Altair library when importing it
 to save us some typing later.
@@ -412,6 +419,7 @@ since all the data is plotted on top of each other in the same location.
 To the right of the chart, there is a button with three dots on it.
 don't worry about it right now,
 we will explain what this is for at the end of the chapter.
+:::
 
 ---
 
@@ -424,7 +432,7 @@ alt.Chart(cars).mark_point().encode(
     x='Weight_in_lbs')
 ```
 
-Notes:
+::: {.notes}
 To visually separate the points,
 we can encode columns in the dataframe
 as visual channels,
@@ -448,6 +456,7 @@ so that it is easy to compare their position to the points.
 This is particularly useful when the points might be further away
 from the axis ticks,
 such as in the next slide.
+:::
 
 ---
 
@@ -459,7 +468,7 @@ alt.Chart(cars).mark_point().encode(
     y='Miles_per_Gallon')
 ```
 
-Notes:
+::: {.notes}
 By spreading out the data along both the x and y-axis,
 we can answer our initial question about the relationship between car weight and gas mileage.
 as it appears that the heavier cars are the ones that have the poorest mileage.
@@ -477,6 +486,7 @@ This rich, easily interpretable display of information
 is one of the main advantages of visualizing data
 and later in the course, we will talk more about the different type of relationships,
 such as linear, exponential, etc.
+:::
 
 ---
 
@@ -489,8 +499,7 @@ alt.Chart(cars).mark_point().encode(
     color='Horsepower')
 ```
 
-Notes:
-
+::: {.notes}
 Is there a relationship between horsepower and car weight, or fuel-efficiency?
 
 To enrich this display of information further,
@@ -512,6 +521,7 @@ We can also observe a relationship between the horsepower of a vehicle and the f
 
 In the next module, we will learn more in detail about 
 which encodings are most suitable for different comparisons.
+:::
 
 ---
 
@@ -524,7 +534,7 @@ alt.Chart(cars).mark_point().encode(
     color='Origin')
 ```
 
-Notes:
+::: {.notes}
 In the previous slide,
 a continuous, gradually increasing colour scale was used
 to visualize the gradual increase in the numerical column `Horsepower`.
@@ -543,6 +553,7 @@ and we can see that the heavier, more powerful cars are primarily manufactured i
 while the lighter more fuel-efficient ones are manufactured in Europe and Japan
 (remember that this is true for this particular dataset,
 and not necessarily all cars).
+:::
 
 ---
 
@@ -556,7 +567,7 @@ alt.Chart(cars).mark_point().encode(
     shape='Origin')
 ```
 
-Notes:
+::: {.notes}
 Although Altair's colour scales are designed to be effective and easy to interpret,
 we can make the categories in our plot even more distinct
 by encoding the same categorical column as both colour and shape.
@@ -565,6 +576,7 @@ This also makes visualizations much easier to interpret and understand
 for anyone with visual colour deficiency
 (about 10% of the population).
 We will talk more in-depth about colour theory in a later module.
+:::
 
 ---
 
@@ -580,7 +592,7 @@ alt.Chart(cars).mark_point().encode(
     size='Horsepower')
 ```
 
-Notes:
+::: {.notes}
 Sometimes a visualization tries to do too much.
 In this example,
 we have added the size channel
@@ -596,6 +608,7 @@ with an appropriate amount of information,
 and what the research indicates
 regarding which visual channels are the most efficient
 for communicating information visually.
+:::
 
 ---
 
@@ -610,7 +623,7 @@ alt.Chart(cars).mark_point().encode(
     size='Horsepower')
 ```
 
-Notes:
+::: {.notes}
 This is the same visualization as from the last slide,
 and we will just use it as an example.
 
@@ -626,7 +639,6 @@ We will also be learning about programmatic ways to save our charts later in the
 The last three menu items relate to the library VegaLite,
 which is what we mentioned Altair is built upon,
 but we will not be using these in this course.
-
----
+:::
 
 # Let's apply what we learned!
