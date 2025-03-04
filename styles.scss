@@ -29,8 +29,13 @@ div.callout-tip.callout-style-default > .callout-header {
   background-color: #8990C5 !important;
 }
 
-h1, h2, h3, strong, b, code {
+h1, h2, h3 {
   color: #4853A4 !important;
+
+}
+
+strong, b, code {
+  color: #F78F2E !important;
 }
 
 /* Make slide headings smaller */
@@ -48,6 +53,15 @@ h1, h2, h3, strong, b, code {
   font-size: 12px;
 }
 
+.reveal.show-notes .speaker-notes code {
+  /* The ubuntu mono font is quite small */
+  font-size: 1.2em;
+}
+
+.reveal .speaker-notes::before {
+  content: "Slide notes";
+}
+
 /* Make code smaller and remove border around code block */
 .reveal div.sourceCode {
   font-size: 0.8em;
@@ -55,8 +69,19 @@ h1, h2, h3, strong, b, code {
 }
 
 /* Shrink font for dataframes and the dimension text printed under them */
-.reveal table, p {
+.reveal table,
+.reveal p,
+.reveal li {
   font-size: 0.5em;
+}
+
+.reveal span.im,
+.reveal span.st {
+  color: #4853A4;
+}
+
+.reveal span.op {
+  color: #f78f2e;
 }
 
 iframe.slide-deck,
