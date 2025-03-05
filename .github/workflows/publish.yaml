@@ -25,7 +25,11 @@ jobs:
           path: _freeze
 
       - name: Install System Dependencies
-        run:  python3 -m pip install altair[all] pandas vega_datasets
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+      - run:  pip install altair[all] pandas vega_datasets
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
