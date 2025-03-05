@@ -2,20 +2,22 @@ project:
   type: website
   title: "Data Visualization"
   render:
-    # This will render modules, slides, and exercises into _site
+    # This renders modules, slides, and exercises into `_site`
     - modules/**/*.qmd
-resources:
-  - static/
+    - modules/index.qmd
+  resources:
+    - styles.scss
 
 website:
   page-navigation: true
   sidebar:
+    logo: static/logo.svg
     collapse-level: 1
-    style: "docked"
     search: true
+    style: 'docked'
+    background: 'primary'
     contents:
-      - text: 'Course Intro'
-        href: modules/index.qmd
+      - text: '<strong>Modules</strong>'
       - section: "0. Visualization Intro"
         contents:
           - href: modules/module0/module0-01-data_visualization.qmd
@@ -31,9 +33,40 @@ website:
           - href: modules/module1/module1-08-questions_on_how_plots_are_created.qmd
           - href: modules/module1/module1-11-what_did_we_just_learn.qmd
 
+# Since we are declaring options for two formats here (html and revealjs)
+# each qmd file needs to include a yaml block including which format to use for that file.
+# https://github.com/quarto-dev/quarto-cli/issues/4583
 format:
   html:
+    callout-icon: false
+    theme: [united, styles.scss]
+    linkcolor: '#F78F2E'
+    highlight-style: atom-one
     grid:
       sidebar-width: 350px
-      body-width: 1200px
-      margin-width: 400px
+      margin-width: 800px
+  live-html:
+    callout-icon: false
+    theme: [united, styles.scss]
+    linkcolor: '#F78F2E'
+    highlight-style: atom-one
+    grid:
+      sidebar-width: 350px
+      margin-width: 800px
+  revealjs:
+    transition: slide
+    show-notes: true
+    slide-number: true
+    width: 100%
+    theme: styles.scss
+    monofont: Ubuntu Mono
+    mainfont: Ubuntu
+    font-size: 0.5em
+    monobackgroundcolor: '#F1F3F5'
+    highlight-style: atom-one
+    # tango atom-one  nord
+    code-line-numbers: false
+    code-copy: true
+    progress: false
+    execute:
+      echo: true

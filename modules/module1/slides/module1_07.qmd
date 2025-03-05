@@ -1,11 +1,5 @@
 ---
-engine: knitr
-format:
-  revealjs:
-    transition: slide
-    show-notes: true
-    slide-number: true
-    width: 100%
+format: revealjs
 title: Aggregations, lines, and layers
 title-slide-attributes:
   data-notes: |
@@ -14,14 +8,30 @@ title-slide-attributes:
     how to create lineplots via `mark_line()`,
     and how to combine line and point plots together
     via layers.
-include-in-header:
-  - text: |
-      <style>
-      .reveal.show-notes .speaker-notes {
-        font-size: 0.3em;
-      }
-      </style>
 ---
+
+```{python}
+#| echo: false
+import pandas as pd
+import numpy as np
+import altair as alt
+
+
+pd.set_option('display.width', 350)
+np.set_printoptions(linewidth=400)
+pd.set_option('display.max_columns', 50)
+pd.set_option('display.max_rows', 15)
+
+@alt.theme.register("increase_font_size", enable=True)
+def increase_font_size() -> alt.theme.ThemeConfig:
+    return {
+    'config': {
+        'view': {'continuousWidth': 400, 'continuousHeight': 300},
+        'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14},
+        'axis': {'titleFontSize': 14, 'labelFontSize': 12},
+        'header': {'titleFontSize': 16, 'labelFontSize': 14},
+        'encoding': {'x': {'scale': {'zero': False}}}}}
+```
 
 ## Including all the data can hinder visualization of general trends
 
@@ -37,12 +47,6 @@ alt.Chart(cars).mark_point().encode(
 ```
 
 ::: {.notes}
-In this slide deck, we will see how to aggregate data in Altair
-(to plot the mean, median, etc),
-how to create lineplots via `mark_line()`,
-and how to combine line and point plots together
-via layers.
-
 Throughout this course
 we will explore many different datasets,
 but for now, we will stick to the `cars`
@@ -369,7 +373,5 @@ unless they are specifically overwritten.
 If we would only have added colour to the point chart,
 there would still have been a single line instead of three.
 :::
-
----
 
 # Let's apply what we learned!

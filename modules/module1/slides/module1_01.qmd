@@ -1,18 +1,25 @@
 ---
-params:
-  dynamictitle: "module1_01"
-title: "`r params$dynamictitle`"
-output:
-  md_document:
-    variant: gfm
+format: revealjs
+title: What is Data Visualization?
+title-slide-attributes:
+  data-notes: |
+    At its core,
+    data visualization is about representing numbers with graphical elements
+    such as the position of a line, the length of a bar, or the colour of a point.
+
+    We often use visualizations to explore data ourselves,
+    and to effectively communicate our insights to others,
+    as we will learn in later modules of this course.
+resources:
+  - ../../utils.py
 ---
 
-```{r setup, include=FALSE}
-source('../../../../slide-setup.R')
-# Remember to also manually update the YAML title above
-```
+```{python}
+#| echo: false
+#| output: false
 
-```{python include=FALSE}
+# TODO It would be convenient to run this entire setup once or at least put it in a utils file, but seems tricky:
+# https://stackoverflow.com/questions/75751478/how-can-i-include-external-python-scripts-while-executing-their-codes-in-quarto
 import pandas as pd
 import numpy as np
 
@@ -21,28 +28,20 @@ pd.set_option('display.width', 350)
 np.set_printoptions(linewidth=400)
 pd.set_option('display.max_columns', 50)
 pd.set_option('display.max_rows', 15)
+
+
+import altair as alt
+
+@alt.theme.register("increase_font_size", enable=True)
+def increase_font_size() -> alt.theme.ThemeConfig:
+    return {
+    'config': {
+        'view': {'continuousWidth': 400, 'continuousHeight': 300},
+        'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14},
+        'axis': {'titleFontSize': 14, 'labelFontSize': 12},
+        'header': {'titleFontSize': 16, 'labelFontSize': 14},
+        'encoding': {'x': {'scale': {'zero': False}}}}}
 ```
-
-type: slides
-
-# What is Data Visualization?
-
-<head>
-    <base target="_blank">
-</head><head>
-    <base target="_blank">
-</head>
-
-Notes:
-At its core,
-data visualization is about representing numbers with graphical elements
-such as the position of a line, the length of a bar, or the colour of a point.
-
-We often use visualizations to explore data ourselves,
-and to effectively communicate our insights to others,
-as we will learn in later modules of this course.
-
----
 
 ## What is the purpose of visualizing data?
 
@@ -57,7 +56,7 @@ To create an effective visualization, start by
 - Thinking about what you want to achieve by making the visualization
 - Drawing it out with pen and paper
 
-Notes: 
+::: {.notes}
 We often visualize data in order to help us answer a specific question
 we have about our dataset,
 but it can also help us generate new questions.
@@ -81,6 +80,7 @@ or if there is another plot better suited for the task at hand.
 Drawing with pen and paper also makes it easier to write the code afterwards,
 since you clearly know what you are expecting
 the visualization to look like.
+:::
 
 ---
 
@@ -88,10 +88,8 @@ the visualization to look like.
 
 ### Can you see any differences in the general trends of these four sets of numbers?
 
-```{python echo=FALSE, results="asis"}
-# This is the code that generates the table below,
-# and set results to `'asis'` ensures it is rendered as HTML
-# instead of being wrapped in an output code block
+```{python}
+#| echo: false
 import altair as alt
 from vega_datasets import data
 
@@ -103,14 +101,31 @@ anscombe.loc[anscombe['Y'] == anscombe['Y'].max(), 'Y'] = 8.5
 for set_name, df in anscombe.groupby('Set'):
     df = df.drop(columns='Set')
     df.columns = pd.MultiIndex.from_tuples([(set_name, 'X'), (set_name, 'Y')])
-    print(
-        df
-        .to_html(index=False)
-        .replace('class="dataframe"', 'style="width:70px; float:left; margin-right:40px"')
-        .replace('<thead>',  '<thead style="text-align: center">'))
+    # Ugly hack to add spacing between columns instead of having to mock around wit the CSS
+    if set_name == 'A':
+        df[' '] = ''
+        df[' ' * 5] = ''
+        dfs = df.copy()
+    else:
+        if set_name == 'B':
+            df['  '] = ''
+            df[' ' * 6] = ''
+        elif set_name == 'C':
+            df['   '] = ''
+            df[' ' * 7] = ''
+        elif set_name == 'D':
+            df['    '] = ''
+            df[' ' * 8] = ''
+        dfs = dfs.merge(df.reset_index(drop='index'), left_index=True, right_index=True)
+(
+    dfs
+    .to_html()
+    .replace('class="dataframe"', 'style="width:70px; float:left; margin-right:40px"')
+    .replace('<thead>',  '<thead style="text-align: center">')
+)
 ```
 
-Notes:
+::: {.notes}
 Why do we need visualizations to help answer our questions?
 
 Is it not enough to look at numbers in tables?
@@ -141,6 +156,7 @@ Can you see the differences in the general trends between these four sets of num
 This is a slightly modified version of the original,
 <a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank">which was put together by statistician Francis Anscombe in the
 70s.</a>
+:::
 
 
 ---
@@ -149,21 +165,30 @@ This is a slightly modified version of the original,
 
 ### C is the only set with a different mean and standard deviation
 
-```{python echo=FALSE, results="asis"}
+```{python}
+#| echo: false
+dfs = []
 for set_name, df in anscombe.groupby('Set'):
     df = df.drop(columns='Set')
     df.columns = pd.MultiIndex.from_tuples([(set_name, 'X'), (set_name, 'Y')])
-    print(
-        df
-        .agg(['mean', 'std']).round(2).reset_index().rename(columns={'index': ''})
-        .to_html(index=False)
-        .replace('class="dataframe"', 'style="width:70px; float:left; margin-right:40px"')
-        .replace('<thead>',  '<thead style="text-align: center">')
-        .replace('>7.11',  ' style="background-color:#4853a4; color:#ffffff"> <b>7.11</b>')
-        .replace('>1.15',  ' style="background-color:#4853a4; color:#ffffff"> <b>1.15</b>'))
+    dfs.append(df.agg(['mean', 'std']).round(2))
+    # Ugly hack to add spacing between columns instead of having to mock around wit the CSS
+    dfs[-1][' '] = ''
+    dfs[-1]['  '] = ''
+(
+    pd.concat(
+        dfs,
+        axis=1
+    )
+    .to_html()
+    .replace('class="dataframe"', 'style="width:70px; float:left; margin-right:40px"')
+    .replace('<thead>',  '<thead style="text-align: center">')
+    .replace('>7.11',  ' style="background-color:#4853a4; color:#ffffff"> <b>7.11</b>')
+    .replace('>1.15',  ' style="background-color:#4853a4; color:#ffffff"> <b>1.15</b>')
+)
 ```
 
-Notes:
+::: {.notes}
 Summaries,
 such as the mean and standard deviation,
 are helpful statistical tools
@@ -180,6 +205,7 @@ the mean and standard deviation indicate that set C
 is slightly different from the other sets of data
 in terms of the centre of the sample distribution and the spread of that distribution,
 while the remaining three sets of data have a similar centre and spread.
+:::
 
 ---
 
@@ -187,22 +213,8 @@ while the remaining three sets of data have a similar centre and spread.
 
 ### We could not detect these patterns from only looking at the raw numbers or summary statistics
 
-```{python echo=FALSE, results=FALSE}
-# Make plot elements easier to see
-# This is a bit ugly but there is no faster why,
-# maybe we should discuss if we want this in all slide decks
-# or just go with the default smaller font.
-def bigger_font():
-    return {
-        'config': {
-            'view': {'continuousWidth': 400, 'continuousHeight': 300},
-            'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14},
-            'axis': {'titleFontSize': 14, 'labelFontSize': 12},
-            'header': {'titleFontSize': 16, 'labelFontSize': 14},
-            'encoding': {'x': {'scale': {'zero': False}}}}}
-alt.themes.register('bigger_font', bigger_font)
-alt.themes.enable('bigger_font')
-
+```{python}
+#| echo: false
 (alt.Chart(anscombe).mark_circle(size=80, opacity=1).encode(
     x='X',
     y='Y')
@@ -210,12 +222,10 @@ alt.themes.enable('bigger_font')
  .facet('Set', columns=2)
  .configure_axis(grid=True)
  .configure_header(title=None)
- .save('../../../../static/module1/modified-anscombes.svg'))
+ )
 ```
 
-<img src="/module1/modified-anscombes.svg" alt="" width="60%"></img>
-
-Notes:
+::: {.notes}
 Humans are not good at detecting patterns in raw numbers,
 and we don't have good intuition about how different distributions of data
 can contribute to identical statistical summaries.
@@ -238,17 +248,18 @@ for the four different data sets.
 Sets A and C are roughly linearly increasing at similar rates,
 whereas set B reaches a plateau and starts to drop,
 and set D has a constant X-value for all numbers except one big outlier.
+:::
 
 ---
 
 ## More examples of plotting versus statistical summaries
 
-![](https://blog.revolutionanalytics.com/downloads/DataSaurus%20Dozen.gif)
+![Datasaurus](https://blog.revolutionanalytics.com/downloads/DataSaurus%20Dozen.gif)
 
 <a href="https://www.autodesk.com/research/publications/same-stats-different-graphs" target="_blank">Source: Matejka and Fitzmaurice, 2017</a>
 
 
-Notes:
+::: {.notes}
 A more recent and dynamic illustration of
 how graphical representations are much easier for us to interpret
 compared to statistical summaries,
@@ -257,9 +268,6 @@ is the Datasaurus GIF <a href="https://www.autodesk.com/research/publications/sa
 It displays several different datasets,
 all with the same mean, standard deviation and correlation between X and Y,
 but looking at the data graphically shows us how different these datasets actually are.
-
----
+:::
 
 # Let's apply what we learned!
-
-Notes: <br>
