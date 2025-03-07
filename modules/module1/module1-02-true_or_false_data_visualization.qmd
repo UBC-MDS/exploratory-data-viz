@@ -2,29 +2,36 @@
 format: html
 ---
 
+<script src='../../src/quiz.js'></script>  <!-- Only needed once per page -->
+
 # 2. Exercises
 
 ## True or False: Data Visualization
 
-**True or False**<br>
-*It is easier for humans to interpret plots than raw numbers.*
+<div id='mcq1'></div> <!-- The quiz will be inserted here -->
+<script>
+    generateQuiz(
+        'mcq1', // Must be unique and match the ID above
+        'True or False',  // Question title
+        'It is easier for humans to interpret plots than raw numbers.',  // Question/statement text
+        { // Option: Explanation
+        'True': 'We saw in the slides that sometimes humans can pick up more information about the data in plots.',
+        'False': 'Take a look at the slides. Is it easier to notice trends and patterns with the data displayed in tables or in plots?'
+        },
+        'True',  // Correction answer
+    );
+</script>
 
-a) True
-a) False
-
-
-::: {.callout-tip title="Solution" collapse="true"}
-The right answer is **"True"**: We saw in the slides that sometimes humans can pick up more information about the data in plots.<br>
-If you got this wrong: Take a look at the slides. Is it easier to notice trends and patterns with the data displayed in tables or in plots?
-:::
-
-**True or False**<br>
-*Statistical summaries are often useful, but it is a good idea to also visualize your data before drawing any conclusions.*
-
-a) True
-a) False
-
-::: {.callout-tip title="Solution" collapse="true"}
-The right answer is **"True"**.<br>
-If you got this wrong: Summaries are helpful but don’t get us a full picture like a visualization can.
-:::
+<div id='mcq2'></div> <!-- The quiz will be inserted here -->
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'Statistical summaries are often useful, but it is a good idea to also visualize your data before drawing any conclusions.',
+        {
+        'True': '',
+        'False': 'Summaries are helpful but don’t get us a full picture like a visualization can.'
+        },
+        'True',
+    );
+</script>
