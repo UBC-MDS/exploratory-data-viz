@@ -3,15 +3,21 @@ import random
 import altair as alt
 
 
-@alt.theme.register("increase_font_size", enable=True)
-def increase_chart_font_size() -> alt.theme.ThemeConfig:
+def increase_font_size():
     return {
-    'config': {
-        'view': {'continuousWidth': 400, 'continuousHeight': 300},
-        'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14},
-        'axis': {'titleFontSize': 14, 'labelFontSize': 12},
-        'header': {'titleFontSize': 16, 'labelFontSize': 14},
-        'encoding': {'x': {'scale': {'zero': False}}}}}
+        "config": {
+            "view": {"continuousWidth": 400, "continuousHeight": 300},
+            "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14},
+            "axis": {"titleFontSize": 14, "labelFontSize": 12},
+            "header": {"titleFontSize": 16, "labelFontSize": 14},
+            "encoding": {"x": {"scale": {"zero": False}}},
+        }
+    }
+
+
+alt.themes.register("increase_font_size", increase_font_size)
+alt.themes.enable("increase_font_size")
+
 
 # def increase_chart_font_size():
 #     import altair as alt
