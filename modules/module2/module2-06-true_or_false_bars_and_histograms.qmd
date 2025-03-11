@@ -111,7 +111,9 @@ We are interested in obtaining the number of penguins we collected of each speci
 
 ```{pyodide}
 #| setup: true
-#| exercise: practicing_bar_plots
+#| exercise: 
+#|   - practicing_bar_plots
+#|   - making_history
 
 import altair as alt
 import pandas as pd
@@ -188,3 +190,72 @@ penguin_bar
         'Adelie',  
     );
 </script>
+
+## Making History with Histograms
+
+**Instructions:**
+Be patient when running a coding exercise for the first time, it can take a few minutes.
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+Let's now see what the distribution of penguin flipper length looks like. 
+
+**Tasks:**
+
+- Using bars, show the counts of the `flipper_length_mm` values using the `penguins_df` dataframe
+- Make sure to give it a title and set the dimensions to a height of 150 and a width of 300.
+- Save your plot in an object named `penguin_hist`.
+
+```{pyodide}
+#| exercise: making_history
+penguin_hist = alt.Chart(____).____().encode(
+    x=alt.X(____, ____),
+    y='____',
+    ).properties(____='Flipper length among Penguins', ____=300, height=____)
+
+penguin_hist
+```
+
+```{pyodide}
+#| exercise: making_history
+#| check: true
+
+solution = alt.Chart(penguins_df).mark_bar().encode(
+    x=alt.X('flipper_length_mm', bin=True),
+    y='count()',
+    ).properties(title='Flipper length among Penguins', width=300, height=150)
+
+assert_chart_equal(solution, result)
+```
+
+:::: { .hint exercise="making_history"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you using `.mark_bar()`?
+- Are you assigning the plot to an object named`penguin_hist`?
+- Are you specifying `alt.X('flipper_length_mm', bin=True)` on the x-axis?
+- Are you specifying `count()` on the y-axis?
+- Are you giving the plot a title and proper dimensions using `.properties()`?
+
+:::
+::::
+
+:::: { .solution exercise="making_history" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide} 
+penguin_hist = alt.Chart(penguins_df).mark_bar().encode(
+    x=alt.X('flipper_length_mm', bin=True),
+    y='count()',
+    ).properties(title='Flipper length among Penguins', width=300, height=150)
+
+penguin_hist
+```
+
+:::
+::::
