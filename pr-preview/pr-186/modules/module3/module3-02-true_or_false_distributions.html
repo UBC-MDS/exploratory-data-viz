@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>module0-02-prerequisite_confirmation – Data Visualization</title>
+<title>module3-02-true_or_false_distributions – Data Visualization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../modules/module1/module1-00-module-learning-outcomes.html" rel="next">
-<link href="../../modules/module0/module0-01-data_visualization.html" rel="prev">
+<link href="../../modules/module3/module3-01-how_to_visualize_data_from_a_single_column.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -123,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../modules/module0/module0-02-prerequisite_confirmation.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../modules/module0/module0-02-prerequisite_confirmation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">&nbsp;&nbsp; 1.1. Prerequisite confirmation</span></a>
   </div>
 </li>
@@ -282,7 +315,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../modules/module3/module3-02-true_or_false_distributions.html" class="sidebar-item-text sidebar-link">
+  <a href="../../modules/module3/module3-02-true_or_false_distributions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">&nbsp;&nbsp; 1.1. Exercises</span></a>
   </div>
 </li>
@@ -301,26 +334,87 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="../../src/quiz.js"></script>
-<p><!-- Only needed once per page --></p>
-<section id="prerequisite-confirmation" class="level1">
-<h1>1.1. Prerequisite Confirmation</h1>
+<section id="exercises" class="level1">
+<h1>1.1. Exercises</h1>
+<section id="true-or-false-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="true-or-false-distributions">True or False: Distributions</h2>
 <div id="mcq1">
 
 </div>
 <script>
     generateQuiz(
-        'mcq1',
-        'Prerequisites',
-        'Have you taken the prerequisite Programming in Python for Data Science?',
-        {
-        'Yes I have': 'Let’s get started. Please continue on to Module 1.',
-        'I have not': 'Please take the course "Programming in Python for Data Science" before proceeding onto Module 1.',
+        'mcq1', 
+        'True or False',  
+        'When we are visualization data from a single column, we are (usually) more interested in the shape/distribution in general, than individual points.',  
+        { 
+        'True': '',
+        'False': 'We are usually interested in the values as a collective.'
         },
-        'Yes I have',
+        'True',  
     );
 </script>
+<div id="mcq2">
+
+</div>
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'Layered histograms are more interpretable than stacked histograms.',
+        {
+        'True': 'This isn’t always true. In fact, depending on the question you are attempting to answer, layered histograms can do the opposite.',
+        'False': ''
+        },
+        'False',
+    );
+</script>
+</section>
+<section id="multiple-choice-questions-on-single-column-plots" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-choice-questions-on-single-column-plots">Multiple Choice Questions on Single Column Plots</h2>
+<div id="mcq3">
+
+</div>
+<script>
+    generateQuiz(
+        'mcq3',
+        'Question 1',
+        'What can be problematic about the rugplot below?',
+        {
+        'They can take a lot time to produce.': 'The time it takes to make a plot is more dependent on the amount of data you have!',
+        'They visualize too many features at a time.': 'Rugplots are mostly used to display a single feature.',
+        'They do not provide enough details for insights.': 'The problem might be that they have too much detail.',
+        'With large quantities of data, they can be very difficult to interpret.': ''
+        },
+        'With large quantities of data, they can be very difficult to interpret.',
+    );
+</script>
+<p><img src="../../../static/module3/rugplot.svg" class="img-fluid" alt="Rugplot"></p>
+<div id="mcq4">
+
+</div>
+<script>
+    generateQuiz(
+        'mcq4',
+        'Question 2',
+        'To make a layered histogram instead of a stacked one, what should replace the "???" in the code below?',
+        {
+        'stack=False': 'You’ve got the right argument but the wrong value being set.',
+        'stack=None': '',
+        'layered=True': 'I think your argument should be called something else.',
+        'stacked=None': 'You are extremely close, but no past tense is needed.'
+        },
+        'stack=None',
+    );
+</script>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>hist_plot <span class="op">=</span> alt.Chart(df_source).mark_bar(opacity<span class="op">=</span><span class="fl">0.4</span>).encode(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'runtime'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'count()'</span>, ???),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'genre'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> .facet(<span class="st">'country'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> .resolve_scale(y<span class="op">=</span><span class="st">'independent'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -743,14 +837,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../modules/module0/module0-01-data_visualization.html" class="pagination-link" aria-label="1. Data Visualization">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1. Data Visualization</span>
+      <a href="../../modules/module3/module3-01-how_to_visualize_data_from_a_single_column.html" class="pagination-link" aria-label="1. How To Visualize Data From a Single Column">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1. How To Visualize Data From a Single Column</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../modules/module1/module1-00-module-learning-outcomes.html" class="pagination-link" aria-label="0. Module Learning Outcomes">
-        <span class="nav-page-text">0. Module Learning Outcomes</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
