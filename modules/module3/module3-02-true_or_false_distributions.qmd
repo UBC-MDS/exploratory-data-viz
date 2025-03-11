@@ -1,0 +1,82 @@
+---
+format: html
+---
+
+<script src='../../src/quiz.js'></script>  
+
+# 1.1. Exercises
+
+## True or False: Distributions
+
+<div id='mcq1'></div> 
+<script>
+    generateQuiz(
+        'mcq1', 
+        'True or False',  
+        'When we are visualization data from a single column, we are (usually) more interested in the shape/distribution in general, than individual points.',  
+        { 
+        'True': '',
+        'False': 'We are usually interested in the values as a collective.'
+        },
+        'True',  
+    );
+</script>
+
+<div id='mcq2'></div> 
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'Layered histograms are more interpretable than stacked histograms.',
+        {
+        'True': 'This isn’t always true. In fact, depending on the question you are attempting to answer, layered histograms can do the opposite.',
+        'False': ''
+        },
+        'False',
+    );
+</script>
+
+## Multiple Choice Questions on Single Column Plots
+
+<div id='mcq3'></div> 
+<script>
+    generateQuiz(
+        'mcq3',
+        'Question 1',
+        'What can be problematic about the rugplot below?',
+        {
+        'They can take a lot time to produce.': 'The time it takes to make a plot is more dependent on the amount of data you have!',
+        'They visualize too many features at a time.': 'Rugplots are mostly used to display a single feature.',
+        'They do not provide enough details for insights.': 'The problem might be that they have too much detail.',
+        'With large quantities of data, they can be very difficult to interpret.': ''
+        },
+        'With large quantities of data, they can be very difficult to interpret.',
+    );
+</script>
+
+![](../../../static/module3/rugplot.svg){fig-alt="Rugplot"}
+
+<div id='mcq4'></div> 
+<script>
+    generateQuiz(
+        'mcq4',
+        'Question 2',
+        'To make a layered histogram instead of a stacked one, what should replace the "???" in the code below?',
+        {
+        'stack=False': 'You’ve got the right argument but the wrong value being set.',
+        'stack=None': '',
+        'layered=True': 'I think your argument should be called something else.',
+        'stacked=None': 'You are extremely close, but no past tense is needed.'
+        },
+        'stack=None',
+    );
+</script>
+
+```python
+hist_plot = alt.Chart(df_source).mark_bar(opacity=0.4).encode(
+    alt.X('runtime', bin=alt.Bin(maxbins=30)),
+    alt.Y('count()', ???),
+    color='genre')
+ .facet('country')
+ .resolve_scale(y='independent')
+```
