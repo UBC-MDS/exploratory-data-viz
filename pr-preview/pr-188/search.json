@@ -1,0 +1,407 @@
+[
+  {
+    "objectID": "modules/module1/slides/module1_end.html#module-learning-outcomes",
+    "href": "modules/module1/slides/module1_end.html#module-learning-outcomes",
+    "title": "What Did we Learn and What to Expect in Assignment 1",
+    "section": "Module Learning Outcomes",
+    "text": "Module Learning Outcomes\nIn this module students will learn how to\n\nExplain the importance of data visualizations.\nUse the grammar of graphics presented here.\nTransform data directly in Altair instead of pandas.\nCombine graphical marks via layering.\n\n\nThe assignment will concentrate on the learning objectives as well as building knowledge on existing concepts."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#there-are-two-types-of-visualization-approaches",
+    "href": "modules/module1/slides/module1_03.html#there-are-two-types-of-visualization-approaches",
+    "title": "How Can We Visualize Data?",
+    "section": "There are two types of visualization approaches",
+    "text": "There are two types of visualization approaches\nWhen learning about data visualization, it is helpful to distinguish between the following two approaches to visualization:\n\nImperative\nDeclarative\n\n\nThere are a plethora of visualization packages in Python.\nThis rich selection can be beneficial but it is also confusing, especially when starting out and trying to decide which package to choose.\nWhen learning about data visualization, it is helpful to distinguish between plotting packages that follow either an imperative or a declarative visualization philosophy."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#imperative-low-level-plotting-focuses-on-plot-mechanics",
+    "href": "modules/module1/slides/module1_03.html#imperative-low-level-plotting-focuses-on-plot-mechanics",
+    "title": "How Can We Visualize Data?",
+    "section": "Imperative (low level) plotting focuses on plot mechanics",
+    "text": "Imperative (low level) plotting focuses on plot mechanics\n\nFocus on plot construction details.\n\nOften includes loops, low-level drawing commands, etc.\n\nSpecify how something should be done\n\n“Draw a red point for every observation that has value X in column A, a blue point for every observation that has value Y in column A, etc.”\n\nMinute control over plotting details, but laborious for complex visualization.\n\n\nImperative (or low level) plotting packages focus on plot construction details such as how to implement the visualization in terms of for-loops, low-level drawing commands, etc.\nThis approach gives us minute control over what is plotted, but it becomes quite laborious when we need to plot larger dataframes, or create more complex visualizations."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#the-data-we-will-be-plotting",
+    "href": "modules/module1/slides/module1_03.html#the-data-we-will-be-plotting",
+    "title": "How Can We Visualize Data?",
+    "section": "The data we will be plotting",
+    "text": "The data we will be plotting\n\n\n\n\nCountry\n\n\nArea\n\n\nPopulation\n\n\n\n\n\n\nRussia\n\n\n17098246\n\n\n144386830\n\n\n\n\nCanada\n\n\n9984670\n\n\n38008005\n\n\n\n\nChina\n\n\n9596961\n\n\n1400050000\n\n\n\n\n\nIn the example in the next slide, we will plot the area and the population for the three largest countries in the world to see how they compare. This is the table we are plotting."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#example-of-imperative-plotting",
+    "href": "modules/module1/slides/module1_03.html#example-of-imperative-plotting",
+    "title": "How Can We Visualize Data?",
+    "section": "Example of imperative plotting",
+    "text": "Example of imperative plotting\n# Pseudocode\ncolors = ['blue', 'red', 'yellow']\nplot = create_plot()\nfor row_number, row_data in enumerate(dataframe):\n    plot.add_point(x=row_data['Area'], y=row_data['Population'], color=colors[row_number])\n\n\n\n\n\n\n\n\n\nFor this example, we will use Python-inspired pseudocode, which is code that is made up and designed so that it is less complex and easier to read than real programming languages.\nThis helps us focus on understanding the concepts of plotting instead of getting hung up on the code syntax details of a particular package.\nYou can see that an imperative approach to plotting this data would be to first create the plot and then loop through the dataframe to add a point for each country one by one.\nTo colour the points, we need to manually create a sequence of colours that we can access inside the loop.\nThe visualization on this page is an example of what a plot could look like when run with real code similar to our pseudocode.\nYou can see that one of the countries is bigger than the others, and one of the countries has a much larger population, but without seeing the code, it is not possible to know which colour represents which country.\nWe could add a legend by creating it explicitly and adding one coloured dot per iteration in the loop."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#declarative-high-level-plotting-focuses-on-the-data",
+    "href": "modules/module1/slides/module1_03.html#declarative-high-level-plotting-focuses-on-the-data",
+    "title": "How Can We Visualize Data?",
+    "section": "Declarative (high level) plotting focuses on the data",
+    "text": "Declarative (high level) plotting focuses on the data\n\nFocus on data and relationships.\n\nOften includes linking columns to visual channels.\n\nSpecify what should be done\n\n“Assign colors based on the values in column A”\n\nSmart defaults give us what we want without complete control over minor plotting details.\n\n\nDeclarative (or high level) plotting packages declare links between dataframe columns and visual channels, such as the x-axis, y-axis, colour, etc.\nThis means that you can provide a high-level specification of what you want the visualization to include, and the plot details are handled automatically.\nIn summary, declarative visualization tools let you think about data and relationships, while imperative visualization tools focus on plot construction details."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#example-of-declarative-plotting",
+    "href": "modules/module1/slides/module1_03.html#example-of-declarative-plotting",
+    "title": "How Can We Visualize Data?",
+    "section": "Example of declarative plotting",
+    "text": "Example of declarative plotting\n# Pseudocode\npoint_plot(data=dataframe, x='Area', y='Population', color='Country')\n\n\n\n\n\n\n\n\n\nThe visualization on this page is an example of what a plot could look like when run with real code similar to our pseudocode.\nYou will notice that this time the plot also includes a legend without us having to create it explicitly, which is a common convenience in declarative plotting packages."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#a-high-level-grammar-of-graphics-helps-us-compose-plots-effectively",
+    "href": "modules/module1/slides/module1_03.html#a-high-level-grammar-of-graphics-helps-us-compose-plots-effectively",
+    "title": "How Can We Visualize Data?",
+    "section": "A high-level grammar of graphics helps us compose plots effectively",
+    "text": "A high-level grammar of graphics helps us compose plots effectively\n\nSimple grammatical components combine to create visualizations.\nVisualization grammars often consist of three main components:\n\nCreate a chart linked to a dataframe.\nAdd graphical elements (such as points, lines, etc).\nEncode dataframe columns as visual channels (such as x, etc).\n\n\n# Pseudocode\nchart(dataframe).add_points().encode_columns(x='Area', y='Population', color='Country')\n\nThe declarative plotting concept can be implemented in different ways.\nIn the previous slide, we had a dedicated function for creating the pointplot, and there would be a separate function for creating a lineplot, barplot, etc.\nWith this approach, it is often not easy to combine plots together, unless there is a specific function for that purpose and the three bullets points on this slide are all executed by this single function.\nAnother way to use declarative plotting is via a visualization grammar.\nGenerally, a grammar governs how individual parts come together to compose more complex constructs.\nFor example, a linguistic grammar decides how words and phrases can be combined into coherent sentences. A data visualization grammar determines how to combine individual parts of the plotting syntax to create complete visualization.\nIn the example on this slide, you can see that the three bullet points are now broken down into one main function to create the chart linked to the data, and then we build upon this by adding the graphical elements (add_points()) and the encoding of the columns to properties of this chart (encode_columns()).\nBy combining these three grammatical components in different ways, we can build a wide range of visualizations, without memorizing a unique function for each plot type.\nThanks to this grammatical visualization approach, we also only require minimal changes to our code to change the type of plot."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#the-python-plotting-landscape",
+    "href": "modules/module1/slides/module1_03.html#the-python-plotting-landscape",
+    "title": "How Can We Visualize Data?",
+    "section": "The Python plotting landscape",
+    "text": "The Python plotting landscape\n\n\nNow that we know the basic concepts of how data can be visualized, let’s select a Python package and get coding!\nIn this image, you can see the most commonly used Python plotting packages.\nThere are many more, but these are the ones you are the most likely to hear about, so it is good to know that they exist.\nThe text to the left in the image is a legend to explain the colours used for the different Python packages (blue for high level, declarative packages and orange for low-level, imperative packages).\nAs you can see there are several high and low-level language, so how do we chose?\nIn this course we will use Altair, because it is a powerful declarative visualization tool with a clear and consistent grammar that also allows us to add interactive components to our plots, such as tooltips and selections.\nWe have also included some of the most common visualization packages for the web which are built-in Javascript and coloured in white.\nThe reason we mention these is that the Altair library is a little bit of Python code connected to an already existing powerful JavaScript package called VegaLite, which in turns builds on D3, the most dominant visualization package on the web today.\nBy leveraging these well-established JavaScript visualization packages Altair can create plots that work natively on the web and includes interactive features without reinventing the wheel.\nSince Altair and VegaLite are relatively new visualization libraries, they don’t yet support every single plot type out there, but they more than make up for it with their ease of use and support for powerful interactive visualizations, as we will see later."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#sample-data-can-be-found-in-altairs-companion-package-vega_datasets",
+    "href": "modules/module1/slides/module1_03.html#sample-data-can-be-found-in-altairs-companion-package-vega_datasets",
+    "title": "How Can We Visualize Data?",
+    "section": "Sample data can be found in Altair’s companion package vega_datasets",
+    "text": "Sample data can be found in Altair’s companion package vega_datasets\n\nfrom vega_datasets import data\n\ncars = data.cars()\ncars\n\n\n\n\n\n\n\n\nName\nMiles_per_Gallon\nCylinders\nDisplacement\nHorsepower\nWeight_in_lbs\nAcceleration\nYear\nOrigin\n\n\n\n\n0\nchevrolet chevelle malibu\n18.0\n8\n307.0\n130.0\n3504\n12.0\n1970-01-01\nUSA\n\n\n1\nbuick skylark 320\n15.0\n8\n350.0\n165.0\n3693\n11.5\n1970-01-01\nUSA\n\n\n2\nplymouth satellite\n18.0\n8\n318.0\n150.0\n3436\n11.0\n1970-01-01\nUSA\n\n\n3\namc rebel sst\n16.0\n8\n304.0\n150.0\n3433\n12.0\n1970-01-01\nUSA\n\n\n4\nford torino\n17.0\n8\n302.0\n140.0\n3449\n10.5\n1970-01-01\nUSA\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n401\nford mustang gl\n27.0\n4\n140.0\n86.0\n2790\n15.6\n1982-01-01\nUSA\n\n\n402\nvw pickup\n44.0\n4\n97.0\n52.0\n2130\n24.6\n1982-01-01\nEurope\n\n\n403\ndodge rampage\n32.0\n4\n135.0\n84.0\n2295\n11.6\n1982-01-01\nUSA\n\n\n404\nford ranger\n28.0\n4\n120.0\n79.0\n2625\n18.6\n1982-01-01\nUSA\n\n\n405\nchevy s-10\n31.0\n4\n119.0\n82.0\n2720\n19.4\n1982-01-01\nUSA\n\n\n\n\n406 rows × 9 columns\n\n\n\n\nBefore we start visualizing data, we need to select a dataset and often also a question we want to answer.\nAltair works with dataframes in the “tidy” format (which we talked about in the Programming in Python for Data Science course), which means that they should consist of rows with one observation each and a set of named data columns with one feature each (you might also have heard these called fields or variables, but we will stick to columns for clarity).\nIn this course, we will often use data from the vega-datasets package, which has many plot-friendly practice datasets available as Pandas dataframes and can be loaded as demonstrated in this slide. We can use these datasets by importing the data module from the vega_datasets packages as in this slide. Here, our data contains the name of different cars and some attributes relating to each car. There are many interesting questions we could ask from this data set! For our first plot, let’s explore the relationship between how heavy a car is (the Weight_in_lbs column) and how good gas mileage it has (theMiles_per_gallon column).\nBefore starting to code the visualization, take a few seconds and think about what you would expect the relationship between these two columns to look like when you plot it."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#adding-graphical-elements-via-marks",
+    "href": "modules/module1/slides/module1_03.html#adding-graphical-elements-via-marks",
+    "title": "How Can We Visualize Data?",
+    "section": "Adding graphical elements via marks",
+    "text": "Adding graphical elements via marks\n\nimport altair as alt\n\nalt.Chart(cars).mark_point()\n\n\n\n\n\n\n\n\nHere we assigned a shorter name (alt) to the Altair library when importing it to save us some typing later. The Altair syntax is similar to the grammar of graphics pseudocode we saw a few slides ago. The fundamental object in Altair is the Chart, which takes a data frame as a single argument, e.g. alt.Chart(cars).\nAfter the chart object has been created, we can specify how the graphical element should look that we use to visualize the data. This is called a graphical mark in Altair, and in this slide, we have used mark_point() to show the data as points.\nSince we have not specified which columns should be used for the x and y axes, we appear to only see one point in this plot since all the data is plotted on top of each other in the same location.\nTo the right of the chart, there is a button with three dots on it. don’t worry about it right now, we will explain what this is for at the end of the chapter."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#encoding-columns-as-visual-channels",
+    "href": "modules/module1/slides/module1_03.html#encoding-columns-as-visual-channels",
+    "title": "How Can We Visualize Data?",
+    "section": "Encoding columns as visual channels",
+    "text": "Encoding columns as visual channels\nMapping a dataframe column to the x-scale\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs')\n\n\n\n\n\n\n\n\nTo visually separate the points, we can encode columns in the dataframe as visual channels, such as the axes or colours of the plot.\nHere, we encode the column Miles_per_Gallon as the x-axis. For Pandas data frames, Altair automatically determines an appropriate data type for the mapped column, which in this case is quantitative (or numerical) and shows the numbers under the axis.\nYou can see that there are several short black lines spread out evenly on the x-axis. These are called axis ticks and help us see where the values of this dataframe column lie along the axis.\nThe faint gray lines are called grid lines and extend the locations of the axis ticks so that it is easy to compare their position to the points.\nThis is particularly useful when the points might be further away from the axis ticks, such as in the next slide."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#mapping-a-dataframe-column-to-the-y-scale",
+    "href": "modules/module1/slides/module1_03.html#mapping-a-dataframe-column-to-the-y-scale",
+    "title": "How Can We Visualize Data?",
+    "section": "Mapping a dataframe column to the y-scale",
+    "text": "Mapping a dataframe column to the y-scale\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon')\n\n\n\n\n\n\n\n\nBy spreading out the data along both the x and y-axis, we can answer our initial question about the relationship between car weight and gas mileage. as it appears that the heavier cars are the ones that have the poorest mileage.\nAlthough we might have expected this to be the case, visualizing all the data points also provides information on the nature of the relationship between weight and mileage.\nIt appears that the x-y points don’t simply follow a straight line, but rather a curved line that where the mileage drop quickly when moving away from the lightest cars, but then decreases more slowly throughout the remainder of the data.\nThis rich, easily interpretable display of information is one of the main advantages of visualizing data and later in the course, we will talk more about the different type of relationships, such as linear, exponential, etc."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#mapping-a-numerical-dataframe-column-to-the-colour-scale",
+    "href": "modules/module1/slides/module1_03.html#mapping-a-numerical-dataframe-column-to-the-colour-scale",
+    "title": "How Can We Visualize Data?",
+    "section": "Mapping a numerical dataframe column to the colour scale",
+    "text": "Mapping a numerical dataframe column to the colour scale\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon',\n    color='Horsepower')\n\n\n\n\n\n\n\n\nIs there a relationship between horsepower and car weight, or fuel-efficiency?\nTo enrich this display of information further, we can colour the points according to a column in the dataframe. When we encode a column as the colour channel Altair will automatically figure out an appropriate colour scale to use, depending on whether the data is numerical, categorical, etc. Here we have indicated that we want to colour the points according to the car’s horsepower, which indicated how powerful its engine is.\nWe can see that the heavier cars have more powerful engines, than the lighter ones, but when using colour for a numerical comparison like this, makes it is harder to tell whether the relationship follows a straight line or is of another nature, so this encoding is mostly useful as an approximate indication of the horsepower.\nWe can also observe a relationship between the horsepower of a vehicle and the fuel efficiency. It appears that cars with greater horsepower (the points with a darker shade of blue) are less efficient with their fuel since miles per Gallon is much lower.\nIn the next module, we will learn more in detail about which encodings are most suitable for different comparisons."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#mapping-a-categorical-dataframe-column-to-the-colour-scale",
+    "href": "modules/module1/slides/module1_03.html#mapping-a-categorical-dataframe-column-to-the-colour-scale",
+    "title": "How Can We Visualize Data?",
+    "section": "Mapping a categorical dataframe column to the colour scale",
+    "text": "Mapping a categorical dataframe column to the colour scale\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon',\n    color='Origin')\n\n\n\n\n\n\n\n\nIn the previous slide, a continuous, gradually increasing colour scale was used to visualize the gradual increase in the numerical column Horsepower. In this slide, we instead chose to colour the points per the categorical column Origin (where the car was made).\nAs you can see, Altair detects that this column contains categorical data (with the help of pandas) and picks a different colour scale to facilitate distinction between the categories. As in the previous slide,\nAltair automatically adds a helpful legend, and we can see that the heavier, more powerful cars are primarily manufactured in the US, while the lighter more fuel-efficient ones are manufactured in Europe and Japan (remember that this is true for this particular dataset, and not necessarily all cars)."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#mapping-a-dataframe-column-to-the-shape-scale",
+    "href": "modules/module1/slides/module1_03.html#mapping-a-dataframe-column-to-the-shape-scale",
+    "title": "How Can We Visualize Data?",
+    "section": "Mapping a dataframe column to the shape scale",
+    "text": "Mapping a dataframe column to the shape scale\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon',\n    color='Origin',\n    shape='Origin')\n\n\n\n\n\n\n\n\nAlthough Altair’s colour scales are designed to be effective and easy to interpret, we can make the categories in our plot even more distinct by encoding the same categorical column as both colour and shape.\nThis also makes visualizations much easier to interpret and understand for anyone with visual colour deficiency (about 10% of the population). We will talk more in-depth about colour theory in a later module."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#mapping-a-dataframe-column-to-the-size-scale",
+    "href": "modules/module1/slides/module1_03.html#mapping-a-dataframe-column-to-the-size-scale",
+    "title": "How Can We Visualize Data?",
+    "section": "Mapping a dataframe column to the size scale",
+    "text": "Mapping a dataframe column to the size scale\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon',\n    color='Origin',\n    shape='Origin',\n    size='Horsepower')\n\n\n\n\n\n\n\n\nSometimes a visualization tries to do too much. In this example, we have added the size channel to indicate the engine power.\nAlthough Altair elegantly handles the dual legends, it is difficult for us to discern useful information from this plot. If you go back to the plot where we encoded weight in the colour channel, you can see that the plot is much clearer.\nLater we will learn more about how to efficiently load a visualization with an appropriate amount of information, and what the research indicates regarding which visual channels are the most efficient for communicating information visually."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#the-action-button-can-be-used-to-save-the-plot",
+    "href": "modules/module1/slides/module1_03.html#the-action-button-can-be-used-to-save-the-plot",
+    "title": "How Can We Visualize Data?",
+    "section": "The action button can be used to save the plot",
+    "text": "The action button can be used to save the plot\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon',\n    color='Origin',\n    shape='Origin',\n    size='Horsepower')\n\n\n\n\n\n\n\n\nThis is the same visualization as from the last slide, and we will just use it as an example.\nThe button to the right of the chart with three dots on it is called the “action button”. and clicking it will bring up a menu.\nThe first two items in ’s menu can be used to save the chart, either in an image-based PNG-format or a text-based SVG-format.\nWe will also be learning about programmatic ways to save our charts later in the course.\nThe last three menu items relate to the library VegaLite, which is what we mentioned Altair is built upon, but we will not be using these in this course."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_00.html#module-learning-outcomes",
+    "href": "modules/module1/slides/module1_00.html#module-learning-outcomes",
+    "title": "Module Learning Outcomes",
+    "section": "Module Learning Outcomes",
+    "text": "Module Learning Outcomes\nIn this module students will learn how to\n\nExplain the importance of data visualizations.\nUse Altair’s grammar of graphics.\nCreate point and line visualizations in Altair.\nTransform data directly in Altair instead of pandas.\nCombine graphical marks via layering."
+  },
+  {
+    "objectID": "modules/module1/module1-08-questions_on_how_plots_are_created.html#test-your-knowledge-visualization-libraries",
+    "href": "modules/module1/module1-08-questions_on_how_plots_are_created.html#test-your-knowledge-visualization-libraries",
+    "title": "3.1. Exercises",
+    "section": "Test Your Knowledge: Visualization Libraries",
+    "text": "Test Your Knowledge: Visualization Libraries",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "&nbsp;&nbsp; 3.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-04-test_your_knowledge_visualization_libraries.html#test-your-knowledge-visualization-libraries",
+    "href": "modules/module1/module1-04-test_your_knowledge_visualization_libraries.html#test-your-knowledge-visualization-libraries",
+    "title": "2.1. Exercises",
+    "section": "Test Your Knowledge: Visualization Libraries",
+    "text": "Test Your Knowledge: Visualization Libraries",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "&nbsp;&nbsp; 2.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-04-test_your_knowledge_visualization_libraries.html#true-or-false-visualization-libraries",
+    "href": "modules/module1/module1-04-test_your_knowledge_visualization_libraries.html#true-or-false-visualization-libraries",
+    "title": "2.1. Exercises",
+    "section": "True or False: Visualization Libraries",
+    "text": "True or False: Visualization Libraries",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "&nbsp;&nbsp; 2.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-04-test_your_knowledge_visualization_libraries.html#your-first-plot",
+    "href": "modules/module1/module1-04-test_your_knowledge_visualization_libraries.html#your-first-plot",
+    "title": "2.1. Exercises",
+    "section": "Your First Plot",
+    "text": "Your First Plot\nInstructions: Be patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nLet’s use the same vehicle dataset we saw in the lecture, but visualize the relationship between two different columns.\nThe data has already been imported for you in this exercise.\nHere is what it looks like:\n\n\n\n\n\n\nTasks:\n\nFill out the missing fields in the Altair plot in order to create a scatter plot.\nThe cars’ Horsepower should be on the y-axis and their Weight_in_lbs on the x-axis.\nColor the points by the Origin of the cars.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\nAre the column names expressed in quotes, e.g. y='Horsepower'?\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "&nbsp;&nbsp; 2.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-02-true_or_false_data_visualization.html#true-or-false-data-visualization",
+    "href": "modules/module1/module1-02-true_or_false_data_visualization.html#true-or-false-data-visualization",
+    "title": "1.1. Exercises",
+    "section": "True or False: Data Visualization",
+    "text": "True or False: Data Visualization",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "&nbsp;&nbsp; 1.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-00-module-learning-outcomes.html",
+    "href": "modules/module1/module1-00-module-learning-outcomes.html",
+    "title": "0. Module Learning Outcomes",
+    "section": "",
+    "text": "0. Module Learning Outcomes\n\nVideoSlides",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "0. Module Learning Outcomes"
+    ]
+  },
+  {
+    "objectID": "modules/module0/module0-02-prerequisite_confirmation.html",
+    "href": "modules/module0/module0-02-prerequisite_confirmation.html",
+    "title": "1.1. Prerequisite Confirmation",
+    "section": "",
+    "text": "1.1. Prerequisite Confirmation",
+    "crumbs": [
+      "**M0. Visualization Intro**",
+      "&nbsp;&nbsp; 1.1. Prerequisite confirmation"
+    ]
+  },
+  {
+    "objectID": "modules/index.html",
+    "href": "modules/index.html",
+    "title": "Welcome to Data Visualization!",
+    "section": "",
+    "text": "Welcome to Data Visualization!\nThis course is part of the Key Capabilities for Data Science program and covers topics related to data visualization.\nIn this course we will learn how to (and how not to) visualize data. We will learn about the grammar of visualization and how it’s implemented in the “Altair” package to create our figures. In addition to common statistical visualizations, we will learn how to tell stories with data, create geographical visualizations, and bring out plots to life by adding interactive elements. Together, these skills will allow us to create effective data visualizations that strengthen our own exploratory data analysis skills and our ability to communicate insights to others. Select the first module in the sidebar to the left to get started.\nCourse prerequisites: Programming in Python for Data Science"
+  },
+  {
+    "objectID": "modules/module0/module0-01-data_visualization.html",
+    "href": "modules/module0/module0-01-data_visualization.html",
+    "title": "1. Data Visualization",
+    "section": "",
+    "text": "1. Data Visualization\n\nVideoSlides",
+    "crumbs": [
+      "**M0. Visualization Intro**",
+      "1. Data Visualization"
+    ]
+  },
+  {
+    "objectID": "modules/module0/slides/module0_00.html#course-learning-outcomes",
+    "href": "modules/module0/slides/module0_00.html#course-learning-outcomes",
+    "title": "Welcome!",
+    "section": "Course Learning Outcomes",
+    "text": "Course Learning Outcomes\nBy the end of the course, students are expected to be able to:\n\nUse the Altair grammar of graphics to create data visualizations.\nSelect an appropriate visualization for the data.\nPerform exploratory data analysis on a dataset.\nEffectively communicate findings with figures.\nInterpret data visualizations to answer questions and formulate follow-up questions.\n\n\nIn this module, you will learn how to use Altair to create data visualizations, choose the right visualizations for your data, explore datasets, and effectively communicate your analytical findings."
+  },
+  {
+    "objectID": "modules/module0/slides/module0_00.html#prerequisites",
+    "href": "modules/module0/slides/module0_00.html#prerequisites",
+    "title": "Welcome!",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nBefore we proceed to Module 1, it is important to make sure you have a solid foundation of coding in Python."
+  },
+  {
+    "objectID": "modules/module0/slides/module0_00.html#have-you-taken-programming-in-python-for-data-science",
+    "href": "modules/module0/slides/module0_00.html#have-you-taken-programming-in-python-for-data-science",
+    "title": "Welcome!",
+    "section": "Have you taken Programming in Python for Data Science?",
+    "text": "Have you taken Programming in Python for Data Science?\nMake sure you are familiar with basic Python programming concepts as they are essential for this course."
+  },
+  {
+    "objectID": "modules/module1/module1-01-what_is_data_visualization.html",
+    "href": "modules/module1/module1-01-what_is_data_visualization.html",
+    "title": "1. What is Data Visualization?",
+    "section": "",
+    "text": "1. What is Data Visualization?\n\nVideoSlides",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "1. What is Data Visualization?"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-03-how_can_we_visualize_data.html",
+    "href": "modules/module1/module1-03-how_can_we_visualize_data.html",
+    "title": "2. How can we visualize data?",
+    "section": "",
+    "text": "2. How can we visualize data?\n\nVideoSlides",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "2. How can we visualize data?"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-07-aggregations_lines_and_layers.html",
+    "href": "modules/module1/module1-07-aggregations_lines_and_layers.html",
+    "title": "3. Aggregations, Lines, and Layers",
+    "section": "",
+    "text": "3. Aggregations, Lines, and Layers\n\nVideoSlides",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "3. Aggregations, Lines, and Layers"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-11-what_did_we_just_learn.html",
+    "href": "modules/module1/module1-11-what_did_we_just_learn.html",
+    "title": "4. What did we just learn?",
+    "section": "",
+    "text": "4. What did we just learn?\n\nVideoSlides",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "4. What did we just learn?"
+    ]
+  },
+  {
+    "objectID": "modules/module1/slides/module1_01.html#what-is-the-purpose-of-visualizing-data",
+    "href": "modules/module1/slides/module1_01.html#what-is-the-purpose-of-visualizing-data",
+    "title": "What is Data Visualization?",
+    "section": "What is the purpose of visualizing data?",
+    "text": "What is the purpose of visualizing data?\nVisualizing data can be used to\n\nAnswer a specific question\nExplore data more generally to generate new questions\n\nTo create an effective visualization, start by\n\nLooking at the data\nThinking about what you want to achieve by making the visualization\nDrawing it out with pen and paper\n\n\nWe often visualize data in order to help us answer a specific question we have about our dataset, but it can also help us generate new questions.\nBefore creating a visualization, it is important that you think about why you are making it, and what you want to achieve from creating this plot.\nIs there a specific question you are trying to answer, like comparing the relationship between two dataframe columns? Or are you creating a plot to help you understand the structure of your data more in general, such as plotting the distribution of each dataframe column?\nIn either case, it can be extremely helpful to draw out your plot with pen and paper first. This helps you think about if the plot you are creating makes sense or if there is another plot better suited for the task at hand.\nDrawing with pen and paper also makes it easier to write the code afterwards, since you clearly know what you are expecting the visualization to look like."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_01.html#why-bother-visualizing-data-instead-of-showing-raw-numbers",
+    "href": "modules/module1/slides/module1_01.html#why-bother-visualizing-data-instead-of-showing-raw-numbers",
+    "title": "What is Data Visualization?",
+    "section": "Why bother visualizing data instead of showing raw numbers?",
+    "text": "Why bother visualizing data instead of showing raw numbers?\nCan you see any differences in the general trends of these four sets of numbers?\n\n\n\n\n\n\n\n\n\n\n\n\nA\n\n\n\n\n\n\n\n\n\nB\n\n\n\n\n\n\n\n\n\nC\n\n\n\n\n\n\n\n\n\nD\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n0\n\n\n\n10\n\n\n\n8.04\n\n\n\n\n\n\n\n\n\n10\n\n\n\n9.14\n\n\n\n\n\n\n\n\n\n10\n\n\n\n7.46\n\n\n\n\n\n\n\n\n\n8\n\n\n\n6.58\n\n\n\n\n\n\n\n\n\n\n\n\n\n1\n\n\n\n8\n\n\n\n6.95\n\n\n\n\n\n\n\n\n\n8\n\n\n\n8.14\n\n\n\n\n\n\n\n\n\n8\n\n\n\n6.77\n\n\n\n\n\n\n\n\n\n8\n\n\n\n5.76\n\n\n\n\n\n\n\n\n\n\n\n\n\n2\n\n\n\n13\n\n\n\n7.58\n\n\n\n\n\n\n\n\n\n13\n\n\n\n8.74\n\n\n\n\n\n\n\n\n\n13\n\n\n\n8.50\n\n\n\n\n\n\n\n\n\n8\n\n\n\n7.71\n\n\n\n\n\n\n\n\n\n\n\n\n\n3\n\n\n\n9\n\n\n\n8.81\n\n\n\n\n\n\n\n\n\n9\n\n\n\n8.77\n\n\n\n\n\n\n\n\n\n9\n\n\n\n7.11\n\n\n\n\n\n\n\n\n\n8\n\n\n\n8.84\n\n\n\n\n\n\n\n\n\n\n\n\n\n4\n\n\n\n11\n\n\n\n8.33\n\n\n\n\n\n\n\n\n\n11\n\n\n\n9.26\n\n\n\n\n\n\n\n\n\n11\n\n\n\n7.81\n\n\n\n\n\n\n\n\n\n8\n\n\n\n8.47\n\n\n\n\n\n\n\n\n\n\n\n\n\n5\n\n\n\n14\n\n\n\n9.96\n\n\n\n\n\n\n\n\n\n14\n\n\n\n8.10\n\n\n\n\n\n\n\n\n\n14\n\n\n\n8.84\n\n\n\n\n\n\n\n\n\n8\n\n\n\n7.04\n\n\n\n\n\n\n\n\n\n\n\n\n\n6\n\n\n\n6\n\n\n\n7.24\n\n\n\n\n\n\n\n\n\n6\n\n\n\n6.13\n\n\n\n\n\n\n\n\n\n6\n\n\n\n6.08\n\n\n\n\n\n\n\n\n\n8\n\n\n\n5.25\n\n\n\n\n\n\n\n\n\n\n\n\n\n7\n\n\n\n4\n\n\n\n4.26\n\n\n\n\n\n\n\n\n\n4\n\n\n\n3.10\n\n\n\n\n\n\n\n\n\n4\n\n\n\n5.39\n\n\n\n\n\n\n\n\n\n19\n\n\n\n12.50\n\n\n\n\n\n\n\n\n\n\n\n\n\n8\n\n\n\n12\n\n\n\n10.84\n\n\n\n\n\n\n\n\n\n12\n\n\n\n9.13\n\n\n\n\n\n\n\n\n\n12\n\n\n\n8.15\n\n\n\n\n\n\n\n\n\n8\n\n\n\n5.56\n\n\n\n\n\n\n\n\n\n\n\n\n\n9\n\n\n\n7\n\n\n\n4.81\n\n\n\n\n\n\n\n\n\n7\n\n\n\n7.26\n\n\n\n\n\n\n\n\n\n7\n\n\n\n6.42\n\n\n\n\n\n\n\n\n\n8\n\n\n\n7.91\n\n\n\n\n\n\n\n\n\n\n\n\n\n10\n\n\n\n5\n\n\n\n5.68\n\n\n\n\n\n\n\n\n\n5\n\n\n\n4.74\n\n\n\n\n\n\n\n\n\n5\n\n\n\n5.73\n\n\n\n\n\n\n\n\n\n8\n\n\n\n6.89\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhy do we need visualizations to help answer our questions?\nIs it not enough to look at numbers in tables?\nTo understand why visualizations are so powerful, it is helpful to remember that to answer a question, we often have to put the data in a format that is easy for us humans to interpret.\nBecause our number systems have only been around for about 5,000 years, we need to assert effort and train ourselves to recognize structure in numerical data.\nVisual systems, on the other hand, have undergone refinement during 500,000,000 years of evolution, so we can instinctively recognize visual patterns and accurately estimate visual properties such as colours and distances.\nPractically, this means that we can arrive at correct conclusions faster from studying visual rather than numerical representations of the same data.\nFor example, have a look at the four sets of numbers in the table on the slide. Can you see the differences in the general trends between these four sets of numbers? This is a slightly modified version of the original, which was put together by statistician Francis Anscombe in the 70s."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_01.html#although-summary-statistics-are-often-useful-they-dont-tell-the-whole-story",
+    "href": "modules/module1/slides/module1_01.html#although-summary-statistics-are-often-useful-they-dont-tell-the-whole-story",
+    "title": "What is Data Visualization?",
+    "section": "Although summary statistics are often useful, they don’t tell the whole story",
+    "text": "Although summary statistics are often useful, they don’t tell the whole story\nC is the only set with a different mean and standard deviation\n\n\n\n\n\n\n\n\n\n\n\n\nA\n\n\n\n\n\n\n\n\n\nB\n\n\n\n\n\n\n\n\n\nC\n\n\n\n\n\n\n\n\n\nD\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmean\n\n\n\n9.00\n\n\n\n7.50\n\n\n\n\n\n\n\n\n\n9.00\n\n\n\n7.50\n\n\n\n\n\n\n\n\n\n9.00\n\n\n\n7.11\n\n\n\n\n\n\n\n\n\n9.00\n\n\n\n7.50\n\n\n\n\n\n\n\n\n\n\n\n\n\nstd\n\n\n\n3.32\n\n\n\n2.03\n\n\n\n\n\n\n\n\n\n3.32\n\n\n\n2.03\n\n\n\n\n\n\n\n\n\n3.32\n\n\n\n1.15\n\n\n\n\n\n\n\n\n\n3.32\n\n\n\n2.03\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSummaries, such as the mean and standard deviation, are helpful statistical tools that are often useful for detecting the differences between datasets.\nHowever, since they collapse the data into just a few numbers, statistical summaries can’t tell the whole story about the data and there can be important differences between datasets that summaries fail to reveal.\nHere, the mean and standard deviation indicate that set C is slightly different from the other sets of data in terms of the centre of the sample distribution and the spread of that distribution, while the remaining three sets of data have a similar centre and spread."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_01.html#plotting-the-data-immediately-reveals-patterns-in-the-data",
+    "href": "modules/module1/slides/module1_01.html#plotting-the-data-immediately-reveals-patterns-in-the-data",
+    "title": "What is Data Visualization?",
+    "section": "Plotting the data immediately reveals patterns in the data",
+    "text": "Plotting the data immediately reveals patterns in the data\nWe could not detect these patterns from only looking at the raw numbers or summary statistics\n\n\n\n\n\n\n\n\n\nHumans are not good at detecting patterns in raw numbers, and we don’t have good intuition about how different distributions of data can contribute to identical statistical summaries.\nBut guess what we excel at?\nDetecting visual patterns!\nIt is immediately clear to us how these sets of numbers differ once they are shown as graphical elements instead of textual objects.\nThis is one of the main reasons why data visualization is such a powerful tool for data exploration and communication.\nIn our example here, we would come to widely different conclusions about the behaviour of the data for the four different data sets.\nSets A and C are roughly linearly increasing at similar rates, whereas set B reaches a plateau and starts to drop, and set D has a constant X-value for all numbers except one big outlier."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_01.html#more-examples-of-plotting-versus-statistical-summaries",
+    "href": "modules/module1/slides/module1_01.html#more-examples-of-plotting-versus-statistical-summaries",
+    "title": "What is Data Visualization?",
+    "section": "More examples of plotting versus statistical summaries",
+    "text": "More examples of plotting versus statistical summaries\n\nSource: Matejka and Fitzmaurice, 2017\n\nA more recent and dynamic illustration of how graphical representations are much easier for us to interpret compared to statistical summaries, is the Datasaurus GIF from Autodesk’s research team in this slide.\nIt displays several different datasets, all with the same mean, standard deviation and correlation between X and Y, but looking at the data graphically shows us how different these datasets actually are."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#including-all-the-data-can-hinder-visualization-of-general-trends",
+    "href": "modules/module1/slides/module1_07.html#including-all-the-data-can-hinder-visualization-of-general-trends",
+    "title": "Aggregations, lines, and layers",
+    "section": "Including all the data can hinder visualization of general trends",
+    "text": "Including all the data can hinder visualization of general trends\n\nimport altair as alt\nfrom vega_datasets import data\n\ncars = data.cars()\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon',\n    color='Origin')\n\n\n\n\n\n\n\n\nThroughout this course we will explore many different datasets, but for now, we will stick to the cars dataset to keep it simple and focus on introducing additional Altair functionality.\nLet’s refresh our memory with this plot from the previous module.\nWe noted that it appears that cars differ in their weight and mileage based on their country of origin. At least the American cars appear to stand out, but it is difficult to see any differences between Europe and Japan.\nVisualizing all data points as in this slide is helpful to detect patterns in the data.\nBut when showing all observations, it can be hard to pick up on general trends in the data, e.g. if there are any differences in the mean weight of cars made in either Japan or Europe.\nTo more effectively visualize such general trends in the data, we can create plots of statistical summaries, such as means and medians.\nIn Altair (and pandas) these are referred to as data aggregations."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#data-aggregations-are-built-into-altair",
+    "href": "modules/module1/slides/module1_07.html#data-aggregations-are-built-into-altair",
+    "title": "Aggregations, lines, and layers",
+    "section": "Data aggregations are built into Altair",
+    "text": "Data aggregations are built into Altair\n\nalt.Chart(cars).mark_point().encode(\n    x='mean(Weight_in_lbs)',\n    y='mean(Miles_per_Gallon)',\n    color='Origin')\n\n\n\n\n\n\n\n\nTo plot the means of weight and mileage, we could use pandas to first calculate the mean values, and then plot the resulting dataframe in Altair.\nThis is powerful since we can access all aggregations built into pandas, but it is a bit verbose for simple common operations, such as the mean.\nFortunately, Altair has shortcuts for plotting simple aggregations where you provide the name of the aggregation together with the name of the column inside a string as in the example in this slide.\nThe Altair documentation includes a table with all available aggregations.\nIn this visualization, we can detect small differences between the means of the Japanese and Europeans cars, which was not discernible when we plotted all the points.\nWhether this difference is big enough to reach a different conclusion than when inspecting the previous plots depends on our application and the purpose of the data exploration."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#plotting-aggregations-to-visualize-trends-over-time",
+    "href": "modules/module1/slides/module1_07.html#plotting-aggregations-to-visualize-trends-over-time",
+    "title": "Aggregations, lines, and layers",
+    "section": "Plotting aggregations to visualize trends over time",
+    "text": "Plotting aggregations to visualize trends over time\n\ncars\n\n\n\n\n\n\n\n\nName\nMiles_per_Gallon\nCylinders\nDisplacement\nHorsepower\nWeight_in_lbs\nAcceleration\nYear\nOrigin\n\n\n\n\n0\nchevrolet chevelle malibu\n18.0\n8\n307.0\n130.0\n3504\n12.0\n1970-01-01\nUSA\n\n\n1\nbuick skylark 320\n15.0\n8\n350.0\n165.0\n3693\n11.5\n1970-01-01\nUSA\n\n\n2\nplymouth satellite\n18.0\n8\n318.0\n150.0\n3436\n11.0\n1970-01-01\nUSA\n\n\n3\namc rebel sst\n16.0\n8\n304.0\n150.0\n3433\n12.0\n1970-01-01\nUSA\n\n\n4\nford torino\n17.0\n8\n302.0\n140.0\n3449\n10.5\n1970-01-01\nUSA\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n401\nford mustang gl\n27.0\n4\n140.0\n86.0\n2790\n15.6\n1982-01-01\nUSA\n\n\n402\nvw pickup\n44.0\n4\n97.0\n52.0\n2130\n24.6\n1982-01-01\nEurope\n\n\n403\ndodge rampage\n32.0\n4\n135.0\n84.0\n2295\n11.6\n1982-01-01\nUSA\n\n\n404\nford ranger\n28.0\n4\n120.0\n79.0\n2625\n18.6\n1982-01-01\nUSA\n\n\n405\nchevy s-10\n31.0\n4\n119.0\n82.0\n2720\n19.4\n1982-01-01\nUSA\n\n\n\n\n406 rows × 9 columns\n\n\n\n\nAggregations are often helpful when comparing trends over time, especially when there are multiple groups in the data. In the cars dataset, there is a Year column, indicating when the car was made.\nOften when there is a notion of time in the data, it is interesting to see how values in the dataframe change over time.\nIn this case, we might be interested in knowing whether newer cars are more fuel-efficient than older ones.\nPresumably, they should be, but does it differ depending on where the car was made?\nLet’s find out!"
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#plotting-aggregations-to-visualize-trends-over-time-works-well",
+    "href": "modules/module1/slides/module1_07.html#plotting-aggregations-to-visualize-trends-over-time-works-well",
+    "title": "Aggregations, lines, and layers",
+    "section": "Plotting aggregations to visualize trends over time works well",
+    "text": "Plotting aggregations to visualize trends over time works well\n\nalt.Chart(cars).mark_point().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)')\n\n\n\n\n\n\n\n\nTo visualize the mean mileage for each year of all cars, we want to perform the aggregation on the Miles_per_Gallon column while leaving the Year column intact.\nAs you can see this plot one value (the mean) for each year in the dataframe.\nHere we can see that the observations in this dataframe span the years 1970-1982 and it does indeed look like the mileage is getting better over time as we expected!"
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#plotting-all-data-to-visualize-trends-over-time-is-not-effective",
+    "href": "modules/module1/slides/module1_07.html#plotting-all-data-to-visualize-trends-over-time-is-not-effective",
+    "title": "Aggregations, lines, and layers",
+    "section": "Plotting all data to visualize trends over time is not effective",
+    "text": "Plotting all data to visualize trends over time is not effective\n\nalt.Chart(cars).mark_point().encode(\n    x='Year',\n    y='Miles_per_Gallon')\n\n\n\n\n\n\n\n\nAs a comparison with the previous slide, if we instead of the mean would plot all the data points for each year, it would be much more difficult to see the pattern over time as you can see here."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#plotting-points-to-visualize-trends-over-time-is-not-ideal",
+    "href": "modules/module1/slides/module1_07.html#plotting-points-to-visualize-trends-over-time-is-not-ideal",
+    "title": "Aggregations, lines, and layers",
+    "section": "Plotting points to visualize trends over time is not ideal",
+    "text": "Plotting points to visualize trends over time is not ideal\n\nalt.Chart(cars).mark_point().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)',\n    color='Origin')\n\n\n\n\n\n\n\n\nIf we try to explore the mileage over time while grouping the cars according to their origin, it is a bit difficult to immediately recognize which points belong to which group.\nIn fact, using points for visualizing trends is not ideal, and lines are often preferred as we will see in the next slide."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#plotting-lines-to-visualize-trends-over-time-is-ideal",
+    "href": "modules/module1/slides/module1_07.html#plotting-lines-to-visualize-trends-over-time-is-ideal",
+    "title": "Aggregations, lines, and layers",
+    "section": "Plotting lines to visualize trends over time is ideal",
+    "text": "Plotting lines to visualize trends over time is ideal\n\nalt.Chart(cars).mark_line().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)',\n    color='Origin')\n\n\n\n\n\n\n\n\nOne key advantage of line plots is that they connect all the observations that belong to the same group presenting them as one unified graphical object (one line), which is easy for us to distinguish when looking at the plot instead of trying to connect the dots mentally.\nAnother advantage is that the slope of the line makes it easier to see if the value from one year to another is increasing or decreasing.\nAltair grammar lets us switch from a point plot to a line plot, by only changing mark_point() to mark_line(), and keeping the rest of the code as-is.\nIn this plot, we can clearly compare the mileage trends over time to conclude that cars from all origins improved their mileage, and that the trajectory and mileage values are the most similar between Europe and Japan."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#combining-a-line-with-a-set-of-points-via-layers",
+    "href": "modules/module1/slides/module1_07.html#combining-a-line-with-a-set-of-points-via-layers",
+    "title": "Aggregations, lines, and layers",
+    "section": "Combining a line with a set of points via layers",
+    "text": "Combining a line with a set of points via layers\n\nline = alt.Chart(cars).mark_line().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)')\n\npoint = alt.Chart(cars).mark_point().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)')\n\nline + point\n\n\n\n\n\n\n\n\nTo augment a line plot, it is sometimes helpful to add point marks for each data point along the line, to emphasize where the observations fall.\nThis is helpful since the line drawn between points could be misleading if we have very few points.\nFor example, if you see a straight line, does that mean there are just two points, one in each corner of the line?\nOr are there ten points spread out all along the line?\nTo combine two different types of graphical marks (line and point in this case), we will use Altair’s layering grammar.\nIn this slide, we start by defining each chart separately:\nfirst a line plot,  then a point plot.\nWe can then use the + (plus) operator to combine the two into a layered chart."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#building-upon-previous-plots-can-save-time-when-combining-charts",
+    "href": "modules/module1/slides/module1_07.html#building-upon-previous-plots-can-save-time-when-combining-charts",
+    "title": "Aggregations, lines, and layers",
+    "section": "Building upon previous plots can save time when combining charts",
+    "text": "Building upon previous plots can save time when combining charts\n\nline = alt.Chart(cars).mark_line().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)')\n\nline + line.mark_point()\n\n\n\n\n\n\n\n\nWe can also create a layered plot by reusing a previous chart definition.\nRather than creating the point plot from scratch, we can start with the line plot, and then invoke the mark_point method.\nWe could also have typed mark_line(point=True), which is a special case for getting points on a line since it is such a common operation, but the layering grammar extends to other plots, so it is more helpful to focus on learning that."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#showing-raw-values-together-with-the-mean-is-often-helpful",
+    "href": "modules/module1/slides/module1_07.html#showing-raw-values-together-with-the-mean-is-often-helpful",
+    "title": "Aggregations, lines, and layers",
+    "section": "Showing raw values together with the mean is often helpful",
+    "text": "Showing raw values together with the mean is often helpful\n\nline = alt.Chart(cars).mark_line().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)')\n\nline + line.mark_point().encode(y='Miles_per_Gallon')\n\n\n\n\n\n\n\n\nWhen we are combing plots in layers, we can not only change the mark, but also the encodings.\nThis way, we can create a layer with one point per observations, and with a line for the average values.\nFor this, we need to use encode again after creating the first plot, to instruct Altair to use the raw values instead of the mean for the points.\n(note that the axis now has two labels, we will see how to change that in a future lecture).\nThis type of visualization is helpful when we want to show both the underlying data and a statistical summary, which is often helpful for elucidating what the data tells us.\nIt is also a good check to make sure nothing unexpected is going on with the raw values as we saw in the introductory example with Anscombe’s quartet."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#all-encodings-of-the-base-chart-are-propagated-unless-they-are-overwritten",
+    "href": "modules/module1/slides/module1_07.html#all-encodings-of-the-base-chart-are-propagated-unless-they-are-overwritten",
+    "title": "Aggregations, lines, and layers",
+    "section": "All encodings of the base chart are propagated unless they are overwritten",
+    "text": "All encodings of the base chart are propagated unless they are overwritten\n\nline = alt.Chart(cars).mark_line().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)',\n    color='Origin')\n\nline + line.mark_point().encode(y='Miles_per_Gallon')\n\n\n\n\n\n\n\n\nWe have already seen that the x and y encoding remain the same in any subsequently created plots.\nHere, we’re showing that this also applies to the colour encoding to illustrate that any encoding will be propagated to all layers unless they are specifically overwritten.\nIf we would only have added colour to the point chart, there would still have been a single line instead of three."
+  }
+]
