@@ -35,7 +35,7 @@ function generateQuiz(containerId, title, question, options, correctAnswer) {
         div.className = 'form-check';
         div.style.display = 'grid';
         div.style.gridTemplateColumns = 'auto 1fr'; // Ensures radio button and text alignment
-        div.style.alignItems = 'start'; // Align radio button with first line
+        div.style.alignItems = 'center'; // Align radio button with text vertically
         div.style.marginBottom = '5px';
 
         const input = document.createElement('input');
