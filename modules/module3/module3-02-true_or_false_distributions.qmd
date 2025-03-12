@@ -1,5 +1,10 @@
 ---
-format: html
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ../data
+  - ./../../static/module3/
 ---
 
 <script src='../../src/quiz.js'></script>  
@@ -80,3 +85,234 @@ hist_plot = alt.Chart(df_source).mark_bar(opacity=0.4).encode(
  .facet('country')
  .resolve_scale(y='independent')
 ```
+
+## Stacked plotting with penguins
+
+**Instructions:**
+Be patient when running a coding exercise for the first time, it can take a few minutes.
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+Let's bring back our [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) that we introduced in the previous module.
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+
+penguins_df = pd.read_csv('data/penguins.csv')
+penguins_df.info()
+```
+
+The culmen, also sometimes referred to as the bill, is the [upper ridge of a bird's beak](https://allisonhorst.github.io/palmerpenguins/articles/articles/art.html). 
+Below, we've included a diagram made by [Allison Horst](https://twitter.com/allison_horst) which should help give you a bit of an idea of what these values are measuring.
+
+![](../../../static/module3/penguin_culmen.jpg){fig-align="center" width=40%}
+
+The culmen measurements can useful for predicting the sex between penguin species, however, it may be interesting to see if it's indicative of species as well!
+
+
+For this question let's create a stacked histogram of the values in the `culmen_depth_mm` column for different penguin species and determine if there is any type of relationship between the culmen depth and the species of penguin. 
+
+
+**Tasks:** 
+
+Fill in the blanks in the code below so that the following gets accomplished.
+
+- Use the data source `penguins` to make a **stacked** histogram plot.
+- Plot the counts of the `culmen_depth_mm`  and distinguish the penguin `species` using the colour channel.
+- Make sure to set the `maxbins` argument to something appropriate. 
+- Give it an appropriate title. 
+
+
+```{pyodide}
+#| setup: true
+#| exercise: 
+#|  - stacked_plot
+#|  - layered_plot
+
+import altair as alt
+import pandas as pd
+from utils import assert_chart_equal 
+```
+
+```{pyodide}
+#| exercise: stacked_plot
+penguins_df = pd.read_csv('data/penguins.csv').dropna(subset=['sex'])
+
+culmen_stacked_plot = ___.___.___.encode(
+    alt.X(___),
+    alt.Y(___),
+    color=___
+    ).properties(___, width=230, height=200
+    )
+
+culmen_stacked_plot
+```
+
+```{pyodide}
+#| exercise: stacked_plot
+#| check: true
+
+solution = alt.Chart(penguins_df).mark_bar().encode(
+    alt.X('culmen_depth_mm', bin=alt.Bin(maxbins=30), title='Culmen depth (mm)'),
+    alt.Y('count()'),
+    color='species'
+    ).properties(title="Penguin culmen depth distributions among species", width=230, height=200
+    )
+
+assert_chart_equal(solution, result)
+```
+
+:::: { .hint exercise="stacked_plot"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you setting `alt.X('culmen_depth_mm', bin=alt.Bin(maxbins=30))`?
+- Are you setting a title in `properties()`?
+
+:::
+::::
+
+:::: { .solution exercise="stacked_plot" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+penguins_df = pd.read_csv('data/penguins.csv').dropna(subset=['sex'])
+
+culmen_stacked_plot = alt.Chart(penguins_df).mark_bar().encode(
+    alt.X('culmen_depth_mm', bin=alt.Bin(maxbins=30), title='Culmen depth (mm)'),
+    alt.Y('count()'),
+    color='species'
+    ).properties(title="Penguin culmen depth distributions among species", width=230, height=200
+    )
+
+culmen_stacked_plot
+```
+
+:::
+::::
+
+<div id='mcq5'></div> 
+<script>
+    generateQuiz(
+        'mcq5',
+        'Question',
+        'Which species of penguin tend to have more shallow culmen?',
+        {
+        'Chinstrap': 'This species actually has a lot of overlap with the Adelie species.',
+        'Gentoo': '',
+        'Adelie': 'This species actually has a lot of overlap with the Chinstrap species.'
+        },
+        'Gentoo',
+    );
+</script>
+
+## Layered plotting with Penguins
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+Using the [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) dataset again, we are going to try to create a layered histogram.
+
+We want to understand how penguins' culmen depth differs over different penguin species. This means we will need to layer the histogram shapes of the `culmen_depth_mm` column. We also want to facet on the `sex` column to see if this affects the distribution. 
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished.
+
+- Use the data source `penguins_df` to make a **layered** histogram plot named `culmen_layered_plot` and make sure to give it an appropriate opacity.
+- Plot the counts of the `culmen_depth_mm`  and distinguish the penguin `species` using the colour channel.
+- Make sure to set the `maxbins` argument to something appropriate and any other arguments needed to make a layered plot. 
+- Give it an appropriate title and facet by the `sex` column making sure that there is only 1 column so the graphs are stacked vertically. 
+- Make sure to give each faceted plot an independent axis.
+
+
+```{pyodide}
+#| exercise: layered_plot
+penguins_df = pd.read_csv('data/penguins.csv').dropna(subset=['sex'])
+
+culmen_layered_plot = alt.Chart(___).mark_bar(___).encode(
+    ___,
+    ___,
+    ___
+    ).___(___, width=230, height=200
+    ).___(___, ___
+    ).___
+
+culmen_layered_plot
+```
+
+```{pyodide}
+#| exercise: layered_plot
+#| check: true
+
+solution = alt.Chart(penguins_df).mark_bar(opacity=0.5).encode(
+    alt.X('culmen_depth_mm', bin=alt.Bin(maxbins=30), title= 'Culmen depth (mm)'),
+    alt.Y('count()', stack=None, title='Number of penguins'),
+    alt.Color('species', title='Species')
+    ).properties(title="Penguin culmen depth distributions among species", width=230, height=200
+    ).facet('sex', columns=1
+    ).resolve_scale(y='independent')
+
+assert_chart_equal(solution, result)
+```
+
+:::: { .hint exercise="layered_plot"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you setting `opacity=0.5` in `mark_bar()`?
+- Are you setting `alt.X('culmen_depth_mm', bin=alt.Bin(maxbins=30))`?
+- Are you specifying `stack=None` in the `alt.Y()` helper function?
+- Are you setting a title in `properties()`?
+- Are you faceting by `sex` using `.facet('sex', columns=1)`?
+- Are you giving the plots independent axis with `.resolve_scale(y='independent')`?
+
+:::
+::::
+
+:::: { .solution exercise="layered_plot" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+penguins_df = pd.read_csv('data/penguins.csv').dropna(subset=['sex'])
+
+culmen_layered_plot = alt.Chart(penguins_df).mark_bar(opacity=0.5).encode(
+    alt.X('culmen_depth_mm', bin=alt.Bin(maxbins=30), title= 'Culmen depth (mm)'),
+    alt.Y('count()', stack=None, title='Number of penguins'),
+    alt.Color('species', title='Species')
+    ).properties(title="Penguin culmen depth distributions among species", width=230, height=200
+    ).facet('sex', columns=1
+    ).resolve_scale(y='independent')
+
+culmen_layered_plot
+```
+
+:::
+::::
+
+
+<div id='mcq6'></div> 
+<script>
+    generateQuiz(
+        'mcq6',
+        'Question',
+        'For each species of penguin, do the female penguins tend to have less deep culmen?',
+        {
+        'Yes': 'It appears that the culmen values for the female penguins on a per species level are lower.',
+        'No': 'Why don’t you compare the bars on a per colour basis?'
+        },
+        'Yes',
+    );
+</script>
