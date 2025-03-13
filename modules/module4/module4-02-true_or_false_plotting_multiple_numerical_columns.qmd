@@ -1,6 +1,10 @@
 ---
-format: html
----
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ../data
+---  
 
 <script src='../../src/quiz.js'></script>  <!-- Only needed once per page -->
 
@@ -115,3 +119,108 @@ Score</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-eve
         '.mark_rect()',
     );
 </script>
+
+## Fire and Ice: Heatmaps with  Antarctic Penguins
+
+**Instructions:**
+Be patient when running a coding exercise for the first time, it can take a few minutes.
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+Let's now look at our [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) previous modules and see which penguins are more abundant. Are there penguins that have a greater flipper length  (`flipper_length_mm`) but with a smaller body mass (`body_mass_g`)? Does the mass of a penguin have a relationship to its flipper length?
+
+Let's take a look!
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+
+penguins_df = pd.read_csv('data/penguins.csv')
+penguins_df.info()
+```
+
+
+Create a heatmap between `flipper_length_mm` and `body_mass_g` and answer the questions below.
+
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished.
+
+- Create a heatmap and assign it to an object named `penguin_heatmap`. 
+- Map `flipper_length_mm` on the x-axis and `body_mass_g` on the y-axis. Distinguish the penguin `count()` using the color channel.
+- Make sure to set the `maxbins` argument to 30. 
+- Set the dimensions to a width of 250 and a height of 200.
+- Give it an appropriate title and axis labels. 
+
+
+```{pyodide}
+#| setup: true
+#| exercise: penguin_heatmap
+import altair as alt
+import pandas as pd
+from utils import assert_chart_equal
+
+penguins_df = pd.read_csv('data/penguins.csv')
+```
+
+```{pyodide}
+#| exercise: penguin_heatmap
+penguin_heatmap = alt.Chart(____).____().encode(
+    alt.X(____,  bin=____, title=____),
+    alt.Y(____,  bin=____, title=____),
+    alt.Color(____, title=____)
+    ).____(title=____, ____=250, =____=200)
+   
+penguin_heatmaps
+```
+
+```{pyodide}
+#| exercise: penguin_heatmap
+#| check: true
+
+solution = alt.Chart(penguins_df).mark_rect().encode(
+    alt.X('flipper_length_mm', bin=alt.Bin(maxbins=30), title='Flipper length (mm)'),
+    alt.Y('body_mass_g', bin=alt.Bin(maxbins=30), title='Penguin mass (g)'),
+    alt.Color('count()', title='Penguin quantity')
+    ).properties(title="Body mass and flipper length among Antartic penguins",
+     width=250, height=200
+    )
+assert_chart_equal(solution, result)
+```
+
+:::: { .hint exercise="penguin_heatmap"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you using `.mark_rect()`?
+- Are you setting `alt.X('flipper_length_mm', bin=alt.Bin(maxbins=30)`?
+- Are you setting `alt.Y('body_mass_g', bin=alt.Bin(maxbins=30)`?
+- Are you using a color channel and setting it to `counts()`?
+- Are you setting a title using `.properties(title= 'title')`?
+- Are you setting `width=250` and `height=200` in `.properties()`?
+
+:::
+::::
+
+:::: { .solution exercise="penguin_heatmap" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+penguin_heatmap = alt.Chart(penguins_df).mark_rect().encode(
+    alt.X('flipper_length_mm', bin=alt.Bin(maxbins=30), title='Flipper length (mm)'),
+    alt.Y('body_mass_g', bin=alt.Bin(maxbins=30), title='Penguin mass (g)'),
+    alt.Color('count()', title='Penguin quantity')
+    ).properties(title="Body mass and flipper length among Antartic penguins",
+     width=250, height=200
+    )
+   
+penguin_heatmap
+```
+
+:::
+::::
