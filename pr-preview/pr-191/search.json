@@ -1,0 +1,839 @@
+[
+  {
+    "objectID": "modules/module4/slides/module4_end.html#module-learning-outcomes",
+    "href": "modules/module4/slides/module4_end.html#module-learning-outcomes",
+    "title": "What Did we Learn and What to Expect in Assignment 4",
+    "section": "Module Learning Outcomes",
+    "text": "Module Learning Outcomes\nIn this module students will learn how to\n\nCreate heatmaps to visualize 2D distributions\nVisualize correlations and counts of categorical dataframe columns.\nUse repeated plot grids to investigate multiple data frame columns in the same plot.\n\n\nThe assignment will concentrate on the learning objectives as well as building knowledge on existing concepts."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_05.html#glancing-at-the-values-in-the-dataframe-is-a-good-first-step-to-get-familiar-with-a-new-dataset",
+    "href": "modules/module4/slides/module4_05.html#glancing-at-the-values-in-the-dataframe-is-a-good-first-step-to-get-familiar-with-a-new-dataset",
+    "title": "Exploratory Data Analysis",
+    "section": "Glancing at the values in the dataframe is a good first step to get familiar with a new dataset",
+    "text": "Glancing at the values in the dataframe is a good first step to get familiar with a new dataset\n\nimport pandas as pd\n\nmovies_extended = pd.read_csv('data/movies-extended-eda.csv')\nmovies_extended\n\n\n\n\n\n\n\n\nMajor Genre\nMPAA Rating\nRunning Time min\nIMDB Rating\nIMDB Votes\n\n\n\n\n0\nAction\nR\n108.0\n5.8\n33584.0\n\n\n1\nComedy\nPG-13\n95.0\n5.8\n51109.0\n\n\n2\nAction\nPG-13\n106.0\n5.2\n15817.0\n\n\n3\nAdventure\nNaN\n108.0\n5.9\n45773.0\n\n\n4\nDrama\nR\n111.0\n6.1\n9908.0\n\n\n...\n...\n...\n...\n...\n...\n\n\n996\nComedy\nPG-13\n89.0\n6.4\n69296.0\n\n\n997\nComedy\nR\n87.0\n7.8\n81629.0\n\n\n998\nComedy\nR\n101.0\n7.0\n55687.0\n\n\n999\nAdventure\nPG\n129.0\n5.7\n21161.0\n\n\n1000\nAdventure\nPG-13\n136.0\n6.7\n4789.0\n\n\n\n\n1001 rows × 5 columns\n\n\n\n\nIn this slide deck, you will see how EDA allows us to identify interesting relationships that we want to study closer, suggest a hypothesis to test, assess assumptions of the data, and inform further data collection.\nThe very first thing we do in EDA, is often to glance at the dataframe by printing out a few values like in this slide.\nThis gives us an idea about which columns are numerical and categorical as well as the size of the dataframe.\nYou can also see that we don’t have the exact same dataframe columns as in the previous slide decks. We have left out a few since we will be including all dataframe columns in the same chart and want to make sure it fits on the slide."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_05.html#viewing-the-column-data-types-and-missing-values-protects-us-from-errors-later-on",
+    "href": "modules/module4/slides/module4_05.html#viewing-the-column-data-types-and-missing-values-protects-us-from-errors-later-on",
+    "title": "Exploratory Data Analysis",
+    "section": "Viewing the column data types and missing values protects us from errors later on",
+    "text": "Viewing the column data types and missing values protects us from errors later on\n\nmovies_extended.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 1001 entries, 0 to 1000\nData columns (total 5 columns):\n #   Column            Non-Null Count  Dtype  \n---  ------            --------------  -----  \n 0   Major Genre       996 non-null    object \n 1   MPAA Rating       994 non-null    object \n 2   Running Time min  1001 non-null   float64\n 3   IMDB Rating       945 non-null    float64\n 4   IMDB Votes        945 non-null    float64\ndtypes: float64(3), object(2)\nmemory usage: 39.2+ KB\n\n\n\nNext, it is a good idea to check the type of data in each column and how many missing values there are.\nFrom looking at the values in the table, we already have an idea of what the column data types are, and this matches the output from the info method. The columns with categorical data are referred to as “objects” and the numerical columns are read in as decimal numbers or “floats”.\nAlthough it seems unnecessary in this case, it is good practice to perform this check since there are rare cases where pandas might interpret a column differently from what we think.\nA common example of this is when people use a text string to encode missing values, for example “missing”, “null”, or “nan” instead of leaving the value blank which is best practice. This can make pandas treat a column as an object, which we might not detect when printing only the first few rows of the dataframe.\nThis can also happen with dates, which might be parsed as numbers unless you specify parse_dates=['column_name'] to read_csv.\nSpeaking of missing values, this is the next thing to check for. Columns that are missing some values might need to be imputed or dropped for machine learning tasks, and when we perform statistical tests, we need to know how many observations we have with data.\nImportantly, patterns in missing values can also give hints to which columns have strong relationships between their values and indicate if that something went wrong in the data collection process, which we should investigate before performing our analysis.\nHere, it looks like there are some NaNs in many of the columns, and the IMDB ratings and votes seems to have the most: about 60 rows are missing a value.\nThe IMDB rating and the number of votes have the exact same amount of missing values, and it makes sense that movies without votes can’t have a rating. But if we didn’t know how these columns were related, how could we check?"
+  },
+  {
+    "objectID": "modules/module4/slides/module4_05.html#visualizing-missing-values-helps-us-identify-potential-issues-with-the-data",
+    "href": "modules/module4/slides/module4_05.html#visualizing-missing-values-helps-us-identify-potential-issues-with-the-data",
+    "title": "Exploratory Data Analysis",
+    "section": "Visualizing missing values helps us identify potential issues with the data",
+    "text": "Visualizing missing values helps us identify potential issues with the data\n\nimport altair as alt\n\nalt.data_transformers.disable_max_rows();\n\nmovies_nans = movies_extended.isna().reset_index().melt(id_vars='index', var_name='column', value_name='NaN')\nmovies_nans\n\n\n\n\n\n\n\n\nindex\ncolumn\nNaN\n\n\n\n\n0\n0\nMajor Genre\nFalse\n\n\n1\n1\nMajor Genre\nFalse\n\n\n2\n2\nMajor Genre\nFalse\n\n\n3\n3\nMajor Genre\nFalse\n\n\n4\n4\nMajor Genre\nFalse\n\n\n...\n...\n...\n...\n\n\n5000\n996\nIMDB Votes\nFalse\n\n\n5001\n997\nIMDB Votes\nFalse\n\n\n5002\n998\nIMDB Votes\nFalse\n\n\n5003\n999\nIMDB Votes\nFalse\n\n\n5004\n1000\nIMDB Votes\nFalse\n\n\n\n\n5005 rows × 3 columns\n\n\n\n\nTo create a visualization of missing values for all columns, we must first reshape the data into a format where the column names become a single categorical column in the dataframe, which we can use on the y-axis in Altair. The index column will be used to give each column the same numbers on the x-axis.\nSince this reshape operation makes our dataframe longer than 5000 rows, we need to disable the max rows warning in Altair, which otherwise would prevent us from making this chart.\nWhenever we do this, we should also check the final size of our visualization if we save it to a file or in the notebook to ensure that it is not too large for what we can currently handle."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_05.html#visualizing-missing-values-helps-us-identify-potential-issues-with-the-data-1",
+    "href": "modules/module4/slides/module4_05.html#visualizing-missing-values-helps-us-identify-potential-issues-with-the-data-1",
+    "title": "Exploratory Data Analysis",
+    "section": "Visualizing missing values helps us identify potential issues with the data",
+    "text": "Visualizing missing values helps us identify potential issues with the data\n\nalt.Chart(movies_nans).mark_rect(height=17).encode(\n    x='index:O',\n    y='column',\n    color='NaN',\n    stroke='NaN').properties(width=800)\n\n\n\n\n\n\n\n\nBy visualizing the missing values for each column next to each other, we can quickly see if there are similar patterns between columns.\nA common cause for such correlations, could for example be due to the same day or hour missing for several columns when working with time-series data.\nThis information could help us decide whether we might want to remove an entire row from our analysis (when most column values for that observation are missing or look suspect) or if we should impute a missing value (if most column values for that observation look OK).\nHere we can confirm that the missing values from IMDB ratings and votes are indeed missing for the same rows in the data frame, since the orange lines show up in the same positions throughout the index, which suggests that these columns are linked in the data collection process.\nThe reason we specified the stroke encoding in this plot is to colour the outline of each rectangle, which is white by default.\nBefore continuing with our analysis we could consider dropping the NaN values, but it might also be a good idea to create all our visualizations both with and without them, to see if this impacts our conclusions.\nUltimately, domain expertise should also be involved in the decision to drop the NaN-values and understanding why they are present is important before deciding whether to get rid of them."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_05.html#a-statistical-summary-is-useful-to-complement-visualizations",
+    "href": "modules/module4/slides/module4_05.html#a-statistical-summary-is-useful-to-complement-visualizations",
+    "title": "Exploratory Data Analysis",
+    "section": "A statistical summary is useful to complement visualizations",
+    "text": "A statistical summary is useful to complement visualizations\n\nmovies_extended.describe()\n\n\n\n\n\n\n\n\nRunning Time min\nIMDB Rating\nIMDB Votes\n\n\n\n\ncount\n1001.000000\n945.000000\n945.000000\n\n\nmean\n110.312687\n6.279577\n43514.432804\n\n\nstd\n20.701090\n1.178046\n52241.047929\n\n\nmin\n72.000000\n1.700000\n48.000000\n\n\n25%\n95.000000\n5.500000\n12747.000000\n\n\n50%\n107.000000\n6.300000\n26303.000000\n\n\n75%\n122.000000\n7.100000\n55248.000000\n\n\nmax\n222.000000\n8.900000\n465000.000000\n\n\n\n\n\n\n\n\nNow that we are aware of what data types we are working with and how the missing values are distributed, let’s start visualizing the data that is not missing!\nVisualization is a critical component throughout EDA as it is key in communicating information about the data to us.\nWe will start by visualizing the distributions of numerical data, in order to familiarize ourselves with how the values are spread out for each numerical column.\nBefore doing so let’s print out the summary statistics for these numerical columns.\nWhile it is difficult to make statements about how the data is distributed by only looking at these numbers, they are useful to have available for cross-reference when visualizing the data and also give us an idea of what to expect when creating our visualization.\nAfter visualizing the data, we can also go back and look at these numbers to ensure that they align and that we don’t have a typo somewhere causing an error."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_05.html#visualizing-the-distributions-of-all-numerical-columns-helps-us-understand-the-data",
+    "href": "modules/module4/slides/module4_05.html#visualizing-the-distributions-of-all-numerical-columns-helps-us-understand-the-data",
+    "title": "Exploratory Data Analysis",
+    "section": "Visualizing the distributions of all numerical columns helps us understand the data",
+    "text": "Visualizing the distributions of all numerical columns helps us understand the data\n\nnumerical_columns = movies_extended.select_dtypes('number').columns.tolist()\n(alt.Chart(movies_extended)\n .mark_bar().encode(\n     alt.X(alt.repeat(), type='quantitative', bin=alt.Bin(maxbins=25)),\n     y='count()')\n .properties(width=250, height=150)\n .repeat(numerical_columns))\n\n\n\n\n\n\n\n\nSpecific to EDA visualizations is that we often want to create quick overview charts similar to the table we just printed. We worry less about the details such as axis labels and titles, since we are trying to understand the data ourselves through an interactive explorative process, rather than making the figures look appealing in a presentation (we will see how to do that later).\nTo create these overview visualizations, it is helpful to make the same type of plot for several dataframe columns and lay them out as subplots within a figure.\nPreviously, we have made subplots via faceting, which uses a categorical column to filter subsets of the data in each subplot, and all subplots have the same columns mapped to the X and Y axes.\nHere, we will see how we can create figures where the X and Y axes are different between subplots, and all the data is present in each one of them.\nTo achieve this in Altair, we say that we repeat the same Chart setup for multiple columns.\nInstead of typing each chart out manually, we specify which columns we want to use via the .repeat method of a Chart object, and indicate with alt.repeat() where these repeated columns should be used.\nSince we are not using the dataframe column directly, we also need to specify which type the repeated columns are.\nA great first step is to visualize the distribution of each of the quantitative dataframe columns to get an overview of how our data looks and examine it to see if there are any weird things going on (e.g. values that are way too small or large, values all bunched up in one place that could indicate measurement errors, etc). To do this, we here create a histogram chart and repeat it for each of the numerical columns.\nThis overview tells us that most movies have a runtime of around 90-130 min, but there are some that are shorter and some that are longer.\nMost movies have less than 80,000 votes, but there are some that have a really high number.\nThe distribution for the IMDB ratings is centred around 6, with few extreme values on either end and no notable shift in either direction.\nOur EDA is already helping us finding interesting aspects of the data!"
+  },
+  {
+    "objectID": "modules/module4/slides/module4_05.html#repeating-columns-of-both-x-and-y-lets-us-effectively-explore-pairwise-relationships-between-columns",
+    "href": "modules/module4/slides/module4_05.html#repeating-columns-of-both-x-and-y-lets-us-effectively-explore-pairwise-relationships-between-columns",
+    "title": "Exploratory Data Analysis",
+    "section": "Repeating columns of both X and Y lets us effectively explore pairwise relationships between columns",
+    "text": "Repeating columns of both X and Y lets us effectively explore pairwise relationships between columns\n\n# Scroll down on the plot to see the last row\n(alt.Chart(movies_extended)\n .mark_point(size=10).encode(\n     alt.X(alt.repeat('column'), type='quantitative'),\n     alt.Y(alt.repeat('row'), type='quantitative'))\n .properties(width=120, height=120)\n .repeat(column=numerical_columns, row=numerical_columns))\n\n\n\n\n\n\n\n\nEquipped with the information about each column’s data distribution, we move on to exploring the pairwise relationships between columns. This type of visualization will help us understand which columns are related to each other.\nFor example, we already saw earlier in this module that the ratings on IMDB and Rotten Tomatoes have a strong relationship when we create a scatter plot of these two dataframe columns. Here, we can ask that same question of all columns in the dataset.\nThis is helpful both for our general knowledge about the data and if we have a specific goal in mind, maybe we would want to predict the movie ratings, but we are not sure which other dataframe columns would be useful to have in the prediction model?\nInstead of looking at just one relationship at a time, we visualize all of them to be able to answer the same question for all pairs of columns.\nTo create this visualization, we need to use alt.repeat on both the axes, instead of just one as for the histograms.\nIn the last slide, we used alt.repeat without arguments, which means that we are repeating over all the columns. Here we specifically set the rows and columns attributes to ensure that our repeated chart will include all the pairwise combinations of the dataframe columns.\nIn the resulting visualization, the diagonal compares the column against itself, so this is not very interesting. The same pairwise comparisons are also repeated above and below the diagonal, so we will focus our attention only on the six plots below the diagonal.\nThis type of visualization is often referred to as a scatterplot matrix or pairplot.\nUnfortunately, these plots are saturated, so although we can see that there might be some correlative relationships, we should remake this plot as a 2D histogram heatmap, using the techniques we learned in the previous slide deck."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_05.html#heatmaps-can-be-used-for-repeated-charts-to-avoid-saturation",
+    "href": "modules/module4/slides/module4_05.html#heatmaps-can-be-used-for-repeated-charts-to-avoid-saturation",
+    "title": "Exploratory Data Analysis",
+    "section": "Heatmaps can be used for repeated charts to avoid saturation",
+    "text": "Heatmaps can be used for repeated charts to avoid saturation\n\n# Scroll down on the plot to see the last row\n(alt.Chart(movies_extended)\n .mark_rect().encode(\n     alt.X(alt.repeat('column'), type='quantitative', bin=alt.Bin(maxbins=30)),\n     alt.Y(alt.repeat('row'), type='quantitative', bin=alt.Bin(maxbins=30)),\n     alt.Color('count()', title=None))\n .properties(width=110, height=110)\n .repeat(column=numerical_columns, row=numerical_columns)).resolve_scale(color='independent')\n\n\n\n\n\n\n\n\nAs we learned earlier, we can create a heatmap to avoid the issues with saturation in the scatter plot.\nThanks to our repeated charts, we can quickly assess if there are strong relationships between any of the column pairs.\nIn addition to the relationship between the two ratings, there IMDB Rating and the Running Time appears to be related and the number of votes also seems to be related to the IMDB rating.\nPairs of columns that appear correlated in this visualization are good candidates to explore further e.g. with formal statistical testing to assess the strength of these correlations or to test in our machine learning models as predictors for another column\nWe should also use our domain expertise to understand why these columns might correlate and the nature of their relationship (for example, if one directly causes the other one to change values the relationship would be directly causative).\nHowever, as interesting to explore later could be columns that we had expected to be correlated, but appears not to be in this plot.\nNote that we set the colour title to None to save some space between the subplots, and since it is the same for each colour bar (“Count of records”).\nTo get more resolution of the counts for each column pair, we resolve the colour scale to be set individually for each subplot. Otherwise the high counts in the few bins of diagonals would drown out the counts in the other plots which would have the same colour almost everywhere."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_05.html#repeat-also-allows-us-to-explore-the-relationship-between-categorical-and-numerical-columns",
+    "href": "modules/module4/slides/module4_05.html#repeat-also-allows-us-to-explore-the-relationship-between-categorical-and-numerical-columns",
+    "title": "Exploratory Data Analysis",
+    "section": "Repeat also allows us to explore the relationship between categorical and numerical columns",
+    "text": "Repeat also allows us to explore the relationship between categorical and numerical columns\n\ncategorical_columns = movies_extended.select_dtypes('object').columns.tolist()\n(alt.Chart(movies_extended)\n .mark_boxplot().encode(\n     alt.X(alt.repeat('column'), type='quantitative'),\n     alt.Y(alt.repeat('row'), type='nominal', title=''))\n .properties(width=150)\n .repeat(column=numerical_columns, row=categorical_columns))\n\n\n\n\n\n\n\n\nIn addition to repeating charts with numerical data only, we can use the same principles to explore the relationships between the categorical and the numerical columns in our dataset.\nHere, we spread out the three categorical dataframe columns along with the columns of the plot to be able to answer questions regarding how the different categories compare, e.g. how do different genres impact movie runtime?\nThe categories labelled “null” are the ones which are missing a value in that categorical column in the dataframe, but still has values in the numerical column that is plotted on the x-axis.\nWe have also removed the “Title” item from the list of categorical columns, as well as dropped it from the dataframe, since we would have created a giant plot if thousands of titles were included.\nSo what is the answer to our question, how does genres impact movie runtime? It seems like Musicals, and Dramas have the longest run times. Whereas for Ratings, PG-13 and R-rated movies appear to run the longest.\nAs we have discussed before, it is often easier to compare plots where the values are sorted.\nFor a single boxplot, we learned previously that we can pass a list of the categories in the order we want to plot them.\nIn this case, we have different columns on the y-axis, so we would need to pass a list of all categories in all these three columns. We could use a loop with pandas to create this like so:\nrunning_time_order = []\nfor groupby_col in ['Major Genre', 'MPAA Rating']:\n    running_time_order.extend(\n        movies_extended\n        .groupby(groupby_col)\n        .median()\n        ['Running Time min']\n        .sort_values()\n        .index\n        .to_list())"
+  },
+  {
+    "objectID": "modules/module4/slides/module4_01.html#reading-in-the-data",
+    "href": "modules/module4/slides/module4_01.html#reading-in-the-data",
+    "title": "Visualizing Multidimensional Distributions",
+    "section": "Reading in the data",
+    "text": "Reading in the data\n\nimport altair as alt\nimport pandas as pd\n\nmovies_extended = pd.read_csv('data/movies-extended.csv')\nmovies_extended\n\n\n\n\n\n\n\n\nTitle\nUS Gross\nWorldwide Gross\nUS DVD Sales\nProduction Budget\nRelease Date\nMPAA Rating\nRunning Time min\nDistributor\nSource\nMajor Genre\nCreative Type\nDirector\nRotten Tomatoes Rating\nIMDB Rating\nIMDB Votes\n\n\n\n\n0\nBoynton Beach Club\n3127472.0\n3127472.0\nNaN\n2900000.0\nMar 24 2006\nR\n104.0\nWingate Distribution\nOriginal Screenplay\nRomantic Comedy\nContemporary Fiction\nNaN\nNaN\nNaN\nNaN\n\n\n1\nBroken Arrow\n70645997.0\n148345997.0\nNaN\n65000000.0\nFeb 09 1996\nR\n108.0\n20th Century Fox\nOriginal Screenplay\nAction\nContemporary Fiction\nJohn Woo\n55.0\n5.8\n33584.0\n\n\n2\nBrazil\n9929135.0\n9929135.0\nNaN\n15000000.0\nDec 18 1985\nR\n136.0\nUniversal\nOriginal Screenplay\nBlack Comedy\nFantasy\nTerry Gilliam\n98.0\n8.0\n76635.0\n\n\n3\nThe Cable Guy\n60240295.0\n102825796.0\nNaN\n47000000.0\nJun 14 1996\nPG-13\n95.0\nSony Pictures\nOriginal Screenplay\nComedy\nContemporary Fiction\nBen Stiller\n52.0\n5.8\n51109.0\n\n\n4\nChain Reaction\n21226204.0\n60209334.0\nNaN\n55000000.0\nAug 02 1996\nPG-13\n106.0\n20th Century Fox\nOriginal Screenplay\nAction\nContemporary Fiction\nAndrew Davis\n13.0\n5.2\n15817.0\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n1185\nZombieland\n75590286.0\n98690286.0\n28281155.0\n23600000.0\nOct 02 2009\nR\n87.0\nSony Pictures\nOriginal Screenplay\nComedy\nFantasy\nRuben Fleischer\n89.0\n7.8\n81629.0\n\n\n1186\nZack and Miri Make a Porno\n31452765.0\n36851125.0\n21240321.0\n24000000.0\nOct 31 2008\nR\n101.0\nWeinstein Co.\nOriginal Screenplay\nComedy\nContemporary Fiction\nKevin Smith\n65.0\n7.0\n55687.0\n\n\n1187\nZodiac\n33080084.0\n83080084.0\n20983030.0\n85000000.0\nMar 02 2007\nR\n157.0\nParamount Pictures\nBased on Book/Short Story\nThriller/Suspense\nDramatization\nDavid Fincher\n89.0\nNaN\nNaN\n\n\n1188\nThe Legend of Zorro\n45575336.0\n141475336.0\nNaN\n80000000.0\nOct 28 2005\nPG\n129.0\nSony Pictures\nRemake\nAdventure\nHistorical Fiction\nMartin Campbell\n26.0\n5.7\n21161.0\n\n\n1189\nThe Mask of Zorro\n93828745.0\n233700000.0\nNaN\n65000000.0\nJul 17 1998\nPG-13\n136.0\nSony Pictures\nRemake\nAdventure\nHistorical Fiction\nMartin Campbell\n82.0\n6.7\n4789.0\n\n\n\n\n1190 rows × 16 columns\n\n\n\n\nWe’re continuing to work with the movies data set. Here we have done some additional preprocessing steps to the data and saved it to disk beforehand so that we can load it indirectly on this slide.\nThis is largely the same dataset as before, but we filtered out some additional NaNs and a few categories that contained problematic values."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_01.html#scatter-plots-are-effective-visualizations-for-2d-distributions",
+    "href": "modules/module4/slides/module4_01.html#scatter-plots-are-effective-visualizations-for-2d-distributions",
+    "title": "Visualizing Multidimensional Distributions",
+    "section": "Scatter plots are effective visualizations for 2D distributions",
+    "text": "Scatter plots are effective visualizations for 2D distributions\n\nalt.Chart(movies_extended).mark_point().encode(\n    alt.X('IMDB Rating'),\n    alt.Y('Rotten Tomatoes Rating'))\n\n\n\n\n\n\n\n\nIn the last module, we saw how to visualize the distribution of a single numerical dataframe column. What if we instead want to compare the distributions of two columns with each other?\nA question we could answer with this type of comparison is “Are movies rated similarly on different online platforms?”\nIn this slide, we are showing the movie rating from both https://www.imdb.com/ and https://www.rottentomatoes.com. These are both websites where people can rate movies.\nThere is clearly a pattern in this scatter plot, but how can we interpret it?\nThe first thing that stands out is the overall pattern of the points which is resembles a diagonal line with some variation around it.\nWhen the points in a scatter plot lines up in a pattern that resembles a diagonal line as in this chart, it means that there is a relationship between the two dataframe columns we have visualized.\nIn other words, we can clearly see that as one of the ratings goes up, so does the other and there are only a few exceptions to this.\nThe relationship in this plot would be considered strong because we can see clearly the diagonal trend that the points follow."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_01.html#non-linear-relationships-follow-a-predictable-pattern-that-is-not-a-straight-line",
+    "href": "modules/module4/slides/module4_01.html#non-linear-relationships-follow-a-predictable-pattern-that-is-not-a-straight-line",
+    "title": "Visualizing Multidimensional Distributions",
+    "section": "Non-linear relationships follow a predictable pattern that is not a straight line",
+    "text": "Non-linear relationships follow a predictable pattern that is not a straight line\n\nalt.Chart(movies_extended).mark_point().encode(\n    alt.X('IMDB Rating'),\n    alt.Y('IMDB Votes'))\n\n\n\n\n\n\n\n\nThe relationship in the previous slide followed a straight line and we would refer to it as a “linear” relationship.\nHowever, not all relationships are linear. In this slide, we can see that there appears to be a clear pattern between the rating and the number of votes a movie receives but it follows a bent curve rather than a straight line.\nThis still appears to be a pretty strong relationship, but it is a bit hard to tell because of the many points in a big chunk at the bottom.\nWhen a relationship is not following a straight line, we say that it is non-linear. There are many types of non-linear relationships, but we will not delve into them in this course."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_01.html#the-stronger-the-relationship-the-closer-together-the-points-are",
+    "href": "modules/module4/slides/module4_01.html#the-stronger-the-relationship-the-closer-together-the-points-are",
+    "title": "Visualizing Multidimensional Distributions",
+    "section": "The stronger the relationship, the closer together the points are",
+    "text": "The stronger the relationship, the closer together the points are\n\nalt.Chart(movies_extended).mark_point().encode(\n    alt.X('IMDB Rating'),\n    alt.Y('IMDB Rating'))\n\n\n\n\n\n\n\n\nIf the relationship between two columns was really strong, the points would be very close together and there would be little variation.\nIn this plot, we have visualized the same column for both the X and Y axis, which means the relationship is perfect.\nWe would never expect to see this strong of a relationship in real data, but it is good to know what are extreme cases.\nOn that topic, let’s see what a plot looks like when there appears to be no relationship between the plotted dataframe columns."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_01.html#when-there-is-no-relationship-there-is-also-no-pattern-in-the-plotted-points",
+    "href": "modules/module4/slides/module4_01.html#when-there-is-no-relationship-there-is-also-no-pattern-in-the-plotted-points",
+    "title": "Visualizing Multidimensional Distributions",
+    "section": "When there is no relationship, there is also no pattern in the plotted points",
+    "text": "When there is no relationship, there is also no pattern in the plotted points\n\nalt.Chart(movies_extended.reset_index()).mark_point().encode(\n    alt.X('IMDB Rating'),\n    alt.Y('index'))\n\n\n\n\n\n\n\n\nHere, we have plotted the IMDB Rating against the row number in the dataframe (remember that when you reset the index of a dataframe a new column is created with the previous index/row number).\nUnless the data had been ordered in a specific manner previously, we would expect there to be no relationship between these two dataframe columns and that is exactly what we see in this plot.\nThere is no distinct pattern here, just a cloud of points. In other words, by knowing the value on the x-axis, there is no way we could know the value on the y-axis.\nFor example, a movie with an IMDB Rating of 4-5 could have an index number anywhere from 0 to 1200.\nLet’s contrast this with the first visualization we created."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_01.html#a-strong-relationship-means-that-the-value-on-one-axis-gives-information-about-the-value-on-the-other-axis",
+    "href": "modules/module4/slides/module4_01.html#a-strong-relationship-means-that-the-value-on-one-axis-gives-information-about-the-value-on-the-other-axis",
+    "title": "Visualizing Multidimensional Distributions",
+    "section": "A strong relationship means that the value on one axis gives information about the value on the other axis",
+    "text": "A strong relationship means that the value on one axis gives information about the value on the other axis\n\nalt.Chart(movies_extended).mark_point().encode(\n    alt.X('IMDB Rating'),\n    alt.Y('Rotten Tomatoes Rating'))\n\n\n\n\n\n\n\n\nHere, knowing the IMDB Rating for a movie is informative for knowing the Rotten Tomatoes Rating.\nFor example, if we know that the IMDB Rating is 4-5, we can be quite sure that the Rotten Tomatoes Rating will not exceed 50, and there are just a few exceptions to this.\nHowever, we must be careful not to claim that there is a causal relationship between these two dataframe columns. All we know is that they have a strong relationship, we don’t know the details of why.\nThere are formal ways of measure how strong these relationships are, but they often come with some caveats and it is generally more informative to look at the visualizations to understand how the two columns are related to each other.\nRemember what we learned in module 1, people are generally better at detecting visual patterns than interpreting individual numbers summarizing these relationships."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_01.html#saturated-scatter-plots-are-difficult-to-interpret",
+    "href": "modules/module4/slides/module4_01.html#saturated-scatter-plots-are-difficult-to-interpret",
+    "title": "Visualizing Multidimensional Distributions",
+    "section": "Saturated scatter plots are difficult to interpret",
+    "text": "Saturated scatter plots are difficult to interpret\n\nalt.Chart(movies_extended).mark_point().encode(\n    alt.X('Production Budget'),\n    alt.Y('Worldwide Gross'))\n\n\n\n\n\n\n\n\nAs we have seen, scatter plots are generally effective for visualizing two-dimensional relationships. However, as with all plots, they have their shortcomings.\nMost notably, when the bulk of the points become concentrated in a small region of the chart, 2D scatter plots become saturated in the same way as the 1D scatter and rug plots we saw in the previous module.\nIn this slide we’re trying to answer the question: “Do high grossing movies tend to have a high production budget?”\nIn the scatter plot you can see that it is impossible to tell if there are more points close to 80 million or 0 on the x-axis, and likewise, 200 million or 0 on the y-axis.\nSo, although we can discern a trend for the points outside the saturated area we do not know how the data is spread out inside the blue blob.\nTo solve this issue, we can create a two-dimensional histogram in the form of a heatmap."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_01.html#a-heatmap-can-visualize-the-relationship-between-two-distributions-without-saturation",
+    "href": "modules/module4/slides/module4_01.html#a-heatmap-can-visualize-the-relationship-between-two-distributions-without-saturation",
+    "title": "Visualizing Multidimensional Distributions",
+    "section": "A heatmap can visualize the relationship between two distributions without saturation",
+    "text": "A heatmap can visualize the relationship between two distributions without saturation\n\nalt.Chart(movies_extended).mark_rect().encode(\n    alt.X('Production Budget', bin=alt.Bin(maxbins=60)),\n    alt.Y('Worldwide Gross', bin=alt.Bin(maxbins=60)),\n    alt.Color('count()'))\n\n\n\n\n\n\n\n\nWhat’s involved in creating a two-dimensional histogram?\nThis is similar to when we several heatmaps to compare multiple 1D distributions, but here we need to bin both the x and y-axis.\nThese bins will look like a grid or mesh overlayed on the image, similar to the pattern of the faint grey gridlines in the previous slide.\nWithin each rectangle of this grid, we will count the number of observations and represent the count value with a colour.\nThe result of these operations is the heatmap shown in this slide, which enables us to see a level of detail we could not perceive in the scatter plot.\nHere it is clear that there are many fewer movies with a production budget of 80 million compared to the area close to 0, and most movies seem to be around 10-15 million. Likewise, the grossing of most movies is around 0-50 million, not 200 million."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_01.html#a-2d-density-plot-can-also-visualize-the-relationship-between-two-distributions-without-saturation",
+    "href": "modules/module4/slides/module4_01.html#a-2d-density-plot-can-also-visualize-the-relationship-between-two-distributions-without-saturation",
+    "title": "Visualizing Multidimensional Distributions",
+    "section": "A 2D density plot can also visualize the relationship between two distributions without saturation",
+    "text": "A 2D density plot can also visualize the relationship between two distributions without saturation\n\n\nIn addition to representing 2D distributions as heatmaps, we can also represent them as density plots.\nAltair cannot yet make these plots, so here we’re showing an example created from another plotting library called seaborn, so that you can get a sense of what this visualization would look like for our data.\nIn a 2D density plot, each bin is now two dimensional and look like a bell in a clocktower or the top of a circus tent, rather than a bell-shaped one-dimensional curve.\nThis type of visualization gives us similar information as the heatmap in the previous slide and the advantages and disadvantages are similar to those between one-dimensional histograms and density plots.\nAs with 1D density plots, the values of the density themselves are not helpful, but we have included them here in the colour bar as an example."
+  },
+  {
+    "objectID": "modules/module4/module4-09-what_did_we_just_learn.html",
+    "href": "modules/module4/module4-09-what_did_we_just_learn.html",
+    "title": "5. What did we just learn?",
+    "section": "",
+    "text": "5. What did we just learn?\n\nVideoSlides",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "5. What did we just learn?"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-07-eda_on_categorical_data.html",
+    "href": "modules/module4/module4-07-eda_on_categorical_data.html",
+    "title": "4. Exploratory Data Analysis on Categorical Data",
+    "section": "",
+    "text": "4. Exploratory Data Analysis on Categorical Data\n\nVideoSlides",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "4. Exploratory Data Analysis on Categorical Data"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-05-exploratory_data_analysis.html",
+    "href": "modules/module4/module4-05-exploratory_data_analysis.html",
+    "title": "3. Exploratory Data Analysis",
+    "section": "",
+    "text": "3. Exploratory Data Analysis\n\nVideoSlides",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "3. Exploratory Data Analysis"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-03-visualizing_categorical_distributions.html",
+    "href": "modules/module4/module4-03-visualizing_categorical_distributions.html",
+    "title": "2. Visualizing Categorical Distributions",
+    "section": "",
+    "text": "2. Visualizing Categorical Distributions\n\nVideoSlides",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "2. Visualizing Categorical Distributions"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-01-visualizing_multidimensional_distributions.html",
+    "href": "modules/module4/module4-01-visualizing_multidimensional_distributions.html",
+    "title": "1. Visualizing Multidimensional Distributions",
+    "section": "",
+    "text": "1. Visualizing Multidimensional Distributions\n\nVideoSlides",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "1. Visualizing Multidimensional Distributions"
+    ]
+  },
+  {
+    "objectID": "modules/module1/slides/module1_end.html#module-learning-outcomes",
+    "href": "modules/module1/slides/module1_end.html#module-learning-outcomes",
+    "title": "What Did we Learn and What to Expect in Assignment 1",
+    "section": "Module Learning Outcomes",
+    "text": "Module Learning Outcomes\nIn this module students will learn how to\n\nExplain the importance of data visualizations.\nUse the grammar of graphics presented here.\nTransform data directly in Altair instead of pandas.\nCombine graphical marks via layering.\n\n\nThe assignment will concentrate on the learning objectives as well as building knowledge on existing concepts."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#there-are-two-types-of-visualization-approaches",
+    "href": "modules/module1/slides/module1_03.html#there-are-two-types-of-visualization-approaches",
+    "title": "How Can We Visualize Data?",
+    "section": "There are two types of visualization approaches",
+    "text": "There are two types of visualization approaches\nWhen learning about data visualization, it is helpful to distinguish between the following two approaches to visualization:\n\nImperative\nDeclarative\n\n\nThere are a plethora of visualization packages in Python.\nThis rich selection can be beneficial but it is also confusing, especially when starting out and trying to decide which package to choose.\nWhen learning about data visualization, it is helpful to distinguish between plotting packages that follow either an imperative or a declarative visualization philosophy."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#imperative-low-level-plotting-focuses-on-plot-mechanics",
+    "href": "modules/module1/slides/module1_03.html#imperative-low-level-plotting-focuses-on-plot-mechanics",
+    "title": "How Can We Visualize Data?",
+    "section": "Imperative (low level) plotting focuses on plot mechanics",
+    "text": "Imperative (low level) plotting focuses on plot mechanics\n\nFocus on plot construction details.\n\nOften includes loops, low-level drawing commands, etc.\n\nSpecify how something should be done\n\n“Draw a red point for every observation that has value X in column A, a blue point for every observation that has value Y in column A, etc.”\n\nMinute control over plotting details, but laborious for complex visualization.\n\n\nImperative (or low level) plotting packages focus on plot construction details such as how to implement the visualization in terms of for-loops, low-level drawing commands, etc.\nThis approach gives us minute control over what is plotted, but it becomes quite laborious when we need to plot larger dataframes, or create more complex visualizations."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#the-data-we-will-be-plotting",
+    "href": "modules/module1/slides/module1_03.html#the-data-we-will-be-plotting",
+    "title": "How Can We Visualize Data?",
+    "section": "The data we will be plotting",
+    "text": "The data we will be plotting\n\n\n\n\nCountry\n\n\nArea\n\n\nPopulation\n\n\n\n\n\n\nRussia\n\n\n17098246\n\n\n144386830\n\n\n\n\nCanada\n\n\n9984670\n\n\n38008005\n\n\n\n\nChina\n\n\n9596961\n\n\n1400050000\n\n\n\n\n\nIn the example in the next slide, we will plot the area and the population for the three largest countries in the world to see how they compare. This is the table we are plotting."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#example-of-imperative-plotting",
+    "href": "modules/module1/slides/module1_03.html#example-of-imperative-plotting",
+    "title": "How Can We Visualize Data?",
+    "section": "Example of imperative plotting",
+    "text": "Example of imperative plotting\n# Pseudocode\ncolors = ['blue', 'red', 'yellow']\nplot = create_plot()\nfor row_number, row_data in enumerate(dataframe):\n    plot.add_point(x=row_data['Area'], y=row_data['Population'], color=colors[row_number])\n\n\n\n\n\n\n\n\n\nFor this example, we will use Python-inspired pseudocode, which is code that is made up and designed so that it is less complex and easier to read than real programming languages.\nThis helps us focus on understanding the concepts of plotting instead of getting hung up on the code syntax details of a particular package.\nYou can see that an imperative approach to plotting this data would be to first create the plot and then loop through the dataframe to add a point for each country one by one.\nTo colour the points, we need to manually create a sequence of colours that we can access inside the loop.\nThe visualization on this page is an example of what a plot could look like when run with real code similar to our pseudocode.\nYou can see that one of the countries is bigger than the others, and one of the countries has a much larger population, but without seeing the code, it is not possible to know which colour represents which country.\nWe could add a legend by creating it explicitly and adding one coloured dot per iteration in the loop."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#declarative-high-level-plotting-focuses-on-the-data",
+    "href": "modules/module1/slides/module1_03.html#declarative-high-level-plotting-focuses-on-the-data",
+    "title": "How Can We Visualize Data?",
+    "section": "Declarative (high level) plotting focuses on the data",
+    "text": "Declarative (high level) plotting focuses on the data\n\nFocus on data and relationships.\n\nOften includes linking columns to visual channels.\n\nSpecify what should be done\n\n“Assign colors based on the values in column A”\n\nSmart defaults give us what we want without complete control over minor plotting details.\n\n\nDeclarative (or high level) plotting packages declare links between dataframe columns and visual channels, such as the x-axis, y-axis, colour, etc.\nThis means that you can provide a high-level specification of what you want the visualization to include, and the plot details are handled automatically.\nIn summary, declarative visualization tools let you think about data and relationships, while imperative visualization tools focus on plot construction details."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#example-of-declarative-plotting",
+    "href": "modules/module1/slides/module1_03.html#example-of-declarative-plotting",
+    "title": "How Can We Visualize Data?",
+    "section": "Example of declarative plotting",
+    "text": "Example of declarative plotting\n# Pseudocode\npoint_plot(data=dataframe, x='Area', y='Population', color='Country')\n\n\n\n\n\n\n\n\n\nThe visualization on this page is an example of what a plot could look like when run with real code similar to our pseudocode.\nYou will notice that this time the plot also includes a legend without us having to create it explicitly, which is a common convenience in declarative plotting packages."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#a-high-level-grammar-of-graphics-helps-us-compose-plots-effectively",
+    "href": "modules/module1/slides/module1_03.html#a-high-level-grammar-of-graphics-helps-us-compose-plots-effectively",
+    "title": "How Can We Visualize Data?",
+    "section": "A high-level grammar of graphics helps us compose plots effectively",
+    "text": "A high-level grammar of graphics helps us compose plots effectively\n\nSimple grammatical components combine to create visualizations.\nVisualization grammars often consist of three main components:\n\nCreate a chart linked to a dataframe.\nAdd graphical elements (such as points, lines, etc).\nEncode dataframe columns as visual channels (such as x, etc).\n\n\n# Pseudocode\nchart(dataframe).add_points().encode_columns(x='Area', y='Population', color='Country')\n\nThe declarative plotting concept can be implemented in different ways.\nIn the previous slide, we had a dedicated function for creating the pointplot, and there would be a separate function for creating a lineplot, barplot, etc.\nWith this approach, it is often not easy to combine plots together, unless there is a specific function for that purpose and the three bullets points on this slide are all executed by this single function.\nAnother way to use declarative plotting is via a visualization grammar.\nGenerally, a grammar governs how individual parts come together to compose more complex constructs.\nFor example, a linguistic grammar decides how words and phrases can be combined into coherent sentences. A data visualization grammar determines how to combine individual parts of the plotting syntax to create complete visualization.\nIn the example on this slide, you can see that the three bullet points are now broken down into one main function to create the chart linked to the data, and then we build upon this by adding the graphical elements (add_points()) and the encoding of the columns to properties of this chart (encode_columns()).\nBy combining these three grammatical components in different ways, we can build a wide range of visualizations, without memorizing a unique function for each plot type.\nThanks to this grammatical visualization approach, we also only require minimal changes to our code to change the type of plot."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#the-python-plotting-landscape",
+    "href": "modules/module1/slides/module1_03.html#the-python-plotting-landscape",
+    "title": "How Can We Visualize Data?",
+    "section": "The Python plotting landscape",
+    "text": "The Python plotting landscape\n\n\nNow that we know the basic concepts of how data can be visualized, let’s select a Python package and get coding!\nIn this image, you can see the most commonly used Python plotting packages.\nThere are many more, but these are the ones you are the most likely to hear about, so it is good to know that they exist.\nThe text to the left in the image is a legend to explain the colours used for the different Python packages (blue for high level, declarative packages and orange for low-level, imperative packages).\nAs you can see there are several high and low-level language, so how do we chose?\nIn this course we will use Altair, because it is a powerful declarative visualization tool with a clear and consistent grammar that also allows us to add interactive components to our plots, such as tooltips and selections.\nWe have also included some of the most common visualization packages for the web which are built-in Javascript and coloured in white.\nThe reason we mention these is that the Altair library is a little bit of Python code connected to an already existing powerful JavaScript package called VegaLite, which in turns builds on D3, the most dominant visualization package on the web today.\nBy leveraging these well-established JavaScript visualization packages Altair can create plots that work natively on the web and includes interactive features without reinventing the wheel.\nSince Altair and VegaLite are relatively new visualization libraries, they don’t yet support every single plot type out there, but they more than make up for it with their ease of use and support for powerful interactive visualizations, as we will see later."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#sample-data-can-be-found-in-altairs-companion-package-vega_datasets",
+    "href": "modules/module1/slides/module1_03.html#sample-data-can-be-found-in-altairs-companion-package-vega_datasets",
+    "title": "How Can We Visualize Data?",
+    "section": "Sample data can be found in Altair’s companion package vega_datasets",
+    "text": "Sample data can be found in Altair’s companion package vega_datasets\n\nfrom vega_datasets import data\n\ncars = data.cars()\ncars\n\n\n\n\n\n\n\n\nName\nMiles_per_Gallon\nCylinders\nDisplacement\nHorsepower\nWeight_in_lbs\nAcceleration\nYear\nOrigin\n\n\n\n\n0\nchevrolet chevelle malibu\n18.0\n8\n307.0\n130.0\n3504\n12.0\n1970-01-01\nUSA\n\n\n1\nbuick skylark 320\n15.0\n8\n350.0\n165.0\n3693\n11.5\n1970-01-01\nUSA\n\n\n2\nplymouth satellite\n18.0\n8\n318.0\n150.0\n3436\n11.0\n1970-01-01\nUSA\n\n\n3\namc rebel sst\n16.0\n8\n304.0\n150.0\n3433\n12.0\n1970-01-01\nUSA\n\n\n4\nford torino\n17.0\n8\n302.0\n140.0\n3449\n10.5\n1970-01-01\nUSA\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n401\nford mustang gl\n27.0\n4\n140.0\n86.0\n2790\n15.6\n1982-01-01\nUSA\n\n\n402\nvw pickup\n44.0\n4\n97.0\n52.0\n2130\n24.6\n1982-01-01\nEurope\n\n\n403\ndodge rampage\n32.0\n4\n135.0\n84.0\n2295\n11.6\n1982-01-01\nUSA\n\n\n404\nford ranger\n28.0\n4\n120.0\n79.0\n2625\n18.6\n1982-01-01\nUSA\n\n\n405\nchevy s-10\n31.0\n4\n119.0\n82.0\n2720\n19.4\n1982-01-01\nUSA\n\n\n\n\n406 rows × 9 columns\n\n\n\n\nBefore we start visualizing data, we need to select a dataset and often also a question we want to answer.\nAltair works with dataframes in the “tidy” format (which we talked about in the Programming in Python for Data Science course), which means that they should consist of rows with one observation each and a set of named data columns with one feature each (you might also have heard these called fields or variables, but we will stick to columns for clarity).\nIn this course, we will often use data from the vega-datasets package, which has many plot-friendly practice datasets available as Pandas dataframes and can be loaded as demonstrated in this slide. We can use these datasets by importing the data module from the vega_datasets packages as in this slide. Here, our data contains the name of different cars and some attributes relating to each car. There are many interesting questions we could ask from this data set! For our first plot, let’s explore the relationship between how heavy a car is (the Weight_in_lbs column) and how good gas mileage it has (theMiles_per_gallon column).\nBefore starting to code the visualization, take a few seconds and think about what you would expect the relationship between these two columns to look like when you plot it."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#adding-graphical-elements-via-marks",
+    "href": "modules/module1/slides/module1_03.html#adding-graphical-elements-via-marks",
+    "title": "How Can We Visualize Data?",
+    "section": "Adding graphical elements via marks",
+    "text": "Adding graphical elements via marks\n\nimport altair as alt\n\nalt.Chart(cars).mark_point()\n\n\n\n\n\n\n\n\nHere we assigned a shorter name (alt) to the Altair library when importing it to save us some typing later. The Altair syntax is similar to the grammar of graphics pseudocode we saw a few slides ago. The fundamental object in Altair is the Chart, which takes a data frame as a single argument, e.g. alt.Chart(cars).\nAfter the chart object has been created, we can specify how the graphical element should look that we use to visualize the data. This is called a graphical mark in Altair, and in this slide, we have used mark_point() to show the data as points.\nSince we have not specified which columns should be used for the x and y axes, we appear to only see one point in this plot since all the data is plotted on top of each other in the same location.\nTo the right of the chart, there is a button with three dots on it. don’t worry about it right now, we will explain what this is for at the end of the chapter."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#encoding-columns-as-visual-channels",
+    "href": "modules/module1/slides/module1_03.html#encoding-columns-as-visual-channels",
+    "title": "How Can We Visualize Data?",
+    "section": "Encoding columns as visual channels",
+    "text": "Encoding columns as visual channels\nMapping a dataframe column to the x-scale\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs')\n\n\n\n\n\n\n\n\nTo visually separate the points, we can encode columns in the dataframe as visual channels, such as the axes or colours of the plot.\nHere, we encode the column Miles_per_Gallon as the x-axis. For Pandas data frames, Altair automatically determines an appropriate data type for the mapped column, which in this case is quantitative (or numerical) and shows the numbers under the axis.\nYou can see that there are several short black lines spread out evenly on the x-axis. These are called axis ticks and help us see where the values of this dataframe column lie along the axis.\nThe faint gray lines are called grid lines and extend the locations of the axis ticks so that it is easy to compare their position to the points.\nThis is particularly useful when the points might be further away from the axis ticks, such as in the next slide."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#mapping-a-dataframe-column-to-the-y-scale",
+    "href": "modules/module1/slides/module1_03.html#mapping-a-dataframe-column-to-the-y-scale",
+    "title": "How Can We Visualize Data?",
+    "section": "Mapping a dataframe column to the y-scale",
+    "text": "Mapping a dataframe column to the y-scale\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon')\n\n\n\n\n\n\n\n\nBy spreading out the data along both the x and y-axis, we can answer our initial question about the relationship between car weight and gas mileage. as it appears that the heavier cars are the ones that have the poorest mileage.\nAlthough we might have expected this to be the case, visualizing all the data points also provides information on the nature of the relationship between weight and mileage.\nIt appears that the x-y points don’t simply follow a straight line, but rather a curved line that where the mileage drop quickly when moving away from the lightest cars, but then decreases more slowly throughout the remainder of the data.\nThis rich, easily interpretable display of information is one of the main advantages of visualizing data and later in the course, we will talk more about the different type of relationships, such as linear, exponential, etc."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#mapping-a-numerical-dataframe-column-to-the-colour-scale",
+    "href": "modules/module1/slides/module1_03.html#mapping-a-numerical-dataframe-column-to-the-colour-scale",
+    "title": "How Can We Visualize Data?",
+    "section": "Mapping a numerical dataframe column to the colour scale",
+    "text": "Mapping a numerical dataframe column to the colour scale\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon',\n    color='Horsepower')\n\n\n\n\n\n\n\n\nIs there a relationship between horsepower and car weight, or fuel-efficiency?\nTo enrich this display of information further, we can colour the points according to a column in the dataframe. When we encode a column as the colour channel Altair will automatically figure out an appropriate colour scale to use, depending on whether the data is numerical, categorical, etc. Here we have indicated that we want to colour the points according to the car’s horsepower, which indicated how powerful its engine is.\nWe can see that the heavier cars have more powerful engines, than the lighter ones, but when using colour for a numerical comparison like this, makes it is harder to tell whether the relationship follows a straight line or is of another nature, so this encoding is mostly useful as an approximate indication of the horsepower.\nWe can also observe a relationship between the horsepower of a vehicle and the fuel efficiency. It appears that cars with greater horsepower (the points with a darker shade of blue) are less efficient with their fuel since miles per Gallon is much lower.\nIn the next module, we will learn more in detail about which encodings are most suitable for different comparisons."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#mapping-a-categorical-dataframe-column-to-the-colour-scale",
+    "href": "modules/module1/slides/module1_03.html#mapping-a-categorical-dataframe-column-to-the-colour-scale",
+    "title": "How Can We Visualize Data?",
+    "section": "Mapping a categorical dataframe column to the colour scale",
+    "text": "Mapping a categorical dataframe column to the colour scale\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon',\n    color='Origin')\n\n\n\n\n\n\n\n\nIn the previous slide, a continuous, gradually increasing colour scale was used to visualize the gradual increase in the numerical column Horsepower. In this slide, we instead chose to colour the points per the categorical column Origin (where the car was made).\nAs you can see, Altair detects that this column contains categorical data (with the help of pandas) and picks a different colour scale to facilitate distinction between the categories. As in the previous slide,\nAltair automatically adds a helpful legend, and we can see that the heavier, more powerful cars are primarily manufactured in the US, while the lighter more fuel-efficient ones are manufactured in Europe and Japan (remember that this is true for this particular dataset, and not necessarily all cars)."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#mapping-a-dataframe-column-to-the-shape-scale",
+    "href": "modules/module1/slides/module1_03.html#mapping-a-dataframe-column-to-the-shape-scale",
+    "title": "How Can We Visualize Data?",
+    "section": "Mapping a dataframe column to the shape scale",
+    "text": "Mapping a dataframe column to the shape scale\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon',\n    color='Origin',\n    shape='Origin')\n\n\n\n\n\n\n\n\nAlthough Altair’s colour scales are designed to be effective and easy to interpret, we can make the categories in our plot even more distinct by encoding the same categorical column as both colour and shape.\nThis also makes visualizations much easier to interpret and understand for anyone with visual colour deficiency (about 10% of the population). We will talk more in-depth about colour theory in a later module."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#mapping-a-dataframe-column-to-the-size-scale",
+    "href": "modules/module1/slides/module1_03.html#mapping-a-dataframe-column-to-the-size-scale",
+    "title": "How Can We Visualize Data?",
+    "section": "Mapping a dataframe column to the size scale",
+    "text": "Mapping a dataframe column to the size scale\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon',\n    color='Origin',\n    shape='Origin',\n    size='Horsepower')\n\n\n\n\n\n\n\n\nSometimes a visualization tries to do too much. In this example, we have added the size channel to indicate the engine power.\nAlthough Altair elegantly handles the dual legends, it is difficult for us to discern useful information from this plot. If you go back to the plot where we encoded weight in the colour channel, you can see that the plot is much clearer.\nLater we will learn more about how to efficiently load a visualization with an appropriate amount of information, and what the research indicates regarding which visual channels are the most efficient for communicating information visually."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_03.html#the-action-button-can-be-used-to-save-the-plot",
+    "href": "modules/module1/slides/module1_03.html#the-action-button-can-be-used-to-save-the-plot",
+    "title": "How Can We Visualize Data?",
+    "section": "The action button can be used to save the plot",
+    "text": "The action button can be used to save the plot\n\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon',\n    color='Origin',\n    shape='Origin',\n    size='Horsepower')\n\n\n\n\n\n\n\n\nThis is the same visualization as from the last slide, and we will just use it as an example.\nThe button to the right of the chart with three dots on it is called the “action button”. and clicking it will bring up a menu.\nThe first two items in ’s menu can be used to save the chart, either in an image-based PNG-format or a text-based SVG-format.\nWe will also be learning about programmatic ways to save our charts later in the course.\nThe last three menu items relate to the library VegaLite, which is what we mentioned Altair is built upon, but we will not be using these in this course."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_00.html#module-learning-outcomes",
+    "href": "modules/module1/slides/module1_00.html#module-learning-outcomes",
+    "title": "Module Learning Outcomes",
+    "section": "Module Learning Outcomes",
+    "text": "Module Learning Outcomes\nIn this module students will learn how to\n\nExplain the importance of data visualizations.\nUse Altair’s grammar of graphics.\nCreate point and line visualizations in Altair.\nTransform data directly in Altair instead of pandas.\nCombine graphical marks via layering."
+  },
+  {
+    "objectID": "modules/module1/module1-08-questions_on_how_plots_are_created.html#test-your-knowledge-visualization-libraries",
+    "href": "modules/module1/module1-08-questions_on_how_plots_are_created.html#test-your-knowledge-visualization-libraries",
+    "title": "3.1. Exercises",
+    "section": "Test Your Knowledge: Visualization Libraries",
+    "text": "Test Your Knowledge: Visualization Libraries",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "&nbsp;&nbsp; 3.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-04-test_your_knowledge_visualization_libraries.html#test-your-knowledge-visualization-libraries",
+    "href": "modules/module1/module1-04-test_your_knowledge_visualization_libraries.html#test-your-knowledge-visualization-libraries",
+    "title": "2.1. Exercises",
+    "section": "Test Your Knowledge: Visualization Libraries",
+    "text": "Test Your Knowledge: Visualization Libraries",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "&nbsp;&nbsp; 2.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-04-test_your_knowledge_visualization_libraries.html#true-or-false-visualization-libraries",
+    "href": "modules/module1/module1-04-test_your_knowledge_visualization_libraries.html#true-or-false-visualization-libraries",
+    "title": "2.1. Exercises",
+    "section": "True or False: Visualization Libraries",
+    "text": "True or False: Visualization Libraries",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "&nbsp;&nbsp; 2.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-04-test_your_knowledge_visualization_libraries.html#your-first-plot",
+    "href": "modules/module1/module1-04-test_your_knowledge_visualization_libraries.html#your-first-plot",
+    "title": "2.1. Exercises",
+    "section": "Your First Plot",
+    "text": "Your First Plot\nInstructions: Be patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nLet’s use the same vehicle dataset we saw in the lecture, but visualize the relationship between two different columns.\nThe data has already been imported for you in this exercise.\nHere is what it looks like:\n\n\n\n\n\n\nTasks:\n\nFill out the missing fields in the Altair plot in order to create a scatter plot.\nThe cars’ Horsepower should be on the y-axis and their Weight_in_lbs on the x-axis.\nColor the points by the Origin of the cars.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\nAre the column names expressed in quotes, e.g. y='Horsepower'?\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "&nbsp;&nbsp; 2.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-02-true_or_false_data_visualization.html#true-or-false-data-visualization",
+    "href": "modules/module1/module1-02-true_or_false_data_visualization.html#true-or-false-data-visualization",
+    "title": "1.1. Exercises",
+    "section": "True or False: Data Visualization",
+    "text": "True or False: Data Visualization",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "&nbsp;&nbsp; 1.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-00-module-learning-outcomes.html",
+    "href": "modules/module1/module1-00-module-learning-outcomes.html",
+    "title": "0. Module Learning Outcomes",
+    "section": "",
+    "text": "0. Module Learning Outcomes\n\nVideoSlides",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "0. Module Learning Outcomes"
+    ]
+  },
+  {
+    "objectID": "modules/module0/module0-02-prerequisite_confirmation.html",
+    "href": "modules/module0/module0-02-prerequisite_confirmation.html",
+    "title": "1.1. Prerequisite Confirmation",
+    "section": "",
+    "text": "1.1. Prerequisite Confirmation",
+    "crumbs": [
+      "**M0. Visualization Intro**",
+      "&nbsp;&nbsp; 1.1. Prerequisite confirmation"
+    ]
+  },
+  {
+    "objectID": "modules/index.html",
+    "href": "modules/index.html",
+    "title": "Welcome to Data Visualization!",
+    "section": "",
+    "text": "Welcome to Data Visualization!\nThis course is part of the Key Capabilities for Data Science program and covers topics related to data visualization.\nIn this course we will learn how to (and how not to) visualize data. We will learn about the grammar of visualization and how it’s implemented in the “Altair” package to create our figures. In addition to common statistical visualizations, we will learn how to tell stories with data, create geographical visualizations, and bring out plots to life by adding interactive elements. Together, these skills will allow us to create effective data visualizations that strengthen our own exploratory data analysis skills and our ability to communicate insights to others. Select the first module in the sidebar to the left to get started.\nCourse prerequisites: Programming in Python for Data Science"
+  },
+  {
+    "objectID": "modules/module0/module0-01-data_visualization.html",
+    "href": "modules/module0/module0-01-data_visualization.html",
+    "title": "1. Data Visualization",
+    "section": "",
+    "text": "1. Data Visualization\n\nVideoSlides",
+    "crumbs": [
+      "**M0. Visualization Intro**",
+      "1. Data Visualization"
+    ]
+  },
+  {
+    "objectID": "modules/module0/slides/module0_00.html#course-learning-outcomes",
+    "href": "modules/module0/slides/module0_00.html#course-learning-outcomes",
+    "title": "Welcome!",
+    "section": "Course Learning Outcomes",
+    "text": "Course Learning Outcomes\nBy the end of the course, students are expected to be able to:\n\nUse the Altair grammar of graphics to create data visualizations.\nSelect an appropriate visualization for the data.\nPerform exploratory data analysis on a dataset.\nEffectively communicate findings with figures.\nInterpret data visualizations to answer questions and formulate follow-up questions.\n\n\nIn this module, you will learn how to use Altair to create data visualizations, choose the right visualizations for your data, explore datasets, and effectively communicate your analytical findings."
+  },
+  {
+    "objectID": "modules/module0/slides/module0_00.html#prerequisites",
+    "href": "modules/module0/slides/module0_00.html#prerequisites",
+    "title": "Welcome!",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nBefore we proceed to Module 1, it is important to make sure you have a solid foundation of coding in Python."
+  },
+  {
+    "objectID": "modules/module0/slides/module0_00.html#have-you-taken-programming-in-python-for-data-science",
+    "href": "modules/module0/slides/module0_00.html#have-you-taken-programming-in-python-for-data-science",
+    "title": "Welcome!",
+    "section": "Have you taken Programming in Python for Data Science?",
+    "text": "Have you taken Programming in Python for Data Science?\nMake sure you are familiar with basic Python programming concepts as they are essential for this course."
+  },
+  {
+    "objectID": "modules/module1/module1-01-what_is_data_visualization.html",
+    "href": "modules/module1/module1-01-what_is_data_visualization.html",
+    "title": "1. What is Data Visualization?",
+    "section": "",
+    "text": "1. What is Data Visualization?\n\nVideoSlides",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "1. What is Data Visualization?"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-03-how_can_we_visualize_data.html",
+    "href": "modules/module1/module1-03-how_can_we_visualize_data.html",
+    "title": "2. How can we visualize data?",
+    "section": "",
+    "text": "2. How can we visualize data?\n\nVideoSlides",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "2. How can we visualize data?"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-07-aggregations_lines_and_layers.html",
+    "href": "modules/module1/module1-07-aggregations_lines_and_layers.html",
+    "title": "3. Aggregations, Lines, and Layers",
+    "section": "",
+    "text": "3. Aggregations, Lines, and Layers\n\nVideoSlides",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "3. Aggregations, Lines, and Layers"
+    ]
+  },
+  {
+    "objectID": "modules/module1/module1-11-what_did_we_just_learn.html",
+    "href": "modules/module1/module1-11-what_did_we_just_learn.html",
+    "title": "4. What did we just learn?",
+    "section": "",
+    "text": "4. What did we just learn?\n\nVideoSlides",
+    "crumbs": [
+      "**M1. Why Visualize Data?**",
+      "4. What did we just learn?"
+    ]
+  },
+  {
+    "objectID": "modules/module1/slides/module1_01.html#what-is-the-purpose-of-visualizing-data",
+    "href": "modules/module1/slides/module1_01.html#what-is-the-purpose-of-visualizing-data",
+    "title": "What is Data Visualization?",
+    "section": "What is the purpose of visualizing data?",
+    "text": "What is the purpose of visualizing data?\nVisualizing data can be used to\n\nAnswer a specific question\nExplore data more generally to generate new questions\n\nTo create an effective visualization, start by\n\nLooking at the data\nThinking about what you want to achieve by making the visualization\nDrawing it out with pen and paper\n\n\nWe often visualize data in order to help us answer a specific question we have about our dataset, but it can also help us generate new questions.\nBefore creating a visualization, it is important that you think about why you are making it, and what you want to achieve from creating this plot.\nIs there a specific question you are trying to answer, like comparing the relationship between two dataframe columns? Or are you creating a plot to help you understand the structure of your data more in general, such as plotting the distribution of each dataframe column?\nIn either case, it can be extremely helpful to draw out your plot with pen and paper first. This helps you think about if the plot you are creating makes sense or if there is another plot better suited for the task at hand.\nDrawing with pen and paper also makes it easier to write the code afterwards, since you clearly know what you are expecting the visualization to look like."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_01.html#why-bother-visualizing-data-instead-of-showing-raw-numbers",
+    "href": "modules/module1/slides/module1_01.html#why-bother-visualizing-data-instead-of-showing-raw-numbers",
+    "title": "What is Data Visualization?",
+    "section": "Why bother visualizing data instead of showing raw numbers?",
+    "text": "Why bother visualizing data instead of showing raw numbers?\nCan you see any differences in the general trends of these four sets of numbers?\n\n\n\n\n\n\n\n\n\n\n\n\nA\n\n\n\n\n\n\n\n\n\nB\n\n\n\n\n\n\n\n\n\nC\n\n\n\n\n\n\n\n\n\nD\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n0\n\n\n\n10\n\n\n\n8.04\n\n\n\n\n\n\n\n\n\n10\n\n\n\n9.14\n\n\n\n\n\n\n\n\n\n10\n\n\n\n7.46\n\n\n\n\n\n\n\n\n\n8\n\n\n\n6.58\n\n\n\n\n\n\n\n\n\n\n\n\n\n1\n\n\n\n8\n\n\n\n6.95\n\n\n\n\n\n\n\n\n\n8\n\n\n\n8.14\n\n\n\n\n\n\n\n\n\n8\n\n\n\n6.77\n\n\n\n\n\n\n\n\n\n8\n\n\n\n5.76\n\n\n\n\n\n\n\n\n\n\n\n\n\n2\n\n\n\n13\n\n\n\n7.58\n\n\n\n\n\n\n\n\n\n13\n\n\n\n8.74\n\n\n\n\n\n\n\n\n\n13\n\n\n\n8.50\n\n\n\n\n\n\n\n\n\n8\n\n\n\n7.71\n\n\n\n\n\n\n\n\n\n\n\n\n\n3\n\n\n\n9\n\n\n\n8.81\n\n\n\n\n\n\n\n\n\n9\n\n\n\n8.77\n\n\n\n\n\n\n\n\n\n9\n\n\n\n7.11\n\n\n\n\n\n\n\n\n\n8\n\n\n\n8.84\n\n\n\n\n\n\n\n\n\n\n\n\n\n4\n\n\n\n11\n\n\n\n8.33\n\n\n\n\n\n\n\n\n\n11\n\n\n\n9.26\n\n\n\n\n\n\n\n\n\n11\n\n\n\n7.81\n\n\n\n\n\n\n\n\n\n8\n\n\n\n8.47\n\n\n\n\n\n\n\n\n\n\n\n\n\n5\n\n\n\n14\n\n\n\n9.96\n\n\n\n\n\n\n\n\n\n14\n\n\n\n8.10\n\n\n\n\n\n\n\n\n\n14\n\n\n\n8.84\n\n\n\n\n\n\n\n\n\n8\n\n\n\n7.04\n\n\n\n\n\n\n\n\n\n\n\n\n\n6\n\n\n\n6\n\n\n\n7.24\n\n\n\n\n\n\n\n\n\n6\n\n\n\n6.13\n\n\n\n\n\n\n\n\n\n6\n\n\n\n6.08\n\n\n\n\n\n\n\n\n\n8\n\n\n\n5.25\n\n\n\n\n\n\n\n\n\n\n\n\n\n7\n\n\n\n4\n\n\n\n4.26\n\n\n\n\n\n\n\n\n\n4\n\n\n\n3.10\n\n\n\n\n\n\n\n\n\n4\n\n\n\n5.39\n\n\n\n\n\n\n\n\n\n19\n\n\n\n12.50\n\n\n\n\n\n\n\n\n\n\n\n\n\n8\n\n\n\n12\n\n\n\n10.84\n\n\n\n\n\n\n\n\n\n12\n\n\n\n9.13\n\n\n\n\n\n\n\n\n\n12\n\n\n\n8.15\n\n\n\n\n\n\n\n\n\n8\n\n\n\n5.56\n\n\n\n\n\n\n\n\n\n\n\n\n\n9\n\n\n\n7\n\n\n\n4.81\n\n\n\n\n\n\n\n\n\n7\n\n\n\n7.26\n\n\n\n\n\n\n\n\n\n7\n\n\n\n6.42\n\n\n\n\n\n\n\n\n\n8\n\n\n\n7.91\n\n\n\n\n\n\n\n\n\n\n\n\n\n10\n\n\n\n5\n\n\n\n5.68\n\n\n\n\n\n\n\n\n\n5\n\n\n\n4.74\n\n\n\n\n\n\n\n\n\n5\n\n\n\n5.73\n\n\n\n\n\n\n\n\n\n8\n\n\n\n6.89\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhy do we need visualizations to help answer our questions?\nIs it not enough to look at numbers in tables?\nTo understand why visualizations are so powerful, it is helpful to remember that to answer a question, we often have to put the data in a format that is easy for us humans to interpret.\nBecause our number systems have only been around for about 5,000 years, we need to assert effort and train ourselves to recognize structure in numerical data.\nVisual systems, on the other hand, have undergone refinement during 500,000,000 years of evolution, so we can instinctively recognize visual patterns and accurately estimate visual properties such as colours and distances.\nPractically, this means that we can arrive at correct conclusions faster from studying visual rather than numerical representations of the same data.\nFor example, have a look at the four sets of numbers in the table on the slide. Can you see the differences in the general trends between these four sets of numbers? This is a slightly modified version of the original, which was put together by statistician Francis Anscombe in the 70s."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_01.html#although-summary-statistics-are-often-useful-they-dont-tell-the-whole-story",
+    "href": "modules/module1/slides/module1_01.html#although-summary-statistics-are-often-useful-they-dont-tell-the-whole-story",
+    "title": "What is Data Visualization?",
+    "section": "Although summary statistics are often useful, they don’t tell the whole story",
+    "text": "Although summary statistics are often useful, they don’t tell the whole story\nC is the only set with a different mean and standard deviation\n\n\n\n\n\n\n\n\n\n\n\n\nA\n\n\n\n\n\n\n\n\n\nB\n\n\n\n\n\n\n\n\n\nC\n\n\n\n\n\n\n\n\n\nD\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\nX\n\n\n\nY\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmean\n\n\n\n9.00\n\n\n\n7.50\n\n\n\n\n\n\n\n\n\n9.00\n\n\n\n7.50\n\n\n\n\n\n\n\n\n\n9.00\n\n\n\n7.11\n\n\n\n\n\n\n\n\n\n9.00\n\n\n\n7.50\n\n\n\n\n\n\n\n\n\n\n\n\n\nstd\n\n\n\n3.32\n\n\n\n2.03\n\n\n\n\n\n\n\n\n\n3.32\n\n\n\n2.03\n\n\n\n\n\n\n\n\n\n3.32\n\n\n\n1.15\n\n\n\n\n\n\n\n\n\n3.32\n\n\n\n2.03\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSummaries, such as the mean and standard deviation, are helpful statistical tools that are often useful for detecting the differences between datasets.\nHowever, since they collapse the data into just a few numbers, statistical summaries can’t tell the whole story about the data and there can be important differences between datasets that summaries fail to reveal.\nHere, the mean and standard deviation indicate that set C is slightly different from the other sets of data in terms of the centre of the sample distribution and the spread of that distribution, while the remaining three sets of data have a similar centre and spread."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_01.html#plotting-the-data-immediately-reveals-patterns-in-the-data",
+    "href": "modules/module1/slides/module1_01.html#plotting-the-data-immediately-reveals-patterns-in-the-data",
+    "title": "What is Data Visualization?",
+    "section": "Plotting the data immediately reveals patterns in the data",
+    "text": "Plotting the data immediately reveals patterns in the data\nWe could not detect these patterns from only looking at the raw numbers or summary statistics\n\n\n\n\n\n\n\n\n\nHumans are not good at detecting patterns in raw numbers, and we don’t have good intuition about how different distributions of data can contribute to identical statistical summaries.\nBut guess what we excel at?\nDetecting visual patterns!\nIt is immediately clear to us how these sets of numbers differ once they are shown as graphical elements instead of textual objects.\nThis is one of the main reasons why data visualization is such a powerful tool for data exploration and communication.\nIn our example here, we would come to widely different conclusions about the behaviour of the data for the four different data sets.\nSets A and C are roughly linearly increasing at similar rates, whereas set B reaches a plateau and starts to drop, and set D has a constant X-value for all numbers except one big outlier."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_01.html#more-examples-of-plotting-versus-statistical-summaries",
+    "href": "modules/module1/slides/module1_01.html#more-examples-of-plotting-versus-statistical-summaries",
+    "title": "What is Data Visualization?",
+    "section": "More examples of plotting versus statistical summaries",
+    "text": "More examples of plotting versus statistical summaries\n\nSource: Matejka and Fitzmaurice, 2017\n\nA more recent and dynamic illustration of how graphical representations are much easier for us to interpret compared to statistical summaries, is the Datasaurus GIF from Autodesk’s research team in this slide.\nIt displays several different datasets, all with the same mean, standard deviation and correlation between X and Y, but looking at the data graphically shows us how different these datasets actually are."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#including-all-the-data-can-hinder-visualization-of-general-trends",
+    "href": "modules/module1/slides/module1_07.html#including-all-the-data-can-hinder-visualization-of-general-trends",
+    "title": "Aggregations, lines, and layers",
+    "section": "Including all the data can hinder visualization of general trends",
+    "text": "Including all the data can hinder visualization of general trends\n\nimport altair as alt\nfrom vega_datasets import data\n\ncars = data.cars()\nalt.Chart(cars).mark_point().encode(\n    x='Weight_in_lbs',\n    y='Miles_per_Gallon',\n    color='Origin')\n\n\n\n\n\n\n\n\nThroughout this course we will explore many different datasets, but for now, we will stick to the cars dataset to keep it simple and focus on introducing additional Altair functionality.\nLet’s refresh our memory with this plot from the previous module.\nWe noted that it appears that cars differ in their weight and mileage based on their country of origin. At least the American cars appear to stand out, but it is difficult to see any differences between Europe and Japan.\nVisualizing all data points as in this slide is helpful to detect patterns in the data.\nBut when showing all observations, it can be hard to pick up on general trends in the data, e.g. if there are any differences in the mean weight of cars made in either Japan or Europe.\nTo more effectively visualize such general trends in the data, we can create plots of statistical summaries, such as means and medians.\nIn Altair (and pandas) these are referred to as data aggregations."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#data-aggregations-are-built-into-altair",
+    "href": "modules/module1/slides/module1_07.html#data-aggregations-are-built-into-altair",
+    "title": "Aggregations, lines, and layers",
+    "section": "Data aggregations are built into Altair",
+    "text": "Data aggregations are built into Altair\n\nalt.Chart(cars).mark_point().encode(\n    x='mean(Weight_in_lbs)',\n    y='mean(Miles_per_Gallon)',\n    color='Origin')\n\n\n\n\n\n\n\n\nTo plot the means of weight and mileage, we could use pandas to first calculate the mean values, and then plot the resulting dataframe in Altair.\nThis is powerful since we can access all aggregations built into pandas, but it is a bit verbose for simple common operations, such as the mean.\nFortunately, Altair has shortcuts for plotting simple aggregations where you provide the name of the aggregation together with the name of the column inside a string as in the example in this slide.\nThe Altair documentation includes a table with all available aggregations.\nIn this visualization, we can detect small differences between the means of the Japanese and Europeans cars, which was not discernible when we plotted all the points.\nWhether this difference is big enough to reach a different conclusion than when inspecting the previous plots depends on our application and the purpose of the data exploration."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#plotting-aggregations-to-visualize-trends-over-time",
+    "href": "modules/module1/slides/module1_07.html#plotting-aggregations-to-visualize-trends-over-time",
+    "title": "Aggregations, lines, and layers",
+    "section": "Plotting aggregations to visualize trends over time",
+    "text": "Plotting aggregations to visualize trends over time\n\ncars\n\n\n\n\n\n\n\n\nName\nMiles_per_Gallon\nCylinders\nDisplacement\nHorsepower\nWeight_in_lbs\nAcceleration\nYear\nOrigin\n\n\n\n\n0\nchevrolet chevelle malibu\n18.0\n8\n307.0\n130.0\n3504\n12.0\n1970-01-01\nUSA\n\n\n1\nbuick skylark 320\n15.0\n8\n350.0\n165.0\n3693\n11.5\n1970-01-01\nUSA\n\n\n2\nplymouth satellite\n18.0\n8\n318.0\n150.0\n3436\n11.0\n1970-01-01\nUSA\n\n\n3\namc rebel sst\n16.0\n8\n304.0\n150.0\n3433\n12.0\n1970-01-01\nUSA\n\n\n4\nford torino\n17.0\n8\n302.0\n140.0\n3449\n10.5\n1970-01-01\nUSA\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n401\nford mustang gl\n27.0\n4\n140.0\n86.0\n2790\n15.6\n1982-01-01\nUSA\n\n\n402\nvw pickup\n44.0\n4\n97.0\n52.0\n2130\n24.6\n1982-01-01\nEurope\n\n\n403\ndodge rampage\n32.0\n4\n135.0\n84.0\n2295\n11.6\n1982-01-01\nUSA\n\n\n404\nford ranger\n28.0\n4\n120.0\n79.0\n2625\n18.6\n1982-01-01\nUSA\n\n\n405\nchevy s-10\n31.0\n4\n119.0\n82.0\n2720\n19.4\n1982-01-01\nUSA\n\n\n\n\n406 rows × 9 columns\n\n\n\n\nAggregations are often helpful when comparing trends over time, especially when there are multiple groups in the data. In the cars dataset, there is a Year column, indicating when the car was made.\nOften when there is a notion of time in the data, it is interesting to see how values in the dataframe change over time.\nIn this case, we might be interested in knowing whether newer cars are more fuel-efficient than older ones.\nPresumably, they should be, but does it differ depending on where the car was made?\nLet’s find out!"
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#plotting-aggregations-to-visualize-trends-over-time-works-well",
+    "href": "modules/module1/slides/module1_07.html#plotting-aggregations-to-visualize-trends-over-time-works-well",
+    "title": "Aggregations, lines, and layers",
+    "section": "Plotting aggregations to visualize trends over time works well",
+    "text": "Plotting aggregations to visualize trends over time works well\n\nalt.Chart(cars).mark_point().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)')\n\n\n\n\n\n\n\n\nTo visualize the mean mileage for each year of all cars, we want to perform the aggregation on the Miles_per_Gallon column while leaving the Year column intact.\nAs you can see this plot one value (the mean) for each year in the dataframe.\nHere we can see that the observations in this dataframe span the years 1970-1982 and it does indeed look like the mileage is getting better over time as we expected!"
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#plotting-all-data-to-visualize-trends-over-time-is-not-effective",
+    "href": "modules/module1/slides/module1_07.html#plotting-all-data-to-visualize-trends-over-time-is-not-effective",
+    "title": "Aggregations, lines, and layers",
+    "section": "Plotting all data to visualize trends over time is not effective",
+    "text": "Plotting all data to visualize trends over time is not effective\n\nalt.Chart(cars).mark_point().encode(\n    x='Year',\n    y='Miles_per_Gallon')\n\n\n\n\n\n\n\n\nAs a comparison with the previous slide, if we instead of the mean would plot all the data points for each year, it would be much more difficult to see the pattern over time as you can see here."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#plotting-points-to-visualize-trends-over-time-is-not-ideal",
+    "href": "modules/module1/slides/module1_07.html#plotting-points-to-visualize-trends-over-time-is-not-ideal",
+    "title": "Aggregations, lines, and layers",
+    "section": "Plotting points to visualize trends over time is not ideal",
+    "text": "Plotting points to visualize trends over time is not ideal\n\nalt.Chart(cars).mark_point().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)',\n    color='Origin')\n\n\n\n\n\n\n\n\nIf we try to explore the mileage over time while grouping the cars according to their origin, it is a bit difficult to immediately recognize which points belong to which group.\nIn fact, using points for visualizing trends is not ideal, and lines are often preferred as we will see in the next slide."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#plotting-lines-to-visualize-trends-over-time-is-ideal",
+    "href": "modules/module1/slides/module1_07.html#plotting-lines-to-visualize-trends-over-time-is-ideal",
+    "title": "Aggregations, lines, and layers",
+    "section": "Plotting lines to visualize trends over time is ideal",
+    "text": "Plotting lines to visualize trends over time is ideal\n\nalt.Chart(cars).mark_line().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)',\n    color='Origin')\n\n\n\n\n\n\n\n\nOne key advantage of line plots is that they connect all the observations that belong to the same group presenting them as one unified graphical object (one line), which is easy for us to distinguish when looking at the plot instead of trying to connect the dots mentally.\nAnother advantage is that the slope of the line makes it easier to see if the value from one year to another is increasing or decreasing.\nAltair grammar lets us switch from a point plot to a line plot, by only changing mark_point() to mark_line(), and keeping the rest of the code as-is.\nIn this plot, we can clearly compare the mileage trends over time to conclude that cars from all origins improved their mileage, and that the trajectory and mileage values are the most similar between Europe and Japan."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#combining-a-line-with-a-set-of-points-via-layers",
+    "href": "modules/module1/slides/module1_07.html#combining-a-line-with-a-set-of-points-via-layers",
+    "title": "Aggregations, lines, and layers",
+    "section": "Combining a line with a set of points via layers",
+    "text": "Combining a line with a set of points via layers\n\nline = alt.Chart(cars).mark_line().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)')\n\npoint = alt.Chart(cars).mark_point().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)')\n\nline + point\n\n\n\n\n\n\n\n\nTo augment a line plot, it is sometimes helpful to add point marks for each data point along the line, to emphasize where the observations fall.\nThis is helpful since the line drawn between points could be misleading if we have very few points.\nFor example, if you see a straight line, does that mean there are just two points, one in each corner of the line?\nOr are there ten points spread out all along the line?\nTo combine two different types of graphical marks (line and point in this case), we will use Altair’s layering grammar.\nIn this slide, we start by defining each chart separately:\nfirst a line plot,  then a point plot.\nWe can then use the + (plus) operator to combine the two into a layered chart."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#building-upon-previous-plots-can-save-time-when-combining-charts",
+    "href": "modules/module1/slides/module1_07.html#building-upon-previous-plots-can-save-time-when-combining-charts",
+    "title": "Aggregations, lines, and layers",
+    "section": "Building upon previous plots can save time when combining charts",
+    "text": "Building upon previous plots can save time when combining charts\n\nline = alt.Chart(cars).mark_line().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)')\n\nline + line.mark_point()\n\n\n\n\n\n\n\n\nWe can also create a layered plot by reusing a previous chart definition.\nRather than creating the point plot from scratch, we can start with the line plot, and then invoke the mark_point method.\nWe could also have typed mark_line(point=True), which is a special case for getting points on a line since it is such a common operation, but the layering grammar extends to other plots, so it is more helpful to focus on learning that."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#showing-raw-values-together-with-the-mean-is-often-helpful",
+    "href": "modules/module1/slides/module1_07.html#showing-raw-values-together-with-the-mean-is-often-helpful",
+    "title": "Aggregations, lines, and layers",
+    "section": "Showing raw values together with the mean is often helpful",
+    "text": "Showing raw values together with the mean is often helpful\n\nline = alt.Chart(cars).mark_line().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)')\n\nline + line.mark_point().encode(y='Miles_per_Gallon')\n\n\n\n\n\n\n\n\nWhen we are combing plots in layers, we can not only change the mark, but also the encodings.\nThis way, we can create a layer with one point per observations, and with a line for the average values.\nFor this, we need to use encode again after creating the first plot, to instruct Altair to use the raw values instead of the mean for the points.\n(note that the axis now has two labels, we will see how to change that in a future lecture).\nThis type of visualization is helpful when we want to show both the underlying data and a statistical summary, which is often helpful for elucidating what the data tells us.\nIt is also a good check to make sure nothing unexpected is going on with the raw values as we saw in the introductory example with Anscombe’s quartet."
+  },
+  {
+    "objectID": "modules/module1/slides/module1_07.html#all-encodings-of-the-base-chart-are-propagated-unless-they-are-overwritten",
+    "href": "modules/module1/slides/module1_07.html#all-encodings-of-the-base-chart-are-propagated-unless-they-are-overwritten",
+    "title": "Aggregations, lines, and layers",
+    "section": "All encodings of the base chart are propagated unless they are overwritten",
+    "text": "All encodings of the base chart are propagated unless they are overwritten\n\nline = alt.Chart(cars).mark_line().encode(\n    x='Year',\n    y='mean(Miles_per_Gallon)',\n    color='Origin')\n\nline + line.mark_point().encode(y='Miles_per_Gallon')\n\n\n\n\n\n\n\n\nWe have already seen that the x and y encoding remain the same in any subsequently created plots.\nHere, we’re showing that this also applies to the colour encoding to illustrate that any encoding will be propagated to all layers unless they are specifically overwritten.\nIf we would only have added colour to the point chart, there would still have been a single line instead of three."
+  },
+  {
+    "objectID": "modules/module4/module4-00-module_learning_outcomes.html",
+    "href": "modules/module4/module4-00-module_learning_outcomes.html",
+    "title": "0. Module Learning Outcomes",
+    "section": "",
+    "text": "0. Module Learning Outcomes\n\nVideoSlides",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "0. Module Learning Outcomes"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-02-true_or_false_plotting_multiple_numerical_columns.html#true-or-false-plotting-multiple-numerical-columns",
+    "href": "modules/module4/module4-02-true_or_false_plotting_multiple_numerical_columns.html#true-or-false-plotting-multiple-numerical-columns",
+    "title": "1.1. Exercises",
+    "section": "True or False: Plotting Multiple Numerical Columns",
+    "text": "True or False: Plotting Multiple Numerical Columns",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "&nbsp;&nbsp; 1.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-02-true_or_false_plotting_multiple_numerical_columns.html#which-plot-is-it",
+    "href": "modules/module4/module4-02-true_or_false_plotting_multiple_numerical_columns.html#which-plot-is-it",
+    "title": "1.1. Exercises",
+    "section": "Which Plot Is It?",
+    "text": "Which Plot Is It?",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "&nbsp;&nbsp; 1.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-02-true_or_false_plotting_multiple_numerical_columns.html#graph-analysis",
+    "href": "modules/module4/module4-02-true_or_false_plotting_multiple_numerical_columns.html#graph-analysis",
+    "title": "1.1. Exercises",
+    "section": "Graph Analysis",
+    "text": "Graph Analysis\nLook at the plot below and answer the following questions.\n\n\n246810Count of RecordsPokemon Scores5101520253035404550556065707580859095100105110115120125130135140145150155160165170175180185190195200205210215220225230Defense Score5101520253035404550556065707580859095100105110115120125130135140145150155160165170175180185Attack Score",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "&nbsp;&nbsp; 1.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-02-true_or_false_plotting_multiple_numerical_columns.html#fire-and-ice-heatmaps-with-antarctic-penguins",
+    "href": "modules/module4/module4-02-true_or_false_plotting_multiple_numerical_columns.html#fire-and-ice-heatmaps-with-antarctic-penguins",
+    "title": "1.1. Exercises",
+    "section": "Fire and Ice: Heatmaps with Antarctic Penguins",
+    "text": "Fire and Ice: Heatmaps with Antarctic Penguins\nInstructions: Be patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nLet’s now look at our penguins previous modules and see which penguins are more abundant. Are there penguins that have a greater flipper length (flipper_length_mm) but with a smaller body mass (body_mass_g)? Does the mass of a penguin have a relationship to its flipper length?\nLet’s take a look!\n\n\n\n\n\n\nCreate a heatmap between flipper_length_mm and body_mass_g and answer the questions below.\nTasks:\nFill in the blanks in the code below so that the following gets accomplished.\n\nCreate a heatmap and assign it to an object named penguin_heatmap.\nMap flipper_length_mm on the x-axis and body_mass_g on the y-axis. Distinguish the penguin count() using the color channel.\nMake sure to set the maxbins argument to 30.\nSet the dimensions to a width of 250 and a height of 200.\nGive it an appropriate title and axis labels.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you using .mark_rect()?\nAre you setting alt.X('flipper_length_mm', bin=alt.Bin(maxbins=30)?\nAre you setting alt.Y('body_mass_g', bin=alt.Bin(maxbins=30)?\nAre you using a color channel and setting it to counts()?\nAre you setting a title using .properties(title= 'title')?\nAre you setting width=250 and height=200 in .properties()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "&nbsp;&nbsp; 1.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-04-return_of_the_pokemon.html",
+    "href": "modules/module4/module4-04-return_of_the_pokemon.html",
+    "title": "2.1 Exercises",
+    "section": "",
+    "text": "Instructions: Be patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nWe are going to explore the different types of pokemon. You may remember this dataset from the previous Programming in Python for Data Science course. This time we are going to take a look at the different generations and pokemon types and see which ones are most prominent.\nFor those less familiar with Pokemon, a Pokemon’s generation is determined by the ara it was introduced. For example, the first generation spans Pokemon characters that were released in video games from 1996-1999. The 7th generation are Pokemon introduced from games released between 2016-2019.\nAccording to Wikipedia, A Pokémon’s type is “an elemental attribute determining the strengths and weaknesses of each Pokémon and its moves. Pokémon take double damage from attacking moves of types they are weak to and half damage from moves they resist. These type matchups offset one another in rock–paper–scissors-style relationships.”\n\n\n\n\n\n\nInstead of a heatmap, let’s make a plot that produces circles whose colour and size change based on the count of the Pokemon for each generation and type.\nTasks:\n\nCreate a heatmap and assign it to an object named pokemon_cicleplot.\nMap gen on the x-axis and make sure to specify that it is an ordinal (‘O’) value.\n\nMap type on the y-axis.\nAssign a Size and Colour channel to the count() of the pokemon.\nGive it an appropriate title and axis labels.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you using .mark_cicle()?\nAre you setting alt.X('gen:O')?\nAre you setting alt.Y('type')?\nAre you using a color channel and setting it to counts()?\nAre you setting a title using .properties(title= 'title')?\nAre you setting width=250 and height=200 in .properties()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "&nbsp;&nbsp; 2.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-04-return_of_the_pokemon.html#return-of-the-pokemon",
+    "href": "modules/module4/module4-04-return_of_the_pokemon.html#return-of-the-pokemon",
+    "title": "2.1 Exercises",
+    "section": "",
+    "text": "Instructions: Be patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nWe are going to explore the different types of pokemon. You may remember this dataset from the previous Programming in Python for Data Science course. This time we are going to take a look at the different generations and pokemon types and see which ones are most prominent.\nFor those less familiar with Pokemon, a Pokemon’s generation is determined by the ara it was introduced. For example, the first generation spans Pokemon characters that were released in video games from 1996-1999. The 7th generation are Pokemon introduced from games released between 2016-2019.\nAccording to Wikipedia, A Pokémon’s type is “an elemental attribute determining the strengths and weaknesses of each Pokémon and its moves. Pokémon take double damage from attacking moves of types they are weak to and half damage from moves they resist. These type matchups offset one another in rock–paper–scissors-style relationships.”\n\n\n\n\n\n\nInstead of a heatmap, let’s make a plot that produces circles whose colour and size change based on the count of the Pokemon for each generation and type.\nTasks:\n\nCreate a heatmap and assign it to an object named pokemon_cicleplot.\nMap gen on the x-axis and make sure to specify that it is an ordinal (‘O’) value.\n\nMap type on the y-axis.\nAssign a Size and Colour channel to the count() of the pokemon.\nGive it an appropriate title and axis labels.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you using .mark_cicle()?\nAre you setting alt.X('gen:O')?\nAre you setting alt.Y('type')?\nAre you using a color channel and setting it to counts()?\nAre you setting a title using .properties(title= 'title')?\nAre you setting width=250 and height=200 in .properties()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "&nbsp;&nbsp; 2.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-06-true_or_false_eda.html#true-or-false-exploratory-data-analysis-eda",
+    "href": "modules/module4/module4-06-true_or_false_eda.html#true-or-false-exploratory-data-analysis-eda",
+    "title": "3.1. Exercises",
+    "section": "True or False: Exploratory Data Analysis (EDA)",
+    "text": "True or False: Exploratory Data Analysis (EDA)",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "&nbsp;&nbsp; 3.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-06-true_or_false_eda.html#exploring-eda",
+    "href": "modules/module4/module4-06-true_or_false_eda.html#exploring-eda",
+    "title": "3.1. Exercises",
+    "section": "Exploring EDA",
+    "text": "Exploring EDA",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "&nbsp;&nbsp; 3.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-06-true_or_false_eda.html#plotting-numeric-columns-with-penguins",
+    "href": "modules/module4/module4-06-true_or_false_eda.html#plotting-numeric-columns-with-penguins",
+    "title": "3.1. Exercises",
+    "section": "Plotting Numeric Columns with Penguins",
+    "text": "Plotting Numeric Columns with Penguins\nInstructions:\nBe patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nIt’s been a hot second since we used the penguins data and seen it’s one second too long and we missed it, we are welcoming it back.\n\n\n\n\n\n\nLet’s plot all the distributions of the numeric columns from the dataset.\nTasks:\nFill in the blanks in the code below so that the following gets accomplished.\n\nUse the data source penguins_df to make a histogram for each of the numeric columns.\nAssign the plot to an object named numeric_histograms.\nPlot the counts of each column on the y-axis and the values of each numeric column of the x-axis.\nMake sure to set the maxbins argument to something appropriate (30 or 40).\nSet width to 150 and height to 150 and display the plots in 2 columns and 2 rows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you setting alt.X(alt.repeat(), type='quantitative', bin=alt.Bin(maxbins=30)?\nAre you setting alt.Y('count()')?\nAre you setting the height and width in properties()?\nAre you using .repeat() and setting numeric_cols as the first argument and columns=2 or rows=2?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "&nbsp;&nbsp; 3.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-08-true_or_false_categorical_columns.html",
+    "href": "modules/module4/module4-08-true_or_false_categorical_columns.html",
+    "title": "4.1. Exercises",
+    "section": "",
+    "text": "Instructions:\nBe patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nAre you getting bored of this penguins data yet? Don’t worry, we will spice it up soon, but let finish off this module with it.\n\n\n\n\n\n\nLet’s count combinations of the different categoricals, so we can get a bit of a better idea about where our data lies.\nTasks:\nFill in the blanks in the code below so that the following gets accomplished.\n\nUse the data source penguins_df to make a circle plot for each pair of categorical columns.\nAssign the plot to an object named categorical_plots.\nMap and repeat every categorical column on both the x and y-axis.\nMap the counts to both a Color and Size channel and indicate that no title should be assigned.\nMake sure to give the size and colour channels independent scales.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you using .mark_circle()?\nAre you setting alt.X(alt.repeat('column'), type='nominal')?\nAre you setting alt.Y('count()')?\nAre you chaining repeat(row=cat_cols, column=cat_cols) after .encode()?\nAre you setting color='independent' and size='independent' in .resolve_scale()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "&nbsp;&nbsp; 4.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module4/module4-08-true_or_false_categorical_columns.html#plotting-repeated-categorical-columns-with-penguins",
+    "href": "modules/module4/module4-08-true_or_false_categorical_columns.html#plotting-repeated-categorical-columns-with-penguins",
+    "title": "4.1. Exercises",
+    "section": "",
+    "text": "Instructions:\nBe patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nAre you getting bored of this penguins data yet? Don’t worry, we will spice it up soon, but let finish off this module with it.\n\n\n\n\n\n\nLet’s count combinations of the different categoricals, so we can get a bit of a better idea about where our data lies.\nTasks:\nFill in the blanks in the code below so that the following gets accomplished.\n\nUse the data source penguins_df to make a circle plot for each pair of categorical columns.\nAssign the plot to an object named categorical_plots.\nMap and repeat every categorical column on both the x and y-axis.\nMap the counts to both a Color and Size channel and indicate that no title should be assigned.\nMake sure to give the size and colour channels independent scales.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you using .mark_circle()?\nAre you setting alt.X(alt.repeat('column'), type='nominal')?\nAre you setting alt.Y('count()')?\nAre you chaining repeat(row=cat_cols, column=cat_cols) after .encode()?\nAre you setting color='independent' and size='independent' in .resolve_scale()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "&nbsp;&nbsp; 4.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module4/slides/module4_00.html#module-learning-outcomes",
+    "href": "modules/module4/slides/module4_00.html#module-learning-outcomes",
+    "title": "Module Learning Outcomes",
+    "section": "Module Learning Outcomes",
+    "text": "Module Learning Outcomes\nIn this module students will learn how to\n\nCreate heatmaps to visualize 2D distributions\nVisualize correlations and counts of categorical dataframe columns.\nUse repeated plot grids to investigate multiple data frame columns in the same plot."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_03.html#reading-in-the-data",
+    "href": "modules/module4/slides/module4_03.html#reading-in-the-data",
+    "title": "Visualizing Categorical Distributions",
+    "section": "Reading in the data",
+    "text": "Reading in the data\n\nimport altair as alt\nimport pandas as pd\n\nmovies_extended = pd.read_csv('data/movies-extended.csv')\nmovies_extended\n\n\n\n\n\n\n\n\nTitle\nUS Gross\nWorldwide Gross\nUS DVD Sales\nProduction Budget\nRelease Date\nMPAA Rating\nRunning Time min\nDistributor\nSource\nMajor Genre\nCreative Type\nDirector\nRotten Tomatoes Rating\nIMDB Rating\nIMDB Votes\n\n\n\n\n0\nBoynton Beach Club\n3127472.0\n3127472.0\nNaN\n2900000.0\nMar 24 2006\nR\n104.0\nWingate Distribution\nOriginal Screenplay\nRomantic Comedy\nContemporary Fiction\nNaN\nNaN\nNaN\nNaN\n\n\n1\nBroken Arrow\n70645997.0\n148345997.0\nNaN\n65000000.0\nFeb 09 1996\nR\n108.0\n20th Century Fox\nOriginal Screenplay\nAction\nContemporary Fiction\nJohn Woo\n55.0\n5.8\n33584.0\n\n\n2\nBrazil\n9929135.0\n9929135.0\nNaN\n15000000.0\nDec 18 1985\nR\n136.0\nUniversal\nOriginal Screenplay\nBlack Comedy\nFantasy\nTerry Gilliam\n98.0\n8.0\n76635.0\n\n\n3\nThe Cable Guy\n60240295.0\n102825796.0\nNaN\n47000000.0\nJun 14 1996\nPG-13\n95.0\nSony Pictures\nOriginal Screenplay\nComedy\nContemporary Fiction\nBen Stiller\n52.0\n5.8\n51109.0\n\n\n4\nChain Reaction\n21226204.0\n60209334.0\nNaN\n55000000.0\nAug 02 1996\nPG-13\n106.0\n20th Century Fox\nOriginal Screenplay\nAction\nContemporary Fiction\nAndrew Davis\n13.0\n5.2\n15817.0\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n1185\nZombieland\n75590286.0\n98690286.0\n28281155.0\n23600000.0\nOct 02 2009\nR\n87.0\nSony Pictures\nOriginal Screenplay\nComedy\nFantasy\nRuben Fleischer\n89.0\n7.8\n81629.0\n\n\n1186\nZack and Miri Make a Porno\n31452765.0\n36851125.0\n21240321.0\n24000000.0\nOct 31 2008\nR\n101.0\nWeinstein Co.\nOriginal Screenplay\nComedy\nContemporary Fiction\nKevin Smith\n65.0\n7.0\n55687.0\n\n\n1187\nZodiac\n33080084.0\n83080084.0\n20983030.0\n85000000.0\nMar 02 2007\nR\n157.0\nParamount Pictures\nBased on Book/Short Story\nThriller/Suspense\nDramatization\nDavid Fincher\n89.0\nNaN\nNaN\n\n\n1188\nThe Legend of Zorro\n45575336.0\n141475336.0\nNaN\n80000000.0\nOct 28 2005\nPG\n129.0\nSony Pictures\nRemake\nAdventure\nHistorical Fiction\nMartin Campbell\n26.0\n5.7\n21161.0\n\n\n1189\nThe Mask of Zorro\n93828745.0\n233700000.0\nNaN\n65000000.0\nJul 17 1998\nPG-13\n136.0\nSony Pictures\nRemake\nAdventure\nHistorical Fiction\nMartin Campbell\n82.0\n6.7\n4789.0\n\n\n\n\n1190 rows × 16 columns\n\n\n\n\nWe’re continuing to work with the movies data set from the last slide deck, but here we will focus on the categorical dataframe columns."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_03.html#bar-charts-are-effective-for-visualizing-categorical-distributions-of-a-single-column",
+    "href": "modules/module4/slides/module4_03.html#bar-charts-are-effective-for-visualizing-categorical-distributions-of-a-single-column",
+    "title": "Visualizing Categorical Distributions",
+    "section": "Bar charts are effective for visualizing categorical “distributions” of a single column",
+    "text": "Bar charts are effective for visualizing categorical “distributions” of a single column\n\nalt.Chart(movies_extended).mark_bar().encode(\n    alt.X('count()'),\n    alt.Y('Major Genre', sort='x'))\n\n\n\n\n\n\n\n\nWe have already seen examples of visualizing categorical distributions when we used bar charts to plot the count of categories in previous modules.\nAlthough these plots represent categorical distributions, it’s good to know that they are commonly referred to as just showing the counts of the categories, rather than their “distribution”.\nHere we have made a bar chart to answer the question “Which is the most common genre among movies in this dataset?”.\nWe can see that the dataset consists of mostly comedies and dramas with very few concert/performance films."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_03.html#stacked-bar-charts-can-visualize-counts-for-combinations-of-two-categorical-columns",
+    "href": "modules/module4/slides/module4_03.html#stacked-bar-charts-can-visualize-counts-for-combinations-of-two-categorical-columns",
+    "title": "Visualizing Categorical Distributions",
+    "section": "Stacked bar charts can visualize counts for combinations of two categorical columns",
+    "text": "Stacked bar charts can visualize counts for combinations of two categorical columns\n\nalt.Chart(movies_extended).mark_bar().encode(\n    alt.X('count()'),\n    alt.Y('Major Genre', sort='x'),\n    alt.Color('MPAA Rating'))\n\n\n\n\n\n\n\n\nWhat if we wanted to ask a more complex question that involves visualizing the combinatorial counts of two categorical columns?\nOur data contains the MPAA rating for each movie, which is a classification given by the Motion Picture Association indicating what age groups, a movie is suitable for: - G – General Audiences - PG – Parental Guidance Suggested - PG-13 – Parents Strongly Cautioned - R – Restricted Do you think there are any differences in the proportions of ratings between movie genres?\nFor example, we might already have a hypothesis that there won’t be any horror movies that are appropriate for children.\nTo find out, we could colour the bars according to the MPAA rating as in this slide. However, one aspect of our chart is not very intuitive: the colour legend and the stacked bar segments are not sorted in the same order."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_03.html#reordering-the-bar-segments-aligns-it-with-the-order-in-the-legend",
+    "href": "modules/module4/slides/module4_03.html#reordering-the-bar-segments-aligns-it-with-the-order-in-the-legend",
+    "title": "Visualizing Categorical Distributions",
+    "section": "Reordering the bar segments aligns it with the order in the legend",
+    "text": "Reordering the bar segments aligns it with the order in the legend\n\nalt.Chart(movies_extended).mark_bar().encode(\n    alt.X('count()'),\n    alt.Y('Major Genre', sort='x'),\n    alt.Color('MPAA Rating'),\n    alt.Order('MPAA Rating'))\n\n\n\n\n\n\n\n\nHere we have reordered the bar segments using alt.Order, so that they are in the same order as the legend. We could have opted to reorder the legend instead, but it is more natural to start with the rating for children (G) and proceed towards increasingly more mature ratings.\nIn this chart we can see that most comedies are rated PG-13, most dramas are rated R, that action movies almost only have movies rated either R or PG-13\nBut this doesn’t really answer our question, which was if there are any differences in the proportions of MPAA ratings between movie genres?\nWhile we can roughly see the relative proportions within a single bar, it is quite hard to compare the coloured segments between bars as proportions since the bars are of different lengths.\nIt is also impossible to see the proportions in the genres with fewer movies."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_03.html#rescaling-the-bar-lengths-facilitates-comparing-proportions-between-bars",
+    "href": "modules/module4/slides/module4_03.html#rescaling-the-bar-lengths-facilitates-comparing-proportions-between-bars",
+    "title": "Visualizing Categorical Distributions",
+    "section": "Rescaling the bar lengths facilitates comparing proportions between bars",
+    "text": "Rescaling the bar lengths facilitates comparing proportions between bars\n\nalt.Chart(movies_extended).mark_bar().encode(\n    alt.X('count()', stack='normalize', title='Proportion of movies'),\n    alt.Y('Major Genre', sort='x'),\n    alt.Color('MPAA Rating'),\n    alt.Order('MPAA Rating'))\n\n\n\n\n\n\n\n\nHere we have changed the strategy for how the segments are stacked together by setting stack='normalize', which means to normalize/rescale each bar to span the entire length of the x-axis and label it as a proportion.\nThe plot looks quite unordered, because ‘x’ is not a meaningful way to sort the bars when they are all the same length. Instead, we would like to sort them by the length of one of the coloured segments."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_03.html#sorting-by-the-length-of-one-of-the-coloured-segments-make-the-chart-easier-to-read",
+    "href": "modules/module4/slides/module4_03.html#sorting-by-the-length-of-one-of-the-coloured-segments-make-the-chart-easier-to-read",
+    "title": "Visualizing Categorical Distributions",
+    "section": "Sorting by the length of one of the coloured segments make the chart easier to read",
+    "text": "Sorting by the length of one of the coloured segments make the chart easier to read\n\nsort_order = ['Adventure', 'Musical', 'Comedy', 'Romantic Comedy', 'Action',\n              'Drama', 'Concert/Performance', 'Documentary', 'Western',\n              'Thriller/Suspense', 'Horror', 'Black Comedy'] \nalt.Chart(movies_extended).mark_bar().encode(\n    alt.X('count()', stack='normalize', title='Proportion of movies'),\n    alt.Y('Major Genre', sort=sort_order),\n    alt.Color('MPAA Rating'),\n    alt.Order('MPAA Rating'))\n\n\n\n\n\n\n\n\nThat’s much better! Sorting the chart in an intuitive order has once again shown to be crucial for making our plot easier to interpret.\nIn a normalized stacked bar chart it makes sense to sort by either the first or the last coloured segment. Since not all genres have movies rated 'G', we chose to set the order based on 'R' instead.\nIf you are more interested in one genre than others, you could also choose to sort by that genre.\nNow we can directly compare the length of individual bar segments between the genres. We see that there certainly are differences in the proportions of MPAA ratings between movies in different genres.\nFor the R rating, it is immediately obvious exactly how big these differences are, and we can see that all black comedies are rated R, while almost no adventure movies receive this rating.\nIt is a little bit harder to compare the other rating because the coloured segments do not share the same baseline. We can still see that concerts and performance movies has the highest proportions of movies that are kids-friendly at 50%, while musicals, documentaries, and action movies have around 20% kids-friendly movies.\n(We specified the sort order manually in this slide, because it is rather advanced to extract this order using pandas, but we include an example in the transcript if you are interested in how this could be done:)\nsort_order = (\n    movies_extended\n    .groupby('Major Genre')['MPAA Rating']\n    .value_counts(normalize=True)\n    .xs('R', level='MPAA Rating')\n    .sort_values()\n    .index\n    .to_list())"
+  },
+  {
+    "objectID": "modules/module4/slides/module4_03.html#normalize-stacked-bar-charts-are-effective-at-visualizing-just-a-few-categories",
+    "href": "modules/module4/slides/module4_03.html#normalize-stacked-bar-charts-are-effective-at-visualizing-just-a-few-categories",
+    "title": "Visualizing Categorical Distributions",
+    "section": "Normalize stacked bar charts are effective at visualizing just a few categories",
+    "text": "Normalize stacked bar charts are effective at visualizing just a few categories\n\nsort_order = ['Concert/Performance', 'Musical', 'Documentary', 'Adventure', \n              'Comedy', 'Romantic Comedy', 'Drama',  'Action']\nalt.Chart(movies_extended[movies_extended['MPAA Rating'].isin(['G', 'PG'])]).mark_bar().encode(\n    alt.X('count()', stack='normalize', title='Proportion of movies'),\n    alt.Y('Major Genre', sort=sort_order),\n    alt.Color('MPAA Rating'),\n    alt.Order('MPAA Rating'))\n\n\n\n\n\n\n\n\nAs with all charts, there are shortcomings to normalized stacked bar charts as well. We saw in the last slide that it was a bit harder to compare the coloured segments that did not share a baseline versus the segments at the ends where the baseline is the same.\nThis means that normalized stacked bar charts are ideal when there are only two categories, since both segments will be easy to compare between categories.\nWe can see an example in this slide where we filtered the dataset to contain only movies rated either 'G' or 'PG'. It is easy to make a comparison for both the blue and the orange segments.\nStacked bar charts also work fine for 3-4 categories, but beyond that, they are usually ineffective. Even for 3-4 categories, it is often preferred to show the bars side-by-side instead of stacked."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_03.html#showing-bars-side-by-side-makes-it-easier-to-compare-their-exact-heights-within-a-category",
+    "href": "modules/module4/slides/module4_03.html#showing-bars-side-by-side-makes-it-easier-to-compare-their-exact-heights-within-a-category",
+    "title": "Visualizing Categorical Distributions",
+    "section": "Showing bars side by side makes it easier to compare their exact heights within a category",
+    "text": "Showing bars side by side makes it easier to compare their exact heights within a category\n\n(alt.Chart(movies_extended).mark_bar().encode(\n    alt.X('count()', title=''),\n    alt.Y('MPAA Rating', title=''),\n    alt.Color('MPAA Rating', legend=None))\n .properties(width=100, height=45)\n .facet('Major Genre', columns=4)\n .resolve_scale(x='independent'))\n\n\n\n\n\n\n\n\nIt is not (yet) possible to pass a different value to stack, which would put the bars next to each other. Instead, we could use faceting as in this slide.\nHere, we have also removed some of the axis titles to make the figure more compact and less crowded with text. You will learn more about customizing elements such as titles in the next module.\nBy resolving the x-scale to be independent between the plots, the bar height is not relative to the max in each facet. This makes them easier to compare as proportions both within and between facets while still retaining an indication of the count on the x-axis.\nIf we wanted to compare the absolute counts between facets, we would leave the axis at its default value: “shared”.\nThis type of visualization is effective when we want to accurately compare the heights of bars within a genre. For example, to answer the question: “Which are the most common MPAA ratings for each genre?”."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_03.html#switching-the-faceting-and-y-column-targets-the-plot-towards-a-slightly-different-question",
+    "href": "modules/module4/slides/module4_03.html#switching-the-faceting-and-y-column-targets-the-plot-towards-a-slightly-different-question",
+    "title": "Visualizing Categorical Distributions",
+    "section": "Switching the faceting and y column targets the plot towards a slightly different question",
+    "text": "Switching the faceting and y column targets the plot towards a slightly different question\n\n(alt.Chart(movies_extended).mark_bar().encode(\n    alt.X('count()', title=''),\n    alt.Y('Major Genre', title='', sort='x'),\n    alt.Color('MPAA Rating', legend=None))\n .properties(width=100, height=150)\n .facet('MPAA Rating')\n .resolve_scale(x='independent'))\n\n\n\n\n\n\n\n\nIf we instead wanted to answer the question: “Which are the most common genres for each MPAA Rating?”, we would switch the faceting and y columns.\nHere, we kept the colour column as the MPAA Rating so that it is consistent with the previous figures, and because with this many categories, it would look quite messy if we coloured by the Major Genre instead.\nWe can see that the most common G-rated movies are adventure films and that most PG-13 rated movies are Comedies, Dramas and action movies. It is important to remember that genres have more movies in total, so, we would expect them to show up highly in all the facets. Whether this is desired or not depends on the question we are asking, but it does make sense here."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_03.html#heatmaps-are-effective-for-visualizing-counts-of-two-dimensional-categorical-data",
+    "href": "modules/module4/slides/module4_03.html#heatmaps-are-effective-for-visualizing-counts-of-two-dimensional-categorical-data",
+    "title": "Visualizing Categorical Distributions",
+    "section": "Heatmaps are effective for visualizing counts of two-dimensional categorical data",
+    "text": "Heatmaps are effective for visualizing counts of two-dimensional categorical data\n\nalt.Chart(movies_extended).mark_rect().encode(\n    alt.Color('count()'),\n    alt.X('MPAA Rating'),\n    alt.Y('Major Genre', sort='color'))\n\n\n\n\n\n\n\n\nIf we want to get an overview of the information from both the faceted plots in the previous two slides, we could create a heatmap. In this heatmap the colour represents the combinatorial counts of two categorical columns, such as how many movies are both rated G and in the comedy genre.\nComparing squares vertically in this heatmap is similar to the first faceted plot we made and comparing them horizontally is similar to the faceted visualization in the last slide.\nIn other words, if we want to compare which genre is most common for a certain rating, we compare the colours column-wise in the heatmap. If we instead are interested in the most common rating assigned to a movie we compare the columns row-wise. We can quickly see that most dramas are rated PG-13 or R and most horror movies are rated R.\nSorting on colour/count puts the genres with many observations close together, similar to how we sorted on 'x' and 'y' in previous modules. We could sort the x-axis also, but since it has a natural order to it, we have decided to keep it as is here.\nThis visualization is effective for quickly communicating the main takeaways from the two questions and giving us an overview of the data, but it is harder to tell that exact count for each colour so, if that is of great importance a bar chart is more suitable."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_03.html#using-both-the-colour-and-marker-size-to-indicate-the-count-creates-a-more-effective-visualization",
+    "href": "modules/module4/slides/module4_03.html#using-both-the-colour-and-marker-size-to-indicate-the-count-creates-a-more-effective-visualization",
+    "title": "Visualizing Categorical Distributions",
+    "section": "Using both the colour and marker size to indicate the count creates a more effective visualization",
+    "text": "Using both the colour and marker size to indicate the count creates a more effective visualization\n\nalt.Chart(movies_extended).mark_circle().encode(\n    alt.X('MPAA Rating'),\n    alt.Y('Major Genre', sort='color'),\n    alt.Color('count()'),\n    alt.Size('count()'))\n\n\n\n\n\n\n\n\nOne potential concern with heatmaps is that they rely solely on colour to communicate the value of interest.\nWe cannot perceive small variations in colour as accurately as we can for other visual channels, such as the position or size.\nColour can also be problematic for people with colour vision deficiencies, which is almost 10% of the population, which we will talk more about in a later module.\nTo ameliorate these issues, we can use the same marks as when creating scatter plots, such as mark_circle or mark_square, which allows us to change the size of each mark in addition to its colour.\nThis visualization is highly effective in answering both of the questions we posed initially, and if we wanted to, we could now facet by a third categorical column such as the movie distributor, to interrogate three categorical columns simultaneously."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_07.html#a-statistical-summary-is-useful-to-complement-visualizations",
+    "href": "modules/module4/slides/module4_07.html#a-statistical-summary-is-useful-to-complement-visualizations",
+    "title": "Exploratory Data Analysis on Categorical Data",
+    "section": "A statistical summary is useful to complement visualizations",
+    "text": "A statistical summary is useful to complement visualizations\n\nimport pandas as pd\n\nmovies_extended = pd.read_csv('data/movies-extended-eda.csv')\nmovies_extended.describe(exclude='number')\n\n\n\n\n\n\n\n\nMajor Genre\nMPAA Rating\n\n\n\n\ncount\n996\n994\n\n\nunique\n6\n4\n\n\ntop\nComedy\nPG-13\n\n\nfreq\n286\n413\n\n\n\n\n\n\n\n\nSince we have already seen the dataset rows and info in the last slide deck, we start by describing the data here.\nIn addition to generally receiving more information about our data, categorical counts are helpful when building machine learning classification models. Having an unbalanced data set for the dataframe column we are trying to predict (i.e., uneven numbers of things in the various categories) would mean that we need to compensate for this in our downstream analysis.\nThere are many other examples in statistical analysis, where uneven categories can change how you need to do your analysis. Failing to account for this would lead to less accurate and possibly misleading results.\nAs for the numerical columns above, we start by printing information about the most frequently occurring categorical values in each of the columns. We use exclude to indicate that we want to use all other columns except the numerical ones.\nWe can already see what the most commons values are for each column, but let’s visualize these in a bar chart and cross-reference this table with our plot on the next slide."
+  },
+  {
+    "objectID": "modules/module4/slides/module4_07.html#visualizing-the-counts-of-all-categorical-columns-helps-us-understand-the-data",
+    "href": "modules/module4/slides/module4_07.html#visualizing-the-counts-of-all-categorical-columns-helps-us-understand-the-data",
+    "title": "Exploratory Data Analysis on Categorical Data",
+    "section": "Visualizing the counts of all categorical columns helps us understand the data",
+    "text": "Visualizing the counts of all categorical columns helps us understand the data\n\nimport altair as alt\n\ncategorical_columns = movies_extended.select_dtypes('object').columns.tolist()\n(alt.Chart(movies_extended)\n .mark_bar().encode(\n     alt.X('count()'),\n     alt.Y(alt.repeat(), type='nominal', sort='x'))\n .properties(width=200, height=150)\n .repeat(categorical_columns))\n\n\n\n\n\n\n\n\nTo answer how the counts are distributed between different categorical values, we will create a bar chart for each categorical dataframe column.\nThe syntax here is very similar to when we created the histograms, but we don’t use any bins, and the axis type is now nominal instead of quantitative.\nWe can see that most movies are dramas and comedies, and fall within the R and PG-13 ratings.\nWe could have included the title column here to check that no two movies have the same title. After that, we can safely skip that subplot since it is rather messy with hundreds of titles.\nHowever, since this is EDA and not a plot created for communication, we could also have left it in and carried on"
+  },
+  {
+    "objectID": "modules/module4/slides/module4_07.html#repeat-can-also-be-used-to-explore-the-counts-of-combinations-of-categorical-columns",
+    "href": "modules/module4/slides/module4_07.html#repeat-can-also-be-used-to-explore-the-counts-of-combinations-of-categorical-columns",
+    "title": "Exploratory Data Analysis on Categorical Data",
+    "section": "Repeat can also be used to explore the counts of combinations of categorical columns",
+    "text": "Repeat can also be used to explore the counts of combinations of categorical columns\n\n(alt.Chart(movies_extended).mark_circle().encode(\n    alt.X(alt.repeat('column'), type='nominal', sort='-size', title=None),\n    alt.Y(alt.repeat('row'), type='nominal', sort='size', title=None),\n    alt.Color('count()', title=None),\n    alt.Size('count()', title=None))\n .repeat(row=categorical_columns, column=categorical_columns)\n .resolve_scale(color='independent', size='independent'))\n\n\n\n\n\n\n\n\nThe same repeat principles can be used to count combinations of categoricals, helping us get more resolution into where the data lies.\nThis plot should be read similarly to the pairplot we made earlier, so we only look at the one plot below the diagonal. In this case, it means we could have just made a single plot, but if you have more than two categories to repeat over, there would be additional plots under the diagonal.\nIn this plot, we can see that comedies rated PG-13 and dramas rated R are the most common combinations in our data.\nIn fact, there are so many more of these than some of the others that we should be careful if we proceed to perform any statistical tests on this data as some analysis methods are not robust against samples sizes that are this unequal and we need to adapt our analysis strategy accordingly"
+  },
+  {
+    "objectID": "modules/module4/slides/module4_07.html#altairs-grammar-allows-us-to-repeat-facetted-charts",
+    "href": "modules/module4/slides/module4_07.html#altairs-grammar-allows-us-to-repeat-facetted-charts",
+    "title": "Exploratory Data Analysis on Categorical Data",
+    "section": "Altair’s grammar allows us to repeat facetted charts",
+    "text": "Altair’s grammar allows us to repeat facetted charts\n\nmovies_extended['Top Rated'] = movies_extended['IMDB Rating'] &gt; 8\n(alt.Chart(movies_extended[movies_extended['MPAA Rating'].isin([\"G\", \"R\"])])\n .mark_boxplot().encode(\n     alt.X('Running Time min', type='quantitative'),\n     alt.Y(alt.repeat('row'), type='nominal'))\n .facet(column='MPAA Rating')\n .repeat(row=['Major Genre', 'Top Rated']))\n\n\n\n\n\n\n\n\nThanks to the flexible grammar of graphics in Altair, we are able to repeat complex charts, such as those already containing facets.\nIn this case, we are interested in comparing the counts of the Major Genres and Create Types within each of the G and R MPAA RAtings.\nTo achieve this, we first facet the chart and then repeat it, combing the principles we have learned so far in the course.\nNow we can answer questions such as which the most popular genres are within each of the ratings.\nAs we might have expected, the top genres differ depending on the MPAA Rating, and there are many genres that are not even present for the family-rated G movies."
+  }
+]
