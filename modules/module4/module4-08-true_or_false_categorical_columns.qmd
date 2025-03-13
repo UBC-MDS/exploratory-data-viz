@@ -1,0 +1,185 @@
+---
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ../data
+---  
+
+<script src='../../src/quiz.js'></script>
+
+# 4.1. Exercises
+
+## Repeating Categorical Columns Quick Questions!
+
+<div id='mcq1'></div> 
+<script>
+    generateQuiz(
+        'mcq1',
+        'Question 1: True or False',
+        'Repeating charts is the same as facetting them.',
+        {
+        'True': 'Not quite. We can facet on a categorical dataframe column and repeat a plot mapping many categorical columns making them 2 distinct actions.',
+        'False': ''
+        },
+        'False',
+    );
+</script>
+
+<div id='mcq2'></div> 
+<script>
+    generateQuiz(
+        'mcq2',
+        'Question 2',
+        'When we want to repeat categorical column values, what value can we use in the "type" argument?',
+        {
+            '"qualitative"': 'I can understand the confusion since quantitative was used for numeric columns but that is because Altair recognizes them with a tag of Q for quantitative.',
+            '"object"': 'This is a pandas dtype and not a recognizable Altair type.',
+            '"nominal"': '',
+            '"categorical"': 'Altair doesn’t recognize this as a type.'
+        },
+        '"nominal"'
+    );
+</script>
+
+## Plotting Repeated Categorical Columns with Penguins
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+Are you getting bored of this [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) data yet? Don't worry, we will spice it up soon, but let finish off this module with it. 
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+
+penguins_df = pd.read_csv('data/penguins.csv')
+penguins_df.info()
+```
+
+
+Let's count combinations of the different categoricals, so we can get a bit of a better idea about where our data lies. 
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished.
+
+- Use the data source `penguins_df` to make a circle plot for each pair of categorical columns.
+- Assign the plot to an object named `categorical_plots`. 
+- Map and repeat every categorical column on both the x and y-axis.
+- Map the counts to both a `Color` and `Size` channel and indicate that no title should be assigned.
+- Make sure to give the size and colour channels independent scales. 
+
+
+```{pyodide}
+#| setup: true
+#| exercise: repeated_categorical
+import altair as alt
+import pandas as pd
+from utils import assert_chart_equal
+
+penguins_df = pd.read_csv('data/penguins.csv')
+```
+
+```{pyodide}
+#| exercise: repeated_categorical
+# Obtain all the labels of the columns with dtype object in a list
+# Name the list cat_cols
+____ = ____
+
+# Next create histogram pairplots for every categorical column
+categorical_plots = alt.Chart(____).____().encode(
+     alt.X(____, type=____),
+     alt.Y(____, type=____),
+     alt.____(____, title=None),
+     alt.____(____, title=None)
+     ).____(____=____, ____=____
+     ).resolve_scale(____='independent', ____='independent')
+    
+____
+```
+
+```{pyodide}
+#| exercise: repeated_categorical
+#| check: true
+
+solution = alt.Chart(penguins_df).mark_circle().encode(
+     alt.X(alt.repeat('column'), type='nominal'),
+     alt.Y(alt.repeat('row'), type='nominal'),
+     alt.Color('count()', title=None),
+     alt.Size('count()', title=None)
+     ).repeat(row=cat_cols, column=cat_cols
+     ).resolve_scale(color='independent', size='independent')
+
+assert_chart_equal(solution, result)
+```
+
+:::: { .hint exercise="repeated_categorical"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you using `.mark_circle()`?
+- Are you setting `alt.X(alt.repeat('column'), type='nominal')`?
+- Are you setting `alt.Y('count()')`?
+- Are you chaining `repeat(row=cat_cols, column=cat_cols)` after `.encode()`?
+- Are you setting `color='independent'` and `size='independent'` in `.resolve_scale()`?
+
+:::
+::::
+
+:::: { .solution exercise="repeated_categorical"}
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+cat_cols = penguins_df.select_dtypes('object').columns.tolist()
+
+categorical_plots = alt.Chart(penguins_df).mark_circle().encode(
+     alt.X(alt.repeat('column'), type='nominal'),
+     alt.Y(alt.repeat('row'), type='nominal'),
+     alt.Color('count()', title=None),
+     alt.Size('count()', title=None)
+     ).repeat(row=cat_cols, column=cat_cols
+     ).resolve_scale(color='independent', size='independent')
+    
+categorical_plots
+```
+
+:::
+::::
+
+<div id='mcq3'></div> 
+<script>
+    generateQuiz(
+        'mcq3',
+        'Question 1',
+        'Are there approximately the same number of female and male penguins for each penguin species?',
+        {
+        'Yes': 'If you look at the circle size and colours of each species in the sex vs species plot (top right), they are approximately equal.',
+        'No': 'Are you comparing the circle size and colours of each species in the sex vs species plot (top right)?'
+        },
+        'Yes',
+    );
+</script>
+
+<div id='mcq4'></div> 
+<script>
+    generateQuiz(
+        'mcq4',
+        'Question 2',
+        'What species of penguins and from what island are most prominent in our data?',
+        {
+            'The Adelie species on Biscoe island are most prominent penguin in the data.': 'Although the Adelie species are present on Biscoe island, they are not the most occurring in our data.',
+            'The Gentoo species on Biscoe island are most prominent penguin in the data.': '',
+            'The Chinstrap species on Dream island are most prominent penguin in the data.': 'This is the second most occurring penguin in the data but not the first.',
+            'The Gentoo species on Dream island are most prominent penguin in the data.': 'There are no records of Gentoo penguins on Dream island in the data.'
+        },
+        'The Gentoo species on Biscoe island are most prominent penguin in the data.'
+    );
+</script>

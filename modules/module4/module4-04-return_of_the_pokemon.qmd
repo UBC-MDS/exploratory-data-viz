@@ -1,0 +1,147 @@
+---
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ../data
+---  
+
+<script src='../../src/quiz.js'></script> 
+
+# 2.1 Exercises
+
+## Return of the Pokemon
+
+**Instructions:**
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+We are going to explore the different types of pokemon. You may remember this dataset from the previous Programming in Python for Data Science course. 
+This time we are going to take a look at the different generations and pokemon types and see which ones are most prominent. 
+
+For those less familiar with Pokemon, a Pokemon's generation is determined by the ara it was introduced. For example, the first generation spans Pokemon characters that were released in video games from 1996-1999. The 7th generation are Pokemon introduced from games released between 2016-2019.
+
+According to [Wikipedia](https://en.wikipedia.org/wiki/Gameplay_of_Pok%C3%A9mon#Pok%C3%A9mon_types), A Pokémon's type is *"an elemental attribute determining the strengths and weaknesses of each Pokémon and its moves. Pokémon take double damage from attacking moves of types they are weak to and half damage from moves they resist. These type matchups offset one another in rock–paper–scissors-style relationships."*
+
+```{pyodide}
+import pandas as pd
+import altair as alt
+
+pokemon_df = pd.read_csv('data/pokemon.csv')
+pokemon_df.head()
+```
+
+Instead of a heatmap, let's make a plot that produces circles whose colour and size change based on the count of the Pokemon for each generation and type. 
+
+**Tasks:**
+
+- Create a heatmap and assign it to an object named `pokemon_cicleplot`. 
+- Map `gen` on the x-axis and make sure to specify that it is an ordinal ('O') value.  
+- Map  `type` on the y-axis.
+- Assign a `Size` and `Colour` channel to the `count()` of the pokemon. 
+- Give it an appropriate title and axis labels. 
+
+```{pyodide}
+#| setup: true
+#| exercise: pokemon
+import pandas as pd
+import altair as alt
+from utils import assert_chart_equal
+
+pokemon_df = pd.read_csv('data/pokemon.csv')
+```
+
+
+```{pyodide}
+#| exercise: pokemon
+pokemon_circleplot = alt.____(____).____().____(
+    alt.X(____, ____),
+    alt.Y(____, ____),
+    alt.____(____, title='Number of Pokemon'),
+    alt.____(____, title='Number of Pokemon')
+    ).____(title='Number of Pokemon types per generation')
+    
+____
+```
+
+```{pyodide}
+#| exercise: pokemon
+#| check: true
+
+solution = alt.Chart(pokemon_df).mark_circle().encode(
+    alt.X('gen:O', title='Generation'),
+    alt.Y('type', title='Type'),
+    alt.Color('count()', title='Number of Pokemon'),
+    alt.Size('count()', title='Number of Pokemon')
+    ).properties(title='Number of Pokemon types per generation')
+
+assert_chart_equal(solution, result)
+```
+
+:::: { .hint exercise="pokemon"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you using `.mark_cicle()`?
+- Are you setting `alt.X('gen:O')`?
+- Are you setting `alt.Y('type')`?
+- Are you using a color channel and setting it to `counts()`?
+- Are you setting a title using `.properties(title= 'title')`?
+- Are you setting `width=250` and `height=200` in `.properties()`?
+
+:::
+::::
+
+:::: { .solution exercise="pokemon" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+pokemon_circleplot = alt.Chart(pokemon_df).mark_circle().encode(
+    alt.X('gen:O', title='Generation'),
+    alt.Y('type', title='Type'),
+    alt.Color('count()', title='Number of Pokemon'),
+    alt.Size('count()', title='Number of Pokemon')
+    ).properties(title='Number of Pokemon types per generation')
+    
+pokemon_circleplot
+```
+
+:::
+::::
+
+<div id='mcq1'></div> 
+<script>
+    generateQuiz(
+        'mcq1', 
+        'Question 1',  
+        'Which generation and pokemon type is most occurring in the dataset?',  
+        { 
+        'Water Pokemon from Generation 1': '',
+        'Water Pokemon from Generation 3': 'Right type but wrong generation!',
+        'Normal Pokemon from Generation 1': 'Take a look at the size and colour of the circles.',
+        'Bug Pokemon from Generation 5': 'Take a look at the size and colour of the circles.'
+        },
+        'Water Pokemon from Generation 1', 
+    );
+</script>
+
+<div id='mcq2'></div> 
+<script>
+    generateQuiz(
+        'mcq2', 
+        'Question 2',  
+        'Which generation has no dragon Pokemon?',  
+        { 
+        'Generation 1': 'This generation has no steel Pokemon.',
+        'Generation 2': '',
+        'Generation 7': 'This generation has no ice Pokemon.',
+        'Generation 6': 'This generation has no ground Pokemon.'
+        },
+        'Generation 2', 
+    );
+</script>

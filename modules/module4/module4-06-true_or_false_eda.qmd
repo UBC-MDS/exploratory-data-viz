@@ -1,0 +1,194 @@
+---
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ../data
+---  
+
+<script src='../../src/quiz.js'></script>  <!-- Only needed once per page -->
+
+# 3.1. Exercises
+
+## True or False: Exploratory Data Analysis (EDA)
+
+<div id='mcq1'></div> 
+<script>
+    generateQuiz(
+        'mcq1', 
+        'True or False',  
+        'We start EDA by displaying a few rows from the data.',  
+        { 
+        'True': 'Let’s see what we are dealing with!',
+        'False': 'It’s important to see what our data looks like!'
+        },
+        'True', 
+    );
+</script>
+
+<div id='mcq2'></div> 
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'EDA visualizations are less concerned about plotting details such as axis labels and titles.',
+        {
+        'True': '',
+        'False': 'Are you sure? Fun Fact: Co-creator of this course, Hayley Boyce once lost marks for having plots that were “too pretty” in her EDA.'
+        },
+        'True',
+    );
+</script>
+
+## Exploring EDA
+
+<div id='mcq3'></div> 
+<script>
+    generateQuiz(
+        'mcq3', 
+        'Question 1',  
+        'Which of the following is not part of EDA?',  
+        { 
+        'Obtaining statistics of the data.': 'Statistics can help complement and paint a supportive picture of your data.',
+        'Understanding the missing values from your data.': 'It’s important to have an idea of what values are missing from your data and ideally be able to explain why.',
+        'Visualizing the data': 'Visualizing the data is a crucial part of communicating information about the data.',
+        'Creating a predictive model from the data': 'This is not a formal part of exploratory data analysis.'
+        },
+        'Creating a predictive model from the data', 
+    );
+</script>
+
+<div id='mcq4'></div> 
+<script>
+    generateQuiz(
+        'mcq4', 
+        'Question 2',  
+        'Which code will help us create multiple plots, that map every numeric column to a specified axis?',  
+        { 
+        '.repeat()': 'You are half right, we specifically said every *numeric* column though.',
+        '.repeated() and the argument type="numeric"': 'I think your argument should be called something else.',
+        '.repeat() and the argument type="quantitative"': 'Visualizing the data is a crucial part of communicating information about the data.',
+        'The argument map="numeric"': 'You are extremely close, but no past tense is needed.'
+        },
+        '.repeat() and the argument type="quantitative"', 
+    );
+</script>
+
+## Plotting Numeric Columns with Penguins
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+It's been a hot second since we used the [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) data and seen it's one second too long and we missed it, we are welcoming it back. 
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+
+penguins_df = pd.read_csv('data/penguins.csv')
+penguins_df.info()
+```
+
+
+Let's plot all the distributions of the numeric columns from the dataset.
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished.
+
+- Use the data source `penguins_df` to make a histogram for each of the numeric columns.
+- Assign the plot to an object named `numeric_histograms`. 
+- Plot the counts of each column on the y-axis and the values of each numeric column of the x-axis.
+- Make sure to set the `maxbins` argument to something appropriate (30 or 40). 
+- Set width to 150 and height to 150 and display the plots in 2 columns and 2 rows.
+
+
+```{pyodide}
+#| setup: true
+#| exercise: penguin_histogram
+import altair as alt
+import pandas as pd
+from utils import assert_chart_equal
+
+penguins_df = pd.read_csv('data/penguins.csv')
+```
+
+```{pyodide}
+#| exercise: penguin_histogram
+# Obtain all the labels of the numeric columns in a list
+# Name the list numeric_cols
+numeric_cols = ____
+
+# Next repeat a histogram plot for every numeric column on the x axis
+numeric_histograms = alt.Chart(____).____().____(
+     alt.X(____),
+     alt.Y(____),
+     ).properties(____
+     ).____(____)
+         
+____
+```
+
+```{pyodide}
+#| exercise: penguin_histogram
+#| check: true
+
+solution = alt.Chart(penguins_df).mark_bar().encode(
+     alt.X(alt.repeat(), type='quantitative', bin=alt.Bin(maxbins=30)),
+     alt.Y('count()'),
+     ).properties(width=150, height=150
+     ).repeat(numeric_cols, columns=2)
+
+assert_chart_equal(solution, result)
+```
+
+:::: { .hint exercise="penguin_histogram"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you setting `alt.X(alt.repeat(), type='quantitative', bin=alt.Bin(maxbins=30)`?
+- Are you setting `alt.Y('count()')`?
+- Are you setting the height and width in `properties()`?
+- Are you using `.repeat()` and setting `numeric_cols` as the first argument and `columns=2` or `rows=2`?
+
+:::
+::::
+
+:::: { .solution exercise="penguin_histogram" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+numeric_cols = penguins_df.select_dtypes('number').columns.tolist()
+
+numeric_histograms = alt.Chart(penguins_df).mark_bar().encode(
+     alt.X(alt.repeat(), type='quantitative', bin=alt.Bin(maxbins=30)),
+     alt.Y('count()'),
+     ).properties(width=150, height=150
+     ).repeat(numeric_cols, columns=2)
+    
+numeric_histograms
+```
+
+:::
+::::
+
+<div id='mcq5'></div> 
+<script>
+    generateQuiz(
+    'mcq5', 
+    'Question',  
+    'Do any of the distributions look bimodal (2 bell shapes)?',  
+    { 
+        'Yes': 'The 2 bumps suggest bimodality. The culmen_length_mm and flipper_length_mm distributions both appear to be bimodal.',
+        'No': 'Do you see 2 “bumps” in any of the plots? Maybe look at the culmen_length_mm and flipper_length_mm distributions.'
+    },
+    'Yes'
+);
+</script>
