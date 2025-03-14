@@ -1,0 +1,191 @@
+---
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ../data
+---
+
+<script src='../../src/quiz.js'></script>  
+
+# 4.1. Exercises
+
+## True or False: Facets
+
+<div id='mcq1'></div> 
+<script>
+    generateQuiz(
+        'mcq1', 
+        'True or False',  
+        'If you faceting and assign a colour channel to the same column, you will obtain subplots all in different colours.',  
+        { 
+        'True': '',
+        'False': 'Setting a colour channel to the same column as the facet will change each of the faceted plots to different colours.'
+        },
+        'True',  
+    );
+</script>
+
+<div id='mcq2'></div> 
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'Faceting works best with a numeric column.',
+        {
+        'True': 'How many plots will a continuous feature produce?',
+        'False': 'Faceting works when the column you wish to facet is categorical.' 
+        },
+        'False',
+    );
+</script>
+
+## Facing Some Faceting Questions
+
+<div id='mcq3'></div> 
+<script>
+    generateQuiz(
+        'mcq3', 
+        'Question 1',  
+        'When we facet a plot by a specific column, by default are the subplots displayed vertically or horizontally?',  
+        { 
+        'Horizontally': '',
+        'Vertically': 'Just like a list, the plots are concatenated by default horizontally.'
+        },
+        'Horizontally',  
+    );
+</script>
+
+<div id='mcq4'></div> 
+<script>
+    generateQuiz(
+        'mcq4', 
+        'Question 2',  
+        'If we wanted to facet the plot below by the column 𝘀𝘂𝗯𝗷𝗲𝗰𝘁 and the number of plots per row at 4, what would be needed instead of "???" in the code below?',  
+        { 
+        '"subject", row=3': '𝗿𝗼𝘄 needs a column name as an argument value',
+        '"subject", row=4': 'This would produce 4 rows.',
+        '"subject", columns=4': '',
+        '"subject", column=4': 'The 𝗰𝗼𝗹𝘂𝗺𝗻 argument needs a column label as an input.'
+        },
+        '"subject", columns=4',  
+    );
+</script>
+
+```python
+alt.Chart(data_source).mark_bar().encode(
+    x=alt.X('students', bin=True),
+    y='count()'
+).properties(width=300, height=150).facet(???)
+
+
+```
+
+## Faceting with Penguins
+
+**Instructions:**
+Be patient when running a coding exercise for the first time, it can take a few minutes.
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+Ok, let's facet our penguin dataset now.
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+
+penguins_df = pd.read_csv('data/penguins.csv')
+penguins_df.head()
+```
+
+
+Tasks: 
+
+- Using bars, show the distribution of the `body_mass_g` values from the `penguins_df` dataset.
+- Make sure to give it a title and set the dimensions to a height of 100 and a width of 150.
+- Facet your plots by `species` for the columns and by `island` for the rows.
+- Save your plot in an object named `penguin_facet`.
+
+```{pyodide}
+#| setup: true
+#| exercise: faceting_with_penguins
+
+import altair as alt
+import pandas as pd
+from utils import assert_chart_equal 
+
+penguins_df = pd.read_csv('data/penguins.csv')
+```
+
+```{pyodide}
+#| exercise: faceting_with_penguins
+penguin_facet = alt.Chart(____).____().encode(
+    x=____('body_mass_g', ____),
+    y=____,
+    ).properties(____='Penguin mass', ____, ____
+    ).____(____=____, ____='island')
+
+penguin_facet
+```
+
+```{pyodide}
+#| exercise: faceting_with_penguins
+#| check: true
+
+solution = alt.Chart(penguins_df).mark_bar().encode(
+    x=alt.X('body_mass_g', bin=alt.Bin(maxbins=15)),
+    y='count()',
+    ).properties(title='Penguin mass', width=150, height=100
+    ).facet(column='species', row='island')
+
+assert_chart_equal(solution, result)
+```
+
+:::: { .hint exercise="faceting_with_penguins"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you using `.mark_bar()`?
+- Are you assigning the plot to an object named`penguin_facet`?
+- Are you specifying `alt.X('species', bin=True)` on the x-axis?
+- Are you specifying `count()` on the y-axis?
+- Are you giving the plot a title and proper dimensions using `.properties()`?
+
+:::
+::::
+
+:::: { .solution exercise="faceting_with_penguins" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+penguin_facet = alt.Chart(penguins_df).mark_bar().encode(
+    x=alt.X('body_mass_g', bin=alt.Bin(maxbins=15)),
+    y='count()',
+    ).properties(title='Penguin mass', width=150, height=100
+    ).facet(column='species', row='island')
+
+penguin_facet
+```
+
+:::
+::::
+
+<div id='mcq5'></div> 
+<script>
+    generateQuiz(
+        'mcq5', 
+        'Question',  
+        'Based on how the plots are generated when facetting, which species of penguin are on the “Dream” island?',  
+        { 
+        'Adelie, Chinstrap and Gentoo': 'Are all three plots generating distributions in the “Dream” island row?',
+        'Adelie and Chinstrap': '',
+        'Adelie and Gentoo': 'These are the 2 species present on Biscoe island.',
+        'Only Adelie': 'This is the only species on Torgersen Island.'
+        },
+        'Adelie and Chinstrap',  
+    );
+</script>
