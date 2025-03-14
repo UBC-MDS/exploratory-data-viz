@@ -1,0 +1,317 @@
+---
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ../data
+---
+
+<script src='../../src/quiz.js'></script>  
+
+# 2.1. Exercises
+
+## True or False: Distributions
+
+<div id='mcq1'></div>
+<script>
+    generateQuiz(
+        'mcq1', 
+        'True or False',  
+        'Using the same data, a histogram´s shape can change depending on the bin size.',  
+        { 
+        'True': '',
+        'False': 'If we have more bins for a histogram, the shape may differ from a histogram using fewer bins.'
+        },
+        'True', 
+    );
+</script>
+
+<div id='mcq2'></div> 
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'Using density plots can be misleading for small data sets.',
+        {
+        'True': ' Since we don’t show the number of observations in the plot, the plots can appear smooth like plots that have many observations which is not the case.',
+        'False': 'What about plots with small amounts of data?'
+        },
+        'True',
+    );
+</script>
+
+
+## Mutliple Choice Questions on Single Column Plots
+
+<div id='mcq3'></div> 
+<script>
+    generateQuiz(
+        'mcq3',
+        'Question 1',
+        'Another name for a density plot is a ____?',
+        {
+        'Count Estimation Plot (CEP)': 'Take a quick look at slide 3 for more information on this.',
+        'Kernel Density Estimate (KDE)': '',
+        'Kernel Smoothing Plot (KSP)': 'Take a quick look at slide 3 for more information on this.',
+        'Count Smoothing Estimate (CSE)': 'Take a quick look at slide 3 for more information on this.'
+        },
+        'Kernel Density Estimate (KDE)',
+    );
+</script>
+
+<div id='mcq4'></div> 
+<script>
+    generateQuiz(
+        'mcq4',
+        'Question 2',
+        'Unlike other plots using Altair, making a density plot requires 2 steps. The first step involves generating a new column of samples of the estimated densities. Which of the following code is needed to calculate the estimated densities?',
+        {
+        '.transform_density()': '',
+        '.estimate_density()': 'You are right that we use a method for the first step but this is not the right named method.',
+        '.transform_density=True': 'Using an argument is not the right type of coding needed.',
+        '.estimate_density=True': 'Using an argument is not the right type of coding needed.'
+        },
+        '.transform_density()',
+    );
+</script>
+
+## Application: Make Your Own Density Plot
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+Bringing back our trusty [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) data, we are going to try to make a density plot that will provide insights into the distribution of penguins mass among the different islands.
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+
+penguins_df = pd.read_csv('data/penguins.csv')
+penguins_df.info()
+```
+
+Create a density plot for the `body_mass_g` column for penguins located on different islands.
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished.
+
+- Use the data source `penguins_df` to make a plot assigned to an object named `mass_density_plot`.
+- Calculate the KDE of the `body_mass_g` column and make sure to split it up by the categorical column `island`. When you create your new values for the calculation make sure to name them `density`.
+- Set the step size to 100.
+- Give the area plot an appropriate opacity.
+- Map `body_mass_g` and `density` to the x and y-axis and make sure to specify that `density` consists of quantitative values. 
+- Map the island to the colour (colour) channel. 
+- Make sure to give your plot a title.
+
+```{pyodide}
+#| setup: true
+#| exercise: 
+#|  - density_plot
+#|  - density_plot_facet_species
+
+import altair as alt
+import pandas as pd
+from utils import assert_chart_equal 
+penguins_df = pd.read_csv('data/penguins.csv')
+```
+
+```{pyodide}
+#| exercise: density_plot
+mass_density_plot = alt.Chart(___).transform_density(
+    ___,
+    groupby=___,
+    ___=['body_mass_g', 'density'],
+    ___=100
+    ).mark_area(___).encode(
+        alt.X(___),
+        ___,
+        alt.Color(___)).properties(___)
+
+mass_density_plot
+```
+
+```{pyodide}
+#| exercise: density_plot
+#| check: true
+
+solution = alt.Chart(penguins_df).transform_density(
+     'body_mass_g',
+     groupby=['island'],
+     as_=['body_mass_g', 'density'],
+     steps=100
+     ).mark_area(opacity=0.5).encode(
+          alt.X('body_mass_g', title='Mass (grams)'),
+          alt.Y('density:Q', title='Density'),
+          alt.Color('island', title='Antarctic Island')).properties(
+               title="Penguin mass among species")
+
+assert_chart_equal(solution, result)
+```
+
+:::: { .hint exercise="density_plot"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you setting `groupby=['island']` and `as_=['body_mass_g', 'density']` in `transform_density()`?
+- Are you setting `steps=100`?
+- Are you setting `opacity=0.5` in `mark_bar()`?
+- Are you specifying `x='body_mass_g'` or `alt.X('body_mass_g')`?
+- Are you specifying `y='density:Q'` or `alt.Y('density:Q')`?
+- Are you specifying `color='island'` or `alt.Color('island')`?
+- Are you setting a title in `properties()`?
+
+:::
+::::
+
+:::: { .solution exercise="density_plot" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+mass_density_plot = alt.Chart(penguins_df).transform_density(
+     'body_mass_g',
+     groupby=['island'],
+     as_=['body_mass_g', 'density'],
+     steps=100
+     ).mark_area(opacity=0.5).encode(
+          alt.X('body_mass_g', title='Mass (grams)'),
+          alt.Y('density:Q', title='Density'),
+          alt.Color('island', title='Antarctic Island')).properties(
+               title="Penguin mass among species")
+
+mass_density_plot
+```
+
+:::
+::::
+
+<div id='mcq5'></div> 
+<script>
+    generateQuiz(
+        'mcq5',
+        'Question',
+        'Which island tends to have penguins with higher body masses?',
+        {
+        'Biscoe': 'This island appears to have penguins with a heavier mass.',
+        'Dream': 'This island doesn’t have any penguins with a body mass greater than 5000 g.',
+        'Torgersen': 'This island doesn’t have any penguins with a body mass greater than 5000 g.',
+        },
+        'Biscoe',
+    );
+</script>
+
+Now let's facet based on species and see if that gives us some more insight. 
+
+
+Create a density plot for the `body_mass_g` column for penguins located on different islands but this time facet for species 
+
+**Tasks:** 
+
+- Use the data source `penguins_df` to make the plot and assign it to an object named `mass_faceted_plot`.
+- Calculate the KDE of the `body_mass_g` column and make sure to split it up by the categorical column `island` and penguin `species`. When you create your new values for the calculation make sure to name them `density`. 
+- Set the step size to 100. 
+- Give the area plot an appropriate opacity.
+- Map `body_mass_g` and `density` to the x and y-axis and make sure to specify that `density` consists of quantitative values.
+- Map the island to the colour (colour) channel. 
+- Make sure to give your plot a title and set the width of the plot to 200 and height to 100.
+- Facet the plot by the penguin `species` and display them all in a single column.
+
+
+```{pyodide}
+#| exercise: density_plot_facet_species
+mass_faceted_plot = alt.Chart(___).___(
+     'body_mass_g',
+     groupby=___,
+     ___=['body_mass_g', 'density'],
+     steps=___
+     ).___(___=0.5).encode(
+         alt.X(___),
+         ___('density:Q', title='Density'),
+         alt.Color(___)).___(
+              ___='body mass distribution by species and island',
+              ___).___(___, ___)
+
+mass_faceted_plot
+```
+
+```{pyodide}
+#| exercise: density_plot_facet_species
+#| check: true
+
+solution = alt.Chart(penguins_df).transform_density(
+     'body_mass_g',
+     groupby=['island','species'],
+     as_=['body_mass_g', 'density'],
+     steps=100
+     ).mark_area(opacity=0.5).encode(
+         alt.X('body_mass_g', title='Mass (grams)'),
+         alt.Y('density:Q', title='Density'),
+         alt.Color('island', title='Island')).properties(
+              title='body mass distribution by species and island',
+              width=200, height=100).facet('species', columns=1)
+
+assert_chart_equal(solution, result)
+```
+
+:::: { .hint exercise="density_plot_facet_species"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you setting `groupby=['island','species']` and `as_=['body_mass_g', 'density']` in `transform_density()`?
+- Are you setting `steps=100`?
+- Are you setting `opacity=0.5` in `mark_bar()`?
+- Are you specifying `x='body_mass_g'` or `alt.X('body_mass_g')`?
+- Are you specifying `y='density:Q'` or `alt.Y('density:Q')`?
+- Are you specifying `color='island'` or `alt.Color('island')`?
+- Are you setting a title, height and width in `properties()`?
+- Are you faceting with `.facet('species', columns=1)`?
+
+:::
+::::
+
+:::: { .solution exercise="density_plot_facet_species" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+mass_faceted_plot = alt.Chart(penguins_df).transform_density(
+     'body_mass_g',
+     groupby=['island','species'],
+     as_=['body_mass_g', 'density'],
+     steps=100
+     ).mark_area(opacity=0.5).encode(
+         alt.X('body_mass_g', title='Mass (grams)'),
+         alt.Y('density:Q', title='Density'),
+         alt.Color('island', title='Island')).properties(
+              title='body mass distribution by species and island',
+              width=200, height=100).facet('species', columns=1)
+
+mass_faceted_plot
+```
+
+:::
+::::
+
+<div id='mcq6'></div> 
+<script>
+    generateQuiz(
+        'mcq6',
+        'Question',
+        'Based on the plot we just made, what did we learn?',
+        {
+        'The Chinstrap species of penguin is available on Dream and Torgersen island.': 'The Chinstrap penguin species is only on Dream island.',
+        'The Gentoo penguin species appears to have higher body mass compared to other species.': 'This species only inhabits Gentoo island and appears to have a heavier body mass distribution.',
+        'Dream island tend to have penguins with a higher body mass compared to the other islands.': 'Dream island inhabits penguins of only the Chinstrap species and this body mass distribution appears similar to the Adelie species.',
+        },
+        'The Gentoo penguin species appears to have higher body mass compared to other species.',
+    );
+</script>
