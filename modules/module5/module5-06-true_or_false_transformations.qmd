@@ -1,0 +1,360 @@
+---
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ./../../static/
+  - ../data
+---
+
+<script src='../../src/quiz.js'></script>  <!-- Only needed once per page -->
+
+# 3.1. Exercises
+
+## True or False: Transformations
+
+<div id='mcq1'></div> 
+<script>
+    generateQuiz(
+        'mcq1',
+        'True or False',
+        'Filtering and clipping is appropriate to see a variation in certain areas of your data.',
+        {
+        'True': 'You’ve been paying attention here! It’s important to know that we should be careful when we do this, as sometimes we risk inflating differences among categories or measures.',
+        'False': 'Although we should be careful when we do this, as sometimes we risk inflating differences among categories or measures but sometimes we need to see values within a certain range to identify any variable or relationships within the data.'
+        },
+        'True',
+    );
+</script>
+
+<div id='mcq2'></div> 
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'Large outliers in the data can mask trends within the data.',
+        {
+        'True': '',
+        'False': 'Sometimes a large value can affect the scale on an axis and make it difficult to identify and relationships or trends occurring in the data.'
+        },
+        'True',
+    );
+</script>
+
+<div id='mcq3'></div> 
+<script>
+    generateQuiz(
+        'mcq3',
+        'True or False',
+        'Log transforming an axis is a good option to use if there is a large range of values to displayed that incorporates zero and you don’t want to compress the smaller values into the bottom of the graph.',
+        {
+        'True': 'The first part is true, however, log transforming does not work with values of 0 which would result in a value of -∞.',
+        'False': ''
+        },
+        'False',
+    );
+</script>
+
+## Transformations and Presentations
+
+<div id='mcq4'></div> 
+<script>
+    generateQuiz(
+        'mcq4',
+        'Question 1',
+        'Which of the following arguments will exclude points from a plot?',
+        {
+        '<code>clip</code>': '',
+        '<code>scale</code>': 'We can use <code>.Scale()</code> and the <code>domain</code> argument to specify the domain of the plot axes but that does not stop the data points from appearing.',
+        '<code>domain</code>': 'Although this specifies the domain for the plot, the points will still be displayed if you do not clip the plot.',
+        '<code>filter</code>': 'This is not an argument with Altair.'
+        },
+        '<code>clip</code>',
+    );
+</script>
+
+<div id='mcq5'></div> 
+<script>
+    generateQuiz(
+        'mcq5',
+        'Question 2',
+        'How do you add interactivity to a plot?',
+        {
+        '<code>interactive=True</code>': 'You would need something more than an argument. Perhaps a method?',
+        '<code>.interactivity()</code>': 'Close but not quite! You are on the right track with a method.',
+        '<code>.interactive()</code>': '',
+        '<code>.active()</code>': 'You are right that it’s a method but not the correct one.'
+        },
+        '<code>.interactive()</code>',
+    );
+</script>
+
+## Using Transformations in Action!
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+This variation of the [Phillipino dataset originally from Kaggle](https://www.kaggle.com/grosvenpaul/family-income-and-expenditure) shows the income and expenditure (in PHP) of residents in the Philippines.
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+
+income_df = pd.read_csv('data/income_expenditure.csv')
+income_df.head()
+```
+
+First, let's just plot the income vs education expenditure with no transformations. Let's make sure we are formatting the axes correctly and determine if we can make any conclusions regarding the relationship between the two variables.
+
+Tasks: 
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+- In a plot named `income_plot`, use the data source `income_df` to make a scatterplot. 
+- Map the `tot_income` on the x-axis and `education_expenditure` on the y-axis. 
+- Set the opacity of the points to 0.5 and size to 10.
+- Make sure to give the x and y-axis labels (with units) and the plot a title.
+- The x and y-axis values should have SI-units. 
+
+```{pyodide}
+#| setup: true
+#| exercise: 
+#|  - income_plot
+#|  - income_log_plot
+import altair as alt
+import pandas as pd
+from utils import assert_chart_equal
+
+income_df = pd.read_csv('data/income_expenditure.csv')
+```
+
+```{pyodide}
+#| exercise: income_plot
+income_plot = alt.Chart(income_df).mark_circle(____).encode(
+    alt.X('tot_income',
+          axis=____,
+          title=____),
+    alt.Y('education_expenditure',
+          axis=____,
+          title=____)
+).properties(title=____)
+
+income_plot
+```
+
+```{pyodide}
+#| exercise: income_plot
+#| check: true
+solution = alt.Chart(income_df).mark_circle(opacity=0.5, size=10).encode(
+    alt.X('tot_income',
+          axis=alt.Axis(format='s'),
+          title='Income (PHP)'),
+    alt.Y('education_expenditure',
+          axis=alt.Axis(format='s'),
+          title='Education expenditure (PHP)'),
+).properties(
+    title="There is substantial variation in the Filipino population's income")
+
+# Remove the overall chart title.
+solution = solution.properties(title='')
+result = result.properties(title='')
+
+spec = solution.to_dict()
+if "config" in spec:
+    spec["config"].pop("encoding", None)
+if "encoding" in spec:
+    for channel in spec["encoding"]:
+        spec["encoding"][channel].pop("title", None)
+solution = alt.Chart.from_dict(spec)
+
+spec_result = result.to_dict()
+if "config" in spec_result:
+    spec_result["config"].pop("encoding", None)
+if "encoding" in spec_result:
+    for channel in spec_result["encoding"]:
+        spec_result["encoding"][channel].pop("title", None)
+result = alt.Chart.from_dict(spec_result)
+
+assert_chart_equal(solution, result)
+```
+
+:::: { .hint exercise="income_plot"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you setting `alt.X('tot_income', axis=alt.Axis(format='s'), title='Income (PHP)'))`?
+- Are you setting `alt.Y('education_expenditure', axis=alt.Axis(format='s'), title='Education expenditure (PHP)')`?
+- Are you using `.mark_circle()`?
+- Are you setting `opacity=0.5, size=10` within `.mark_circle()`?
+
+:::
+::::
+
+:::: { .solution exercise="income_plot" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+income_plot = alt.Chart(income_df).mark_circle(opacity=0.5, size=10).encode(
+    alt.X('tot_income',
+          axis=alt.Axis(format='s'),
+          title='Income (PHP)'),
+    alt.Y('education_expenditure',
+          axis=alt.Axis(format='s'),
+          title='Education expenditure (PHP)'),
+).properties(
+    title="There is substantial variation in the Filipino population's income")
+
+income_plot
+```
+
+:::
+::::
+
+
+It’s difficult to draw any clear conclusion on the relationship between these two variables. It might be helpful to transform these axes.
+
+<div id='mcq6'></div> 
+<script>
+    generateQuiz(
+        'mcq6',
+        'Question',
+        'Which type of transformation do you think would be the best fitting here?',
+        {
+        'Logarithmic, <code>alt.Scale(type="log")</code>': 'Are you sure? Some people may spend 0 PHP on education.',
+        'Symmetric Logarithmic, <code>alt.Scale(type="symlog")</code>': 'You got it! <code>Symlog</code> is best here since some people spend 0 PHP on education.',
+        'Exponential, <code>alt.Scale(type="pow", exponent=2)</code>': 'Maybe it’s a good idea to refer to the notes.',
+        'Square Root, <code>alt.Scale(type="sqrt")</code>': 'It doesn’t make sense to have negative income or expenditures in this situation.'
+        },
+        '<code>.interactive()</code>',
+    );
+</script>
+
+
+</choice>
+
+
+Let's transform the axes now!
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+- In a new plot named `income_log_plot` create a new scatter plot similar to what we did before. 
+- Map the `tot_income` on the x-axis and `education_expenditure` on the y-axis. 
+- Set the opacity of the points to 0.5 and size to 10.
+- Make sure to give the x and y-axis labels (with units) and the plot a title.
+- The x and y-axis values should have SI-units. 
+- **This time, transform both the x and y-axes with the appropriate transformation we answered from the multiple-choice question above.** 
+
+```{pyodide}
+#| exercise: income_log_plot
+income_log_plot = alt.Chart(income_df).mark_circle(____).encode(
+    alt.Y('tot_income',
+          axis=____,
+          title=____,
+          scale=____),
+    alt.X('education_expenditure',
+          axis=____,
+          title=____,
+          scale=____)
+    ).properties(title=____)
+
+income_log_plot
+```
+
+```{pyodide}
+#| exercise: income_log_plot
+#| check: true
+solution = alt.Chart(income_df).mark_circle(opacity=0.5, size=10).encode(
+    alt.X('tot_income',
+          axis=alt.Axis(format='s'),
+          title='Income (PHP)',
+          scale=alt.Scale(type='symlog')),
+    alt.Y('education_expenditure',
+          axis=alt.Axis(format='s'),
+          title='Education expenditure (PHP)',
+          scale=alt.Scale(type='symlog'))
+).properties(
+    title='The filipino population with higher income will generally spend more on education')
+
+# Remove the overall chart title.
+solution = solution.properties(title='')
+result = result.properties(title='')
+
+spec = solution.to_dict()
+if "config" in spec:
+    spec["config"].pop("encoding", None)
+if "encoding" in spec:
+    for channel in spec["encoding"]:
+        spec["encoding"][channel].pop("title", None)
+solution = alt.Chart.from_dict(spec)
+
+spec_result = result.to_dict()
+if "config" in spec_result:
+    spec_result["config"].pop("encoding", None)
+if "encoding" in spec_result:
+    for channel in spec_result["encoding"]:
+        spec_result["encoding"][channel].pop("title", None)
+result = alt.Chart.from_dict(spec_result)
+
+assert_chart_equal(solution, result)
+```
+
+:::: { .hint exercise="income_log_plot"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you setting `alt.X('tot_income', axis=alt.Axis(format='s'), title='Income (PHP)'), scale=alt.Scale(type='symlog'))`?
+- Are you setting `alt.Y('education_expenditure', axis=alt.Axis(format='s'), title='Education expenditure (PHP)', scale=alt.Scale(type='symlog'))`?
+- Are you using `.mark_circle()`?
+- Are you setting `opacity=0.5, size=10` within `.mark_circle()`?
+
+:::
+::::
+
+:::: { .solution exercise="income_log_plot" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+income_log_plot = alt.Chart(income_df).mark_circle(opacity=0.5, size=10).encode(
+    alt.X('tot_income',
+          axis=alt.Axis(format='s'),
+          title='Income (PHP)',
+          scale=alt.Scale(type='symlog')),
+    alt.Y('education_expenditure',
+          axis=alt.Axis(format='s'),
+          title='Education expenditure (PHP)',
+          scale=alt.Scale(type='symlog'))
+    ).properties(
+            title='The filipino population with higher income will generally spend more on education')
+
+income_log_plot
+```
+
+:::
+::::
+
+<div id='mcq7'></div> 
+<script>
+    generateQuiz(
+        'mcq7',
+        'Question',
+        'What type of relationship is there between income and education expenditure now?',
+        {
+        'Positive': 'There appears to be an upward slope between the data points.',
+        'Negative': 'Are you sure here? Maybe take a look at the direction the points are forming (low to high?).',
+        'No Relationship': 'There appears to be some sort of relationship between the variables, maybe take a look at the direction the points are forming (low to high?).'
+        },
+        'Positive',
+    );
+</script>
