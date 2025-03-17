@@ -118,6 +118,16 @@ import altair as alt
 from calendar import month_name
 import pandas as pd
 from utils import assert_chart_equal
+def remove_keys_inplace(spec, keys):
+    if isinstance(spec, dict):
+        for key in list(spec.keys()):
+            if key in keys:
+                del spec[key]
+            else:
+                remove_keys_inplace(spec[key], keys)
+    elif isinstance(spec, list):
+        for item in spec:
+            remove_keys_inplace(item, keys)
 
 temps_df = pd.read_csv('data/temperature.csv', parse_dates=['date'])
 temps_df = temps_df.assign(month=temps_df['date'].dt.month_name())
@@ -162,31 +172,12 @@ text_plot = rain_plot.mark_text(align='left', dx=5).encode(
 
 solution = (rain_plot + text_plot).configure_view(strokeWidth=0)
 
-# Remove the overall chart title.
-solution = solution.properties(title='')
-result = result.properties(title='')
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+remove_keys_inplace(solution_dict, {"title", "scheme"})
+remove_keys_inplace(result_dict, {"title", "scheme"})
 
-spec = solution.to_dict()
-if "config" in spec:
-    spec["config"].pop("encoding", None)
-if "encoding" in spec:
-    for channel in spec["encoding"]:
-        spec["encoding"][channel].pop("title", None)
-        if "scale" in spec["encoding"][channel]:
-            spec["encoding"][channel]["scale"].pop("scheme", None)
-solution = alt.Chart.from_dict(spec)
-
-spec_result = result.to_dict()
-if "config" in spec_result:
-    spec_result["config"].pop("encoding", None)
-if "encoding" in spec_result:
-    for channel in spec_result["encoding"]:
-        spec_result["encoding"][channel].pop("title", None)
-        if "scale" in spec_result["encoding"][channel]:
-            spec_result["encoding"][channel]["scale"].pop("scheme", None)
-result = alt.Chart.from_dict(spec_result)
-
-assert_chart_equal(solution, result)
+assert_chart_equal(solution_dict, result_dict)
 ```
 
 :::: { .hint exercise="rain_plot"}

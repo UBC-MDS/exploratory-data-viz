@@ -128,6 +128,16 @@ Fill in the blanks in the code below so that the following gets accomplished:
 import altair as alt
 import pandas as pd
 from utils import assert_chart_equal
+def remove_keys_inplace(spec, keys):
+    if isinstance(spec, dict):
+        for key in list(spec.keys()):
+            if key in keys:
+                del spec[key]
+            else:
+                remove_keys_inplace(spec[key], keys)
+    elif isinstance(spec, list):
+        for item in spec:
+            remove_keys_inplace(item, keys)
 
 income_df = pd.read_csv('data/income_expenditure.csv')
 ```
@@ -159,27 +169,12 @@ solution = alt.Chart(income_df).mark_circle(opacity=0.5, size=10).encode(
 ).properties(
     title="There is substantial variation in the Filipino population's income")
 
-# Remove the overall chart title.
-solution = solution.properties(title='')
-result = result.properties(title='')
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+remove_keys_inplace(solution_dict, {"title"})
+remove_keys_inplace(result_dict, {"title"})
 
-spec = solution.to_dict()
-if "config" in spec:
-    spec["config"].pop("encoding", None)
-if "encoding" in spec:
-    for channel in spec["encoding"]:
-        spec["encoding"][channel].pop("title", None)
-solution = alt.Chart.from_dict(spec)
-
-spec_result = result.to_dict()
-if "config" in spec_result:
-    spec_result["config"].pop("encoding", None)
-if "encoding" in spec_result:
-    for channel in spec_result["encoding"]:
-        spec_result["encoding"][channel].pop("title", None)
-result = alt.Chart.from_dict(spec_result)
-
-assert_chart_equal(solution, result)
+assert_chart_equal(solution_dict, result_dict)
 ```
 
 :::: { .hint exercise="income_plot"}
@@ -232,7 +227,7 @@ It’s difficult to draw any clear conclusion on the relationship between these 
         'Exponential, <code>alt.Scale(type="pow", exponent=2)</code>': 'Maybe it’s a good idea to refer to the notes.',
         'Square Root, <code>alt.Scale(type="sqrt")</code>': 'It doesn’t make sense to have negative income or expenditures in this situation.'
         },
-        '<code>.interactive()</code>',
+        'Symmetric Logarithmic, <code>alt.Scale(type="symlog")</code>',
     );
 </script>
 
@@ -284,27 +279,12 @@ solution = alt.Chart(income_df).mark_circle(opacity=0.5, size=10).encode(
 ).properties(
     title='The filipino population with higher income will generally spend more on education')
 
-# Remove the overall chart title.
-solution = solution.properties(title='')
-result = result.properties(title='')
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+remove_keys_inplace(solution_dict, {"title"})
+remove_keys_inplace(result_dict, {"title"})
 
-spec = solution.to_dict()
-if "config" in spec:
-    spec["config"].pop("encoding", None)
-if "encoding" in spec:
-    for channel in spec["encoding"]:
-        spec["encoding"][channel].pop("title", None)
-solution = alt.Chart.from_dict(spec)
-
-spec_result = result.to_dict()
-if "config" in spec_result:
-    spec_result["config"].pop("encoding", None)
-if "encoding" in spec_result:
-    for channel in spec_result["encoding"]:
-        spec_result["encoding"][channel].pop("title", None)
-result = alt.Chart.from_dict(spec_result)
-
-assert_chart_equal(solution, result)
+assert_chart_equal(solution_dict, result_dict)
 ```
 
 :::: { .hint exercise="income_log_plot"}
