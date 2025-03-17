@@ -10,7 +10,7 @@ function generateQuiz(containerId, title, question, options, correctAnswer) {
     container.appendChild(questionTitle);
 
     const questionElement = document.createElement('p');
-    questionElement.textContent = question;
+    questionElement.innerHTML = question;
     questionElement.style.marginBottom = '5px';
     container.appendChild(questionElement);
 
@@ -35,7 +35,7 @@ function generateQuiz(containerId, title, question, options, correctAnswer) {
         div.className = 'form-check';
         div.style.display = 'grid';
         div.style.gridTemplateColumns = 'auto 1fr'; // Ensures radio button and text alignment
-        div.style.alignItems = 'start'; // Align radio button with first line
+        div.style.alignItems = 'center'; // Align radio button with text vertically
         div.style.marginBottom = '5px';
 
         const input = document.createElement('input');
@@ -72,7 +72,7 @@ function generateQuiz(containerId, title, question, options, correctAnswer) {
         const label = document.createElement('label');
         label.className = 'form-check-label';
         label.setAttribute('for', `option-${containerId}-${index}`);
-        label.textContent = option;
+        label.innerHTML = option;
         label.style.marginBottom = '3px'; // Ensure text remains aligned
 
         div.appendChild(input);

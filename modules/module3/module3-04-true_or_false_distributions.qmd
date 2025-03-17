@@ -66,10 +66,10 @@ resources:
         'Question 2',
         'Unlike other plots using Altair, making a density plot requires 2 steps. The first step involves generating a new column of samples of the estimated densities. Which of the following code is needed to calculate the estimated densities?',
         {
-        '.transform_density()': '',
-        '.estimate_density()': 'You are right that we use a method for the first step but this is not the right named method.',
-        '.transform_density=True': 'Using an argument is not the right type of coding needed.',
-        '.estimate_density=True': 'Using an argument is not the right type of coding needed.'
+        '<code>.transform_density()</code>': '',
+        '<code>.estimate_density()</code>': 'You are right that we use a method for the first step but this is not the right named method.',
+        '<code>transform_density=True</code>': 'Using an argument is not the right type of coding needed.',
+        '<code>estimate_density=True</code>': 'Using an argument is not the right type of coding needed.'
         },
         '.transform_density()',
     );
@@ -113,10 +113,21 @@ Fill in the blanks in the code below so that the following gets accomplished.
 #| exercise: 
 #|  - density_plot
 #|  - density_plot_facet_species
-
 import altair as alt
 import pandas as pd
 from utils import assert_chart_equal 
+
+def remove_keys_inplace(spec, keys):
+    if isinstance(spec, dict):
+        for key in list(spec.keys()):
+            if key in keys:
+                del spec[key]
+            else:
+                remove_keys_inplace(spec[key], keys)
+    elif isinstance(spec, list):
+        for item in spec:
+            remove_keys_inplace(item, keys)
+
 penguins_df = pd.read_csv('data/penguins.csv')
 ```
 
@@ -150,7 +161,13 @@ solution = alt.Chart(penguins_df).transform_density(
           alt.Color('island', title='Antarctic Island')).properties(
                title="Penguin mass among species")
 
-assert_chart_equal(solution, result)
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+
+remove_keys_inplace(solution_dict, {"opacity", "title"})
+remove_keys_inplace(result_dict, {"opacity", "title"})
+
+assert_chart_equal(solution_dict, result_dict)
 ```
 
 :::: { .hint exercise="density_plot"}
@@ -257,7 +274,13 @@ solution = alt.Chart(penguins_df).transform_density(
               title='body mass distribution by species and island',
               width=200, height=100).facet('species', columns=1)
 
-assert_chart_equal(solution, result)
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+
+remove_keys_inplace(solution_dict, {"opacity", "title"})
+remove_keys_inplace(result_dict, {"opacity", "title"})
+
+assert_chart_equal(solution_dict, result_dict)
 ```
 
 :::: { .hint exercise="density_plot_facet_species"}
