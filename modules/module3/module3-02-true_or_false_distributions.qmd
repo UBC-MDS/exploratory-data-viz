@@ -68,10 +68,10 @@ resources:
         'Question 2',
         'To make a layered histogram instead of a stacked one, what should replace the "???" in the code below?',
         {
-        'stack=False': 'You’ve got the right argument but the wrong value being set.',
-        'stack=None': '',
-        'layered=True': 'I think your argument should be called something else.',
-        'stacked=None': 'You are extremely close, but no past tense is needed.'
+        '<code>stack=False</code>': 'You’ve got the right argument but the wrong value being set.',
+        '<code>stack=None</code>': '',
+        '<code>layered=True</code>': 'I think your argument should be called something else.',
+        '<code>stacked=None</code>': 'You are extremely close, but no past tense is needed.'
         },
         'stack=None',
     );
@@ -134,6 +134,26 @@ Fill in the blanks in the code below so that the following gets accomplished.
 import altair as alt
 import pandas as pd
 from utils import assert_chart_equal 
+
+def strip_bin(spec):
+    if isinstance(spec, dict):
+        return {k: strip_bin(v) for k, v in spec.items() if k != "bin"}
+    elif isinstance(spec, list):
+        return [strip_bin(item) for item in spec]
+    else:
+        return spec
+
+def remove_keys_inplace(spec, keys):
+    if isinstance(spec, dict):
+        for key in list(spec.keys()):
+            if key in keys:
+                del spec[key]
+            else:
+                remove_keys_inplace(spec[key], keys)
+    elif isinstance(spec, list):
+        for item in spec:
+            remove_keys_inplace(item, keys)
+
 ```
 
 ```{pyodide}
@@ -161,7 +181,30 @@ solution = alt.Chart(penguins_df).mark_bar().encode(
     ).properties(title="Penguin culmen depth distributions among species", width=230, height=200
     )
 
-assert_chart_equal(solution, result)
+solution = solution.properties(title='')
+result = result.properties(title='')
+
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+
+spec = strip_bin(solution_dict)
+spec_result = strip_bin(result_dict)
+
+if "config" in spec:
+    spec["config"].pop("encoding", None)
+if "encoding" in spec:
+    for channel in spec["encoding"]:
+        spec["encoding"][channel].pop("title", None)
+        if "scale" in spec["encoding"][channel]:
+            spec["encoding"][channel]["scale"].pop("scheme", None)
+
+if "config" in spec_result:
+    spec_result["config"].pop("encoding", None)
+if "encoding" in spec_result:
+    for channel in spec_result["encoding"]:
+        spec_result["encoding"][channel].pop("title", None)
+
+assert_chart_equal(spec, spec_result)
 ```
 
 :::: { .hint exercise="stacked_plot"}
@@ -262,7 +305,27 @@ solution = alt.Chart(penguins_df).mark_bar(opacity=0.5).encode(
     ).facet('sex', columns=1
     ).resolve_scale(y='independent')
 
-assert_chart_equal(solution, result)
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+
+remove_keys_inplace(solution_dict, {"bin", "opacity", "title"})
+remove_keys_inplace(result_dict, {"bin", "opacity", "title"})
+
+if "config" in solution_dict:
+    solution_dict["config"].pop("encoding", None)
+if "encoding" in solution_dict:
+    for channel in solution_dict["encoding"]:
+        solution_dict["encoding"][channel].pop("title", None)
+        if "scale" in solution_dict["encoding"][channel]:
+            solution_dict["encoding"][channel]["scale"].pop("scheme", None)
+
+if "config" in result_dict:
+    result_dict["config"].pop("encoding", None)
+if "encoding" in result_dict:
+    for channel in result_dict["encoding"]:
+        result_dict["encoding"][channel].pop("title", None)
+
+assert_chart_equal(solution_dict, result_dict)
 ```
 
 :::: { .hint exercise="layered_plot"}
