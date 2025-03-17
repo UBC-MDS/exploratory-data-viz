@@ -135,14 +135,6 @@ import altair as alt
 import pandas as pd
 from utils import assert_chart_equal 
 
-def strip_bin(spec):
-    if isinstance(spec, dict):
-        return {k: strip_bin(v) for k, v in spec.items() if k != "bin"}
-    elif isinstance(spec, list):
-        return [strip_bin(item) for item in spec]
-    else:
-        return spec
-
 def remove_keys_inplace(spec, keys):
     if isinstance(spec, dict):
         for key in list(spec.keys()):
