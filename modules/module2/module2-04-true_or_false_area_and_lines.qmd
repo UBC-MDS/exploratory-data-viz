@@ -219,8 +219,8 @@ solution = alt.Chart(cars).mark_line().encode( # Or mark_area() would also be ac
     y='mean(Miles_per_Gallon)',
     color = 'Origin').properties(title="Average origin fuel efficiency over time")
 
-spec_solution = solution if isinstance(solution, dict) else solution.to_dict()
-spec_result = result if isinstance(result, dict) else result.to_dict()
+spec_solution = solution.to_dict()
+spec_result = result.to_dict()
 
 def get_mark_type(spec):
     mark = spec.get('mark')
@@ -235,11 +235,9 @@ mark_type_result = get_mark_type(spec_result)
 assert mark_type_solution in allowed_marks, f"Unexpected mark: {mark_type_solution}"
 assert mark_type_result in allowed_marks, f"Unexpected mark: {mark_type_result}"
 
-# Remove the mark property for further comparison
 spec_solution.pop('mark', None)
 spec_result.pop('mark', None)
 
-# Remove the title property for further comparison
 spec_solution.pop('title', None)
 spec_result.pop('title', None)
 

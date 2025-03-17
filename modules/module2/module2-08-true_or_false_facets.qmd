@@ -115,13 +115,16 @@ import altair as alt
 import pandas as pd
 from utils import assert_chart_equal 
 
-def strip_bin(spec):
+def remove_keys_inplace(spec, keys):
     if isinstance(spec, dict):
-        return {k: strip_bin(v) for k, v in spec.items() if k != "bin"}
+        for key in list(spec.keys()):
+            if key in keys:
+                del spec[key]
+            else:
+                remove_keys_inplace(spec[key], keys)
     elif isinstance(spec, list):
-        return [strip_bin(item) for item in spec]
-    else:
-        return spec
+        for item in spec:
+            remove_keys_inplace(item, keys)
 
 penguins_df = pd.read_csv('data/penguins.csv')
 ```
@@ -150,10 +153,10 @@ solution = alt.Chart(penguins_df).mark_bar().encode(
 solution_dict = solution.to_dict()
 result_dict = result.to_dict()
 
-solution_stripped = strip_bin(solution_dict)
-result_stripped = strip_bin(result_dict)
+remove_keys_inplace(solution_dict, {"bin"})
+remove_keys_inplace(result_dict, {"bin"})
 
-assert_chart_equal(solution_stripped, result_stripped)
+assert_chart_equal(solution_dict, result_dict)
 ```
 
 :::: { .hint exercise="faceting_with_penguins"}

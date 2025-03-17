@@ -181,30 +181,12 @@ solution = alt.Chart(penguins_df).mark_bar().encode(
     ).properties(title="Penguin culmen depth distributions among species", width=230, height=200
     )
 
-solution = solution.properties(title='')
-result = result.properties(title='')
-
 solution_dict = solution.to_dict()
 result_dict = result.to_dict()
+remove_keys_inplace(solution_dict, {"bin", "title"})
+remove_keys_inplace(result_dict, {"bin", "title"})
 
-spec = strip_bin(solution_dict)
-spec_result = strip_bin(result_dict)
-
-if "config" in spec:
-    spec["config"].pop("encoding", None)
-if "encoding" in spec:
-    for channel in spec["encoding"]:
-        spec["encoding"][channel].pop("title", None)
-        if "scale" in spec["encoding"][channel]:
-            spec["encoding"][channel]["scale"].pop("scheme", None)
-
-if "config" in spec_result:
-    spec_result["config"].pop("encoding", None)
-if "encoding" in spec_result:
-    for channel in spec_result["encoding"]:
-        spec_result["encoding"][channel].pop("title", None)
-
-assert_chart_equal(spec, spec_result)
+assert_chart_equal(solution_dict, result_dict)
 ```
 
 :::: { .hint exercise="stacked_plot"}
@@ -310,20 +292,6 @@ result_dict = result.to_dict()
 
 remove_keys_inplace(solution_dict, {"bin", "opacity", "title"})
 remove_keys_inplace(result_dict, {"bin", "opacity", "title"})
-
-if "config" in solution_dict:
-    solution_dict["config"].pop("encoding", None)
-if "encoding" in solution_dict:
-    for channel in solution_dict["encoding"]:
-        solution_dict["encoding"][channel].pop("title", None)
-        if "scale" in solution_dict["encoding"][channel]:
-            solution_dict["encoding"][channel]["scale"].pop("scheme", None)
-
-if "config" in result_dict:
-    result_dict["config"].pop("encoding", None)
-if "encoding" in result_dict:
-    for channel in result_dict["encoding"]:
-        result_dict["encoding"][channel].pop("title", None)
 
 assert_chart_equal(solution_dict, result_dict)
 ```
