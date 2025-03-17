@@ -61,12 +61,12 @@ resources:
     generateQuiz(
         'mcq4', 
         'Question 2',  
-        'If we wanted to facet the plot below by the column 𝘀𝘂𝗯𝗷𝗲𝗰𝘁 and the number of plots per row at 4, what would be needed instead of "???" in the code below?',  
+        'If we wanted to facet the plot below by the column <code>subject</code> and the number of plots per row at 4, what would be needed instead of <code>"???"</code> in the code below?',  
         { 
-        '"subject", row=3': '𝗿𝗼𝘄 needs a column name as an argument value',
-        '"subject", row=4': 'This would produce 4 rows.',
-        '"subject", columns=4': '',
-        '"subject", column=4': 'The 𝗰𝗼𝗹𝘂𝗺𝗻 argument needs a column label as an input.'
+        '<code>"subject", row=3</code>': '𝗿𝗼𝘄 needs a column name as an argument value',
+        '<code>"subject", rows=4</code>': 'This would produce 4 rows.',
+        '<code>"subject", columns=4</code>': '',
+        '<code>"subject", column=4</code>': 'The 𝗰𝗼𝗹𝘂𝗺𝗻 argument needs a column label as an input.'
         },
         '"subject", columns=4',  
     );
@@ -115,6 +115,14 @@ import altair as alt
 import pandas as pd
 from utils import assert_chart_equal 
 
+def strip_bin(spec):
+    if isinstance(spec, dict):
+        return {k: strip_bin(v) for k, v in spec.items() if k != "bin"}
+    elif isinstance(spec, list):
+        return [strip_bin(item) for item in spec]
+    else:
+        return spec
+
 penguins_df = pd.read_csv('data/penguins.csv')
 ```
 
@@ -139,7 +147,13 @@ solution = alt.Chart(penguins_df).mark_bar().encode(
     ).properties(title='Penguin mass', width=150, height=100
     ).facet(column='species', row='island')
 
-assert_chart_equal(solution, result)
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+
+solution_stripped = strip_bin(solution_dict)
+result_stripped = strip_bin(result_dict)
+
+assert_chart_equal(solution_stripped, result_stripped)
 ```
 
 :::: { .hint exercise="faceting_with_penguins"}

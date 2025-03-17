@@ -33,8 +33,8 @@ alt.themes.enable("increase_font_size")
 
 
 def assert_chart_equal(expected, actual):
-    expected_dict = expected.to_dict()
-    actual_dict = actual.to_dict()
+    expected_dict = expected if isinstance(expected, dict) else expected.to_dict()
+    actual_dict = actual if isinstance(actual, dict) else actual.to_dict()
     try:
         assert_dict_equal(expected_dict, actual_dict)
         message = random.choice(["Nicely done", "Great", "Good job", "Well done"])

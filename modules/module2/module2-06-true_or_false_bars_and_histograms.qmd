@@ -65,10 +65,10 @@ resources:
         'Question 2',  
         'If we wanted to increase the number of bars in the histogram (see code below), what would be needed instead of "???" in the code below?',  
         { 
-        '50': 'You need to use a helper function to increase the number of bars and not just set `bin` equal to a number.',
-        'alt.Bin(50)': 'There needs to be some sort of argument set within `alt.Bin()`.',
-        'bin=alt.Bin(bins=30)': 'You are close but the argument `bins` within the helper function `alt.Bin()` is not quite right.',
-        'bin=alt.Bin(maxbins=30)': ''
+        '<code>50</code>': 'You need to use a helper function to increase the number of bars and not just set `bin` equal to a number.',
+        '<code>alt.Bin(50)</code>': 'There needs to be some sort of argument set within `alt.Bin()`.',
+        '<code>bin=alt.Bin(bins=30)</code>': 'You are close but the argument `bins` within the helper function `alt.Bin()` is not quite right.',
+        '<code>bin=alt.Bin(maxbins=30)</code>': ''
         },
         'bin=alt.Bin(maxbins=30)',  
     );
@@ -142,6 +142,9 @@ solution = alt.Chart(penguins_df).mark_bar().encode(
     y=alt.Y('species', sort='x')
     ).properties(title='Frequency of penguin species', width=300, height=150)
 
+solution = solution.properties(title='')
+result = result.properties(title='')
+
 assert_chart_equal(solution, result)
 ```
 
@@ -165,12 +168,12 @@ assert_chart_equal(solution, result)
 ## Fully worked solution:
 
 ```{pyodide}
-penguin_bar = alt.Chart(penguins_df).mark_bar().encode(
+mass_boxplot = alt.Chart(penguins_df).mark_bar().encode(
     x='count()',
     y=alt.Y('species', sort='x')
     ).properties(title='Frequency of penguin species', width=300, height=150)
 
-penguin_bar
+mass_boxplot
 ```
 
 :::

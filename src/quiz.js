@@ -10,7 +10,7 @@ function generateQuiz(containerId, title, question, options, correctAnswer) {
     container.appendChild(questionTitle);
 
     const questionElement = document.createElement('p');
-    questionElement.textContent = question;
+    questionElement.innerHTML = question;
     questionElement.style.marginBottom = '5px';
     container.appendChild(questionElement);
 
@@ -32,7 +32,11 @@ function generateQuiz(containerId, title, question, options, correctAnswer) {
 
     Object.entries(options).forEach(([option, explanation], index) => {
         const div = document.createElement('div');
-        div.className = 'form-check d-flex align-items-center'; // Flexbox for vertical alignment
+        div.className = 'form-check';
+        div.style.display = 'grid';
+        div.style.gridTemplateColumns = 'auto 1fr'; // Ensures radio button and text alignment
+        div.style.alignItems = 'center'; // Align radio button with text vertically
+        div.style.marginBottom = '5px';
 
         const input = document.createElement('input');
         input.type = 'radio';
@@ -40,7 +44,6 @@ function generateQuiz(containerId, title, question, options, correctAnswer) {
         input.value = option;
         input.className = 'form-check-input me-2'; // Added margin for spacing
         input.id = `option-${containerId}-${index}`;
-        input.style.marginTop = '0'; // Ensure no extra space pushes text down
         input.style.borderColor = '#4853A4'; // Radio button outline
         input.style.boxShadow = 'none';  // Remove brief occurances of transparent fill when clicked
         input.style.outline = 'none';  // Remove brief occurances of transparent fill when clicked
@@ -69,7 +72,7 @@ function generateQuiz(containerId, title, question, options, correctAnswer) {
         const label = document.createElement('label');
         label.className = 'form-check-label';
         label.setAttribute('for', `option-${containerId}-${index}`);
-        label.textContent = option;
+        label.innerHTML = option;
         label.style.marginBottom = '3px'; // Ensure text remains aligned
 
         div.appendChild(input);

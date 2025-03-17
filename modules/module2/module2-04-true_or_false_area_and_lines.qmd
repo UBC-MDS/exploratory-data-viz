@@ -62,7 +62,7 @@ resources:
     generateQuiz(
         'mcq4',
         'Question 2',
-        'Which of the graphs does a better job in answering the question "𝐖𝐡𝐢𝐜𝐡 𝐜𝐨𝐧𝐭𝐢𝐧𝐞𝐧𝐭𝐬 𝐚𝐯𝐞𝐫𝐚𝐠𝐞 𝐟𝐞𝐫𝐭𝐢𝐥𝐢𝐭𝐲 𝐝𝐞𝐜𝐫𝐞𝐚𝐬𝐞𝐝 𝐭𝐡𝐞 𝐦𝐨𝐬𝐭 𝐨𝐯𝐞𝐫 𝐭𝐡𝐞 𝐲𝐞𝐚𝐫𝐬"',
+        'Which of the graphs does a better job in answering the question <strong>"Which continents average fertility decreased the most over the years"</strong>',
         {
         'Plot A': 'This is difficult to differentiate between the continent’s fertility rate separately.',
         'Plot B': ''
@@ -141,6 +141,9 @@ solution = alt.Chart(cars).mark_area().encode(
     x='Year',
     y='mean(Miles_per_Gallon)').properties(title="Fuel efficiency over time")
 
+solution = solution.properties(title='')
+result = result.properties(title='')
+
 assert_chart_equal(solution, result)
 ```
 
@@ -216,7 +219,31 @@ solution = alt.Chart(cars).mark_line().encode( # Or mark_area() would also be ac
     y='mean(Miles_per_Gallon)',
     color = 'Origin').properties(title="Average origin fuel efficiency over time")
 
-assert_chart_equal(solution, result)
+spec_solution = solution if isinstance(solution, dict) else solution.to_dict()
+spec_result = result if isinstance(result, dict) else result.to_dict()
+
+def get_mark_type(spec):
+    mark = spec.get('mark')
+    if isinstance(mark, dict):
+        return mark.get('type')
+    return mark
+
+allowed_marks = ['line', 'area']
+mark_type_solution = get_mark_type(spec_solution)
+mark_type_result = get_mark_type(spec_result)
+
+assert mark_type_solution in allowed_marks, f"Unexpected mark: {mark_type_solution}"
+assert mark_type_result in allowed_marks, f"Unexpected mark: {mark_type_result}"
+
+# Remove the mark property for further comparison
+spec_solution.pop('mark', None)
+spec_result.pop('mark', None)
+
+# Remove the title property for further comparison
+spec_solution.pop('title', None)
+spec_result.pop('title', None)
+
+assert_chart_equal(spec_solution, spec_result)
 ```
 
 :::: { .hint exercise="fuel_efficiency_graph"}
