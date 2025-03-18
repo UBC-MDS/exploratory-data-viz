@@ -1,6 +1,8 @@
 ---
 format: revealjs
 title: Bar Charts and Histograms
+resources:
+  - ../../utils.py
 title-slide-attributes:
   data-notes: |
     In this slide deck we will be learning 
@@ -12,26 +14,7 @@ title-slide-attributes:
 
 ```{python}
 # | echo: false
-import numpy as np
-import pandas as pd
-import altair as alt
-
-
-pd.set_option('display.width', 350)
-np.set_printoptions(linewidth=400)
-pd.set_option('display.max_columns', 50)
-pd.set_option('display.max_rows', 15)
-
-
-@alt.theme.register("increase_font_size", enable=True)
-def increase_font_size() -> alt.theme.ThemeConfig:
-    return {
-        'config': {
-            'view': {'continuousWidth': 400, 'continuousHeight': 300},
-            'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14},
-            'axis': {'titleFontSize': 14, 'labelFontSize': 12},
-            'header': {'titleFontSize': 16, 'labelFontSize': 14},
-            'encoding': {'x': {'scale': {'zero': False}}}}}
+%run ../../utils.py
 ```
 
 ## Subsetting the global development data
