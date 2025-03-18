@@ -38,7 +38,7 @@ def increase_font_size() -> alt.theme.ThemeConfig:
 import pandas as pd
 import altair as alt
 
-gm = pd.read_csv('data/world-data-gapminder.csv', parse_dates=['year'])
+gm = pd.read_csv('../../data/world-data-gapminder.csv', parse_dates=['year'])
 gm2018 = gm[gm['year'] == '2018']
 
 alt.Chart(gm2018).mark_bar().encode(

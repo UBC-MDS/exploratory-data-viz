@@ -17,10 +17,10 @@ resources:
     generateQuiz(
         'mcq1', 
         'True or False',  
-        'If you faceting and assign a colour channel to the same column, you will obtain subplots all in different colours.',  
+        'If you facet and assign a colour channel to the same column, you will obtain subplots all in different colours.',  
         { 
         'True': '',
-        'False': 'Setting a colour channel to the same column as the facet will change each of the faceted plots to different colours.'
+        'False': 'Since there is only one group (based on the chosen column) in each faceted chart, there will also only be one color in each of the charts.'
         },
         'True',  
     );
@@ -166,7 +166,7 @@ assert_chart_equal(solution_dict, result_dict)
 
 - Are you using `.mark_bar()`?
 - Are you assigning the plot to an object named`penguin_facet`?
-- Are you specifying `alt.X('species', bin=True)` on the x-axis?
+- Are you specifying `alt.X('species', bin=alt.Bin(maxbins=15))` on the x-axis?
 - Are you specifying `count()` on the y-axis?
 - Are you giving the plot a title and proper dimensions using `.properties()`?
 
@@ -182,8 +182,8 @@ assert_chart_equal(solution_dict, result_dict)
 penguin_facet = alt.Chart(penguins_df).mark_bar().encode(
     x=alt.X('body_mass_g', bin=alt.Bin(maxbins=15)),
     y='count()',
-    ).properties(title='Penguin mass', width=150, height=100
-    ).facet(column='species', row='island')
+).properties(title='Penguin mass', width=150, height=100
+).facet(column='species', row='island')
 
 penguin_facet
 ```
