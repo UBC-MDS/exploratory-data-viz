@@ -11,32 +11,8 @@ title-slide-attributes:
 ---
 
 ```{python}
-#| echo: false
-#| output: false
-
-# TODO It would be convenient to run this entire setup once or at least put it in a utils file, but seems tricky:
-# https://stackoverflow.com/questions/75751478/how-can-i-include-external-python-scripts-while-executing-their-codes-in-quarto
-import pandas as pd
-import numpy as np
-
-
-pd.set_option('display.width', 350)
-np.set_printoptions(linewidth=400)
-pd.set_option('display.max_columns', 50)
-pd.set_option('display.max_rows', 15)
-
-
-import altair as alt
-
-@alt.theme.register("increase_font_size", enable=True)
-def increase_font_size() -> alt.theme.ThemeConfig:
-    return {
-    'config': {
-        'view': {'continuousWidth': 400, 'continuousHeight': 300},
-        'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14},
-        'axis': {'titleFontSize': 14, 'labelFontSize': 12},
-        'header': {'titleFontSize': 16, 'labelFontSize': 14},
-        'encoding': {'x': {'scale': {'zero': False}}}}}
+# | echo: false
+%run ../../utils.py
 ```
 
 ## Glancing at the values in the dataframe is a good first step to get familiar with a new dataset
@@ -44,7 +20,7 @@ def increase_font_size() -> alt.theme.ThemeConfig:
 ```{python}
 import pandas as pd
 
-movies_extended = pd.read_csv('data/movies-extended-eda.csv')
+movies_extended = pd.read_csv("../../data/movies-extended-eda.csv")
 movies_extended
 ```
 
