@@ -7,26 +7,8 @@ title-slide-attributes:
 ---
 
 ```{python}
-#| echo: false
-import pandas as pd
-import numpy as np
-import altair as alt
-
-
-pd.set_option('display.width', 350)
-np.set_printoptions(linewidth=400)
-pd.set_option('display.max_columns', 50)
-pd.set_option('display.max_rows', 15)
-
-@alt.theme.register("increase_font_size", enable=True)
-def increase_font_size() -> alt.theme.ThemeConfig:
-    return {
-    'config': {
-        'view': {'continuousWidth': 400, 'continuousHeight': 300},
-        'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14},
-        'axis': {'titleFontSize': 14, 'labelFontSize': 12},
-        'header': {'titleFontSize': 16, 'labelFontSize': 14},
-        'encoding': {'x': {'scale': {'zero': False}}}}}
+# | echo: false
+%run ../../utils.py
 ```
 
 ## Histograms can give different results depending on the data
@@ -89,7 +71,7 @@ or just a "density plot".
 ```{python}
 import pandas as pd
 
-movies = pd.read_csv('data/movies.csv')
+movies = pd.read_csv("../../data/movies.csv")
 movies
 ```
 
@@ -111,10 +93,11 @@ import altair as alt
 
 (alt.Chart(movies).transform_density(
     'runtime',
-    as_=['runtime', 'density'])  # Give a name to the KDE values, which we can use when plotting
+    # Give a name to the KDE values, which we can use when plotting
+    as_=['runtime', 'density'])
  .mark_area().encode(
     x='runtime',
-    y='density:Q'))
+    y=alt.Y('density:Q').stack(False)))
 ```
 
 ::: {.notes}
@@ -169,12 +152,12 @@ those are the more informative in a density plot.
 
 ```{python}
 (alt.Chart(movies).transform_density(
-     'runtime',
-     groupby=['genre'],
-     as_=['runtime', 'density'])
+    'runtime',
+    groupby=['genre'],
+    as_=['runtime', 'density'])
  .mark_area().encode(
      x='runtime',
-     y='density:Q',
+     y=alt.Y('density:Q').stack(False),
      color='genre'))
 ```
 
@@ -221,7 +204,7 @@ so that we can see the range of all the distributions.
      steps=200)
  .mark_area(opacity=0.5).encode(
      x='runtime',
-     y='density:Q',
+     y=alt.Y('density:Q').stack(False),
      color='genre'))
 ```
 
@@ -257,10 +240,10 @@ or facet them vertically as we saw with the histograms previously.
     groupby=['genre'],
     as_=['runtime', 'density'],
     steps=2)
- .mark_area().encode(
+ .mark_area(opacity=0.7).encode(
      x='runtime',
-     y='density:Q',
-     color='genre'))
+     y=alt.Y('density:Q').stack(False),
+     color = 'genre'))
 ```
 
 ::: {.notes}
@@ -288,7 +271,7 @@ as you can see in this slide.
      steps=200)
  .mark_area().encode(
      x='runtime',
-     y='density:Q',
+     y=alt.Y('density:Q').stack(False),
      color='genre'))
 ```
 
@@ -314,7 +297,8 @@ density = (alt.Chart(movies[:10]).transform_density(
     as_=['runtime', 'density'])
  .mark_area().encode(
     x='runtime',
-    y='density:Q'))
+    y=alt.Y('density:Q').stack(False),
+    color='genre'))
 density
 ```
 
@@ -380,7 +364,7 @@ or created a histogram.
     counts=True)
  .mark_area().encode(
     x='runtime',
-    y='density:Q'))
+    y=alt.Y('density:Q').stack(False)))
 ```
 
 ::: {.notes}

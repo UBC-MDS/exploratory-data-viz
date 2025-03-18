@@ -1,6 +1,12 @@
 import random
-
 import altair as alt
+import numpy as np
+import pandas as pd
+
+pd.set_option("display.width", 350)
+np.set_printoptions(linewidth=400)
+pd.set_option("display.max_columns", 8)
+pd.set_option("display.max_rows", 6)
 
 
 def increase_font_size():
