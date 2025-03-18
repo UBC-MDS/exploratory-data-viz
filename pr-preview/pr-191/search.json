@@ -11,7 +11,7 @@
     "href": "modules/module4/slides/module4_05.html#glancing-at-the-values-in-the-dataframe-is-a-good-first-step-to-get-familiar-with-a-new-dataset",
     "title": "Exploratory Data Analysis",
     "section": "Glancing at the values in the dataframe is a good first step to get familiar with a new dataset",
-    "text": "Glancing at the values in the dataframe is a good first step to get familiar with a new dataset\n\nimport pandas as pd\n\nmovies_extended = pd.read_csv('data/movies-extended-eda.csv')\nmovies_extended\n\n\n\n\n\n\n\n\nMajor Genre\nMPAA Rating\nRunning Time min\nIMDB Rating\nIMDB Votes\n\n\n\n\n0\nAction\nR\n108.0\n5.8\n33584.0\n\n\n1\nComedy\nPG-13\n95.0\n5.8\n51109.0\n\n\n2\nAction\nPG-13\n106.0\n5.2\n15817.0\n\n\n3\nAdventure\nNaN\n108.0\n5.9\n45773.0\n\n\n4\nDrama\nR\n111.0\n6.1\n9908.0\n\n\n...\n...\n...\n...\n...\n...\n\n\n996\nComedy\nPG-13\n89.0\n6.4\n69296.0\n\n\n997\nComedy\nR\n87.0\n7.8\n81629.0\n\n\n998\nComedy\nR\n101.0\n7.0\n55687.0\n\n\n999\nAdventure\nPG\n129.0\n5.7\n21161.0\n\n\n1000\nAdventure\nPG-13\n136.0\n6.7\n4789.0\n\n\n\n\n1001 rows × 5 columns\n\n\n\n\nIn this slide deck, you will see how EDA allows us to identify interesting relationships that we want to study closer, suggest a hypothesis to test, assess assumptions of the data, and inform further data collection.\nThe very first thing we do in EDA, is often to glance at the dataframe by printing out a few values like in this slide.\nThis gives us an idea about which columns are numerical and categorical as well as the size of the dataframe.\nYou can also see that we don’t have the exact same dataframe columns as in the previous slide decks. We have left out a few since we will be including all dataframe columns in the same chart and want to make sure it fits on the slide."
+    "text": "Glancing at the values in the dataframe is a good first step to get familiar with a new dataset\n\nimport pandas as pd\n\nmovies_extended = pd.read_csv(\"../../data/movies-extended-eda.csv\")\nmovies_extended\n\n\n\n\n\n\n\n\nMajor Genre\nMPAA Rating\nRunning Time min\nIMDB Rating\nIMDB Votes\n\n\n\n\n0\nAction\nR\n108.0\n5.8\n33584.0\n\n\n1\nComedy\nPG-13\n95.0\n5.8\n51109.0\n\n\n2\nAction\nPG-13\n106.0\n5.2\n15817.0\n\n\n...\n...\n...\n...\n...\n...\n\n\n998\nComedy\nR\n101.0\n7.0\n55687.0\n\n\n999\nAdventure\nPG\n129.0\n5.7\n21161.0\n\n\n1000\nAdventure\nPG-13\n136.0\n6.7\n4789.0\n\n\n\n\n1001 rows × 5 columns\n\n\n\n\nIn this slide deck, you will see how EDA allows us to identify interesting relationships that we want to study closer, suggest a hypothesis to test, assess assumptions of the data, and inform further data collection.\nThe very first thing we do in EDA, is often to glance at the dataframe by printing out a few values like in this slide.\nThis gives us an idea about which columns are numerical and categorical as well as the size of the dataframe.\nYou can also see that we don’t have the exact same dataframe columns as in the previous slide decks. We have left out a few since we will be including all dataframe columns in the same chart and want to make sure it fits on the slide."
   },
   {
     "objectID": "modules/module4/slides/module4_05.html#viewing-the-column-data-types-and-missing-values-protects-us-from-errors-later-on",
@@ -25,7 +25,7 @@
     "href": "modules/module4/slides/module4_05.html#visualizing-missing-values-helps-us-identify-potential-issues-with-the-data",
     "title": "Exploratory Data Analysis",
     "section": "Visualizing missing values helps us identify potential issues with the data",
-    "text": "Visualizing missing values helps us identify potential issues with the data\n\nimport altair as alt\n\nalt.data_transformers.disable_max_rows();\n\nmovies_nans = movies_extended.isna().reset_index().melt(id_vars='index', var_name='column', value_name='NaN')\nmovies_nans\n\n\n\n\n\n\n\n\nindex\ncolumn\nNaN\n\n\n\n\n0\n0\nMajor Genre\nFalse\n\n\n1\n1\nMajor Genre\nFalse\n\n\n2\n2\nMajor Genre\nFalse\n\n\n3\n3\nMajor Genre\nFalse\n\n\n4\n4\nMajor Genre\nFalse\n\n\n...\n...\n...\n...\n\n\n5000\n996\nIMDB Votes\nFalse\n\n\n5001\n997\nIMDB Votes\nFalse\n\n\n5002\n998\nIMDB Votes\nFalse\n\n\n5003\n999\nIMDB Votes\nFalse\n\n\n5004\n1000\nIMDB Votes\nFalse\n\n\n\n\n5005 rows × 3 columns\n\n\n\n\nTo create a visualization of missing values for all columns, we must first reshape the data into a format where the column names become a single categorical column in the dataframe, which we can use on the y-axis in Altair. The index column will be used to give each column the same numbers on the x-axis.\nSince this reshape operation makes our dataframe longer than 5000 rows, we need to disable the max rows warning in Altair, which otherwise would prevent us from making this chart.\nWhenever we do this, we should also check the final size of our visualization if we save it to a file or in the notebook to ensure that it is not too large for what we can currently handle."
+    "text": "Visualizing missing values helps us identify potential issues with the data\n\nimport altair as alt\n\nalt.data_transformers.disable_max_rows();\n\nmovies_nans = movies_extended.isna().reset_index().melt(id_vars='index', var_name='column', value_name='NaN')\nmovies_nans\n\n\n\n\n\n\n\n\nindex\ncolumn\nNaN\n\n\n\n\n0\n0\nMajor Genre\nFalse\n\n\n1\n1\nMajor Genre\nFalse\n\n\n2\n2\nMajor Genre\nFalse\n\n\n...\n...\n...\n...\n\n\n5002\n998\nIMDB Votes\nFalse\n\n\n5003\n999\nIMDB Votes\nFalse\n\n\n5004\n1000\nIMDB Votes\nFalse\n\n\n\n\n5005 rows × 3 columns\n\n\n\n\nTo create a visualization of missing values for all columns, we must first reshape the data into a format where the column names become a single categorical column in the dataframe, which we can use on the y-axis in Altair. The index column will be used to give each column the same numbers on the x-axis.\nSince this reshape operation makes our dataframe longer than 5000 rows, we need to disable the max rows warning in Altair, which otherwise would prevent us from making this chart.\nWhenever we do this, we should also check the final size of our visualization if we save it to a file or in the notebook to ensure that it is not too large for what we can currently handle."
   },
   {
     "objectID": "modules/module4/slides/module4_05.html#visualizing-missing-values-helps-us-identify-potential-issues-with-the-data-1",
@@ -39,7 +39,7 @@
     "href": "modules/module4/slides/module4_05.html#a-statistical-summary-is-useful-to-complement-visualizations",
     "title": "Exploratory Data Analysis",
     "section": "A statistical summary is useful to complement visualizations",
-    "text": "A statistical summary is useful to complement visualizations\n\nmovies_extended.describe()\n\n\n\n\n\n\n\n\nRunning Time min\nIMDB Rating\nIMDB Votes\n\n\n\n\ncount\n1001.000000\n945.000000\n945.000000\n\n\nmean\n110.312687\n6.279577\n43514.432804\n\n\nstd\n20.701090\n1.178046\n52241.047929\n\n\nmin\n72.000000\n1.700000\n48.000000\n\n\n25%\n95.000000\n5.500000\n12747.000000\n\n\n50%\n107.000000\n6.300000\n26303.000000\n\n\n75%\n122.000000\n7.100000\n55248.000000\n\n\nmax\n222.000000\n8.900000\n465000.000000\n\n\n\n\n\n\n\n\nNow that we are aware of what data types we are working with and how the missing values are distributed, let’s start visualizing the data that is not missing!\nVisualization is a critical component throughout EDA as it is key in communicating information about the data to us.\nWe will start by visualizing the distributions of numerical data, in order to familiarize ourselves with how the values are spread out for each numerical column.\nBefore doing so let’s print out the summary statistics for these numerical columns.\nWhile it is difficult to make statements about how the data is distributed by only looking at these numbers, they are useful to have available for cross-reference when visualizing the data and also give us an idea of what to expect when creating our visualization.\nAfter visualizing the data, we can also go back and look at these numbers to ensure that they align and that we don’t have a typo somewhere causing an error."
+    "text": "A statistical summary is useful to complement visualizations\n\nmovies_extended.describe()\n\n\n\n\n\n\n\n\nRunning Time min\nIMDB Rating\nIMDB Votes\n\n\n\n\ncount\n1001.000000\n945.000000\n945.000000\n\n\nmean\n110.312687\n6.279577\n43514.432804\n\n\nstd\n20.701090\n1.178046\n52241.047929\n\n\n...\n...\n...\n...\n\n\n50%\n107.000000\n6.300000\n26303.000000\n\n\n75%\n122.000000\n7.100000\n55248.000000\n\n\nmax\n222.000000\n8.900000\n465000.000000\n\n\n\n\n8 rows × 3 columns\n\n\n\n\nNow that we are aware of what data types we are working with and how the missing values are distributed, let’s start visualizing the data that is not missing!\nVisualization is a critical component throughout EDA as it is key in communicating information about the data to us.\nWe will start by visualizing the distributions of numerical data, in order to familiarize ourselves with how the values are spread out for each numerical column.\nBefore doing so let’s print out the summary statistics for these numerical columns.\nWhile it is difficult to make statements about how the data is distributed by only looking at these numbers, they are useful to have available for cross-reference when visualizing the data and also give us an idea of what to expect when creating our visualization.\nAfter visualizing the data, we can also go back and look at these numbers to ensure that they align and that we don’t have a typo somewhere causing an error."
   },
   {
     "objectID": "modules/module4/slides/module4_05.html#visualizing-the-distributions-of-all-numerical-columns-helps-us-understand-the-data",
@@ -74,7 +74,7 @@
     "href": "modules/module4/slides/module4_01.html#reading-in-the-data",
     "title": "Visualizing Multidimensional Distributions",
     "section": "Reading in the data",
-    "text": "Reading in the data\n\nimport altair as alt\nimport pandas as pd\n\nmovies_extended = pd.read_csv('data/movies-extended.csv')\nmovies_extended\n\n\n\n\n\n\n\n\nTitle\nUS Gross\nWorldwide Gross\nUS DVD Sales\nProduction Budget\nRelease Date\nMPAA Rating\nRunning Time min\nDistributor\nSource\nMajor Genre\nCreative Type\nDirector\nRotten Tomatoes Rating\nIMDB Rating\nIMDB Votes\n\n\n\n\n0\nBoynton Beach Club\n3127472.0\n3127472.0\nNaN\n2900000.0\nMar 24 2006\nR\n104.0\nWingate Distribution\nOriginal Screenplay\nRomantic Comedy\nContemporary Fiction\nNaN\nNaN\nNaN\nNaN\n\n\n1\nBroken Arrow\n70645997.0\n148345997.0\nNaN\n65000000.0\nFeb 09 1996\nR\n108.0\n20th Century Fox\nOriginal Screenplay\nAction\nContemporary Fiction\nJohn Woo\n55.0\n5.8\n33584.0\n\n\n2\nBrazil\n9929135.0\n9929135.0\nNaN\n15000000.0\nDec 18 1985\nR\n136.0\nUniversal\nOriginal Screenplay\nBlack Comedy\nFantasy\nTerry Gilliam\n98.0\n8.0\n76635.0\n\n\n3\nThe Cable Guy\n60240295.0\n102825796.0\nNaN\n47000000.0\nJun 14 1996\nPG-13\n95.0\nSony Pictures\nOriginal Screenplay\nComedy\nContemporary Fiction\nBen Stiller\n52.0\n5.8\n51109.0\n\n\n4\nChain Reaction\n21226204.0\n60209334.0\nNaN\n55000000.0\nAug 02 1996\nPG-13\n106.0\n20th Century Fox\nOriginal Screenplay\nAction\nContemporary Fiction\nAndrew Davis\n13.0\n5.2\n15817.0\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n1185\nZombieland\n75590286.0\n98690286.0\n28281155.0\n23600000.0\nOct 02 2009\nR\n87.0\nSony Pictures\nOriginal Screenplay\nComedy\nFantasy\nRuben Fleischer\n89.0\n7.8\n81629.0\n\n\n1186\nZack and Miri Make a Porno\n31452765.0\n36851125.0\n21240321.0\n24000000.0\nOct 31 2008\nR\n101.0\nWeinstein Co.\nOriginal Screenplay\nComedy\nContemporary Fiction\nKevin Smith\n65.0\n7.0\n55687.0\n\n\n1187\nZodiac\n33080084.0\n83080084.0\n20983030.0\n85000000.0\nMar 02 2007\nR\n157.0\nParamount Pictures\nBased on Book/Short Story\nThriller/Suspense\nDramatization\nDavid Fincher\n89.0\nNaN\nNaN\n\n\n1188\nThe Legend of Zorro\n45575336.0\n141475336.0\nNaN\n80000000.0\nOct 28 2005\nPG\n129.0\nSony Pictures\nRemake\nAdventure\nHistorical Fiction\nMartin Campbell\n26.0\n5.7\n21161.0\n\n\n1189\nThe Mask of Zorro\n93828745.0\n233700000.0\nNaN\n65000000.0\nJul 17 1998\nPG-13\n136.0\nSony Pictures\nRemake\nAdventure\nHistorical Fiction\nMartin Campbell\n82.0\n6.7\n4789.0\n\n\n\n\n1190 rows × 16 columns\n\n\n\n\nWe’re continuing to work with the movies data set. Here we have done some additional preprocessing steps to the data and saved it to disk beforehand so that we can load it indirectly on this slide.\nThis is largely the same dataset as before, but we filtered out some additional NaNs and a few categories that contained problematic values."
+    "text": "Reading in the data\n\nimport altair as alt\nimport pandas as pd\n\nmovies_extended = pd.read_csv(\"../../data/movies-extended.csv\")\nmovies_extended\n\n\n\n\n\n\n\n\nTitle\nUS Gross\nWorldwide Gross\nUS DVD Sales\n...\nDirector\nRotten Tomatoes Rating\nIMDB Rating\nIMDB Votes\n\n\n\n\n0\nBoynton Beach Club\n3127472.0\n3127472.0\nNaN\n...\nNaN\nNaN\nNaN\nNaN\n\n\n1\nBroken Arrow\n70645997.0\n148345997.0\nNaN\n...\nJohn Woo\n55.0\n5.8\n33584.0\n\n\n2\nBrazil\n9929135.0\n9929135.0\nNaN\n...\nTerry Gilliam\n98.0\n8.0\n76635.0\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n1187\nZodiac\n33080084.0\n83080084.0\n20983030.0\n...\nDavid Fincher\n89.0\nNaN\nNaN\n\n\n1188\nThe Legend of Zorro\n45575336.0\n141475336.0\nNaN\n...\nMartin Campbell\n26.0\n5.7\n21161.0\n\n\n1189\nThe Mask of Zorro\n93828745.0\n233700000.0\nNaN\n...\nMartin Campbell\n82.0\n6.7\n4789.0\n\n\n\n\n1190 rows × 16 columns\n\n\n\n\nWe’re continuing to work with the movies data set. Here we have done some additional preprocessing steps to the data and saved it to disk beforehand so that we can load it indirectly on this slide.\nThis is largely the same dataset as before, but we filtered out some additional NaNs and a few categories that contained problematic values."
   },
   {
     "objectID": "modules/module4/slides/module4_01.html#scatter-plots-are-effective-visualizations-for-2d-distributions",
@@ -139,7 +139,7 @@
     "section": "",
     "text": "5. What did we just learn?\n\nVideoSlides",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "5. What did we just learn?"
     ]
   },
@@ -150,7 +150,7 @@
     "section": "",
     "text": "4. Exploratory Data Analysis on Categorical Data\n\nVideoSlides",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "4. Exploratory Data Analysis on Categorical Data"
     ]
   },
@@ -161,7 +161,7 @@
     "section": "",
     "text": "3. Exploratory Data Analysis\n\nVideoSlides",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "3. Exploratory Data Analysis"
     ]
   },
@@ -172,7 +172,7 @@
     "section": "",
     "text": "2. Visualizing Categorical Distributions\n\nVideoSlides",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "2. Visualizing Categorical Distributions"
     ]
   },
@@ -183,7 +183,7 @@
     "section": "",
     "text": "1. Visualizing Multidimensional Distributions\n\nVideoSlides",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "1. Visualizing Multidimensional Distributions"
     ]
   },
@@ -599,7 +599,7 @@
     "section": "",
     "text": "0. Module Learning Outcomes\n\nVideoSlides",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "0. Module Learning Outcomes"
     ]
   },
@@ -610,7 +610,7 @@
     "section": "True or False: Plotting Multiple Numerical Columns",
     "text": "True or False: Plotting Multiple Numerical Columns",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "&nbsp;&nbsp; 1.1. Exercises"
     ]
   },
@@ -621,7 +621,7 @@
     "section": "Which Plot Is It?",
     "text": "Which Plot Is It?",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "&nbsp;&nbsp; 1.1. Exercises"
     ]
   },
@@ -632,7 +632,7 @@
     "section": "Graph Analysis",
     "text": "Graph Analysis\nLook at the plot below and answer the following questions.\n\n\n246810Count of RecordsPokemon Scores5101520253035404550556065707580859095100105110115120125130135140145150155160165170175180185190195200205210215220225230Defense Score5101520253035404550556065707580859095100105110115120125130135140145150155160165170175180185Attack Score",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "&nbsp;&nbsp; 1.1. Exercises"
     ]
   },
@@ -643,7 +643,7 @@
     "section": "Fire and Ice: Heatmaps with Antarctic Penguins",
     "text": "Fire and Ice: Heatmaps with Antarctic Penguins\nInstructions: Be patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nLet’s now look at our penguins previous modules and see which penguins are more abundant. Are there penguins that have a greater flipper length (flipper_length_mm) but with a smaller body mass (body_mass_g)? Does the mass of a penguin have a relationship to its flipper length?\nLet’s take a look!\n\n\n\n\n\n\nCreate a heatmap between flipper_length_mm and body_mass_g and answer the questions below.\nTasks:\nFill in the blanks in the code below so that the following gets accomplished.\n\nCreate a heatmap and assign it to an object named penguin_heatmap.\nMap flipper_length_mm on the x-axis and body_mass_g on the y-axis. Distinguish the penguin count() using the color channel.\nMake sure to set the maxbins argument to 30.\nSet the dimensions to a width of 250 and a height of 200.\nGive it an appropriate title and axis labels.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you using .mark_rect()?\nAre you setting alt.X('flipper_length_mm', bin=alt.Bin(maxbins=30)?\nAre you setting alt.Y('body_mass_g', bin=alt.Bin(maxbins=30)?\nAre you using a color channel and setting it to counts()?\nAre you setting a title using .properties(title= 'title')?\nAre you setting width=250 and height=200 in .properties()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "&nbsp;&nbsp; 1.1. Exercises"
     ]
   },
@@ -654,7 +654,7 @@
     "section": "",
     "text": "Instructions: Be patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nWe are going to explore the different types of pokemon. You may remember this dataset from the previous Programming in Python for Data Science course. This time we are going to take a look at the different generations and pokemon types and see which ones are most prominent.\nFor those less familiar with Pokemon, a Pokemon’s generation is determined by the ara it was introduced. For example, the first generation spans Pokemon characters that were released in video games from 1996-1999. The 7th generation are Pokemon introduced from games released between 2016-2019.\nAccording to Wikipedia, A Pokémon’s type is “an elemental attribute determining the strengths and weaknesses of each Pokémon and its moves. Pokémon take double damage from attacking moves of types they are weak to and half damage from moves they resist. These type matchups offset one another in rock–paper–scissors-style relationships.”\n\n\n\n\n\n\nInstead of a heatmap, let’s make a plot that produces circles whose colour and size change based on the count of the Pokemon for each generation and type.\nTasks:\n\nCreate a heatmap and assign it to an object named pokemon_cicleplot.\nMap gen on the x-axis and make sure to specify that it is an ordinal (‘O’) value.\n\nMap type on the y-axis.\nAssign a Size and Colour channel to the count() of the pokemon.\nGive it an appropriate title and axis labels.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you using .mark_cicle()?\nAre you setting alt.X('gen:O')?\nAre you setting alt.Y('type')?\nAre you using a color channel and setting it to counts()?\nAre you setting a title using .properties(title= 'title')?\nAre you setting width=250 and height=200 in .properties()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "&nbsp;&nbsp; 2.1. Exercises"
     ]
   },
@@ -665,7 +665,7 @@
     "section": "",
     "text": "Instructions: Be patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nWe are going to explore the different types of pokemon. You may remember this dataset from the previous Programming in Python for Data Science course. This time we are going to take a look at the different generations and pokemon types and see which ones are most prominent.\nFor those less familiar with Pokemon, a Pokemon’s generation is determined by the ara it was introduced. For example, the first generation spans Pokemon characters that were released in video games from 1996-1999. The 7th generation are Pokemon introduced from games released between 2016-2019.\nAccording to Wikipedia, A Pokémon’s type is “an elemental attribute determining the strengths and weaknesses of each Pokémon and its moves. Pokémon take double damage from attacking moves of types they are weak to and half damage from moves they resist. These type matchups offset one another in rock–paper–scissors-style relationships.”\n\n\n\n\n\n\nInstead of a heatmap, let’s make a plot that produces circles whose colour and size change based on the count of the Pokemon for each generation and type.\nTasks:\n\nCreate a heatmap and assign it to an object named pokemon_cicleplot.\nMap gen on the x-axis and make sure to specify that it is an ordinal (‘O’) value.\n\nMap type on the y-axis.\nAssign a Size and Colour channel to the count() of the pokemon.\nGive it an appropriate title and axis labels.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you using .mark_cicle()?\nAre you setting alt.X('gen:O')?\nAre you setting alt.Y('type')?\nAre you using a color channel and setting it to counts()?\nAre you setting a title using .properties(title= 'title')?\nAre you setting width=250 and height=200 in .properties()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "&nbsp;&nbsp; 2.1. Exercises"
     ]
   },
@@ -676,7 +676,7 @@
     "section": "True or False: Exploratory Data Analysis (EDA)",
     "text": "True or False: Exploratory Data Analysis (EDA)",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "&nbsp;&nbsp; 3.1. Exercises"
     ]
   },
@@ -687,7 +687,7 @@
     "section": "Exploring EDA",
     "text": "Exploring EDA",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "&nbsp;&nbsp; 3.1. Exercises"
     ]
   },
@@ -698,7 +698,7 @@
     "section": "Plotting Numeric Columns with Penguins",
     "text": "Plotting Numeric Columns with Penguins\nInstructions:\nBe patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nIt’s been a hot second since we used the penguins data and seen it’s one second too long and we missed it, we are welcoming it back.\n\n\n\n\n\n\nLet’s plot all the distributions of the numeric columns from the dataset.\nTasks:\nFill in the blanks in the code below so that the following gets accomplished.\n\nUse the data source penguins_df to make a histogram for each of the numeric columns.\nAssign the plot to an object named numeric_histograms.\nPlot the counts of each column on the y-axis and the values of each numeric column of the x-axis.\nMake sure to set the maxbins argument to something appropriate (30 or 40).\nSet width to 150 and height to 150 and display the plots in 2 columns and 2 rows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you setting alt.X(alt.repeat(), type='quantitative', bin=alt.Bin(maxbins=30)?\nAre you setting alt.Y('count()')?\nAre you setting the height and width in properties()?\nAre you using .repeat() and setting numeric_cols as the first argument and columns=2 or rows=2?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "&nbsp;&nbsp; 3.1. Exercises"
     ]
   },
@@ -709,7 +709,7 @@
     "section": "",
     "text": "Instructions:\nBe patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nAre you getting bored of this penguins data yet? Don’t worry, we will spice it up soon, but let finish off this module with it.\n\n\n\n\n\n\nLet’s count combinations of the different categoricals, so we can get a bit of a better idea about where our data lies.\nTasks:\nFill in the blanks in the code below so that the following gets accomplished.\n\nUse the data source penguins_df to make a circle plot for each pair of categorical columns.\nAssign the plot to an object named categorical_plots.\nMap and repeat every categorical column on both the x and y-axis.\nMap the counts to both a Color and Size channel and indicate that no title should be assigned.\nMake sure to give the size and colour channels independent scales.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you using .mark_circle()?\nAre you setting alt.X(alt.repeat('column'), type='nominal')?\nAre you setting alt.Y('count()')?\nAre you chaining repeat(row=cat_cols, column=cat_cols) after .encode()?\nAre you setting color='independent' and size='independent' in .resolve_scale()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "&nbsp;&nbsp; 4.1. Exercises"
     ]
   },
@@ -720,7 +720,7 @@
     "section": "",
     "text": "Instructions:\nBe patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nAre you getting bored of this penguins data yet? Don’t worry, we will spice it up soon, but let finish off this module with it.\n\n\n\n\n\n\nLet’s count combinations of the different categoricals, so we can get a bit of a better idea about where our data lies.\nTasks:\nFill in the blanks in the code below so that the following gets accomplished.\n\nUse the data source penguins_df to make a circle plot for each pair of categorical columns.\nAssign the plot to an object named categorical_plots.\nMap and repeat every categorical column on both the x and y-axis.\nMap the counts to both a Color and Size channel and indicate that no title should be assigned.\nMake sure to give the size and colour channels independent scales.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you using .mark_circle()?\nAre you setting alt.X(alt.repeat('column'), type='nominal')?\nAre you setting alt.Y('count()')?\nAre you chaining repeat(row=cat_cols, column=cat_cols) after .encode()?\nAre you setting color='independent' and size='independent' in .resolve_scale()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
     "crumbs": [
-      "**M4.Visualizing Distributions and Exploratory Data Analysis**",
+      "**M4. Visualizing Distributions and Exploratory Data Analysis**",
       "&nbsp;&nbsp; 4.1. Exercises"
     ]
   },
@@ -736,7 +736,7 @@
     "href": "modules/module4/slides/module4_03.html#reading-in-the-data",
     "title": "Visualizing Categorical Distributions",
     "section": "Reading in the data",
-    "text": "Reading in the data\n\nimport altair as alt\nimport pandas as pd\n\nmovies_extended = pd.read_csv('data/movies-extended.csv')\nmovies_extended\n\n\n\n\n\n\n\n\nTitle\nUS Gross\nWorldwide Gross\nUS DVD Sales\nProduction Budget\nRelease Date\nMPAA Rating\nRunning Time min\nDistributor\nSource\nMajor Genre\nCreative Type\nDirector\nRotten Tomatoes Rating\nIMDB Rating\nIMDB Votes\n\n\n\n\n0\nBoynton Beach Club\n3127472.0\n3127472.0\nNaN\n2900000.0\nMar 24 2006\nR\n104.0\nWingate Distribution\nOriginal Screenplay\nRomantic Comedy\nContemporary Fiction\nNaN\nNaN\nNaN\nNaN\n\n\n1\nBroken Arrow\n70645997.0\n148345997.0\nNaN\n65000000.0\nFeb 09 1996\nR\n108.0\n20th Century Fox\nOriginal Screenplay\nAction\nContemporary Fiction\nJohn Woo\n55.0\n5.8\n33584.0\n\n\n2\nBrazil\n9929135.0\n9929135.0\nNaN\n15000000.0\nDec 18 1985\nR\n136.0\nUniversal\nOriginal Screenplay\nBlack Comedy\nFantasy\nTerry Gilliam\n98.0\n8.0\n76635.0\n\n\n3\nThe Cable Guy\n60240295.0\n102825796.0\nNaN\n47000000.0\nJun 14 1996\nPG-13\n95.0\nSony Pictures\nOriginal Screenplay\nComedy\nContemporary Fiction\nBen Stiller\n52.0\n5.8\n51109.0\n\n\n4\nChain Reaction\n21226204.0\n60209334.0\nNaN\n55000000.0\nAug 02 1996\nPG-13\n106.0\n20th Century Fox\nOriginal Screenplay\nAction\nContemporary Fiction\nAndrew Davis\n13.0\n5.2\n15817.0\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n1185\nZombieland\n75590286.0\n98690286.0\n28281155.0\n23600000.0\nOct 02 2009\nR\n87.0\nSony Pictures\nOriginal Screenplay\nComedy\nFantasy\nRuben Fleischer\n89.0\n7.8\n81629.0\n\n\n1186\nZack and Miri Make a Porno\n31452765.0\n36851125.0\n21240321.0\n24000000.0\nOct 31 2008\nR\n101.0\nWeinstein Co.\nOriginal Screenplay\nComedy\nContemporary Fiction\nKevin Smith\n65.0\n7.0\n55687.0\n\n\n1187\nZodiac\n33080084.0\n83080084.0\n20983030.0\n85000000.0\nMar 02 2007\nR\n157.0\nParamount Pictures\nBased on Book/Short Story\nThriller/Suspense\nDramatization\nDavid Fincher\n89.0\nNaN\nNaN\n\n\n1188\nThe Legend of Zorro\n45575336.0\n141475336.0\nNaN\n80000000.0\nOct 28 2005\nPG\n129.0\nSony Pictures\nRemake\nAdventure\nHistorical Fiction\nMartin Campbell\n26.0\n5.7\n21161.0\n\n\n1189\nThe Mask of Zorro\n93828745.0\n233700000.0\nNaN\n65000000.0\nJul 17 1998\nPG-13\n136.0\nSony Pictures\nRemake\nAdventure\nHistorical Fiction\nMartin Campbell\n82.0\n6.7\n4789.0\n\n\n\n\n1190 rows × 16 columns\n\n\n\n\nWe’re continuing to work with the movies data set from the last slide deck, but here we will focus on the categorical dataframe columns."
+    "text": "Reading in the data\n\nimport altair as alt\nimport pandas as pd\n\nmovies_extended = pd.read_csv(\"../../data/movies-extended.csv\")\nmovies_extended\n\n\n\n\n\n\n\n\nTitle\nUS Gross\nWorldwide Gross\nUS DVD Sales\n...\nDirector\nRotten Tomatoes Rating\nIMDB Rating\nIMDB Votes\n\n\n\n\n0\nBoynton Beach Club\n3127472.0\n3127472.0\nNaN\n...\nNaN\nNaN\nNaN\nNaN\n\n\n1\nBroken Arrow\n70645997.0\n148345997.0\nNaN\n...\nJohn Woo\n55.0\n5.8\n33584.0\n\n\n2\nBrazil\n9929135.0\n9929135.0\nNaN\n...\nTerry Gilliam\n98.0\n8.0\n76635.0\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n1187\nZodiac\n33080084.0\n83080084.0\n20983030.0\n...\nDavid Fincher\n89.0\nNaN\nNaN\n\n\n1188\nThe Legend of Zorro\n45575336.0\n141475336.0\nNaN\n...\nMartin Campbell\n26.0\n5.7\n21161.0\n\n\n1189\nThe Mask of Zorro\n93828745.0\n233700000.0\nNaN\n...\nMartin Campbell\n82.0\n6.7\n4789.0\n\n\n\n\n1190 rows × 16 columns\n\n\n\n\nWe’re continuing to work with the movies data set from the last slide deck, but here we will focus on the categorical dataframe columns."
   },
   {
     "objectID": "modules/module4/slides/module4_03.html#bar-charts-are-effective-for-visualizing-categorical-distributions-of-a-single-column",
@@ -813,7 +813,7 @@
     "href": "modules/module4/slides/module4_07.html#a-statistical-summary-is-useful-to-complement-visualizations",
     "title": "Exploratory Data Analysis on Categorical Data",
     "section": "A statistical summary is useful to complement visualizations",
-    "text": "A statistical summary is useful to complement visualizations\n\nimport pandas as pd\n\nmovies_extended = pd.read_csv('data/movies-extended-eda.csv')\nmovies_extended.describe(exclude='number')\n\n\n\n\n\n\n\n\nMajor Genre\nMPAA Rating\n\n\n\n\ncount\n996\n994\n\n\nunique\n6\n4\n\n\ntop\nComedy\nPG-13\n\n\nfreq\n286\n413\n\n\n\n\n\n\n\n\nSince we have already seen the dataset rows and info in the last slide deck, we start by describing the data here.\nIn addition to generally receiving more information about our data, categorical counts are helpful when building machine learning classification models. Having an unbalanced data set for the dataframe column we are trying to predict (i.e., uneven numbers of things in the various categories) would mean that we need to compensate for this in our downstream analysis.\nThere are many other examples in statistical analysis, where uneven categories can change how you need to do your analysis. Failing to account for this would lead to less accurate and possibly misleading results.\nAs for the numerical columns above, we start by printing information about the most frequently occurring categorical values in each of the columns. We use exclude to indicate that we want to use all other columns except the numerical ones.\nWe can already see what the most commons values are for each column, but let’s visualize these in a bar chart and cross-reference this table with our plot on the next slide."
+    "text": "A statistical summary is useful to complement visualizations\n\nimport pandas as pd\n\nmovies_extended = pd.read_csv(\"../../data/movies-extended-eda.csv\")\nmovies_extended.describe(exclude=\"number\")\n\n\n\n\n\n\n\n\nMajor Genre\nMPAA Rating\n\n\n\n\ncount\n996\n994\n\n\nunique\n6\n4\n\n\ntop\nComedy\nPG-13\n\n\nfreq\n286\n413\n\n\n\n\n\n\n\n\nSince we have already seen the dataset rows and info in the last slide deck, we start by describing the data here.\nIn addition to generally receiving more information about our data, categorical counts are helpful when building machine learning classification models. Having an unbalanced data set for the dataframe column we are trying to predict (i.e., uneven numbers of things in the various categories) would mean that we need to compensate for this in our downstream analysis.\nThere are many other examples in statistical analysis, where uneven categories can change how you need to do your analysis. Failing to account for this would lead to less accurate and possibly misleading results.\nAs for the numerical columns above, we start by printing information about the most frequently occurring categorical values in each of the columns. We use exclude to indicate that we want to use all other columns except the numerical ones.\nWe can already see what the most commons values are for each column, but let’s visualize these in a bar chart and cross-reference this table with our plot on the next slide."
   },
   {
     "objectID": "modules/module4/slides/module4_07.html#visualizing-the-counts-of-all-categorical-columns-helps-us-understand-the-data",
