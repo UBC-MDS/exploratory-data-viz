@@ -1,0 +1,97 @@
+---
+format: html
+---
+
+<script src='../../src/quiz.js'></script> 
+
+# 1.1. Exercises
+
+## True or False: Once Upon a Time...
+
+<div id='mcq1'></div> 
+<script>
+    generateQuiz(
+        'mcq1', 
+        'True or False', 
+        'When telling a narrative for data analysis, it’s important to adjust the technical verbiage for the respective reader.',  
+        { 
+        'True': '',
+        'False': 'When explaining insights, it’s important that we communicate them in a way that the audience understands.'
+        },
+        'True',  
+    );
+</script>
+
+<div id='mcq2'></div> 
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'Telling a narrative around data and data visualizations may sometimes lead to additional questions.',
+        {
+        'True': '',
+        'False': 'Stories and narratives attempt to answer an initial question but can sometimes lead us down the path of “why?” or additional questions regarding what we discovered.'
+        },
+        'True',
+    );
+</script>
+
+## ...Happily Ever After: Narrative Components
+
+<div id='mcq3'></div> 
+<script>
+    generateQuiz(
+        'mcq3',
+        'Question',
+        'What is NOT an effective method to help make your storytelling more effective?',
+        {
+        'Concentrating on the most exciting discoveries of your analysis and exagerate them.': ' Yikes! Never exaggerate any of your findings. Remember the reading is trusting you to represent the data truthfully.',
+        'Using striking visualizations to capture the audience´s attention.': 'This can be effective since and follow-up questions can help tell a story.',
+        'Recaping the insights discovered at the end of your analysis.': 'This is a great thing to do to remind the reader of what was covered.',
+        'Preemptively covering topics or answering questions you think the reader may have about the data.': 'It’s a great idea to try and supply the ready with answers they may want.'
+        },
+        'Concentrating on the most exciting discoveries of your analysis and exagerate them.',
+    );
+</script>
+
+
+## Analysis Narrative - Short Stories
+
+<div id='mcq4'></div> 
+<script>
+    generateQuiz(
+        'mcq4',
+        'Question 1',
+        'Take a look at the plot below that visualizes hotel bookings data, in particular the number of guests and the number of days rooms were booked in advance. Which of the following is the best narrative approach to the visualization below?',
+        {
+        'Due to the majority of single stays being business related, it´s clear that single guest stays need less advanced booking time then bookings with multiple guests.': 'This narrative is jumping to conclusions regarding the single stays being business-related. We have no information on that displayed here.',
+        'In comparison to single and many guest bookings, the distribution of bookings for couples has a much longer right tail. This is likely due to parents needing more time to organize for child care accomodation for their children when they go on vacation together.': 'Again this seems to be jumping to conclusions on a very specific reason that may not be accurate.',
+        'Looking at the hotel bookings from single guests, the distribution appears to have a large peak at values less than 50 days in advance. This leads us to further questions regarding the nature of the booking. Are they booked through travel agents or by a corporate company? How long are they stays on average?': '',
+        'Single guest bookings generally are booked far less in advance than multiple guest bookings.': 'This is just an observation here, there doesn’t seem to be any storytelling or narrative to keep the readers’ engagement.'
+        },
+        'Looking at the hotel bookings from single guests, the distribution appears to have a large peak at values less than 50 days in advance. This leads us to further questions regarding the nature of the booking. Are they booked through travel agents or by a corporate company? How long are they stays on average?',
+    );
+</script>
+
+![](../../../static/module6/hotel.svg){fig-alt="Hotel" width=60%}
+
+(Attribution: These plots were created using [a Kaggle dataset](https://www.kaggle.com/jessemostipak/hotel-booking-demand?select=hotel_bookings.csv) where the data was originally obtained from the article [Hotel Booking Demand Datasets](https://www.sciencedirect.com/science/article/pii/S2352340918315191), written by Nuno Antonio, Ana Almeida, and Luis Nunes for Data in Brief, Volume 22, February 2019.)
+
+
+<div id='mcq5'></div> 
+<script>
+    generateQuiz(
+        'mcq5',
+        'Question 2',
+        'We then follow up on our dataset and decide to answer some questions that were brought to light. Are most bookings for a single guest business-related? This leads up to make the visualizations below. Which narrative is more suitable to explain the plots above?',
+        {
+        'After plotting the booking method for single guest stays, we can confirm that a large porportion of the bookings were done corporately. This explains the distribution in the previous question and why single guest stays are booked less time in advance.': 'Do we need to know all the categories?',
+        'Now that we can see the porportion of booking methods more clearly, it appears that a much large porportion of single guest stays, are booked through a corporate setting than for multiple guest bookings. However, it is possible that the data is underestimating the the number of business-related bookings for single guest travel stays, as not all business-stays need to be booked via corporate booking services but without additional data, we cannot confirm this.': ''
+        },
+        'Now that we can see the porportion of booking methods more clearly, it appears that a much large porportion of single guest stays, are booked through a corporate setting than for multiple guest bookings. However, it is possible that the data is underestimating the the number of business-related bookings for single guest travel stays, as not all business-stays need to be booked via corporate booking services but without additional data, we cannot confirm this.',
+    );
+</script>
+
+![](../../../static/module6/hotelsing.svg){fig-alt="Hotelsing" width=80%}
+
+![](../../../static/module6/hotelmult.svg){fig-alt="Hotelmult" width=80%}
