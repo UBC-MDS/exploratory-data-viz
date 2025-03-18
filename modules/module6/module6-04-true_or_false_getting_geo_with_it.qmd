@@ -1,0 +1,103 @@
+---
+format:
+  live-html
+resources:
+  - ../utils.py
+---
+
+
+<script src='../../src/quiz.js'></script>  <!-- Only needed once per page -->
+
+# 2.1. Exercises
+
+## True or False: Getting Geo With It!
+
+<div id='mcq1'></div> 
+<script>
+    generateQuiz(
+        'mcq1', 
+        'True or False', 
+        'If we want to look more closely at certain countries instead of the whole globe, Altair uses the scale argument to zoom in to our desire geographical area.',  
+        { 
+        'True': '',
+        'False': 'We can use the arguments <code>scale</code> and <code>translate</code> to zoom and pan closer into a map.'
+        },
+        'True',  
+    );
+</script>
+
+<div id='mcq2'></div> 
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'With Altair geographical visualizations, we are restricted to choropleth maps.',
+        {
+        'True': 'If we have the necessary columns (such as <code>latitude</code> and <code>longitude</code>) we can use different channels and are less restricted in our visualizations.',
+        'False': 'Depending on which columns we have, (such as <code>latitude</code> and <code>longitude</code>) we can use different visualization channels!'
+        },
+        'False',
+    );
+</script>
+
+## Where Are We, With Geography?
+
+<div id='mcq3'></div> 
+<script>
+    generateQuiz(
+        'mcq3',
+        'Question 1',
+        'Below we see a map showing the location of all the airports in the USA. Which of the following projection types would have been used to create this plot?',
+        {
+        '<code>FlatUsa</code>': 'Not quite. We made this one up and is not a type of projection.',
+        '<code>albers</code>': 'This is a U.S.-centric configuration of “conicEqualArea” and would not produce a map as clear as the one above.',
+        '<code>equalEarth</code>': 'This type is used with the <code>countries</code> feature type and focuses on correctly representing the relative areas of all landmasses.',
+        '<code>albersUsa</code>': ''
+        },
+        '<code>albersUsa</code>',
+    );
+</script>
+
+<iframe src="../../static/module6/airports.html" width="100%" height="580px">
+</iframe>
+
+[Attribution](https://altair-viz.github.io/gallery/airports.html)
+
+<div id='mcq4'></div> 
+<script>
+    generateQuiz(
+        'mcq4',
+        'Question 2',
+        'Which of the following methods is needed for all map visualizations?',
+        {
+        '<code>.project()</code>': 'This isn’t needed since if omitted, the default projection of <code>mercator</code> will result.',
+        '<code>.mark_geoshape()</code>': '',
+        '<code>.LookupData()</code>': 'This is only needed if we need 2 data sources.',
+        '<code>.transform_lookup()</code>': 'This is only needed if we need 2 data sources.'
+        },
+        '<code>.mark_geoshape()</code>',
+    );
+</script>
+
+## Geography with Gapminder
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+We were introduced to the Gapminder dataset in previous modules as well as the assignments as although we have data about the world, we have yet to actually plot it as a map! 
+
+We have altered this dataset a bit to only include data from 2018 (there should only be 1 row for each country now) and we also added a new `id` column which contains the [ISO 3166-1 numeric code](https://en.wikipedia.org/wiki/ISO_3166-1_numeric) for each country. 
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+from vega_datasets import data
+
+# The data sources
+gapminder_df = pd.read_csv('data/gapminder_codes.csv', parse_dates=['year'])
+gapminder_df.info()
+```
+
