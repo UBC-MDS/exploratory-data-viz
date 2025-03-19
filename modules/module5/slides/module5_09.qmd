@@ -1,6 +1,8 @@
 ---
 format: revealjs
 title: Effective use of colour for quantitative data
+resources:
+  - ../../utils.py
 title-slide-attributes:
   data-notes: |
    This slide deck describes how to choose colour to accurately represent numerical data.
@@ -8,19 +10,7 @@ title-slide-attributes:
 
 ```{python}
 #  | echo: false
-#  | output: false
-import altair as alt
-
-
-@alt.theme.register("increase_font_size", enable=True)
-def increase_font_size() -> alt.theme.ThemeConfig:
-    return {
-        'config': {
-            'view': {'continuousWidth': 400, 'continuousHeight': 300},
-            'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14},
-            'axis': {'titleFontSize': 14, 'labelFontSize': 12},
-            'header': {'titleFontSize': 16, 'labelFontSize': 14},
-            'encoding': {'x': {'scale': {'zero': False}}}}}
+%run ../../utils.py
 ```
 
 ## Repetition of hue, lightness, and saturation
@@ -305,9 +295,9 @@ where the end and beginning are close to each other.
 ```{python}
 import pandas as pd
 
-toronto_temp = pd.read_csv("data/weatherstats_toronto_daily.csv", parse_dates=["date"])[
-    ["date", "avg_temperature"]
-]
+toronto_temp = pd.read_csv(
+    "../../data/weatherstats_toronto_daily.csv", parse_dates=["date"]
+)[["date", "avg_temperature"]]
 alt.Chart(toronto_temp).mark_circle(size=50).encode(
     alt.X("date", title=None),
     alt.Y("avg_temperature", title="Average temperature (°C)"),

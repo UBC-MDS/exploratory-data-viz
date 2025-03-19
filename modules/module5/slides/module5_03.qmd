@@ -1,6 +1,8 @@
 ---
 format: revealjs
 title: Descriptive titles and labels
+resources:
+  - ../../utils.py
 title-slide-attributes:
   data-notes: |
    In this slide deck, we will see how we can change different aesthetic elements of the plot to cater to communication in various settings.
@@ -8,19 +10,7 @@ title-slide-attributes:
 
 ```{python}
 #  | echo: false
-#  | output: false
-import altair as alt
-
-
-@alt.theme.register("increase_font_size", enable=True)
-def increase_font_size() -> alt.theme.ThemeConfig:
-    return {
-        'config': {
-            'view': {'continuousWidth': 400, 'continuousHeight': 300},
-            'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14},
-            'axis': {'titleFontSize': 14, 'labelFontSize': 12},
-            'header': {'titleFontSize': 16, 'labelFontSize': 14},
-            'encoding': {'x': {'scale': {'zero': False}}}}}
+%run ../../utils.py
 ```
 
 ## Charts without titles are hard to interpret
