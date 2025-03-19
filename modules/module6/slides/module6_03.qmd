@@ -1,6 +1,8 @@
 ---
 format: revealjs
 title: Visualizing Geographic Data
+resources:
+  - ../../utils.py
 title-slide-attributes:
   data-notes: |
     In this module we will see how we can plot maps with Altair. We will also learn how to colour these maps to link our data to geographical regions.
@@ -9,19 +11,7 @@ title-slide-attributes:
 
 ```{python}
 # | echo: false
-import pandas as pd
-import altair as alt
-
-
-@alt.theme.register("increase_font_size", enable=True)
-def increase_font_size() -> alt.theme.ThemeConfig:
-    return {
-        "config": {
-            "view": {"continuousWidth": 400, "continuousHeight": 300},
-            "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14},
-            "axis": {"titleFontSize": 14, "labelFontSize": 12},
-            "header": {"titleFontSize": 16, "labelFontSize": 14},
-            "encoding": {"x": {"scale": {"zero": False}}}}}
+%run ../../utils.py
 ```
 
 ## Geographical file formats
@@ -249,7 +239,7 @@ if we specified it as ordinal or nominal.
 ```{python}
 import pandas as pd
 
-state_pop = pd.read_csv('data/us_population_coordinates_asthma-cases.csv')
+state_pop = pd.read_csv("../../data/us_population_coordinates_asthma-cases.csv")
 state_pop[:5]
 ```
 
