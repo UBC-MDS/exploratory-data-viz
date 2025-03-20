@@ -75,3 +75,15 @@ def assert_dict_equal(expected_dict, actual_dict, path=""):
     for key in actual_dict:
         if key not in expected_dict:
             raise AssertionError(f"Key mismatch: '{path + key}' was unexpected.")
+
+
+def remove_keys_inplace(spec, keys):
+    if isinstance(spec, dict):
+        for key in list(spec.keys()):
+            if key in keys:
+                del spec[key]
+            else:
+                remove_keys_inplace(spec[key], keys)
+    elif isinstance(spec, list):
+        for item in spec:
+            remove_keys_inplace(item, keys)
