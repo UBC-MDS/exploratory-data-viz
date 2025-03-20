@@ -120,17 +120,7 @@ Fill in the blanks in the code below so that the following gets accomplished.
 
 import altair as alt
 import pandas as pd
-from utils import assert_chart_equal 
-def remove_keys_inplace(spec, keys):
-    if isinstance(spec, dict):
-        for key in list(spec.keys()):
-            if key in keys:
-                del spec[key]
-            else:
-                remove_keys_inplace(spec[key], keys)
-    elif isinstance(spec, list):
-        for item in spec:
-            remove_keys_inplace(item, keys)
+from utils import assert_chart_equal, remove_keys_inplace
 
 penguins_df = pd.read_csv('data/penguins.csv')
 ```
