@@ -48,17 +48,7 @@ Instead of a heatmap, let's make a plot that produces circles whose colour and s
 #| exercise: pokemon
 import pandas as pd
 import altair as alt
-from utils import assert_chart_equal
-def remove_keys_inplace(spec, keys):
-    if isinstance(spec, dict):
-        for key in list(spec.keys()):
-            if key in keys:
-                del spec[key]
-            else:
-                remove_keys_inplace(spec[key], keys)
-    elif isinstance(spec, list):
-        for item in spec:
-            remove_keys_inplace(item, keys)
+from utils import assert_chart_equal, remove_keys_inplace
 
 pokemon_df = pd.read_csv('data/pokemon.csv')
 ```
