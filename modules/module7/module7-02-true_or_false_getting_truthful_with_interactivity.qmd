@@ -1,0 +1,204 @@
+---
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ../data
+---
+
+<script src='../../src/quiz.js'></script> 
+
+# 1.1. Exercises
+
+## True or False: Getting Truthful with Interactivity
+
+<div id='mcq1'></div>
+<script>
+    generateQuiz(
+        'mcq1',
+        'True or False',
+        'Panning, zooming and brush selections can be simply added to Altair charts by using the <code>.interactive()</code> method.',
+        {
+        'True': 'Try again! Brush selections are added via <code>.add_selection()</code> and  <code>.selection_interval()</code>, not the <code>.interactive()</code> method.',
+        'False': ''
+        },
+        'False',
+    );
+</script>
+
+<div id='mcq2'></div>
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'In Altair, brush selections are automatically linked between scatter plots that are created from the same dataframe.',
+        {
+        'True': 'Great work! This is a great feature of Altair!',
+        'False': 'Try again! It’s easier than you think to link selections between scatter plots in Altair!'
+        },
+        'True',
+    );
+</script>
+
+
+## Your First Interactive Plot
+
+**Instructions:**
+Be patient when running a coding exercise for the first time, it can take a few minutes.
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.**
+
+Let’s now look at the [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) data set again and see whether species differences in body shape also relates to species differences in culmen shape. 
+
+Which penguins are more abundant? Are there penguins that have a greater flipper length (`flipper_length_mm`) but with a smaller body mass (`body_mass_g)`? Does the mass of a penguin have a relationship to its flipper length? 
+
+Let’s take a look!
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+
+penguins_df = pd.read_csv('data/penguins.csv')
+penguins_df.info()
+```
+
+The first scatter plot should show body mass (y-axis) vs flipper length (x-axis) and be named `linked_scatter`. Colour the points be species. The second plot should show culmen depth (y-axis) vs culmen length (x-axis) - this second scatter plot can be created by just overwriting the encoding of the first. Horizontally concatenate these two scatter plots.
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished:<br>
+- Create a selection interval and save it in an object named `brush`.<br>
+- Create a scatter plot thats maps body mass on the y axis and flipper length on the x-axis. Map species to the colour channel and save this plot in an object named `linked_scatter`. <br>
+-  In a second plot using `linked_scatter` as a base, map the culmen length (x-axis) by culmen depth (y-axis) and display them on top of each other by saving them in an object called `together_plot`. 
+
+```{pyodide}
+#| setup: true
+#| exercise: interactive_plot
+import altair as alt
+import pandas as pd
+from utils import assert_chart_equal, remove_keys_inplace
+
+penguins_df = pd.read_csv('data/penguins.csv')
+```
+
+```{pyodide}
+#| exercise: interactive_plot
+brush = ____
+
+linked_scatter = (alt.Chart(____).mark_circle().encode(
+    alt.X(____, title=____, scale=alt.Scale(zero=False)),
+    alt.Y(____, title=____, scale=alt.Scale(zero=False)),
+    color=alt.condition(____, 'species', alt.value('lightgray')))
+    .add_selection(____))
+    
+together_plots = (____ &
+                 ____.encode(alt.X(____,
+                             title=____,
+                             scale=alt.Scale(zero=False)),
+                             alt.Y(____,
+                             title=____, scale=alt.Scale(zero=False))))
+together_plots
+```
+
+```{pyodide}
+#| exercise: interactive_plot
+#| check: true
+
+brush = alt.selection_interval()
+
+linked_scatter = (alt.Chart(penguins_df).mark_circle().encode(
+    alt.X('body_mass_g', title='Body mass (g)', scale=alt.Scale(zero=False)),
+    alt.Y('flipper_length_mm', title='Flipper length (mm)', scale=alt.Scale(zero=False)),
+    color=alt.condition(brush, 'species', alt.value('lightgray')))
+    .add_selection(brush))
+    
+solution = (linked_scatter &
+                  linked_scatter.encode(alt.X('culmen_length_mm',
+                                              title='Culmen length (mm)',
+                                              scale=alt.Scale(zero=False)),
+                                       alt.Y('culmen_depth_mm',
+                                             title='Culmen depth (mm)',
+                                             scale=alt.Scale(zero=False))))
+
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+
+remove_keys_inplace(solution_dict, {"title", "name", "param", "views"})
+remove_keys_inplace(result_dict, {"title", "name", "param", "views"})
+
+assert_chart_equal(solution_dict, result_dict)
+```
+
+:::: { .hint exercise="interactive_plot"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you creating a selection interval using `alt.selection_interval()`
+- Are you using the data `penguins_df` to create `linked_scatter`? 
+- Are you plotting `body_mass_g` on the x-axis in `linked_scatter`?
+- Are you setting the selection interval as an argument in condition? 
+- Are you setting `brush` in  `add_selection`?
+
+:::
+::::
+
+:::: { .solution exercise="interactive_plot" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+brush = alt.selection_interval()
+
+linked_scatter = (alt.Chart(penguins_df).mark_circle().encode(
+    alt.X('body_mass_g', title='Body mass (g)', scale=alt.Scale(zero=False)),
+    alt.Y('flipper_length_mm', title='Flipper length (mm)', scale=alt.Scale(zero=False)),
+    color=alt.condition(brush, 'species', alt.value('lightgray')))
+    .add_selection(brush))
+    
+together_plots = (linked_scatter &
+                  linked_scatter.encode(alt.X('culmen_length_mm',
+                                              title='Culmen length (mm)',
+                                              scale=alt.Scale(zero=False)),
+                                       alt.Y('culmen_depth_mm',
+                                             title='Culmen depth (mm)',
+                                             scale=alt.Scale(zero=False))))
+together_plots
+```
+
+:::
+::::
+
+<div id='mcq3'></div>
+<script>
+    generateQuiz(
+        'mcq3',
+        'Question 1',
+        'Do the smallest Gentoo penguins (as measured by body size and flipper size) also have the smallest culmens?',
+        {
+        'Yes': 'Nice work! When we use our cursor to select the smallest Gentoo penguins in the scatter plot on the left, we see that this also highlights the Gentoo penguins with the smallest culmens in the scatter plot on the right.',
+        'No': 'Try again, making sure you select the Gentoo penguins with the smallest body mass and flipper lengths!',
+        'It is not possible to answer this with this visualization.': 'This is indeed possible with scatter plots that have linked brush selections. Make sure you are using your cursor on the scatter plot on the left to select the Gentoo penguins with the smallest body mass and flipper lengths!'
+        },
+        'Yes',
+    );
+</script>
+
+<div id='mcq4'></div>
+<script>
+    generateQuiz(
+        'mcq4',
+        'Question 2',
+        'If we wanted to be able to get more detail about the linked observations between the two penguins scatter plots we just created, which of the following would <strong>NOT</strong> be helpful?',
+        {
+        'Use <code>resolve="intersect"</code> with <code>.selection_interval()</code> so that we can make brush selections in both scatter plots to highlight only intersecting points.': 'Try again! This would be helpful as we could highlight only the observations that intersect in a select space between the two charts!',
+        'Use <code>.interactive()</code> so that we can zoom in and pan to areas of interest': 'Try again! Adding  <code>.interactive()</code> would let us get more detail through panning and zooming.',
+        'Use <code>tooltip</code> so that the island the penguin came from and its sex is shown when a cursor hovers over an observation.': 'Nice work! Adding a tooltip would only be useful if here if we had unique identifiers for each observation. We do not have this here in this data set. It’s important to note, that even if we did, this would be less effective that the other two options in this question.'
+        },
+        'Use <code>tooltip</code> so that the island the penguin came from and its sex is shown when a cursor hovers over an observation.',
+    );
+</script>
+
+
+
