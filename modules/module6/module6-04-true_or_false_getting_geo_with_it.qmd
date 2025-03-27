@@ -4,6 +4,8 @@ format:
 resources:
   - ../utils.py
   - ./../../static/module6/
+  - ../data
+
 ---
 
 
@@ -102,3 +104,204 @@ gapminder_df = pd.read_csv('data/gapminder_codes.csv', parse_dates=['year'])
 gapminder_df.info()
 ```
 
+Before we start plotting the data from the `gapminder_df`, let's first make sure we know how to make a map of the world without any statistics. 
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+- Load the `countries` TopoJSON file from the `vega_datasets` library and save it as an object named `world_df` respectively. 
+-  In a plot named `world_plot`, use the data source `world_df` to make a `.geo_shape()` visualization with a projection type of `equalEarth`. Make sure the plot has the height and width dimensions of 580 and 400 respectively. 
+
+```{pyodide}
+#| setup: true
+#| exercise: 
+#|  - world_plot
+#|  - pop_dense_plot
+
+import altair as alt
+import pandas as pd
+from vega_datasets import data
+from utils import assert_chart_equal, remove_keys_inplace
+```
+
+```{pyodide}
+#| exercise: world_plot
+# The data sources
+world_df = alt.____(data.world_110m.url, ____)
+
+# The map
+world_plot = alt.Chart(____).____(
+).____(type=____
+).properties(width=580, height=400,
+            title='World Map'
+            )
+
+world_plot
+```
+
+```{pyodide}
+#| exercise: world_plot
+#| check: true
+world_df = alt.topo_feature(data.world_110m.url, 'countries')
+
+solution = alt.Chart(world_df).mark_geoshape(
+).project(type='equalEarth'
+).properties(width=580, height=400,
+            title='World Map'
+            )
+
+assert_chart_equal(solution, result)
+```
+
+:::: { .hint exercise="world_plot"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you using the method `.topo_feature()` to load in the lada and selecting `countries`? 
+- In the plot, are you using `.mark_geoshape()`?
+- Are you setting `type="equalEarth"` within `.project()`?
+
+
+:::
+::::
+
+:::: { .solution exercise="world_plot" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+world_df = alt.topo_feature(data.world_110m.url, 'countries')
+
+world_plot = alt.Chart(world_df).mark_geoshape(
+).project(type='equalEarth'
+).properties(width=580, height=400,
+            title='World Map'
+            )
+world_plot
+```
+
+:::
+::::
+
+Great we have a map! What if we want to add some statistics though? We have looked at various statistics in the past, but for this question, let's look at each country's population density.
+We want to visualize all the countries and if they are above or below the global median of  life expectancy of 72 years (in 2018).
+This might help us see clearly if there are any particular geographical locations that are higher or lower than the global average.
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+- Load 2 sources of data; the `gapminder_codes.csv` data that contains all the global statistics, and the `countries` TopoJSON file from the `vega_datasets` library. Name each data source `gapminder_df`and `world_df` respectively. 
+- In a plot named `pop_dense_plot`, use the data source `world_df` to make a `.geo_shape()` visualization that maps the `pop_density` of each country to a colour channel. Use a [colour scheme](https://vega.github.io/vega/docs/schemes/) you find appropriate (we recommend a diverging scheme) with the domain midpoint at the global median (81).
+- In order to combine the two sources, you will need to use `transform_lookup()` to lookup the two columns `pop_density` from the `gapminder_df` data using `id` as the connecting column.
+- Finally, make sure that you are zooming in with a scale of 80 and panning to , respectively. 
+
+```{pyodide}
+#| exercise: pop_dense_plot
+# The data sources
+gapminder_df = pd.read_csv('data/gapminder_codes.csv', parse_dates=['year'])
+world_df = alt.____(data.world_110m.url, ____)
+
+# The map
+pop_dense_plot = (
+    alt.Chart(____).____().encode(
+        alt.____('____:Q',
+                  ____=alt.Scale(scheme=____, domainMid=____),
+                  title='Population Density (people/Km^2)')
+    ).____(
+        lookup='id',
+        from_=alt.____(____, 'id', [____]))
+).properties(width=580, height=340,
+            title='Country population densities are higher in Europe and parts of Asia'
+            ).____(____=80, translate=[290, 240]).configure_legend(orient='bottom')
+
+pop_dense_plot
+```
+
+```{pyodide}
+#| exercise: pop_dense_plot
+#| check: true
+gapminder_df = pd.read_csv('data/gapminder_codes.csv', parse_dates=['year'])
+world_df = alt.topo_feature(data.world_110m.url, 'countries')
+
+solution = (
+    alt.Chart(world_df).mark_geoshape().encode(
+        alt.Color('pop_density:Q',
+                  scale=alt.Scale(scheme='blueorange', domainMid=81),
+                  title='Population Density (people/Km^2)')
+    ).transform_lookup(
+        lookup='id',
+        from_=alt.LookupData(gapminder_df, 'id', ['pop_density']))
+).properties(width=580, height=340,
+            title='Country population densities are higher in Europe and parts of Asia and Africa'
+            ).project(scale=80, translate=[290, 240]).configure_legend(orient='bottom')
+
+
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+
+remove_keys_inplace(solution_dict, {"scheme"})
+remove_keys_inplace(result_dict, {"scheme"})
+
+assert_chart_equal(solution_dict, result_dict)
+```
+
+
+:::: { .hint exercise="pop_dense_plot"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- In the plot, are you using `.mark_geoshape()`?
+- In the plot, are you specifying ` alt.Color('pop_density:Q', scale=alt.Scale(scheme='blueorange', domainMid=81))`?
+- Are you setting `lookup='id'` and `from_=alt.LookupData(gapminder_df, "id", ['pop_density'])` within `.transform_lookup()`?
+- Are you setting `scale=80` within `.project()`?
+
+
+:::
+::::
+
+:::: { .solution exercise="pop_dense_plot" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+gapminder_df = pd.read_csv('data/gapminder_codes.csv', parse_dates=['year'])
+world_df = alt.topo_feature(data.world_110m.url, 'countries')
+
+pop_dense_plot = (
+    alt.Chart(world_df).mark_geoshape().encode(
+        alt.Color('pop_density:Q',
+                  scale=alt.Scale(scheme='blueorange', domainMid=81),
+                  title='Population Density (people/Km^2)')
+    ).transform_lookup(
+        lookup='id',
+        from_=alt.LookupData(gapminder_df, 'id', ['pop_density']))
+).properties(width=580, height=340,
+            title='Country population densities are higher in Europe and parts of Asia and Africa'
+            ).project(scale=80, translate=[290, 240]).configure_legend(orient='bottom')
+
+pop_dense_plot
+```
+
+:::
+::::
+
+<div id='mcq5'></div> 
+<script>
+    generateQuiz(
+        'mcq5',
+        'Question',
+        'Looking at the plot above, which narrative is most appropriate?',
+        {
+        'Countries from Europe and parts of Asia and Africa appear to have population densities above the global average. This could be due to higher populations or less land area. In comparison, Canada (our home and native land) has a relatively low population density.': '',
+        'Although countries in South America appear to have the lowest population density globally, it appears they also have the greatest range of densities spanning from as low as 2 all the way over 1000.': 'We cannot jump to this conclusion without seeing any evidence of it!It’s not clear that there is a large range of population densities for countries in South America.',
+        'Countries in Oceania appear to have the most countries with the highest population densities. That being said, these countries also tend to be farming countries and responsible to the export of grains and food products.': 'We cannot jump to this conclusion without seeing any evidence of it! This statement was completely fabricated.'
+        },
+        'Countries from Europe and parts of Asia and Africa appear to have population densities above the global average. This could be due to higher populations or less land area. In comparison, Canada (our home and native land) has a relatively low population density.',
+    );
+</script>
