@@ -132,7 +132,7 @@ rain_plot = alt.Chart(temps_df).____().encode(
     title=____),
     alt.Y('month', sort=list(month_name), title=None),
     ____=alt.condition(____ == ____, ____, ____)
-).properties(____)
+).properties(____) 
 
 text_plot = rain_plot.____(____, ____).encode(
     text=alt.Text(____, format=____),
@@ -164,8 +164,9 @@ solution = (rain_plot + text_plot).configure_view(strokeWidth=0)
 
 solution_dict = solution.to_dict()
 result_dict = result.to_dict()
-remove_keys_inplace(solution_dict, {"title", "scheme"})
-remove_keys_inplace(result_dict, {"title", "scheme"})
+
+remove_keys_inplace(solution_dict, {"title", "color"})
+remove_keys_inplace(result_dict, {"title", "color"})
 
 assert_chart_equal(solution_dict, result_dict)
 ```
