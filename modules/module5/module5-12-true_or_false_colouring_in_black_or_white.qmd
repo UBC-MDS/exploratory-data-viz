@@ -1,0 +1,232 @@
+---
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ../data
+---
+
+
+<script src='../../src/quiz.js'></script>  <!-- Only needed once per page -->
+
+# 6.1. Exercises
+
+## True or False: Colouring in Black or White
+
+<div id='mcq1'></div> 
+<script>
+    generateQuiz(
+        'mcq1',
+        'True or False',
+        'Within the colour channel, we can simply set <code>color="blue"</code> or <code>color="yellow"</code> if we want a specific plot colour.',
+        {
+        'True': 'When using a colour channel, we need to make sure that we use <code>alt.value("blue")</code> to specify a colour or Altair will think you are trying to add a variable to a colour channel instead of a static colour.',
+        'False': 'Right! When using a colour channel, we need to make sure that we use <code>alt.value("blue")</code> to specify a colour.'
+        },
+        'False',
+    );
+</script>
+
+<div id='mcq2'></div> 
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'An entire aesthetic of a plot can be changed by styling multiple visual components at a time by applying a theme.',
+        {
+        'True': '',
+        'False': 'Take a look at the last slide. This is a cool technique to know!'
+        },
+        'True',
+    );
+</script>
+
+## Texting and Selecting
+
+<div id='mcq3'></div> 
+<script>
+    generateQuiz(
+        'mcq3',
+        'Question 1',
+        'the <code>.condition()</code> Altair method acts like which of the following Python Syntax?',
+        {
+        'A <code>for</code> loop': 'Not a for loop. What does <code>.condition()</code> relate to?',
+        'An if-else statement': '',
+        'the assignment operator': 'Nope. Think about the name of the method.',
+        'A dictionary': 'This is a data structure, think about an action that is occurring.'
+        },
+        'An if-else statement',
+    );
+</script>
+
+<div id='mcq4'></div> 
+<script>
+    generateQuiz(
+        'mcq4',
+        'Question 2',
+        'How would we format text on a graph so that it displays <strong>dollar</strong> values to 2 significant figures and removes any trailing zeros? Which of the following is most appropriate',
+        {
+        '<code>format="$.2,d"</code>': 'This will produce 2 significant figures and will round to the nearest integer.',
+        '<code>format=".2s-"</code>': 'This is missing the dollar sign and the <strong>s</strong> is in the wrong location. We also do not use - for the removal of trailing zeros',
+        '<code>format="$.2~s"</code>': '',
+        '<code>format=".2~s"</code>': ' You are close! You are missing the dollar sign!'
+        },
+        '<code>format="$.2~s"</code>',
+    );
+</script>
+
+
+## Precipitation Contemplation
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+Let's take a look again at the [Government of Canada](https://climate.weather.gc.ca/) data that contains the weather in Kamloops from 2009-2012.
+We left off seeing that precipitation was higher in the hotter months.
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+from calendar import month_name
+
+temps_df = pd.read_csv('data/temperature.csv', parse_dates=['date'])
+temps_df = temps_df.assign(month=temps_df['date'].dt.month_name())
+temps_df.info()
+```
+
+For the 4 years of data, Let's find out the total rainfall in each month. So between the years 2009 and 2012, how much precipitation was there in total during all the Januarys, Februarys, etc?  Remember that we will have to aggregate values here. 
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+
+- In a plot named `rain_plot`, use the data source `temps_df` to make a bar plot.
+- Map the month on the y-axis and the sum of all the precipitation for each month on the x-axis. Print your chart first and examine which month has the most precipitation.
+- Color `rain_plot` by designating a different colour bar to the month with the highest rainfall.
+- Make sure you are giving the x-axis an appropriate label and the plot a title. 
+- In a second plot named `text_plot`, add text to each bar that shows the aggregate precipitation for each month and format it so it includes integer values only. Make sure it is aligned to the left and located 5 units to the right of the bar (use `dx` for this).  Set the text colour as black.
+
+```{pyodide}
+#| setup: true
+#| exercise: rain_plot
+import altair as alt
+from calendar import month_name
+import pandas as pd
+from utils import assert_chart_equal, remove_keys_inplace
+
+temps_df = pd.read_csv('data/temperature.csv', parse_dates=['date'])
+temps_df = temps_df.assign(month=temps_df['date'].dt.month_name())
+```
+
+```{pyodide}
+#| exercise: rain_plot
+top_month = temps_df.groupby('month')['total_rain_mm'].sum().idxmax()
+
+rain_plot = alt.Chart(temps_df).____().encode(
+    alt.X('sum(total_rain_mm)',
+    title=____),
+    alt.Y('month', sort=list(month_name), title=None),
+    ____=alt.condition(____ == ____, ____, ____)
+).properties(____) 
+
+text_plot = rain_plot.____(____, ____).encode(
+    text=alt.Text(____, format=____),
+    color = ____(____))
+
+(rain_plot + text_plot).configure_view(strokeWidth=0)
+```
+
+```{pyodide}
+#| exercise: rain_plot
+#| check: true
+top_month = temps_df.groupby('month')['total_rain_mm'].sum().idxmax()
+
+rain_plot = alt.Chart(temps_df).mark_bar().encode(
+    alt.X('sum(total_rain_mm)',
+    title="Total rainfall per month (mm)"),
+    alt.Y('month', sort=list(month_name), title=None),
+    color=alt.condition(alt.datum.month == top_month,
+                        alt.value('darkslateblue'),
+                        alt.value('powderblue'))
+).properties(
+    title='Between 2009-2012, May had the greatest total rainfall collectively')
+
+text_plot = rain_plot.mark_text(align='left', dx=5).encode(
+    text=alt.Text('sum(total_rain_mm)', format='d'),
+    color = alt.value('black'))
+
+solution = (rain_plot + text_plot).configure_view(strokeWidth=0)
+
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+
+remove_keys_inplace(solution_dict, {"title", "color"})
+remove_keys_inplace(result_dict, {"title", "color"})
+
+assert_chart_equal(solution_dict, result_dict)
+```
+
+:::: { .hint exercise="rain_plot"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you using `mark_bar()`?
+- Are you setting `alt.X('sum(total_precipitate_mm)', title="Total precipitate per month (mm)")`?
+- Are you setting `alt.Y('month', sort=list(month_name), title=None)`?
+- Are you setting `color=alt.condition(alt.datum.month == 'May', alt.value('colour1'), alt.value('colour2')`?
+- Are you setting a title in `.properties()`?
+- In the text plot, are you coding `mark_text(align='left', dx=5)`?
+- Are you setting ` text=alt.Text('sum(total_precipitate_mm)', format='d')`?
+- Are you setting the colour to black using `color = alt.value('black')`? 
+
+
+:::
+::::
+
+:::: { .solution exercise="rain_plot" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+top_month = temps_df.groupby('month')['total_rain_mm'].sum().idxmax()
+
+rain_plot = alt.Chart(temps_df).mark_bar().encode(
+    alt.X('sum(total_rain_mm)',
+    title="Total rainfall per month (mm)"),
+    alt.Y('month', sort=list(month_name), title=None),
+    color=alt.condition(alt.datum.month == top_month,
+                        alt.value('darkslateblue'),
+                        alt.value('powderblue'))
+).properties(
+    title='Between 2009-2012, May had the greatest total rainfall collectively')
+
+text_plot = rain_plot.mark_text(align='left', dx=5).encode(
+    text=alt.Text('sum(total_rain_mm)', format='d'),
+    color = alt.value('black'))
+
+(rain_plot + text_plot).configure_view(strokeWidth=0)
+```
+
+:::
+::::
+
+<div id='mcq5'></div> 
+<script>
+    generateQuiz(
+        'mcq5',
+        'Question',
+        'In this plot would it make sense to sort the values on the x-axis instead of highlighting the month?',
+        {
+        'Yes, since we are interested in the month with the greatest precipitate we should be sorting in ascending order.': 'What about the x-axis? Does it have a natural order already?',
+        'No, highlighting the value makes more sense since the y-axis has a natural order that should be followed.': ''
+        },
+        'No, highlighting the value makes more sense since the y-axis has a natural order that should be followed.',
+    );
+</script>

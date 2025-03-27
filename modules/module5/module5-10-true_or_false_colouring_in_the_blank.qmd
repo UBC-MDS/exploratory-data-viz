@@ -1,0 +1,202 @@
+---
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ../data
+---
+
+<script src='../../src/quiz.js'></script>  <!-- Only needed once per page -->
+
+# 5.1. Exercises
+
+## True or False: Colouring in the Blank
+
+<div id='mcq1'></div> 
+<script>
+    generateQuiz(
+        'mcq1',
+        'True or False',
+        'Some colour palettes and schemes may introduce a bias towards certain insights.',
+        {
+        'True': '',
+        'False': 'It’s important to be careful since using a palette potentially can cause a slight bias towards seeing groupings where there are none.'
+        },
+        'True',
+    );
+</script>
+
+<div id='mcq2'></div> 
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'When using colour to communicate changes in quantitative data, it’s better to use a scale with many different colours and hues.',
+        {
+        'True': 'It’s often better to use a palette with few colours designed specifically to distinguish a scale or a single colour with different saturations.',
+        'False': ''
+        },
+        'False',
+    );
+</script>
+
+## Colouring by Number Questions
+
+<div id='mcq3'></div> 
+<script>
+    generateQuiz(
+        'mcq3',
+        'Question 1',
+        'If you are plotting data for a particular variable where there is no difference in importance between the high and low values, which colour should be assigned to the highest variable given the colours below?',
+        {
+        '🔮- Indigo': 'Cool! This is the darkest colour and thus has the largest contrast with the background which gets assigned to the highest values.',
+        '🧢 - Blue': 'We need to assign the colour with the most contrast to the highest values. Is this the darkest colour?',
+        '♻️- Green': 'We need to assign the colour with the most contrast to the highest values. Is this the darkest colour?',
+        '☀️- Yellow': 'We need to assign the colour with the most contrast to the highest values. Is this the darkest colour?'
+        },
+        '🔮- Indigo',
+    );
+</script>
+
+<div id='mcq4'></div> 
+<script>
+    generateQuiz(
+        'mcq4',
+        'Question 2',
+        'Which colour scheme is most appropriate for quantitative data that has a natural midpoint?',
+        {
+        'Sequential': 'Not quite. There is a better answer.',
+        'Categorical': 'This is for categorical data! We asked for quantitative data!',
+        'Diverging': 'Passing with flying colours!',
+        'Rainbow': 'There is no pot of gold at the end of this rainbow.'
+        },
+        'Diverging',
+    );
+</script>
+
+## Playing with Colour
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+The University of British Columbia is based in Vancouver and we are lucky enough to have a relatively mild climate (mild climate, but rainy) but not all cities and towns in British Columbia have this luck. This made us think of a city further north of BC - **Kamloops** whose climate is more varied. This question will be using the data obtained from the [Governement of Canada](https://climate.weather.gc.ca/). The data we have collected is from 2009-2012.
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+
+temps_df = pd.read_csv('data/temperature.csv', parse_dates=['date'])
+temps_df.info()
+```
+
+Let's observe and visualize the mean monthly temperature of Kamloops and see if there is any relationship between rainfall, the season and temperature. 
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+
+- In a plot named `temp_plot`, use the data source `temps_df` to make a scatter plot (`mark_circle`) with points that are size 50.
+- Map the date on the x-axis and the total rainfall levels on the y-axis. 
+- Map the mean temperature to a colour channel and select an appropriate [colour scheme](https://vega.github.io/vega/docs/schemes/). Is a diverging or sequential scheme more appropriate? What is an appropriate mid-point value?
+- Make sure you are giving the channels all proper labels and the plot a title.
+
+```{pyodide}
+#| setup: true
+#| exercise: temp_plot
+import altair as alt
+import pandas as pd
+from utils import assert_chart_equal, remove_keys_inplace
+
+temps_df = pd.read_csv('data/temperature.csv', parse_dates=['date'])
+```
+
+```{pyodide}
+#| exercise: temp_plot
+temp_plot = alt.Chart(temps_df).____(____).encode(
+    alt.X('date', ____),
+    alt.Y('total_rain_mm', ____),
+    alt.____(____, ____, ____)
+    ).properties(title=____)
+
+temp_plot
+```
+
+```{pyodide}
+#| exercise: temp_plot
+#| check: true
+solution = alt.Chart(temps_df).mark_circle(size=50).encode(
+    alt.X('date', 
+        title="Date"),
+    alt.Y('total_rain_mm',
+        title='Total rainfall for the month (mm)'),
+    alt.Color('mean_temp',
+        title=' Mean Temperature',
+        scale=alt.Scale(scheme='blueorange', domainMid=0))
+    ).properties(title='Hotter months tend to have higher levels of rainfall')
+
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+
+remove_keys_inplace(solution_dict, {"title", "scheme"})
+remove_keys_inplace(result_dict, {"title", "scheme"})
+
+assert_chart_equal(solution_dict, result_dict)
+```
+
+:::: { .hint exercise="temp_plot"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you using `mark_circle(size=50)`?
+- Are you setting `alt.X('date', title="Date"))`?
+- Are you setting `alt.Y('total_rain_mm',title='rainfall total for the month (mm)')`?
+- In the  plot, are you coding `alt.Color('mean_temp', title=' Mean Temperature', scale=alt.Scale(scheme='blueorange', domainMid=0))`?
+- Are you setting a title in `properties()`?
+
+
+:::
+::::
+
+:::: { .solution exercise="temp_plot" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+temp_plot = alt.Chart(temps_df).mark_circle(size=50).encode(
+    alt.X('date', 
+        title="Date"),
+    alt.Y('total_rain_mm',
+        title='Total rainfall for the month (mm)'),
+    alt.Color('mean_temp',
+        title=' Mean Temperature',
+        scale=alt.Scale(scheme='blueorange', domainMid=0))
+    ).properties(title='Hotter months tend to have higher levels of rainfall')
+
+temp_plot
+```
+
+:::
+::::
+
+<div id='mcq5'></div> 
+<script>
+    generateQuiz(
+        'mcq5',
+        'Question',
+        'Now that we can use colour to distinguish between hotter and colder months, do colder months tend to have higher or lower levels of rainfall?',
+        {
+        'Lower': '',
+        'Higher': 'Maybe take a look at your graph?'
+        },
+        'Lower',
+    );
+</script>
+
+Can you think of why this might occur?
