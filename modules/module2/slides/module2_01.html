@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -9,7 +9,7 @@
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-7631f81a166a2979f555f02f21929a0e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.41">
 
-  <title>Data Visualization – What is Data Visualization?</title>
+  <title>Data Visualization – Effective Use of Visual Channels</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -120,41 +120,27 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-notes="<p>At its core, data visualization is about representing numbers with graphical elements such as the position of a line, the length of a bar, or the colour of a point.</p>
-<p>We often use visualizations to explore data ourselves, and to effectively communicate our insights to others, as we will learn in later modules of this course.</p>" class="quarto-title-block center">
-  <h1 class="title">What is Data Visualization?</h1>
+<section id="title-slide" data-notes="<p>So far we have seen how to use points and lines to represent data visually.</p>
+<p>In this slide deck, we will see how we can also use areas and bars for this purpose.</p>
+<p>Before we dive into the code, let’s discuss how different visual channels, such as position, area, etc, can impact how easy it is for us to accurately interpret the plotted data.</p>
+<p>As in many cases, an efficient way to learn this topic is through personal experience.</p>
+<p>Please follow along in the exercises on the next two slides to see which visual channels you find the most effective.</p>" class="quarto-title-block center">
+  <h1 class="title">Effective Use of Visual Channels</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section id="what-is-the-purpose-of-visualizing-data" class="slide level2">
-<h2>What is the purpose of visualizing data?</h2>
-<p>Visualizing data can be used to</p>
-<ul>
-<li>Answer a specific question</li>
-<li>Explore data more generally to generate new questions</li>
-</ul>
-<p>To create an effective visualization, start by</p>
-<ul>
-<li>Looking at the data</li>
-<li>Thinking about what you want to achieve by making the visualization</li>
-<li>Drawing it out with pen and paper</li>
-</ul>
-<aside class="notes">
-<p>We often visualize data in order to help us answer a specific question we have about our dataset, but it can also help us generate new questions.</p>
-<p>Before creating a visualization, it is important that you think about why you are making it, and what you want to achieve from creating this plot.</p>
-<p>Is there a specific question you are trying to answer, like comparing the relationship between two dataframe columns? Or are you creating a plot to help you understand the structure of your data more in general, such as plotting the distribution of each dataframe column?</p>
-<p>In either case, it can be extremely helpful to draw out your plot with pen and paper first. This helps you think about if the plot you are creating makes sense or if there is another plot better suited for the task at hand.</p>
-<p>Drawing with pen and paper also makes it easier to write the code afterwards, since you clearly know what you are expecting the visualization to look like.</p>
+<section id="comparing-sizes-is-easier-for-some-geometrical-objects-than-for-others" class="slide level2">
+<h2>Comparing sizes is easier for some geometrical objects than for others</h2>
+
+<img data-src="../../../static/module2/circle-comparison.png" alt="Circle Comparison" class="r-stretch"><aside class="notes">
+<p>In the image in this slide, try to estimate how many times larger the big circle is compared to the small one.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -167,846 +153,11 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="why-bother-visualizing-data-instead-of-showing-raw-numbers" class="slide level2">
-<h2>Why bother visualizing data instead of showing raw numbers?</h2>
-<h3 id="can-you-see-any-differences-in-the-general-trends-of-these-four-sets-of-numbers">Can you see any differences in the general trends of these four sets of numbers?</h3>
-<div id="1ea83700" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display" data-execution_count="2">
-<table border="1" style="width:70px; float:left; margin-right:40px">
-
-<thead style="text-align: center">
-
-<tr>
-
-<th>
-</th>
-
-<th colspan="2" halign="left">
-A
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-<th colspan="2" halign="left">
-B
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-<th colspan="2" halign="left">
-C
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-<th colspan="2" halign="left">
-D
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-</th>
-
-<th>
-X
-</th>
-
-<th>
-Y
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-<th>
-X
-</th>
-
-<th>
-Y
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-<th>
-X
-</th>
-
-<th>
-Y
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-<th>
-X
-</th>
-
-<th>
-Y
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-
-<th>
-0
-</th>
-
-<td>
-10
-</td>
-
-<td>
-8.04
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-10
-</td>
-
-<td>
-9.14
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-10
-</td>
-
-<td>
-7.46
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-8
-</td>
-
-<td>
-6.58
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-1
-</th>
-
-<td>
-8
-</td>
-
-<td>
-6.95
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-8
-</td>
-
-<td>
-8.14
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-8
-</td>
-
-<td>
-6.77
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-8
-</td>
-
-<td>
-5.76
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-2
-</th>
-
-<td>
-13
-</td>
-
-<td>
-7.58
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-13
-</td>
-
-<td>
-8.74
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-13
-</td>
-
-<td>
-8.50
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-8
-</td>
-
-<td>
-7.71
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-3
-</th>
-
-<td>
-9
-</td>
-
-<td>
-8.81
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-9
-</td>
-
-<td>
-8.77
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-9
-</td>
-
-<td>
-7.11
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-8
-</td>
-
-<td>
-8.84
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-4
-</th>
-
-<td>
-11
-</td>
-
-<td>
-8.33
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-11
-</td>
-
-<td>
-9.26
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-11
-</td>
-
-<td>
-7.81
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-8
-</td>
-
-<td>
-8.47
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-5
-</th>
-
-<td>
-14
-</td>
-
-<td>
-9.96
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-14
-</td>
-
-<td>
-8.10
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-14
-</td>
-
-<td>
-8.84
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-8
-</td>
-
-<td>
-7.04
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-6
-</th>
-
-<td>
-6
-</td>
-
-<td>
-7.24
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-6
-</td>
-
-<td>
-6.13
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-6
-</td>
-
-<td>
-6.08
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-8
-</td>
-
-<td>
-5.25
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-7
-</th>
-
-<td>
-4
-</td>
-
-<td>
-4.26
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-4
-</td>
-
-<td>
-3.10
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-4
-</td>
-
-<td>
-5.39
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-19
-</td>
-
-<td>
-12.50
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-8
-</th>
-
-<td>
-12
-</td>
-
-<td>
-10.84
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-12
-</td>
-
-<td>
-9.13
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-12
-</td>
-
-<td>
-8.15
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-8
-</td>
-
-<td>
-5.56
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-9
-</th>
-
-<td>
-7
-</td>
-
-<td>
-4.81
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-7
-</td>
-
-<td>
-7.26
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-7
-</td>
-
-<td>
-6.42
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-8
-</td>
-
-<td>
-7.91
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-10
-</th>
-
-<td>
-5
-</td>
-
-<td>
-5.68
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-5
-</td>
-
-<td>
-4.74
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-5
-</td>
-
-<td>
-5.73
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-8
-</td>
-
-<td>
-6.89
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-</div>
-</div>
-<aside class="notes">
-<p>Why do we need visualizations to help answer our questions?</p>
-<p>Is it not enough to look at numbers in tables?</p>
-<p>To understand why visualizations are so powerful, it is helpful to remember that to answer a question, we often have to put the data in a format that is easy for us humans to interpret.</p>
-<p>Because our number systems have only been around for about 5,000 years, we need to assert effort and train ourselves to recognize structure in numerical data.</p>
-<p>Visual systems, on the other hand, have undergone refinement during 500,000,000 years of evolution, so we can instinctively recognize visual patterns and accurately estimate visual properties such as colours and distances.</p>
-<p>Practically, this means that we can arrive at correct conclusions faster from studying visual rather than numerical representations of the same data.</p>
-<p>For example, have a look at the four sets of numbers in the table on the slide. Can you see the differences in the general trends between these four sets of numbers? This is a slightly modified version of the original, <a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank">which was put together by statistician Francis Anscombe in the 70s.</a></p>
+<section id="comparing-sizes-is-easier-for-some-geometrical-objects-than-for-others-1" class="slide level2">
+<h2>Comparing sizes is easier for some geometrical objects than for others</h2>
+
+<img data-src="../../../static/module2/bar-comparison.png" alt="Bar Comparison" class="r-stretch"><aside class="notes">
+<p>In the image in this slide, try to estimate how many times larger the big bar is compared to the small one.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1019,266 +170,15 @@ Y
           display:block!important;
       }</style></aside>
 </section>
-<section id="although-summary-statistics-are-often-useful-they-dont-tell-the-whole-story" class="slide level2">
-<h2>Although summary statistics are often useful, they don’t tell the whole story</h2>
-<h3 id="c-is-the-only-set-with-a-different-mean-and-standard-deviation">C is the only set with a different mean and standard deviation</h3>
-<div id="1654daa9" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="3">
-<table border="1" style="width:70px; float:left; margin-right:40px">
-
-<thead style="text-align: center">
-
-<tr>
-
-<th>
-</th>
-
-<th colspan="2" halign="left">
-A
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-<th colspan="2" halign="left">
-B
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-<th colspan="2" halign="left">
-C
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-<th colspan="2" halign="left">
-D
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-</th>
-
-<th>
-X
-</th>
-
-<th>
-Y
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-<th>
-X
-</th>
-
-<th>
-Y
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-<th>
-X
-</th>
-
-<th>
-Y
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-<th>
-X
-</th>
-
-<th>
-Y
-</th>
-
-<th>
-</th>
-
-<th>
-</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-
-<th>
-mean
-</th>
-
-<td>
-9.00
-</td>
-
-<td>
-7.50
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-9.00
-</td>
-
-<td>
-7.50
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-9.00
-</td>
-
-<td style="background-color:#4853a4; color:#ffffff">
-<b>7.11</b>
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-9.00
-</td>
-
-<td>
-7.50
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-std
-</th>
-
-<td>
-3.32
-</td>
-
-<td>
-2.03
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-3.32
-</td>
-
-<td>
-2.03
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-3.32
-</td>
-
-<td style="background-color:#4853a4; color:#ffffff">
-<b>1.15</b>
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-<td>
-3.32
-</td>
-
-<td>
-2.03
-</td>
-
-<td>
-</td>
-
-<td>
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-</div>
-</div>
-<aside class="notes">
-<p>Summaries, such as the mean and standard deviation, are helpful statistical tools that are often useful for detecting the differences between datasets.</p>
-<p>However, since they collapse the data into just a few numbers, statistical summaries can’t tell the whole story about the data and there can be important differences between datasets that summaries fail to reveal.</p>
-<p>Here, the mean and standard deviation indicate that set C is slightly different from the other sets of data in terms of the centre of the sample distribution and the spread of that distribution, while the remaining three sets of data have a similar centre and spread.</p>
+<section id="both-the-circles-and-rectangles-differ-by-7x" class="slide level2">
+<h2>Both the circles and rectangles differ by 7x</h2>
+
+<img data-src="../../../static/module2/7x.png" alt="7x Image" class="r-stretch"><aside class="notes">
+<p>In both cases, the answer is seven times bigger. Even if you guessed both of these exactly correct, most people find it is much easier to compare the length or position of the bars rather than the area of the circles.</p>
+<p>For the circles, you might even have hesitated at exactly what to compare when we said “how many time <em>larger</em>”, were you supposed to compare the area or the diameter?</p>
+<p>This is less ambiguous for bars as long as their widths are kept the same.</p>
+<p>This is important to keep in mind, especially when communicating to others via visualization, but also when creating plots for yourself.</p>
+<p>These two examples are originally from <a href="https://www.youtube.com/watch?v=hsfWtPH2kDg">Jeffrey Heer’s PyData talk</a>, who is a visualization researcher at the University of Washington and whose research group created the D3 and VegaLite packages which Altair is based on.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1291,89 +191,15 @@ std
           display:block!important;
       }</style></aside>
 </section>
-<section id="plotting-the-data-immediately-reveals-patterns-in-the-data" class="slide level2">
-<h2>Plotting the data immediately reveals patterns in the data</h2>
-<h3 id="we-could-not-detect-these-patterns-from-only-looking-at-the-raw-numbers-or-summary-statistics">We could not detect these patterns from only looking at the raw numbers or summary statistics</h3>
-<div id="24dd571d" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-display" data-execution_count="4">
+<section id="summary-of-visual-channel-efficiency" class="slide level2">
+<h2>Summary of visual channel efficiency</h2>
 
-<style>
-  #altair-viz-acdcfeff15854ac18ed0058d501647c5.vega-embed {
-    width: 100%;
-    display: flex;
-  }
-
-  #altair-viz-acdcfeff15854ac18ed0058d501647c5.vega-embed details,
-  #altair-viz-acdcfeff15854ac18ed0058d501647c5.vega-embed details summary {
-    position: relative;
-  }
-</style>
-<div id="altair-viz-acdcfeff15854ac18ed0058d501647c5"></div>
-<script type="text/javascript">
-  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
-  (function(spec, embedOpt){
-    let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-acdcfeff15854ac18ed0058d501647c5") {
-      outputDiv = document.getElementById("altair-viz-acdcfeff15854ac18ed0058d501647c5");
-    }
-
-    const paths = {
-      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
-      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
-      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
-      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
-    };
-
-    function maybeLoadScript(lib, version) {
-      var key = `${lib.replace("-", "")}_version`;
-      return (VEGA_DEBUG[key] == version) ?
-        Promise.resolve(paths[lib]) :
-        new Promise(function(resolve, reject) {
-          var s = document.createElement('script');
-          document.getElementsByTagName("head")[0].appendChild(s);
-          s.async = true;
-          s.onload = () => {
-            VEGA_DEBUG[key] = version;
-            return resolve(paths[lib]);
-          };
-          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
-          s.src = paths[lib];
-        });
-    }
-
-    function showError(err) {
-      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
-      throw err;
-    }
-
-    function displayChart(vegaEmbed) {
-      vegaEmbed(outputDiv, spec, embedOpt)
-        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
-    }
-
-    if(typeof define === "function" && define.amd) {
-      requirejs.config({paths});
-      let deps = ["vega-embed"];
-      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
-    } else {
-      maybeLoadScript("vega", "5")
-        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
-        .then(() => maybeLoadScript("vega-embed", "6"))
-        .catch(showError)
-        .then(() => displayChart(vegaEmbed));
-    }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12, "grid": true}, "header": {"titleFontSize": 16, "labelFontSize": 14, "title": null}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"name": "data-2952341c829013f8b9cddb65c318382c"}, "facet": {"field": "Set", "type": "nominal"}, "spec": {"mark": {"type": "circle", "opacity": 1, "size": 80}, "encoding": {"x": {"field": "X", "type": "quantitative"}, "y": {"field": "Y", "type": "quantitative"}}, "height": 200, "width": 300}, "columns": 2, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-2952341c829013f8b9cddb65c318382c": [{"X": 10, "Y": 8.04, "Set": "A"}, {"X": 8, "Y": 6.95, "Set": "A"}, {"X": 13, "Y": 7.58, "Set": "A"}, {"X": 9, "Y": 8.81, "Set": "A"}, {"X": 11, "Y": 8.33, "Set": "A"}, {"X": 14, "Y": 9.96, "Set": "A"}, {"X": 6, "Y": 7.24, "Set": "A"}, {"X": 4, "Y": 4.26, "Set": "A"}, {"X": 12, "Y": 10.84, "Set": "A"}, {"X": 7, "Y": 4.8100000000000005, "Set": "A"}, {"X": 5, "Y": 5.68, "Set": "A"}, {"X": 10, "Y": 9.14, "Set": "B"}, {"X": 8, "Y": 8.14, "Set": "B"}, {"X": 13, "Y": 8.74, "Set": "B"}, {"X": 9, "Y": 8.77, "Set": "B"}, {"X": 11, "Y": 9.26, "Set": "B"}, {"X": 14, "Y": 8.1, "Set": "B"}, {"X": 6, "Y": 6.13, "Set": "B"}, {"X": 4, "Y": 3.1, "Set": "B"}, {"X": 12, "Y": 9.13, "Set": "B"}, {"X": 7, "Y": 7.26, "Set": "B"}, {"X": 5, "Y": 4.74, "Set": "B"}, {"X": 10, "Y": 7.46, "Set": "C"}, {"X": 8, "Y": 6.77, "Set": "C"}, {"X": 13, "Y": 8.5, "Set": "C"}, {"X": 9, "Y": 7.11, "Set": "C"}, {"X": 11, "Y": 7.8100000000000005, "Set": "C"}, {"X": 14, "Y": 8.84, "Set": "C"}, {"X": 6, "Y": 6.08, "Set": "C"}, {"X": 4, "Y": 5.39, "Set": "C"}, {"X": 12, "Y": 8.15, "Set": "C"}, {"X": 7, "Y": 6.42, "Set": "C"}, {"X": 5, "Y": 5.73, "Set": "C"}, {"X": 8, "Y": 6.58, "Set": "D"}, {"X": 8, "Y": 5.76, "Set": "D"}, {"X": 8, "Y": 7.71, "Set": "D"}, {"X": 8, "Y": 8.84, "Set": "D"}, {"X": 8, "Y": 8.47, "Set": "D"}, {"X": 8, "Y": 7.04, "Set": "D"}, {"X": 8, "Y": 5.25, "Set": "D"}, {"X": 19, "Y": 12.5, "Set": "D"}, {"X": 8, "Y": 5.5600000000000005, "Set": "D"}, {"X": 8, "Y": 7.91, "Set": "D"}, {"X": 8, "Y": 6.89, "Set": "D"}]}}, {"mode": "vega-lite"});
-</script>
-</div>
-</div>
-<aside class="notes">
-<p>Humans are not good at detecting patterns in raw numbers, and we don’t have good intuition about how different distributions of data can contribute to identical statistical summaries.</p>
-<p>But guess what we excel at?</p>
-<p>Detecting visual patterns!</p>
-<p>It is immediately clear to us how these sets of numbers differ once they are shown as graphical elements instead of textual objects.</p>
-<p>This is one of the main reasons why data visualization is such a powerful tool for data exploration and communication.</p>
-<p>In our example here, we would come to widely different conclusions about the behaviour of the data for the four different data sets.</p>
-<p>Sets A and C are roughly linearly increasing at similar rates, whereas set B reaches a plateau and starts to drop, and set D has a constant X-value for all numbers except one big outlier.</p>
+<img data-src="../../../static/module2/visual-channels-rank.png" alt="Visual Channels Rank" class="r-stretch"><aside class="notes">
+<p>Even if you got both these right yourself, the fact that many people prefer one over the other means that in order for you to create effective visualizations you need to know which visual channels are the easiest for humans to decode.</p>
+<p>Luckily, there has been plenty of research in this area, which can be summarized in the schematic on this slide.</p>
+<p>Position is by far the best and therefore we should put our most important comparison there.</p>
+<p>Using position often means that we can’t use other things such as length or angle (like the angle in a pie chart), but we can add size or colour to represent other relationships.</p>
+<p>Even if it is hard to tell exact information from these (is this colour/dot 2x darker/bigger than another?) they are good to give an idea of trends in the data.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1386,13 +212,104 @@ std
           display:block!important;
       }</style></aside>
 </section>
-<section id="more-examples-of-plotting-versus-statistical-summaries" class="slide level2">
-<h2>More examples of plotting versus statistical summaries</h2>
+<section id="dont-use-3d-without-a-good-reason" class="slide level2">
+<h2>Don’t use 3D without a good reason</h2>
+<h3 id="unnecessary-3d-makes-plot-interpretation-harder">Unnecessary 3D makes plot interpretation harder</h3>
 
-<img data-src="https://blog.revolutionanalytics.com/downloads/DataSaurus%20Dozen.gif" alt="The Datasaurus is a modern take on Anscombe's quartet with additional datasets" class="r-stretch"><p><a href="https://www.autodesk.com/research/publications/same-stats-different-graphs" target="_blank">Source: Matejka and Fitzmaurice, 2017</a></p>
-<aside class="notes">
-<p>A more recent and dynamic illustration of how graphical representations are much easier for us to interpret compared to statistical summaries, is the Datasaurus GIF <a href="https://www.autodesk.com/research/publications/same-stats-different-graphs" target="_blank">from Autodesk’s research team</a> in this slide.</p>
-<p>It displays several different datasets, all with the same mean, standard deviation and correlation between X and Y, but looking at the data graphically shows us how different these datasets actually are.</p>
+<img data-src="../../../static/module2/bad-3d-barchart.png" alt="Bad 3D Barchart" class="r-stretch"><aside class="notes">
+<p>The biggest issue with using 3D is when it is used unnecessarily (like a 3D bar or pie chart), as the only way to compare position (like a 3D scatter plot), and when they are represented on a 2D medium like a paper where they can’t be rotated.</p>
+<p>In this slide, we see a 3D bar chart, where it looks like the values of the bars are around A=0.7, B=1.7, C=2.7 and D=3.7.</p>
+<p>However, this is only because of the angle of the camera in the plot, the actual values here of A, B, C, and D are actually 1, 2, 3, and 4, respectively.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="meaningful-3d-can-facilitate-plot-interpretation" class="slide level2">
+<h2>Meaningful 3D can facilitate plot interpretation</h2>
+
+<img src="https://github.com/user-attachments/assets/a7f3470a-8869-42fb-96e8-81e5583f562a" class="r-stretch"><aside class="notes">
+<p>Sometimes 3D can be useful, like a topographical map or a protein folding visualization.</p>
+<p>In this slide, you can see the <a href="https://www.tylermw.com/3d-ggplots-with-rayshader/">interesting work is done with the Rayshader library</a> that maps in 3D in an intuitive way that incorporates reasonable camera rotation around the objects.</p>
+<p>The example to the right visualizes the bend in space-time via 3D position (depth), eliminating the need for an additional 2D plot as in the example to the left.</p>
+<p>But be cautious, we will see in the next slides that even in systems such as blood vessels, which are naturally organized in three dimensions, it is still mentally more complex to interpret a 3D visualization accurately.</p>
+<p><a href="https://clauswilke.com/dataviz/no-3d.html">Researcher Claus Wilke’s has authored a good chapter</a> on this topic if you are interested to learn more.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!--
+Use this issue: https://github.com/UBC-MDS/exploratory-data-viz/issues/185 
+to store large images / animations and then link them with the github media 
+link instead of committing them to the git history
+-->
+</section>
+<section id="properly-designed-visualizations-help-saving-lives" class="slide level2">
+<h2>Properly designed visualizations help saving lives</h2>
+
+<img data-src="../../../static/module2/blood-vessels-40.png" alt="Blood Vessels 40" class="r-stretch"><aside class="notes">
+<p>How much these best practices actually matters might be a bit abstract until you gain personal experience from it, therefore, I want to include a concrete example of how changing visualization methods improved an important clinical outcome.</p>
+<p>Heart disease is the most common cause of death, yearly killing almost 9 million people, or as many as diabetes, dementia, neonatal conditions respiratory infections all together.</p>
+<p>By detecting regions of low shear stress in the arteries around the heart, doctors can identify patients that are on their way to develop heart disease and take action early to improve the patient’s survival chances.</p>
+<p>To evaluate the shear stress in the arteries, the regular practice is to use a digital 3D representation of the artery coloured according to the amount of shear stress which is what you can see in this picture.</p>
+<p>The colormap changes from blue for the areas of interest (low stress) to cyan, green, yellow, and red for higher stress.</p>
+<p>A few years ago, a research group set out to test how effective this type of visualization was compared to a couple of alternatives.</p>
+<p>When using the visualization you see in this slide, about 40% of the areas of low shear stress were correctly identified by doctors.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="changing-the-colour-scale-almost-doubled-the-accuracy" class="slide level2">
+<h2>Changing the colour scale almost doubled the accuracy</h2>
+
+<img data-src="../../../static/module2/blood-vessels-70.png" alt="Blood Vessels 70" class="r-stretch"><aside class="notes">
+<p>The first thing this research group tested was the effect of testing the colour scale to one that is easier to interpret and makes the important areas of low shear stress stand out more, since they are highlighted in a bright red colour, and the rest are in black and white.</p>
+<p>By this seemingly small modification, they identified that the percentage of correct analysis almost doubled, from 40% to 70%.</p>
+<p>We will talk more about choosing the correct colour scales in the later modules of this course.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="changing-from-3d-to-2d-improved-the-further-accuracy" class="slide level2">
+<h2>Changing from 3D to 2D improved the further accuracy</h2>
+
+<img data-src="../../../static/module2/blood-vessels-90.png" alt="Blood Vessels 90" class="r-stretch"><aside class="notes">
+<p>The next modification the researcher tested was to change from a 3D representation of the blood vessels to a 2D representation.</p>
+<p>Although a 3D representation is more anatomically correct here, it is also more cognitively demanding for us to process, and some areas can cover others so it is harder to get a quick overview of the vessels.</p>
+<p>In the 2D visualization, the blood vessels and their branching points are shown in a schematic that is less cognitively demanding to interpret. This representation was also shown to be more effective, as 90% of the low shear stress areas were now correctly identified.</p>
+<p>Overall, these two tweaks more than doubled the outcome accuracy, from 40% to 90%.</p>
+<p>A huge increase from modification that might have seemed to be a mere matter of taste unless you knew visualization theory!</p>
+<p>So, if anyone tells you that visualization of data is not as important as other components, you can tell them about this study and ask them what kind of visualization they want their doctor to look at when analyzing their arteries.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
