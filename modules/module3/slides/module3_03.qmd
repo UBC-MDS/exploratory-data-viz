@@ -93,11 +93,11 @@ import altair as alt
 
 (alt.Chart(movies).transform_density(
     'runtime',
-    # Give a name to the KDE values, which we can use when plotting
+    # Give a name to the density values, which we can use when plotting
     as_=['runtime', 'density'])
  .mark_area().encode(
     x='runtime',
-    y=alt.Y('density:Q').stack(False)))
+    y='density:Q')
 ```
 
 ::: {.notes}
@@ -169,6 +169,9 @@ when calculating the density.
 
 Setting this parameter to the same column we use for the colour encoding
 will compute one density for each of the differently coloured areas.
+We also need to indicate that we don't want the densities
+to be stacked on top of each other
+by setting stack to `False` in the Y-channel encoding.
 
 This plot effectively conveys
 the differences between runtimes of movies from different genres.
@@ -200,8 +203,7 @@ so that we can see the range of all the distributions.
 (alt.Chart(movies).transform_density(
      'runtime',
      groupby=['genre'],
-     as_=['runtime', 'density'],
-     steps=200)
+     as_=['runtime', 'density'])
  .mark_area(opacity=0.5).encode(
      x='runtime',
      y=alt.Y('density:Q').stack(False),
@@ -232,62 +234,6 @@ In such cases, we could either filter the data to plot fewer distributions
 or facet them vertically as we saw with the histograms previously.
 :::
 
-## Changing the number of density steps adjusts the smoothness of the curve
-
-```{python}
-(alt.Chart(movies).transform_density(
-    'runtime',
-    groupby=['genre'],
-    as_=['runtime', 'density'],
-    steps=2)
- .mark_area(opacity=0.7).encode(
-     x='runtime',
-     y=alt.Y('density:Q').stack(False),
-     color = 'genre'))
-```
-
-::: {.notes}
-In the previous slide,
-we can see that the density curves are a bit jagged
-rather than perfectly smooth.
-
-This is because, in the calculation of the density,
-we can indicate how many steps along the curve the density should be calculated for.
-This can be more intuitive to understand if we think of the extreme cases:
-
-If we calculated a density for only a single step,
-there would be a straight line between the start and endpoint,
-and for two steps there the curve would have a single sharp peak like a triangle
-as you can see in this slide.
-:::
-
-## Creating smoother density plots with more calculation steps
-
-```{python}
-(alt.Chart(movies).transform_density(
-     'runtime',
-     groupby=['genre'],
-     as_=['runtime', 'density'],
-     steps=200)
- .mark_area().encode(
-     x='runtime',
-     y=alt.Y('density:Q').stack(False),
-     color='genre'))
-```
-
-::: {.notes}
-If we instead increased the number of steps,
-we could make the density curves appear smoother.
-Since a density is an approximation of the true distribution underlying our data,
-it makes sense to set the number of steps 
-so that the areas appear smooth.
-
-However,
-more steps take more computing power since there are more calculations to make.
-If we are working with a large data set
-or creating many plots,
-we might therefore want to decrease this value slightly.
-:::
 
 ## Density plots of small datasets can be misleading
 
@@ -297,8 +243,7 @@ density = (alt.Chart(movies[:10]).transform_density(
     as_=['runtime', 'density'])
  .mark_area().encode(
     x='runtime',
-    y=alt.Y('density:Q').stack(False),
-    color='genre'))
+    y='density:Q')
 density
 ```
 
@@ -364,7 +309,7 @@ or created a histogram.
     counts=True)
  .mark_area().encode(
     x='runtime',
-    y=alt.Y('density:Q').stack(False)))
+    y='density:Q')
 ```
 
 ::: {.notes}
