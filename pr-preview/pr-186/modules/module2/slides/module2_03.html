@@ -346,7 +346,7 @@ Mean number of years in primary, secondary, and tertiary school for 25-36 years 
 </section>
 <section id="read-in-and-glimpse-at-the-data-with-pandas" class="slide level2">
 <h2>Read in and glimpse at the data with pandas</h2>
-<div id="2e5af5ca" class="cell" data-execution_count="2">
+<div id="fc54aca7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>gm <span class="op">=</span> pd.read_csv(<span class="st">"../../data/world-data-gapminder.csv"</span>, parse_dates<span class="op">=</span>[<span class="st">"year"</span>])</span>
@@ -491,7 +491,7 @@ Mean number of years in primary, secondary, and tertiary school for 25-36 years 
 </section>
 <section id="info-shows-column-data-types-and-missing-values" class="slide level2">
 <h2><em>.info()</em> shows column data types and missing values</h2>
-<div id="4efae16b" class="cell" data-execution_count="3">
+<div id="e4d9b4d0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>gm.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -540,7 +540,7 @@ memory usage: 4.2+ MB</code></pre>
 </section>
 <section id="working-with-large-data-in-altair-via-urls" class="slide level2">
 <h2>Working with large data in Altair via URLs</h2>
-<div id="76a3aac8" class="cell" data-execution_count="4">
+<div id="dccf32b1" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    alt.Chart(<span class="st">"https://website.com/data.csv"</span>)</span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>    .mark_line()</span>
@@ -702,10 +702,10 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="a-line-chart-is-a-good-choice-for-trends-over-time" class="slide level2">
 <h2>A line chart is a good choice for trends over time</h2>
-<div id="9d3679d8" class="cell" data-execution_count="5">
+<div id="6443b981" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>gm_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/tags/v1.0.0/chapters/en/slides/module2/data/world-data-gapminder.csv"</span></span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>gm_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/heads/main/modules/data/world-data-gapminder.csv"</span></span>
 <span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_line().encode(</span>
 <span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'year:T'</span>,</span>
@@ -714,23 +714,23 @@ date (August 13 2020), time (12:00 pm)
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-e8a9eb29a7d843ed8ac99b722d46ec4f.vega-embed {
+  #altair-viz-d9bac6aa517e42cea0e581b7b3a75cce.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-e8a9eb29a7d843ed8ac99b722d46ec4f.vega-embed details,
-  #altair-viz-e8a9eb29a7d843ed8ac99b722d46ec4f.vega-embed details summary {
+  #altair-viz-d9bac6aa517e42cea0e581b7b3a75cce.vega-embed details,
+  #altair-viz-d9bac6aa517e42cea0e581b7b3a75cce.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-e8a9eb29a7d843ed8ac99b722d46ec4f"></div>
+<div id="altair-viz-d9bac6aa517e42cea0e581b7b3a75cce"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-e8a9eb29a7d843ed8ac99b722d46ec4f") {
-      outputDiv = document.getElementById("altair-viz-e8a9eb29a7d843ed8ac99b722d46ec4f");
+    if (outputDiv.id !== "altair-viz-d9bac6aa517e42cea0e581b7b3a75cce") {
+      outputDiv = document.getElementById("altair-viz-d9bac6aa517e42cea0e581b7b3a75cce");
     }
 
     const paths = {
@@ -778,7 +778,7 @@ date (August 13 2020), time (12:00 pm)
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/tags/v1.0.0/chapters/en/slides/module2/data/world-data-gapminder.csv"}, "mark": {"type": "line"}, "encoding": {"x": {"field": "year", "type": "temporal"}, "y": {"field": "population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/heads/main/modules/data/world-data-gapminder.csv"}, "mark": {"type": "line"}, "encoding": {"x": {"field": "year", "type": "temporal"}, "y": {"field": "population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 </div>
@@ -801,30 +801,30 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="the-.sum-aggregate-method-will-show-us-the-trend-of-the-entire-world" class="slide level2">
 <h2>The <em>.sum()</em> aggregate method will show us the trend of the entire world</h2>
-<div id="8ee3ce6c" class="cell" data-execution_count="6">
+<div id="bcc81188" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_line().encode(</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'year:T'</span>,</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'sum(population):Q'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-5fd4f0969e554a35bbcda0706461dd5b.vega-embed {
+  #altair-viz-8de4c41ec0ee4b6eb7632bc86918dc5d.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-5fd4f0969e554a35bbcda0706461dd5b.vega-embed details,
-  #altair-viz-5fd4f0969e554a35bbcda0706461dd5b.vega-embed details summary {
+  #altair-viz-8de4c41ec0ee4b6eb7632bc86918dc5d.vega-embed details,
+  #altair-viz-8de4c41ec0ee4b6eb7632bc86918dc5d.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-5fd4f0969e554a35bbcda0706461dd5b"></div>
+<div id="altair-viz-8de4c41ec0ee4b6eb7632bc86918dc5d"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-5fd4f0969e554a35bbcda0706461dd5b") {
-      outputDiv = document.getElementById("altair-viz-5fd4f0969e554a35bbcda0706461dd5b");
+    if (outputDiv.id !== "altair-viz-8de4c41ec0ee4b6eb7632bc86918dc5d") {
+      outputDiv = document.getElementById("altair-viz-8de4c41ec0ee4b6eb7632bc86918dc5d");
     }
 
     const paths = {
@@ -872,7 +872,7 @@ date (August 13 2020), time (12:00 pm)
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/tags/v1.0.0/chapters/en/slides/module2/data/world-data-gapminder.csv"}, "mark": {"type": "line"}, "encoding": {"x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/heads/main/modules/data/world-data-gapminder.csv"}, "mark": {"type": "line"}, "encoding": {"x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 </div>
@@ -899,30 +899,30 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="changing-axes-titles-clarifies-makes-our-plot-easier-to-interpret" class="slide level2">
 <h2>Changing axes titles clarifies makes our plot easier to interpret</h2>
-<div id="7f2ac52e" class="cell" data-execution_count="7">
+<div id="e7971e86" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_line().encode(</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'year:T'</span>,</span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">'sum(population):Q'</span>, title<span class="op">=</span><span class="st">'World population'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-4018b372da0747ec8595c9be8bd231d7.vega-embed {
+  #altair-viz-c0a03424c3a048708342f54b44aebbb8.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-4018b372da0747ec8595c9be8bd231d7.vega-embed details,
-  #altair-viz-4018b372da0747ec8595c9be8bd231d7.vega-embed details summary {
+  #altair-viz-c0a03424c3a048708342f54b44aebbb8.vega-embed details,
+  #altair-viz-c0a03424c3a048708342f54b44aebbb8.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-4018b372da0747ec8595c9be8bd231d7"></div>
+<div id="altair-viz-c0a03424c3a048708342f54b44aebbb8"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-4018b372da0747ec8595c9be8bd231d7") {
-      outputDiv = document.getElementById("altair-viz-4018b372da0747ec8595c9be8bd231d7");
+    if (outputDiv.id !== "altair-viz-c0a03424c3a048708342f54b44aebbb8") {
+      outputDiv = document.getElementById("altair-viz-c0a03424c3a048708342f54b44aebbb8");
     }
 
     const paths = {
@@ -970,7 +970,7 @@ date (August 13 2020), time (12:00 pm)
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/tags/v1.0.0/chapters/en/slides/module2/data/world-data-gapminder.csv"}, "mark": {"type": "line"}, "encoding": {"x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "title": "World population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/heads/main/modules/data/world-data-gapminder.csv"}, "mark": {"type": "line"}, "encoding": {"x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "title": "World population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 </div>
@@ -994,30 +994,30 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="area-charts-are-also-effective-at-visualizing-trends-over-time" class="slide level2">
 <h2>Area charts are also effective at visualizing trends over time</h2>
-<div id="5879d92e" class="cell" data-execution_count="8">
+<div id="bbf0228a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_area().encode(</span>
 <span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:T'</span>),</span>
 <span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'sum(population):Q'</span>, title<span class="op">=</span><span class="st">'World population'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-2d57e769d78c4382b3e12e6d778e3324.vega-embed {
+  #altair-viz-a169d4ba35bb4c0d9b81a6badb2d2774.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2d57e769d78c4382b3e12e6d778e3324.vega-embed details,
-  #altair-viz-2d57e769d78c4382b3e12e6d778e3324.vega-embed details summary {
+  #altair-viz-a169d4ba35bb4c0d9b81a6badb2d2774.vega-embed details,
+  #altair-viz-a169d4ba35bb4c0d9b81a6badb2d2774.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2d57e769d78c4382b3e12e6d778e3324"></div>
+<div id="altair-viz-a169d4ba35bb4c0d9b81a6badb2d2774"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2d57e769d78c4382b3e12e6d778e3324") {
-      outputDiv = document.getElementById("altair-viz-2d57e769d78c4382b3e12e6d778e3324");
+    if (outputDiv.id !== "altair-viz-a169d4ba35bb4c0d9b81a6badb2d2774") {
+      outputDiv = document.getElementById("altair-viz-a169d4ba35bb4c0d9b81a6badb2d2774");
     }
 
     const paths = {
@@ -1065,7 +1065,7 @@ date (August 13 2020), time (12:00 pm)
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/tags/v1.0.0/chapters/en/slides/module2/data/world-data-gapminder.csv"}, "mark": {"type": "area"}, "encoding": {"x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "title": "World population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/heads/main/modules/data/world-data-gapminder.csv"}, "mark": {"type": "area"}, "encoding": {"x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "title": "World population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 </div>
@@ -1088,7 +1088,7 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="area-charts-are-preferred-when-the-total-of-the-groups-is-the-most-important" class="slide level2">
 <h2>Area charts are preferred when the total of the groups is the most important</h2>
-<div id="fa08b96f" class="cell" data-execution_count="9">
+<div id="cb670348" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_area().encode(</span>
 <span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:T'</span>),</span>
 <span id="cb9-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'sum(population):Q'</span>, title<span class="op">=</span><span class="st">'World population'</span>),</span>
@@ -1096,23 +1096,23 @@ date (August 13 2020), time (12:00 pm)
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-cb2ba084e25647619012f3199f186926.vega-embed {
+  #altair-viz-5deecdc2f48044acb79bc7965e0a2bb5.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-cb2ba084e25647619012f3199f186926.vega-embed details,
-  #altair-viz-cb2ba084e25647619012f3199f186926.vega-embed details summary {
+  #altair-viz-5deecdc2f48044acb79bc7965e0a2bb5.vega-embed details,
+  #altair-viz-5deecdc2f48044acb79bc7965e0a2bb5.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-cb2ba084e25647619012f3199f186926"></div>
+<div id="altair-viz-5deecdc2f48044acb79bc7965e0a2bb5"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-cb2ba084e25647619012f3199f186926") {
-      outputDiv = document.getElementById("altair-viz-cb2ba084e25647619012f3199f186926");
+    if (outputDiv.id !== "altair-viz-5deecdc2f48044acb79bc7965e0a2bb5") {
+      outputDiv = document.getElementById("altair-viz-5deecdc2f48044acb79bc7965e0a2bb5");
     }
 
     const paths = {
@@ -1160,7 +1160,7 @@ date (August 13 2020), time (12:00 pm)
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/tags/v1.0.0/chapters/en/slides/module2/data/world-data-gapminder.csv"}, "mark": {"type": "area"}, "encoding": {"color": {"field": "region", "type": "nominal"}, "x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "title": "World population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/heads/main/modules/data/world-data-gapminder.csv"}, "mark": {"type": "area"}, "encoding": {"color": {"field": "region", "type": "nominal"}, "x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "title": "World population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 </div>
@@ -1182,7 +1182,7 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="it-is-helpful-to-clarify-that-the-areas-are-stacked-on-top-of-each-other" class="slide level2">
 <h2>It is helpful to clarify that the areas are stacked on top of each other</h2>
-<div id="1dd98065" class="cell" data-execution_count="10">
+<div id="f3a84fda" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_area().encode(</span>
 <span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:T'</span>),</span>
 <span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'sum(population):Q'</span>, title<span class="op">=</span><span class="st">'Cumulative population of stacked regions'</span>),</span>
@@ -1190,23 +1190,23 @@ date (August 13 2020), time (12:00 pm)
 <div class="cell-output cell-output-display" data-execution_count="10">
 
 <style>
-  #altair-viz-1a5dad23574a4f7c996b5c1e9ade8ae3.vega-embed {
+  #altair-viz-c9548bee182849b5a6efd072a6bc745d.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-1a5dad23574a4f7c996b5c1e9ade8ae3.vega-embed details,
-  #altair-viz-1a5dad23574a4f7c996b5c1e9ade8ae3.vega-embed details summary {
+  #altair-viz-c9548bee182849b5a6efd072a6bc745d.vega-embed details,
+  #altair-viz-c9548bee182849b5a6efd072a6bc745d.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-1a5dad23574a4f7c996b5c1e9ade8ae3"></div>
+<div id="altair-viz-c9548bee182849b5a6efd072a6bc745d"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-1a5dad23574a4f7c996b5c1e9ade8ae3") {
-      outputDiv = document.getElementById("altair-viz-1a5dad23574a4f7c996b5c1e9ade8ae3");
+    if (outputDiv.id !== "altair-viz-c9548bee182849b5a6efd072a6bc745d") {
+      outputDiv = document.getElementById("altair-viz-c9548bee182849b5a6efd072a6bc745d");
     }
 
     const paths = {
@@ -1254,7 +1254,7 @@ date (August 13 2020), time (12:00 pm)
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/tags/v1.0.0/chapters/en/slides/module2/data/world-data-gapminder.csv"}, "mark": {"type": "area"}, "encoding": {"color": {"field": "region", "type": "nominal"}, "x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "title": "Cumulative population of stacked regions", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/heads/main/modules/data/world-data-gapminder.csv"}, "mark": {"type": "area"}, "encoding": {"color": {"field": "region", "type": "nominal"}, "x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "title": "Cumulative population of stacked regions", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 </div>
@@ -1277,7 +1277,7 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="line-charts-are-preferred-when-the-individual-groups-are-the-most-important" class="slide level2">
 <h2>Line charts are preferred when the individual groups are the most important</h2>
-<div id="d4ad680e" class="cell" data-execution_count="11">
+<div id="2338a9f1" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_line().encode(</span>
 <span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:T'</span>),</span>
 <span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'sum(population):Q'</span>, title<span class="op">=</span><span class="st">'Population'</span>),</span>
@@ -1285,23 +1285,23 @@ date (August 13 2020), time (12:00 pm)
 <div class="cell-output cell-output-display" data-execution_count="11">
 
 <style>
-  #altair-viz-69ab388b1f634a8182c39eeec12ced98.vega-embed {
+  #altair-viz-27658143ba2643eca71845ee88e8fc54.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-69ab388b1f634a8182c39eeec12ced98.vega-embed details,
-  #altair-viz-69ab388b1f634a8182c39eeec12ced98.vega-embed details summary {
+  #altair-viz-27658143ba2643eca71845ee88e8fc54.vega-embed details,
+  #altair-viz-27658143ba2643eca71845ee88e8fc54.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-69ab388b1f634a8182c39eeec12ced98"></div>
+<div id="altair-viz-27658143ba2643eca71845ee88e8fc54"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-69ab388b1f634a8182c39eeec12ced98") {
-      outputDiv = document.getElementById("altair-viz-69ab388b1f634a8182c39eeec12ced98");
+    if (outputDiv.id !== "altair-viz-27658143ba2643eca71845ee88e8fc54") {
+      outputDiv = document.getElementById("altair-viz-27658143ba2643eca71845ee88e8fc54");
     }
 
     const paths = {
@@ -1349,7 +1349,7 @@ date (August 13 2020), time (12:00 pm)
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/tags/v1.0.0/chapters/en/slides/module2/data/world-data-gapminder.csv"}, "mark": {"type": "line"}, "encoding": {"color": {"field": "region", "type": "nominal"}, "x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "title": "Population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/heads/main/modules/data/world-data-gapminder.csv"}, "mark": {"type": "line"}, "encoding": {"color": {"field": "region", "type": "nominal"}, "x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "title": "Population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 </div>
@@ -1372,30 +1372,30 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="when-will-the-worlds-population-stop-growing" class="slide level2">
 <h2>When will the world’s population stop growing?</h2>
-<div id="f2be0c50" class="cell" data-execution_count="12">
+<div id="58578772" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_area().encode(</span>
 <span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:T'</span>),</span>
 <span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'sum(population):Q'</span>, title<span class="op">=</span><span class="st">'World population'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 
 <style>
-  #altair-viz-98e85d3605d14e42b5ea2683dfb7c543.vega-embed {
+  #altair-viz-c83270d78e144f1ead08a1020d95f837.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-98e85d3605d14e42b5ea2683dfb7c543.vega-embed details,
-  #altair-viz-98e85d3605d14e42b5ea2683dfb7c543.vega-embed details summary {
+  #altair-viz-c83270d78e144f1ead08a1020d95f837.vega-embed details,
+  #altair-viz-c83270d78e144f1ead08a1020d95f837.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-98e85d3605d14e42b5ea2683dfb7c543"></div>
+<div id="altair-viz-c83270d78e144f1ead08a1020d95f837"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-98e85d3605d14e42b5ea2683dfb7c543") {
-      outputDiv = document.getElementById("altair-viz-98e85d3605d14e42b5ea2683dfb7c543");
+    if (outputDiv.id !== "altair-viz-c83270d78e144f1ead08a1020d95f837") {
+      outputDiv = document.getElementById("altair-viz-c83270d78e144f1ead08a1020d95f837");
     }
 
     const paths = {
@@ -1443,7 +1443,7 @@ date (August 13 2020), time (12:00 pm)
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/tags/v1.0.0/chapters/en/slides/module2/data/world-data-gapminder.csv"}, "mark": {"type": "area"}, "encoding": {"x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "title": "World population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/heads/main/modules/data/world-data-gapminder.csv"}, "mark": {"type": "area"}, "encoding": {"x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "sum", "field": "population", "title": "World population", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 </div>
@@ -1465,30 +1465,30 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="the-world-population-is-predicted-to-stabilize-at-around-11-billion" class="slide level2">
 <h2>The world population is predicted to stabilize at around 11 billion</h2>
-<div id="510566c6" class="cell" data-execution_count="13">
+<div id="1d836641" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_area().encode(</span>
 <span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:T'</span>),</span>
 <span id="cb13-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'mean(children_per_woman):Q'</span>, title<span class="op">=</span><span class="st">'Average children per woman worldwide'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 
 <style>
-  #altair-viz-6b509c066a9243a6adda020076a8c33c.vega-embed {
+  #altair-viz-cb0ce8db1c73427e92791d161687a6c4.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-6b509c066a9243a6adda020076a8c33c.vega-embed details,
-  #altair-viz-6b509c066a9243a6adda020076a8c33c.vega-embed details summary {
+  #altair-viz-cb0ce8db1c73427e92791d161687a6c4.vega-embed details,
+  #altair-viz-cb0ce8db1c73427e92791d161687a6c4.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-6b509c066a9243a6adda020076a8c33c"></div>
+<div id="altair-viz-cb0ce8db1c73427e92791d161687a6c4"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-6b509c066a9243a6adda020076a8c33c") {
-      outputDiv = document.getElementById("altair-viz-6b509c066a9243a6adda020076a8c33c");
+    if (outputDiv.id !== "altair-viz-cb0ce8db1c73427e92791d161687a6c4") {
+      outputDiv = document.getElementById("altair-viz-cb0ce8db1c73427e92791d161687a6c4");
     }
 
     const paths = {
@@ -1536,7 +1536,7 @@ date (August 13 2020), time (12:00 pm)
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/tags/v1.0.0/chapters/en/slides/module2/data/world-data-gapminder.csv"}, "mark": {"type": "area"}, "encoding": {"x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "mean", "field": "children_per_woman", "title": "Average children per woman worldwide", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14}, "axis": {"titleFontSize": 14, "labelFontSize": 12}, "header": {"titleFontSize": 16, "labelFontSize": 14}, "encoding": {"x": {"scale": {"zero": false}}}}, "data": {"url": "https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/heads/main/modules/data/world-data-gapminder.csv"}, "mark": {"type": "area"}, "encoding": {"x": {"field": "year", "type": "temporal"}, "y": {"aggregate": "mean", "field": "children_per_woman", "title": "Average children per woman worldwide", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 </div>
