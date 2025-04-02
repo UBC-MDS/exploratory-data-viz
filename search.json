@@ -1,59 +1,135 @@
 [
   {
-    "objectID": "modules/module3/slides/module3_01.html#the-movies-dataset",
-    "href": "modules/module3/slides/module3_01.html#the-movies-dataset",
-    "title": "Visualizing data from one column",
-    "section": "The movies dataset",
-    "text": "The movies dataset\n\nimport pandas as pd\n\nmovies = pd.read_csv(\"../../data/movies.csv\")\nmovies\n\n\n\n\n\n\n\n\ntitle\nruntime\nbudget\nrevenue\ngenre\ncountry\nvote_average\n\n\n\n\n0\nFinding Nemo\n100\n94000000\n940335536\nAnimation\nUnited States of America\n3.86\n\n\n1\nPirates of the Caribbean: The Curse of the Bla...\n143\n140000000\n655011224\nFantasy\nUnited States of America\n3.81\n\n\n2\nThe Simpsons Movie\n87\n75000000\n527068851\nAnimation\nUnited States of America\n3.44\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n526\nThe Emoji Movie\n86\n50000000\n66913939\nAnimation\nUnited States of America\n0.63\n\n\n527\nA Dog's Purpose\n100\n22000000\n194647323\nFantasy\nUnited States of America\n3.61\n\n\n528\nBatman: The Killing Joke\n72\n3500000\n3775000\nAnimation\nUnited States of America\n2.94\n\n\n\n\n529 rows × 7 columns\n\n\n\n\nThroughout this module, we will study a dataset of movies containing each movie’s title, runtime, budget, revenue, genre, country of production, and average user rating.\nUpon glancing at the dataframe table in this slide, there are several questions that might come to mind, e.g. - Are high-budget movies more profitable? - Do some countries make more movies of certain genres? - Are some genres rated higher than others? Before diving into these comparisons, we want to understand the data for each of the columns in our dataset.\nLet’s start by looking at the ratings the movies received and explore the best ways to visualize this data"
+    "objectID": "modules/module3/slides/module3_end.html#module-learning-outcomes",
+    "href": "modules/module3/slides/module3_end.html#module-learning-outcomes",
+    "title": "What Did we Learn and What to Expect in Assignment 3",
+    "section": "Module Learning Outcomes",
+    "text": "Module Learning Outcomes\nIn this module students will learn how to\n\nSelect an appropriate distribution plot for the data.\nCreate density plots to compare a few distributions.\nCreate boxplots to compare many distributions.\n\n\nThe assignment will concentrate on the learning objectives as well as building knowledge on existing concepts."
   },
   {
-    "objectID": "modules/module3/slides/module3_01.html#visualizing-a-single-column-with-a-point-plot-along-one-axis",
-    "href": "modules/module3/slides/module3_01.html#visualizing-a-single-column-with-a-point-plot-along-one-axis",
-    "title": "Visualizing data from one column",
-    "section": "Visualizing a single column with a point plot along one axis",
-    "text": "Visualizing a single column with a point plot along one axis\n\nimport altair as alt\n\nalt.Chart(movies[:5]).mark_point().encode(\n    x='runtime')\n\n\n\n\n\n\n\n\n\nVisualizing data distributions are useful in understanding the values in a dataframe column, as doing this allows us to quickly and easily see both the range and frequency of the values.\nOne of the simplest visualizations to understand a distribution of a single dataframe column is to plot each individual observation as a point.\nThis could be thought of as a one-dimensional scatter plot, where the values are spread out along only one of the plot axes.\nThis visualization works well when there are just a few plots to visualize, and to illustrate this we have filtered the data in this slide."
+    "objectID": "modules/module3/slides/module3_03.html#histograms-can-give-different-results-depending-on-the-data",
+    "href": "modules/module3/slides/module3_03.html#histograms-can-give-different-results-depending-on-the-data",
+    "title": "Using density plots to visualize distributions",
+    "section": "Histograms can give different results depending on the data",
+    "text": "Histograms can give different results depending on the data\nFrom scikit-learn\n\n\nHow many observations are counted per bar in a histogram depends on exactly where on the axis the border between the bins are.\nIn the images on this slide, the actual observations are drawn with black tick marks on the bottom and they are the same in both subplots.\nThe reason the histograms look different is that the border between the groups is shifted in the rightmost picture.\nAs we see here, a histogram is not an as unbiased plot as we might think at first, especially not if we have few data points, where the inclusion or exclusion of just a few points makes a big difference for the bar height."
   },
   {
-    "objectID": "modules/module3/slides/module3_01.html#single-axis-plots-can-become-saturated-when-there-is-a-lot-of-data-to-plot",
-    "href": "modules/module3/slides/module3_01.html#single-axis-plots-can-become-saturated-when-there-is-a-lot-of-data-to-plot",
-    "title": "Visualizing data from one column",
-    "section": "Single-axis plots can become saturated when there is a lot of data to plot",
-    "text": "Single-axis plots can become saturated when there is a lot of data to plot\n\nalt.Chart(movies[:50]).mark_point().encode(\n    x='runtime')\n\n\n\n\n\n\n\n\n\nWhen there are more observations, it becomes difficult to see how many there are at different locations along the axis, since the circular marks are overlapping with each other.\nWhen it becomes hard to tell individual observations apart, we say that a plot becomes “saturated” or “overplotted”. We will talk more about this concept in the next module."
+    "objectID": "modules/module3/slides/module3_03.html#centering-the-bins-on-the-data-can-help-create-more-accurate-distribution-plots",
+    "href": "modules/module3/slides/module3_03.html#centering-the-bins-on-the-data-can-help-create-more-accurate-distribution-plots",
+    "title": "Using density plots to visualize distributions",
+    "section": "Centering the bins on the data can help create more accurate distribution plots",
+    "text": "Centering the bins on the data can help create more accurate distribution plots\n\n\nInstead of setting fixed lines along the axis and then count points fully in one bin or another, we can create bins that are centred on the data and then add the bins together.\nWhen we center bins on the data, we often use bell-shaped bins instead of square ones as in the histogram. This removes noise or spikes in the plotted area, which could arise when using a square bin.\nThese spikes are often not informative for us when trying to get an idea of what the distribution looks like, and a smoother area is more conducive to conveying the overall shape of the data distribution.\nThe bell-shaped bins (also called kernels) are then added together as in the animation in this slide so that they sum up to an overall distribution line. Formally, this is called a “Kernel Density Estimate” (KDE), or just a “density plot”."
   },
   {
-    "objectID": "modules/module3/slides/module3_01.html#thinner-marks-avoid-saturation",
-    "href": "modules/module3/slides/module3_01.html#thinner-marks-avoid-saturation",
-    "title": "Visualizing data from one column",
-    "section": "Thinner marks avoid saturation",
-    "text": "Thinner marks avoid saturation\n\nalt.Chart(movies[:50]).mark_tick().encode(\n    x='runtime')\n\n\n\n\n\n\n\n\n\nIt is often easier to separate individual observations when they are represented as thin tick marks instead of the circles in the previous slide.\nThe disadvantage of this plot type is that it can be a bit harder to see individual observations. However, when we are visualization many marks, we are often more interested in how the data is distributed in general, rather than looking at individual points.\nThis type of plot with vertical tick marks along one axis is so common that it is sometimes referred to by a special name: “rugplot”.\nInstead of solely remembering plot by their specific names, the visualization grammar of Altair lets us think about visualizations more intuitively by how they are composed, which makes it easy to see the similarities between these plots and the one on the previous slide."
+    "objectID": "modules/module3/slides/module3_03.html#reading-in-the-movies-dataset",
+    "href": "modules/module3/slides/module3_03.html#reading-in-the-movies-dataset",
+    "title": "Using density plots to visualize distributions",
+    "section": "Reading in the movies dataset",
+    "text": "Reading in the movies dataset\n\nimport pandas as pd\n\nmovies = pd.read_csv(\"../../data/movies.csv\")\nmovies\n\n\n\n\n\n\n\n\ntitle\nruntime\nbudget\nrevenue\ngenre\ncountry\nvote_average\n\n\n\n\n0\nFinding Nemo\n100\n94000000\n940335536\nAnimation\nUnited States of America\n3.86\n\n\n1\nPirates of the Caribbean: The Curse of the Bla...\n143\n140000000\n655011224\nFantasy\nUnited States of America\n3.81\n\n\n2\nThe Simpsons Movie\n87\n75000000\n527068851\nAnimation\nUnited States of America\n3.44\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n526\nThe Emoji Movie\n86\n50000000\n66913939\nAnimation\nUnited States of America\n0.63\n\n\n527\nA Dog's Purpose\n100\n22000000\n194647323\nFantasy\nUnited States of America\n3.61\n\n\n528\nBatman: The Killing Joke\n72\n3500000\n3775000\nAnimation\nUnited States of America\n2.94\n\n\n\n\n529 rows × 7 columns\n\n\n\n\nWe will continue with the movies dataset in this slide deck, to try to answer the question we posed at the end of the previous chapter: “Are there differences in movie runtimes between genres?”.\nAs we have seen previously, histograms are not effective for this type of comparison between distributions, no matter if they are stacked or layered.\nWe could use faceting to answer this question, but sometimes we want to dedicate the separate facets for another categorical dataframe column, as we will do later in this slide deck.\nWhile row and column-based faceting would be possible, those plots require a lot of space. Here we will instead explore how we can use density plots, to effectively visualize both single and multiple distributions."
   },
   {
-    "objectID": "modules/module3/slides/module3_01.html#thinner-marks-also-saturate-for-large-data-sets",
-    "href": "modules/module3/slides/module3_01.html#thinner-marks-also-saturate-for-large-data-sets",
-    "title": "Visualizing data from one column",
-    "section": "Thinner marks also saturate for large data sets",
-    "text": "Thinner marks also saturate for large data sets\n\nalt.Chart(movies).mark_tick().encode(\n    x='runtime')\n\n\n\n\n\n\n\n\n\nWhen we increase the number of observations even further it becomes difficult to tell exactly how the data distribution looks, even with these thin marks.\nHere we require another strategy to visualize our data."
+    "objectID": "modules/module3/slides/module3_03.html#creating-a-density-plot-in-altair-requires-two-step",
+    "href": "modules/module3/slides/module3_03.html#creating-a-density-plot-in-altair-requires-two-step",
+    "title": "Using density plots to visualize distributions",
+    "section": "Creating a density plot in Altair requires two step",
+    "text": "Creating a density plot in Altair requires two step\n\nimport altair as alt\n\n(alt.Chart(movies).transform_density(\n    'runtime',\n    # Give a name to the density values, which we can use when plotting\n    as_=['runtime', 'density'])\n .mark_area().encode(\n    x='runtime',\n    y='density:Q'))\n\n\n\n\n\n\n\n\nTo create a density plot, we need to complete two tasks: 1. Place the bell-shaped bins and add them together as in the animation a few slides ago. 2. Plot a line or area mark for the newly calculated sum of bins. In Altair, these operations are done in two explicit steps, using transform_density for the calculation.\nFirst, we specify which dataframe column we want to use for the calculation. Then we use the as_ parameter to name the newly calculated values, which we here refer to as 'density'.\nSince the 'density' values are not part of the pandas dataframe, Altair cannot ask pandas which data type it is. Therefore, we need to add ':Q' to indicate that the density has quantitative values, just as when we specified the data types in module 2.\nWe could also have calculated the sum of the bell-shaped bins as a separate step outside Altair and added it as a new column in our pandas dataframe, but it is more convenient to do both the steps in Altair.\nWe can see that this plot looks similar to the histogram we created in the last slide deck, and we would reach similar conclusions when studying it. Most movies peak around 100 min, but there is great variation all the way from ~25 to ~215 min.\nIn contrast to a histogram, the y-axis of a density plot is not very informative.\nThe definition of a density entails that the area under the curve should sum up to 1, which represents all the observations.\nTherefore the y-axis is simply adjusted based on the values on the x-axis, so that the area equals 1.\nInstead of looking at the y-axis, focus on the shape of the area and the x-axis, those are the more informative in a density plot."
   },
   {
-    "objectID": "modules/module3/slides/module3_01.html#using-histograms-to-visualize-distributions-avoids-saturation-issues",
-    "href": "modules/module3/slides/module3_01.html#using-histograms-to-visualize-distributions-avoids-saturation-issues",
-    "title": "Visualizing data from one column",
-    "section": "Using histograms to visualize distributions avoids saturation issues",
-    "text": "Using histograms to visualize distributions avoids saturation issues\n\nalt.Chart(movies).mark_bar().encode(\n    alt.X('runtime', bin=alt.Bin(maxbins=30)),\n    y='count()')\n\n\n\n\n\n\n\n\n\nInstead of visualizing each individual observation, we can use the histograms we learned about in the last module. Histograms divide one axis into groups (or “bins”) and represent the count of observations in each group with a bar.\nIn this plot, we can directly see that most movies are around 100 min in length because all the highest bars are around this value. We would say that this distribution has a single peak of around 100 min.\nSome distributions have multiple peaks which are not necessarily in the center of the distribution, and some have no distinct peaks at all, but are instead more uniformly distributed.\nWe also see a wide variation in the length of movies in the plot, The shortest movie is just 20-30 min long, while the longest is somewhere between 2010 and 220 minutes.\nI wonder if we can explain some of the variation in the movie runtimes by grouping the data according to one of the categorical columns in the dataset. What do you think, which categories could contribute influence the movie length?"
+    "objectID": "modules/module3/slides/module3_03.html#creating-a-grouped-density-plot-requires-an-explicit-density-grouping",
+    "href": "modules/module3/slides/module3_03.html#creating-a-grouped-density-plot-requires-an-explicit-density-grouping",
+    "title": "Using density plots to visualize distributions",
+    "section": "Creating a grouped density plot requires an explicit density grouping",
+    "text": "Creating a grouped density plot requires an explicit density grouping\n\n(alt.Chart(movies).transform_density(\n    'runtime',\n    groupby=['genre'],\n    as_=['runtime', 'density'])\n .mark_area().encode(\n     x='runtime',\n     y=alt.Y('density:Q').stack(False),\n     color='genre'))\n\n\n\n\n\n\n\n\nIf we want to split and colour the densities by a categorical dataframe column, we need to explicitly specify a dataframe column to the groupby parameter when calculating the density.\nSetting this parameter to the same column we use for the colour encoding will compute one density for each of the differently coloured areas. We also need to indicate that we don’t want the densities to be stacked on top of each other by setting stack to False in the Y-channel encoding.\nThis plot effectively conveys the differences between runtimes of movies from different genres.\nNotably, we can see that the peaks are different locations on the x-axis for the three genres. This indicates that the most common movie lengths are different between genres.\nThis difference appears to be around 20 min, but it does not necessarily tell us where the mean and median would fall, since that also depends on where the rest of the values are distributed.\nWe can see that the Animation genre has the highest peak, which means that the values are the most densely packed around the peak in this distribution compared to the others. But we can only see the range of the History distribution, since this is plotted on top of the others.\nLet’s make the areas less opaque so that we can see the range of all the distributions."
   },
   {
-    "objectID": "modules/module3/slides/module3_01.html#faceting-is-effective-when-comparing-multiple-distributions",
-    "href": "modules/module3/slides/module3_01.html#faceting-is-effective-when-comparing-multiple-distributions",
-    "title": "Visualizing data from one column",
-    "section": "Faceting is effective when comparing multiple distributions",
-    "text": "Faceting is effective when comparing multiple distributions\n\nalt.Chart(movies).mark_bar().encode(\n    alt.X('runtime', bin=alt.Bin(maxbins=30)),\n    y='count()').facet('country')\n\n\n\n\n\n\n\n\n\nLet’s start by comparing the runtimes of movies produced in different countries. This is maybe not the first categorical column that you thought of, but don’t worry, we will look at additional ones later.\nAs we saw in the last module, faceting is a good way to compare multiple distributions and here we use it to create one histogram per production country.\nThis is a little bit of repetition, but we will discuss the histograms in more detail in these slides now that we have learned more about what they represent.\nYou can see that this particular dataset only contains movies made in the UK or the US. Because there are so many more movies made in the US compared to the UK, it is quite hard to tell if there are any meaningful differences between movies from the two countries.\nThe location of the two distributions on the x-axis look quite similar, but from these visualizations alone, we don’t have enough information to tell if the location, number of peaks, and the overall shape is the same between the two distributions."
+    "objectID": "modules/module3/slides/module3_03.html#slightly-transparent-areas-reveal-more-details",
+    "href": "modules/module3/slides/module3_03.html#slightly-transparent-areas-reveal-more-details",
+    "title": "Using density plots to visualize distributions",
+    "section": "Slightly transparent areas reveal more details",
+    "text": "Slightly transparent areas reveal more details\n\n(alt.Chart(movies).transform_density(\n     'runtime',\n     groupby=['genre'],\n     as_=['runtime', 'density'])\n .mark_area(opacity=0.5).encode(\n     x='runtime',\n     y=alt.Y('density:Q').stack(False),\n     color='genre'))\n\n\n\n\n\n\n\n\nThe density areas don’t suffer the same issues as the histograms when made transparent. The continuous solid shape for each group is easier to follow even when it is semi-transparent and overlaps with the other areas.\nThe transparency gives us the advantage of knowing that there is not small density area completely hiding behind a bigger one and we can also see the range of all the distributions.\nFor example, we can tell that there are some Fantasy movies that are almost as long as the longest History movies, whereas there is not a single Animation movie that is longer than 120 minutes.\nHowever, if we had more distributions to compare, a semi-transparent density plot would become hard to decipher. In such cases, we could either filter the data to plot fewer distributions or facet them vertically as we saw with the histograms previously."
   },
   {
-    "objectID": "modules/module3/slides/module3_01.html#independent-y-axis-scales-let-us-study-each-distribution-in-more-detail",
-    "href": "modules/module3/slides/module3_01.html#independent-y-axis-scales-let-us-study-each-distribution-in-more-detail",
-    "title": "Visualizing data from one column",
-    "section": "Independent y-axis scales let us study each distribution in more detail",
-    "text": "Independent y-axis scales let us study each distribution in more detail\n\n(alt.Chart(movies).mark_bar().encode(\n    alt.X('runtime', bin=alt.Bin(maxbins=30)),\n    y='count()')\n .facet('country')\n .resolve_scale(y='independent'))\n\n\n\n\n\n\n\n\n\nBy default when faceting, the y-axis is the same for all the subplots. This is often the most suitable choice, because it makes it clear when the total number of observations differ between the groups.\nIf we want to drill down and compare the distribution shape more closely we could define the y-axes to be independent for each facet, as we have done in this slide.\nNow we can get a better view of the UK histogram, which looks like it possibly could be slightly bimodal (it might have two peaks), whereas the US one is clearly unimodal (it has one peak).\nHowever, since we have such few British movies in our dataset, we can’t state this with much confidence; it might just be an artifact from the small sample number, of from which intervals the bins are covering.\nTo be more certain about if there are any meaningful differences between these two histograms, we would need to have a larger sample set from the UK and create multiple visualizations each with a different number of maxbins to see if that changes the histogram appearance.\nMaybe there are other categorical dataframe columns that would better explain the spread in movie length seen in the initial histogram?\nIn the next module, we will explore if there are more distinct differences in movie length based on which genre the movies belong to rather than its production country."
+    "objectID": "modules/module3/slides/module3_03.html#density-plots-of-small-datasets-can-be-misleading",
+    "href": "modules/module3/slides/module3_03.html#density-plots-of-small-datasets-can-be-misleading",
+    "title": "Using density plots to visualize distributions",
+    "section": "Density plots of small datasets can be misleading",
+    "text": "Density plots of small datasets can be misleading\n\ndensity = (alt.Chart(movies[:10]).transform_density(\n    'runtime',\n    as_=['runtime', 'density'])\n .mark_area().encode(\n    x='runtime',\n    y='density:Q'))\ndensity\n\n\n\n\n\n\n\n\nSince density plots don’t show the number of observations, they can be misleading for small data sets where they will still appear smooth as if there were many data points to back up that smoothness.\nWhen looking at this plot, are you be able to tell that the density is made up of just ten observations?\nIn Altair, a hint that a density is made up of few observations is the sharp borders of the areas. This happens because the default behaviour in Altair is to end the density where the data ends, which often creates sharp borders for low numbers of observations.\nMany other plotting packages instead, extend the density beyond the observations in the dataset to make it appear smoother and it is therefore paramount to always ask how many observations there are before interpreting a density plot."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_03.html#densities-can-be-combined-with-plotting-individual-data-points",
+    "href": "modules/module3/slides/module3_03.html#densities-can-be-combined-with-plotting-individual-data-points",
+    "title": "Using density plots to visualize distributions",
+    "section": "Densities can be combined with plotting individual data points",
+    "text": "Densities can be combined with plotting individual data points\n\n(density.mark_area(opacity=0.7) +\n alt.Chart(movies[:10]).mark_tick(color='black', yOffset=140).encode(x='runtime'))\n\n\n\n\n\n\n\n\nSince it is so hard to tell how many observations are in a density plot, you should always check this separately. Strategies to do this include looking at the number of rows in the dataframe, creating a separate histogram, or layering the density plot together with a plot of the individual data points.\nHere we are using mark_tick to plot every single observation along the x-axis and making the density area transparent so that we can see the tick marks. By default, the ticks would be in the middle of the plot, so we are using yOffset to align them with the x-axis.\nWith as few as 10 observations, we actually don’t need the density at all and could instead just have shown the individual observations or created a histogram."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_03.html#scaling-densities-by-the-numbers-of-observations-is-possible-but-not-very-effective",
+    "href": "modules/module3/slides/module3_03.html#scaling-densities-by-the-numbers-of-observations-is-possible-but-not-very-effective",
+    "title": "Using density plots to visualize distributions",
+    "section": "Scaling densities by the numbers of observations is possible but not very effective",
+    "text": "Scaling densities by the numbers of observations is possible but not very effective\n\n(alt.Chart(movies[:10]).transform_density(\n    'runtime',\n    as_=['runtime', 'density'],\n    counts=True)\n .mark_area().encode(\n    x='runtime',\n    y='density:Q'))\n\n\n\n\n\n\n\n\nIn Altair, we could actually scale the density plots by the count of observations by specifying counts=True inside the transform_density.\nHowever, since a density is a continuous area counts are not as easy to interpret as in a histogram where there is an exact count for each discrete bin.\nAs we can see in this example, the y-axis has been scaled by 10, but it is still hard to interpret, are there 0.08 movies with a runtime of 110 min?\nAlthough densities can be scaled by count, it is often confusing, which means we must be careful when interpreting them and always check how many observations are in the data by plotting the individual data points!"
+  },
+  {
+    "objectID": "modules/module3/slides/module3_00.html#module-learning-outcomes",
+    "href": "modules/module3/slides/module3_00.html#module-learning-outcomes",
+    "title": "Module Learning Outcomes",
+    "section": "Module Learning Outcomes",
+    "text": "Module Learning Outcomes\nIn this module students will learn how to\n\nSelect an appropriate distribution plot for the data.\nCreate density plots to compare a few distributions.\nCreate boxplots to compare many distributions."
+  },
+  {
+    "objectID": "modules/module3/module3-06-true_or_false_many_distributions.html#true-or-false-many-distributions",
+    "href": "modules/module3/module3-06-true_or_false_many_distributions.html#true-or-false-many-distributions",
+    "title": "3.1. Exercises",
+    "section": "True or False: Many Distributions",
+    "text": "True or False: Many Distributions",
+    "crumbs": [
+      "**M3. Visualizing Distributions**",
+      "&nbsp;&nbsp; 3.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module3/module3-06-true_or_false_many_distributions.html#why-and-how-to-compare-multiple-distributions",
+    "href": "modules/module3/module3-06-true_or_false_many_distributions.html#why-and-how-to-compare-multiple-distributions",
+    "title": "3.1. Exercises",
+    "section": "Why and How to Compare Multiple Distributions",
+    "text": "Why and How to Compare Multiple Distributions\n\n\n\n\n\n\n0200,000,000400,000,000600,000,000800,000,0001,000,000,0001,200,000,0001,400,000,0001,600,000,0001,800,000,0002,000,000,0002,200,000,0002,400,000,0002,600,000,0002,800,000,000Worldwide Gross0.000000000.000000010.000000020.000000030.000000040.00000005densityActionAdventureBlack ComedyComedyConcert/PerformanceDocumentaryDramaHorrorMusicalRomantic ComedyThriller/SuspenseWesternMajor Genre",
+    "crumbs": [
+      "**M3. Visualizing Distributions**",
+      "&nbsp;&nbsp; 3.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module3/module3-06-true_or_false_many_distributions.html#boxplots-and-penguins",
+    "href": "modules/module3/module3-06-true_or_false_many_distributions.html#boxplots-and-penguins",
+    "title": "3.1. Exercises",
+    "section": "Boxplots and Penguins",
+    "text": "Boxplots and Penguins\nInstructions:\nBe patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nIn the last few slides, we were faceting and using colour channels to compare the body mass of different species of penguins. Let’s explore this but this time using a boxplot!\n\n\n\n\n\n\nTasks:\nFill in the blanks in the code below so that the following gets accomplished.\n\nUse the data source penguins_df to make boxplots for the body mass values among the different penguin species.\nMake sure to give it an appropriate title and set the plot dimensions to a height of 200 and a width of 400.\nRemember to assign the species to the y-axis and the body_mass_g to the y-axis since we want to read the labels easily as we learned in the previous module.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you using mark_boxplot()?\nAre you setting alt.X('body_mass_g')?\nAre you setting alt.Y('species')?\nAre you setting a title, height and width in properties()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M3. Visualizing Distributions**",
+      "&nbsp;&nbsp; 3.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module3/module3-04-true_or_false_distributions.html",
+    "href": "modules/module3/module3-04-true_or_false_distributions.html",
+    "title": "2.1. Exercises",
+    "section": "",
+    "text": "Instructions:\nBe patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nBringing back our trusty penguins data, we are going to try to make a density plot that will provide insights into the distribution of penguins mass among the different islands.\n\n\n\n\n\n\nCreate a density plot for the body_mass_g column for penguins located on different islands.\nTasks:\nFill in the blanks in the code below so that the following gets accomplished.\n\nUse the data source penguins_df to make a plot assigned to an object named mass_density_plot.\nCalculate the KDE of the body_mass_g column and make sure to split it up by the categorical column island. When you create your new values for the calculation make sure to name them density.\nSet the step size to 100.\nGive the area plot an appropriate opacity.\nMap body_mass_g and density to the x and y-axis and make sure to specify that density consists of quantitative values.\nMap the island to the colour (colour) channel.\nMake sure to give your plot a title.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you setting groupby=['island'] and as_=['body_mass_g', 'density'] in transform_density()?\nAre you setting steps=100?\nAre you setting opacity=0.5 in mark_bar()?\nAre you specifying x='body_mass_g' or alt.X('body_mass_g')?\nAre you specifying y='density:Q' or alt.Y('density:Q')?\nAre you specifying color='island' or alt.Color('island')?\nAre you setting a title in properties()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNow let’s facet based on species and see if that gives us some more insight.\nCreate a density plot for the body_mass_g column for penguins located on different islands but this time facet for species\nTasks:\n\nUse the data source penguins_df to make the plot and assign it to an object named mass_faceted_plot.\nCalculate the KDE of the body_mass_g column and make sure to split it up by the categorical column island and penguin species. When you create your new values for the calculation make sure to name them density.\nSet the step size to 100.\nGive the area plot an appropriate opacity.\nMap body_mass_g and density to the x and y-axis and make sure to specify that density consists of quantitative values.\nMap the island to the colour (colour) channel.\nMake sure to give your plot a title and set the width of the plot to 200 and height to 100.\nFacet the plot by the penguin species and display them all in a single column.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you setting groupby=['island','species'] and as_=['body_mass_g', 'density'] in transform_density()?\nAre you setting steps=100?\nAre you setting opacity=0.5 in mark_bar()?\nAre you specifying x='body_mass_g' or alt.X('body_mass_g')?\nAre you specifying y='density:Q' or alt.Y('density:Q')?\nAre you specifying color='island' or alt.Color('island')?\nAre you setting a title, height and width in properties()?\nAre you faceting with .facet('species', columns=1)?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M3. Visualizing Distributions**",
+      "&nbsp;&nbsp; 2.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module3/module3-04-true_or_false_distributions.html#application-make-your-own-density-plot",
+    "href": "modules/module3/module3-04-true_or_false_distributions.html#application-make-your-own-density-plot",
+    "title": "2.1. Exercises",
+    "section": "",
+    "text": "Instructions:\nBe patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nBringing back our trusty penguins data, we are going to try to make a density plot that will provide insights into the distribution of penguins mass among the different islands.\n\n\n\n\n\n\nCreate a density plot for the body_mass_g column for penguins located on different islands.\nTasks:\nFill in the blanks in the code below so that the following gets accomplished.\n\nUse the data source penguins_df to make a plot assigned to an object named mass_density_plot.\nCalculate the KDE of the body_mass_g column and make sure to split it up by the categorical column island. When you create your new values for the calculation make sure to name them density.\nSet the step size to 100.\nGive the area plot an appropriate opacity.\nMap body_mass_g and density to the x and y-axis and make sure to specify that density consists of quantitative values.\nMap the island to the colour (colour) channel.\nMake sure to give your plot a title.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you setting groupby=['island'] and as_=['body_mass_g', 'density'] in transform_density()?\nAre you setting steps=100?\nAre you setting opacity=0.5 in mark_bar()?\nAre you specifying x='body_mass_g' or alt.X('body_mass_g')?\nAre you specifying y='density:Q' or alt.Y('density:Q')?\nAre you specifying color='island' or alt.Color('island')?\nAre you setting a title in properties()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNow let’s facet based on species and see if that gives us some more insight.\nCreate a density plot for the body_mass_g column for penguins located on different islands but this time facet for species\nTasks:\n\nUse the data source penguins_df to make the plot and assign it to an object named mass_faceted_plot.\nCalculate the KDE of the body_mass_g column and make sure to split it up by the categorical column island and penguin species. When you create your new values for the calculation make sure to name them density.\nSet the step size to 100.\nGive the area plot an appropriate opacity.\nMap body_mass_g and density to the x and y-axis and make sure to specify that density consists of quantitative values.\nMap the island to the colour (colour) channel.\nMake sure to give your plot a title and set the width of the plot to 200 and height to 100.\nFacet the plot by the penguin species and display them all in a single column.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you setting groupby=['island','species'] and as_=['body_mass_g', 'density'] in transform_density()?\nAre you setting steps=100?\nAre you setting opacity=0.5 in mark_bar()?\nAre you specifying x='body_mass_g' or alt.X('body_mass_g')?\nAre you specifying y='density:Q' or alt.Y('density:Q')?\nAre you specifying color='island' or alt.Color('island')?\nAre you setting a title, height and width in properties()?\nAre you faceting with .facet('species', columns=1)?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M3. Visualizing Distributions**",
+      "&nbsp;&nbsp; 2.1. Exercises"
+    ]
   },
   {
     "objectID": "modules/module3/module3-02-true_or_false_distributions.html",
@@ -1039,10 +1115,190 @@
     ]
   },
   {
-    "objectID": "modules/module3/slides/module3_00.html#module-learning-outcomes",
-    "href": "modules/module3/slides/module3_00.html#module-learning-outcomes",
-    "title": "Module Learning Outcomes",
-    "section": "Module Learning Outcomes",
-    "text": "Module Learning Outcomes\nIn this module students will learn how to\n\nSelect an appropriate distribution plot for the data.\nCreate density plots to compare a few distributions.\nCreate boxplots to compare many distributions."
+    "objectID": "modules/module3/module3-03-visualize_distributions_with_density_plots.html",
+    "href": "modules/module3/module3-03-visualize_distributions_with_density_plots.html",
+    "title": "2. Visualize Distributions with Density Plots",
+    "section": "",
+    "text": "2. Visualize Distributions with Density Plots\n\nVideoSlides",
+    "crumbs": [
+      "**M3. Visualizing Distributions**",
+      "2. Visualize Distributions with Density Plots"
+    ]
+  },
+  {
+    "objectID": "modules/module3/module3-05-comparing_multiple_distributions.html",
+    "href": "modules/module3/module3-05-comparing_multiple_distributions.html",
+    "title": "3. Comparing Multiple Distributions",
+    "section": "",
+    "text": "3. Comparing Multiple Distributions\n\nVideoSlides",
+    "crumbs": [
+      "**M3. Visualizing Distributions**",
+      "3. Comparing Multiple Distributions"
+    ]
+  },
+  {
+    "objectID": "modules/module3/module3-07-what_did_we_just_learn.html",
+    "href": "modules/module3/module3-07-what_did_we_just_learn.html",
+    "title": "4. What did we just learn?",
+    "section": "",
+    "text": "4. What did we just learn?\n\nVideoSlides",
+    "crumbs": [
+      "**M3. Visualizing Distributions**",
+      "4. What did we just learn?"
+    ]
+  },
+  {
+    "objectID": "modules/module3/slides/module3_01.html#the-movies-dataset",
+    "href": "modules/module3/slides/module3_01.html#the-movies-dataset",
+    "title": "Visualizing data from one column",
+    "section": "The movies dataset",
+    "text": "The movies dataset\n\nimport pandas as pd\n\nmovies = pd.read_csv(\"../../data/movies.csv\")\nmovies\n\n\n\n\n\n\n\n\ntitle\nruntime\nbudget\nrevenue\ngenre\ncountry\nvote_average\n\n\n\n\n0\nFinding Nemo\n100\n94000000\n940335536\nAnimation\nUnited States of America\n3.86\n\n\n1\nPirates of the Caribbean: The Curse of the Bla...\n143\n140000000\n655011224\nFantasy\nUnited States of America\n3.81\n\n\n2\nThe Simpsons Movie\n87\n75000000\n527068851\nAnimation\nUnited States of America\n3.44\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n526\nThe Emoji Movie\n86\n50000000\n66913939\nAnimation\nUnited States of America\n0.63\n\n\n527\nA Dog's Purpose\n100\n22000000\n194647323\nFantasy\nUnited States of America\n3.61\n\n\n528\nBatman: The Killing Joke\n72\n3500000\n3775000\nAnimation\nUnited States of America\n2.94\n\n\n\n\n529 rows × 7 columns\n\n\n\n\nThroughout this module, we will study a dataset of movies containing each movie’s title, runtime, budget, revenue, genre, country of production, and average user rating.\nUpon glancing at the dataframe table in this slide, there are several questions that might come to mind, e.g. - Are high-budget movies more profitable? - Do some countries make more movies of certain genres? - Are some genres rated higher than others? Before diving into these comparisons, we want to understand the data for each of the columns in our dataset.\nLet’s start by looking at the ratings the movies received and explore the best ways to visualize this data"
+  },
+  {
+    "objectID": "modules/module3/slides/module3_01.html#visualizing-a-single-column-with-a-point-plot-along-one-axis",
+    "href": "modules/module3/slides/module3_01.html#visualizing-a-single-column-with-a-point-plot-along-one-axis",
+    "title": "Visualizing data from one column",
+    "section": "Visualizing a single column with a point plot along one axis",
+    "text": "Visualizing a single column with a point plot along one axis\n\nimport altair as alt\n\nalt.Chart(movies[:5]).mark_point().encode(\n    x='runtime')\n\n\n\n\n\n\n\n\n\nVisualizing data distributions are useful in understanding the values in a dataframe column, as doing this allows us to quickly and easily see both the range and frequency of the values.\nOne of the simplest visualizations to understand a distribution of a single dataframe column is to plot each individual observation as a point.\nThis could be thought of as a one-dimensional scatter plot, where the values are spread out along only one of the plot axes.\nThis visualization works well when there are just a few plots to visualize, and to illustrate this we have filtered the data in this slide."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_01.html#single-axis-plots-can-become-saturated-when-there-is-a-lot-of-data-to-plot",
+    "href": "modules/module3/slides/module3_01.html#single-axis-plots-can-become-saturated-when-there-is-a-lot-of-data-to-plot",
+    "title": "Visualizing data from one column",
+    "section": "Single-axis plots can become saturated when there is a lot of data to plot",
+    "text": "Single-axis plots can become saturated when there is a lot of data to plot\n\nalt.Chart(movies[:50]).mark_point().encode(\n    x='runtime')\n\n\n\n\n\n\n\n\n\nWhen there are more observations, it becomes difficult to see how many there are at different locations along the axis, since the circular marks are overlapping with each other.\nWhen it becomes hard to tell individual observations apart, we say that a plot becomes “saturated” or “overplotted”. We will talk more about this concept in the next module."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_01.html#thinner-marks-avoid-saturation",
+    "href": "modules/module3/slides/module3_01.html#thinner-marks-avoid-saturation",
+    "title": "Visualizing data from one column",
+    "section": "Thinner marks avoid saturation",
+    "text": "Thinner marks avoid saturation\n\nalt.Chart(movies[:50]).mark_tick().encode(\n    x='runtime')\n\n\n\n\n\n\n\n\n\nIt is often easier to separate individual observations when they are represented as thin tick marks instead of the circles in the previous slide.\nThe disadvantage of this plot type is that it can be a bit harder to see individual observations. However, when we are visualization many marks, we are often more interested in how the data is distributed in general, rather than looking at individual points.\nThis type of plot with vertical tick marks along one axis is so common that it is sometimes referred to by a special name: “rugplot”.\nInstead of solely remembering plot by their specific names, the visualization grammar of Altair lets us think about visualizations more intuitively by how they are composed, which makes it easy to see the similarities between these plots and the one on the previous slide."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_01.html#thinner-marks-also-saturate-for-large-data-sets",
+    "href": "modules/module3/slides/module3_01.html#thinner-marks-also-saturate-for-large-data-sets",
+    "title": "Visualizing data from one column",
+    "section": "Thinner marks also saturate for large data sets",
+    "text": "Thinner marks also saturate for large data sets\n\nalt.Chart(movies).mark_tick().encode(\n    x='runtime')\n\n\n\n\n\n\n\n\n\nWhen we increase the number of observations even further it becomes difficult to tell exactly how the data distribution looks, even with these thin marks.\nHere we require another strategy to visualize our data."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_01.html#using-histograms-to-visualize-distributions-avoids-saturation-issues",
+    "href": "modules/module3/slides/module3_01.html#using-histograms-to-visualize-distributions-avoids-saturation-issues",
+    "title": "Visualizing data from one column",
+    "section": "Using histograms to visualize distributions avoids saturation issues",
+    "text": "Using histograms to visualize distributions avoids saturation issues\n\nalt.Chart(movies).mark_bar().encode(\n    alt.X('runtime', bin=alt.Bin(maxbins=30)),\n    y='count()')\n\n\n\n\n\n\n\n\n\nInstead of visualizing each individual observation, we can use the histograms we learned about in the last module. Histograms divide one axis into groups (or “bins”) and represent the count of observations in each group with a bar.\nIn this plot, we can directly see that most movies are around 100 min in length because all the highest bars are around this value. We would say that this distribution has a single peak of around 100 min.\nSome distributions have multiple peaks which are not necessarily in the center of the distribution, and some have no distinct peaks at all, but are instead more uniformly distributed.\nWe also see a wide variation in the length of movies in the plot, The shortest movie is just 20-30 min long, while the longest is somewhere between 2010 and 220 minutes.\nI wonder if we can explain some of the variation in the movie runtimes by grouping the data according to one of the categorical columns in the dataset. What do you think, which categories could contribute influence the movie length?"
+  },
+  {
+    "objectID": "modules/module3/slides/module3_01.html#faceting-is-effective-when-comparing-multiple-distributions",
+    "href": "modules/module3/slides/module3_01.html#faceting-is-effective-when-comparing-multiple-distributions",
+    "title": "Visualizing data from one column",
+    "section": "Faceting is effective when comparing multiple distributions",
+    "text": "Faceting is effective when comparing multiple distributions\n\nalt.Chart(movies).mark_bar().encode(\n    alt.X('runtime', bin=alt.Bin(maxbins=30)),\n    y='count()').facet('country')\n\n\n\n\n\n\n\n\n\nLet’s start by comparing the runtimes of movies produced in different countries. This is maybe not the first categorical column that you thought of, but don’t worry, we will look at additional ones later.\nAs we saw in the last module, faceting is a good way to compare multiple distributions and here we use it to create one histogram per production country.\nThis is a little bit of repetition, but we will discuss the histograms in more detail in these slides now that we have learned more about what they represent.\nYou can see that this particular dataset only contains movies made in the UK or the US. Because there are so many more movies made in the US compared to the UK, it is quite hard to tell if there are any meaningful differences between movies from the two countries.\nThe location of the two distributions on the x-axis look quite similar, but from these visualizations alone, we don’t have enough information to tell if the location, number of peaks, and the overall shape is the same between the two distributions."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_01.html#independent-y-axis-scales-let-us-study-each-distribution-in-more-detail",
+    "href": "modules/module3/slides/module3_01.html#independent-y-axis-scales-let-us-study-each-distribution-in-more-detail",
+    "title": "Visualizing data from one column",
+    "section": "Independent y-axis scales let us study each distribution in more detail",
+    "text": "Independent y-axis scales let us study each distribution in more detail\n\n(alt.Chart(movies).mark_bar().encode(\n    alt.X('runtime', bin=alt.Bin(maxbins=30)),\n    y='count()')\n .facet('country')\n .resolve_scale(y='independent'))\n\n\n\n\n\n\n\n\n\nBy default when faceting, the y-axis is the same for all the subplots. This is often the most suitable choice, because it makes it clear when the total number of observations differ between the groups.\nIf we want to drill down and compare the distribution shape more closely we could define the y-axes to be independent for each facet, as we have done in this slide.\nNow we can get a better view of the UK histogram, which looks like it possibly could be slightly bimodal (it might have two peaks), whereas the US one is clearly unimodal (it has one peak).\nHowever, since we have such few British movies in our dataset, we can’t state this with much confidence; it might just be an artifact from the small sample number, of from which intervals the bins are covering.\nTo be more certain about if there are any meaningful differences between these two histograms, we would need to have a larger sample set from the UK and create multiple visualizations each with a different number of maxbins to see if that changes the histogram appearance.\nMaybe there are other categorical dataframe columns that would better explain the spread in movie length seen in the initial histogram?\nIn the next module, we will explore if there are more distinct differences in movie length based on which genre the movies belong to rather than its production country."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#the-extended-movies-dataset",
+    "href": "modules/module3/slides/module3_05.html#the-extended-movies-dataset",
+    "title": "Comparing many distributions",
+    "section": "The extended movies dataset",
+    "text": "The extended movies dataset\n\nimport altair as alt\nfrom vega_datasets import data\n\nmovies_extended = data.movies().dropna(subset=['Major_Genre'])\nmovies_extended\n\n\n\n\n\n\n\n\nTitle\nUS_Gross\nWorldwide_Gross\nUS_DVD_Sales\n...\nDirector\nRotten_Tomatoes_Rating\nIMDB_Rating\nIMDB_Votes\n\n\n\n\n1\nFirst Love, Last Rites\n10876.0\n10876.0\nNaN\n...\nNone\nNaN\n6.9\n207.0\n\n\n2\nI Married a Strange Person\n203134.0\n203134.0\nNaN\n...\nNone\nNaN\n6.8\n865.0\n\n\n3\nLet's Talk About Sex\n373615.0\n373615.0\nNaN\n...\nNone\n13.0\nNaN\nNaN\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n3198\nZoom\n11989328.0\n12506188.0\n6679409.0\n...\nPeter Hewitt\n3.0\n3.4\n7424.0\n\n\n3199\nThe Legend of Zorro\n45575336.0\n141475336.0\nNaN\n...\nMartin Campbell\n26.0\n5.7\n21161.0\n\n\n3200\nThe Mask of Zorro\n93828745.0\n233700000.0\nNaN\n...\nMartin Campbell\n82.0\n6.7\n4789.0\n\n\n\n\n2926 rows × 16 columns\n\n\n\n\nFor this exercise, we will use an extended movies dataset containing additional genres.\nWe load in that dataset from the vega sample repository and drop all the rows that have a NaN value in the column \"Major Genre\", since we are only interested in comparing the movies that we know belong to a genre.\nThe question we will try to answer in this slide deck is “Which genres have the highest worldwide gross?”."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#many-distributions-cant-be-effectively-compared-with-histograms",
+    "href": "modules/module3/slides/module3_05.html#many-distributions-cant-be-effectively-compared-with-histograms",
+    "title": "Comparing many distributions",
+    "section": "Many distributions can’t be effectively compared with histograms",
+    "text": "Many distributions can’t be effectively compared with histograms\n\nalt.Chart(movies_extended).mark_bar().encode(\n    alt.X('Worldwide_Gross', bin=alt.Bin(maxbins=30)),\n    alt.Y('count()'),\n    alt.Color('Major_Genre'))\n\n\n\n\n\n\n\n\nAs we have seen, histograms are not very effective for comparing multiple distributions, and not at all with this many different groups.\nMost genres have a low worldwide gross and because our histograms are stacked on top of each other the left-most bar dominates with around 2000 movies. It extends the y-axis so that it is hard to see how many observations there are for the highest x-values (but we know there are some since the axis extends that far)."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#many-distributions-cant-be-effectively-compared-with-densities-either",
+    "href": "modules/module3/slides/module3_05.html#many-distributions-cant-be-effectively-compared-with-densities-either",
+    "title": "Comparing many distributions",
+    "section": "Many distributions can’t be effectively compared with densities either",
+    "text": "Many distributions can’t be effectively compared with densities either\n\n(alt.Chart(movies_extended).mark_area().transform_density(\n    'Worldwide_Gross',\n    groupby=['Major_Genre'],\n    as_=['Worldwide_Gross', 'density'])\n .encode(\n    alt.X('Worldwide_Gross'),\n    alt.Y('density:Q'),\n    alt.Color('Major_Genre')))\n\n\n\n\n\n\n\n\nAlthough we saw previously that a layered density chart is better than a stacked histogram, it is not effective in comparing this many distributions either. Particularly not when the bulk of the distribution is concentrated in a small area, such as the low x-values in this plot.\nThis density chart shares many of the issues with the histogram from the previous slide, and this visualization is a poor choice for our data.\nWe could try faceting vertically with one density or histogram per facets, but there would be a lot of subplots with this many genres and they might not be that easy to compare when they are in facets far apart.\nSo how can we create an effective comparison between all the genres?"
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#bar-charts-are-effective-for-comparing-a-single-value-per-group-but-hides-variation",
+    "href": "modules/module3/slides/module3_05.html#bar-charts-are-effective-for-comparing-a-single-value-per-group-but-hides-variation",
+    "title": "Comparing many distributions",
+    "section": "Bar charts are effective for comparing a single value per group but hides variation",
+    "text": "Bar charts are effective for comparing a single value per group but hides variation\n\nalt.Chart(movies_extended).mark_bar().encode(\n    alt.X('mean(Worldwide_Gross)'),\n    alt.Y('Major_Genre'))\n\n\n\n\n\n\n\n\nWe could use a barplot if we were only interested in comparing a single value from each distribution, such as the mean or median.\nHowever, this is generally not a good idea because any plot that only shows a single value from a distribution will hide the variation in the data, which could lead us to arrive at incorrect conclusions as you will see in the next slide."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#showing-a-single-value-can-lead-to-incorrect-conclusions",
+    "href": "modules/module3/slides/module3_05.html#showing-a-single-value-can-lead-to-incorrect-conclusions",
+    "title": "Comparing many distributions",
+    "section": "Showing a single value can lead to incorrect conclusions",
+    "text": "Showing a single value can lead to incorrect conclusions\nBeyond Bar and Line Graphs: Time for a New Data Presentation Paradigm\n\n\nThis image illustrates how the same bar chart (A) could have been generated from three different distributions (B, C, or D).\nIf we just looked at the bar chart, we could not tell which of the distributions it came from, but looking at the points directly we would arrive at a widely different conclusion regarding our data.\nIn sample B, the points seem to on average be slightly different between the two groups, although there is significant overlap between the distributions.\nIn sample C there seems to be one outlier data point that increases the mean significantly for its group, but most of the other points are pretty similar between the two groups.\nIn D, both groups have their data distributed bimodally (in two peaks). Maybe this means that there is a third group in this data to which all the high values belong too?\nAll this valuable information about our data, is lost when visualizing it as a bar chart. Remember, bar charts are best suited for displaying individual values such as counts, proportions, and sums.\nTo arrive at more accurate conclusions we need to present a richer representation of the data such as a histogram or a density plot, which are great as long as we don’t have too many distributions to compare.\nBut which visualizations could we use to accurately represent the distributions while still remaining effective for comparing many distributions in the same plot?"
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#showing-individual-observations-gives-a-richer-representation-than-bar-charts",
+    "href": "modules/module3/slides/module3_05.html#showing-individual-observations-gives-a-richer-representation-than-bar-charts",
+    "title": "Comparing many distributions",
+    "section": "Showing individual observations gives a richer representation than bar charts",
+    "text": "Showing individual observations gives a richer representation than bar charts\n\nalt.Chart(movies_extended).mark_tick().encode(\n    alt.X('Worldwide_Gross'),\n    alt.Y('Major_Genre'))\n\n\n\n\n\n\n\n\nOne approach would be to show the individual observations, such as in this chart. This is a compact plot, which makes it easy to compare the different genres, since they are close to each other in the chart.\nWe can also clearly see the reason why the x-axis goes up to such a large max value: There are two movies that grossed highly above the rest!\nWhich are these movies?"
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#tooltips-are-helpful-for-answering-questions-about-specific-observations",
+    "href": "modules/module3/slides/module3_05.html#tooltips-are-helpful-for-answering-questions-about-specific-observations",
+    "title": "Comparing many distributions",
+    "section": "Tooltips are helpful for answering questions about specific observations",
+    "text": "Tooltips are helpful for answering questions about specific observations\n\nalt.Chart(movies_extended).mark_tick().encode(\n    alt.X('Worldwide_Gross'),\n    alt.Y('Major_Genre'),\n    alt.Tooltip('Title:N'))\n\n\n\n\n\n\n\n\nAltair really shines in answering questions like this! In addition to having a robust visualization grammar, it also provides a grammar for interactive features.\nWe will dive deep into more complex interactivity in the last module in this course, but for now, we can simply add a tooltip and answer the question we just posed by hovering with the mouse over the two highest grossing movies. Try it!\n(We need the :N because there are some title values that makes Altair not recognize this dataframe column as nominal otherwise)\nAlthough this visualization is useful in getting information about the individual movies, it is hard to tell exactly how many data points there are in the areas that are completely blue. Is there just enough so that we don’t see any of the white background or are there thousands of observations stacked on top of each other?\nThis plot is saturated, something we will discuss in detail in the next module. We could use transparency to alleviate this issue to some extend, but it is more effective to use colour for representing the counts, such as in a heatmap."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#heatmaps-can-compare-multiple-distributions-without-saturation",
+    "href": "modules/module3/slides/module3_05.html#heatmaps-can-compare-multiple-distributions-without-saturation",
+    "title": "Comparing many distributions",
+    "section": "Heatmaps can compare multiple distributions without saturation",
+    "text": "Heatmaps can compare multiple distributions without saturation\n\n(alt.Chart(movies_extended).mark_rect().encode(\n    alt.X('Worldwide_Gross', bin=alt.Bin(maxbins=100)),\n    alt.Y('Major_Genre'),\n    alt.Color('count()')))\n\n\n\n\n\n\n\n\nA heatmap of the number of observations is very similar to a histogram, but the count is mapped to the colour instead of to the height on the y-axis.\nThis heatmap shows the histogram for each of the genres right next to each other so that they are easy to compare and contrast, by looking at the varying colours.\nWe can see that some genres appear to have most of their observations close to zero, such as Comedy and Drama, whereas others are more spread out, such as Adventure movies.\nThis is a pretty effective visualization, but since the colour scale is the same for each genre and some genres have many more observations than others, it can be difficult to accurately interpret the distribution of those genres that have few observations.\nFor example, we wouldn’t be able to distinguish between regions with 10-20 and 40-50 observations since the colours are so similar.\nRemember that comparing positions is more effective than comparing colours, so how can we use position to compare multiple distributions?"
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#boxplots-show-several-key-statistics-from-a-distribution",
+    "href": "modules/module3/slides/module3_05.html#boxplots-show-several-key-statistics-from-a-distribution",
+    "title": "Comparing many distributions",
+    "section": "Boxplots show several key statistics from a distribution",
+    "text": "Boxplots show several key statistics from a distribution\nJhguch at en.wikipedia via Wikimedia Commons\n \n\n\nA boxplot is a mix between showing individual values and a few key summary statistics.\nInstead of showing just the mean or median as with a bar plot, a box plot shows 5 summary statistics.\nThe box represents three values, the median in the middle and the lower and upper quartile at the edges This means that 50% of the data points lie within the box.\nThe lines extending from the box are called whiskers and they can represent a few different statistics. Sometimes, they are showing the min and the max (the range) of our data.\nHowever, it is more common that they show the furthest points that are still within 1.5 x the “interquartile” range from the edges of the box. The interquartile range is the distance between the edges of the box.\nConventionally, any observations that fall outside the whiskers, are drawn out as individual points and are sometimes referred to as “outliers”, which are occasionally discarded.\nHowever, what really is an outlier in your data and what you should do with them depends on the question you are asking. Maybe these data points are the most important in your dataset or they could be measurement errors. You should always look further and think carefully before discarding data as outliers.\nHow does it look when we use boxplots to answer our question?"
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#boxplots-can-effectively-compare-multiple-distributions",
+    "href": "modules/module3/slides/module3_05.html#boxplots-can-effectively-compare-multiple-distributions",
+    "title": "Comparing many distributions",
+    "section": "Boxplots can effectively compare multiple distributions",
+    "text": "Boxplots can effectively compare multiple distributions\n\nbar = alt.Chart(movies_extended).mark_bar().encode(\n    alt.X('mean(Worldwide_Gross)'),\n    alt.Y('Major_Genre'))\n\nbox = alt.Chart(movies_extended).mark_boxplot().encode(\n    alt.X('Worldwide_Gross'),\n    alt.Y('Major_Genre'))\n\nbox | bar\n\n\n\n\n\n\n\n\nHere we show a boxplot next to the barplot we created initially. The | operator works similarly to the + operator, but instead of layering charts on top of each other, it puts them next to each other.\nWe can see that the box plots provide us with the same clear positional comparison as in the barplot, but we now also have access to additional information about each genres’ distribution. We can ensure ourselves that the distributions are roughly the same shape and view potential outliers.\nWe can directly answer the question we posed at the beginning: the Adventure genre generates the highest revenue both in terms of the medians and the overall position of the boxes.\nIt seems like Action is the second most highly grossing genre, but after that, it becomes hard to compare. We could make this visualization even more effective by sorting the boxes according to their median value."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#sorted-boxplots-more-effective-for-comparing-similar-distributions",
+    "href": "modules/module3/slides/module3_05.html#sorted-boxplots-more-effective-for-comparing-similar-distributions",
+    "title": "Comparing many distributions",
+    "section": "Sorted boxplots more effective for comparing similar distributions",
+    "text": "Sorted boxplots more effective for comparing similar distributions\n\ngenre_order = movies_extended.groupby(\n    'Major_Genre')['Worldwide_Gross'].median().sort_values().index.tolist()\nalt.Chart(movies_extended).mark_boxplot().encode(\n    alt.X('Worldwide_Gross'),\n    alt.Y('Major_Genre', sort=genre_order))\n\n\n\n\n\n\n\n\nAltair does not support sorting boxplots via the “x” or “-x” shortcut.\nInstead, we need to create a list of the genres, ordered by value.\nWe can do this with pandas by grouping the dataframe, computing the median for the grossing columns, sorting the values, and then extracting the index as a list.\nNow the visualization is very effective! It is easy to compare genres with similar grossing since they are right next to each other in the plot.\nIf we wanted to look closer at the differences between the bulk of the distributions we could exclude the two most highly grossing movies."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#zooming-in-facilitates-comparison-of-small-differences",
+    "href": "modules/module3/slides/module3_05.html#zooming-in-facilitates-comparison-of-small-differences",
+    "title": "Comparing many distributions",
+    "section": "Zooming in facilitates comparison of small differences",
+    "text": "Zooming in facilitates comparison of small differences\n\nfiltered_movies = movies_extended[movies_extended['Worldwide_Gross'] &lt; 1_500_000_000]\nalt.Chart(filtered_movies).mark_boxplot().encode(\n    alt.X('Worldwide_Gross'),\n    alt.Y('Major_Genre', sort=genre_order))\n\n\n\n\n\n\n\n\nHere we can compare the distributions more clearly, and it really looks like there are no large differences in the medians between the five genres behind Adventure and Action.\nWe will need to keep in mind that there are two additional data points that we have excluded from this visualization, but neither the median line nor the box would be much affected by excluding just a few values from a large population.\nIf we would have shown the mean instead of the median, this could have been an issue since the mean can be affected significantly from just a few extreme values."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#boxplots-can-be-scaled-by-the-number-of-observations",
+    "href": "modules/module3/slides/module3_05.html#boxplots-can-be-scaled-by-the-number-of-observations",
+    "title": "Comparing many distributions",
+    "section": "Boxplots can be scaled by the number of observations",
+    "text": "Boxplots can be scaled by the number of observations\n\nalt.Chart(movies_extended).mark_boxplot().encode(\n    alt.X('Worldwide_Gross'),\n    alt.Y('Major_Genre', sort=genre_order),\n    alt.Size('count()'))\n\n\n\n\n\n\n\n\nThe size of the boxes can be made proportional to the count of observations in that group.\nThis helps us see if there are many more observations underlying some of the boxes versus others. In our plot, we can see that the “comedy” genre has the most movies whereas there are few documentaries and black comedies.\nHowever, it also makes it hard to tell where the lines of the median and the boxes are for many of the distributions. A better alternative could be to not scale the boxes and instead, include a bar chart with the number of observations per genre together with the boxplot."
+  },
+  {
+    "objectID": "modules/module3/slides/module3_05.html#boxplots-are-not-able-to-accurately-represent-data-with-multiple-peaks",
+    "href": "modules/module3/slides/module3_05.html#boxplots-are-not-able-to-accurately-represent-data-with-multiple-peaks",
+    "title": "Comparing many distributions",
+    "section": "Boxplots are not able to accurately represent data with multiple peaks",
+    "text": "Boxplots are not able to accurately represent data with multiple peaks\nFrom Autodesk research\n\n\nWhile boxplots are effective for visualizing multiple distributions, they also have their shortcomings.\nOne of their main downsides is that they are not effective in showing distributions with multiple peaks. This can be seen in the animation in this slide, where variation in the raw data does no result in any change in the boxplots.\nTwo effective visualizations for many distributions that also handle multiple peaks are violin plots (as shown in this slide) and stripplots.\nViolinplots are similar to density plots put next to each other, and stripplots prevent overlap by distributing the points in a cloud instead of a straight line.\nThere are also sina plots, which combine the best of violin plots and strip plots together.\nThese are all highly effective, but not yet available to make easily in Altair, so we will not be teaching them here.\nBoxplots are still very effective in comparing multiple distributions, and when there are even more distributions than what we have here, e.g. 50+, then boxplots are often easier to interpret than the alternatives mentions above, since they are simpler."
   }
 ]
