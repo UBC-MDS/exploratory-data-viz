@@ -112,7 +112,7 @@ Whenever we do this, we should also check the final size of our visualization if
 
 ```{python}
 alt.Chart(movies_nans).mark_rect(height=17).encode(
-    x='index:O',
+    x=alt.X('index:O', axis=None),
     y='column',
     color='NaN',
     stroke='NaN').properties(width=800)
