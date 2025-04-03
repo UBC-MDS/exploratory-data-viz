@@ -209,7 +209,7 @@ e.g. the top bar says `15` instead of `15.0`.
 title = alt.TitleParams(
     text='Wikipedia receives most donations on Wednesdays',
     subtitle='Values represent the total amount donated in 2020',
-    anchor='start', dx=26, dy=-5)
+    anchor='start', frame='group', dy=-5)
 chart = alt.Chart(donations, title=title).mark_bar().encode(
     alt.Y('week_day', sort=list(day_abbr), title=None),
     alt.X('sum(sum)', axis=None),
@@ -228,7 +228,7 @@ as we have included its information directly in the text annotations.
 We add a title to the plot with the take-home message
 and explain what the values are in the subtitle.
 We anchor the title to the start (left) of the plot
-and use `dx` to align it with the bottom of the bars
+and use `frame` to align it with the axis line (the bottom of the bars)
 since this often looks more visually appealing for horizontal bar charts.
 
 We use `dy` to add additional whitespace between the subtitle and the topmost bar
