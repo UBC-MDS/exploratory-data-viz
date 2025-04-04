@@ -93,7 +93,7 @@
     code span.vs { color: #da4453; } /* VerbatimString */
     code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-b7e4b3e345513871fa0d8b7bbccede2a.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-a5dd941a686b8c75bf78b3bb29531cf0.css">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -365,17 +365,13 @@
 <section id="what-if-we-want-to-save-our-charts-as-images-instead" class="slide level2">
 <h2>What if we want to save our charts as images instead?</h2>
 <ul>
-<li>The three dots action button can be used to save images manually.</li>
-<li><code>altair_saver</code> enables saving of PNG and SVG charts .
-<ul>
-<li><a href="https://github.com/altair-viz/altair_saver/">Instructions for how to install and work with Altair saver can be found here</a>.</li>
-<li>The syntax is the same as before <code>chart.save('my-chart.png')</code></li>
-</ul></li>
+<li>The three dots action button can be used to save charts as PNG or SVG manually.</li>
+<li>Charts can also be saved programmatically via the same syntax as before, e.g.&nbsp;<code>chart.save('my-chart.pdf')</code></li>
 </ul>
 <aside class="notes">
-<p>If we want to save a chart as a PNG image file we can use the three dot action button as we saw in the very first module of this course. When we are clicking the “Save as PNG” entry in this menu, the browser converts the Vega-Lite spec into a PNG image that is downloaded to our computer.</p>
-<p>If we want to save an image as a PNG programatically we need to use a helper package called <code>altair_saver</code>. This package let’s Altair access the save functionality of the browser in a similar way as when you click the thee dot action button.</p>
-<p><a href="https://github.com/altair-viz/altair_saver/">Instructions for how to install and work with Altair saver can be found here</a>. After it is installed, you can save as PNG by typing <code>chart.save('my-chart.png')</code>.</p>
+<p>If we want to save a chart as a PNG or SVG file we can use the three dot action button as we saw in the very first module of this course. When we are clicking the “Save as PNG” entry in this menu, the browser converts the Vega-Lite spec into a PNG image that is downloaded to our computer.</p>
+<p>If we want to save charts programmatically as either PNG, SVG, or PDF we need to use a helper package called <code>vl-convert</code>. This package let’s Altair access the save functionality of the browser in a similar way as when you click the thee dot action button.</p>
+<p><a href="https://altair-viz.github.io/user_guide/saving_charts.html#png-svg-and-pdf-format">More details on how to save charts and install vl-convert can be found in the Altair documentation</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -398,7 +394,7 @@
 <li>Zooming in causes the image to become blurry/pixelated</li>
 <li>The file size depends on the number of pixels</li>
 </ul></li>
-<li>SVG is a scalable graphics / vector format
+<li>SVG and PDF are a scalable graphics / vector formats
 <ul>
 <li>Stores data as text with mathematical formulas</li>
 <li>Good for simpler illustration</li>
@@ -407,9 +403,8 @@
 </ul></li>
 </ul>
 <aside class="notes">
-<p>In additional to saving as PNG, we could also have saved as SVG by changing the file extension accordingly.</p>
-<p>What is the difference between these two options?<br><br> <strong>PNG is a bitmap/raster format</strong><br> - Stores data in a grid of pixels of different colors<br> - Zooming in causes the image to become blurry/pixelated<br> - The file size depends on the number of pixels<br> - Often ideal for photos and complex illustrations<br><br> <strong>SVG is a scalable graphics / vector format</strong><br> - Stores data as text by describing objects with mathematical formulas<br> - Zooming in retains perfect quality<br> - The file size depends on the number of objects and their complexity<br> - Often ideal for simpler illustration such as most charts<br><br> Saving as HTML has similar advantages and disadvantages as SVG.<br> In fact HTML uses SVG for creating the graphics.</p>
-<p>Another common format is PDF, which can be a combination of raster images and scalable graphics formats. <code>altair_saver</code> allows you to save as pdf, but you have to follow specific installation steps in the instructions we linked to in the last slide.</p>
+<p>In additional to saving as PNG, we could also have saved as SVG or PDF by changing the file extension accordingly.</p>
+<p>What is the difference between these two options?<br><br> <strong>PNG is a bitmap/raster format</strong><br> - Stores data in a grid of pixels of different colors<br> - Zooming in causes the image to become blurry/pixelated<br> - The file size depends on the number of pixels<br> - Often ideal for photos and complex illustrations<br><br> <strong>SVG and PDF are scalable graphics / vector formats</strong><br> - Stores data as text by describing objects with mathematical formulas<br> - Zooming in retains perfect quality<br> - The file size depends on the number of objects and their complexity<br> - Often ideal for simpler illustration such as most charts<br><br> Saving as HTML has similar advantages and disadvantages as SVG.<br> In fact HTML uses SVG for creating the graphics.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
