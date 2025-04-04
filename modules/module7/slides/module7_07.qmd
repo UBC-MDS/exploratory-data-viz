@@ -221,28 +221,23 @@ This will not cause any changes to the appearance of your chart.
 
 ## What if we want to save our charts as images instead?
 
-- The three dots action button can be used to save images manually.
-- `altair_saver` enables saving of PNG and SVG charts .
-    - [Instructions for how to install and work with Altair saver can be found here](https://github.com/altair-viz/altair_saver/).
-    - The syntax is the same as before `chart.save('my-chart.png')`
+- The three dots action button can be used to save charts as PNG or SVG manually.
+- Charts can also be saved programmatically via the same syntax as before, e.g. `chart.save('my-chart.pdf')`
 
 :::{.notes}
-If we want to save a chart as a PNG image file
+If we want to save a chart as a PNG or SVG file
 we can use the three dot action button
 as we saw in the very first module of this course.
 When we are clicking the "Save as PNG" entry in this menu,
 the browser converts the Vega-Lite spec into a PNG image
 that is downloaded to our computer.
 
-If we want to save an image as a PNG programatically
-we need to use a helper package called `altair_saver`.
+If we want to save charts programmatically as either PNG, SVG, or PDF
+we need to use a helper package called `vl-convert`.
 This package let's Altair access the save functionality of the browser
 in a similar way as when you click the thee dot action button.
 
-[Instructions for how to install
-and work with Altair saver can be found here](https://github.com/altair-viz/altair_saver/).
-After it is installed,
-you can save as PNG by typing `chart.save('my-chart.png')`.
+[More details on how to save charts and install vl-convert can be found in the Altair documentation](https://altair-viz.github.io/user_guide/saving_charts.html#png-svg-and-pdf-format).
 :::
 
 ## What is the difference between saving in different formats?
