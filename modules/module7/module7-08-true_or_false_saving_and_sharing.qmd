@@ -1,0 +1,91 @@
+---
+format: html
+---
+
+<script src='../../src/quiz.js'></script>  
+
+# 4.1. Exercises
+
+## True or False: Saving and Sharing 
+
+<div id='mcq1'></div> 
+<script>
+    generateQuiz(
+        'mcq1', 
+        'True or False',  
+        'It is easier to save Altair charts as a <code>.png</code> or <code>.svg</code> image file than as a plain text data file (e.g., <code>.html</code> or <code>.json</code> file).', 
+        { 
+        'True': 'Try again! Go back to the slides and review how Altair charts are constructed.',
+        'False': 'Great work! Given how Altair charts are constructed, it’s actually easier to save them as plain text data files!'
+        },
+        'False',  
+    );
+</script>
+
+<div id='mcq2'></div> 
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'The SVG image file format stores data as text with mathematical formulas and is good for photos and complex illustrations.',
+        {
+        'True': 'Try again! SVG image files are really not great for photos or complex illustrations!',
+        'False': 'Great work! SVG image files do store data as text with mathematical formulas, however this means that they are really not great for photos or complex illustrations!'
+        },
+        'False',
+    );
+</script>
+
+
+## How to Save? Let me Count the Ways
+
+<div id='mcq3'></div> 
+<script>
+    generateQuiz(
+        'mcq3',
+        'Question',
+        'In Altair, a chart like the one below can be saved as an image file via which of the following ways?',
+        {
+        'Using Altair´s <code>.save()</code> method (e.g. <code>alt.save(chart_name, "my-chart.png", "PNG")</code>)': 'Try again! You can save Altair charts programmatically, but not with this syntax!',
+        'By clicking the three dots and selecting "Save as SVG" or "Save as PNG"': 'Try again! Yes, you can save Altair charts interactively, but it’s not the only way to save them!',
+        'Using the <code>altair_saver</code> method (e.g., <code>chart_name.save("my-chart.png")</code>)': 'Try again! Yes, you can save Altair charts programmatically, but it’s not the only way to save them!',
+        'A & B': 'Try again! There is a way to do this both interactively and programmatically, but not with this syntax.',
+        'B & C': 'Nice work! There is a way to do this both interactively and programmatically!'
+        },
+        'B & C',
+    );
+</script>
+
+![](../../static/module7/q14.png){fig-alt="q14" width=80%}
+
+## Difficulties with Data
+
+<div id='mcq4'></div> 
+<script>
+    generateQuiz(
+        'mcq4',
+        'Question 1',
+        'Visualizing larger data in Altair takes care and can be challenging because:',
+        {
+        'Data is included in that Altair chart specifications': 'Nice work! And because data is included in that Altair chart specifications, bigger data means bigger chart objects!',
+        'Visualizing larger data is always challenging': 'Try again! We’re asking about what makes this specifically challenging in Altair.',
+        'Altair charts can only support 5000 observations in a single chart': 'Try again! You do get a warning if you try to visualize a data frame with over 5000 rows, however, there are strategies that allow you to have Altair charts with more than this many rows.'
+        },
+        'Data is included in that Altair chart specifications',
+    );
+</script>
+
+<div id='mcq5'></div> 
+<script>
+    generateQuiz(
+        'mcq5',
+        'Question 2',
+        'Which of the strategies listed below is <strong>NOT</strong> a way to visualizing larger data in Altair?',
+        {
+        'Use the <code>altair_server</code> package to link the chart to the data frame via an active Python process': 'Try again! This is a legitimate strategy for visualizing larger data in Altair.',
+        'Convert the pandas dataframe into an Altair dataframe, via <code>.datatransform()</code>': 'Nice work! We made this up! There is no such thing as an Altair dataframe!',
+        'Make the data accessible via a URL, and pass the data to Altair via a URL instead of via a data frame.': 'Try again! This is a legitimate strategy for visualizing larger data in Altair.'
+        },
+        'Convert the pandas dataframe into an Altair dataframe, via <code>.datatransform()</code>',
+    );
+</script>

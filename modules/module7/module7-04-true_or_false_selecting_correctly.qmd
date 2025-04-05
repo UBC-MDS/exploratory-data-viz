@@ -1,0 +1,174 @@
+---
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ../data
+---
+
+<script src='../../src/quiz.js'></script>  <!-- Only needed once per page -->
+
+# 2.1. Exercises
+
+## True or False: Selecting Correctly
+
+<div id='mcq1'></div>
+<script>
+    generateQuiz(
+        'mcq1',
+        'True or False',
+        'In Altair, click selections can be bound to another chart or the legend.',
+        {
+        'True': 'Great work! This is a great feature of Altair!',
+        'False': 'Try again! In the previous slides we showed you how to do both of these things!'
+        },
+        'True',
+    );
+</script>
+
+<div id='mcq2'></div>
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'Interactive features in Altair are only possible for scatter plots and bar charts.',
+        {
+        'True': 'Are you sure? What about the interactive maps we saw in the last few slides?',
+        'False': 'Great work! You can use Altair to create interactive features with any chart you can make in Altair!'
+        },
+        'False',
+    );
+</script>
+
+## Multi-Select for Multiple Choice Questions
+
+<div id='mcq3'></div>
+<script>
+    generateQuiz(
+        'mcq3',
+        'True or False',
+        'Which method in Altair would allow us to use a brush selection in one chart to filter data to highlight in another chart in?',
+        {
+        '<code>.transform_filter()</code>': 'Nice work! <code>.transform_filter()</code> let´s you use a brush selection for filtering data in another chart!',
+        '<code>.interactive()</code>': 'Try again! <code>.interactive()</code> let´s you add zooming and panning functionality!',
+        '<code>.add_selection()</code>': 'Try again! <code>.add_selection()</code> let´s you add click highlighting functionality!'
+        },
+        '<code>.transform_filter()</code>',
+    );
+</script>
+
+## Clicks not Cliques
+
+**Instructions:**
+Be patient when running a coding exercise for the first time, it can take a few minutes.
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.**
+
+Let’s now look at the [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) data set again and see how the Penguins of each species were studied on each island.
+
+Let’s take a look!
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+
+penguins_df = pd.read_csv('data/penguins.csv')
+penguins_df.info()
+```
+
+Create a grouped, horizontal bar chart where the number of penguins on each island is plotted for each species. You are aiming to have a plot that looks like you have 3 subplots, where each subplot is for each species. Add interactivity, so that you can select which island to highlight on the bar chart by clicking the legend. 
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+- Create a multiple selection tool that binds to the legend selecting the observations from the columns `island`. Name this object `click`. 
+- In a horizontal bar plot named `click_legend`, map the counts of penguins on the x-axis and the island the penguins were onserved on the y axis. Make sure to sort the islands by increasing count values. 
+- Color the points by island and facet the plot by species using `.Row()`. 
+- Add a condition to the opacity channel that depends on the selection tool `click` giving an opacity of 0.9 if selected and 0.2 if not. 
+
+
+```{pyodide}
+#| setup: true
+#| exercise: click_legend
+import altair as alt
+import pandas as pd
+from utils import assert_chart_equal, remove_keys_inplace
+
+penguins_df = pd.read_csv('data/penguins.csv')
+```
+
+```{pyodide}
+#| exercise: click_legend
+click = alt.selection_multi(fields=____, bind=____)
+
+click_legend = (alt.Chart(penguins_df).mark_bar().encode(
+    alt.X('count()', title='Number of Penguins'),
+    alt.Y('island', title=None, sort=____),
+    alt.Color(____, title="Island"),
+    alt.Row('species', title=None),
+    opacity=alt.condition(____, ____, ____))
+.add_selection(____)).properties(width=300)
+
+click_legend
+```
+
+```{pyodide}
+#| exercise: click_legend
+#| check: true
+
+click = alt.selection_multi(fields=['island'], bind='legend')
+
+solution = (alt.Chart(penguins_df).mark_bar().encode(
+    alt.X('count()', title='Number of Penguins'),
+    alt.Y('island', title=None, sort='x'),
+    alt.Color('island', title="Island"),
+    alt.Row('species', title=None),
+    opacity=alt.condition(click, alt.value(0.9), alt.value(0.2)))
+.add_selection(click)).properties(width=300)
+
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+
+remove_keys_inplace(solution_dict, {"param", "name"})
+remove_keys_inplace(result_dict, {"param", "name"})
+
+assert_chart_equal(solution_dict, result_dict)
+```
+
+:::: { .hint exercise="click_legend"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you setting `fields=['island']` and binding to legend in the `click` selection tool?
+- Are you setting `sort='x'` in the  `alt.Y()` function? 
+- Are you plotting `body_mass_g` on the x-axis in `linked_scatter`?
+- Are you setting the `island` to the colour channel?? 
+- Are you setting `alt.condition(click, alt.value(0.9), alt.value(0.2))`?
+- Are you remembering to call `click` in `.add_selection()` at the end of the plot?
+
+:::
+::::
+
+:::: { .solution exercise="click_legend" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+click = alt.selection_multi(fields=['island'], bind='legend')
+
+click_legend = (alt.Chart(penguins_df).mark_bar().encode(
+    alt.X('count()', title='Number of Penguins'),
+    alt.Y('island', title=None, sort='x'),
+    alt.Color('island', title="Island"),
+    alt.Row('species', title=None),
+    opacity=alt.condition(click, alt.value(0.9), alt.value(0.2)))
+.add_selection(click)).properties(width=300)
+
+click_legend
+```
+
+:::
+::::

@@ -1,0 +1,200 @@
+---
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ../data
+---
+
+<script src='../../src/quiz.js'></script>  <!-- Only needed once per page -->
+
+# 3.1. Exercises
+
+## True or False: Controls
+
+<div id='mcq1'></div>
+<script>
+    generateQuiz(
+        'mcq1',
+        'True or False',
+        'If we create a scatter plot of two quantitative variables, but also have 10, or more, categories that we would like to visualize this for, facetting or using interactive selections can make such charts more effective compared to colouring the points by category?',
+        {
+        'True': 'Great work! Indeed 10, or more, categories are far too many for us to effectively use colour along to differentiate points on a scatter plot. Instead interactivity or faceting are great ways to improve the effectiveness of such a visualization!',
+        'False': 'Try again! In the previous slides we discuss this!'
+        },
+        'True',
+    );
+</script>
+
+<div id='mcq2'></div>
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'In Altair, sliders can be used to concurrently set an upper and lower threshold to select a range of observations to highlight.',
+        {
+        'True': 'Not quite! Sadly this is not yet possible in Altair.',
+        'False': 'Great work! This is not yet possible in Altair. However, instead of using a slider to do this, we can instead use a selection interval from another chart to do this.'
+        },
+        'False',
+    );
+</script>
+
+## Minimap Multi-Choice
+
+<div id='mcq3'></div>
+<script>
+    generateQuiz(
+        'mcq3',
+        'Question',
+        'Creating a “minimap” for interval selection and chart navigation (i.e., using one chart to drive zooming in another chart, where the charts are identical) can be effective when:',
+        {
+        'Visualizing a chlorepleth map with many small geographical regions': 'You are close! This is one scenario where this can be effective, but there is one more!',
+        'Visualizing count data in a simple bar chart': 'Try again! You don’t really need complex interaction here to effectively visualize count data in a simple bar chart.',
+        'Visualizing lengthy time series': 'You are close! This is one scenario where this can be effective, but there is one more!',
+        'A & C': 'Nice work! “minimaps” are effective for interval selections with both lengthy time series and chlorepleth map with many small geographical regions.'
+        },
+        'A & C',
+    );
+</script>
+
+## Slipping and Sliding Penguins
+
+**Instructions:**
+Be patient when running a coding exercise for the first time, it can take a few minutes.
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.**
+
+Let’s now look at the [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) data set again and see how the Penguins of each species were studied on each island.
+
+Let’s take a look!
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+
+penguins_df = pd.read_csv('data/penguins.csv')
+penguins_df.info()
+```
+
+Create a scatter plot from the Penguins data set that visualizes culmen depth (y-axis) vs culmen length (x-axis).
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+- Create a scatter plot named `slider_scatter` that maps culmen length on the x-axis and culmen depth on the y-axis.
+- Colour the points by species. 
+- Add a slider assigned to an object `slider` that allows you to set a threshold so that you can highlight the observations where the penguins body mass (in grams) is under the threshold specified by the slider and set the maximum slider value to the maximum value found in the body mass column. Name the slider "Body mass (g)".
+
+```{pyodide}
+#| setup: true
+#| exercise: slider_scatter
+
+import altair as alt
+import pandas as pd
+from utils import assert_chart_equal, remove_keys_inplace
+
+penguins_df = pd.read_csv('data/penguins.csv')
+```
+
+```{pyodide}
+#| exercise: slider_scatter
+slider = alt.____(name=____, max=max(penguins_df____))
+select_rating = alt.____(
+    fields=[____],
+    bind=____,
+    name='select_rating')
+
+slider_scatter = (alt.Chart(penguins_df).mark_circle().encode(
+    alt.X('culmen_length_mm', title='Culmen length (mm)', scale=alt.Scale(zero=False)),
+    alt.Y('culmen_depth_mm', title='Culmen depth (mm)', scale=alt.Scale(zero=False)),
+    color='species',
+    opacity=alt.condition(____ < ____, alt.value(0.7), alt.value(0.05)))
+    .add_selection(____))
+
+slider_scatter
+```
+
+```{pyodide}
+#| exercise: slider_scatter
+#| check: true
+
+slider = alt.binding_range(name='Body mass (g)', max=max(penguins_df['body_mass_g']))
+select_rating = alt.selection_single(
+    fields=['body_mass_g'],
+    bind=slider,
+    name='select_rating')
+
+solution = (alt.Chart(penguins_df).mark_circle().encode(
+    alt.X('culmen_length_mm', title='Culmen length (mm)', scale=alt.Scale(zero=False)),
+    alt.Y('culmen_depth_mm', title='Culmen depth (mm)', scale=alt.Scale(zero=False)),
+    color='species',
+    opacity=alt.condition(alt.datum.body_mass_g < select_rating.body_mass_g,
+                          alt.value(0.7), alt.value(0.05)))
+    .add_selection(select_rating))
+
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+remove_keys_inplace(solution_dict, {"name"})
+remove_keys_inplace(result_dict, {"name"})
+
+assert_chart_equal(solution_dict, result_dict)
+```
+
+:::: { .hint exercise="slider_scatter"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you setting `alt.binding_range()` to build your sliding tool?
+- Are you setting the max of the slider to `max=max(penguins_df['body_mass_g'])` ? 
+- Are you using `selection_single` to make `select_rating`?
+- Are you binding the `selection_single` to `slider`? 
+- Are you setting `alt.datum.body_mass_g < select_rating.body_mass_g` as your expression in `alt.condition()`?
+- Are you calling `select_rating` in `.add_selection()`?
+
+:::
+::::
+
+:::: { .solution exercise="slider_scatter" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+slider = alt.binding_range(name='Body mass (g)', max=max(penguins_df['body_mass_g']))
+select_rating = alt.selection_single(
+    fields=['body_mass_g'],
+    bind=slider,
+    name='select_rating')
+
+slider_scatter = (alt.Chart(penguins_df).mark_circle().encode(
+    alt.X('culmen_length_mm', title='Culmen length (mm)', scale=alt.Scale(zero=False)),
+    alt.Y('culmen_depth_mm', title='Culmen depth (mm)', scale=alt.Scale(zero=False)),
+    color='species',
+    opacity=alt.condition(alt.datum.body_mass_g < select_rating.body_mass_g,
+                          alt.value(0.7), alt.value(0.05)))
+    .add_selection(select_rating))
+
+slider_scatter
+```
+
+:::
+::::
+
+<div id='mcq4'></div>
+<script>
+    generateQuiz(
+        'mcq4',
+        'Question',
+        'How many Gentoo penguins have a body mass of 3000 grams or less?',
+        {
+        '0': 'Nice work! That would be a lot harder to answer without the nifty slider, eh?',
+        '3': 'Try again! Make sure you set the slider at 3000.',
+        '5': 'Try again! Make sure you set the slider at 3000.',
+        '9': 'Try again! Make sure you set the slider at 3000.'
+        },
+        '0',
+    );
+</script>
