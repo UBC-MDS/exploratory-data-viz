@@ -1,5 +1,214 @@
 [
   {
+    "objectID": "modules/module7/slides/module7_end.html#module-learning-outcomes",
+    "href": "modules/module7/slides/module7_end.html#module-learning-outcomes",
+    "title": "What Did we Learn and What to Expect in Assignment 7",
+    "section": "Module Learning Outcomes",
+    "text": "Module Learning Outcomes\nIn this module students will learn how to\n\nCreate selections within a chart.\nLink selections between chart to highlight and filter data.\nUse widgets to drive chart selections.\nShare interactive visualizations without running a full Python dashboard.\n\n\nThe assignment will concentrate on the learning objectives as well as building knowledge on existing concepts."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_05.html#reading-in-the-movies-dataset",
+    "href": "modules/module7/slides/module7_05.html#reading-in-the-movies-dataset",
+    "title": "Using Widgets to Control Selections",
+    "section": "Reading in the movies dataset",
+    "text": "Reading in the movies dataset\n\nimport altair as alt\nimport pandas as pd\n\nmovies = pd.read_csv(\"../../data/movies_rating.csv\", parse_dates=[\"Release_Year\"])\nmovies\n\n\n\n\n\n\n\n\nWorldwide_Gross\nRelease_Year\nIMDB_Rating\nRotten_Tomatoes_Rating\nMajor_Genre\nMPAA_Rating\n\n\n\n\n0\n148345997.0\n1996-01-01\n5.8\n55.0\nAction\nR\n\n\n1\n9929135.0\n1985-01-01\n8.0\n98.0\nBlack Comedy\nR\n\n\n2\n102825796.0\n1996-01-01\n5.8\n52.0\nComedy\nPG-13\n\n\n...\n...\n...\n...\n...\n...\n...\n\n\n975\n36851125.0\n2008-01-01\n7.0\n65.0\nComedy\nR\n\n\n976\n141475336.0\n2005-01-01\n5.7\n26.0\nAdventure\nPG\n\n\n977\n233700000.0\n1998-01-01\n6.7\n82.0\nAdventure\nPG-13\n\n\n\n\n978 rows × 6 columns\n\n\n\n\nTo demonstrate how we can use widgets in Altair we will be using an abbreviated version of the movies dataset which you can see in this slide.\nThis data contains how much each movie made, when it was released, its genre, maturity rating, and user ratings on two online sites: IMDB and Rotten Tomatoes."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_05.html#interactive-selections-can-make-charts-with-many-categories-more-effective",
+    "href": "modules/module7/slides/module7_05.html#interactive-selections-can-make-charts-with-many-categories-more-effective",
+    "title": "Using Widgets to Control Selections",
+    "section": "Interactive selections can make charts with many categories more effective",
+    "text": "Interactive selections can make charts with many categories more effective\n\nselect_genre = alt.selection_point(fields=['Major_Genre'], bind='legend')\n\npoints = alt.Chart(movies).mark_circle().encode(\n    alt.X('Rotten_Tomatoes_Rating', title='Rotten Tomatoes rating'),\n    alt.Y('IMDB_Rating', title='IMDB rating'),\n    alt.Color('Major_Genre', title='Major genre'),\n    opacity=alt.condition(select_genre, alt.value(0.7), alt.value(0.05))).properties(height=200)\npoints.add_selection(select_genre)\n\n\n\n\n\n\n\n\nWe saw in the previous slide deck how we could use the bind parameter of a selection to link it to the legend of the plot and highlight points by clicking on categories in the legend.\nHere we create that same type of plot using the movie data set that we just saw in the last slide.\nAt first glance, this chart does not look very effective, as the many genre categories are mapped to more colours than we can easily distinguish between. However, the chart we created is not static!\nWe used alt.selection_point and alt.condition to make it interactive, so that we can click the legend to show the points from only a specific genre. This alleviates the problem of having too many colour encodings that we cannot distinguish between."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_05.html#binding-selections-to-dropdowns-instead-of-legends",
+    "href": "modules/module7/slides/module7_05.html#binding-selections-to-dropdowns-instead-of-legends",
+    "title": "Using Widgets to Control Selections",
+    "section": "Binding selections to dropdowns instead of legends",
+    "text": "Binding selections to dropdowns instead of legends\n\ngenres = sorted(movies['Major_Genre'].unique())\ndropdown = alt.binding_select(name='Genre ', options=genres)\nselect_genre = alt.selection_point(fields=['Major_Genre'], bind=dropdown)\n\npoints.add_selection(select_genre).encode(\n    opacity=alt.condition(select_genre, alt.value(0.7), alt.value(0.05)))\n\n\n\n\n\n\n\n\nDriving our interactions via a dropdown instead of a legend could be useful if we have too many categories to show in the legend, or if we wanted to have a different dataframe column in the dropdown from what we use in the legend.\nHere we use the same column for both, so that you can clearly see how the interaction works.\nIn this slide, We create a dropdown selection widget via alt.binding_select. Then, instead of binding alt.selection_point to the legend we can pass the dropdown to the bind parameter.\nThe dropdown requires an array to be passed to the options parameter; here we sort the genres alphabetically before passing them to the dropdown.\nSince we recreated the select_genre variable, we need to also redefine the opacity encoding and add this new variable to overwrite the old one.\nNow you can use the dropdown to select movies of different genres!\nNote that the location of the dropdown is fixed and there is no way change its location."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_05.html#setting-the-default-value-in-a-widget",
+    "href": "modules/module7/slides/module7_05.html#setting-the-default-value-in-a-widget",
+    "title": "Using Widgets to Control Selections",
+    "section": "Setting the default value in a widget",
+    "text": "Setting the default value in a widget\n\nselect_genre = alt.selection_point(\n    fields=[\"Major_Genre\"], bind=dropdown, value=\"Comedy\"\n)\n\npoints.add_selection(select_genre).encode(\n    opacity=alt.condition(select_genre, alt.value(0.7), alt.value(0.05))\n)\n\n\n\n\n\n\n\n\nIf we don’t specify a default value in a widget, the first value in select_genre will be shown in the widget, but it is not used to select points until we click the dropdown.\nIf we wanted to set a specific default value and immediately use it to highlight the data, we could specify which column and value to use via the value parameter as we have done in this slide.\nBecause we did this, the chart initially displays only the comedy genre, instead of all the points."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_05.html#adding-multiple-widgets-to-the-same-charts",
+    "href": "modules/module7/slides/module7_05.html#adding-multiple-widgets-to-the-same-charts",
+    "title": "Using Widgets to Control Selections",
+    "section": "Adding multiple widgets to the same charts",
+    "text": "Adding multiple widgets to the same charts\n\nmpaa_rating = sorted(movies['MPAA_Rating'].unique())\nradiobuttons_mpaa = alt.binding_radio(name='MPAA Rating ', options=mpaa_rating)\ndropdown_genre = alt.binding_select(name='Genre ', options=genres)\nselect_genre_and_mpaa = alt.selection_point(\n    fields=['Major_Genre', 'MPAA_Rating'],\n    bind={'Major_Genre': dropdown_genre, 'MPAA_Rating': radiobuttons_mpaa})\n\npoints.add_selection(select_genre_and_mpaa).encode(\n    opacity=alt.condition(select_genre_and_mpaa, alt.value(0.7), alt.value(0.05)))\n\n\n\n\n\n\n\n\nSometimes we want to highlight our data based on more than a single criteria. For example, we might want to show only comedies that are rated as suitable for children to watch.\nWe have already seen how to perform such breakdowns via faceting, but we could also do it by combining multiple interactive widgets.\nHere we’re adding a set of radio buttons for the maturity rating of the movies and a dropdown button for the genre selection.\nFirst we create the radio buttons and the dropdown as two separate widgets. We then use both these widgets to the selection_point object, so that the dropdown is bound to the 'Major_Genre' dataframe column and the radio buttons are bound to 'MPAA_Rating.\nTo trigger a selection, we now need to both click a radio button and make a selection in the dropdown."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_05.html#adding-sliders-allows-us-to-highlight-points-based-on-quantitative-value-comparisons",
+    "href": "modules/module7/slides/module7_05.html#adding-sliders-allows-us-to-highlight-points-based-on-quantitative-value-comparisons",
+    "title": "Using Widgets to Control Selections",
+    "section": "Adding sliders allows us to highlight points based on quantitative value comparisons",
+    "text": "Adding sliders allows us to highlight points based on quantitative value comparisons\n\nslider = alt.binding_range(name='Tomatometer ')\nselect_rating = alt.selection_point(\n    fields=['Rotten_Tomatoes_Rating'],\n    bind=slider)\n\npoints.encode(\n    opacity=alt.condition(select_rating, alt.value(0.7), alt.value(0.05))\n).add_selection(select_rating)\n\n\n\n\n\n\n\n\nSo far we have seen how to select categorical values from dropdown menus and radio buttons. To instead highlight based on quantitative values, we can use a slider.\nAdding a slider is similar to adding a dropdown or set of radio buttons, and we do it via binding_range(). Here we link the slider to the same column that is mapped to the x-axis, so that you can see how it works.\nIf you drag the slider around, you can see that the default behaviour is to only highlight points that exactly match the value of the slider.\nNow that we understand how we can create a slider, let’s next see how to use it in a slightly more realistic setting, such as highlighting values above or below a threshold."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_05.html#highlighting-points-smaller-or-bigger-than-a-slider-value",
+    "href": "modules/module7/slides/module7_05.html#highlighting-points-smaller-or-bigger-than-a-slider-value",
+    "title": "Using Widgets to Control Selections",
+    "section": "Highlighting points smaller or bigger than a slider value",
+    "text": "Highlighting points smaller or bigger than a slider value\n\npoints.encode(\n    opacity=alt.condition(\n        alt.datum.Rotten_Tomatoes_Rating &lt; select_rating.Rotten_Tomatoes_Rating,\n        alt.value(0.7), alt.value(0.05))\n).add_selection(select_rating)\n\n\n\n\n\n\n\n\nLet’s say that we want to create a chart where we highlight values which are smaller than the value specified by the slider. To do this we need to compare the current value of the slider with the observations’ values in the column we are filtering on.\nThe current value of the slider can be accessed via select_rating.Rotten_Tomatoes_Rating, and Altair has a special datum object to access values from different columns in the dataframe. To compare against the column with the Rotten Tomatoes Ratings, we use alt.datum.Rotten_Tomatoes_Rating.\nThis might seem cumbersome at first, but it is necessary to avoid ambiguity with only writing \"Rotten_Tomatoes_Rating\", which in comparison expressions means just the string and is not a reference to a column in the dataframe.\nNow that we drag the slider you can see that all the points are highlighted that have a value less than the slider value."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_05.html#customizing-a-slider-widget",
+    "href": "modules/module7/slides/module7_05.html#customizing-a-slider-widget",
+    "title": "Using Widgets to Control Selections",
+    "section": "Customizing a slider widget",
+    "text": "Customizing a slider widget\n\nslider = alt.binding_range(name=\"IMDB rating \", min=1, max=10, step=0.5)\nselect_rating = alt.selection_point(fields=[\"IMDB_Rating\"], bind=slider, value=4)\n\npoints.encode(\n    opacity=alt.condition(\n        alt.datum.IMDB_Rating &lt; select_rating.IMDB_Rating,\n        alt.value(0.7),\n        alt.value(0.05),\n    )\n).add_selection(select_rating)\n\n\n\n\n\n\n\n\nBy default the range for the slider is from 0 to 100. This happens to work well for the ratings from Rotten Tomatoes, but what if we wanted to use it for the IMDB ratings instead?\nSince the slider does not automatically adjust to the range of the data, we need to define the range manually. Here we set the minimum to be 1 (there is no 0 rating for IMDB), the maximum to be 10.\nWe also demonstrate how to change the step size. Now that we drag the slider handle it jumps half a step at a time, instead of the default step size of 1, which gives us increased precision in which movies we are selecting.\nJust as with dropdowns we could set an explicit start value to have an active selection when the chart first appears.\nHere we have specified the slider to be set at 4 when the chart first loads via setting value=4 in alt.selection_point."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_05.html#it-is-more-useful-to-bind-a-slider-to-a-dataframe-column-not-displayed-on-the-chart-axes",
+    "href": "modules/module7/slides/module7_05.html#it-is-more-useful-to-bind-a-slider-to-a-dataframe-column-not-displayed-on-the-chart-axes",
+    "title": "Using Widgets to Control Selections",
+    "section": "It is more useful to bind a slider to a dataframe column not displayed on the chart axes",
+    "text": "It is more useful to bind a slider to a dataframe column not displayed on the chart axes\n\nslider = alt.binding_range(name='Worldwide Gross ', max=100_000_000, step=1_000_000)\nselect_rating = alt.selection_point(fields=['Worldwide_Gross'], bind=slider)\n\npoints.encode(\n    opacity=alt.condition(\n        alt.datum.Worldwide_Gross &lt; select_rating.Worldwide_Gross,\n        alt.value(0.7), alt.value(0.05))\n).add_selection(select_rating)\n\n\n\n\n\n\n\n\nSo far we have used the same column for the slider as we have on the x-axis to clearly see the effect from changing the slider behavior.\nHowever, when creating an interactive visualization it is often the most useful to bind the slider to a dataframe column that is not already included on one of the axes.\nIn this slide, we instead filter on the worldwide gross. Since the range for this is outside 0 - 100, we explicitly set the max to a higher value, and adjust the stepsize to something more meaningful.\nNow we can use the slider to filter movies on the amount they grossed. However, since we cannot select a range on the slider, we’re limited to selecting all movies either bigger than or smaller than the slider value."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_05.html#sliders-only-work-with-numerical-data",
+    "href": "modules/module7/slides/module7_05.html#sliders-only-work-with-numerical-data",
+    "title": "Using Widgets to Control Selections",
+    "section": "Sliders only work with numerical data",
+    "text": "Sliders only work with numerical data\n\nslider = alt.binding_range(name='Year')\nselect_rating = alt.selection_point(fields=['Release_Year'], bind=slider)\n\npoints.encode(\n    opacity=alt.condition(select_rating, alt.value(0.7), alt.value(0.05))\n).add_selection(select_rating)\n\n\n\n\n\n\n\n\nIn this slide we try to use the slider widget to highlight movies based on the year they were produced, so that we can effectively explore movies from different time periods separately.\nHowever, as you can see it doesn’t work as we expected and nothing happens when we drag the slider handle back and fourth. The reason for this is that sliders only work with numerical data and support for temporal data is not yet implemented. in Altair.\nAs an alternative to the slider, we can use another plot to to select data, which has several other advantages as you will see in the next slide."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_05.html#driving-range-selections-from-another-plot-is-more-effective",
+    "href": "modules/module7/slides/module7_05.html#driving-range-selections-from-another-plot-is-more-effective",
+    "title": "Using Widgets to Control Selections",
+    "section": "Driving range selections from another plot is more effective",
+    "text": "Driving range selections from another plot is more effective\n\nselect_year = alt.selection_interval()\nbar_slider = (alt.Chart(movies).mark_bar().encode(\n    alt.X('Release_Year', title='Release Year'),\n    alt.Y('count()'),\n    opacity=alt.condition(select_year, alt.value(0.7), alt.value(0.05)))\n.properties(height=50).add_selection(select_year))\n\npoints.encode(opacity=alt.condition(select_year, alt.value(0.7), alt.value(0.05))) & bar_slider\n\n\n\n\n\n\n\n\nWith range selection in general, and especially for temporal data, it is more effective to use a histogram instead of a slider. This is because the histogram gives us information about how many movies we have data for each year and it also lets us select a range of years.\nWe can use what we learned in the last slide deck to link the selection between the two plots. The biggest difference here is that instead of a single or multi selection, we will use the selection_interval function to create a range selection.\nIn this histogram we can see that there are just a few movies from the 1980s in the data and only one in 2040, which must be an error in the dataset.\nIn addition to showing the distribution of the data this also allows us to select a range of values, which is not possible with sliders in Altair. We can then drag the selection with the mouse, just as when we were selecting in the scatter plots in the first slide deck of this module.\nIf we wanted to we could also style the histogram chart to look more like a widget, and remove the incorrect data point, but we won’t do that here."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_05.html#interval-selection-can-also-be-used-to-create-a-minimap-for-chart-navigation",
+    "href": "modules/module7/slides/module7_05.html#interval-selection-can-also-be-used-to-create-a-minimap-for-chart-navigation",
+    "title": "Using Widgets to Control Selections",
+    "section": "Interval selection can also be used to create a “minimap” for chart navigation",
+    "text": "Interval selection can also be used to create a “minimap” for chart navigation\n\nmovies_1995_2010 = movies.loc[movies['Release_Year'].between('1995', '2010')]\nbase = alt.Chart(movies_1995_2010).mark_area().encode(\n    alt.X('Release_Year', title=None),\n    alt.Y('mean(Worldwide_Gross)', title='Gross worldwide'))\n\nselect_year = alt.selection_interval()\nlower = base.properties(height=50).add_selection(select_year)\nupper = base.encode(alt.X('Release_Year', title=None, scale=alt.Scale(domain=select_year))).properties(height=200)\nupper & lower\n\n\n\n\n\n\n\n\nParticularly when visualizing data over long time periods, it can be useful to both have and overview of the data and be able to zoom in on specific event.\nOne way to achieve this is with the interactive method we used earlier. However, we could also use the approach with an additional chart as in the previous slide to create a so called “minimap” for navigation of another chart.\nThe key to making this interaction work is to let the interval selection control the axis extent (the domain) of the main chart, while only adding it as a selection on the “minimap” chart.\nThe syntax for this is consistent with what we have learned earlier, but instead of having a condition that checks if an observation falls within the selection, we’re directly using the range of the selection to set the domain in the main chart."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_01.html#the-return-of-the-cars-dataset",
+    "href": "modules/module7/slides/module7_01.html#the-return-of-the-cars-dataset",
+    "title": "Tooltips, Zoom, and Selections",
+    "section": "The return of the cars dataset",
+    "text": "The return of the cars dataset\n\nimport altair as alt\nfrom vega_datasets import data\n\ncars = data.cars()\ncars\n\n\n\n\n\n\n\n\nName\nMiles_per_Gallon\nCylinders\nDisplacement\n...\nWeight_in_lbs\nAcceleration\nYear\nOrigin\n\n\n\n\n0\nchevrolet chevelle malibu\n18.0\n8\n307.0\n...\n3504\n12.0\n1970-01-01\nUSA\n\n\n1\nbuick skylark 320\n15.0\n8\n350.0\n...\n3693\n11.5\n1970-01-01\nUSA\n\n\n2\nplymouth satellite\n18.0\n8\n318.0\n...\n3436\n11.0\n1970-01-01\nUSA\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n403\ndodge rampage\n32.0\n4\n135.0\n...\n2295\n11.6\n1982-01-01\nUSA\n\n\n404\nford ranger\n28.0\n4\n120.0\n...\n2625\n18.6\n1982-01-01\nUSA\n\n\n405\nchevy s-10\n31.0\n4\n119.0\n...\n2720\n19.4\n1982-01-01\nUSA\n\n\n\n\n406 rows × 9 columns\n\n\n\n\nFor this slide deck we will be using the cars data set again, since it lends itself well to demonstrate the interactive elements that we will cover here.\nYou already saw this dataset in previous modules, but as a reminder it contains data on individual car brands from three different regions over time."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_01.html#tooltips-can-provide-additional-information-about-data-points",
+    "href": "modules/module7/slides/module7_01.html#tooltips-can-provide-additional-information-about-data-points",
+    "title": "Tooltips, Zoom, and Selections",
+    "section": "Tooltips can provide additional information about data points",
+    "text": "Tooltips can provide additional information about data points\n\nalt.Chart(cars).mark_circle().encode(\n    alt.X('Horsepower', title='Enging power (hp)'),\n    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),\n    tooltip='Name')\n\n\n\n\n\n\n\n\nWe have seen in previous modules how adding a tooltip can provide us with information that is not captured on the axes.\nIn this plot, we have used a tooltip to view the names of each vehicle when hovering our cursor over the respective point.\nTooltips are particularly useful when we have dataframe columns that contain many unique values; so many that it would not be possible to visualize them effectively using different colours and a legend."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_01.html#tooltips-can-also-add-more-precise-values-for-dataframe-columns-on-the-chart-axes",
+    "href": "modules/module7/slides/module7_01.html#tooltips-can-also-add-more-precise-values-for-dataframe-columns-on-the-chart-axes",
+    "title": "Tooltips, Zoom, and Selections",
+    "section": "Tooltips can also add more precise values for dataframe columns on the chart axes",
+    "text": "Tooltips can also add more precise values for dataframe columns on the chart axes\n\nalt.Chart(cars).mark_circle().encode(\n    alt.X('Horsepower', title='Enging power (hp)'),\n    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),\n    tooltip=['Name', 'Horsepower'])\n\n\n\n\n\n\n\n\nWe can also use tooltips to add more than just one piece of information when we hover over individual points.\nFor example, in addition to the car type for each observation, we have also added the exact value for horsepower (which is mapped to the x-axis) to make it easier to look them up on the chart.\nWe were able to do this by specifying the Name and the Horsepower columns as a list that we passed to the tooltip argument.\nWhen you hover the cursor over a point, you can also see that specifying column names in a list to the tooltip parameter, leads Altair to automatically add the name of the dataframe column as grey text so that we know what the two values in the tooltip represent."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_01.html#points-can-be-linked-to-an-url-to-provide-more-information-about-the-data",
+    "href": "modules/module7/slides/module7_01.html#points-can-be-linked-to-an-url-to-provide-more-information-about-the-data",
+    "title": "Tooltips, Zoom, and Selections",
+    "section": "Points can be linked to an URL to provide more information about the data",
+    "text": "Points can be linked to an URL to provide more information about the data\n\ncars['URL'] = 'https://duckduckgo.com/?q=' + cars['Name']\n\nalt.Chart(cars).mark_circle().encode(\n    alt.X('Horsepower', title='Enging power (hp)'),\n    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),\n    href='URL',\n    tooltip=['Name', 'URL'])\n\n\n\n\n\n\n\n\nWhile a tooltip that shows each cars name when hovering over it adds some information, it might not be that meaningful to those of us that are not familiar with car model names.\nTo facilitate finding more information about each cars, we could add an interaction so that clicking the point would search for the name of the car online.\nIn this specific case, we have crafted the URL such that clicking the point would search for the name of the car online using the DuckDuckGo privacy-focused search engine.\nWe accomplished this by creating a new column in the dataframe called 'URL' which holds the full URL search address for each car.\nThe href encoding in Altair can be used to define a link action when a chart element is clicked and here we set it to the URL field so that when we click a point, we will open a browser at that web address. href is what links are called in HTML code."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_01.html#zooming-and-panning-helps-the-audience-explore-the-data",
+    "href": "modules/module7/slides/module7_01.html#zooming-and-panning-helps-the-audience-explore-the-data",
+    "title": "Tooltips, Zoom, and Selections",
+    "section": "Zooming and panning helps the audience explore the data",
+    "text": "Zooming and panning helps the audience explore the data\n\nalt.Chart(cars).mark_circle().encode(\n    alt.X('Horsepower', title='Enging power (hp)'),\n    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),\n    href='URL',\n    tooltip=['Name', 'URL']).interactive()\n\n\n\n\n\n\n\n\nIn all our previous charts, it has been difficult to resolve exactly which point a tooltip refers to in the more dense regions of the charts where points overlap.\nOne approach to deal with this would be to make the points smaller or to make the visualization larger. However, in some cases this might make individual points harder to see or take up more space than we have available for our visualizations.\nInstead, we could enable zooming and panning on the chart with the interactive() method. This works on all visualizations except maps and allows us to zoom in by using the scrolling feature of our mouse or touchpad, and pan by clicking and dragging the chart. Double clicking resets the zoom and pan to the default view.\nIn addition to resolving tooltip ambiguity, adding the zooming and panning feature allows your audience to decide which regions of the chart they want to look closer at, which would not be possible with a static visualization."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_01.html#adding-selections-allows-us-to-highlight-data-points",
+    "href": "modules/module7/slides/module7_01.html#adding-selections-allows-us-to-highlight-data-points",
+    "title": "Tooltips, Zoom, and Selections",
+    "section": "Adding selections allows us to highlight data points",
+    "text": "Adding selections allows us to highlight data points\n\nbrush = alt.selection_interval()\n \n(alt.Chart(cars).mark_circle().encode(\n    alt.X('Horsepower', title='Enging power (hp)'),\n    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'))\n.add_selection(brush))\n\n\n\n\n\n\n\n\nSelections are useful to highlight certain points in a chart. This is particularly helpful when highlighting the same points in multiple linked charts.\nIn a few slides, we will see a concrete example of how this can be used to answer a specific question, but first, let’s walk through the syntax for adding selections to a single chart.\nTo add a selection to a chart, we first need to create the selection object. In this slide we create and interval selection by specifying alt.selection_interval() and then giving this the name brush.\nThe reason for this name is that selecting points with an interval is often referred to as “brushing” in data visualization terminology. You would commonly see this when reading online resources on interactive selections in data visualization.\nAfter creating the selection object, we add it to our chart using add_selection(), which means that we can use our cursor in the chart to create a grey selection rectangle by clicking and dragging with our mouse or touchpad.\nYou can click to drag the selection around and to clear it you can either double click the selection or click once outside the selected region.\nBut it doesn’t look like any of the points are highlighted yet, why not?"
+  },
+  {
+    "objectID": "modules/module7/slides/module7_01.html#highlighting-points-with-selections-requires-a-conditional-statement",
+    "href": "modules/module7/slides/module7_01.html#highlighting-points-with-selections-requires-a-conditional-statement",
+    "title": "Tooltips, Zoom, and Selections",
+    "section": "Highlighting points with selections requires a conditional statement",
+    "text": "Highlighting points with selections requires a conditional statement\n\nbrush = alt.selection_interval()\n \n(alt.Chart(cars).mark_circle().encode(\n    alt.X('Horsepower', title='Enging power (hp)'),\n    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),\n    color=alt.condition(brush, 'Origin', alt.value('lightgray')))\n.add_selection(brush))\n\n\n\n\n\n\n\n\nTo highlight the selected in a different colour than the rest of the data, we can use a conditional statement.\nAltair has a built in if/else function called condition that checks if an event is present (such as selection) and then lets us define what to do if it is True, and what to do if it is False. You can think of it like this:\nalt.condition(check-this, if-true-do-this, if-false-do-this)\nIn the chart on this slide we check if our interval range selection brush contains any data points. If that is true, we use the Origin dataframe column to colour the points, otherwise we use the value 'lightgray'.\nalt.value is a helper function for when we want to map a single value to the data points, rather than mapping the values from a column in the dataframe."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_01.html#linking-selections-between-charts-helps-exploring-observations-across-more-columns",
+    "href": "modules/module7/slides/module7_01.html#linking-selections-between-charts-helps-exploring-observations-across-more-columns",
+    "title": "Tooltips, Zoom, and Selections",
+    "section": "Linking selections between charts helps exploring observations across more columns",
+    "text": "Linking selections between charts helps exploring observations across more columns\n\nbrush = alt.selection_interval()\n \npoints = (alt.Chart(cars).mark_circle().encode(\n    alt.X('Horsepower', title='Enging power (hp)'),\n    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),\n    color=alt.condition(brush, 'Origin', alt.value('lightgray')))\n.add_selection(brush)).properties(height=225, width=300)\n\npoints | points.encode(x='Acceleration', y=alt.Y('Weight_in_lbs', title='Weight'))\n\n\n\n\n\n\n\n\nIn this slide we have created two charts from the same dataframe. In the first we have plotted Horsepower against Miles_per_Gallon and in the second we have plotted Acceleration against Weight_in_lbs.\nWe can use this to see patterns or relationship between two variables within each chart, but we don’t know how the points are related between the two charts.\nFor example, we might wonder if the cars with really powerful engines and low mileage are the ones with low or high acceleration and weight. There is not way to tell this from just looking at these two charts.\nHowever, if we could highlight points of interest in one chart, and then see the same observations highlighted in the other chart - we would be able to answer such a question!\nAs you can see in this slide selections are automatically linked between the two charts. The reason this worked was because both these charts have one point for each observation in the data, so that we selected a point in one of the scatterplots the corresponding point for that same observation could automatically be highlighted in the other scatterplot.\nNow we can answer our question! Highlighting the observations where the cars have high engine power and low mileage shows that they are mostly heavy cars with slow acceleration. Importantly, the relationships of other observations can also be explored in the plot without us having to change anything."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_01.html#multiple-selections-can-be-used-to-highlight-points",
+    "href": "modules/module7/slides/module7_01.html#multiple-selections-can-be-used-to-highlight-points",
+    "title": "Tooltips, Zoom, and Selections",
+    "section": "Multiple selections can be used to highlight points",
+    "text": "Multiple selections can be used to highlight points\n\nbrush = alt.selection_interval(resolve='intersect')\n \npoints = (alt.Chart(cars).mark_circle().encode(\n    alt.X('Horsepower', title='Enging power (hp)'),\n    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),\n    color=alt.condition(brush, 'Origin', alt.value('lightgray')))\n.add_selection(brush)).properties(height=225, width=300)\n\npoints | points.encode(x='Acceleration', y=alt.Y('Weight_in_lbs', title='Weight'))\n\n\n\n\n\n\n\n\nIn the previous slide we only had one selection possible at a time. For example, if we started to first select observations in the chart on the left, and then started to make another selection in the chart on the right hand side, the chart to the left would clear its selection.\nWe could modify this behavior so that there are separate selections in the the two charts and only points that fall within the intersection or union of both the selections are highlighted as in this slide.\nThis can be useful if you want to narrow down your data further select observations that meet multiple conditions."
+  },
+  {
+    "objectID": "modules/module7/module7-09-what_did_we_just_learn.html",
+    "href": "modules/module7/module7-09-what_did_we_just_learn.html",
+    "title": "5. What did we just learn?",
+    "section": "",
+    "text": "5. What did we just learn?\n\nVideoSlides",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "5. What did we just learn?"
+    ]
+  },
+  {
+    "objectID": "modules/module7/module7-07-sharing_altair_visualizations.html",
+    "href": "modules/module7/module7-07-sharing_altair_visualizations.html",
+    "title": "4. Sharing Altair Visualizations",
+    "section": "",
+    "text": "4. Sharing Altair Visualizations\n\nVideoSlides",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "4. Sharing Altair Visualizations"
+    ]
+  },
+  {
+    "objectID": "modules/module7/module7-05-using_widgets_to_control_selections.html",
+    "href": "modules/module7/module7-05-using_widgets_to_control_selections.html",
+    "title": "3. Using Widgets to Control Selections",
+    "section": "",
+    "text": "3. Using Widgets to Control Selections\n\nVideoSlides",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "3. Using Widgets to Control Selections"
+    ]
+  },
+  {
+    "objectID": "modules/module7/module7-03-advanced_selections.html",
+    "href": "modules/module7/module7-03-advanced_selections.html",
+    "title": "2. Advanced Selections",
+    "section": "",
+    "text": "2. Advanced Selections\n\nVideoSlides",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "2. Advanced Selections"
+    ]
+  },
+  {
+    "objectID": "modules/module7/module7-01-tooltips_zoom_and_selections.html",
+    "href": "modules/module7/module7-01-tooltips_zoom_and_selections.html",
+    "title": "1. Tooltips, Zoom, and Selections",
+    "section": "",
+    "text": "1. Tooltips, Zoom, and Selections\n\nVideoSlides",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "1. Tooltips, Zoom, and Selections"
+    ]
+  },
+  {
     "objectID": "modules/module6/slides/module6_end.html#module-learning-outcomes",
     "href": "modules/module6/slides/module6_end.html#module-learning-outcomes",
     "title": "What Did we Learn and What to Expect in Assignment 6",
@@ -2846,5 +3055,251 @@
     "title": "Figure Composition",
     "section": "Titles can be added to each chart in the layout to clarify what they represent",
     "text": "Titles can be added to each chart in the layout to clarify what they represent\n\nchoropleth_with_title = choropleth_small.properties(title='Asthma cases per capita')\npointmap_with_title = (us_map + points).properties(title='Total ashtma cases')\nbars_with_title = (bars.encode(color='asthma_cases_per_capita').properties(title='Asthma cases per capita'))\nfigure_panel = (choropleth_with_title | pointmap_with_title) & bars_with_title\nfigure_panel_title = alt.TitleParams(text='Asthma cases among US states', dx=200)\nfigure_panel.properties(title=figure_panel_title)\n\n\n\n\n\n\n\n\nTo make our visualization easier to interpret, we can add descriptive titles. These are often particularly important when we create more complex figures since there are now several panels within each figure to keep track of.\nIf we have already taken steps to reduce the ambiguity of the charts in our figure (as we did in the previous slides), we might not need a title for each chart in the figure, but when in doubt it is better to add one title too many than one too few.\nWe should at least add an overall title to the figure as we learned in previous modules. Here we use dx to center this figure over the charts in the figure, rather than having it to the left or centered over the entire charts + legends.\nWe here make the overall title more general, but could also have highlighted a specific take home message, such as that there is no clear geographical distribution of asthma cases or that the relative differences between most states is rather small. Which title we chose would depend on the narrative we are building with the figure."
+  },
+  {
+    "objectID": "modules/module7/module7-00-module_learning_outcomes.html",
+    "href": "modules/module7/module7-00-module_learning_outcomes.html",
+    "title": "0. Module Learning Outcomes",
+    "section": "",
+    "text": "0. Module Learning Outcomes\n\nVideoSlides",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "0. Module Learning Outcomes"
+    ]
+  },
+  {
+    "objectID": "modules/module7/module7-02-true_or_false_getting_truthful_with_interactivity.html",
+    "href": "modules/module7/module7-02-true_or_false_getting_truthful_with_interactivity.html",
+    "title": "1.1. Exercises",
+    "section": "",
+    "text": "Instructions: Be patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nLet’s now look at the penguins data set again and see whether species differences in body shape also relates to species differences in culmen shape.\nWhich penguins are more abundant? Are there penguins that have a greater flipper length (flipper_length_mm) but with a smaller body mass (body_mass_g)? Does the mass of a penguin have a relationship to its flipper length?\nLet’s take a look!\n\n\n\n\n\n\nThe first scatter plot should show body mass (y-axis) vs flipper length (x-axis) and be named linked_scatter. Colour the points be species. The second plot should show culmen depth (y-axis) vs culmen length (x-axis) - this second scatter plot can be created by just overwriting the encoding of the first. Horizontally concatenate these two scatter plots.\nTasks:\nFill in the blanks in the code below so that the following gets accomplished: - Create a selection interval and save it in an object named brush. - Create a scatter plot thats maps body mass on the y axis and flipper length on the x-axis. Map species to the colour channel and save this plot in an object named linked_scatter.  - In a second plot using linked_scatter as a base, map the culmen length (x-axis) by culmen depth (y-axis) and display them on top of each other by saving them in an object called together_plot.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you creating a selection interval using alt.selection_interval()\nAre you using the data penguins_df to create linked_scatter?\nAre you plotting body_mass_g on the x-axis in linked_scatter?\nAre you setting the selection interval as an argument in condition?\nAre you setting brush in add_selection?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "&nbsp;&nbsp; 1.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module7/module7-02-true_or_false_getting_truthful_with_interactivity.html#your-first-interactive-plot",
+    "href": "modules/module7/module7-02-true_or_false_getting_truthful_with_interactivity.html#your-first-interactive-plot",
+    "title": "1.1. Exercises",
+    "section": "",
+    "text": "Instructions: Be patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nLet’s now look at the penguins data set again and see whether species differences in body shape also relates to species differences in culmen shape.\nWhich penguins are more abundant? Are there penguins that have a greater flipper length (flipper_length_mm) but with a smaller body mass (body_mass_g)? Does the mass of a penguin have a relationship to its flipper length?\nLet’s take a look!\n\n\n\n\n\n\nThe first scatter plot should show body mass (y-axis) vs flipper length (x-axis) and be named linked_scatter. Colour the points be species. The second plot should show culmen depth (y-axis) vs culmen length (x-axis) - this second scatter plot can be created by just overwriting the encoding of the first. Horizontally concatenate these two scatter plots.\nTasks:\nFill in the blanks in the code below so that the following gets accomplished: - Create a selection interval and save it in an object named brush. - Create a scatter plot thats maps body mass on the y axis and flipper length on the x-axis. Map species to the colour channel and save this plot in an object named linked_scatter.  - In a second plot using linked_scatter as a base, map the culmen length (x-axis) by culmen depth (y-axis) and display them on top of each other by saving them in an object called together_plot.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you creating a selection interval using alt.selection_interval()\nAre you using the data penguins_df to create linked_scatter?\nAre you plotting body_mass_g on the x-axis in linked_scatter?\nAre you setting the selection interval as an argument in condition?\nAre you setting brush in add_selection?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "&nbsp;&nbsp; 1.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module7/module7-04-true_or_false_selecting_correctly.html#true-or-false-selecting-correctly",
+    "href": "modules/module7/module7-04-true_or_false_selecting_correctly.html#true-or-false-selecting-correctly",
+    "title": "2.1. Exercises",
+    "section": "True or False: Selecting Correctly",
+    "text": "True or False: Selecting Correctly",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "&nbsp;&nbsp; 2.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module7/module7-04-true_or_false_selecting_correctly.html#multi-select-for-multiple-choice-questions",
+    "href": "modules/module7/module7-04-true_or_false_selecting_correctly.html#multi-select-for-multiple-choice-questions",
+    "title": "2.1. Exercises",
+    "section": "Multi-Select for Multiple Choice Questions",
+    "text": "Multi-Select for Multiple Choice Questions",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "&nbsp;&nbsp; 2.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module7/module7-04-true_or_false_selecting_correctly.html#clicks-not-cliques",
+    "href": "modules/module7/module7-04-true_or_false_selecting_correctly.html#clicks-not-cliques",
+    "title": "2.1. Exercises",
+    "section": "Clicks not Cliques",
+    "text": "Clicks not Cliques\nInstructions: Be patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nLet’s now look at the penguins data set again and see how the Penguins of each species were studied on each island.\nLet’s take a look!\n\n\n\n\n\n\nCreate a grouped, horizontal bar chart where the number of penguins on each island is plotted for each species. You are aiming to have a plot that looks like you have 3 subplots, where each subplot is for each species. Add interactivity, so that you can select which island to highlight on the bar chart by clicking the legend.\nTasks:\nFill in the blanks in the code below so that the following gets accomplished:\n\nCreate a multiple selection tool that binds to the legend selecting the observations from the columns island. Name this object click.\nIn a horizontal bar plot named click_legend, map the counts of penguins on the x-axis and the island the penguins were onserved on the y axis. Make sure to sort the islands by increasing count values.\nColor the points by island and facet the plot by species using .Row().\nAdd a condition to the opacity channel that depends on the selection tool click giving an opacity of 0.9 if selected and 0.2 if not.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you setting fields=['island'] and binding to legend in the click selection tool?\nAre you setting sort='x' in the alt.Y() function?\nAre you plotting body_mass_g on the x-axis in linked_scatter?\nAre you setting the island to the colour channel??\nAre you setting alt.condition(click, alt.value(0.9), alt.value(0.2))?\nAre you remembering to call click in .add_selection() at the end of the plot?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "&nbsp;&nbsp; 2.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module7/module7-06-true_or_false_controls.html#true-or-false-controls",
+    "href": "modules/module7/module7-06-true_or_false_controls.html#true-or-false-controls",
+    "title": "3.1. Exercises",
+    "section": "True or False: Controls",
+    "text": "True or False: Controls",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "&nbsp;&nbsp; 3.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module7/module7-06-true_or_false_controls.html#minimap-multi-choice",
+    "href": "modules/module7/module7-06-true_or_false_controls.html#minimap-multi-choice",
+    "title": "3.1. Exercises",
+    "section": "Minimap Multi-Choice",
+    "text": "Minimap Multi-Choice",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "&nbsp;&nbsp; 3.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module7/module7-06-true_or_false_controls.html#slipping-and-sliding-penguins",
+    "href": "modules/module7/module7-06-true_or_false_controls.html#slipping-and-sliding-penguins",
+    "title": "3.1. Exercises",
+    "section": "Slipping and Sliding Penguins",
+    "text": "Slipping and Sliding Penguins\nInstructions: Be patient when running a coding exercise for the first time, it can take a few minutes.\nWhen you see ____ in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output and submit it to validate if you were correct.\nLet’s now look at the penguins data set again and see how the Penguins of each species were studied on each island.\nLet’s take a look!\n\n\n\n\n\n\nCreate a scatter plot from the Penguins data set that visualizes culmen depth (y-axis) vs culmen length (x-axis).\nTasks:\nFill in the blanks in the code below so that the following gets accomplished:\n\nCreate a scatter plot named slider_scatter that maps culmen length on the x-axis and culmen depth on the y-axis.\nColour the points by species.\nAdd a slider assigned to an object slider that allows you to set a threshold so that you can highlight the observations where the penguins body mass (in grams) is under the threshold specified by the slider and set the maximum slider value to the maximum value found in the body mass column. Name the slider “Body mass (g)”.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint 1\n\n\n\n\n\n\nAre you setting alt.binding_range() to build your sliding tool?\nAre you setting the max of the slider to max=max(penguins_df['body_mass_g']) ?\nAre you using selection_single to make select_rating?\nAre you binding the selection_single to slider?\nAre you setting alt.datum.body_mass_g &lt; select_rating.body_mass_g as your expression in alt.condition()?\nAre you calling select_rating in .add_selection()?\n\n\n\n\n\n\n\n\n\n\n\n\nFully worked solution:",
+    "crumbs": [
+      "**M7. Chart Interactivity**",
+      "&nbsp;&nbsp; 3.1. Exercises"
+    ]
+  },
+  {
+    "objectID": "modules/module7/slides/module7_00.html#module-learning-outcomes",
+    "href": "modules/module7/slides/module7_00.html#module-learning-outcomes",
+    "title": "Module Learning Outcomes",
+    "section": "Module Learning Outcomes",
+    "text": "Module Learning Outcomes\nIn this module students will learn how to\n\nCreate selections within a chart.\nLink selections between chart to highlight and filter data.\nUse widgets to drive chart selections.\nShare interactive visualizations without running a full Python dashboard."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_03.html#selections-can-be-triggered-on-clicks-instead-of-dragging-with-the-mouse",
+    "href": "modules/module7/slides/module7_03.html#selections-can-be-triggered-on-clicks-instead-of-dragging-with-the-mouse",
+    "title": "Advanced Selections",
+    "section": "Selections can be triggered on clicks instead of dragging with the mouse",
+    "text": "Selections can be triggered on clicks instead of dragging with the mouse\n\nimport altair as alt\nfrom vega_datasets import data\n\ncars = data.cars()\nclick = alt.selection_multi()\nbars = (alt.Chart(cars).mark_bar().encode(\n    alt.X('count()', title='Number of cars'),\n    alt.Y('Origin', title='Region'),\n    alt.Color('Origin', title=None),\n    opacity=alt.condition(click, alt.value(0.9), alt.value(0.2)))\n.add_selection(click)).properties(width=300)\n\nbars\n\n\n\n\n\n\n\n\nTo demonstrate the functionality in this slide deck, we will continue to work with the car dataset from the previous deck.\nWhen creating certain visualizations, such as bar charts and maps, it is often more intuitive to be able to click the objects to highlight or select them, rather than dragging with the cursor to select an area.\nIn this slide we use selection_multi to create a selection based on what we click with our cursor If we hold the shift key, we can select multiple items.\nIf you do not want to allow for multiple selection in your visualization, you can instead opt to use selection_single instead of selection_multi.\nHere, we named our alt.selection_multi() object click, and linked it to a visible change in the chart, by passing it inside alt.condition to the opacity parameter.\nThis has the effect that when an object is clicked on, that object gets a high opacity value, and the objects that are not clicked on get a low opacity value.\nIn the last slide deck we used the colour instead of the opacity parameter with alt.condition when we used a selection interval to highlight points in our charts.\nWe could have also used opacity there as well and whether we change the colour or opacity on selection is mostly an aesthetic choice.\nIn this slide, we have assigned the chart to a variable name because we will reuse it in several later slides in this slide deck."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_03.html#combining-charts-with-different-selections",
+    "href": "modules/module7/slides/module7_03.html#combining-charts-with-different-selections",
+    "title": "Advanced Selections",
+    "section": "Combining charts with different selections",
+    "text": "Combining charts with different selections\n\nbrush = alt.selection_interval()\npoints = (alt.Chart(cars).mark_circle().encode(\n    alt.X('Horsepower', title='Enging power (hp)'),\n    alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),\n    color=alt.condition(brush, 'Origin', alt.value('lightgray')))\n.add_selection(brush)).properties(width=300, height=200)\n\npoints & bars\n\n\n\n\n\n\n\n\nTo add two charts together, we can use what we learned previously about Altair’s layout operators. To concatenate the bar chart and scatterplot vertically, we’re here using the & operator.\nWhen we linked the two scatterplots together in the previous slide deck, we simply added the selection, without the need to specify which fields to use, why can’t we do that hear?\nThe reason this worked was because both those plots had one point for each observation in the data, so that we selected a point in one of the scatterplots the corresponding point for that same observation could automatically be highlighted in the other scatterplot.\nThe bar chart in this slide is made from counting the observations in the raw data and then drawing exactly three bars, one per region of origin. Since the individual observations do not exist in the bar chart it is impossible to automatically link the two charts together.\nIt could be very useful to create a linked selection between these charts, so that when we select a region of origin in the bar chart the points in the scatter plot that are from the same origin would be highlighted.\nThis way we could study observations from each Origin separately, so how can we perform this linkage in Altair?"
+  },
+  {
+    "objectID": "modules/module7/slides/module7_03.html#linking-selections-from-separate-charts-requires-explicit-columns-to-select-on",
+    "href": "modules/module7/slides/module7_03.html#linking-selections-from-separate-charts-requires-explicit-columns-to-select-on",
+    "title": "Advanced Selections",
+    "section": "Linking selections from separate charts requires explicit columns to select on",
+    "text": "Linking selections from separate charts requires explicit columns to select on\n\nclick = alt.selection_multi(fields=['Origin'])\nbars = bars.add_selection(click)\npoints = points.encode(opacity=alt.condition(click, alt.value(0.9), alt.value(0.2)))\n\npoints & bars\n\n\n\n\n\n\n\n\nTo link the three bars to the individual observations in the scatter plot, we need to be explicit about what should happen when a selection is made.\nFor example, to link a click of a bar to a selection in the scatterplot, we need to say which column in the dataframe should be used to select on.\nIn this case, \"Origin\" is the column that we want to use for the selection, as it is the common encoding between both charts.\nIf there were two or more data frame columns that were common encodings in both charts, then you would select the one that made more sense for the question you were asking.\nTo successfully link this selection we need to do three things: 1. Create a new selection that specifies which columns should be used for selections (the fields parameter). 2. Add this new selection to the bar plot 3. Add an encoding to the scatterplot that depends on the new click selections. Here we use opacity. Now that we click the bars the opacity of the corresponding points changes as we would expect!\nNote that we can still click and drag in the scatterplot since our brush selection is unchanged from before.\nThe same principles that we showed here can be applied to create a linked selection from the scatterplot to the barchart, which we will see an example of in a few slides."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_03.html#a-selection-can-be-bound-to-the-legend-instead-of-a-particular-chart",
+    "href": "modules/module7/slides/module7_03.html#a-selection-can-be-bound-to-the-legend-instead-of-a-particular-chart",
+    "title": "Advanced Selections",
+    "section": "A selection can be bound to the legend instead of a particular chart",
+    "text": "A selection can be bound to the legend instead of a particular chart\n\nclick_legend = alt.selection_multi(fields=['Origin'], bind='legend')\npoints = points.encode(opacity=alt.condition(click_legend, alt.value(0.9), alt.value(0.2)))\n\npoints.add_selection(click_legend)\n\n\n\n\n\n\n\n\nWe don’t always have a bar chart to drive the selections from. What if we only create a scatterplot, but still want to be able to select data from different origins?\nInstead of using a separate chart, we could use the legend to make the selections. We can tell Altair that we want to make the legend interactive, by binding selection_multi to it.\nWe then need to link this new selection to the points opacity encoding and add it to the plot.\nNow if you click the legend, it will select the corresponding observations in the scatterplot!"
+  },
+  {
+    "objectID": "modules/module7/slides/module7_03.html#legend-selections-can-be-added-to-multiple-charts",
+    "href": "modules/module7/slides/module7_03.html#legend-selections-can-be-added-to-multiple-charts",
+    "title": "Advanced Selections",
+    "section": "Legend selections can be added to multiple charts",
+    "text": "Legend selections can be added to multiple charts\n\nbars = bars.encode(opacity=alt.condition(click_legend, alt.value(0.9), alt.value(0.2)))\n(points & bars).add_selection(click_legend) \n\n\n\n\n\n\n\n\nThe syntax for linking legend interactivity to a layout of charts is the same as to a single chart, but we need to add the selection to both charts since the legend belongs to both of them.\nWe could do this one by one, or both at once as we do in this slide, and there is no difference in choosing one approach over the other."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_03.html#instead-of-highlighting-a-selection-can-be-used-for-filtering-data",
+    "href": "modules/module7/slides/module7_03.html#instead-of-highlighting-a-selection-can-be-used-for-filtering-data",
+    "title": "Advanced Selections",
+    "section": "Instead of highlighting, a selection can be used for filtering data",
+    "text": "Instead of highlighting, a selection can be used for filtering data\n\nbars = bars.transform_filter(brush)\n(points & bars).add_selection(click_legend) \n\n\n\n\n\n\n\n\nSo far we have seen how to change graphical encodings such as color and opacity to highlight observations or groups of observations. Another useful type of interactivity is to actually filter the data based on a selection, rather than just styling the chart appearance.\nFor example, we may use a brush selection on a scatter plot to highlight particular observations, and then wonder how many observations are in our brushed selection for each region? To answer this question, we can change the bar chart to update dynamically as we select points in the scatterplot!\nTransform filters can filter data similarly to what we might do in pandas and are often referred to as “dynamic queries”. Note that but this type of filtering is best used in this kind of interactive setting, as it is not as powerful as the filtering available to you via pandas.\nSince we have conditions in the charts’ encodings that depend on the legend_click selection variable, we need to also add this selection to the charts to avoid an error, even if it is not the focus of what we are learning in this slide.\nNow that we have select points by dragging in the scatter plot we can see that the barchart updates the count to reflect the number of points we have selected of each color, neat!"
+  },
+  {
+    "objectID": "modules/module7/slides/module7_03.html#fixing-the-extent-of-the-x-axis-makes-the-bars-easier-to-compare",
+    "href": "modules/module7/slides/module7_03.html#fixing-the-extent-of-the-x-axis-makes-the-bars-easier-to-compare",
+    "title": "Advanced Selections",
+    "section": "Fixing the extent of the x-axis makes the bars easier to compare",
+    "text": "Fixing the extent of the x-axis makes the bars easier to compare\n\nbar_chart_max = cars.groupby('Origin').size().max()\nbars = bars.encode(alt.X('count()', scale=alt.Scale(domain=[0, bar_chart_max])))\n(points & bars).add_selection(click_legend) \n\n\n\n\n\n\n\n\nIt is a bit non-intuitive that the x-axis keep changing its extent as we select different number of points, and it makes the bar heights harder to compare as we move the selection around. Ideally only the bars would change length, but the axis would stay the same.\nIn this slide we calculate the max number of cars from any region and then use this number to fix the extent of the x-axis. Now that we select in the scatterplot, only the lengths of the bars changes, but the range of the axis remains the same.\nIt is a bit unintuitive that the x-axis keeps changing its range as we make brush selections that contain different numbers of observations.\nThis also makes the bar heights harder to compare as we move the selection around. Ideally only the bars would change length, but the axis would stay the same.\nTo fix this, we here calculate the maximum number of cars from any region and then use this number to set the range of the x-axis. After doing this, brush selections of observations in the scatterplot, only change the lengths of the bars, while the range of the x-axis remains the same."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_03.html#interactive-features-work-with-all-charts",
+    "href": "modules/module7/slides/module7_03.html#interactive-features-work-with-all-charts",
+    "title": "Advanced Selections",
+    "section": "Interactive features work with all charts",
+    "text": "Interactive features work with all charts\n\nimport pandas as pd\n\nstate_map = alt.topo_feature(data.us_10m.url, \"states\")\nstate_pop = pd.read_csv(\"../../data/us_population_coordinates_asthma-cases.csv\")\nstate_pop[\"asthma_cases_per_capita\"] = (\n    state_pop[\"number_of_asthma_cases\"] / state_pop[\"population\"]\n)\n\nhover = alt.selection_single(fields=[\"state\"], on=\"mouseover\")\nchoropleth = (\n    alt.Chart(state_map)\n    .mark_geoshape()\n    .transform_lookup(\n        lookup=\"id\",\n        from_=alt.LookupData(state_pop, \"id\", [\"number_of_asthma_cases\", \"state\"]),\n    )\n    .encode(\n        color=alt.Color(\"number_of_asthma_cases:Q\", title=\"Asthma cases\"),\n        opacity=alt.condition(hover, alt.value(1), alt.value(0.1)),\n        tooltip=[\n            \"state:N\",\n            alt.Tooltip(\"number_of_asthma_cases:Q\", title=\"Asthma cases\"),\n        ],\n    )\n    .add_selection(hover)\n    .project(type=\"albersUsa\")\n    .properties(height=150, width=300)\n)\nchoropleth\n\n\n\n\n\n\n\n\nSelections work with all types of charts in Altair. In this slide we have recreated one of the maps we made in module 6, which communicates the number of asthma cases per state as a choropleth map.\nWe have added interactivity to this map in the form of a helpful tooltip that shows which state we are hovering over as well as the exact number of asthma cases in that state, which would be hard to read out precisely from the color mapping alone.\nWe used alt.Tooltip to change the title in the tooltip, just as when we change the title of an axis or legend.\nWe also added a selection_single interaction, but instead of binding it to cursor clicks (the default), we bound it to 'mouseover', which is when we are hovering over a state with our cursor.\nIn this slide we can use this interaction to highlight a particular state in the choropleth map and in the next slide we will see how we can also link it to another chart.\nNote that we set the dimensions of the plot to fit on the slide."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_03.html#linking-a-map-selection-to-another-chart",
+    "href": "modules/module7/slides/module7_03.html#linking-a-map-selection-to-another-chart",
+    "title": "Advanced Selections",
+    "section": "Linking a map selection to another chart",
+    "text": "Linking a map selection to another chart\n\npoints = (alt.Chart(state_pop).mark_circle(size=70).encode(\n    alt.X('asthma_cases_per_capita', title='Asthma cases / capita', scale=alt.Scale(zero=False)),\n    alt.Y('number_of_asthma_cases', title='Asthma cases'),\n    stroke=alt.condition(hover, alt.value('black'), alt.value('#ffffff')),\n    color='number_of_asthma_cases')).properties(height=150, width=300)\nchoropleth & points\n\n\n\n\n\n\n\n\nTo link an interaction on a map to another chart, we use the same logic as we did in previous slides for linking the barchart and scatterplot.\nHere we create a separate scatterplot where the stroke color (outline) of each points depends on whether we have selected that state on the map or not.\nBy default all states on the map are selected so all the points have a black outline. As we hover over a state in the map, the outline changes to white for the points whose states are not selected in the map.\nUsing the map to identify states can be more helpful than just adding a tooltip to the scatterplot since we might already have an intuition for where different states are located on the map and don’t have to go through each of the point’s tooltip looking for the state name of interest."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_03.html#two-way-interactivity-between-the-map-and-scatter-plot",
+    "href": "modules/module7/slides/module7_03.html#two-way-interactivity-between-the-map-and-scatter-plot",
+    "title": "Advanced Selections",
+    "section": "Two way interactivity between the map and scatter plot",
+    "text": "Two way interactivity between the map and scatter plot\n\nchoropleth & points.encode(tooltip='state').add_selection(hover)\n\n\n\n\n\n\n\n\nLinking the interactive elements from the map to the points begs the question of how we could link interaction the other way and control the map from the points.\nIn the case of our visualization, it could be helpful to show a tooltip of each state’s name and highlight the corresponding state on the map when hovering over the a point.\nIn this slide we add the same hover selection to the scatterplot. We don’t need to change the encoded dataframe columns since the opacity is already set to change when we use the hover object, regardless of whether it is used on the map or on the scatter plot.\nAs you can see, Altair’s grammar remains consistent between different types of plots, such as scatterplots, maps, and barcharts. This allows us to build on the same principles we learned earlier and expand our grammar of interactivity no matter which plots we work with."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_07.html#charts-are-easily-saved-as-html-files",
+    "href": "modules/module7/slides/module7_07.html#charts-are-easily-saved-as-html-files",
+    "title": "Sharing Altair Visualization",
+    "section": "Charts are easily saved as HTML files",
+    "text": "Charts are easily saved as HTML files\nimport altair as alt\nfrom vega_datasets import data\n\ncars = data.cars.url\nchart = alt.Chart(cars).mark_circle().encode(\n    alt.X('Horsepower:Q'),\n    alt.Y('Miles_per_Gallon:Q'))\n\nchart.save('cars-scatterplot.html')\n\nThe easiest way to save Altair charts is as an HTML document via the save method. That is what we demonstrate here in this slide.\nAn HTML file then can either be incorporated in a web page or sent to anyone via email. When someone opens an HTML file containing an Altair chart in a web browser they will see the visualization, including any interactivity you have used!\nThis is all you need to know for sharing your visualizations to be viewed on a computer with others outside of Jupyter, but read on for more technical details about how this works and how you can save to other formats than HTML.\nOther formats than HTML can be important when you want to share the visualization on a paper medium as opposed to in a digital environment."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_07.html#how-are-altair-visualization-rendered",
+    "href": "modules/module7/slides/module7_07.html#how-are-altair-visualization-rendered",
+    "title": "Sharing Altair Visualization",
+    "section": "How are Altair visualization rendered?",
+    "text": "How are Altair visualization rendered?\n\nAltair does not create images to represent charts\nInstead if create Vega-Lite code\nYour browser knows how to render Vega-Lite code as graphics\n\n\nIt might surprise you that it is easier to save as an HTML document than an image file in PNG or JPG format. After all, plots are images aren’t they?\nTo understand this, let’s look into how Altair visualizations are constructed.\nIn the beginning we mentioned that Altair uses the JavaScript library Vega-Lite to generate its visualizations. This is great because we get access to many interactive features that build on web technologies such as JavaScript and HTML, and our visualizations can easily be incorporated in online contexts.\nThis also means that what Altair does under the hood is not to generate an image of the visualization, but the Vega-Lite code required to construct the chart.\nThis is similar to how graphical elements work on webpages. All the buttons, banners, etc that you see when you go to a web page are not images but HTML code that your browser can convert into a graphical elements such as buttons.\nVega-Lite code is rendered in a similar way. Modern browsers know how to draw graphical elements from the Vega-Lite code, so we never need to create any images.\nSo what does this Vega-Lite code look like?"
+  },
+  {
+    "objectID": "modules/module7/slides/module7_07.html#the-vega-lite-json-specification-for-charts",
+    "href": "modules/module7/slides/module7_07.html#the-vega-lite-json-specification-for-charts",
+    "title": "Sharing Altair Visualization",
+    "section": "The Vega-Lite JSON specification for charts",
+    "text": "The Vega-Lite JSON specification for charts\nprint(chart.to_json())\n{\n  \"config\": {\n    \"view\": {\n      \"continuousHeight\": 300,\n      \"continuousWidth\": 400\n    }\n  },\n  \"data\": {\n    \"url\": \"https://vega.github.io/vega-datasets/data/cars.json\"\n  },\n  \"encoding\": {\n    \"x\": {\n      \"field\": \"Horsepower\",\n      \"type\": \"quantitative\"\n    },\n    \"y\": {\n      \"field\": \"Miles_per_Gallon\",\n      \"type\": \"quantitative\"\n    }\n  },\n  \"mark\": \"circle\"\n}\nOpen the Chart in the Vega Editor\n\nInstead of creating a new programming language to store its code, Vega-Lite uses the established JSON file format.\nJSON is already widely used on the web as a storage format for text data, so this approach means that Vega-Lite does not need to reinvent the wheel. Instead, there are rules for which words are allows to appear in the JSON file for it to be valid Vega-Lite code, which is referred to as the “specification” (or “spec” for short).\nYou can see an example of how this looks for an Altair visualization by using the to_json method as we have done in this slide.\nYou can see that the words are the same we use in Altair, but the format of the JSON specification is a bit more verbose than the Altair syntax.\nYou can paste this JSON directly into Vega-Lite online editor and you will see that it renders correctly. We included a link for this in the slide that you can try.\nYou can also click the three dot action button and select the “Open in Vega Editor” entry to achieve the same result, try it out!"
+  },
+  {
+    "objectID": "modules/module7/slides/module7_07.html#the-json-spec-is-part-of-the-saves-html-file",
+    "href": "modules/module7/slides/module7_07.html#the-json-spec-is-part-of-the-saves-html-file",
+    "title": "Sharing Altair Visualization",
+    "section": "The JSON spec is part of the saves HTML file",
+    "text": "The JSON spec is part of the saves HTML file\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n  &lt;style&gt;\n    .error {\n        color: red;\n    }\n  &lt;/style&gt;\n  &lt;script type=\"text/javascript\" src=\"https://cdn.jsdelivr.net/npm//vega@5\"&gt;&lt;/script&gt;\n  &lt;script type=\"text/javascript\" src=\"https://cdn.jsdelivr.net/npm//vega-lite@4.8.1\"&gt;&lt;/script&gt;\n  &lt;script type=\"text/javascript\" src=\"https://cdn.jsdelivr.net/npm//vega-embed@6\"&gt;&lt;/script&gt;\n&lt;/head&gt;\n&lt;body&gt;\n  &lt;div id=\"vis\"&gt;&lt;/div&gt;\n  &lt;script&gt;\n    (function(vegaEmbed) {\n      var spec = {\"config\": {\"view\": {\"continuousWidth\": 400, \"continuousHeight\": 300}}, \"data\": {\"url\": \"https://vega.github.io/vega-datasets/data/cars.json\"}, \"mark\": \"circle\", \"encoding\": {\"x\": {\"type\": \"quantitative\", \"field\": \"Horsepower\"}, \"y\": {\"type\": \"quantitative\", \"field\": \"Miles_per_Gallon\"}}, \"$schema\": \"https://vega.github.io/schema/vega-lite/v4.8.1.json\"};\n...\n\nIf you look at the HTML file we saved in the previous step you will see that the JSON spec from the previous slide is included as you can see in this slide.\nAlso included is some additional code that tells your browser to use Vega-Lite’s web libraries to render this JSON spec.\nWe cut the HTML off here to fit it on the slide, but if you open the file you will see that there is also a section on how to emit error messages."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_07.html#charts-can-be-rendered-offline",
+    "href": "modules/module7/slides/module7_07.html#charts-can-be-rendered-offline",
+    "title": "Sharing Altair Visualization",
+    "section": "Charts can be rendered offline",
+    "text": "Charts can be rendered offline\n\nLink to install the offline Vega-Lite extension in JupyterLab\nCode to include a fallback image representation of your chart for offline rendering:\n\nalt.renderers.enable(\"mimetype\")\n\nThis does not change how your chart appears, it only includes a an image-representation of the chart which is saved as a string of characters in the notebook.\n\n “image/png”: “iVBORw0KGgoAAAANSUhEUgAAAfQAAAF3CAMAAABkLEnOAAADAFBMVEUAAAABAQECAgIDAwMEBAQFBQUGBgYHBwcICAgJCQkKCgoLCwsMDAwNDQ0ODg4…” \n\nGiven that displaying the JSON spec correctly depends on a the Vega-Lite web libraries, our charts will only render if we have an internet connection.\nIf you are working offline and want to render charts in JupyterLab, there are a few different options.\nIf you want interactive chart elements to work, you need to install a JupyterLab extension that downloads the the Vega-Lite rendering library to your machine. The steps for installing this extension are outlined in the Altair documentation\nIf you are happy with seeing a static version of your charts when you are offline, you could instruct Altair to use the Vega-Lite libraries only if there is an active internet connection and otherwise use and image for the plot.\nTo do this, you can include the code from this slide on top of your notebook, just after your import statements. This will not cause any changes to the appearance of your chart."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_07.html#what-if-we-want-to-save-our-charts-as-images-instead",
+    "href": "modules/module7/slides/module7_07.html#what-if-we-want-to-save-our-charts-as-images-instead",
+    "title": "Sharing Altair Visualization",
+    "section": "What if we want to save our charts as images instead?",
+    "text": "What if we want to save our charts as images instead?\n\nThe three dots action button can be used to save charts as PNG or SVG manually.\nCharts can also be saved programmatically via the same syntax as before, e.g. chart.save('my-chart.pdf')\n\n\nIf we want to save a chart as a PNG or SVG file we can use the three dot action button as we saw in the very first module of this course. When we are clicking the “Save as PNG” entry in this menu, the browser converts the Vega-Lite spec into a PNG image that is downloaded to our computer.\nIf we want to save charts programmatically as either PNG, SVG, or PDF we need to use a helper package called vl-convert. This package let’s Altair access the save functionality of the browser in a similar way as when you click the thee dot action button.\nMore details on how to save charts and install vl-convert can be found in the Altair documentation."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_07.html#what-is-the-difference-between-saving-in-different-formats",
+    "href": "modules/module7/slides/module7_07.html#what-is-the-difference-between-saving-in-different-formats",
+    "title": "Sharing Altair Visualization",
+    "section": "What is the difference between saving in different formats?",
+    "text": "What is the difference between saving in different formats?\n\nPNG is a bitmap/raster format\n\nUse to store data in a fixed grid of pixels\nGood for photos and complex illustrations\nZooming in causes the image to become blurry/pixelated\nThe file size depends on the number of pixels\n\nSVG and PDF are a scalable graphics / vector formats\n\nStores data as text with mathematical formulas\nGood for simpler illustration\nZooming in retains perfect quality\nThe file size depends on the number of objects and their complexity\n\n\n\nIn additional to saving as PNG, we could also have saved as SVG or PDF by changing the file extension accordingly.\nWhat is the difference between these two options? PNG is a bitmap/raster format - Stores data in a grid of pixels of different colors - Zooming in causes the image to become blurry/pixelated - The file size depends on the number of pixels - Often ideal for photos and complex illustrations SVG and PDF are scalable graphics / vector formats - Stores data as text by describing objects with mathematical formulas - Zooming in retains perfect quality - The file size depends on the number of objects and their complexity - Often ideal for simpler illustration such as most charts Saving as HTML has similar advantages and disadvantages as SVG. In fact HTML uses SVG for creating the graphics."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_07.html#working-with-large-datasets",
+    "href": "modules/module7/slides/module7_07.html#working-with-large-datasets",
+    "title": "Sharing Altair Visualization",
+    "section": "Working with large datasets",
+    "text": "Working with large datasets\nprint(chart.to_json())\n{\n  \"config\": {\n    \"view\": {\n      \"continuousHeight\": 300,\n      \"continuousWidth\": 400\n    }\n  },\n  \"data\": {\n    \"url\": \"https://vega.github.io/vega-datasets/data/cars.json\"\n  },\n  \"encoding\": {\n    \"x\": {\n      \"field\": \"Horsepower\",\n      \"type\": \"quantitative\"\n    },\n    \"y\": {\n      \"field\": \"Miles_per_Gallon\",\n      \"type\": \"quantitative\"\n    }\n  },\n  \"mark\": \"circle\"\n}\nView spec with the full data instead of the URL in the Vega Editor\n\nNow that we know how Altair creates charts, we can also understand why there is an issue with large datasets.\nYou can see the JSON chart spec printed in this slide again. Note that the data here is just a string value pointing to a URL because we used data.cars.url to create the chart.\nIf we had used a pandas dataframe (e.g. data.cars()) to create the chart (instead of a URL) all the data would be included in the chart specification.\nThis means that there would be almost 4500 lines of code in the JSON spec! Vega-Lite can handle this large files without issues, but is not enough room to show that in this slide. If you want to see how it you can click the link under the code in this slide."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_07.html#including-large-data-sets-in-chart",
+    "href": "modules/module7/slides/module7_07.html#including-large-data-sets-in-chart",
+    "title": "Sharing Altair Visualization",
+    "section": "Including large data sets in chart",
+    "text": "Including large data sets in chart\nWarning when plotting &gt; 5000 rows:\nMaxRowsError: The number of rows in your dataset is greater than the maximum\n              allowed (5000). For information on how to plot larger datasets\n              in Altair, see the documentation.\nDisable the warning:\nalt.data_transformers.disable_max_rows()\nMore details about how to work with large datasets can be found in the docs\n\nIncluding all the data is great for reproducibility and it works well with small to medium sized data. However, with large datasets the size of each chart would become really big, and with many charts in the same notebook the overall file size would be huge.\nTo avoid this happening by mistake Altair shows a warning when you try to plot a dataset with more than 5000 rows. If you are sure you want to plot a dataframe with more rows than that, you can disable the warning with the line of code on the top of this slide.\nHowever, as discussed in the last slide, your charts would still be very big because the data would be included in the spec for the chart. If you would like to avoid creating big plots, you can use a URL as we did in the first slide and in module three.\nAn URL is not always an option, and it is not convenient if you need to do some data wrangling with pandas first.\nIn the next slide we will discuss another way to manage this challenge."
+  },
+  {
+    "objectID": "modules/module7/slides/module7_07.html#working-with-large-datasets-without-including-all-the-data-in-the-chart",
+    "href": "modules/module7/slides/module7_07.html#working-with-large-datasets-without-including-all-the-data-in-the-chart",
+    "title": "Sharing Altair Visualization",
+    "section": "Working with large datasets without including all the data in the chart",
+    "text": "Working with large datasets without including all the data in the chart\nUse the data server:\nalt.data_transformers.enable('vegafusion')\nOutput in the spec:\n\"data\": {\n    \"url\": \"http://localhost:21319/4d45d69bbd706eda330e96e79ad4bf46.json\"\n  },\nOptionally you could use the mimtype renderer with the data transformer to show plots without Python running:\nalt.renderers.enable('mimetype')\n\nHere, we’re using alt.data_transformers.enable(‘vegafusion’), which differs from what’s shown in the video. That’s because we’re working with the newer Altair version 5, which no longer supports ‘data_server’. In the video, however, Altair version 4 was used."
   }
 ]
