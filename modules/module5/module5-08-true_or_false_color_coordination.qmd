@@ -1,0 +1,212 @@
+---
+format:
+  live-html
+resources:
+  - ../utils.py
+  - ../data
+---
+
+
+<script src='../../src/quiz.js'></script>  <!-- Only needed once per page -->
+
+# 4.1. Exercises
+
+## True or False: These Statement are Either Black or White
+
+<div id='mcq1'></div> 
+<script>
+    generateQuiz(
+        'mcq1',
+        'True or False',
+        'It’s important to set your work apart and demonstrate creativity by creating your own colour scheme.',
+        {
+        'True': 'It’s often better to use colour schemes designed by experts in a way to be easy to tell apart and in most cases also suitable for people with colour vision deficiencies.',
+        'False': ''
+        },
+        'False',
+    );
+</script>
+
+<div id='mcq2'></div> 
+<script>
+    generateQuiz(
+        'mcq2',
+        'True or False',
+        'Adding an additional channel like “shape” to an existing column mapping, is often recommended to help people with colour vision deficiencies.',
+        {
+        'True': 'Yes! If you want to add a colour mapping of a column, it’s often a good idea to add the same mapping to an additional channel.',
+        'False': 'Is using strictly colour mapping inclusive to people who can’t interpret them?'
+        },
+        'False',
+    );
+</script>
+
+
+## Colour Coordination Quesions
+
+<div id='mcq3'></div> 
+<script>
+    generateQuiz(
+        'mcq3',
+        'Question 1',
+        'When is it most effective to use custom colour schemes?',
+        {
+        'When colours are already naturally associated with certain categories or values.': '',
+        'When it helps demonstrates your creativity and coding ability.': 'Using custom colours may do the opposite in this case.',
+        'When you don´t like the pre-existing colour schemes.': 'There’s gotta be at least one scheme you like!',
+        'When you want to colour coordinate with your company´s logos.': 'I can understand this one but not necessarily the number one reason.'
+        },
+        'When colours are already naturally associated with certain categories or values.',
+    );
+</script>
+
+<div id='mcq4'></div> 
+<script>
+    generateQuiz(
+        'mcq4',
+        'Question 2',
+        '<strong>After</strong> how many colours (approximately by a rule of thumb) should you begin to reconsider colour as an effective channel to represent your data?',
+        {
+        '3': 'Maybe a little higher.',
+        '5': '',
+        '10': 'Can you differential between 10 different colours easily?',
+        '20': '20 colours is a lot!'
+        },
+        '5',
+    );
+</script>
+
+## Adding some Colour to Penguins
+
+**Instructions:**    
+Be patient when running a coding exercise for the first time, it can take a few minutes. 
+
+**When you see `____` in a coding exercise, replace it with what you assume to be the correct code. Run the code to see if you obtain the desired output
+and submit it to validate if you were correct.**
+
+
+We are about to talk our typically black and white [penguins](https://www.kaggle.com/parulpandey/palmer-archipelago-antarctica-penguin-data) and brighten these birds up a bit!  Using what we learned in the last 2 sections, let's see if knowing flipper and body mass length can help us identify the species of penguin. 
+
+```{pyodide}
+import altair as alt
+import pandas as pd
+
+penguins_df = pd.read_csv('data/penguins.csv')
+penguins_df.info()
+```
+
+Let's plot the `body_mass_g` and `flipper_length_mm` but this time, let's add a colour and shape channel to the species and explore if there are appears to be anything telling. 
+
+**Tasks:**
+
+Fill in the blanks in the code below so that the following gets accomplished:
+
+
+- In a plot named `colour_plot`, use the data source `penguins_df` to make a scatter plot (`mark_point`) with points that are size 10.
+- Map the flipper length on the x-axis and the body mass on the y-axis. 
+- Map the penguin species to both a colour and a shape channel.
+- Select a [desired colour scheme](https://vega.github.io/vega/docs/schemes/), and assign it to the colour channel. 
+- In this plot, it might be a good idea to restrict the axis ranges. Select an appropriate domain for both the x and y-axis. 
+- Make sure you are giving the channels all proper labels and the plot a title. 
+
+```{pyodide}
+#| setup: true
+#| exercise: colour_penguins
+import altair as alt
+import pandas as pd
+from utils import assert_chart_equal, remove_keys_inplace
+
+penguins_df = pd.read_csv('data/penguins.csv')
+```
+
+```{pyodide}
+#| exercise: colour_penguins
+colour_plot = alt.Chart(penguins_df).mark_point(____).encode(
+    alt.X('flipper_length_mm', 
+          scale=____, 
+          title=____),
+    alt.Y('body_mass_g', 
+          scale=____, 
+          title=____),
+    alt.____('species', ____, ____),
+    alt.____('species')
+).properties(____)
+
+colour_plot
+```
+
+```{pyodide}
+#| exercise: colour_penguins
+#| check: true
+solution = alt.Chart(penguins_df).mark_point(size=10).encode(
+    alt.X('flipper_length_mm', 
+          scale=alt.Scale(domain=[160, 240]), 
+          title="Flipper length (mm)"),
+    alt.Y('body_mass_g', 
+          scale=alt.Scale(domain=[2500, 6500]), 
+          title='Mass (grams)'),
+    alt.Color('species', title='Penguin species', scale=alt.Scale(scheme='set2')),
+    alt.Shape('species')
+).properties(
+    title='Gentoo penguins tend to have the longest flippers and weight the most among the penguin species.')
+
+solution_dict = solution.to_dict()
+result_dict = result.to_dict()
+remove_keys_inplace(solution_dict, {"domain", "title", "scheme"})
+remove_keys_inplace(result_dict, {"domain", "title", "scheme"})
+
+assert_chart_equal(solution_dict, result_dict)
+```
+
+:::: { .hint exercise="colour_penguins"}
+::: { .callout-note collapse="false"}
+
+## Hint 1
+
+- Are you using `mark_point(size=10)`?
+- Are you setting `alt.X('flipper_length_mm', scale=alt.Scale(domain=[160, 240]), title="Flipper length (mm)")`?
+- Are you setting `alt.X(''body_mass_g', scale=alt.Scale(domain=[2500, 6500]), title='Mass (grams)')`?
+- In the  plot, are you coding ` alt.Color('species', title='Penguin species', scale=alt.Scale(scheme='desired-set-name'))`?
+- Are you setting `alt.Shape('species')`?
+- Are you setting a title in `properties()`?
+
+:::
+::::
+
+:::: { .solution exercise="colour_penguins" }
+::: { .callout-tip collapse="false"}
+
+## Fully worked solution:
+
+```{pyodide}
+colour_plot = alt.Chart(penguins_df).mark_point(size=10).encode(
+    alt.X('flipper_length_mm', 
+          scale=alt.Scale(domain=[160, 240]), 
+          title="Flipper length (mm)"),
+    alt.Y('body_mass_g', 
+          scale=alt.Scale(domain=[2500, 6500]), 
+          title='Mass (grams)'),
+    alt.Color('species', title='Penguin species', scale=alt.Scale(scheme='set2')),
+    alt.Shape('species')
+).properties(
+    title='Gentoo penguins tend to have the longest flippers and weight the most among the penguin species.')
+
+colour_plot
+```
+
+:::
+::::
+
+<div id='mcq5'></div> 
+<script>
+    generateQuiz(
+        'mcq5',
+        'Question',
+        'If you removed the colour channel, would you be able to answer the question <em>“Which two penguin species are the most similar size in terms of mass and flipper length” </em>?',
+        {
+        'Yes': 'Since we added a shape channel, we could still differentiate between the species of penguins.',
+        'No': 'Hmmm, Have you tried plotting it without? What about the <code>Shape</code> channel?'
+        },
+        'Yes',
+    );
+</script>

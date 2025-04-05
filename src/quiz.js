@@ -1,4 +1,4 @@
-function generateQuiz(containerId, title, question, options, correctAnswer) {
+function generateQuiz(containerId, title, question, options, correctAnswers) {
     const container = document.getElementById(containerId);
     container.innerHTML = ''; // Clear previous content
 
@@ -10,7 +10,7 @@ function generateQuiz(containerId, title, question, options, correctAnswer) {
     container.appendChild(questionTitle);
 
     const questionElement = document.createElement('p');
-    questionElement.textContent = question;
+    questionElement.innerHTML = question;
     questionElement.style.marginBottom = '5px';
     container.appendChild(questionElement);
 
@@ -48,14 +48,15 @@ function generateQuiz(containerId, title, question, options, correctAnswer) {
         input.style.boxShadow = 'none';  // Remove brief occurances of transparent fill when clicked
         input.style.outline = 'none';  // Remove brief occurances of transparent fill when clicked
 
-
+        // Modify the event listener to check against an array of correct answers
         input.addEventListener('change', function () {
             messageElement.style.display = 'none';
             messageElement.style.opacity = 0;
 
-            if (option === correctAnswer) {
-                const emojis = ["🍀", "🎉", "🌈", "🚀", "🌟", "✨", "💯"]
-                const emoji = emojis[~~(Math.random() * emojis.length)]
+            // Check if the selected option is in the correctAnswers array
+            if (correctAnswers.includes(option)) {
+                const emojis = ["🍀", "🎉", "🌈", "🚀", "🌟", "✨", "💯"];
+                const emoji = emojis[~~(Math.random() * emojis.length)];
                 messageBody.innerHTML = `<strong style="color: #F78F2E; !important; font-size: 16px">Correct! &nbsp;${emoji}</strong><br>${explanation}`;
                 messageElement.style.backgroundColor = '#FEEFE1'; // Light background for content
                 messageElement.style.borderLeft = '5px solid #F78F2E'; // Left border styling
@@ -72,7 +73,7 @@ function generateQuiz(containerId, title, question, options, correctAnswer) {
         const label = document.createElement('label');
         label.className = 'form-check-label';
         label.setAttribute('for', `option-${containerId}-${index}`);
-        label.textContent = option;
+        label.innerHTML = option;
         label.style.marginBottom = '3px'; // Ensure text remains aligned
 
         div.appendChild(input);
