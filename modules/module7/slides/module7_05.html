@@ -6,8 +6,8 @@
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-7631f81a166a2979f555f02f21929a0e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.41">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-2fa0555fe88427c29efa1b60aaf9e62d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.42">
 
   <title>Data Visualization – Using Widgets to Control Selections</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -203,7 +203,7 @@
 </section>
 <section id="reading-in-the-movies-dataset" class="slide level2">
 <h2>Reading in the movies dataset</h2>
-<div id="bd8779c1" class="cell" data-execution_count="2">
+<div id="58ce1668" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a></span>
@@ -325,7 +325,7 @@
 </section>
 <section id="interactive-selections-can-make-charts-with-many-categories-more-effective" class="slide level2">
 <h2>Interactive selections can make charts with many categories more effective</h2>
-<div id="04583065" class="cell" data-execution_count="3">
+<div id="3a7190be" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>select_genre <span class="op">=</span> alt.selection_point(fields<span class="op">=</span>[<span class="st">'Major_Genre'</span>], bind<span class="op">=</span><span class="st">'legend'</span>)</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> alt.Chart(movies).mark_circle().encode(</span>
@@ -337,23 +337,23 @@
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-7274a71d570b4aeeb4df73df28c23778.vega-embed {
+  #altair-viz-0907efade3fd4ac8aaa31ec5f3413bbb.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-7274a71d570b4aeeb4df73df28c23778.vega-embed details,
-  #altair-viz-7274a71d570b4aeeb4df73df28c23778.vega-embed details summary {
+  #altair-viz-0907efade3fd4ac8aaa31ec5f3413bbb.vega-embed details,
+  #altair-viz-0907efade3fd4ac8aaa31ec5f3413bbb.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-7274a71d570b4aeeb4df73df28c23778"></div>
+<div id="altair-viz-0907efade3fd4ac8aaa31ec5f3413bbb"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-7274a71d570b4aeeb4df73df28c23778") {
-      outputDiv = document.getElementById("altair-viz-7274a71d570b4aeeb4df73df28c23778");
+    if (outputDiv.id !== "altair-viz-0907efade3fd4ac8aaa31ec5f3413bbb") {
+      outputDiv = document.getElementById("altair-viz-0907efade3fd4ac8aaa31ec5f3413bbb");
     }
 
     const paths = {
@@ -424,7 +424,7 @@
 </section>
 <section id="binding-selections-to-dropdowns-instead-of-legends" class="slide level2">
 <h2>Binding selections to dropdowns instead of legends</h2>
-<div id="99909051" class="cell" data-execution_count="4">
+<div id="de8a2291" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>genres <span class="op">=</span> <span class="bu">sorted</span>(movies[<span class="st">'Major_Genre'</span>].unique())</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>dropdown <span class="op">=</span> alt.binding_select(name<span class="op">=</span><span class="st">'Genre '</span>, options<span class="op">=</span>genres)</span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>select_genre <span class="op">=</span> alt.selection_point(fields<span class="op">=</span>[<span class="st">'Major_Genre'</span>], bind<span class="op">=</span>dropdown)</span>
@@ -434,23 +434,23 @@
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-244cc22316684ac4b4ea91d95b6ff672.vega-embed {
+  #altair-viz-851b4dd66bda495595652d7b05f6a918.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-244cc22316684ac4b4ea91d95b6ff672.vega-embed details,
-  #altair-viz-244cc22316684ac4b4ea91d95b6ff672.vega-embed details summary {
+  #altair-viz-851b4dd66bda495595652d7b05f6a918.vega-embed details,
+  #altair-viz-851b4dd66bda495595652d7b05f6a918.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-244cc22316684ac4b4ea91d95b6ff672"></div>
+<div id="altair-viz-851b4dd66bda495595652d7b05f6a918"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-244cc22316684ac4b4ea91d95b6ff672") {
-      outputDiv = document.getElementById("altair-viz-244cc22316684ac4b4ea91d95b6ff672");
+    if (outputDiv.id !== "altair-viz-851b4dd66bda495595652d7b05f6a918") {
+      outputDiv = document.getElementById("altair-viz-851b4dd66bda495595652d7b05f6a918");
     }
 
     const paths = {
@@ -524,7 +524,7 @@
 </section>
 <section id="setting-the-default-value-in-a-widget" class="slide level2">
 <h2>Setting the default value in a widget</h2>
-<div id="378e8e1a" class="cell" data-execution_count="5">
+<div id="843de0e9" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>select_genre <span class="op">=</span> alt.selection_point(</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    fields<span class="op">=</span>[<span class="st">"Major_Genre"</span>], bind<span class="op">=</span>dropdown, value<span class="op">=</span><span class="st">"Comedy"</span></span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>)</span>
@@ -535,23 +535,23 @@
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-b9dd181e220a431b9ab89ba9029d27a8.vega-embed {
+  #altair-viz-9fafc35f5a024dc78e08be616212c71c.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-b9dd181e220a431b9ab89ba9029d27a8.vega-embed details,
-  #altair-viz-b9dd181e220a431b9ab89ba9029d27a8.vega-embed details summary {
+  #altair-viz-9fafc35f5a024dc78e08be616212c71c.vega-embed details,
+  #altair-viz-9fafc35f5a024dc78e08be616212c71c.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-b9dd181e220a431b9ab89ba9029d27a8"></div>
+<div id="altair-viz-9fafc35f5a024dc78e08be616212c71c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-b9dd181e220a431b9ab89ba9029d27a8") {
-      outputDiv = document.getElementById("altair-viz-b9dd181e220a431b9ab89ba9029d27a8");
+    if (outputDiv.id !== "altair-viz-9fafc35f5a024dc78e08be616212c71c") {
+      outputDiv = document.getElementById("altair-viz-9fafc35f5a024dc78e08be616212c71c");
     }
 
     const paths = {
@@ -621,7 +621,7 @@
 </section>
 <section id="adding-multiple-widgets-to-the-same-charts" class="slide level2">
 <h2>Adding multiple widgets to the same charts</h2>
-<div id="a17e9dc9" class="cell" data-execution_count="6">
+<div id="3c9667bb" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>mpaa_rating <span class="op">=</span> <span class="bu">sorted</span>(movies[<span class="st">'MPAA_Rating'</span>].unique())</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>radiobuttons_mpaa <span class="op">=</span> alt.binding_radio(name<span class="op">=</span><span class="st">'MPAA Rating '</span>, options<span class="op">=</span>mpaa_rating)</span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>dropdown_genre <span class="op">=</span> alt.binding_select(name<span class="op">=</span><span class="st">'Genre '</span>, options<span class="op">=</span>genres)</span>
@@ -634,23 +634,23 @@
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-0cc5243e8e5e439f9170f830eceb6ce8.vega-embed {
+  #altair-viz-a7f3ffc8d1a9401a977c33ddcdd20ae6.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-0cc5243e8e5e439f9170f830eceb6ce8.vega-embed details,
-  #altair-viz-0cc5243e8e5e439f9170f830eceb6ce8.vega-embed details summary {
+  #altair-viz-a7f3ffc8d1a9401a977c33ddcdd20ae6.vega-embed details,
+  #altair-viz-a7f3ffc8d1a9401a977c33ddcdd20ae6.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-0cc5243e8e5e439f9170f830eceb6ce8"></div>
+<div id="altair-viz-a7f3ffc8d1a9401a977c33ddcdd20ae6"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-0cc5243e8e5e439f9170f830eceb6ce8") {
-      outputDiv = document.getElementById("altair-viz-0cc5243e8e5e439f9170f830eceb6ce8");
+    if (outputDiv.id !== "altair-viz-a7f3ffc8d1a9401a977c33ddcdd20ae6") {
+      outputDiv = document.getElementById("altair-viz-a7f3ffc8d1a9401a977c33ddcdd20ae6");
     }
 
     const paths = {
@@ -722,7 +722,7 @@
 </section>
 <section id="adding-sliders-allows-us-to-highlight-points-based-on-quantitative-value-comparisons" class="slide level2">
 <h2>Adding sliders allows us to highlight points based on quantitative value comparisons</h2>
-<div id="b5d18723" class="cell" data-execution_count="7">
+<div id="04863158" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>slider <span class="op">=</span> alt.binding_range(name<span class="op">=</span><span class="st">'Tomatometer '</span>)</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>select_rating <span class="op">=</span> alt.selection_point(</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>    fields<span class="op">=</span>[<span class="st">'Rotten_Tomatoes_Rating'</span>],</span>
@@ -734,23 +734,23 @@
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-d72c0b84aedc4a3c83c00fe9903e5f47.vega-embed {
+  #altair-viz-7da897b47cb742b593a155546c246b69.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d72c0b84aedc4a3c83c00fe9903e5f47.vega-embed details,
-  #altair-viz-d72c0b84aedc4a3c83c00fe9903e5f47.vega-embed details summary {
+  #altair-viz-7da897b47cb742b593a155546c246b69.vega-embed details,
+  #altair-viz-7da897b47cb742b593a155546c246b69.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d72c0b84aedc4a3c83c00fe9903e5f47"></div>
+<div id="altair-viz-7da897b47cb742b593a155546c246b69"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d72c0b84aedc4a3c83c00fe9903e5f47") {
-      outputDiv = document.getElementById("altair-viz-d72c0b84aedc4a3c83c00fe9903e5f47");
+    if (outputDiv.id !== "altair-viz-7da897b47cb742b593a155546c246b69") {
+      outputDiv = document.getElementById("altair-viz-7da897b47cb742b593a155546c246b69");
     }
 
     const paths = {
@@ -821,7 +821,7 @@
 </section>
 <section id="highlighting-points-smaller-or-bigger-than-a-slider-value" class="slide level2">
 <h2>Highlighting points smaller or bigger than a slider value</h2>
-<div id="d84a8465" class="cell" data-execution_count="8">
+<div id="05b27171" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>points.encode(</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span>alt.condition(</span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>        alt.datum.Rotten_Tomatoes_Rating <span class="op">&lt;</span> select_rating.Rotten_Tomatoes_Rating,</span>
@@ -830,23 +830,23 @@
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-c22b39cb29e645518f4b9f51350cd699.vega-embed {
+  #altair-viz-3ed0283d5eb24c4cb4bdd45cd603b416.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-c22b39cb29e645518f4b9f51350cd699.vega-embed details,
-  #altair-viz-c22b39cb29e645518f4b9f51350cd699.vega-embed details summary {
+  #altair-viz-3ed0283d5eb24c4cb4bdd45cd603b416.vega-embed details,
+  #altair-viz-3ed0283d5eb24c4cb4bdd45cd603b416.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-c22b39cb29e645518f4b9f51350cd699"></div>
+<div id="altair-viz-3ed0283d5eb24c4cb4bdd45cd603b416"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-c22b39cb29e645518f4b9f51350cd699") {
-      outputDiv = document.getElementById("altair-viz-c22b39cb29e645518f4b9f51350cd699");
+    if (outputDiv.id !== "altair-viz-3ed0283d5eb24c4cb4bdd45cd603b416") {
+      outputDiv = document.getElementById("altair-viz-3ed0283d5eb24c4cb4bdd45cd603b416");
     }
 
     const paths = {
@@ -917,7 +917,7 @@
 </section>
 <section id="customizing-a-slider-widget" class="slide level2">
 <h2>Customizing a slider widget</h2>
-<div id="132a0652" class="cell" data-execution_count="9">
+<div id="8758f0e6" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>slider <span class="op">=</span> alt.binding_range(name<span class="op">=</span><span class="st">"IMDB rating "</span>, <span class="bu">min</span><span class="op">=</span><span class="dv">1</span>, <span class="bu">max</span><span class="op">=</span><span class="dv">10</span>, step<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>select_rating <span class="op">=</span> alt.selection_point(fields<span class="op">=</span>[<span class="st">"IMDB_Rating"</span>], bind<span class="op">=</span>slider, value<span class="op">=</span><span class="dv">4</span>)</span>
 <span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a></span>
@@ -931,23 +931,23 @@
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-0d52bfb6c3354cd0bf8af92c05802bf0.vega-embed {
+  #altair-viz-a620549f4b5f493ea636f798e6b17a0f.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-0d52bfb6c3354cd0bf8af92c05802bf0.vega-embed details,
-  #altair-viz-0d52bfb6c3354cd0bf8af92c05802bf0.vega-embed details summary {
+  #altair-viz-a620549f4b5f493ea636f798e6b17a0f.vega-embed details,
+  #altair-viz-a620549f4b5f493ea636f798e6b17a0f.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-0d52bfb6c3354cd0bf8af92c05802bf0"></div>
+<div id="altair-viz-a620549f4b5f493ea636f798e6b17a0f"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-0d52bfb6c3354cd0bf8af92c05802bf0") {
-      outputDiv = document.getElementById("altair-viz-0d52bfb6c3354cd0bf8af92c05802bf0");
+    if (outputDiv.id !== "altair-viz-a620549f4b5f493ea636f798e6b17a0f") {
+      outputDiv = document.getElementById("altair-viz-a620549f4b5f493ea636f798e6b17a0f");
     }
 
     const paths = {
@@ -1019,7 +1019,7 @@
 </section>
 <section id="it-is-more-useful-to-bind-a-slider-to-a-dataframe-column-not-displayed-on-the-chart-axes" class="slide level2">
 <h2>It is more useful to bind a slider to a dataframe column not displayed on the chart axes</h2>
-<div id="b692fcef" class="cell" data-execution_count="10">
+<div id="c5780c24" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a>slider <span class="op">=</span> alt.binding_range(name<span class="op">=</span><span class="st">'Worldwide Gross '</span>, <span class="bu">max</span><span class="op">=</span><span class="dv">100_000_000</span>, step<span class="op">=</span><span class="dv">1_000_000</span>)</span>
 <span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a>select_rating <span class="op">=</span> alt.selection_point(fields<span class="op">=</span>[<span class="st">'Worldwide_Gross'</span>], bind<span class="op">=</span>slider)</span>
 <span id="cb9-3"><a aria-hidden="true" tabindex="-1"></a></span>
@@ -1031,23 +1031,23 @@
 <div class="cell-output cell-output-display" data-execution_count="10">
 
 <style>
-  #altair-viz-cc11163bd1724d5295f8ef7ae808e812.vega-embed {
+  #altair-viz-602f4265df8944769d7171c7fe8761ff.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-cc11163bd1724d5295f8ef7ae808e812.vega-embed details,
-  #altair-viz-cc11163bd1724d5295f8ef7ae808e812.vega-embed details summary {
+  #altair-viz-602f4265df8944769d7171c7fe8761ff.vega-embed details,
+  #altair-viz-602f4265df8944769d7171c7fe8761ff.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-cc11163bd1724d5295f8ef7ae808e812"></div>
+<div id="altair-viz-602f4265df8944769d7171c7fe8761ff"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-cc11163bd1724d5295f8ef7ae808e812") {
-      outputDiv = document.getElementById("altair-viz-cc11163bd1724d5295f8ef7ae808e812");
+    if (outputDiv.id !== "altair-viz-602f4265df8944769d7171c7fe8761ff") {
+      outputDiv = document.getElementById("altair-viz-602f4265df8944769d7171c7fe8761ff");
     }
 
     const paths = {
@@ -1118,7 +1118,7 @@
 </section>
 <section id="sliders-only-work-with-numerical-data" class="slide level2">
 <h2>Sliders only work with numerical data</h2>
-<div id="4e15a8e4" class="cell" data-execution_count="11">
+<div id="ef651813" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a>slider <span class="op">=</span> alt.binding_range(name<span class="op">=</span><span class="st">'Year'</span>)</span>
 <span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a>select_rating <span class="op">=</span> alt.selection_point(fields<span class="op">=</span>[<span class="st">'Release_Year'</span>], bind<span class="op">=</span>slider)</span>
 <span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a></span>
@@ -1128,23 +1128,23 @@
 <div class="cell-output cell-output-display" data-execution_count="11">
 
 <style>
-  #altair-viz-5b177825f5e6482ebb4b2f9d2fb9501c.vega-embed {
+  #altair-viz-65e57ab03879473b8b188691606c1e37.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-5b177825f5e6482ebb4b2f9d2fb9501c.vega-embed details,
-  #altair-viz-5b177825f5e6482ebb4b2f9d2fb9501c.vega-embed details summary {
+  #altair-viz-65e57ab03879473b8b188691606c1e37.vega-embed details,
+  #altair-viz-65e57ab03879473b8b188691606c1e37.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-5b177825f5e6482ebb4b2f9d2fb9501c"></div>
+<div id="altair-viz-65e57ab03879473b8b188691606c1e37"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-5b177825f5e6482ebb4b2f9d2fb9501c") {
-      outputDiv = document.getElementById("altair-viz-5b177825f5e6482ebb4b2f9d2fb9501c");
+    if (outputDiv.id !== "altair-viz-65e57ab03879473b8b188691606c1e37") {
+      outputDiv = document.getElementById("altair-viz-65e57ab03879473b8b188691606c1e37");
     }
 
     const paths = {
@@ -1214,7 +1214,7 @@
 </section>
 <section id="driving-range-selections-from-another-plot-is-more-effective" class="slide level2">
 <h2>Driving range selections from another plot is more effective</h2>
-<div id="b4286294" class="cell" data-execution_count="12">
+<div id="469fbee1" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a>select_year <span class="op">=</span> alt.selection_interval()</span>
 <span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a>bar_slider <span class="op">=</span> (alt.Chart(movies).mark_bar().encode(</span>
 <span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Release_Year'</span>, title<span class="op">=</span><span class="st">'Release Year'</span>),</span>
@@ -1226,23 +1226,23 @@
 <div class="cell-output cell-output-display" data-execution_count="12">
 
 <style>
-  #altair-viz-ec63c1dbeab643de81e30e3b06c3da73.vega-embed {
+  #altair-viz-d3010f9c9e59460795fc80a89f7c434d.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-ec63c1dbeab643de81e30e3b06c3da73.vega-embed details,
-  #altair-viz-ec63c1dbeab643de81e30e3b06c3da73.vega-embed details summary {
+  #altair-viz-d3010f9c9e59460795fc80a89f7c434d.vega-embed details,
+  #altair-viz-d3010f9c9e59460795fc80a89f7c434d.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-ec63c1dbeab643de81e30e3b06c3da73"></div>
+<div id="altair-viz-d3010f9c9e59460795fc80a89f7c434d"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-ec63c1dbeab643de81e30e3b06c3da73") {
-      outputDiv = document.getElementById("altair-viz-ec63c1dbeab643de81e30e3b06c3da73");
+    if (outputDiv.id !== "altair-viz-d3010f9c9e59460795fc80a89f7c434d") {
+      outputDiv = document.getElementById("altair-viz-d3010f9c9e59460795fc80a89f7c434d");
     }
 
     const paths = {
@@ -1314,7 +1314,7 @@
 </section>
 <section id="interval-selection-can-also-be-used-to-create-a-minimap-for-chart-navigation" class="slide level2">
 <h2>Interval selection can also be used to create a “minimap” for chart navigation</h2>
-<div id="283add3a" class="cell" data-execution_count="13">
+<div id="b36aaea2" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a>movies_1995_2010 <span class="op">=</span> movies.loc[movies[<span class="st">'Release_Year'</span>].between(<span class="st">'1995'</span>, <span class="st">'2010'</span>)]</span>
 <span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> alt.Chart(movies_1995_2010).mark_area().encode(</span>
 <span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Release_Year'</span>, title<span class="op">=</span><span class="va">None</span>),</span>
@@ -1327,23 +1327,23 @@
 <div class="cell-output cell-output-display" data-execution_count="13">
 
 <style>
-  #altair-viz-8e28e19c5af8458d97b70cfaffe9c9e1.vega-embed {
+  #altair-viz-b838c13d70ae490a984eefece5978d26.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-8e28e19c5af8458d97b70cfaffe9c9e1.vega-embed details,
-  #altair-viz-8e28e19c5af8458d97b70cfaffe9c9e1.vega-embed details summary {
+  #altair-viz-b838c13d70ae490a984eefece5978d26.vega-embed details,
+  #altair-viz-b838c13d70ae490a984eefece5978d26.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-8e28e19c5af8458d97b70cfaffe9c9e1"></div>
+<div id="altair-viz-b838c13d70ae490a984eefece5978d26"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-8e28e19c5af8458d97b70cfaffe9c9e1") {
-      outputDiv = document.getElementById("altair-viz-8e28e19c5af8458d97b70cfaffe9c9e1");
+    if (outputDiv.id !== "altair-viz-b838c13d70ae490a984eefece5978d26") {
+      outputDiv = document.getElementById("altair-viz-b838c13d70ae490a984eefece5978d26");
     }
 
     const paths = {
