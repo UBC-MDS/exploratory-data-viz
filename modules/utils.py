@@ -15,9 +15,9 @@ def increase_chart_font_size() -> alt.theme.ThemeConfig:
     return {
     'config': {
         'view': {'continuousWidth': 300, 'continuousHeight': 300},
-        'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 12},
-        'axis': {'titleFontSize': 14, 'labelFontSize': 12},
-        'header': {'titleFontSize': 16, 'labelFontSize': 14}
+        'legend': {'titleFontSize': 13, 'labelFontSize': 12},
+        'axis': {'titleFontSize': 13, 'labelFontSize': 12},
+        'header': {'titleFontSize': 15, 'labelFontSize': 13}
         }
     }
 
