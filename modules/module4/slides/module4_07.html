@@ -202,7 +202,7 @@
 </section>
 <section id="a-statistical-summary-is-useful-to-complement-visualizations" class="slide level2">
 <h2>A statistical summary is useful to complement visualizations</h2>
-<div id="d617e135" class="cell" data-execution_count="2">
+<div id="892d06ee" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>movies_extended <span class="op">=</span> pd.read_csv(<span class="st">"../../data/movies-extended-eda.csv"</span>)</span>
@@ -278,7 +278,7 @@
 </section>
 <section id="visualizing-the-counts-of-all-categorical-columns-helps-us-understand-the-data" class="slide level2">
 <h2>Visualizing the counts of all categorical columns helps us understand the data</h2>
-<div id="41a8b62a" class="cell" data-execution_count="3">
+<div id="c314b244" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>categorical_columns <span class="op">=</span> movies_extended.select_dtypes(<span class="st">'object'</span>).columns.tolist()</span>
@@ -291,23 +291,23 @@
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-983d16341a63459b9c452dc2762aca2a.vega-embed {
+  #altair-viz-3b13ea020648443eb06ae72c8ace01cc.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-983d16341a63459b9c452dc2762aca2a.vega-embed details,
-  #altair-viz-983d16341a63459b9c452dc2762aca2a.vega-embed details summary {
+  #altair-viz-3b13ea020648443eb06ae72c8ace01cc.vega-embed details,
+  #altair-viz-3b13ea020648443eb06ae72c8ace01cc.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-983d16341a63459b9c452dc2762aca2a"></div>
+<div id="altair-viz-3b13ea020648443eb06ae72c8ace01cc"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-983d16341a63459b9c452dc2762aca2a") {
-      outputDiv = document.getElementById("altair-viz-983d16341a63459b9c452dc2762aca2a");
+    if (outputDiv.id !== "altair-viz-3b13ea020648443eb06ae72c8ace01cc") {
+      outputDiv = document.getElementById("altair-viz-3b13ea020648443eb06ae72c8ace01cc");
     }
 
     const paths = {
@@ -379,7 +379,7 @@
 </section>
 <section id="repeat-can-also-be-used-to-explore-the-counts-of-combinations-of-categorical-columns" class="slide level2">
 <h2>Repeat can also be used to explore the counts of combinations of categorical columns</h2>
-<div id="f2955172" class="cell" data-execution_count="4">
+<div id="29148ee8" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(movies_extended).mark_circle().encode(</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(alt.repeat(<span class="st">'column'</span>), <span class="bu">type</span><span class="op">=</span><span class="st">'nominal'</span>, sort<span class="op">=</span><span class="st">'-size'</span>, title<span class="op">=</span><span class="va">None</span>),</span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(alt.repeat(<span class="st">'row'</span>), <span class="bu">type</span><span class="op">=</span><span class="st">'nominal'</span>, sort<span class="op">=</span><span class="st">'size'</span>, title<span class="op">=</span><span class="va">None</span>),</span>
@@ -390,23 +390,23 @@
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-0305f5cf34fc4b11b38db22d3f3aba38.vega-embed {
+  #altair-viz-b97651598ae048f0bf280b52c123ac70.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-0305f5cf34fc4b11b38db22d3f3aba38.vega-embed details,
-  #altair-viz-0305f5cf34fc4b11b38db22d3f3aba38.vega-embed details summary {
+  #altair-viz-b97651598ae048f0bf280b52c123ac70.vega-embed details,
+  #altair-viz-b97651598ae048f0bf280b52c123ac70.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-0305f5cf34fc4b11b38db22d3f3aba38"></div>
+<div id="altair-viz-b97651598ae048f0bf280b52c123ac70"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-0305f5cf34fc4b11b38db22d3f3aba38") {
-      outputDiv = document.getElementById("altair-viz-0305f5cf34fc4b11b38db22d3f3aba38");
+    if (outputDiv.id !== "altair-viz-b97651598ae048f0bf280b52c123ac70") {
+      outputDiv = document.getElementById("altair-viz-b97651598ae048f0bf280b52c123ac70");
     }
 
     const paths = {
@@ -477,7 +477,7 @@
 </section>
 <section id="altairs-grammar-allows-us-to-repeat-facetted-charts" class="slide level2">
 <h2>Altair’s grammar allows us to repeat facetted charts</h2>
-<div id="5ad92bbf" class="cell" data-execution_count="5">
+<div id="77015856" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>movies_extended[<span class="st">'Top Rated'</span>] <span class="op">=</span> movies_extended[<span class="st">'IMDB Rating'</span>] <span class="op">&gt;</span> <span class="dv">8</span></span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(movies_extended[movies_extended[<span class="st">'MPAA Rating'</span>].isin([<span class="st">"G"</span>, <span class="st">"R"</span>])])</span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a> .mark_boxplot().encode(</span>
@@ -488,23 +488,23 @@
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-c20b92cc0eb24d0686e6eaf7c13143d7.vega-embed {
+  #altair-viz-a0f1205611f0426c854b90f72035fb53.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-c20b92cc0eb24d0686e6eaf7c13143d7.vega-embed details,
-  #altair-viz-c20b92cc0eb24d0686e6eaf7c13143d7.vega-embed details summary {
+  #altair-viz-a0f1205611f0426c854b90f72035fb53.vega-embed details,
+  #altair-viz-a0f1205611f0426c854b90f72035fb53.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-c20b92cc0eb24d0686e6eaf7c13143d7"></div>
+<div id="altair-viz-a0f1205611f0426c854b90f72035fb53"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-c20b92cc0eb24d0686e6eaf7c13143d7") {
-      outputDiv = document.getElementById("altair-viz-c20b92cc0eb24d0686e6eaf7c13143d7");
+    if (outputDiv.id !== "altair-viz-a0f1205611f0426c854b90f72035fb53") {
+      outputDiv = document.getElementById("altair-viz-a0f1205611f0426c854b90f72035fb53");
     }
 
     const paths = {

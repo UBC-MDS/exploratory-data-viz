@@ -9,33 +9,15 @@ pd.set_option("display.max_columns", 8)
 pd.set_option("display.max_rows", 6)
 
 
-def increase_font_size():
+@alt.theme.register("increase_font_size", enable=True)
+def increase_chart_font_size() -> alt.theme.ThemeConfig:
     return {
-        "config": {
-            "view": {"continuousWidth": 400, "continuousHeight": 300},
-            "legend": {"symbolSize": 14, "titleFontSize": 14, "labelFontSize": 14},
-            "axis": {"titleFontSize": 14, "labelFontSize": 12},
-            "header": {"titleFontSize": 16, "labelFontSize": 14},
-            "encoding": {"x": {"scale": {"zero": False}}},
-        }
-    }
-
-
-alt.themes.register("increase_font_size", increase_font_size)
-alt.themes.enable("increase_font_size")
-
-
-# def increase_chart_font_size():
-#     import altair as alt
-#     bigger_font = {
-#         'config': {
-#             'view': {'continuousWidth': 400, 'continuousHeight': 300},
-#             'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14},
-#             'axis': {'titleFontSize': 14, 'labelFontSize': 12},
-#             'header': {'titleFontSize': 16, 'labelFontSize': 14},
-#             'encoding': {'x': {'scale': {'zero': False}}}}}
-#     alt.themes.register('bigger_font', bigger_font)
-#     alt.themes.enable('bigger_font')
+    'config': {
+        'view': {'continuousWidth': 400, 'continuousHeight': 300},
+        'legend': {'symbolSize': 14, 'titleFontSize': 14, 'labelFontSize': 14},
+        'axis': {'titleFontSize': 14, 'labelFontSize': 12},
+        'header': {'titleFontSize': 16, 'labelFontSize': 14},
+        'encoding': {'x': {'scale': {'zero': False}}}}}
 
 
 def assert_chart_equal(expected, actual):
