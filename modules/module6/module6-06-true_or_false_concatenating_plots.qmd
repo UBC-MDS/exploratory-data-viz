@@ -130,7 +130,7 @@ mass_density_plot = alt.Chart(penguins_df).transform_density(
      steps=100
      ).mark_area(opacity=0.5).encode(
           alt.X('body_mass_g', title='Mass (grams)'),
-          alt.Y('density:Q', title='Density'),
+          alt.Y('density:Q', title='Density').stack(False),
           alt.Color('species', title='Species', legend=alt.Legend(orient="right"))
           ).properties(width=400, height=100)
 
@@ -181,7 +181,7 @@ mass_density_plot = alt.Chart(penguins_df).transform_density(
      steps=100
      ).mark_area(opacity=0.5).encode(
           alt.X('body_mass_g', title='Mass (grams)'),
-          alt.Y('density:Q', title='Density'),
+          alt.Y('density:Q', title='Density').stack(False),
           alt.Color('species', title='Species', legend=alt.Legend(orient="right"))
           ).properties(width=400, height=100)
 
