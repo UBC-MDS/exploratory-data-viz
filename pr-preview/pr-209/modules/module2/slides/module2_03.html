@@ -346,7 +346,7 @@ Mean number of years in primary, secondary, and tertiary school for 25-36 years 
 </section>
 <section id="read-in-and-glimpse-at-the-data-with-pandas" class="slide level2">
 <h2>Read in and glimpse at the data with pandas</h2>
-<div id="94784165" class="cell" data-execution_count="2">
+<div id="3cd900c7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>gm <span class="op">=</span> pd.read_csv(<span class="st">"data/world-data-gapminder.csv"</span>, parse_dates<span class="op">=</span>[<span class="st">"year"</span>])</span>
@@ -491,7 +491,7 @@ Mean number of years in primary, secondary, and tertiary school for 25-36 years 
 </section>
 <section id="info-shows-column-data-types-and-missing-values" class="slide level2">
 <h2><em>.info()</em> shows column data types and missing values</h2>
-<div id="084d0cfc" class="cell" data-execution_count="3">
+<div id="f50f6ca5" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>gm.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -540,7 +540,7 @@ memory usage: 4.2+ MB</code></pre>
 </section>
 <section id="working-with-large-data-in-altair-via-urls" class="slide level2">
 <h2>Working with large data in Altair via URLs</h2>
-<div id="824c3158" class="cell" data-execution_count="4">
+<div id="ca640e42" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    alt.Chart(<span class="st">"https://website.com/data.csv"</span>)</span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>    .mark_line()</span>
@@ -702,7 +702,7 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="a-line-chart-is-a-good-choice-for-trends-over-time" class="slide level2">
 <h2>A line chart is a good choice for trends over time</h2>
-<div id="9f5b61df" class="cell" data-execution_count="5">
+<div id="10e2b627" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>gm_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/UBC-MDS/exploratory-data-viz/refs/heads/main/modules/data/world-data-gapminder.csv"</span></span>
@@ -714,23 +714,23 @@ date (August 13 2020), time (12:00 pm)
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-07946b36e8d847daa2e0ae618b41a030.vega-embed {
+  #altair-viz-08897111b46f422fbe7989ca504f19af.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-07946b36e8d847daa2e0ae618b41a030.vega-embed details,
-  #altair-viz-07946b36e8d847daa2e0ae618b41a030.vega-embed details summary {
+  #altair-viz-08897111b46f422fbe7989ca504f19af.vega-embed details,
+  #altair-viz-08897111b46f422fbe7989ca504f19af.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-07946b36e8d847daa2e0ae618b41a030"></div>
+<div id="altair-viz-08897111b46f422fbe7989ca504f19af"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-07946b36e8d847daa2e0ae618b41a030") {
-      outputDiv = document.getElementById("altair-viz-07946b36e8d847daa2e0ae618b41a030");
+    if (outputDiv.id !== "altair-viz-08897111b46f422fbe7989ca504f19af") {
+      outputDiv = document.getElementById("altair-viz-08897111b46f422fbe7989ca504f19af");
     }
 
     const paths = {
@@ -801,30 +801,30 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="the-.sum-aggregate-method-will-show-us-the-trend-of-the-entire-world" class="slide level2">
 <h2>The <em>.sum()</em> aggregate method will show us the trend of the entire world</h2>
-<div id="50213efd" class="cell" data-execution_count="6">
+<div id="7e2e582c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_line().encode(</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'year:T'</span>,</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'sum(population):Q'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-34bfa48f320d486f91dec4ef7721e031.vega-embed {
+  #altair-viz-cc741ca51f8247db8f2211ac81606d52.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-34bfa48f320d486f91dec4ef7721e031.vega-embed details,
-  #altair-viz-34bfa48f320d486f91dec4ef7721e031.vega-embed details summary {
+  #altair-viz-cc741ca51f8247db8f2211ac81606d52.vega-embed details,
+  #altair-viz-cc741ca51f8247db8f2211ac81606d52.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-34bfa48f320d486f91dec4ef7721e031"></div>
+<div id="altair-viz-cc741ca51f8247db8f2211ac81606d52"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-34bfa48f320d486f91dec4ef7721e031") {
-      outputDiv = document.getElementById("altair-viz-34bfa48f320d486f91dec4ef7721e031");
+    if (outputDiv.id !== "altair-viz-cc741ca51f8247db8f2211ac81606d52") {
+      outputDiv = document.getElementById("altair-viz-cc741ca51f8247db8f2211ac81606d52");
     }
 
     const paths = {
@@ -899,30 +899,30 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="changing-axes-titles-clarifies-makes-our-plot-easier-to-interpret" class="slide level2">
 <h2>Changing axes titles clarifies makes our plot easier to interpret</h2>
-<div id="b9a5503d" class="cell" data-execution_count="7">
+<div id="4c29d653" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_line().encode(</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'year:T'</span>,</span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">'sum(population):Q'</span>, title<span class="op">=</span><span class="st">'World population'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-239ecae77dd3488dad6a173ef10806bd.vega-embed {
+  #altair-viz-bdb2538594f64372a90cc6c125c586dd.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-239ecae77dd3488dad6a173ef10806bd.vega-embed details,
-  #altair-viz-239ecae77dd3488dad6a173ef10806bd.vega-embed details summary {
+  #altair-viz-bdb2538594f64372a90cc6c125c586dd.vega-embed details,
+  #altair-viz-bdb2538594f64372a90cc6c125c586dd.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-239ecae77dd3488dad6a173ef10806bd"></div>
+<div id="altair-viz-bdb2538594f64372a90cc6c125c586dd"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-239ecae77dd3488dad6a173ef10806bd") {
-      outputDiv = document.getElementById("altair-viz-239ecae77dd3488dad6a173ef10806bd");
+    if (outputDiv.id !== "altair-viz-bdb2538594f64372a90cc6c125c586dd") {
+      outputDiv = document.getElementById("altair-viz-bdb2538594f64372a90cc6c125c586dd");
     }
 
     const paths = {
@@ -994,30 +994,30 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="area-charts-are-also-effective-at-visualizing-trends-over-time" class="slide level2">
 <h2>Area charts are also effective at visualizing trends over time</h2>
-<div id="09bf9f08" class="cell" data-execution_count="8">
+<div id="f618c847" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_area().encode(</span>
 <span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:T'</span>),</span>
 <span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'sum(population):Q'</span>, title<span class="op">=</span><span class="st">'World population'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-863bde0037f5465c8799bb8b7771eee7.vega-embed {
+  #altair-viz-6542895df3964694bbe0c1414a31a4c0.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-863bde0037f5465c8799bb8b7771eee7.vega-embed details,
-  #altair-viz-863bde0037f5465c8799bb8b7771eee7.vega-embed details summary {
+  #altair-viz-6542895df3964694bbe0c1414a31a4c0.vega-embed details,
+  #altair-viz-6542895df3964694bbe0c1414a31a4c0.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-863bde0037f5465c8799bb8b7771eee7"></div>
+<div id="altair-viz-6542895df3964694bbe0c1414a31a4c0"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-863bde0037f5465c8799bb8b7771eee7") {
-      outputDiv = document.getElementById("altair-viz-863bde0037f5465c8799bb8b7771eee7");
+    if (outputDiv.id !== "altair-viz-6542895df3964694bbe0c1414a31a4c0") {
+      outputDiv = document.getElementById("altair-viz-6542895df3964694bbe0c1414a31a4c0");
     }
 
     const paths = {
@@ -1088,7 +1088,7 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="area-charts-are-preferred-when-the-total-of-the-groups-is-the-most-important" class="slide level2">
 <h2>Area charts are preferred when the total of the groups is the most important</h2>
-<div id="aa4a8b51" class="cell" data-execution_count="9">
+<div id="900d8232" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_area().encode(</span>
 <span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:T'</span>),</span>
 <span id="cb9-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'sum(population):Q'</span>, title<span class="op">=</span><span class="st">'World population'</span>),</span>
@@ -1096,23 +1096,23 @@ date (August 13 2020), time (12:00 pm)
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-12911a9fc5b74894818011eeb163b166.vega-embed {
+  #altair-viz-59df3809347742d8a86087d25c5752f6.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-12911a9fc5b74894818011eeb163b166.vega-embed details,
-  #altair-viz-12911a9fc5b74894818011eeb163b166.vega-embed details summary {
+  #altair-viz-59df3809347742d8a86087d25c5752f6.vega-embed details,
+  #altair-viz-59df3809347742d8a86087d25c5752f6.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-12911a9fc5b74894818011eeb163b166"></div>
+<div id="altair-viz-59df3809347742d8a86087d25c5752f6"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-12911a9fc5b74894818011eeb163b166") {
-      outputDiv = document.getElementById("altair-viz-12911a9fc5b74894818011eeb163b166");
+    if (outputDiv.id !== "altair-viz-59df3809347742d8a86087d25c5752f6") {
+      outputDiv = document.getElementById("altair-viz-59df3809347742d8a86087d25c5752f6");
     }
 
     const paths = {
@@ -1182,7 +1182,7 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="it-is-helpful-to-clarify-that-the-areas-are-stacked-on-top-of-each-other" class="slide level2">
 <h2>It is helpful to clarify that the areas are stacked on top of each other</h2>
-<div id="801bea0a" class="cell" data-execution_count="10">
+<div id="b06e9b4f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_area().encode(</span>
 <span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:T'</span>),</span>
 <span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'sum(population):Q'</span>, title<span class="op">=</span><span class="st">'Cumulative population of stacked regions'</span>),</span>
@@ -1190,23 +1190,23 @@ date (August 13 2020), time (12:00 pm)
 <div class="cell-output cell-output-display" data-execution_count="10">
 
 <style>
-  #altair-viz-7933c56514c94521ac3d3d3018c9d7d7.vega-embed {
+  #altair-viz-364ad57509e04bf78c6e479f137661fa.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-7933c56514c94521ac3d3d3018c9d7d7.vega-embed details,
-  #altair-viz-7933c56514c94521ac3d3d3018c9d7d7.vega-embed details summary {
+  #altair-viz-364ad57509e04bf78c6e479f137661fa.vega-embed details,
+  #altair-viz-364ad57509e04bf78c6e479f137661fa.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-7933c56514c94521ac3d3d3018c9d7d7"></div>
+<div id="altair-viz-364ad57509e04bf78c6e479f137661fa"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-7933c56514c94521ac3d3d3018c9d7d7") {
-      outputDiv = document.getElementById("altair-viz-7933c56514c94521ac3d3d3018c9d7d7");
+    if (outputDiv.id !== "altair-viz-364ad57509e04bf78c6e479f137661fa") {
+      outputDiv = document.getElementById("altair-viz-364ad57509e04bf78c6e479f137661fa");
     }
 
     const paths = {
@@ -1277,7 +1277,7 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="line-charts-are-preferred-when-the-individual-groups-are-the-most-important" class="slide level2">
 <h2>Line charts are preferred when the individual groups are the most important</h2>
-<div id="08904bf8" class="cell" data-execution_count="11">
+<div id="5501108a" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_line().encode(</span>
 <span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:T'</span>),</span>
 <span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'sum(population):Q'</span>, title<span class="op">=</span><span class="st">'Population'</span>),</span>
@@ -1285,23 +1285,23 @@ date (August 13 2020), time (12:00 pm)
 <div class="cell-output cell-output-display" data-execution_count="11">
 
 <style>
-  #altair-viz-8527448f642641f38f00324456320ff7.vega-embed {
+  #altair-viz-f6e55603249148efade2c2445a374850.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-8527448f642641f38f00324456320ff7.vega-embed details,
-  #altair-viz-8527448f642641f38f00324456320ff7.vega-embed details summary {
+  #altair-viz-f6e55603249148efade2c2445a374850.vega-embed details,
+  #altair-viz-f6e55603249148efade2c2445a374850.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-8527448f642641f38f00324456320ff7"></div>
+<div id="altair-viz-f6e55603249148efade2c2445a374850"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-8527448f642641f38f00324456320ff7") {
-      outputDiv = document.getElementById("altair-viz-8527448f642641f38f00324456320ff7");
+    if (outputDiv.id !== "altair-viz-f6e55603249148efade2c2445a374850") {
+      outputDiv = document.getElementById("altair-viz-f6e55603249148efade2c2445a374850");
     }
 
     const paths = {
@@ -1372,30 +1372,30 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="when-will-the-worlds-population-stop-growing" class="slide level2">
 <h2>When will the world’s population stop growing?</h2>
-<div id="3e3cb911" class="cell" data-execution_count="12">
+<div id="c03cc033" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_area().encode(</span>
 <span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:T'</span>),</span>
 <span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'sum(population):Q'</span>, title<span class="op">=</span><span class="st">'World population'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 
 <style>
-  #altair-viz-d3ca83c698d743e0a279238476deed7a.vega-embed {
+  #altair-viz-42bd4f1512bb4ae98ab7dc5de2f95626.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d3ca83c698d743e0a279238476deed7a.vega-embed details,
-  #altair-viz-d3ca83c698d743e0a279238476deed7a.vega-embed details summary {
+  #altair-viz-42bd4f1512bb4ae98ab7dc5de2f95626.vega-embed details,
+  #altair-viz-42bd4f1512bb4ae98ab7dc5de2f95626.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d3ca83c698d743e0a279238476deed7a"></div>
+<div id="altair-viz-42bd4f1512bb4ae98ab7dc5de2f95626"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d3ca83c698d743e0a279238476deed7a") {
-      outputDiv = document.getElementById("altair-viz-d3ca83c698d743e0a279238476deed7a");
+    if (outputDiv.id !== "altair-viz-42bd4f1512bb4ae98ab7dc5de2f95626") {
+      outputDiv = document.getElementById("altair-viz-42bd4f1512bb4ae98ab7dc5de2f95626");
     }
 
     const paths = {
@@ -1465,30 +1465,30 @@ date (August 13 2020), time (12:00 pm)
 </section>
 <section id="the-world-population-is-predicted-to-stabilize-at-around-11-billion" class="slide level2">
 <h2>The world population is predicted to stabilize at around 11 billion</h2>
-<div id="5eca5293" class="cell" data-execution_count="13">
+<div id="5750a15e" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm_url).mark_area().encode(</span>
 <span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:T'</span>),</span>
 <span id="cb13-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'mean(children_per_woman):Q'</span>, title<span class="op">=</span><span class="st">'Average children per woman worldwide'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 
 <style>
-  #altair-viz-4f9c02579e82497e862af8f2f77f8f0b.vega-embed {
+  #altair-viz-41216e86eaee4b6e8cd14860fc246df7.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-4f9c02579e82497e862af8f2f77f8f0b.vega-embed details,
-  #altair-viz-4f9c02579e82497e862af8f2f77f8f0b.vega-embed details summary {
+  #altair-viz-41216e86eaee4b6e8cd14860fc246df7.vega-embed details,
+  #altair-viz-41216e86eaee4b6e8cd14860fc246df7.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-4f9c02579e82497e862af8f2f77f8f0b"></div>
+<div id="altair-viz-41216e86eaee4b6e8cd14860fc246df7"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-4f9c02579e82497e862af8f2f77f8f0b") {
-      outputDiv = document.getElementById("altair-viz-4f9c02579e82497e862af8f2f77f8f0b");
+    if (outputDiv.id !== "altair-viz-41216e86eaee4b6e8cd14860fc246df7") {
+      outputDiv = document.getElementById("altair-viz-41216e86eaee4b6e8cd14860fc246df7");
     }
 
     const paths = {
