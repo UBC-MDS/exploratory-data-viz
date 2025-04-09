@@ -202,7 +202,7 @@
 </section>
 <section id="the-movies-dataset" class="slide level2">
 <h2>The movies dataset</h2>
-<div id="49feb362" class="cell" data-execution_count="2">
+<div id="45439786" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>movies <span class="op">=</span> pd.read_csv(<span class="st">"data/movies.csv"</span>)</span>
@@ -332,7 +332,7 @@
 </section>
 <section id="visualizing-a-single-column-with-a-point-plot-along-one-axis" class="slide level2">
 <h2>Visualizing a single column with a point plot along one axis</h2>
-<div id="f1cd3c84" class="cell" data-execution_count="3">
+<div id="5ca5026b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies[:<span class="dv">5</span>]).mark_point().encode(</span>
@@ -340,23 +340,23 @@
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-19d651d39dcb4ec38cea878b77ba8dbe.vega-embed {
+  #altair-viz-12d01f4a3e5347b084910e82e656f6b3.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-19d651d39dcb4ec38cea878b77ba8dbe.vega-embed details,
-  #altair-viz-19d651d39dcb4ec38cea878b77ba8dbe.vega-embed details summary {
+  #altair-viz-12d01f4a3e5347b084910e82e656f6b3.vega-embed details,
+  #altair-viz-12d01f4a3e5347b084910e82e656f6b3.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-19d651d39dcb4ec38cea878b77ba8dbe"></div>
+<div id="altair-viz-12d01f4a3e5347b084910e82e656f6b3"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-19d651d39dcb4ec38cea878b77ba8dbe") {
-      outputDiv = document.getElementById("altair-viz-19d651d39dcb4ec38cea878b77ba8dbe");
+    if (outputDiv.id !== "altair-viz-12d01f4a3e5347b084910e82e656f6b3") {
+      outputDiv = document.getElementById("altair-viz-12d01f4a3e5347b084910e82e656f6b3");
     }
 
     const paths = {
@@ -408,7 +408,7 @@
 </script>
 </div>
 </div>
-<p><embed data-src="static/module3/charts/01/unnamed-chunk-2.html"></p>
+<p><embed data-src="../../../static/module3/charts/01/unnamed-chunk-2.html"></p>
 <aside class="notes">
 <p>Visualizing data distributions are useful in understanding the values in a dataframe column, as doing this allows us to quickly and easily see both the range and frequency of the values.</p>
 <p>One of the simplest visualizations to understand a distribution of a single dataframe column is to plot each individual observation as a point.</p>
@@ -428,29 +428,29 @@
 </section>
 <section id="single-axis-plots-can-become-saturated-when-there-is-a-lot-of-data-to-plot" class="slide level2">
 <h2>Single-axis plots can become saturated when there is a lot of data to plot</h2>
-<div id="c41b4f52" class="cell" data-execution_count="4">
+<div id="c1027305" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies[:<span class="dv">50</span>]).mark_point().encode(</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'runtime'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-1da88222a6844291b431424e351af709.vega-embed {
+  #altair-viz-cacd72bec36a4c91ae78ddeec6207c22.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-1da88222a6844291b431424e351af709.vega-embed details,
-  #altair-viz-1da88222a6844291b431424e351af709.vega-embed details summary {
+  #altair-viz-cacd72bec36a4c91ae78ddeec6207c22.vega-embed details,
+  #altair-viz-cacd72bec36a4c91ae78ddeec6207c22.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-1da88222a6844291b431424e351af709"></div>
+<div id="altair-viz-cacd72bec36a4c91ae78ddeec6207c22"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-1da88222a6844291b431424e351af709") {
-      outputDiv = document.getElementById("altair-viz-1da88222a6844291b431424e351af709");
+    if (outputDiv.id !== "altair-viz-cacd72bec36a4c91ae78ddeec6207c22") {
+      outputDiv = document.getElementById("altair-viz-cacd72bec36a4c91ae78ddeec6207c22");
     }
 
     const paths = {
@@ -502,7 +502,7 @@
 </script>
 </div>
 </div>
-<p><embed data-src="static/module3/charts/01/unnamed-chunk-3.html"></p>
+<p><embed data-src="../../../static/module3/charts/01/unnamed-chunk-3.html"></p>
 <aside class="notes">
 <p>When there are more observations, it becomes difficult to see how many there are at different locations along the axis, since the circular marks are overlapping with each other.</p>
 <p>When it becomes hard to tell individual observations apart, we say that a plot becomes “saturated” or “overplotted”. We will talk more about this concept in the next module.</p>
@@ -520,29 +520,29 @@
 </section>
 <section id="thinner-marks-avoid-saturation" class="slide level2">
 <h2>Thinner marks avoid saturation</h2>
-<div id="e7a186dd" class="cell" data-execution_count="5">
+<div id="257dd0ac" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies[:<span class="dv">50</span>]).mark_tick().encode(</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'runtime'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-99dbd41861114077a3096495515a2c37.vega-embed {
+  #altair-viz-23f207704f394a94b67b2fb52f5bdf23.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-99dbd41861114077a3096495515a2c37.vega-embed details,
-  #altair-viz-99dbd41861114077a3096495515a2c37.vega-embed details summary {
+  #altair-viz-23f207704f394a94b67b2fb52f5bdf23.vega-embed details,
+  #altair-viz-23f207704f394a94b67b2fb52f5bdf23.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-99dbd41861114077a3096495515a2c37"></div>
+<div id="altair-viz-23f207704f394a94b67b2fb52f5bdf23"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-99dbd41861114077a3096495515a2c37") {
-      outputDiv = document.getElementById("altair-viz-99dbd41861114077a3096495515a2c37");
+    if (outputDiv.id !== "altair-viz-23f207704f394a94b67b2fb52f5bdf23") {
+      outputDiv = document.getElementById("altair-viz-23f207704f394a94b67b2fb52f5bdf23");
     }
 
     const paths = {
@@ -594,7 +594,7 @@
 </script>
 </div>
 </div>
-<p><embed data-src="static/module3/charts/01/unnamed-chunk-4.html"></p>
+<p><embed data-src="../../../static/module3/charts/01/unnamed-chunk-4.html"></p>
 <aside class="notes">
 <p>It is often easier to separate individual observations when they are represented as thin tick marks instead of the circles in the previous slide.</p>
 <p>The disadvantage of this plot type is that it can be a bit harder to see individual observations. However, when we are visualization many marks, we are often more interested in how the data is distributed in general, rather than looking at individual points.</p>
@@ -614,29 +614,29 @@
 </section>
 <section id="thinner-marks-also-saturate-for-large-data-sets" class="slide level2">
 <h2>Thinner marks also saturate for large data sets</h2>
-<div id="ad9559b5" class="cell" data-execution_count="6">
+<div id="4dd85aa2" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies).mark_tick().encode(</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'runtime'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-b9696d00ddcd439089c1ad42ebb62b9f.vega-embed {
+  #altair-viz-4633d2f2805c448d8adf58fe570f80cb.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-b9696d00ddcd439089c1ad42ebb62b9f.vega-embed details,
-  #altair-viz-b9696d00ddcd439089c1ad42ebb62b9f.vega-embed details summary {
+  #altair-viz-4633d2f2805c448d8adf58fe570f80cb.vega-embed details,
+  #altair-viz-4633d2f2805c448d8adf58fe570f80cb.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-b9696d00ddcd439089c1ad42ebb62b9f"></div>
+<div id="altair-viz-4633d2f2805c448d8adf58fe570f80cb"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-b9696d00ddcd439089c1ad42ebb62b9f") {
-      outputDiv = document.getElementById("altair-viz-b9696d00ddcd439089c1ad42ebb62b9f");
+    if (outputDiv.id !== "altair-viz-4633d2f2805c448d8adf58fe570f80cb") {
+      outputDiv = document.getElementById("altair-viz-4633d2f2805c448d8adf58fe570f80cb");
     }
 
     const paths = {
@@ -688,7 +688,7 @@
 </script>
 </div>
 </div>
-<p><embed data-src="static/module3/charts/01/unnamed-chunk-5.html"></p>
+<p><embed data-src="../../../static/module3/charts/01/unnamed-chunk-5.html"></p>
 <aside class="notes">
 <p>When we increase the number of observations even further it becomes difficult to tell exactly how the data distribution looks, even with these thin marks.</p>
 <p>Here we require another strategy to visualize our data.</p>
@@ -706,30 +706,30 @@
 </section>
 <section id="using-histograms-to-visualize-distributions-avoids-saturation-issues" class="slide level2">
 <h2>Using histograms to visualize distributions avoids saturation issues</h2>
-<div id="76336193" class="cell" data-execution_count="7">
+<div id="7e8413f8" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies).mark_bar().encode(</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'runtime'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'count()'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-641038714d254ad4b879f9c1b88b30d8.vega-embed {
+  #altair-viz-ca76597f0f6b4f3fada412fe9ef04cf4.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-641038714d254ad4b879f9c1b88b30d8.vega-embed details,
-  #altair-viz-641038714d254ad4b879f9c1b88b30d8.vega-embed details summary {
+  #altair-viz-ca76597f0f6b4f3fada412fe9ef04cf4.vega-embed details,
+  #altair-viz-ca76597f0f6b4f3fada412fe9ef04cf4.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-641038714d254ad4b879f9c1b88b30d8"></div>
+<div id="altair-viz-ca76597f0f6b4f3fada412fe9ef04cf4"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-641038714d254ad4b879f9c1b88b30d8") {
-      outputDiv = document.getElementById("altair-viz-641038714d254ad4b879f9c1b88b30d8");
+    if (outputDiv.id !== "altair-viz-ca76597f0f6b4f3fada412fe9ef04cf4") {
+      outputDiv = document.getElementById("altair-viz-ca76597f0f6b4f3fada412fe9ef04cf4");
     }
 
     const paths = {
@@ -781,7 +781,7 @@
 </script>
 </div>
 </div>
-<p><embed data-src="static/module3/charts/01/unnamed-chunk-6.html"></p>
+<p><embed data-src="../../../static/module3/charts/01/unnamed-chunk-6.html"></p>
 <aside class="notes">
 <p>Instead of visualizing each individual observation, we can use the histograms we learned about in the last module. Histograms divide one axis into groups (or “bins”) and represent the count of observations in each group with a bar.</p>
 <p>In this plot, we can directly see that most movies are around 100 min in length because all the highest bars are around this value. We would say that this distribution has a single peak of around 100 min.</p>
@@ -802,30 +802,30 @@
 </section>
 <section id="faceting-is-effective-when-comparing-multiple-distributions" class="slide level2">
 <h2>Faceting is effective when comparing multiple distributions</h2>
-<div id="c965a0a5" class="cell" data-execution_count="8">
+<div id="111dff89" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies).mark_bar().encode(</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'runtime'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'count()'</span>).facet(<span class="st">'country'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-c18c4c2fc27146ba9119737f6c7fc612.vega-embed {
+  #altair-viz-a69c93720f1b4bd2881cb0b3edcd1e6c.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-c18c4c2fc27146ba9119737f6c7fc612.vega-embed details,
-  #altair-viz-c18c4c2fc27146ba9119737f6c7fc612.vega-embed details summary {
+  #altair-viz-a69c93720f1b4bd2881cb0b3edcd1e6c.vega-embed details,
+  #altair-viz-a69c93720f1b4bd2881cb0b3edcd1e6c.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-c18c4c2fc27146ba9119737f6c7fc612"></div>
+<div id="altair-viz-a69c93720f1b4bd2881cb0b3edcd1e6c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-c18c4c2fc27146ba9119737f6c7fc612") {
-      outputDiv = document.getElementById("altair-viz-c18c4c2fc27146ba9119737f6c7fc612");
+    if (outputDiv.id !== "altair-viz-a69c93720f1b4bd2881cb0b3edcd1e6c") {
+      outputDiv = document.getElementById("altair-viz-a69c93720f1b4bd2881cb0b3edcd1e6c");
     }
 
     const paths = {
@@ -877,7 +877,7 @@
 </script>
 </div>
 </div>
-<p><embed data-src="static/module3/charts/01/unnamed-chunk-7.html"></p>
+<p><embed data-src="../../../static/module3/charts/01/unnamed-chunk-7.html"></p>
 <aside class="notes">
 <p>Let’s start by comparing the runtimes of movies produced in different countries. This is maybe not the first categorical column that you thought of, but don’t worry, we will look at additional ones later.</p>
 <p>As we saw in the last module, faceting is a good way to compare multiple distributions and here we use it to create one histogram per production country.</p>
@@ -898,7 +898,7 @@
 </section>
 <section id="independent-y-axis-scales-let-us-study-each-distribution-in-more-detail" class="slide level2">
 <h2>Independent y-axis scales let us study each distribution in more detail</h2>
-<div id="cd676927" class="cell" data-execution_count="9">
+<div id="210144da" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(movies).mark_bar().encode(</span>
 <span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'runtime'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'count()'</span>)</span>
@@ -907,23 +907,23 @@
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-420cb105775b414a91ff495957371720.vega-embed {
+  #altair-viz-07cc60aa641940f384d6b57821557c07.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-420cb105775b414a91ff495957371720.vega-embed details,
-  #altair-viz-420cb105775b414a91ff495957371720.vega-embed details summary {
+  #altair-viz-07cc60aa641940f384d6b57821557c07.vega-embed details,
+  #altair-viz-07cc60aa641940f384d6b57821557c07.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-420cb105775b414a91ff495957371720"></div>
+<div id="altair-viz-07cc60aa641940f384d6b57821557c07"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-420cb105775b414a91ff495957371720") {
-      outputDiv = document.getElementById("altair-viz-420cb105775b414a91ff495957371720");
+    if (outputDiv.id !== "altair-viz-07cc60aa641940f384d6b57821557c07") {
+      outputDiv = document.getElementById("altair-viz-07cc60aa641940f384d6b57821557c07");
     }
 
     const paths = {
@@ -975,7 +975,7 @@
 </script>
 </div>
 </div>
-<p><embed data-src="static/module3/charts/01/unnamed-chunk-8.html"></p>
+<p><embed data-src="../../../static/module3/charts/01/unnamed-chunk-8.html"></p>
 <aside class="notes">
 <p>By default when faceting, the y-axis is the same for all the subplots. This is often the most suitable choice, because it makes it clear when the total number of observations differ between the groups.</p>
 <p>If we want to drill down and compare the distribution shape more closely we could define the y-axes to be independent for each facet, as we have done in this slide.</p>

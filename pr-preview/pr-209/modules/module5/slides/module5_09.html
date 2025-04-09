@@ -203,7 +203,7 @@
 <section id="repetition-of-hue-lightness-and-saturation" class="slide level2">
 <h2>Repetition of hue, lightness, and saturation</h2>
 
-<img data-src="static/module5/hsl-questions.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%" alt="Hsl questions"><aside class="notes">
+<img data-src="../../../static/module5/hsl-questions.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%" alt="Hsl questions"><aside class="notes">
 <p>In the last slide deck, we varied hues to represent categorical values, with a focus on the distinction between colour hues/categories. When choosing a colour scheme to represent quantitative data, we will instead focus on sequential, perceptually uniform changes in lightness.</p>
 <p>Sequential changes in lightness ensures that uniform changes in the values of the data are perceived as uniform changes in the colour space. In other words, we want it to be intuitive how the colours relate to the numerical values they represent, so that we can accurately understand how the data values vary when looking at the changing colours.</p>
 <style type="text/css">
@@ -220,7 +220,7 @@
 </section>
 <section id="lightness-is-more-effective-than-hue-to-communicate-changes-in-quantitative-data" class="slide level2">
 <h2>Lightness is more effective than hue to communicate changes in quantitative data</h2>
-<iframe src="static/module5/charts/lightness-vs-hues.html" width="100%" height="420px" style="border:none;">
+<iframe src="../../../static/module5/charts/lightness-vs-hues.html" width="100%" height="420px" style="border:none;">
 </iframe>
 <aside class="notes">
 <p>In the plots on this slide, we have encoded the same variable (Horsepower) to be represented by both the x-axis and the colour. This is rarely done in practice, but it is useful to contrast and understand colour schemes because we know that the colours of the points should change in a perceptually uniform manner as we move from left to right along the x-axis.</p>
@@ -240,7 +240,7 @@
 </section>
 <section id="combining-lightness-variation-with-a-slight-variation-in-hue-highlights-detail-in-the-data" class="slide level2">
 <h2>Combining lightness variation with a slight variation in hue highlights detail in the data</h2>
-<iframe src="static/module5/charts/lightness-and-hues.html" width="100%" height="420px" style="border:none;">
+<iframe src="../../../static/module5/charts/lightness-and-hues.html" width="100%" height="420px" style="border:none;">
 </iframe>
 <aside class="notes">
 <p>The leftmost plot here uses the same default colour scheme as in the previous slide.</p>
@@ -262,7 +262,7 @@
 </section>
 <section id="high-values-should-have-the-most-contrast-to-the-background" class="slide level2">
 <h2>High values should have the most contrast to the background</h2>
-<div id="d372a060" class="cell" data-execution_count="3">
+<div id="8bc43bad" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> data.cars()</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
@@ -272,23 +272,23 @@
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-8587dd1893764612b8274fca43e653ff.vega-embed {
+  #altair-viz-dc8e8d92e89a4e8cb8b03ccd2175fd14.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-8587dd1893764612b8274fca43e653ff.vega-embed details,
-  #altair-viz-8587dd1893764612b8274fca43e653ff.vega-embed details summary {
+  #altair-viz-dc8e8d92e89a4e8cb8b03ccd2175fd14.vega-embed details,
+  #altair-viz-dc8e8d92e89a4e8cb8b03ccd2175fd14.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-8587dd1893764612b8274fca43e653ff"></div>
+<div id="altair-viz-dc8e8d92e89a4e8cb8b03ccd2175fd14"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-8587dd1893764612b8274fca43e653ff") {
-      outputDiv = document.getElementById("altair-viz-8587dd1893764612b8274fca43e653ff");
+    if (outputDiv.id !== "altair-viz-dc8e8d92e89a4e8cb8b03ccd2175fd14") {
+      outputDiv = document.getElementById("altair-viz-dc8e8d92e89a4e8cb8b03ccd2175fd14");
     }
 
     const paths = {
@@ -360,7 +360,7 @@
 </section>
 <section id="some-colour-schemes-are-designed-specifically-for-people-with-colour-vision-deficiencies" class="slide level2">
 <h2>Some colour schemes are designed specifically for people with colour vision deficiencies</h2>
-<div id="a9e3d656" class="cell" data-execution_count="4">
+<div id="3fd74f1a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Mileage (miles/gallon)'</span>),</span>
@@ -369,23 +369,23 @@
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-d472d96b6e6b48568f2bbf9aa759bb42.vega-embed {
+  #altair-viz-b5f0cd6bbd5c4fe09cda9a6e3aebb700.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d472d96b6e6b48568f2bbf9aa759bb42.vega-embed details,
-  #altair-viz-d472d96b6e6b48568f2bbf9aa759bb42.vega-embed details summary {
+  #altair-viz-b5f0cd6bbd5c4fe09cda9a6e3aebb700.vega-embed details,
+  #altair-viz-b5f0cd6bbd5c4fe09cda9a6e3aebb700.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d472d96b6e6b48568f2bbf9aa759bb42"></div>
+<div id="altair-viz-b5f0cd6bbd5c4fe09cda9a6e3aebb700"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d472d96b6e6b48568f2bbf9aa759bb42") {
-      outputDiv = document.getElementById("altair-viz-d472d96b6e6b48568f2bbf9aa759bb42");
+    if (outputDiv.id !== "altair-viz-b5f0cd6bbd5c4fe09cda9a6e3aebb700") {
+      outputDiv = document.getElementById("altair-viz-b5f0cd6bbd5c4fe09cda9a6e3aebb700");
     }
 
     const paths = {
@@ -458,7 +458,7 @@
 </section>
 <section id="additional-hue-variation-brings-out-further-detail-but-distorts-the-perceptual-uniformity" class="slide level2">
 <h2>Additional hue variation brings out further detail but distorts the perceptual uniformity</h2>
-<div id="8d00fc6e" class="cell" data-execution_count="5">
+<div id="19215a0d" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Mileage (miles/gallon)'</span>),</span>
@@ -467,23 +467,23 @@
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-d51f488139bc4477b280209d4d5989d6.vega-embed {
+  #altair-viz-d6ed4ecebcc242efa39fde332500ae39.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d51f488139bc4477b280209d4d5989d6.vega-embed details,
-  #altair-viz-d51f488139bc4477b280209d4d5989d6.vega-embed details summary {
+  #altair-viz-d6ed4ecebcc242efa39fde332500ae39.vega-embed details,
+  #altair-viz-d6ed4ecebcc242efa39fde332500ae39.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d51f488139bc4477b280209d4d5989d6"></div>
+<div id="altair-viz-d6ed4ecebcc242efa39fde332500ae39"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d51f488139bc4477b280209d4d5989d6") {
-      outputDiv = document.getElementById("altair-viz-d51f488139bc4477b280209d4d5989d6");
+    if (outputDiv.id !== "altair-viz-d6ed4ecebcc242efa39fde332500ae39") {
+      outputDiv = document.getElementById("altair-viz-d6ed4ecebcc242efa39fde332500ae39");
     }
 
     const paths = {
@@ -557,7 +557,7 @@
 </section>
 <section id="colour-is-most-effectively-used-to-represent-a-separate-dataframe-column" class="slide level2">
 <h2>Colour is most effectively used to represent a separate dataframe column</h2>
-<div id="c5fcc2ac" class="cell" data-execution_count="6">
+<div id="e41f488d" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Mileage (miles/gallon)'</span>),</span>
@@ -565,23 +565,23 @@
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-1e7a60b461f14cd5a0cb9a56347ef08e.vega-embed {
+  #altair-viz-7b8ce056a3db498c9b539c8bb1fbad9c.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-1e7a60b461f14cd5a0cb9a56347ef08e.vega-embed details,
-  #altair-viz-1e7a60b461f14cd5a0cb9a56347ef08e.vega-embed details summary {
+  #altair-viz-7b8ce056a3db498c9b539c8bb1fbad9c.vega-embed details,
+  #altair-viz-7b8ce056a3db498c9b539c8bb1fbad9c.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-1e7a60b461f14cd5a0cb9a56347ef08e"></div>
+<div id="altair-viz-7b8ce056a3db498c9b539c8bb1fbad9c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-1e7a60b461f14cd5a0cb9a56347ef08e") {
-      outputDiv = document.getElementById("altair-viz-1e7a60b461f14cd5a0cb9a56347ef08e");
+    if (outputDiv.id !== "altair-viz-7b8ce056a3db498c9b539c8bb1fbad9c") {
+      outputDiv = document.getElementById("altair-viz-7b8ce056a3db498c9b539c8bb1fbad9c");
     }
 
     const paths = {
@@ -653,7 +653,7 @@
 <section id="diverging-colour-schemes-are-suitable-for-plots-with-a-natural-midpoint" class="slide level2">
 <h2>Diverging colour schemes are suitable for plots with a natural midpoint</h2>
 
-<img data-src="static/module5/color-schemes-lightness.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="Color schemes lightness"><aside class="notes">
+<img data-src="../../../static/module5/color-schemes-lightness.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="Color schemes lightness"><aside class="notes">
 <p>In this slide, you see the lightness variation among all the colour schemes we have covered. Categorical colours are discretely separated, perceptually uniform colour schemes vary lightness linearly throughout the range, whereas rainbow maps peak lightness in the middle and have dark colours at the extremes.</p>
 <p>The colour scheme to the far right is called a diverging colour scheme, which are useful when there is a natural midpoint in the data as we will see next.</p>
 <p>There is also one other type of colour scheme, cyclical, which starts and ends in both the same lightness and hue. This design is useful for values with natural cycles such as degrees of an angle of the month of the year, where the end and beginning are close to each other.</p>
@@ -671,7 +671,7 @@
 </section>
 <section id="temperature-data-can-be-represented-with-a-sequential-colour-scheme" class="slide level2">
 <h2>Temperature data can be represented with a sequential colour scheme</h2>
-<div id="da6fa33c" class="cell" data-execution_count="7">
+<div id="3212e2f7" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>toronto_temp <span class="op">=</span> pd.read_csv(</span>
@@ -685,23 +685,23 @@
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-2eb771142be04b93bd80ab3dfbb92ce2.vega-embed {
+  #altair-viz-22b72f61910a411db779eb7422d0a38b.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2eb771142be04b93bd80ab3dfbb92ce2.vega-embed details,
-  #altair-viz-2eb771142be04b93bd80ab3dfbb92ce2.vega-embed details summary {
+  #altair-viz-22b72f61910a411db779eb7422d0a38b.vega-embed details,
+  #altair-viz-22b72f61910a411db779eb7422d0a38b.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2eb771142be04b93bd80ab3dfbb92ce2"></div>
+<div id="altair-viz-22b72f61910a411db779eb7422d0a38b"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2eb771142be04b93bd80ab3dfbb92ce2") {
-      outputDiv = document.getElementById("altair-viz-2eb771142be04b93bd80ab3dfbb92ce2");
+    if (outputDiv.id !== "altair-viz-22b72f61910a411db779eb7422d0a38b") {
+      outputDiv = document.getElementById("altair-viz-22b72f61910a411db779eb7422d0a38b");
     }
 
     const paths = {
@@ -771,7 +771,7 @@
 </section>
 <section id="a-diverging-colour-scheme-effectively-highlights-values-at-the-extreme-temperatures" class="slide level2">
 <h2>A diverging colour scheme effectively highlights values at the extreme temperatures</h2>
-<div id="3e8607ae" class="cell" data-execution_count="8">
+<div id="c8b5038e" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(toronto_temp).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'date'</span>, title<span class="op">=</span><span class="va">None</span>),</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'avg_temperature'</span>, title<span class="op">=</span><span class="st">'Average temperature (°C)'</span>),</span>
@@ -781,23 +781,23 @@
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-7ac4cdd4092942aea08cc3c04cc902d2.vega-embed {
+  #altair-viz-935afd7b9f234f018334d336a3130da4.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-7ac4cdd4092942aea08cc3c04cc902d2.vega-embed details,
-  #altair-viz-7ac4cdd4092942aea08cc3c04cc902d2.vega-embed details summary {
+  #altair-viz-935afd7b9f234f018334d336a3130da4.vega-embed details,
+  #altair-viz-935afd7b9f234f018334d336a3130da4.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-7ac4cdd4092942aea08cc3c04cc902d2"></div>
+<div id="altair-viz-935afd7b9f234f018334d336a3130da4"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-7ac4cdd4092942aea08cc3c04cc902d2") {
-      outputDiv = document.getElementById("altair-viz-7ac4cdd4092942aea08cc3c04cc902d2");
+    if (outputDiv.id !== "altair-viz-935afd7b9f234f018334d336a3130da4") {
+      outputDiv = document.getElementById("altair-viz-935afd7b9f234f018334d336a3130da4");
     }
 
     const paths = {
@@ -868,7 +868,7 @@
 </section>
 <section id="an-explicit-domain-can-be-defined-to-adjust-colours-at-the-extremes" class="slide level2">
 <h2>An explicit domain can be defined to adjust colours at the extremes</h2>
-<div id="ddc81a4e" class="cell" data-execution_count="9">
+<div id="2c4d8c89" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(toronto_temp).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'date'</span>, title<span class="op">=</span><span class="va">None</span>),</span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'avg_temperature'</span>, title<span class="op">=</span><span class="st">'Average temperature (°C)'</span>),</span>
@@ -878,23 +878,23 @@
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-b8715174b9334cc6b9061ea08d900ce5.vega-embed {
+  #altair-viz-947d8e8d3f3b47708196df8c4c2fed1d.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-b8715174b9334cc6b9061ea08d900ce5.vega-embed details,
-  #altair-viz-b8715174b9334cc6b9061ea08d900ce5.vega-embed details summary {
+  #altair-viz-947d8e8d3f3b47708196df8c4c2fed1d.vega-embed details,
+  #altair-viz-947d8e8d3f3b47708196df8c4c2fed1d.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-b8715174b9334cc6b9061ea08d900ce5"></div>
+<div id="altair-viz-947d8e8d3f3b47708196df8c4c2fed1d"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-b8715174b9334cc6b9061ea08d900ce5") {
-      outputDiv = document.getElementById("altair-viz-b8715174b9334cc6b9061ea08d900ce5");
+    if (outputDiv.id !== "altair-viz-947d8e8d3f3b47708196df8c4c2fed1d") {
+      outputDiv = document.getElementById("altair-viz-947d8e8d3f3b47708196df8c4c2fed1d");
     }
 
     const paths = {

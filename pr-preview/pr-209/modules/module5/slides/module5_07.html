@@ -203,7 +203,7 @@
 <section id="colour-choices-can-have-a-profound-impact-on-the-interpretation-of-the-results" class="slide level2">
 <h2>Colour choices can have a profound impact on the interpretation of the results</h2>
 
-<img data-src="static/module5/color-importance-vessels.png" alt="Color Importance Vessels" class="r-stretch"><aside class="notes">
+<img data-src="../../../static/module5/color-importance-vessels.png" alt="Color Importance Vessels" class="r-stretch"><aside class="notes">
 <p>In module 2 we discussed how changing the colour scheme drastically improved a clinical outcome by almost doubling physician’s detection rate of blood vessels regions indicative of potential future heart disease (from 40% to 70%).</p>
 <p>In this slide deck, we will discuss some of the consideration that goes into evaluating if a colour scheme (also called a colourmap) is suitable for the data you are visualizing.</p>
 <style type="text/css">
@@ -221,7 +221,7 @@
 <section id="colour-can-be-broken-down-into-hue-lightness-and-saturation" class="slide level2">
 <h2>Colour can be broken down into hue, lightness, and saturation</h2>
 
-<img data-src="static/module5/hsl-cylinder.png" class="quarto-figure quarto-figure-center r-stretch" style="width:90.0%" alt="Hsl Cylinder"><aside class="notes">
+<img data-src="../../../static/module5/hsl-cylinder.png" class="quarto-figure quarto-figure-center r-stretch" style="width:90.0%" alt="Hsl Cylinder"><aside class="notes">
 <p>There are several different ways to represent colours. You might already have heard of RGB (red, green, blue) or CMYK (cyan, magenta, yellow, black) where different amounts of a set of base colours are combined to create all possible colours.</p>
 <p>When discussing colours in the context of data visualization, We will be describing them with the parameters “hue”, “saturation” and “lightness”.</p>
 <p>The left schematic in this slide is a 2D circular representation including only hue and saturation. When we add lightness, this circle grows into a cylinder with lightness as the height.</p>
@@ -241,7 +241,7 @@
 <section id="hue-lightness-and-saturation-describes-different-properties-of-colours" class="slide level2">
 <h2>Hue, lightness, and saturation describes different properties of colours</h2>
 
-<img data-src="static/module5/hsl-questions.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%" alt="Hsl Questions"><aside class="notes">
+<img data-src="../../../static/module5/hsl-questions.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%" alt="Hsl Questions"><aside class="notes">
 <p>We could verbalize the changes we saw in the previous slide in the following manner:</p>
 <p>Hue is what we traditionally think of as the “colour”, is it red, blue, etc?</p>
 <p>Each hue can have a varying saturation, which ranges from a dull, greyish appearance to a vibrant fully saturated hue.</p>
@@ -262,7 +262,7 @@
 </section>
 <section id="hues-are-used-to-distinguish-categorical-values" class="slide level2">
 <h2>Hues are used to distinguish categorical values</h2>
-<iframe src="static/module5/charts/categorical-hues.html" width="100%" height="420px" style="border:none;">
+<iframe src="../../../static/module5/charts/categorical-hues.html" width="100%" height="420px" style="border:none;">
 </iframe>
 <aside class="notes">
 <p>Hue is useful to distinguish between categories because it is often relatively easy for us to say that different hues are distinct. We can see that blue, orange, red, etc are different and don’t easily mix them up.</p>
@@ -283,7 +283,7 @@
 <section id="it-is-often-better-to-use-established-colour-schemes-instead-of-making-your-own" class="slide level2">
 <h2>It is often better to use established colour schemes instead of making your own</h2>
 
-<img data-src="static/module5/color-schemes.png" class="quarto-figure quarto-figure-center r-stretch" alt="Color schemes"><aside class="notes">
+<img data-src="../../../static/module5/color-schemes.png" class="quarto-figure quarto-figure-center r-stretch" alt="Color schemes"><aside class="notes">
 <p>There are many different hues we could use to represent our colours and some might not go as well together as others, so how do we decide which ones to use?</p>
 <p>Fortunately, we don’t have to design our own combination of colours to use, but can pick from combinations designed by experts to be easy to tell apart and in most cases also suitable for people with colour vision deficiencies.</p>
 <p>These colour combinations are referred to as colour schemes in Altair, but you might also hear them being called colourmaps or colour palettes.</p>
@@ -303,7 +303,7 @@
 </section>
 <section id="specifying-colour-schemes-in-altair" class="slide level2">
 <h2>Specifying colour schemes in Altair</h2>
-<div id="798106ea" class="cell" data-execution_count="3">
+<div id="382afbf7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point(size<span class="op">=</span><span class="dv">70</span>, filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Fuel efficiency (miles/gallon)'</span>),</span>
@@ -311,23 +311,23 @@
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-800cfa3db2234874a405ed43df91a729.vega-embed {
+  #altair-viz-530c83be52154f59b41c6f512c57da03.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-800cfa3db2234874a405ed43df91a729.vega-embed details,
-  #altair-viz-800cfa3db2234874a405ed43df91a729.vega-embed details summary {
+  #altair-viz-530c83be52154f59b41c6f512c57da03.vega-embed details,
+  #altair-viz-530c83be52154f59b41c6f512c57da03.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-800cfa3db2234874a405ed43df91a729"></div>
+<div id="altair-viz-530c83be52154f59b41c6f512c57da03"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-800cfa3db2234874a405ed43df91a729") {
-      outputDiv = document.getElementById("altair-viz-800cfa3db2234874a405ed43df91a729");
+    if (outputDiv.id !== "altair-viz-530c83be52154f59b41c6f512c57da03") {
+      outputDiv = document.getElementById("altair-viz-530c83be52154f59b41c6f512c57da03");
     }
 
     const paths = {
@@ -396,7 +396,7 @@
 </section>
 <section id="redundant-coding-can-make-charts-easier-to-interpret" class="slide level2">
 <h2>Redundant coding can make charts easier to interpret</h2>
-<div id="d6658f6e" class="cell" data-execution_count="4">
+<div id="cc9b30c0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point(size<span class="op">=</span><span class="dv">70</span>, filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Fuel efficiency (miles/gallon)'</span>),</span>
@@ -405,23 +405,23 @@
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-d85f0ee4c8474ece87fb916e6e8bd03a.vega-embed {
+  #altair-viz-71e000bc585644f49b6f87f5b3db58cf.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d85f0ee4c8474ece87fb916e6e8bd03a.vega-embed details,
-  #altair-viz-d85f0ee4c8474ece87fb916e6e8bd03a.vega-embed details summary {
+  #altair-viz-71e000bc585644f49b6f87f5b3db58cf.vega-embed details,
+  #altair-viz-71e000bc585644f49b6f87f5b3db58cf.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d85f0ee4c8474ece87fb916e6e8bd03a"></div>
+<div id="altair-viz-71e000bc585644f49b6f87f5b3db58cf"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d85f0ee4c8474ece87fb916e6e8bd03a") {
-      outputDiv = document.getElementById("altair-viz-d85f0ee4c8474ece87fb916e6e8bd03a");
+    if (outputDiv.id !== "altair-viz-71e000bc585644f49b6f87f5b3db58cf") {
+      outputDiv = document.getElementById("altair-viz-71e000bc585644f49b6f87f5b3db58cf");
     }
 
     const paths = {
@@ -494,7 +494,7 @@
 </section>
 <section id="specifying-custom-colours" class="slide level2">
 <h2>Specifying custom colours</h2>
-<div id="1570d72e" class="cell" data-execution_count="5">
+<div id="0612a3de" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'coral'</span>, <span class="st">'#4682b4'</span>, <span class="st">'rebeccapurple'</span>]</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point(size<span class="op">=</span><span class="dv">70</span>, filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
@@ -504,23 +504,23 @@
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-2dbcbbf0a0b84dc1b65be300e0a5dcd2.vega-embed {
+  #altair-viz-2c9e879c526d4d40bf31515871621d79.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2dbcbbf0a0b84dc1b65be300e0a5dcd2.vega-embed details,
-  #altair-viz-2dbcbbf0a0b84dc1b65be300e0a5dcd2.vega-embed details summary {
+  #altair-viz-2c9e879c526d4d40bf31515871621d79.vega-embed details,
+  #altair-viz-2c9e879c526d4d40bf31515871621d79.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2dbcbbf0a0b84dc1b65be300e0a5dcd2"></div>
+<div id="altair-viz-2c9e879c526d4d40bf31515871621d79"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2dbcbbf0a0b84dc1b65be300e0a5dcd2") {
-      outputDiv = document.getElementById("altair-viz-2dbcbbf0a0b84dc1b65be300e0a5dcd2");
+    if (outputDiv.id !== "altair-viz-2c9e879c526d4d40bf31515871621d79") {
+      outputDiv = document.getElementById("altair-viz-2c9e879c526d4d40bf31515871621d79");
     }
 
     const paths = {
@@ -594,7 +594,7 @@
 <section id="dont-use-more-than-5-8-distinct-hues-for-categories" class="slide level2">
 <h2>Don’t use more than 5-8 distinct hues for categories</h2>
 
-<img data-src="static/module5/hue-guidelines.png" class="quarto-figure quarto-figure-center r-stretch" alt="Hue Guidelines"><aside class="notes">
+<img data-src="../../../static/module5/hue-guidelines.png" class="quarto-figure quarto-figure-center r-stretch" alt="Hue Guidelines"><aside class="notes">
 <p>Although many of the categorical colour schemes contain ten or more hues, if is often not a good idea to use all that many because it becomes near impossible to distinguish the different hues from each other.</p>
 <p>The guidelines on what is too many hues differ between different sources and also depends on your use case. A good rule of thumb is that when you get to around five different hues, you should really consider if this is the best way to represent your data or if you could split it up into multiple visualizations instead.</p>
 <p>If the data is neatly organized in well-separated clusters, it is possible that you could visualize more than five colours (maybe even ten) effectively, but in data where the datapoints are more mixed, you will rarely if ever, be able to go this high.</p>
@@ -613,7 +613,7 @@
 <section id="too-many-hues-are-impossible-to-distinguish" class="slide level2">
 <h2>Too many hues are impossible to distinguish</h2>
 <!-- #endregion -->
-<div id="043debe3" class="cell" data-execution_count="6">
+<div id="dea4dec6" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point(size<span class="op">=</span><span class="dv">70</span>, filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Fuel efficiency (miles/gallon)'</span>),</span>
@@ -621,23 +621,23 @@
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-775e6d1f53c94cb690086458e70ffc60.vega-embed {
+  #altair-viz-419eb3e62dee46688b7aeb11b18536d4.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-775e6d1f53c94cb690086458e70ffc60.vega-embed details,
-  #altair-viz-775e6d1f53c94cb690086458e70ffc60.vega-embed details summary {
+  #altair-viz-419eb3e62dee46688b7aeb11b18536d4.vega-embed details,
+  #altair-viz-419eb3e62dee46688b7aeb11b18536d4.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-775e6d1f53c94cb690086458e70ffc60"></div>
+<div id="altair-viz-419eb3e62dee46688b7aeb11b18536d4"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-775e6d1f53c94cb690086458e70ffc60") {
-      outputDiv = document.getElementById("altair-viz-775e6d1f53c94cb690086458e70ffc60");
+    if (outputDiv.id !== "altair-viz-419eb3e62dee46688b7aeb11b18536d4") {
+      outputDiv = document.getElementById("altair-viz-419eb3e62dee46688b7aeb11b18536d4");
     }
 
     const paths = {
@@ -708,7 +708,7 @@
 </section>
 <section id="redundant-coding-of-bar-charts-can-be-disorienting" class="slide level2">
 <h2>Redundant coding of bar charts can be disorienting</h2>
-<div id="34becf76" class="cell" data-execution_count="7">
+<div id="ec4eaf8c" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>cars[<span class="st">'Brand'</span>] <span class="op">=</span> cars[<span class="st">'Name'</span>].<span class="bu">str</span>.split().<span class="bu">str</span>[<span class="dv">0</span>]  <span class="co"># Extract brand from the name column</span></span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(cars).mark_bar().encode(</span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Brand'</span>, title<span class="op">=</span><span class="va">None</span>, sort<span class="op">=</span><span class="st">'x'</span>),</span>
@@ -717,23 +717,23 @@
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-2d68f90ffdef4a14bd8f5d7e34e9d323.vega-embed {
+  #altair-viz-c765ef9e99454ed0bb1fad6bb8852d72.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2d68f90ffdef4a14bd8f5d7e34e9d323.vega-embed details,
-  #altair-viz-2d68f90ffdef4a14bd8f5d7e34e9d323.vega-embed details summary {
+  #altair-viz-c765ef9e99454ed0bb1fad6bb8852d72.vega-embed details,
+  #altair-viz-c765ef9e99454ed0bb1fad6bb8852d72.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2d68f90ffdef4a14bd8f5d7e34e9d323"></div>
+<div id="altair-viz-c765ef9e99454ed0bb1fad6bb8852d72"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2d68f90ffdef4a14bd8f5d7e34e9d323") {
-      outputDiv = document.getElementById("altair-viz-2d68f90ffdef4a14bd8f5d7e34e9d323");
+    if (outputDiv.id !== "altair-viz-c765ef9e99454ed0bb1fad6bb8852d72") {
+      outputDiv = document.getElementById("altair-viz-c765ef9e99454ed0bb1fad6bb8852d72");
     }
 
     const paths = {
@@ -806,7 +806,7 @@
 </section>
 <section id="use-consistent-colouring-between-subplots-even-when-it-is-redundant" class="slide level2">
 <h2>Use consistent colouring between subplots even when it is redundant</h2>
-<div id="25d6020d" class="cell" data-execution_count="8">
+<div id="56c171d9" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(cars).mark_bar().encode(</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Origin'</span>, title<span class="op">=</span><span class="va">None</span>),</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'mean(Horsepower)'</span>),</span>
@@ -815,23 +815,23 @@
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-89d7dc2d83a7403aa211d63175092d4f.vega-embed {
+  #altair-viz-c5e488651ff04a12b430f42abb043470.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-89d7dc2d83a7403aa211d63175092d4f.vega-embed details,
-  #altair-viz-89d7dc2d83a7403aa211d63175092d4f.vega-embed details summary {
+  #altair-viz-c5e488651ff04a12b430f42abb043470.vega-embed details,
+  #altair-viz-c5e488651ff04a12b430f42abb043470.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-89d7dc2d83a7403aa211d63175092d4f"></div>
+<div id="altair-viz-c5e488651ff04a12b430f42abb043470"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-89d7dc2d83a7403aa211d63175092d4f") {
-      outputDiv = document.getElementById("altair-viz-89d7dc2d83a7403aa211d63175092d4f");
+    if (outputDiv.id !== "altair-viz-c5e488651ff04a12b430f42abb043470") {
+      outputDiv = document.getElementById("altair-viz-c5e488651ff04a12b430f42abb043470");
     }
 
     const paths = {
