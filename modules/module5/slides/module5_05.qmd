@@ -10,7 +10,7 @@ title-slide-attributes:
 
 ```{python}
 #  | echo: false
-%run ../../utils.py
+%run src/utils.py
 ```
 
 ## Read in the data containing the daily sum of donations to Wikipedia in 2020
@@ -19,7 +19,7 @@ title-slide-attributes:
 import pandas as pd
 import altair as alt
 
-donations = pd.read_csv("../../data/donations.csv", parse_dates=["date"])
+donations = pd.read_csv("data/donations.csv", parse_dates=["date"])
 alt.Chart(
     donations, title="Wikipedia donations peak during Christmas"
 ).mark_circle().encode(

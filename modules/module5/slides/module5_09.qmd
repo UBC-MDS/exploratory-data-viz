@@ -8,7 +8,7 @@ title-slide-attributes:
 
 ```{python}
 #  | echo: false
-%run ../../utils.py
+%run src/utils.py
 ```
 
 ## Repetition of hue, lightness, and saturation
@@ -294,7 +294,7 @@ where the end and beginning are close to each other.
 import pandas as pd
 
 toronto_temp = pd.read_csv(
-    "../../data/weatherstats_toronto_daily.csv", parse_dates=["date"]
+    "data/weatherstats_toronto_daily.csv", parse_dates=["date"]
 )[["date", "avg_temperature"]]
 alt.Chart(toronto_temp).mark_circle(size=50).encode(
     alt.X("date", title=None),

@@ -12,7 +12,7 @@ title-slide-attributes:
 
 ```{python}
 # | echo: false
-%run ../../utils.py
+%run src/utils.py
 ```
 
 ## Subsetting the global development data
@@ -20,7 +20,7 @@ title-slide-attributes:
 ```{python}
 import pandas as pd
 
-gm = pd.read_csv("../../data/world-data-gapminder.csv", parse_dates=["year"])
+gm = pd.read_csv("data/world-data-gapminder.csv", parse_dates=["year"])
 gm2018 = gm[gm["year"] == "2018"]
 gm2018
 ```
