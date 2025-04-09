@@ -10,16 +10,16 @@ pd.set_option("display.max_columns", 8)
 pd.set_option("display.max_rows", 6)
 
 
-@alt.theme.register("increase_font_size", enable=True)
-def increase_chart_font_size() -> alt.theme.ThemeConfig:
-    return {
-    'config': {
-        'view': {'continuousWidth': 300, 'continuousHeight': 300},
-        'legend': {'titleFontSize': 13, 'labelFontSize': 12},
-        'axis': {'titleFontSize': 13, 'labelFontSize': 12},
-        'header': {'titleFontSize': 15, 'labelFontSize': 13}
-        }
-    }
+# @alt.theme.register("increase_font_size", enable=True)
+# def increase_chart_font_size() -> alt.theme.ThemeConfig:
+#     return {
+#     'config': {
+#         'view': {'continuousWidth': 300, 'continuousHeight': 300},
+#         'legend': {'titleFontSize': 13, 'labelFontSize': 12},
+#         'axis': {'titleFontSize': 13, 'labelFontSize': 12},
+#         'header': {'titleFontSize': 15, 'labelFontSize': 13}
+#         }
+#     }
 
 
 def assert_chart_equal(expected, actual):
