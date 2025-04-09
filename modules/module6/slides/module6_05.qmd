@@ -9,7 +9,7 @@ title-slide-attributes:
 
 ```{python}
 # | echo: false
-%run ../../utils.py
+%run src/utils.py
 ```
 
 ## Recreating the chart from last slide deck
@@ -20,7 +20,7 @@ import pandas as pd
 from vega_datasets import data
 
 state_map = alt.topo_feature(data.us_10m.url, "states")
-state_pop = pd.read_csv("../../data/us_population_coordinates_asthma-cases.csv")
+state_pop = pd.read_csv("data/us_population_coordinates_asthma-cases.csv")
 state_pop["asthma_cases_per_capita"] = (
     state_pop["number_of_asthma_cases"] / state_pop["population"]
 )

@@ -8,7 +8,7 @@ title-slide-attributes:
 
 ```{python}
 #  | echo: false
-%run ../../utils.py
+%run src/utils.py
 ```
 
 ## Understanding the periodic variations in the Wikipedia donations
@@ -17,7 +17,7 @@ title-slide-attributes:
 import pandas as pd
 import altair as alt
 
-donations = pd.read_csv("../../data/donations.csv", parse_dates=["date"])
+donations = pd.read_csv("data/donations.csv", parse_dates=["date"])
 alt.Chart(
     donations, title="Wikipedia donations peak during Christmas"
 ).mark_line().encode(

@@ -13,7 +13,7 @@ title-slide-attributes:
 
 ```{python}
 # | echo: false
-%run ../../utils.py
+%run src/utils.py
 ```
 
 ## Selections can be triggered on clicks instead of dragging with the mouse
@@ -297,7 +297,7 @@ while the range of the x-axis remains the same.
 import pandas as pd
 
 state_map = alt.topo_feature(data.us_10m.url, "states")
-state_pop = pd.read_csv("../../data/us_population_coordinates_asthma-cases.csv")
+state_pop = pd.read_csv("data/us_population_coordinates_asthma-cases.csv")
 state_pop["asthma_cases_per_capita"] = (
     state_pop["number_of_asthma_cases"] / state_pop["population"]
 )

@@ -1,10 +1,6 @@
 ---
 format:
   live-html
-resources:
-  - ../utils.py
-  - ./../../static/
-  - ../data
 ---
 
 <script src='../../src/quiz.js'></script>  <!-- Only needed once per page -->
@@ -127,7 +123,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 #|  - income_log_plot
 import altair as alt
 import pandas as pd
-from utils import assert_chart_equal, remove_keys_inplace
+from src.utils import assert_chart_equal, remove_keys_inplace
 
 income_df = pd.read_csv('data/income_expenditure.csv')
 ```

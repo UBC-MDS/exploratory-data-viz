@@ -1,9 +1,6 @@
 ---
 format:
   live-html
-resources:
-  - ../utils.py
-  - ../data
 ---
 
 <script src='../../src/quiz.js'></script>  <!-- Only needed once per page -->
@@ -116,7 +113,7 @@ Fill in the blanks in the code below so that the following gets accomplished:
 #| exercise: combined_plot
 import altair as alt
 import pandas as pd
-from utils import assert_chart_equal
+from src.utils import assert_chart_equal
 ```
 
 ```{pyodide}
@@ -133,7 +130,7 @@ mass_density_plot = alt.Chart(penguins_df).transform_density(
      steps=100
      ).mark_area(opacity=0.5).encode(
           alt.X('body_mass_g', title='Mass (grams)'),
-          alt.Y('density:Q', title='Density'),
+          alt.Y('density:Q', title='Density').stack(False),
           alt.Color('species', title='Species', legend=alt.Legend(orient="right"))
           ).properties(width=400, height=100)
 
@@ -184,7 +181,7 @@ mass_density_plot = alt.Chart(penguins_df).transform_density(
      steps=100
      ).mark_area(opacity=0.5).encode(
           alt.X('body_mass_g', title='Mass (grams)'),
-          alt.Y('density:Q', title='Density'),
+          alt.Y('density:Q', title='Density').stack(False),
           alt.Color('species', title='Species', legend=alt.Legend(orient="right"))
           ).properties(width=400, height=100)
 

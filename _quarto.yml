@@ -1,12 +1,26 @@
 project:
   type: website
   title: "Data Visualization"
+  # Setting the execution dir allows us to use `data/`
+  # instead of relative paths in regular code cells
+  execute-dir: project
+  # `render` executes and renders modules, slides, and exercises into `_site`
   render:
-    # This renders modules, slides, and exercises into `_site`
     - modules/**/*.qmd
     - modules/index.qmd
+  # `resources` copies files into `_site` without execution
   resources:
     - styles.scss
+    - src/utils.py
+    - data
+
+# Setting the pyodide resources allows live code cells to see files
+# previously copied into `_site`
+# by copying them to the virtual file system used by live coding
+pyodide:
+  resources:
+    - src/utils.py
+    - data
 
 website:
   page-navigation: true
