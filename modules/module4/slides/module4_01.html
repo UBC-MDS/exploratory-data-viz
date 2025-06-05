@@ -6,8 +6,8 @@
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-99fa6729ad23987aafeada22b1565191.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.43">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f428fda71a3abb5b1b9c21151da8fd61.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.31">
 
   <title>Data Visualization – Visualizing Multidimensional Distributions</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -28,8 +28,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -40,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -93,7 +94,7 @@
     code span.vs { color: #da4453; } /* VerbatimString */
     code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-49c57219293d8fab0ee09da3582d89ec.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-b44c6fd600e88695524b4ccfa20f51f3.css">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -202,7 +203,7 @@
 </section>
 <section id="reading-in-the-data" class="slide level2">
 <h2>Reading in the data</h2>
-<div id="6c1004f1" class="cell" data-execution_count="2">
+<div id="e2b949f9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a></span>
@@ -348,30 +349,30 @@
 </section>
 <section id="scatter-plots-are-effective-visualizations-for-2d-distributions" class="slide level2">
 <h2>Scatter plots are effective visualizations for 2D distributions</h2>
-<div id="6e378f22" class="cell" data-execution_count="3">
+<div id="76b27c7e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_extended).mark_point().encode(</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'IMDB Rating'</span>),</span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Rotten Tomatoes Rating'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-715ecb0e4a0a435a9d8c25e166b7ab1f.vega-embed {
+  #altair-viz-ab3ced1764a148d8b8e677fb4fae2e9e.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-715ecb0e4a0a435a9d8c25e166b7ab1f.vega-embed details,
-  #altair-viz-715ecb0e4a0a435a9d8c25e166b7ab1f.vega-embed details summary {
+  #altair-viz-ab3ced1764a148d8b8e677fb4fae2e9e.vega-embed details,
+  #altair-viz-ab3ced1764a148d8b8e677fb4fae2e9e.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-715ecb0e4a0a435a9d8c25e166b7ab1f"></div>
+<div id="altair-viz-ab3ced1764a148d8b8e677fb4fae2e9e"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-715ecb0e4a0a435a9d8c25e166b7ab1f") {
-      outputDiv = document.getElementById("altair-viz-715ecb0e4a0a435a9d8c25e166b7ab1f");
+    if (outputDiv.id !== "altair-viz-ab3ced1764a148d8b8e677fb4fae2e9e") {
+      outputDiv = document.getElementById("altair-viz-ab3ced1764a148d8b8e677fb4fae2e9e");
     }
 
     const paths = {
@@ -446,30 +447,30 @@
 </section>
 <section id="non-linear-relationships-follow-a-predictable-pattern-that-is-not-a-straight-line" class="slide level2">
 <h2>Non-linear relationships follow a predictable pattern that is not a straight line</h2>
-<div id="54357a62" class="cell" data-execution_count="4">
+<div id="da4f3e2a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_extended).mark_point().encode(</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'IMDB Rating'</span>),</span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'IMDB Votes'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-e1ca8761fb8a4d39b193c41d52d435b6.vega-embed {
+  #altair-viz-31a73cd5515e4892adbf01643bf014d1.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-e1ca8761fb8a4d39b193c41d52d435b6.vega-embed details,
-  #altair-viz-e1ca8761fb8a4d39b193c41d52d435b6.vega-embed details summary {
+  #altair-viz-31a73cd5515e4892adbf01643bf014d1.vega-embed details,
+  #altair-viz-31a73cd5515e4892adbf01643bf014d1.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-e1ca8761fb8a4d39b193c41d52d435b6"></div>
+<div id="altair-viz-31a73cd5515e4892adbf01643bf014d1"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-e1ca8761fb8a4d39b193c41d52d435b6") {
-      outputDiv = document.getElementById("altair-viz-e1ca8761fb8a4d39b193c41d52d435b6");
+    if (outputDiv.id !== "altair-viz-31a73cd5515e4892adbf01643bf014d1") {
+      outputDiv = document.getElementById("altair-viz-31a73cd5515e4892adbf01643bf014d1");
     }
 
     const paths = {
@@ -540,30 +541,30 @@
 </section>
 <section id="the-stronger-the-relationship-the-closer-together-the-points-are" class="slide level2">
 <h2>The stronger the relationship, the closer together the points are</h2>
-<div id="c76b103f" class="cell" data-execution_count="5">
+<div id="6bb290c9" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_extended).mark_point().encode(</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'IMDB Rating'</span>),</span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'IMDB Rating'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-ecf523a2477d4948a038b2fb315aea1b.vega-embed {
+  #altair-viz-597d60ea5b204bcf9e5d72ef672f6489.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-ecf523a2477d4948a038b2fb315aea1b.vega-embed details,
-  #altair-viz-ecf523a2477d4948a038b2fb315aea1b.vega-embed details summary {
+  #altair-viz-597d60ea5b204bcf9e5d72ef672f6489.vega-embed details,
+  #altair-viz-597d60ea5b204bcf9e5d72ef672f6489.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-ecf523a2477d4948a038b2fb315aea1b"></div>
+<div id="altair-viz-597d60ea5b204bcf9e5d72ef672f6489"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-ecf523a2477d4948a038b2fb315aea1b") {
-      outputDiv = document.getElementById("altair-viz-ecf523a2477d4948a038b2fb315aea1b");
+    if (outputDiv.id !== "altair-viz-597d60ea5b204bcf9e5d72ef672f6489") {
+      outputDiv = document.getElementById("altair-viz-597d60ea5b204bcf9e5d72ef672f6489");
     }
 
     const paths = {
@@ -634,30 +635,30 @@
 </section>
 <section id="when-there-is-no-relationship-there-is-also-no-pattern-in-the-plotted-points" class="slide level2">
 <h2>When there is no relationship, there is also no pattern in the plotted points</h2>
-<div id="3fa486ac" class="cell" data-execution_count="6">
+<div id="b52831de" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_extended.reset_index()).mark_point().encode(</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'IMDB Rating'</span>),</span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'index'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-258ac5218ec94a3494ffe2bb4b45f312.vega-embed {
+  #altair-viz-13fa1bc40dc14dc3b5b36466f6af3f4a.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-258ac5218ec94a3494ffe2bb4b45f312.vega-embed details,
-  #altair-viz-258ac5218ec94a3494ffe2bb4b45f312.vega-embed details summary {
+  #altair-viz-13fa1bc40dc14dc3b5b36466f6af3f4a.vega-embed details,
+  #altair-viz-13fa1bc40dc14dc3b5b36466f6af3f4a.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-258ac5218ec94a3494ffe2bb4b45f312"></div>
+<div id="altair-viz-13fa1bc40dc14dc3b5b36466f6af3f4a"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-258ac5218ec94a3494ffe2bb4b45f312") {
-      outputDiv = document.getElementById("altair-viz-258ac5218ec94a3494ffe2bb4b45f312");
+    if (outputDiv.id !== "altair-viz-13fa1bc40dc14dc3b5b36466f6af3f4a") {
+      outputDiv = document.getElementById("altair-viz-13fa1bc40dc14dc3b5b36466f6af3f4a");
     }
 
     const paths = {
@@ -729,30 +730,30 @@
 </section>
 <section id="a-strong-relationship-means-that-the-value-on-one-axis-gives-information-about-the-value-on-the-other-axis" class="slide level2">
 <h2>A strong relationship means that the value on one axis gives information about the value on the other axis</h2>
-<div id="49aaf7a7" class="cell" data-execution_count="7">
+<div id="d79f2650" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_extended).mark_point().encode(</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'IMDB Rating'</span>),</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Rotten Tomatoes Rating'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-3488831d72574ea0a49bbe088a475a57.vega-embed {
+  #altair-viz-e71ee0e94aec4de481d97e8caf00619b.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-3488831d72574ea0a49bbe088a475a57.vega-embed details,
-  #altair-viz-3488831d72574ea0a49bbe088a475a57.vega-embed details summary {
+  #altair-viz-e71ee0e94aec4de481d97e8caf00619b.vega-embed details,
+  #altair-viz-e71ee0e94aec4de481d97e8caf00619b.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-3488831d72574ea0a49bbe088a475a57"></div>
+<div id="altair-viz-e71ee0e94aec4de481d97e8caf00619b"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-3488831d72574ea0a49bbe088a475a57") {
-      outputDiv = document.getElementById("altair-viz-3488831d72574ea0a49bbe088a475a57");
+    if (outputDiv.id !== "altair-viz-e71ee0e94aec4de481d97e8caf00619b") {
+      outputDiv = document.getElementById("altair-viz-e71ee0e94aec4de481d97e8caf00619b");
     }
 
     const paths = {
@@ -824,30 +825,30 @@
 </section>
 <section id="saturated-scatter-plots-are-difficult-to-interpret" class="slide level2">
 <h2>Saturated scatter plots are difficult to interpret</h2>
-<div id="46e82a65" class="cell" data-execution_count="8">
+<div id="c5de1bd5" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_extended).mark_point().encode(</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Production Budget'</span>),</span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Worldwide Gross'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-09a4e3d2dc9749c3805ca72655e3f49a.vega-embed {
+  #altair-viz-09e9f03fff2c4680b3e5265f3ec53f6b.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-09a4e3d2dc9749c3805ca72655e3f49a.vega-embed details,
-  #altair-viz-09a4e3d2dc9749c3805ca72655e3f49a.vega-embed details summary {
+  #altair-viz-09e9f03fff2c4680b3e5265f3ec53f6b.vega-embed details,
+  #altair-viz-09e9f03fff2c4680b3e5265f3ec53f6b.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-09a4e3d2dc9749c3805ca72655e3f49a"></div>
+<div id="altair-viz-09e9f03fff2c4680b3e5265f3ec53f6b"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-09a4e3d2dc9749c3805ca72655e3f49a") {
-      outputDiv = document.getElementById("altair-viz-09a4e3d2dc9749c3805ca72655e3f49a");
+    if (outputDiv.id !== "altair-viz-09e9f03fff2c4680b3e5265f3ec53f6b") {
+      outputDiv = document.getElementById("altair-viz-09e9f03fff2c4680b3e5265f3ec53f6b");
     }
 
     const paths = {
@@ -920,7 +921,7 @@
 </section>
 <section id="a-heatmap-can-visualize-the-relationship-between-two-distributions-without-saturation" class="slide level2">
 <h2>A heatmap can visualize the relationship between two distributions without saturation</h2>
-<div id="c5ebac56" class="cell" data-execution_count="9">
+<div id="ce540257" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_extended).mark_rect().encode(</span>
 <span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Production Budget'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">60</span>)),</span>
 <span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Worldwide Gross'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">60</span>)),</span>
@@ -928,23 +929,23 @@
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-d2ff4fd567f54379832565a97bd42a3f.vega-embed {
+  #altair-viz-90196f75ad1a4cc28fc71e365f3d1c76.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d2ff4fd567f54379832565a97bd42a3f.vega-embed details,
-  #altair-viz-d2ff4fd567f54379832565a97bd42a3f.vega-embed details summary {
+  #altair-viz-90196f75ad1a4cc28fc71e365f3d1c76.vega-embed details,
+  #altair-viz-90196f75ad1a4cc28fc71e365f3d1c76.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d2ff4fd567f54379832565a97bd42a3f"></div>
+<div id="altair-viz-90196f75ad1a4cc28fc71e365f3d1c76"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d2ff4fd567f54379832565a97bd42a3f") {
-      outputDiv = document.getElementById("altair-viz-d2ff4fd567f54379832565a97bd42a3f");
+    if (outputDiv.id !== "altair-viz-90196f75ad1a4cc28fc71e365f3d1c76") {
+      outputDiv = document.getElementById("altair-viz-90196f75ad1a4cc28fc71e365f3d1c76");
     }
 
     const paths = {
@@ -1257,190 +1258,172 @@
       });
     </script>
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
-          }
-        }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
             }
           }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          return false;
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
             }
-          }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
         }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
-          }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
-        }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
               }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>

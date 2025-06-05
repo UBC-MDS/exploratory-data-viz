@@ -6,8 +6,8 @@
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-99fa6729ad23987aafeada22b1565191.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.43">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f428fda71a3abb5b1b9c21151da8fd61.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.31">
 
   <title>Data Visualization – Visualizing Geographic Data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -28,8 +28,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -40,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -93,7 +94,7 @@
     code span.vs { color: #da4453; } /* VerbatimString */
     code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-49c57219293d8fab0ee09da3582d89ec.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-b44c6fd600e88695524b4ccfa20f51f3.css">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -236,7 +237,7 @@
 </section>
 <section id="creating-a-map-in-altair" class="slide level2">
 <h2>Creating a map in Altair</h2>
-<div id="fb78bcef" class="cell" data-execution_count="2">
+<div id="04d9fbf1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vega_datasets <span class="im">import</span> data</span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a></span>
@@ -245,23 +246,23 @@
 <div class="cell-output cell-output-display" data-execution_count="2">
 
 <style>
-  #altair-viz-39f6f19601a9493ea6446696b20c69c8.vega-embed {
+  #altair-viz-a8c7699995be42e8b6774f8150a75346.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-39f6f19601a9493ea6446696b20c69c8.vega-embed details,
-  #altair-viz-39f6f19601a9493ea6446696b20c69c8.vega-embed details summary {
+  #altair-viz-a8c7699995be42e8b6774f8150a75346.vega-embed details,
+  #altair-viz-a8c7699995be42e8b6774f8150a75346.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-39f6f19601a9493ea6446696b20c69c8"></div>
+<div id="altair-viz-a8c7699995be42e8b6774f8150a75346"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-39f6f19601a9493ea6446696b20c69c8") {
-      outputDiv = document.getElementById("altair-viz-39f6f19601a9493ea6446696b20c69c8");
+    if (outputDiv.id !== "altair-viz-a8c7699995be42e8b6774f8150a75346") {
+      outputDiv = document.getElementById("altair-viz-a8c7699995be42e8b6774f8150a75346");
     }
 
     const paths = {
@@ -332,28 +333,28 @@
 </section>
 <section id="changing-the-projection-gives-a-more-accurate-representation-of-areas" class="slide level2">
 <h2>Changing the projection gives a more accurate representation of areas</h2>
-<div id="2267f9e8" class="cell" data-execution_count="3">
+<div id="174a25f4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(world_map).mark_geoshape().project(<span class="bu">type</span><span class="op">=</span><span class="st">'equalEarth'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-ef6f7b86cd2c4a2bb9bfea981f559575.vega-embed {
+  #altair-viz-3453655e4af344c59fe3c001cfc65e14.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-ef6f7b86cd2c4a2bb9bfea981f559575.vega-embed details,
-  #altair-viz-ef6f7b86cd2c4a2bb9bfea981f559575.vega-embed details summary {
+  #altair-viz-3453655e4af344c59fe3c001cfc65e14.vega-embed details,
+  #altair-viz-3453655e4af344c59fe3c001cfc65e14.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-ef6f7b86cd2c4a2bb9bfea981f559575"></div>
+<div id="altair-viz-3453655e4af344c59fe3c001cfc65e14"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-ef6f7b86cd2c4a2bb9bfea981f559575") {
-      outputDiv = document.getElementById("altair-viz-ef6f7b86cd2c4a2bb9bfea981f559575");
+    if (outputDiv.id !== "altair-viz-3453655e4af344c59fe3c001cfc65e14") {
+      outputDiv = document.getElementById("altair-viz-3453655e4af344c59fe3c001cfc65e14");
     }
 
     const paths = {
@@ -426,30 +427,30 @@
 </section>
 <section id="the-fill-and-border-colours-of-countries-can-be-changed" class="slide level2">
 <h2>The fill and border colours of countries can be changed</h2>
-<div id="444ef74b" class="cell" data-execution_count="4">
+<div id="cd6a2d66" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(world_map).mark_geoshape(</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'black'</span>, stroke<span class="op">=</span><span class="st">'#706545'</span>, strokeWidth<span class="op">=</span><span class="dv">1</span></span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>).project(<span class="bu">type</span><span class="op">=</span><span class="st">'equalEarth'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-2d46b7300e60471db3561acdb0705de0.vega-embed {
+  #altair-viz-9655725ce88d4c508ddb60de8333a498.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2d46b7300e60471db3561acdb0705de0.vega-embed details,
-  #altair-viz-2d46b7300e60471db3561acdb0705de0.vega-embed details summary {
+  #altair-viz-9655725ce88d4c508ddb60de8333a498.vega-embed details,
+  #altair-viz-9655725ce88d4c508ddb60de8333a498.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2d46b7300e60471db3561acdb0705de0"></div>
+<div id="altair-viz-9655725ce88d4c508ddb60de8333a498"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2d46b7300e60471db3561acdb0705de0") {
-      outputDiv = document.getElementById("altair-viz-2d46b7300e60471db3561acdb0705de0");
+    if (outputDiv.id !== "altair-viz-9655725ce88d4c508ddb60de8333a498") {
+      outputDiv = document.getElementById("altair-viz-9655725ce88d4c508ddb60de8333a498");
     }
 
     const paths = {
@@ -519,30 +520,30 @@
 </section>
 <section id="we-can-zoom-and-pan-the-map" class="slide level2">
 <h2>We can zoom and pan the map</h2>
-<div id="95c9cbcc" class="cell" data-execution_count="5">
+<div id="8028ea2a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(world_map).mark_geoshape(</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'#2a1d0c'</span>, stroke<span class="op">=</span><span class="st">'#706545'</span>, strokeWidth<span class="op">=</span><span class="fl">0.5</span></span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>).project(<span class="bu">type</span><span class="op">=</span><span class="st">'equalEarth'</span>, scale<span class="op">=</span><span class="dv">500</span>, translate<span class="op">=</span>[<span class="dv">140</span>, <span class="dv">610</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-a93afbcb1a9d446d86f5d6cacc0028ed.vega-embed {
+  #altair-viz-0078f2cda885413c97e9ea9b577cc16d.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-a93afbcb1a9d446d86f5d6cacc0028ed.vega-embed details,
-  #altair-viz-a93afbcb1a9d446d86f5d6cacc0028ed.vega-embed details summary {
+  #altair-viz-0078f2cda885413c97e9ea9b577cc16d.vega-embed details,
+  #altair-viz-0078f2cda885413c97e9ea9b577cc16d.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-a93afbcb1a9d446d86f5d6cacc0028ed"></div>
+<div id="altair-viz-0078f2cda885413c97e9ea9b577cc16d"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-a93afbcb1a9d446d86f5d6cacc0028ed") {
-      outputDiv = document.getElementById("altair-viz-a93afbcb1a9d446d86f5d6cacc0028ed");
+    if (outputDiv.id !== "altair-viz-0078f2cda885413c97e9ea9b577cc16d") {
+      outputDiv = document.getElementById("altair-viz-0078f2cda885413c97e9ea9b577cc16d");
     }
 
     const paths = {
@@ -613,29 +614,29 @@
 </section>
 <section id="working-with-individual-countries-can-show-regional-details" class="slide level2">
 <h2>Working with individual countries can show regional details</h2>
-<div id="c040adfd" class="cell" data-execution_count="6">
+<div id="0ce16251" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>state_map <span class="op">=</span> alt.topo_feature(data.us_10m.url, <span class="st">'states'</span>)</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(state_map).mark_geoshape().project(<span class="bu">type</span><span class="op">=</span><span class="st">'equalEarth'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-328c4b1cb7b64189b2aeb8b880bd8db6.vega-embed {
+  #altair-viz-ea233f54881341f8bf98467f26898746.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-328c4b1cb7b64189b2aeb8b880bd8db6.vega-embed details,
-  #altair-viz-328c4b1cb7b64189b2aeb8b880bd8db6.vega-embed details summary {
+  #altair-viz-ea233f54881341f8bf98467f26898746.vega-embed details,
+  #altair-viz-ea233f54881341f8bf98467f26898746.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-328c4b1cb7b64189b2aeb8b880bd8db6"></div>
+<div id="altair-viz-ea233f54881341f8bf98467f26898746"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-328c4b1cb7b64189b2aeb8b880bd8db6") {
-      outputDiv = document.getElementById("altair-viz-328c4b1cb7b64189b2aeb8b880bd8db6");
+    if (outputDiv.id !== "altair-viz-ea233f54881341f8bf98467f26898746") {
+      outputDiv = document.getElementById("altair-viz-ea233f54881341f8bf98467f26898746");
     }
 
     const paths = {
@@ -705,28 +706,28 @@
 </section>
 <section id="there-are-special-projections-for-some-countries-such-as-the-us" class="slide level2">
 <h2>There are special projections for some countries such as the US</h2>
-<div id="2a19b333" class="cell" data-execution_count="7">
+<div id="a495e051" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(state_map).mark_geoshape().project(<span class="bu">type</span><span class="op">=</span><span class="st">'albersUsa'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-464de2b53bf94065a1e5bf28229d02ab.vega-embed {
+  #altair-viz-f396de8099ca4e3db5454efb8441b6e3.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-464de2b53bf94065a1e5bf28229d02ab.vega-embed details,
-  #altair-viz-464de2b53bf94065a1e5bf28229d02ab.vega-embed details summary {
+  #altair-viz-f396de8099ca4e3db5454efb8441b6e3.vega-embed details,
+  #altair-viz-f396de8099ca4e3db5454efb8441b6e3.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-464de2b53bf94065a1e5bf28229d02ab"></div>
+<div id="altair-viz-f396de8099ca4e3db5454efb8441b6e3"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-464de2b53bf94065a1e5bf28229d02ab") {
-      outputDiv = document.getElementById("altair-viz-464de2b53bf94065a1e5bf28229d02ab");
+    if (outputDiv.id !== "altair-viz-f396de8099ca4e3db5454efb8441b6e3") {
+      outputDiv = document.getElementById("altair-viz-f396de8099ca4e3db5454efb8441b6e3");
     }
 
     const paths = {
@@ -795,30 +796,30 @@
 </section>
 <section id="colouring-individual-regions-differently" class="slide level2">
 <h2>Colouring individual regions differently</h2>
-<div id="ff989ce8" class="cell" data-execution_count="8">
+<div id="1bcb6d87" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(state_map).mark_geoshape().encode(</span>
 <span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'id:Q'</span>)</span>
 <span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>.project(<span class="bu">type</span><span class="op">=</span><span class="st">'albersUsa'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-7613106eb378414ab3b7a00b3fe2520b.vega-embed {
+  #altair-viz-ff73d6bf7f5c47678170c0b9c3bc91e4.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-7613106eb378414ab3b7a00b3fe2520b.vega-embed details,
-  #altair-viz-7613106eb378414ab3b7a00b3fe2520b.vega-embed details summary {
+  #altair-viz-ff73d6bf7f5c47678170c0b9c3bc91e4.vega-embed details,
+  #altair-viz-ff73d6bf7f5c47678170c0b9c3bc91e4.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-7613106eb378414ab3b7a00b3fe2520b"></div>
+<div id="altair-viz-ff73d6bf7f5c47678170c0b9c3bc91e4"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-7613106eb378414ab3b7a00b3fe2520b") {
-      outputDiv = document.getElementById("altair-viz-7613106eb378414ab3b7a00b3fe2520b");
+    if (outputDiv.id !== "altair-viz-ff73d6bf7f5c47678170c0b9c3bc91e4") {
+      outputDiv = document.getElementById("altair-viz-ff73d6bf7f5c47678170c0b9c3bc91e4");
     }
 
     const paths = {
@@ -890,7 +891,7 @@
 </section>
 <section id="visualizing-data-from-another-dataframe-on-a-map" class="slide level2">
 <h2>Visualizing data from another dataframe on a map</h2>
-<div id="fab3d13f" class="cell" data-execution_count="9">
+<div id="31f0e8b2" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a aria-hidden="true" tabindex="-1"></a>state_pop <span class="op">=</span> pd.read_csv(<span class="st">"data/us_population_coordinates_asthma-cases.csv"</span>)</span>
@@ -993,7 +994,7 @@
 </section>
 <section id="linking-datasets-together-via-lookups" class="slide level2">
 <h2>Linking datasets together via lookups</h2>
-<div id="6008648a" class="cell" data-execution_count="10">
+<div id="7743578d" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(state_map).mark_geoshape().transform_lookup(</span>
 <span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a>    lookup<span class="op">=</span><span class="st">'id'</span>,</span>
 <span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a>    from_<span class="op">=</span>alt.LookupData(state_pop, <span class="st">'id'</span>, [<span class="st">'population'</span>]))</span>
@@ -1002,23 +1003,23 @@
 <div class="cell-output cell-output-display" data-execution_count="10">
 
 <style>
-  #altair-viz-d3da901bdca441bcbfd9f5b7540ade94.vega-embed {
+  #altair-viz-4f448e6da4e74d99b768379f83688551.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d3da901bdca441bcbfd9f5b7540ade94.vega-embed details,
-  #altair-viz-d3da901bdca441bcbfd9f5b7540ade94.vega-embed details summary {
+  #altair-viz-4f448e6da4e74d99b768379f83688551.vega-embed details,
+  #altair-viz-4f448e6da4e74d99b768379f83688551.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d3da901bdca441bcbfd9f5b7540ade94"></div>
+<div id="altair-viz-4f448e6da4e74d99b768379f83688551"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d3da901bdca441bcbfd9f5b7540ade94") {
-      outputDiv = document.getElementById("altair-viz-d3da901bdca441bcbfd9f5b7540ade94");
+    if (outputDiv.id !== "altair-viz-4f448e6da4e74d99b768379f83688551") {
+      outputDiv = document.getElementById("altair-viz-4f448e6da4e74d99b768379f83688551");
     }
 
     const paths = {
@@ -1090,7 +1091,7 @@
 </section>
 <section id="choropleths-can-be-misleading-since-the-area-of-each-region-matters" class="slide level2">
 <h2>Choropleths can be misleading since the area of each region matters</h2>
-<div id="20d1aebb" class="cell" data-execution_count="11">
+<div id="70d9010d" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a>us_map <span class="op">=</span> (alt.Chart(state_map).mark_geoshape(color<span class="op">=</span><span class="st">'lightgray'</span>, stroke<span class="op">=</span><span class="st">'white'</span>)</span>
 <span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a>          .project(<span class="bu">type</span><span class="op">=</span><span class="st">'albersUsa'</span>))</span>
 <span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> alt.Chart(state_pop).mark_circle().encode(</span>
@@ -1101,23 +1102,23 @@
 <div class="cell-output cell-output-display" data-execution_count="11">
 
 <style>
-  #altair-viz-1874080b12794e56a6c90746b07fc27a.vega-embed {
+  #altair-viz-072591b3b2c7486a8f2ab3f06e93d78e.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-1874080b12794e56a6c90746b07fc27a.vega-embed details,
-  #altair-viz-1874080b12794e56a6c90746b07fc27a.vega-embed details summary {
+  #altair-viz-072591b3b2c7486a8f2ab3f06e93d78e.vega-embed details,
+  #altair-viz-072591b3b2c7486a8f2ab3f06e93d78e.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-1874080b12794e56a6c90746b07fc27a"></div>
+<div id="altair-viz-072591b3b2c7486a8f2ab3f06e93d78e"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-1874080b12794e56a6c90746b07fc27a") {
-      outputDiv = document.getElementById("altair-viz-1874080b12794e56a6c90746b07fc27a");
+    if (outputDiv.id !== "altair-viz-072591b3b2c7486a8f2ab3f06e93d78e") {
+      outputDiv = document.getElementById("altair-viz-072591b3b2c7486a8f2ab3f06e93d78e");
     }
 
     const paths = {
@@ -1192,7 +1193,7 @@
 </section>
 <section id="some-measures-can-be-influenced-by-the-population-size" class="slide level2">
 <h2>Some measures can be influenced by the population size</h2>
-<div id="54c780f7" class="cell" data-execution_count="12">
+<div id="9a9d7570" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a>us_map <span class="op">=</span> (alt.Chart(state_map).mark_geoshape(color<span class="op">=</span><span class="st">'lightgray'</span>, stroke<span class="op">=</span><span class="st">'white'</span>)</span>
 <span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a>          .project(<span class="bu">type</span><span class="op">=</span><span class="st">'albersUsa'</span>))</span>
 <span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> alt.Chart(state_pop).mark_circle().encode(</span>
@@ -1203,23 +1204,23 @@
 <div class="cell-output cell-output-display" data-execution_count="12">
 
 <style>
-  #altair-viz-740339b6e6624c05832dc69a86d7bdf4.vega-embed {
+  #altair-viz-37d8e19389e3434a81da0c3d599b6e53.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-740339b6e6624c05832dc69a86d7bdf4.vega-embed details,
-  #altair-viz-740339b6e6624c05832dc69a86d7bdf4.vega-embed details summary {
+  #altair-viz-37d8e19389e3434a81da0c3d599b6e53.vega-embed details,
+  #altair-viz-37d8e19389e3434a81da0c3d599b6e53.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-740339b6e6624c05832dc69a86d7bdf4"></div>
+<div id="altair-viz-37d8e19389e3434a81da0c3d599b6e53"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-740339b6e6624c05832dc69a86d7bdf4") {
-      outputDiv = document.getElementById("altair-viz-740339b6e6624c05832dc69a86d7bdf4");
+    if (outputDiv.id !== "altair-viz-37d8e19389e3434a81da0c3d599b6e53") {
+      outputDiv = document.getElementById("altair-viz-37d8e19389e3434a81da0c3d599b6e53");
     }
 
     const paths = {
@@ -1291,7 +1292,7 @@
 </section>
 <section id="for-these-measures-it-is-important-to-control-for-the-size-of-population" class="slide level2">
 <h2>For these measures it is important to control for the size of population</h2>
-<div id="c58738f8" class="cell" data-execution_count="13">
+<div id="c0047d3b" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a>state_pop[<span class="st">'asthma_cases_per_capita'</span>] <span class="op">=</span> state_pop[<span class="st">'number_of_asthma_cases'</span>] <span class="op">/</span> state_pop[<span class="st">'population'</span>]</span>
 <span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a>us_map <span class="op">=</span> (alt.Chart(state_map).mark_geoshape(color<span class="op">=</span><span class="st">'lightgray'</span>, stroke<span class="op">=</span><span class="st">'white'</span>)</span>
 <span id="cb13-3"><a aria-hidden="true" tabindex="-1"></a>          .project(<span class="bu">type</span><span class="op">=</span><span class="st">'albersUsa'</span>))</span>
@@ -1303,23 +1304,23 @@
 <div class="cell-output cell-output-display" data-execution_count="13">
 
 <style>
-  #altair-viz-cfb41dadfaf64a83bb93db400192377b.vega-embed {
+  #altair-viz-86e3ccbdc1544fbfa2074d9aaa5bfd92.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-cfb41dadfaf64a83bb93db400192377b.vega-embed details,
-  #altair-viz-cfb41dadfaf64a83bb93db400192377b.vega-embed details summary {
+  #altair-viz-86e3ccbdc1544fbfa2074d9aaa5bfd92.vega-embed details,
+  #altair-viz-86e3ccbdc1544fbfa2074d9aaa5bfd92.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-cfb41dadfaf64a83bb93db400192377b"></div>
+<div id="altair-viz-86e3ccbdc1544fbfa2074d9aaa5bfd92"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-cfb41dadfaf64a83bb93db400192377b") {
-      outputDiv = document.getElementById("altair-viz-cfb41dadfaf64a83bb93db400192377b");
+    if (outputDiv.id !== "altair-viz-86e3ccbdc1544fbfa2074d9aaa5bfd92") {
+      outputDiv = document.getElementById("altair-viz-86e3ccbdc1544fbfa2074d9aaa5bfd92");
     }
 
     const paths = {
@@ -1393,7 +1394,7 @@
 </section>
 <section id="a-choropleth-map-avoids-overlap-for-large-values-close-to-each-other" class="slide level2">
 <h2>A choropleth map avoids overlap for large values close to each other</h2>
-<div id="48a7dfe3" class="cell" data-execution_count="14">
+<div id="393f5768" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(state_map).mark_geoshape().transform_lookup(</span>
 <span id="cb14-2"><a aria-hidden="true" tabindex="-1"></a>    lookup<span class="op">=</span><span class="st">'id'</span>,</span>
 <span id="cb14-3"><a aria-hidden="true" tabindex="-1"></a>    from_<span class="op">=</span>alt.LookupData(state_pop, <span class="st">'id'</span>, [<span class="st">'asthma_cases_per_capita'</span>]))</span>
@@ -1402,23 +1403,23 @@
 <div class="cell-output cell-output-display" data-execution_count="14">
 
 <style>
-  #altair-viz-56646e3483a54b73bb4a465f046aeb5f.vega-embed {
+  #altair-viz-000c40b110ef40118100483c9e56f393.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-56646e3483a54b73bb4a465f046aeb5f.vega-embed details,
-  #altair-viz-56646e3483a54b73bb4a465f046aeb5f.vega-embed details summary {
+  #altair-viz-000c40b110ef40118100483c9e56f393.vega-embed details,
+  #altair-viz-000c40b110ef40118100483c9e56f393.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-56646e3483a54b73bb4a465f046aeb5f"></div>
+<div id="altair-viz-000c40b110ef40118100483c9e56f393"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-56646e3483a54b73bb4a465f046aeb5f") {
-      outputDiv = document.getElementById("altair-viz-56646e3483a54b73bb4a465f046aeb5f");
+    if (outputDiv.id !== "altair-viz-000c40b110ef40118100483c9e56f393") {
+      outputDiv = document.getElementById("altair-viz-000c40b110ef40118100483c9e56f393");
     }
 
     const paths = {
@@ -1488,7 +1489,7 @@
 </section>
 <section id="explicitly-setting-the-colour-scale-to-start-from-zero-is-less-misleading" class="slide level2">
 <h2>Explicitly setting the colour scale to start from zero is less misleading</h2>
-<div id="bed74f17" class="cell" data-execution_count="15">
+<div id="e01a6131" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(state_map).mark_geoshape().transform_lookup(</span>
 <span id="cb15-2"><a aria-hidden="true" tabindex="-1"></a>    lookup<span class="op">=</span><span class="st">'id'</span>,</span>
 <span id="cb15-3"><a aria-hidden="true" tabindex="-1"></a>    from_<span class="op">=</span>alt.LookupData(state_pop, <span class="st">'id'</span>, [<span class="st">'asthma_cases_per_capita'</span>]))</span>
@@ -1497,23 +1498,23 @@
 <div class="cell-output cell-output-display" data-execution_count="15">
 
 <style>
-  #altair-viz-24ba5c3198ab4015a3e71d723251502e.vega-embed {
+  #altair-viz-414641b1d3e84d958125b235e7a9e8bd.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-24ba5c3198ab4015a3e71d723251502e.vega-embed details,
-  #altair-viz-24ba5c3198ab4015a3e71d723251502e.vega-embed details summary {
+  #altair-viz-414641b1d3e84d958125b235e7a9e8bd.vega-embed details,
+  #altair-viz-414641b1d3e84d958125b235e7a9e8bd.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-24ba5c3198ab4015a3e71d723251502e"></div>
+<div id="altair-viz-414641b1d3e84d958125b235e7a9e8bd"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-24ba5c3198ab4015a3e71d723251502e") {
-      outputDiv = document.getElementById("altair-viz-24ba5c3198ab4015a3e71d723251502e");
+    if (outputDiv.id !== "altair-viz-414641b1d3e84d958125b235e7a9e8bd") {
+      outputDiv = document.getElementById("altair-viz-414641b1d3e84d958125b235e7a9e8bd");
     }
 
     const paths = {
@@ -1802,190 +1803,172 @@
       });
     </script>
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
-          }
-        }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
             }
           }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          return false;
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
             }
-          }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
         }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
-          }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
-        }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
               }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>

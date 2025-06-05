@@ -6,8 +6,8 @@
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-99fa6729ad23987aafeada22b1565191.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.43">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f428fda71a3abb5b1b9c21151da8fd61.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.31">
 
   <title>Data Visualization – Telling stories with visualizations</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -28,8 +28,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -40,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -93,7 +94,7 @@
     code span.vs { color: #da4453; } /* VerbatimString */
     code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-49c57219293d8fab0ee09da3582d89ec.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-b44c6fd600e88695524b4ccfa20f51f3.css">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -227,7 +228,7 @@
 </section>
 <section id="a-tail-of-global-deforestation" class="slide level2">
 <h2>A tail of global deforestation</h2>
-<div id="fcc968ad" class="cell" data-execution_count="2">
+<div id="52727a73" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a></span>
@@ -240,23 +241,23 @@
 <div class="cell-output cell-output-display" data-execution_count="2">
 
 <style>
-  #altair-viz-f37dfc82ae6043cc8670a49502f148cd.vega-embed {
+  #altair-viz-20e91b20cb84436c9728c961a1d40cc2.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-f37dfc82ae6043cc8670a49502f148cd.vega-embed details,
-  #altair-viz-f37dfc82ae6043cc8670a49502f148cd.vega-embed details summary {
+  #altair-viz-20e91b20cb84436c9728c961a1d40cc2.vega-embed details,
+  #altair-viz-20e91b20cb84436c9728c961a1d40cc2.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-f37dfc82ae6043cc8670a49502f148cd"></div>
+<div id="altair-viz-20e91b20cb84436c9728c961a1d40cc2"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f37dfc82ae6043cc8670a49502f148cd") {
-      outputDiv = document.getElementById("altair-viz-f37dfc82ae6043cc8670a49502f148cd");
+    if (outputDiv.id !== "altair-viz-20e91b20cb84436c9728c961a1d40cc2") {
+      outputDiv = document.getElementById("altair-viz-20e91b20cb84436c9728c961a1d40cc2");
     }
 
     const paths = {
@@ -327,7 +328,7 @@
 </section>
 <section id="half-of-the-tropical-deforestation-is-localized-to-only-two-countries" class="slide level2">
 <h2>Half of the tropical deforestation is localized to only two countries</h2>
-<div id="73b4ddcd" class="cell" data-execution_count="3">
+<div id="e948122e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>top_deforestation_regions <span class="op">=</span> pd.read_csv(<span class="st">'data/region-share-tropical-deforestation.csv'</span>)</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">'Brazil and Indonesia account for almost half of global deforestation'</span></span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(top_deforestation_regions, title<span class="op">=</span>title).mark_bar().encode(</span>
@@ -336,23 +337,23 @@
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-a9b76d94144243409972751c845ec61f.vega-embed {
+  #altair-viz-051127d07f2e4d15bf16515a945dd800.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-a9b76d94144243409972751c845ec61f.vega-embed details,
-  #altair-viz-a9b76d94144243409972751c845ec61f.vega-embed details summary {
+  #altair-viz-051127d07f2e4d15bf16515a945dd800.vega-embed details,
+  #altair-viz-051127d07f2e4d15bf16515a945dd800.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-a9b76d94144243409972751c845ec61f"></div>
+<div id="altair-viz-051127d07f2e4d15bf16515a945dd800"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-a9b76d94144243409972751c845ec61f") {
-      outputDiv = document.getElementById("altair-viz-a9b76d94144243409972751c845ec61f");
+    if (outputDiv.id !== "altair-viz-051127d07f2e4d15bf16515a945dd800") {
+      outputDiv = document.getElementById("altair-viz-051127d07f2e4d15bf16515a945dd800");
     }
 
     const paths = {
@@ -425,7 +426,7 @@
 </section>
 <section id="a-large-part-of-deforestation-is-driven-by-exported-commodities" class="slide level2">
 <h2>A large part of deforestation is driven by exported commodities</h2>
-<div id="62d60f7d" class="cell" data-execution_count="4">
+<div id="0b106473" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>deforestation_exported <span class="op">=</span> pd.read_csv(<span class="st">'data/share-deforestation-exported.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'Year'</span>])</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">'Exported commodities contribute heavily to deforestation'</span></span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(deforestation_exported, title<span class="op">=</span>title).mark_line().encode(</span>
@@ -435,23 +436,23 @@
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-3ecc283eea384cfea0d997db402c86be.vega-embed {
+  #altair-viz-6a8726c28e6144c98c65b7aecc478575.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-3ecc283eea384cfea0d997db402c86be.vega-embed details,
-  #altair-viz-3ecc283eea384cfea0d997db402c86be.vega-embed details summary {
+  #altair-viz-6a8726c28e6144c98c65b7aecc478575.vega-embed details,
+  #altair-viz-6a8726c28e6144c98c65b7aecc478575.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-3ecc283eea384cfea0d997db402c86be"></div>
+<div id="altair-viz-6a8726c28e6144c98c65b7aecc478575"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-3ecc283eea384cfea0d997db402c86be") {
-      outputDiv = document.getElementById("altair-viz-3ecc283eea384cfea0d997db402c86be");
+    if (outputDiv.id !== "altair-viz-6a8726c28e6144c98c65b7aecc478575") {
+      outputDiv = document.getElementById("altair-viz-6a8726c28e6144c98c65b7aecc478575");
     }
 
     const paths = {
@@ -523,7 +524,7 @@
 </section>
 <section id="demand-for-beef-is-the-biggest-reason-for-deforestation-in-brazil" class="slide level2">
 <h2>Demand for beef is the biggest reason for deforestation in Brazil</h2>
-<div id="e0bfaa17" class="cell" data-execution_count="5">
+<div id="c1b9a053" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>brazil_drivers <span class="op">=</span> pd.read_csv(<span class="st">"data/drivers-deforestation_2003-2013_brazil.csv"</span>)</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">"Cattle pasture was the biggest deforestation driver in Brazil 2003-2013"</span></span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(brazil_drivers, title<span class="op">=</span>title).mark_bar().encode(</span>
@@ -533,23 +534,23 @@
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-433ebcac78d0483b819052b5c6c2385d.vega-embed {
+  #altair-viz-c1d645fbbf9144e0b3ae9d2709e62553.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-433ebcac78d0483b819052b5c6c2385d.vega-embed details,
-  #altair-viz-433ebcac78d0483b819052b5c6c2385d.vega-embed details summary {
+  #altair-viz-c1d645fbbf9144e0b3ae9d2709e62553.vega-embed details,
+  #altair-viz-c1d645fbbf9144e0b3ae9d2709e62553.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-433ebcac78d0483b819052b5c6c2385d"></div>
+<div id="altair-viz-c1d645fbbf9144e0b3ae9d2709e62553"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-433ebcac78d0483b819052b5c6c2385d") {
-      outputDiv = document.getElementById("altair-viz-433ebcac78d0483b819052b5c6c2385d");
+    if (outputDiv.id !== "altair-viz-c1d645fbbf9144e0b3ae9d2709e62553") {
+      outputDiv = document.getElementById("altair-viz-c1d645fbbf9144e0b3ae9d2709e62553");
     }
 
     const paths = {
@@ -621,7 +622,7 @@
 </section>
 <section id="beef-is-highly-inefficient-use-of-land-to-generate-calories" class="slide level2">
 <h2>Beef is highly inefficient use of land to generate calories</h2>
-<div id="bc4fb6a9" class="cell" data-execution_count="6">
+<div id="c669691e" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>land_use <span class="op">=</span> pd.read_csv(<span class="st">'data/land-use-per-kcal.csv'</span>)</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">'Beef require the most land per 1000 kcal of food generated'</span></span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(land_use, title<span class="op">=</span>title).mark_bar().encode(</span>
@@ -630,23 +631,23 @@
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-8dd721a7d9af4171b5e9bafc6e3b31fd.vega-embed {
+  #altair-viz-2e0fbb12adc140c785fcdeee667cb9a8.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-8dd721a7d9af4171b5e9bafc6e3b31fd.vega-embed details,
-  #altair-viz-8dd721a7d9af4171b5e9bafc6e3b31fd.vega-embed details summary {
+  #altair-viz-2e0fbb12adc140c785fcdeee667cb9a8.vega-embed details,
+  #altair-viz-2e0fbb12adc140c785fcdeee667cb9a8.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-8dd721a7d9af4171b5e9bafc6e3b31fd"></div>
+<div id="altair-viz-2e0fbb12adc140c785fcdeee667cb9a8"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-8dd721a7d9af4171b5e9bafc6e3b31fd") {
-      outputDiv = document.getElementById("altair-viz-8dd721a7d9af4171b5e9bafc6e3b31fd");
+    if (outputDiv.id !== "altair-viz-2e0fbb12adc140c785fcdeee667cb9a8") {
+      outputDiv = document.getElementById("altair-viz-2e0fbb12adc140c785fcdeee667cb9a8");
     }
 
     const paths = {
@@ -720,7 +721,7 @@
 </section>
 <section id="palm-oil-is-the-biggest-contributor-to-deforestation-in-indonesia" class="slide level2">
 <h2>Palm oil is the biggest contributor to deforestation in Indonesia</h2>
-<div id="0f527846" class="cell" data-execution_count="7">
+<div id="d813e563" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>indonesia_drivers <span class="op">=</span> pd.read_csv(<span class="st">'data/drivers-deforestation_2003-2013_indonesia.csv'</span>)</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">'Palm oil was the biggest contribtutor in Indonesia 2003-2013'</span> </span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(indonesia_drivers, title<span class="op">=</span>title).mark_bar().encode(</span>
@@ -729,23 +730,23 @@
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-715fa116ee7f4fbda174cf4a0e3db26b.vega-embed {
+  #altair-viz-1ada80ae0dc349a497126fec7aeb5efd.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-715fa116ee7f4fbda174cf4a0e3db26b.vega-embed details,
-  #altair-viz-715fa116ee7f4fbda174cf4a0e3db26b.vega-embed details summary {
+  #altair-viz-1ada80ae0dc349a497126fec7aeb5efd.vega-embed details,
+  #altair-viz-1ada80ae0dc349a497126fec7aeb5efd.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-715fa116ee7f4fbda174cf4a0e3db26b"></div>
+<div id="altair-viz-1ada80ae0dc349a497126fec7aeb5efd"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-715fa116ee7f4fbda174cf4a0e3db26b") {
-      outputDiv = document.getElementById("altair-viz-715fa116ee7f4fbda174cf4a0e3db26b");
+    if (outputDiv.id !== "altair-viz-1ada80ae0dc349a497126fec7aeb5efd") {
+      outputDiv = document.getElementById("altair-viz-1ada80ae0dc349a497126fec7aeb5efd");
     }
 
     const paths = {
@@ -819,7 +820,7 @@
 </section>
 <section id="palm-oil-is-the-most-efficient-use-of-land-for-vegetable-oil-production" class="slide level2">
 <h2>Palm oil is the most efficient use of land for vegetable oil production</h2>
-<div id="c73fc937" class="cell" data-execution_count="8">
+<div id="97925725" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>oil_land_use <span class="op">=</span> pd.read_csv(<span class="st">'data/area-land-needed-to-global-oil.csv'</span>)</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">'Palm trees are a the most efficient oil crop'</span></span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(oil_land_use, title<span class="op">=</span>title).mark_bar().encode(</span>
@@ -828,23 +829,23 @@
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-03f188fc69394e5fa6eb4a303d95081a.vega-embed {
+  #altair-viz-125d041d1b1240b19b7fdeca1598c1a0.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-03f188fc69394e5fa6eb4a303d95081a.vega-embed details,
-  #altair-viz-03f188fc69394e5fa6eb4a303d95081a.vega-embed details summary {
+  #altair-viz-125d041d1b1240b19b7fdeca1598c1a0.vega-embed details,
+  #altair-viz-125d041d1b1240b19b7fdeca1598c1a0.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-03f188fc69394e5fa6eb4a303d95081a"></div>
+<div id="altair-viz-125d041d1b1240b19b7fdeca1598c1a0"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-03f188fc69394e5fa6eb4a303d95081a") {
-      outputDiv = document.getElementById("altair-viz-03f188fc69394e5fa6eb4a303d95081a");
+    if (outputDiv.id !== "altair-viz-125d041d1b1240b19b7fdeca1598c1a0") {
+      outputDiv = document.getElementById("altair-viz-125d041d1b1240b19b7fdeca1598c1a0");
     }
 
     const paths = {
@@ -1164,190 +1165,172 @@
       });
     </script>
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
-          }
-        }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
             }
           }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          return false;
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
             }
-          }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
         }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
-          }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
-        }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
               }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
