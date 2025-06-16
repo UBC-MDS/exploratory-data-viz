@@ -203,7 +203,7 @@
 </section>
 <section id="a-statistical-summary-is-useful-to-complement-visualizations" class="slide level2">
 <h2>A statistical summary is useful to complement visualizations</h2>
-<div id="b20b736e" class="cell" data-execution_count="2">
+<div id="407d8f71" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>movies_extended <span class="op">=</span> pd.read_csv(<span class="st">"data/movies-extended-eda.csv"</span>)</span>
@@ -279,7 +279,7 @@
 </section>
 <section id="visualizing-the-counts-of-all-categorical-columns-helps-us-understand-the-data" class="slide level2">
 <h2>Visualizing the counts of all categorical columns helps us understand the data</h2>
-<div id="a9048c23" class="cell" data-execution_count="3">
+<div id="82255a84" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>categorical_columns <span class="op">=</span> movies_extended.select_dtypes(<span class="st">'object'</span>).columns.tolist()</span>
@@ -292,23 +292,23 @@
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-d9dbe94ec8694e618eaaf473ef6e5148.vega-embed {
+  #altair-viz-52c586aec82d46a3b7175d2675d964e8.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d9dbe94ec8694e618eaaf473ef6e5148.vega-embed details,
-  #altair-viz-d9dbe94ec8694e618eaaf473ef6e5148.vega-embed details summary {
+  #altair-viz-52c586aec82d46a3b7175d2675d964e8.vega-embed details,
+  #altair-viz-52c586aec82d46a3b7175d2675d964e8.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d9dbe94ec8694e618eaaf473ef6e5148"></div>
+<div id="altair-viz-52c586aec82d46a3b7175d2675d964e8"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d9dbe94ec8694e618eaaf473ef6e5148") {
-      outputDiv = document.getElementById("altair-viz-d9dbe94ec8694e618eaaf473ef6e5148");
+    if (outputDiv.id !== "altair-viz-52c586aec82d46a3b7175d2675d964e8") {
+      outputDiv = document.getElementById("altair-viz-52c586aec82d46a3b7175d2675d964e8");
     }
 
     const paths = {
@@ -380,7 +380,7 @@
 </section>
 <section id="repeat-can-also-be-used-to-explore-the-counts-of-combinations-of-categorical-columns" class="slide level2">
 <h2>Repeat can also be used to explore the counts of combinations of categorical columns</h2>
-<div id="5f8a8713" class="cell" data-execution_count="4">
+<div id="7737d756" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(movies_extended).mark_circle().encode(</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(alt.repeat(<span class="st">'column'</span>), <span class="bu">type</span><span class="op">=</span><span class="st">'nominal'</span>, sort<span class="op">=</span><span class="st">'-size'</span>, title<span class="op">=</span><span class="va">None</span>),</span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(alt.repeat(<span class="st">'row'</span>), <span class="bu">type</span><span class="op">=</span><span class="st">'nominal'</span>, sort<span class="op">=</span><span class="st">'size'</span>, title<span class="op">=</span><span class="va">None</span>),</span>
@@ -391,23 +391,23 @@
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-f8bdc620e63d438ab60d5fc41510d05b.vega-embed {
+  #altair-viz-73a764e0a7a94199848ea672c973854c.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-f8bdc620e63d438ab60d5fc41510d05b.vega-embed details,
-  #altair-viz-f8bdc620e63d438ab60d5fc41510d05b.vega-embed details summary {
+  #altair-viz-73a764e0a7a94199848ea672c973854c.vega-embed details,
+  #altair-viz-73a764e0a7a94199848ea672c973854c.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-f8bdc620e63d438ab60d5fc41510d05b"></div>
+<div id="altair-viz-73a764e0a7a94199848ea672c973854c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f8bdc620e63d438ab60d5fc41510d05b") {
-      outputDiv = document.getElementById("altair-viz-f8bdc620e63d438ab60d5fc41510d05b");
+    if (outputDiv.id !== "altair-viz-73a764e0a7a94199848ea672c973854c") {
+      outputDiv = document.getElementById("altair-viz-73a764e0a7a94199848ea672c973854c");
     }
 
     const paths = {
@@ -478,7 +478,7 @@
 </section>
 <section id="altairs-grammar-allows-us-to-repeat-facetted-charts" class="slide level2">
 <h2>Altair’s grammar allows us to repeat facetted charts</h2>
-<div id="1a49ad4e" class="cell" data-execution_count="5">
+<div id="f2f45d8e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>movies_extended[<span class="st">'Top Rated'</span>] <span class="op">=</span> movies_extended[<span class="st">'IMDB Rating'</span>] <span class="op">&gt;</span> <span class="dv">8</span></span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(movies_extended[movies_extended[<span class="st">'MPAA Rating'</span>].isin([<span class="st">"G"</span>, <span class="st">"R"</span>])])</span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a> .mark_boxplot().encode(</span>
@@ -489,23 +489,23 @@
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-48588142c8ac4441b2dc780efa5a1a75.vega-embed {
+  #altair-viz-8640b252ea514f2c9f4710db6e36a26c.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-48588142c8ac4441b2dc780efa5a1a75.vega-embed details,
-  #altair-viz-48588142c8ac4441b2dc780efa5a1a75.vega-embed details summary {
+  #altair-viz-8640b252ea514f2c9f4710db6e36a26c.vega-embed details,
+  #altair-viz-8640b252ea514f2c9f4710db6e36a26c.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-48588142c8ac4441b2dc780efa5a1a75"></div>
+<div id="altair-viz-8640b252ea514f2c9f4710db6e36a26c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-48588142c8ac4441b2dc780efa5a1a75") {
-      outputDiv = document.getElementById("altair-viz-48588142c8ac4441b2dc780efa5a1a75");
+    if (outputDiv.id !== "altair-viz-8640b252ea514f2c9f4710db6e36a26c") {
+      outputDiv = document.getElementById("altair-viz-8640b252ea514f2c9f4710db6e36a26c");
     }
 
     const paths = {
@@ -560,7 +560,7 @@
 <aside class="notes">
 <p>Thanks to the flexible grammar of graphics in Altair, we are able to repeat complex charts, such as those already containing facets.</p>
 <p>In this case, we are interested in comparing the counts of the Major Genres and Create Types within each of the <code>G</code> and <code>R</code> MPAA RAtings.</p>
-<p>To achieve this, we first facet the chart and then repeat it, combing the principles we have learned so far in the course.</p>
+<p>To achieve this, we first facet the chart and then repeat it, combining the principles we have learned so far in the course.</p>
 <p>Now we can answer questions such as which the most popular genres are within each of the ratings.</p>
 <p>As we might have expected, the top genres differ depending on the MPAA Rating, and there are many genres that are not even present for the family-rated G movies.</p>
 <style type="text/css">
