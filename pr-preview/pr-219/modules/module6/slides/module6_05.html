@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-c1f63da3e08f13bc72dc17e92cfd001d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
+
+  <title>Data Visualization – Figure Composition</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #383a42;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #383a42; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #50a14f; } /* Annotation */
+    code span.at { color: #a626a4; } /* Attribute */
+    code span.bn { color: #986801; } /* BaseN */
+    code span.bu { color: #a626a4; } /* BuiltIn */
+    code span.cf { color: #a626a4; } /* ControlFlow */
+    code span.ch { color: #50a14f; } /* Char */
+    code span.cn { color: #986801; } /* Constant */
+    code span.co { color: #a0a1a7; font-style: italic; } /* Comment */
+    code span.cv { color: #e45649; font-style: italic; } /* CommentVar */
+    code span.do { color: #e45649; } /* Documentation */
+    code span.dt { color: #a626a4; } /* DataType */
+    code span.dv { color: #986801; } /* DecVal */
+    code span.er { color: #f44747; text-decoration: underline; } /* Error */
+    code span.ex { color: #4078f2; font-weight: bold; } /* Extension */
+    code span.fl { color: #986801; } /* Float */
+    code span.fu { color: #4078f2; } /* Function */
+    code span.im { color: #50a14f; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #a626a4; } /* Keyword */
+    code span.op { color: #a626a4; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #a626a4; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #0184bc; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #50a14f; } /* String */
+    code span.va { color: #e45649; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-a39c3722d301e0f3904de056e7f57251.css">
+  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-notes="<p>In this module we will see how we layout plots together in a panel, instead of showing only one at a time.</p>" class="quarto-title-block center">
+  <h1 class="title">Figure Composition</h1>
+
+<div class="quarto-title-authors">
+</div>
+
+</section>
+<section id="recreating-the-chart-from-last-slide-deck" class="slide level2">
+<h2>Recreating the chart from last slide deck</h2>
+<div id="497f1585" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vega_datasets <span class="im">import</span> data</span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>state_map <span class="op">=</span> alt.topo_feature(data.us_10m.url, <span class="st">"states"</span>)</span>
+<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>state_pop <span class="op">=</span> pd.read_csv(<span class="st">"data/us_population_coordinates_asthma-cases.csv"</span>)</span>
+<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>state_pop[<span class="st">"asthma_cases_per_capita"</span>] <span class="op">=</span> (</span>
+<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>    state_pop[<span class="st">"number_of_asthma_cases"</span>] <span class="op">/</span> state_pop[<span class="st">"population"</span>]</span>
+<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>choropleth <span class="op">=</span> (</span>
+<span id="cb1-11"><a aria-hidden="true" tabindex="-1"></a>    alt.Chart(state_map)</span>
+<span id="cb1-12"><a aria-hidden="true" tabindex="-1"></a>    .mark_geoshape()</span>
+<span id="cb1-13"><a aria-hidden="true" tabindex="-1"></a>    .transform_lookup(</span>
+<span id="cb1-14"><a aria-hidden="true" tabindex="-1"></a>        lookup<span class="op">=</span><span class="st">"id"</span>, from_<span class="op">=</span>alt.LookupData(state_pop, <span class="st">"id"</span>, [<span class="st">"asthma_cases_per_capita"</span>])</span>
+<span id="cb1-15"><a aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-16"><a aria-hidden="true" tabindex="-1"></a>    .encode(</span>
+<span id="cb1-17"><a aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>alt.Color(<span class="st">"asthma_cases_per_capita:Q"</span>, title<span class="op">=</span><span class="st">"Asthma cases per capita"</span>)</span>
+<span id="cb1-18"><a aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-19"><a aria-hidden="true" tabindex="-1"></a>    .project(<span class="bu">type</span><span class="op">=</span><span class="st">"albersUsa"</span>)</span>
+<span id="cb1-20"><a aria-hidden="true" tabindex="-1"></a>    .properties(width<span class="op">=</span><span class="dv">500</span>, height<span class="op">=</span><span class="dv">150</span>)</span>
+<span id="cb1-21"><a aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-22"><a aria-hidden="true" tabindex="-1"></a>choropleth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+
+<style>
+  #altair-viz-03aef5f9a49449baa5fa13274f12a25e.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-03aef5f9a49449baa5fa13274f12a25e.vega-embed details,
+  #altair-viz-03aef5f9a49449baa5fa13274f12a25e.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-03aef5f9a49449baa5fa13274f12a25e"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-03aef5f9a49449baa5fa13274f12a25e") {
+      outputDiv = document.getElementById("altair-viz-03aef5f9a49449baa5fa13274f12a25e");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/us-10m.json", "format": {"feature": "states", "type": "topojson"}}, "mark": {"type": "geoshape"}, "encoding": {"color": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 150, "projection": {"type": "albersUsa"}, "transform": [{"lookup": "id", "from": {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "key": "id", "fields": ["asthma_cases_per_capita"]}}], "width": 500, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-4acfa937387f9b7b32d43a126af5b75d": [{"state": "Alabama", "id": 1, "population": 4863300, "latitude": 32.7794, "longitude": -86.8287, "number_of_asthma_cases": 394634, "asthma_cases_per_capita": 0.0811453128534123}, {"state": "Alaska", "id": 2, "population": 741894, "latitude": 64.0685, "longitude": -152.2782, "number_of_asthma_cases": 50685, "asthma_cases_per_capita": 0.06831838510622812}, {"state": "Arizona", "id": 4, "population": 6931071, "latitude": 34.2744, "longitude": -111.6602, "number_of_asthma_cases": 545104, "asthma_cases_per_capita": 0.07864643141009521}, {"state": "Arkansas", "id": 5, "population": 2988248, "latitude": 34.8938, "longitude": -92.4426, "number_of_asthma_cases": 225853, "asthma_cases_per_capita": 0.0755804069809467}, {"state": "California", "id": 6, "population": 39250017, "latitude": 37.1841, "longitude": -119.4696, "number_of_asthma_cases": 2607598, "asthma_cases_per_capita": 0.06643558905974487}, {"state": "Colorado", "id": 8, "population": 5540545, "latitude": 38.9972, "longitude": -105.5478, "number_of_asthma_cases": 399357, "asthma_cases_per_capita": 0.07207901027786978}, {"state": "Connecticut", "id": 9, "population": 3576452, "latitude": 41.6219, "longitude": -72.7273, "number_of_asthma_cases": 290278, "asthma_cases_per_capita": 0.0811636784164865}, {"state": "Delaware", "id": 10, "population": 952065, "latitude": 38.9896, "longitude": -75.505, "number_of_asthma_cases": 77035, "asthma_cases_per_capita": 0.08091359308450578}, {"state": "District of Columbia", "id": 11, "population": 681170, "latitude": 38.9101, "longitude": -77.0147, "number_of_asthma_cases": 66441, "asthma_cases_per_capita": 0.0975395275775504}, {"state": "Florida", "id": 12, "population": 20612439, "latitude": 28.6305, "longitude": -82.4497, "number_of_asthma_cases": 1495632, "asthma_cases_per_capita": 0.07255968107413198}, {"state": "Georgia", "id": 13, "population": 10310371, "latitude": 32.6415, "longitude": -83.4426, "number_of_asthma_cases": 714569, "asthma_cases_per_capita": 0.06930584748114302}, {"state": "Hawaii", "id": 15, "population": 1428557, "latitude": 20.2927, "longitude": -156.3737, "number_of_asthma_cases": 104368, "asthma_cases_per_capita": 0.07305833788921268}, {"state": "Idaho", "id": 16, "population": 1683140, "latitude": 44.3509, "longitude": -114.613, "number_of_asthma_cases": 111954, "asthma_cases_per_capita": 0.06651496607531163}, {"state": "Illinois", "id": 17, "population": 12801539, "latitude": 40.0417, "longitude": -89.1965, "number_of_asthma_cases": 860007, "asthma_cases_per_capita": 0.06717996953335063}, {"state": "Indiana", "id": 18, "population": 6633053, "latitude": 39.8942, "longitude": -86.2816, "number_of_asthma_cases": 509651, "asthma_cases_per_capita": 0.07683505619508844}, {"state": "Iowa", "id": 19, "population": 3134693, "latitude": 42.0751, "longitude": -93.496, "number_of_asthma_cases": 190960, "asthma_cases_per_capita": 0.06091824622060278}, {"state": "Kansas", "id": 20, "population": 2907289, "latitude": 38.4937, "longitude": -98.3804, "number_of_asthma_cases": 214698, "asthma_cases_per_capita": 0.07384817952394826}, {"state": "Kentucky", "id": 21, "population": 4436974, "latitude": 37.5347, "longitude": -85.3021, "number_of_asthma_cases": 395345, "asthma_cases_per_capita": 0.08910239275686538}, {"state": "Louisiana", "id": 22, "population": 4681666, "latitude": 31.0689, "longitude": -91.9968, "number_of_asthma_cases": 316423, "asthma_cases_per_capita": 0.06758769207371905}, {"state": "Maine", "id": 23, "population": 1331479, "latitude": 45.3695, "longitude": -69.2428, "number_of_asthma_cases": 132126, "asthma_cases_per_capita": 0.09923250760995855}, {"state": "Maryland", "id": 24, "population": 6016447, "latitude": 39.055, "longitude": -76.7909, "number_of_asthma_cases": 439909, "asthma_cases_per_capita": 0.07311773875843999}, {"state": "Massachusetts", "id": 25, "population": 6811779, "latitude": 42.2596, "longitude": -71.8083, "number_of_asthma_cases": 558435, "asthma_cases_per_capita": 0.08198078651700239}, {"state": "Michigan", "id": 26, "population": 9928300, "latitude": 44.3467, "longitude": -85.4102, "number_of_asthma_cases": 872519, "asthma_cases_per_capita": 0.08788201404067161}, {"state": "Minnesota", "id": 27, "population": 5519952, "latitude": 46.2807, "longitude": -94.3053, "number_of_asthma_cases": 357232, "asthma_cases_per_capita": 0.064716504781201}, {"state": "Mississippi", "id": 28, "population": 2988726, "latitude": 32.7364, "longitude": -89.6678, "number_of_asthma_cases": 218223, "asthma_cases_per_capita": 0.07301539184254428}, {"state": "Missouri", "id": 29, "population": 6093000, "latitude": 38.3566, "longitude": -92.458, "number_of_asthma_cases": 444334, "asthma_cases_per_capita": 0.07292532414245856}, {"state": "Montana", "id": 30, "population": 1042520, "latitude": 47.0527, "longitude": -109.6333, "number_of_asthma_cases": 82660, "asthma_cases_per_capita": 0.07928864674059011}, {"state": "Nebraska", "id": 31, "population": 1907116, "latitude": 41.5378, "longitude": -99.7951, "number_of_asthma_cases": 128793, "asthma_cases_per_capita": 0.06753286113692088}, {"state": "Nevada", "id": 32, "population": 2940058, "latitude": 39.3289, "longitude": -116.6312, "number_of_asthma_cases": 186787, "asthma_cases_per_capita": 0.06353173985003017}, {"state": "New Hampshire", "id": 33, "population": 1334795, "latitude": 43.6805, "longitude": -71.5811, "number_of_asthma_cases": 128307, "asthma_cases_per_capita": 0.09612487310785552}, {"state": "New Jersey", "id": 34, "population": 8944469, "latitude": 40.1907, "longitude": -74.6728, "number_of_asthma_cases": 593242, "asthma_cases_per_capita": 0.06632501046177253}, {"state": "New Mexico", "id": 35, "population": 2081015, "latitude": 34.4071, "longitude": -106.1126, "number_of_asthma_cases": 157177, "asthma_cases_per_capita": 0.07552900868086006}, {"state": "New York", "id": 36, "population": 19745289, "latitude": 42.9538, "longitude": -75.5268, "number_of_asthma_cases": 1578011, "asthma_cases_per_capita": 0.07991835419577804}, {"state": "North Carolina", "id": 37, "population": 10146788, "latitude": 35.5557, "longitude": -79.3877, "number_of_asthma_cases": 757790, "asthma_cases_per_capita": 0.07468274689487944}, {"state": "North Dakota", "id": 38, "population": 757952, "latitude": 47.4501, "longitude": -100.4659, "number_of_asthma_cases": 46996, "asthma_cases_per_capita": 0.0620039263700076}, {"state": "Ohio", "id": 39, "population": 11614373, "latitude": 40.2862, "longitude": -82.7937, "number_of_asthma_cases": 854186, "asthma_cases_per_capita": 0.0735455973387457}, {"state": "Oklahoma", "id": 40, "population": 3923561, "latitude": 35.5889, "longitude": -97.4943, "number_of_asthma_cases": 307581, "asthma_cases_per_capita": 0.07839332687831284}, {"state": "Oregon", "id": 41, "population": 4093465, "latitude": 43.9336, "longitude": -120.5583, "number_of_asthma_cases": 383340, "asthma_cases_per_capita": 0.09364682487819}, {"state": "Pennsylvania", "id": 42, "population": 12784227, "latitude": 40.8781, "longitude": -77.7996, "number_of_asthma_cases": 1012588, "asthma_cases_per_capita": 0.07920604038085369}, {"state": "Rhode Island", "id": 44, "population": 1056426, "latitude": 41.6762, "longitude": -71.5562, "number_of_asthma_cases": 101251, "asthma_cases_per_capita": 0.09584296486455275}, {"state": "South Carolina", "id": 45, "population": 4961119, "latitude": 33.9169, "longitude": -80.8964, "number_of_asthma_cases": 360353, "asthma_cases_per_capita": 0.07263542761219798}, {"state": "South Dakota", "id": 46, "population": 865454, "latitude": 44.4443, "longitude": -100.2263, "number_of_asthma_cases": 51652, "asthma_cases_per_capita": 0.05968197038779646}, {"state": "Tennessee", "id": 47, "population": 6651194, "latitude": 35.85800000000001, "longitude": -86.3505, "number_of_asthma_cases": 513084, "asthma_cases_per_capita": 0.07714163802769848}, {"state": "Texas", "id": 48, "population": 27862596, "latitude": 31.4757, "longitude": -99.3312, "number_of_asthma_cases": 1572815, "asthma_cases_per_capita": 0.056448975536952835}, {"state": "Utah", "id": 49, "population": 3051217, "latitude": 39.3055, "longitude": -111.6703, "number_of_asthma_cases": 206360, "asthma_cases_per_capita": 0.06763203010470904}, {"state": "Vermont", "id": 50, "population": 624594, "latitude": 44.0687, "longitude": -72.6658, "number_of_asthma_cases": 60216, "asthma_cases_per_capita": 0.09640822678411896}, {"state": "Virginia", "id": 51, "population": 8411808, "latitude": 37.5215, "longitude": -78.8537, "number_of_asthma_cases": 563510, "asthma_cases_per_capita": 0.06699035451118238}, {"state": "Washington", "id": 53, "population": 7288000, "latitude": 47.3826, "longitude": -120.4472, "number_of_asthma_cases": 558951, "asthma_cases_per_capita": 0.07669470362239297}, {"state": "West Virginia", "id": 54, "population": 1831102, "latitude": 38.6409, "longitude": -80.6227, "number_of_asthma_cases": 175368, "asthma_cases_per_capita": 0.09577183575792064}, {"state": "Wisconsin", "id": 55, "population": 5778708, "latitude": 44.6243, "longitude": -89.9941, "number_of_asthma_cases": 408318, "asthma_cases_per_capita": 0.07065904697036085}, {"state": "Wyoming", "id": 56, "population": 585501, "latitude": 42.9957, "longitude": -107.5512, "number_of_asthma_cases": 38099, "asthma_cases_per_capita": 0.06507076845300008}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<aside class="notes">
+<p>On this slide we are recreating the choropleth pointplot map from the end of the last slide deck. We are saving it as an object so that we can use it to practice laying out plots together in a panel on the following slides.</p>
+<p>We set the width of this map because we will be combining it with other figures later and we want them all to be of the same width for the figure panel to look aesthetically pleasing.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-barchart-is-able-to-represent-relative-differences-more-precisely" class="slide level2">
+<h2>A barchart is able to represent relative differences more precisely</h2>
+<div id="ddecbf6a" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> (alt.Chart(state_pop).mark_bar().encode(</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'state'</span>, sort<span class="op">=</span><span class="st">'-y'</span>, title<span class="op">=</span><span class="st">''</span>),</span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'asthma_cases_per_capita'</span>, title<span class="op">=</span><span class="st">'Asthma cases per capita'</span>))</span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>    .properties(width<span class="op">=</span><span class="dv">500</span>, height<span class="op">=</span><span class="dv">75</span>))</span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>bars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+
+<style>
+  #altair-viz-dea96fa8337e4eb4866c32c7c5883135.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-dea96fa8337e4eb4866c32c7c5883135.vega-embed details,
+  #altair-viz-dea96fa8337e4eb4866c32c7c5883135.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-dea96fa8337e4eb4866c32c7c5883135"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-dea96fa8337e4eb4866c32c7c5883135") {
+      outputDiv = document.getElementById("altair-viz-dea96fa8337e4eb4866c32c7c5883135");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "mark": {"type": "bar"}, "encoding": {"x": {"field": "state", "sort": "-y", "title": "", "type": "nominal"}, "y": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 75, "width": 500, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-4acfa937387f9b7b32d43a126af5b75d": [{"state": "Alabama", "id": 1, "population": 4863300, "latitude": 32.7794, "longitude": -86.8287, "number_of_asthma_cases": 394634, "asthma_cases_per_capita": 0.0811453128534123}, {"state": "Alaska", "id": 2, "population": 741894, "latitude": 64.0685, "longitude": -152.2782, "number_of_asthma_cases": 50685, "asthma_cases_per_capita": 0.06831838510622812}, {"state": "Arizona", "id": 4, "population": 6931071, "latitude": 34.2744, "longitude": -111.6602, "number_of_asthma_cases": 545104, "asthma_cases_per_capita": 0.07864643141009521}, {"state": "Arkansas", "id": 5, "population": 2988248, "latitude": 34.8938, "longitude": -92.4426, "number_of_asthma_cases": 225853, "asthma_cases_per_capita": 0.0755804069809467}, {"state": "California", "id": 6, "population": 39250017, "latitude": 37.1841, "longitude": -119.4696, "number_of_asthma_cases": 2607598, "asthma_cases_per_capita": 0.06643558905974487}, {"state": "Colorado", "id": 8, "population": 5540545, "latitude": 38.9972, "longitude": -105.5478, "number_of_asthma_cases": 399357, "asthma_cases_per_capita": 0.07207901027786978}, {"state": "Connecticut", "id": 9, "population": 3576452, "latitude": 41.6219, "longitude": -72.7273, "number_of_asthma_cases": 290278, "asthma_cases_per_capita": 0.0811636784164865}, {"state": "Delaware", "id": 10, "population": 952065, "latitude": 38.9896, "longitude": -75.505, "number_of_asthma_cases": 77035, "asthma_cases_per_capita": 0.08091359308450578}, {"state": "District of Columbia", "id": 11, "population": 681170, "latitude": 38.9101, "longitude": -77.0147, "number_of_asthma_cases": 66441, "asthma_cases_per_capita": 0.0975395275775504}, {"state": "Florida", "id": 12, "population": 20612439, "latitude": 28.6305, "longitude": -82.4497, "number_of_asthma_cases": 1495632, "asthma_cases_per_capita": 0.07255968107413198}, {"state": "Georgia", "id": 13, "population": 10310371, "latitude": 32.6415, "longitude": -83.4426, "number_of_asthma_cases": 714569, "asthma_cases_per_capita": 0.06930584748114302}, {"state": "Hawaii", "id": 15, "population": 1428557, "latitude": 20.2927, "longitude": -156.3737, "number_of_asthma_cases": 104368, "asthma_cases_per_capita": 0.07305833788921268}, {"state": "Idaho", "id": 16, "population": 1683140, "latitude": 44.3509, "longitude": -114.613, "number_of_asthma_cases": 111954, "asthma_cases_per_capita": 0.06651496607531163}, {"state": "Illinois", "id": 17, "population": 12801539, "latitude": 40.0417, "longitude": -89.1965, "number_of_asthma_cases": 860007, "asthma_cases_per_capita": 0.06717996953335063}, {"state": "Indiana", "id": 18, "population": 6633053, "latitude": 39.8942, "longitude": -86.2816, "number_of_asthma_cases": 509651, "asthma_cases_per_capita": 0.07683505619508844}, {"state": "Iowa", "id": 19, "population": 3134693, "latitude": 42.0751, "longitude": -93.496, "number_of_asthma_cases": 190960, "asthma_cases_per_capita": 0.06091824622060278}, {"state": "Kansas", "id": 20, "population": 2907289, "latitude": 38.4937, "longitude": -98.3804, "number_of_asthma_cases": 214698, "asthma_cases_per_capita": 0.07384817952394826}, {"state": "Kentucky", "id": 21, "population": 4436974, "latitude": 37.5347, "longitude": -85.3021, "number_of_asthma_cases": 395345, "asthma_cases_per_capita": 0.08910239275686538}, {"state": "Louisiana", "id": 22, "population": 4681666, "latitude": 31.0689, "longitude": -91.9968, "number_of_asthma_cases": 316423, "asthma_cases_per_capita": 0.06758769207371905}, {"state": "Maine", "id": 23, "population": 1331479, "latitude": 45.3695, "longitude": -69.2428, "number_of_asthma_cases": 132126, "asthma_cases_per_capita": 0.09923250760995855}, {"state": "Maryland", "id": 24, "population": 6016447, "latitude": 39.055, "longitude": -76.7909, "number_of_asthma_cases": 439909, "asthma_cases_per_capita": 0.07311773875843999}, {"state": "Massachusetts", "id": 25, "population": 6811779, "latitude": 42.2596, "longitude": -71.8083, "number_of_asthma_cases": 558435, "asthma_cases_per_capita": 0.08198078651700239}, {"state": "Michigan", "id": 26, "population": 9928300, "latitude": 44.3467, "longitude": -85.4102, "number_of_asthma_cases": 872519, "asthma_cases_per_capita": 0.08788201404067161}, {"state": "Minnesota", "id": 27, "population": 5519952, "latitude": 46.2807, "longitude": -94.3053, "number_of_asthma_cases": 357232, "asthma_cases_per_capita": 0.064716504781201}, {"state": "Mississippi", "id": 28, "population": 2988726, "latitude": 32.7364, "longitude": -89.6678, "number_of_asthma_cases": 218223, "asthma_cases_per_capita": 0.07301539184254428}, {"state": "Missouri", "id": 29, "population": 6093000, "latitude": 38.3566, "longitude": -92.458, "number_of_asthma_cases": 444334, "asthma_cases_per_capita": 0.07292532414245856}, {"state": "Montana", "id": 30, "population": 1042520, "latitude": 47.0527, "longitude": -109.6333, "number_of_asthma_cases": 82660, "asthma_cases_per_capita": 0.07928864674059011}, {"state": "Nebraska", "id": 31, "population": 1907116, "latitude": 41.5378, "longitude": -99.7951, "number_of_asthma_cases": 128793, "asthma_cases_per_capita": 0.06753286113692088}, {"state": "Nevada", "id": 32, "population": 2940058, "latitude": 39.3289, "longitude": -116.6312, "number_of_asthma_cases": 186787, "asthma_cases_per_capita": 0.06353173985003017}, {"state": "New Hampshire", "id": 33, "population": 1334795, "latitude": 43.6805, "longitude": -71.5811, "number_of_asthma_cases": 128307, "asthma_cases_per_capita": 0.09612487310785552}, {"state": "New Jersey", "id": 34, "population": 8944469, "latitude": 40.1907, "longitude": -74.6728, "number_of_asthma_cases": 593242, "asthma_cases_per_capita": 0.06632501046177253}, {"state": "New Mexico", "id": 35, "population": 2081015, "latitude": 34.4071, "longitude": -106.1126, "number_of_asthma_cases": 157177, "asthma_cases_per_capita": 0.07552900868086006}, {"state": "New York", "id": 36, "population": 19745289, "latitude": 42.9538, "longitude": -75.5268, "number_of_asthma_cases": 1578011, "asthma_cases_per_capita": 0.07991835419577804}, {"state": "North Carolina", "id": 37, "population": 10146788, "latitude": 35.5557, "longitude": -79.3877, "number_of_asthma_cases": 757790, "asthma_cases_per_capita": 0.07468274689487944}, {"state": "North Dakota", "id": 38, "population": 757952, "latitude": 47.4501, "longitude": -100.4659, "number_of_asthma_cases": 46996, "asthma_cases_per_capita": 0.0620039263700076}, {"state": "Ohio", "id": 39, "population": 11614373, "latitude": 40.2862, "longitude": -82.7937, "number_of_asthma_cases": 854186, "asthma_cases_per_capita": 0.0735455973387457}, {"state": "Oklahoma", "id": 40, "population": 3923561, "latitude": 35.5889, "longitude": -97.4943, "number_of_asthma_cases": 307581, "asthma_cases_per_capita": 0.07839332687831284}, {"state": "Oregon", "id": 41, "population": 4093465, "latitude": 43.9336, "longitude": -120.5583, "number_of_asthma_cases": 383340, "asthma_cases_per_capita": 0.09364682487819}, {"state": "Pennsylvania", "id": 42, "population": 12784227, "latitude": 40.8781, "longitude": -77.7996, "number_of_asthma_cases": 1012588, "asthma_cases_per_capita": 0.07920604038085369}, {"state": "Rhode Island", "id": 44, "population": 1056426, "latitude": 41.6762, "longitude": -71.5562, "number_of_asthma_cases": 101251, "asthma_cases_per_capita": 0.09584296486455275}, {"state": "South Carolina", "id": 45, "population": 4961119, "latitude": 33.9169, "longitude": -80.8964, "number_of_asthma_cases": 360353, "asthma_cases_per_capita": 0.07263542761219798}, {"state": "South Dakota", "id": 46, "population": 865454, "latitude": 44.4443, "longitude": -100.2263, "number_of_asthma_cases": 51652, "asthma_cases_per_capita": 0.05968197038779646}, {"state": "Tennessee", "id": 47, "population": 6651194, "latitude": 35.85800000000001, "longitude": -86.3505, "number_of_asthma_cases": 513084, "asthma_cases_per_capita": 0.07714163802769848}, {"state": "Texas", "id": 48, "population": 27862596, "latitude": 31.4757, "longitude": -99.3312, "number_of_asthma_cases": 1572815, "asthma_cases_per_capita": 0.056448975536952835}, {"state": "Utah", "id": 49, "population": 3051217, "latitude": 39.3055, "longitude": -111.6703, "number_of_asthma_cases": 206360, "asthma_cases_per_capita": 0.06763203010470904}, {"state": "Vermont", "id": 50, "population": 624594, "latitude": 44.0687, "longitude": -72.6658, "number_of_asthma_cases": 60216, "asthma_cases_per_capita": 0.09640822678411896}, {"state": "Virginia", "id": 51, "population": 8411808, "latitude": 37.5215, "longitude": -78.8537, "number_of_asthma_cases": 563510, "asthma_cases_per_capita": 0.06699035451118238}, {"state": "Washington", "id": 53, "population": 7288000, "latitude": 47.3826, "longitude": -120.4472, "number_of_asthma_cases": 558951, "asthma_cases_per_capita": 0.07669470362239297}, {"state": "West Virginia", "id": 54, "population": 1831102, "latitude": 38.6409, "longitude": -80.6227, "number_of_asthma_cases": 175368, "asthma_cases_per_capita": 0.09577183575792064}, {"state": "Wisconsin", "id": 55, "population": 5778708, "latitude": 44.6243, "longitude": -89.9941, "number_of_asthma_cases": 408318, "asthma_cases_per_capita": 0.07065904697036085}, {"state": "Wyoming", "id": 56, "population": 585501, "latitude": 42.9957, "longitude": -107.5512, "number_of_asthma_cases": 38099, "asthma_cases_per_capita": 0.06507076845300008}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<aside class="notes">
+<p>At the end of the last slide deck we mentioned that it would good to couple our map with a bar chart since this would make it easier to compare the relative differences between the states more precisely.</p>
+<p>Here we create that bar chart and as you can see, we can now tell apart small differences between the states and we are able to clearly see the values also for states with small areas, such as Rhode Island which is barely visible on the map.</p>
+<p>While having the labels on the x-axis makes them harder to read it will make our bar plot fit in better with the map in the figure layout, which is why we have opted for this encoding here.</p>
+<p>We’re setting a pretty low height so that this chart will work well in the multi-panel figures we are creating in later on in this slide deck.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="placing-plots-next-to-each-other-allows-us-to-make-direct-comparisons" class="slide level2">
+<h2>Placing plots next to each other allows us to make direct comparisons</h2>
+<div id="f7acf69a" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># alt.vconcat(choropleth, bars)</span></span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>choropleth <span class="op">&amp;</span> bars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+
+<style>
+  #altair-viz-033c1220c5034fe6a3a045c7153c9699.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-033c1220c5034fe6a3a045c7153c9699.vega-embed details,
+  #altair-viz-033c1220c5034fe6a3a045c7153c9699.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-033c1220c5034fe6a3a045c7153c9699"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-033c1220c5034fe6a3a045c7153c9699") {
+      outputDiv = document.getElementById("altair-viz-033c1220c5034fe6a3a045c7153c9699");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "vconcat": [{"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/us-10m.json", "format": {"feature": "states", "type": "topojson"}}, "mark": {"type": "geoshape"}, "encoding": {"color": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 150, "projection": {"type": "albersUsa"}, "transform": [{"lookup": "id", "from": {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "key": "id", "fields": ["asthma_cases_per_capita"]}}], "width": 500}, {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "mark": {"type": "bar"}, "encoding": {"x": {"field": "state", "sort": "-y", "title": "", "type": "nominal"}, "y": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 75, "width": 500}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-4acfa937387f9b7b32d43a126af5b75d": [{"state": "Alabama", "id": 1, "population": 4863300, "latitude": 32.7794, "longitude": -86.8287, "number_of_asthma_cases": 394634, "asthma_cases_per_capita": 0.0811453128534123}, {"state": "Alaska", "id": 2, "population": 741894, "latitude": 64.0685, "longitude": -152.2782, "number_of_asthma_cases": 50685, "asthma_cases_per_capita": 0.06831838510622812}, {"state": "Arizona", "id": 4, "population": 6931071, "latitude": 34.2744, "longitude": -111.6602, "number_of_asthma_cases": 545104, "asthma_cases_per_capita": 0.07864643141009521}, {"state": "Arkansas", "id": 5, "population": 2988248, "latitude": 34.8938, "longitude": -92.4426, "number_of_asthma_cases": 225853, "asthma_cases_per_capita": 0.0755804069809467}, {"state": "California", "id": 6, "population": 39250017, "latitude": 37.1841, "longitude": -119.4696, "number_of_asthma_cases": 2607598, "asthma_cases_per_capita": 0.06643558905974487}, {"state": "Colorado", "id": 8, "population": 5540545, "latitude": 38.9972, "longitude": -105.5478, "number_of_asthma_cases": 399357, "asthma_cases_per_capita": 0.07207901027786978}, {"state": "Connecticut", "id": 9, "population": 3576452, "latitude": 41.6219, "longitude": -72.7273, "number_of_asthma_cases": 290278, "asthma_cases_per_capita": 0.0811636784164865}, {"state": "Delaware", "id": 10, "population": 952065, "latitude": 38.9896, "longitude": -75.505, "number_of_asthma_cases": 77035, "asthma_cases_per_capita": 0.08091359308450578}, {"state": "District of Columbia", "id": 11, "population": 681170, "latitude": 38.9101, "longitude": -77.0147, "number_of_asthma_cases": 66441, "asthma_cases_per_capita": 0.0975395275775504}, {"state": "Florida", "id": 12, "population": 20612439, "latitude": 28.6305, "longitude": -82.4497, "number_of_asthma_cases": 1495632, "asthma_cases_per_capita": 0.07255968107413198}, {"state": "Georgia", "id": 13, "population": 10310371, "latitude": 32.6415, "longitude": -83.4426, "number_of_asthma_cases": 714569, "asthma_cases_per_capita": 0.06930584748114302}, {"state": "Hawaii", "id": 15, "population": 1428557, "latitude": 20.2927, "longitude": -156.3737, "number_of_asthma_cases": 104368, "asthma_cases_per_capita": 0.07305833788921268}, {"state": "Idaho", "id": 16, "population": 1683140, "latitude": 44.3509, "longitude": -114.613, "number_of_asthma_cases": 111954, "asthma_cases_per_capita": 0.06651496607531163}, {"state": "Illinois", "id": 17, "population": 12801539, "latitude": 40.0417, "longitude": -89.1965, "number_of_asthma_cases": 860007, "asthma_cases_per_capita": 0.06717996953335063}, {"state": "Indiana", "id": 18, "population": 6633053, "latitude": 39.8942, "longitude": -86.2816, "number_of_asthma_cases": 509651, "asthma_cases_per_capita": 0.07683505619508844}, {"state": "Iowa", "id": 19, "population": 3134693, "latitude": 42.0751, "longitude": -93.496, "number_of_asthma_cases": 190960, "asthma_cases_per_capita": 0.06091824622060278}, {"state": "Kansas", "id": 20, "population": 2907289, "latitude": 38.4937, "longitude": -98.3804, "number_of_asthma_cases": 214698, "asthma_cases_per_capita": 0.07384817952394826}, {"state": "Kentucky", "id": 21, "population": 4436974, "latitude": 37.5347, "longitude": -85.3021, "number_of_asthma_cases": 395345, "asthma_cases_per_capita": 0.08910239275686538}, {"state": "Louisiana", "id": 22, "population": 4681666, "latitude": 31.0689, "longitude": -91.9968, "number_of_asthma_cases": 316423, "asthma_cases_per_capita": 0.06758769207371905}, {"state": "Maine", "id": 23, "population": 1331479, "latitude": 45.3695, "longitude": -69.2428, "number_of_asthma_cases": 132126, "asthma_cases_per_capita": 0.09923250760995855}, {"state": "Maryland", "id": 24, "population": 6016447, "latitude": 39.055, "longitude": -76.7909, "number_of_asthma_cases": 439909, "asthma_cases_per_capita": 0.07311773875843999}, {"state": "Massachusetts", "id": 25, "population": 6811779, "latitude": 42.2596, "longitude": -71.8083, "number_of_asthma_cases": 558435, "asthma_cases_per_capita": 0.08198078651700239}, {"state": "Michigan", "id": 26, "population": 9928300, "latitude": 44.3467, "longitude": -85.4102, "number_of_asthma_cases": 872519, "asthma_cases_per_capita": 0.08788201404067161}, {"state": "Minnesota", "id": 27, "population": 5519952, "latitude": 46.2807, "longitude": -94.3053, "number_of_asthma_cases": 357232, "asthma_cases_per_capita": 0.064716504781201}, {"state": "Mississippi", "id": 28, "population": 2988726, "latitude": 32.7364, "longitude": -89.6678, "number_of_asthma_cases": 218223, "asthma_cases_per_capita": 0.07301539184254428}, {"state": "Missouri", "id": 29, "population": 6093000, "latitude": 38.3566, "longitude": -92.458, "number_of_asthma_cases": 444334, "asthma_cases_per_capita": 0.07292532414245856}, {"state": "Montana", "id": 30, "population": 1042520, "latitude": 47.0527, "longitude": -109.6333, "number_of_asthma_cases": 82660, "asthma_cases_per_capita": 0.07928864674059011}, {"state": "Nebraska", "id": 31, "population": 1907116, "latitude": 41.5378, "longitude": -99.7951, "number_of_asthma_cases": 128793, "asthma_cases_per_capita": 0.06753286113692088}, {"state": "Nevada", "id": 32, "population": 2940058, "latitude": 39.3289, "longitude": -116.6312, "number_of_asthma_cases": 186787, "asthma_cases_per_capita": 0.06353173985003017}, {"state": "New Hampshire", "id": 33, "population": 1334795, "latitude": 43.6805, "longitude": -71.5811, "number_of_asthma_cases": 128307, "asthma_cases_per_capita": 0.09612487310785552}, {"state": "New Jersey", "id": 34, "population": 8944469, "latitude": 40.1907, "longitude": -74.6728, "number_of_asthma_cases": 593242, "asthma_cases_per_capita": 0.06632501046177253}, {"state": "New Mexico", "id": 35, "population": 2081015, "latitude": 34.4071, "longitude": -106.1126, "number_of_asthma_cases": 157177, "asthma_cases_per_capita": 0.07552900868086006}, {"state": "New York", "id": 36, "population": 19745289, "latitude": 42.9538, "longitude": -75.5268, "number_of_asthma_cases": 1578011, "asthma_cases_per_capita": 0.07991835419577804}, {"state": "North Carolina", "id": 37, "population": 10146788, "latitude": 35.5557, "longitude": -79.3877, "number_of_asthma_cases": 757790, "asthma_cases_per_capita": 0.07468274689487944}, {"state": "North Dakota", "id": 38, "population": 757952, "latitude": 47.4501, "longitude": -100.4659, "number_of_asthma_cases": 46996, "asthma_cases_per_capita": 0.0620039263700076}, {"state": "Ohio", "id": 39, "population": 11614373, "latitude": 40.2862, "longitude": -82.7937, "number_of_asthma_cases": 854186, "asthma_cases_per_capita": 0.0735455973387457}, {"state": "Oklahoma", "id": 40, "population": 3923561, "latitude": 35.5889, "longitude": -97.4943, "number_of_asthma_cases": 307581, "asthma_cases_per_capita": 0.07839332687831284}, {"state": "Oregon", "id": 41, "population": 4093465, "latitude": 43.9336, "longitude": -120.5583, "number_of_asthma_cases": 383340, "asthma_cases_per_capita": 0.09364682487819}, {"state": "Pennsylvania", "id": 42, "population": 12784227, "latitude": 40.8781, "longitude": -77.7996, "number_of_asthma_cases": 1012588, "asthma_cases_per_capita": 0.07920604038085369}, {"state": "Rhode Island", "id": 44, "population": 1056426, "latitude": 41.6762, "longitude": -71.5562, "number_of_asthma_cases": 101251, "asthma_cases_per_capita": 0.09584296486455275}, {"state": "South Carolina", "id": 45, "population": 4961119, "latitude": 33.9169, "longitude": -80.8964, "number_of_asthma_cases": 360353, "asthma_cases_per_capita": 0.07263542761219798}, {"state": "South Dakota", "id": 46, "population": 865454, "latitude": 44.4443, "longitude": -100.2263, "number_of_asthma_cases": 51652, "asthma_cases_per_capita": 0.05968197038779646}, {"state": "Tennessee", "id": 47, "population": 6651194, "latitude": 35.85800000000001, "longitude": -86.3505, "number_of_asthma_cases": 513084, "asthma_cases_per_capita": 0.07714163802769848}, {"state": "Texas", "id": 48, "population": 27862596, "latitude": 31.4757, "longitude": -99.3312, "number_of_asthma_cases": 1572815, "asthma_cases_per_capita": 0.056448975536952835}, {"state": "Utah", "id": 49, "population": 3051217, "latitude": 39.3055, "longitude": -111.6703, "number_of_asthma_cases": 206360, "asthma_cases_per_capita": 0.06763203010470904}, {"state": "Vermont", "id": 50, "population": 624594, "latitude": 44.0687, "longitude": -72.6658, "number_of_asthma_cases": 60216, "asthma_cases_per_capita": 0.09640822678411896}, {"state": "Virginia", "id": 51, "population": 8411808, "latitude": 37.5215, "longitude": -78.8537, "number_of_asthma_cases": 563510, "asthma_cases_per_capita": 0.06699035451118238}, {"state": "Washington", "id": 53, "population": 7288000, "latitude": 47.3826, "longitude": -120.4472, "number_of_asthma_cases": 558951, "asthma_cases_per_capita": 0.07669470362239297}, {"state": "West Virginia", "id": 54, "population": 1831102, "latitude": 38.6409, "longitude": -80.6227, "number_of_asthma_cases": 175368, "asthma_cases_per_capita": 0.09577183575792064}, {"state": "Wisconsin", "id": 55, "population": 5778708, "latitude": 44.6243, "longitude": -89.9941, "number_of_asthma_cases": 408318, "asthma_cases_per_capita": 0.07065904697036085}, {"state": "Wyoming", "id": 56, "population": 585501, "latitude": 42.9957, "longitude": -107.5512, "number_of_asthma_cases": 38099, "asthma_cases_per_capita": 0.06507076845300008}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<aside class="notes">
+<p>To place these two plots in a vertical layout we can use the ampersand (<code>&amp;</code>) operator. You may have already seen us using this operator occasionally in previous modules.</p>
+<p>We could also accomplish the same thing by using the <code>alt.vconcat(choropleth, points_on_map)</code> syntax. Here, we chose however to opt for the pipe operator as it is more efficient (keystroke-wise).</p>
+<p>Now we can study both figures in the same view, instead of flipping back and fourth between slides.</p>
+<p>These figures also complement each other in the sense that the choropleth highlights small differences due to the colorscale not starting at zero and the bar chart shows the actual size of the differences since each bar starts from zero.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="plots-can-also-be-concatenated-horizontally" class="slide level2">
+<h2>Plots can also be concatenated horizontally</h2>
+<div id="191fc469" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># alt.hconcat(choropleth, bars)</span></span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>choropleth.properties(width<span class="op">=</span><span class="dv">250</span>) <span class="op">|</span> bars.properties(width<span class="op">=</span><span class="dv">400</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+
+<style>
+  #altair-viz-d08864950d6a4e5492371d9480eb2742.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-d08864950d6a4e5492371d9480eb2742.vega-embed details,
+  #altair-viz-d08864950d6a4e5492371d9480eb2742.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-d08864950d6a4e5492371d9480eb2742"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-d08864950d6a4e5492371d9480eb2742") {
+      outputDiv = document.getElementById("altair-viz-d08864950d6a4e5492371d9480eb2742");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "hconcat": [{"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/us-10m.json", "format": {"feature": "states", "type": "topojson"}}, "mark": {"type": "geoshape"}, "encoding": {"color": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 150, "projection": {"type": "albersUsa"}, "transform": [{"lookup": "id", "from": {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "key": "id", "fields": ["asthma_cases_per_capita"]}}], "width": 250}, {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "mark": {"type": "bar"}, "encoding": {"x": {"field": "state", "sort": "-y", "title": "", "type": "nominal"}, "y": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 75, "width": 400}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-4acfa937387f9b7b32d43a126af5b75d": [{"state": "Alabama", "id": 1, "population": 4863300, "latitude": 32.7794, "longitude": -86.8287, "number_of_asthma_cases": 394634, "asthma_cases_per_capita": 0.0811453128534123}, {"state": "Alaska", "id": 2, "population": 741894, "latitude": 64.0685, "longitude": -152.2782, "number_of_asthma_cases": 50685, "asthma_cases_per_capita": 0.06831838510622812}, {"state": "Arizona", "id": 4, "population": 6931071, "latitude": 34.2744, "longitude": -111.6602, "number_of_asthma_cases": 545104, "asthma_cases_per_capita": 0.07864643141009521}, {"state": "Arkansas", "id": 5, "population": 2988248, "latitude": 34.8938, "longitude": -92.4426, "number_of_asthma_cases": 225853, "asthma_cases_per_capita": 0.0755804069809467}, {"state": "California", "id": 6, "population": 39250017, "latitude": 37.1841, "longitude": -119.4696, "number_of_asthma_cases": 2607598, "asthma_cases_per_capita": 0.06643558905974487}, {"state": "Colorado", "id": 8, "population": 5540545, "latitude": 38.9972, "longitude": -105.5478, "number_of_asthma_cases": 399357, "asthma_cases_per_capita": 0.07207901027786978}, {"state": "Connecticut", "id": 9, "population": 3576452, "latitude": 41.6219, "longitude": -72.7273, "number_of_asthma_cases": 290278, "asthma_cases_per_capita": 0.0811636784164865}, {"state": "Delaware", "id": 10, "population": 952065, "latitude": 38.9896, "longitude": -75.505, "number_of_asthma_cases": 77035, "asthma_cases_per_capita": 0.08091359308450578}, {"state": "District of Columbia", "id": 11, "population": 681170, "latitude": 38.9101, "longitude": -77.0147, "number_of_asthma_cases": 66441, "asthma_cases_per_capita": 0.0975395275775504}, {"state": "Florida", "id": 12, "population": 20612439, "latitude": 28.6305, "longitude": -82.4497, "number_of_asthma_cases": 1495632, "asthma_cases_per_capita": 0.07255968107413198}, {"state": "Georgia", "id": 13, "population": 10310371, "latitude": 32.6415, "longitude": -83.4426, "number_of_asthma_cases": 714569, "asthma_cases_per_capita": 0.06930584748114302}, {"state": "Hawaii", "id": 15, "population": 1428557, "latitude": 20.2927, "longitude": -156.3737, "number_of_asthma_cases": 104368, "asthma_cases_per_capita": 0.07305833788921268}, {"state": "Idaho", "id": 16, "population": 1683140, "latitude": 44.3509, "longitude": -114.613, "number_of_asthma_cases": 111954, "asthma_cases_per_capita": 0.06651496607531163}, {"state": "Illinois", "id": 17, "population": 12801539, "latitude": 40.0417, "longitude": -89.1965, "number_of_asthma_cases": 860007, "asthma_cases_per_capita": 0.06717996953335063}, {"state": "Indiana", "id": 18, "population": 6633053, "latitude": 39.8942, "longitude": -86.2816, "number_of_asthma_cases": 509651, "asthma_cases_per_capita": 0.07683505619508844}, {"state": "Iowa", "id": 19, "population": 3134693, "latitude": 42.0751, "longitude": -93.496, "number_of_asthma_cases": 190960, "asthma_cases_per_capita": 0.06091824622060278}, {"state": "Kansas", "id": 20, "population": 2907289, "latitude": 38.4937, "longitude": -98.3804, "number_of_asthma_cases": 214698, "asthma_cases_per_capita": 0.07384817952394826}, {"state": "Kentucky", "id": 21, "population": 4436974, "latitude": 37.5347, "longitude": -85.3021, "number_of_asthma_cases": 395345, "asthma_cases_per_capita": 0.08910239275686538}, {"state": "Louisiana", "id": 22, "population": 4681666, "latitude": 31.0689, "longitude": -91.9968, "number_of_asthma_cases": 316423, "asthma_cases_per_capita": 0.06758769207371905}, {"state": "Maine", "id": 23, "population": 1331479, "latitude": 45.3695, "longitude": -69.2428, "number_of_asthma_cases": 132126, "asthma_cases_per_capita": 0.09923250760995855}, {"state": "Maryland", "id": 24, "population": 6016447, "latitude": 39.055, "longitude": -76.7909, "number_of_asthma_cases": 439909, "asthma_cases_per_capita": 0.07311773875843999}, {"state": "Massachusetts", "id": 25, "population": 6811779, "latitude": 42.2596, "longitude": -71.8083, "number_of_asthma_cases": 558435, "asthma_cases_per_capita": 0.08198078651700239}, {"state": "Michigan", "id": 26, "population": 9928300, "latitude": 44.3467, "longitude": -85.4102, "number_of_asthma_cases": 872519, "asthma_cases_per_capita": 0.08788201404067161}, {"state": "Minnesota", "id": 27, "population": 5519952, "latitude": 46.2807, "longitude": -94.3053, "number_of_asthma_cases": 357232, "asthma_cases_per_capita": 0.064716504781201}, {"state": "Mississippi", "id": 28, "population": 2988726, "latitude": 32.7364, "longitude": -89.6678, "number_of_asthma_cases": 218223, "asthma_cases_per_capita": 0.07301539184254428}, {"state": "Missouri", "id": 29, "population": 6093000, "latitude": 38.3566, "longitude": -92.458, "number_of_asthma_cases": 444334, "asthma_cases_per_capita": 0.07292532414245856}, {"state": "Montana", "id": 30, "population": 1042520, "latitude": 47.0527, "longitude": -109.6333, "number_of_asthma_cases": 82660, "asthma_cases_per_capita": 0.07928864674059011}, {"state": "Nebraska", "id": 31, "population": 1907116, "latitude": 41.5378, "longitude": -99.7951, "number_of_asthma_cases": 128793, "asthma_cases_per_capita": 0.06753286113692088}, {"state": "Nevada", "id": 32, "population": 2940058, "latitude": 39.3289, "longitude": -116.6312, "number_of_asthma_cases": 186787, "asthma_cases_per_capita": 0.06353173985003017}, {"state": "New Hampshire", "id": 33, "population": 1334795, "latitude": 43.6805, "longitude": -71.5811, "number_of_asthma_cases": 128307, "asthma_cases_per_capita": 0.09612487310785552}, {"state": "New Jersey", "id": 34, "population": 8944469, "latitude": 40.1907, "longitude": -74.6728, "number_of_asthma_cases": 593242, "asthma_cases_per_capita": 0.06632501046177253}, {"state": "New Mexico", "id": 35, "population": 2081015, "latitude": 34.4071, "longitude": -106.1126, "number_of_asthma_cases": 157177, "asthma_cases_per_capita": 0.07552900868086006}, {"state": "New York", "id": 36, "population": 19745289, "latitude": 42.9538, "longitude": -75.5268, "number_of_asthma_cases": 1578011, "asthma_cases_per_capita": 0.07991835419577804}, {"state": "North Carolina", "id": 37, "population": 10146788, "latitude": 35.5557, "longitude": -79.3877, "number_of_asthma_cases": 757790, "asthma_cases_per_capita": 0.07468274689487944}, {"state": "North Dakota", "id": 38, "population": 757952, "latitude": 47.4501, "longitude": -100.4659, "number_of_asthma_cases": 46996, "asthma_cases_per_capita": 0.0620039263700076}, {"state": "Ohio", "id": 39, "population": 11614373, "latitude": 40.2862, "longitude": -82.7937, "number_of_asthma_cases": 854186, "asthma_cases_per_capita": 0.0735455973387457}, {"state": "Oklahoma", "id": 40, "population": 3923561, "latitude": 35.5889, "longitude": -97.4943, "number_of_asthma_cases": 307581, "asthma_cases_per_capita": 0.07839332687831284}, {"state": "Oregon", "id": 41, "population": 4093465, "latitude": 43.9336, "longitude": -120.5583, "number_of_asthma_cases": 383340, "asthma_cases_per_capita": 0.09364682487819}, {"state": "Pennsylvania", "id": 42, "population": 12784227, "latitude": 40.8781, "longitude": -77.7996, "number_of_asthma_cases": 1012588, "asthma_cases_per_capita": 0.07920604038085369}, {"state": "Rhode Island", "id": 44, "population": 1056426, "latitude": 41.6762, "longitude": -71.5562, "number_of_asthma_cases": 101251, "asthma_cases_per_capita": 0.09584296486455275}, {"state": "South Carolina", "id": 45, "population": 4961119, "latitude": 33.9169, "longitude": -80.8964, "number_of_asthma_cases": 360353, "asthma_cases_per_capita": 0.07263542761219798}, {"state": "South Dakota", "id": 46, "population": 865454, "latitude": 44.4443, "longitude": -100.2263, "number_of_asthma_cases": 51652, "asthma_cases_per_capita": 0.05968197038779646}, {"state": "Tennessee", "id": 47, "population": 6651194, "latitude": 35.85800000000001, "longitude": -86.3505, "number_of_asthma_cases": 513084, "asthma_cases_per_capita": 0.07714163802769848}, {"state": "Texas", "id": 48, "population": 27862596, "latitude": 31.4757, "longitude": -99.3312, "number_of_asthma_cases": 1572815, "asthma_cases_per_capita": 0.056448975536952835}, {"state": "Utah", "id": 49, "population": 3051217, "latitude": 39.3055, "longitude": -111.6703, "number_of_asthma_cases": 206360, "asthma_cases_per_capita": 0.06763203010470904}, {"state": "Vermont", "id": 50, "population": 624594, "latitude": 44.0687, "longitude": -72.6658, "number_of_asthma_cases": 60216, "asthma_cases_per_capita": 0.09640822678411896}, {"state": "Virginia", "id": 51, "population": 8411808, "latitude": 37.5215, "longitude": -78.8537, "number_of_asthma_cases": 563510, "asthma_cases_per_capita": 0.06699035451118238}, {"state": "Washington", "id": 53, "population": 7288000, "latitude": 47.3826, "longitude": -120.4472, "number_of_asthma_cases": 558951, "asthma_cases_per_capita": 0.07669470362239297}, {"state": "West Virginia", "id": 54, "population": 1831102, "latitude": 38.6409, "longitude": -80.6227, "number_of_asthma_cases": 175368, "asthma_cases_per_capita": 0.09577183575792064}, {"state": "Wisconsin", "id": 55, "population": 5778708, "latitude": 44.6243, "longitude": -89.9941, "number_of_asthma_cases": 408318, "asthma_cases_per_capita": 0.07065904697036085}, {"state": "Wyoming", "id": 56, "population": 585501, "latitude": 42.9957, "longitude": -107.5512, "number_of_asthma_cases": 38099, "asthma_cases_per_capita": 0.06507076845300008}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<aside class="notes">
+<p>To place plots in a panel stacked horizontally instead of vertically, we can use the pipe (<code>|</code>) operator.</p>
+<p>We could also have used the <code>alt.hconcat(choropleth, points_on_map)</code>, but again, using the operator is a bit more efficient.</p>
+<p>We have to shrink the plot widths a bit to fit them on this slide. This makes it hard to read the bar chart x-labels so a horizontal layout is not as good as a vertical layout for this particular figure.</p>
+<p>In general, whether to choose a horizontal or vertical layout depends on the available space you have for the figure. For example, in this lecture material we’re limited by the size of the slides and have to adjust our figure layouts to work well within this space.</p>
+<p>Note where the color legend for the plots get placed when we do this; it is placed to the right of both plots.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="vertical-and-horizontal-concatenation-can-be-combined" class="slide level2">
+<h2>Vertical and horizontal concatenation can be combined</h2>
+<div id="de8fd7f4" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>us_map <span class="op">=</span> (alt.Chart(state_map).mark_geoshape(color<span class="op">=</span><span class="st">'lightgray'</span>, stroke<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>          .project(<span class="bu">type</span><span class="op">=</span><span class="st">'albersUsa'</span>))</span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> (alt.Chart(state_pop).mark_circle().encode(</span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>    longitude<span class="op">=</span><span class="st">'longitude'</span>,</span>
+<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>    latitude<span class="op">=</span><span class="st">'latitude'</span>,</span>
+<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span>alt.Size(<span class="st">'number_of_asthma_cases'</span>, title<span class="op">=</span><span class="st">'Total asthma case'</span>, scale<span class="op">=</span>alt.Scale(<span class="bu">range</span><span class="op">=</span>(<span class="dv">2</span>,<span class="dv">100</span>))))</span>
+<span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a>    .properties(width<span class="op">=</span><span class="dv">240</span>, height<span class="op">=</span><span class="dv">100</span>))</span>
+<span id="cb5-8"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a aria-hidden="true" tabindex="-1"></a>choropleth_small <span class="op">=</span> choropleth.properties(width<span class="op">=</span><span class="dv">240</span>, height<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb5-10"><a aria-hidden="true" tabindex="-1"></a>choropleth_small <span class="op">|</span> us_map <span class="op">+</span> points <span class="op">&amp;</span> bars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+
+<style>
+  #altair-viz-8120c4b080d345fb9db1ead8614ed026.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-8120c4b080d345fb9db1ead8614ed026.vega-embed details,
+  #altair-viz-8120c4b080d345fb9db1ead8614ed026.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-8120c4b080d345fb9db1ead8614ed026"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-8120c4b080d345fb9db1ead8614ed026") {
+      outputDiv = document.getElementById("altair-viz-8120c4b080d345fb9db1ead8614ed026");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "hconcat": [{"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/us-10m.json", "format": {"feature": "states", "type": "topojson"}}, "mark": {"type": "geoshape"}, "encoding": {"color": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 100, "projection": {"type": "albersUsa"}, "transform": [{"lookup": "id", "from": {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "key": "id", "fields": ["asthma_cases_per_capita"]}}], "width": 240}, {"vconcat": [{"layer": [{"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/us-10m.json", "format": {"feature": "states", "type": "topojson"}}, "mark": {"type": "geoshape", "color": "lightgray", "stroke": "white"}, "projection": {"type": "albersUsa"}}, {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "mark": {"type": "circle"}, "encoding": {"latitude": {"field": "latitude", "type": "quantitative"}, "longitude": {"field": "longitude", "type": "quantitative"}, "size": {"field": "number_of_asthma_cases", "scale": {"range": [2, 100]}, "title": "Total asthma case", "type": "quantitative"}}}], "height": 100, "width": 240}, {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "mark": {"type": "bar"}, "encoding": {"x": {"field": "state", "sort": "-y", "title": "", "type": "nominal"}, "y": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 75, "width": 500}]}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-4acfa937387f9b7b32d43a126af5b75d": [{"state": "Alabama", "id": 1, "population": 4863300, "latitude": 32.7794, "longitude": -86.8287, "number_of_asthma_cases": 394634, "asthma_cases_per_capita": 0.0811453128534123}, {"state": "Alaska", "id": 2, "population": 741894, "latitude": 64.0685, "longitude": -152.2782, "number_of_asthma_cases": 50685, "asthma_cases_per_capita": 0.06831838510622812}, {"state": "Arizona", "id": 4, "population": 6931071, "latitude": 34.2744, "longitude": -111.6602, "number_of_asthma_cases": 545104, "asthma_cases_per_capita": 0.07864643141009521}, {"state": "Arkansas", "id": 5, "population": 2988248, "latitude": 34.8938, "longitude": -92.4426, "number_of_asthma_cases": 225853, "asthma_cases_per_capita": 0.0755804069809467}, {"state": "California", "id": 6, "population": 39250017, "latitude": 37.1841, "longitude": -119.4696, "number_of_asthma_cases": 2607598, "asthma_cases_per_capita": 0.06643558905974487}, {"state": "Colorado", "id": 8, "population": 5540545, "latitude": 38.9972, "longitude": -105.5478, "number_of_asthma_cases": 399357, "asthma_cases_per_capita": 0.07207901027786978}, {"state": "Connecticut", "id": 9, "population": 3576452, "latitude": 41.6219, "longitude": -72.7273, "number_of_asthma_cases": 290278, "asthma_cases_per_capita": 0.0811636784164865}, {"state": "Delaware", "id": 10, "population": 952065, "latitude": 38.9896, "longitude": -75.505, "number_of_asthma_cases": 77035, "asthma_cases_per_capita": 0.08091359308450578}, {"state": "District of Columbia", "id": 11, "population": 681170, "latitude": 38.9101, "longitude": -77.0147, "number_of_asthma_cases": 66441, "asthma_cases_per_capita": 0.0975395275775504}, {"state": "Florida", "id": 12, "population": 20612439, "latitude": 28.6305, "longitude": -82.4497, "number_of_asthma_cases": 1495632, "asthma_cases_per_capita": 0.07255968107413198}, {"state": "Georgia", "id": 13, "population": 10310371, "latitude": 32.6415, "longitude": -83.4426, "number_of_asthma_cases": 714569, "asthma_cases_per_capita": 0.06930584748114302}, {"state": "Hawaii", "id": 15, "population": 1428557, "latitude": 20.2927, "longitude": -156.3737, "number_of_asthma_cases": 104368, "asthma_cases_per_capita": 0.07305833788921268}, {"state": "Idaho", "id": 16, "population": 1683140, "latitude": 44.3509, "longitude": -114.613, "number_of_asthma_cases": 111954, "asthma_cases_per_capita": 0.06651496607531163}, {"state": "Illinois", "id": 17, "population": 12801539, "latitude": 40.0417, "longitude": -89.1965, "number_of_asthma_cases": 860007, "asthma_cases_per_capita": 0.06717996953335063}, {"state": "Indiana", "id": 18, "population": 6633053, "latitude": 39.8942, "longitude": -86.2816, "number_of_asthma_cases": 509651, "asthma_cases_per_capita": 0.07683505619508844}, {"state": "Iowa", "id": 19, "population": 3134693, "latitude": 42.0751, "longitude": -93.496, "number_of_asthma_cases": 190960, "asthma_cases_per_capita": 0.06091824622060278}, {"state": "Kansas", "id": 20, "population": 2907289, "latitude": 38.4937, "longitude": -98.3804, "number_of_asthma_cases": 214698, "asthma_cases_per_capita": 0.07384817952394826}, {"state": "Kentucky", "id": 21, "population": 4436974, "latitude": 37.5347, "longitude": -85.3021, "number_of_asthma_cases": 395345, "asthma_cases_per_capita": 0.08910239275686538}, {"state": "Louisiana", "id": 22, "population": 4681666, "latitude": 31.0689, "longitude": -91.9968, "number_of_asthma_cases": 316423, "asthma_cases_per_capita": 0.06758769207371905}, {"state": "Maine", "id": 23, "population": 1331479, "latitude": 45.3695, "longitude": -69.2428, "number_of_asthma_cases": 132126, "asthma_cases_per_capita": 0.09923250760995855}, {"state": "Maryland", "id": 24, "population": 6016447, "latitude": 39.055, "longitude": -76.7909, "number_of_asthma_cases": 439909, "asthma_cases_per_capita": 0.07311773875843999}, {"state": "Massachusetts", "id": 25, "population": 6811779, "latitude": 42.2596, "longitude": -71.8083, "number_of_asthma_cases": 558435, "asthma_cases_per_capita": 0.08198078651700239}, {"state": "Michigan", "id": 26, "population": 9928300, "latitude": 44.3467, "longitude": -85.4102, "number_of_asthma_cases": 872519, "asthma_cases_per_capita": 0.08788201404067161}, {"state": "Minnesota", "id": 27, "population": 5519952, "latitude": 46.2807, "longitude": -94.3053, "number_of_asthma_cases": 357232, "asthma_cases_per_capita": 0.064716504781201}, {"state": "Mississippi", "id": 28, "population": 2988726, "latitude": 32.7364, "longitude": -89.6678, "number_of_asthma_cases": 218223, "asthma_cases_per_capita": 0.07301539184254428}, {"state": "Missouri", "id": 29, "population": 6093000, "latitude": 38.3566, "longitude": -92.458, "number_of_asthma_cases": 444334, "asthma_cases_per_capita": 0.07292532414245856}, {"state": "Montana", "id": 30, "population": 1042520, "latitude": 47.0527, "longitude": -109.6333, "number_of_asthma_cases": 82660, "asthma_cases_per_capita": 0.07928864674059011}, {"state": "Nebraska", "id": 31, "population": 1907116, "latitude": 41.5378, "longitude": -99.7951, "number_of_asthma_cases": 128793, "asthma_cases_per_capita": 0.06753286113692088}, {"state": "Nevada", "id": 32, "population": 2940058, "latitude": 39.3289, "longitude": -116.6312, "number_of_asthma_cases": 186787, "asthma_cases_per_capita": 0.06353173985003017}, {"state": "New Hampshire", "id": 33, "population": 1334795, "latitude": 43.6805, "longitude": -71.5811, "number_of_asthma_cases": 128307, "asthma_cases_per_capita": 0.09612487310785552}, {"state": "New Jersey", "id": 34, "population": 8944469, "latitude": 40.1907, "longitude": -74.6728, "number_of_asthma_cases": 593242, "asthma_cases_per_capita": 0.06632501046177253}, {"state": "New Mexico", "id": 35, "population": 2081015, "latitude": 34.4071, "longitude": -106.1126, "number_of_asthma_cases": 157177, "asthma_cases_per_capita": 0.07552900868086006}, {"state": "New York", "id": 36, "population": 19745289, "latitude": 42.9538, "longitude": -75.5268, "number_of_asthma_cases": 1578011, "asthma_cases_per_capita": 0.07991835419577804}, {"state": "North Carolina", "id": 37, "population": 10146788, "latitude": 35.5557, "longitude": -79.3877, "number_of_asthma_cases": 757790, "asthma_cases_per_capita": 0.07468274689487944}, {"state": "North Dakota", "id": 38, "population": 757952, "latitude": 47.4501, "longitude": -100.4659, "number_of_asthma_cases": 46996, "asthma_cases_per_capita": 0.0620039263700076}, {"state": "Ohio", "id": 39, "population": 11614373, "latitude": 40.2862, "longitude": -82.7937, "number_of_asthma_cases": 854186, "asthma_cases_per_capita": 0.0735455973387457}, {"state": "Oklahoma", "id": 40, "population": 3923561, "latitude": 35.5889, "longitude": -97.4943, "number_of_asthma_cases": 307581, "asthma_cases_per_capita": 0.07839332687831284}, {"state": "Oregon", "id": 41, "population": 4093465, "latitude": 43.9336, "longitude": -120.5583, "number_of_asthma_cases": 383340, "asthma_cases_per_capita": 0.09364682487819}, {"state": "Pennsylvania", "id": 42, "population": 12784227, "latitude": 40.8781, "longitude": -77.7996, "number_of_asthma_cases": 1012588, "asthma_cases_per_capita": 0.07920604038085369}, {"state": "Rhode Island", "id": 44, "population": 1056426, "latitude": 41.6762, "longitude": -71.5562, "number_of_asthma_cases": 101251, "asthma_cases_per_capita": 0.09584296486455275}, {"state": "South Carolina", "id": 45, "population": 4961119, "latitude": 33.9169, "longitude": -80.8964, "number_of_asthma_cases": 360353, "asthma_cases_per_capita": 0.07263542761219798}, {"state": "South Dakota", "id": 46, "population": 865454, "latitude": 44.4443, "longitude": -100.2263, "number_of_asthma_cases": 51652, "asthma_cases_per_capita": 0.05968197038779646}, {"state": "Tennessee", "id": 47, "population": 6651194, "latitude": 35.85800000000001, "longitude": -86.3505, "number_of_asthma_cases": 513084, "asthma_cases_per_capita": 0.07714163802769848}, {"state": "Texas", "id": 48, "population": 27862596, "latitude": 31.4757, "longitude": -99.3312, "number_of_asthma_cases": 1572815, "asthma_cases_per_capita": 0.056448975536952835}, {"state": "Utah", "id": 49, "population": 3051217, "latitude": 39.3055, "longitude": -111.6703, "number_of_asthma_cases": 206360, "asthma_cases_per_capita": 0.06763203010470904}, {"state": "Vermont", "id": 50, "population": 624594, "latitude": 44.0687, "longitude": -72.6658, "number_of_asthma_cases": 60216, "asthma_cases_per_capita": 0.09640822678411896}, {"state": "Virginia", "id": 51, "population": 8411808, "latitude": 37.5215, "longitude": -78.8537, "number_of_asthma_cases": 563510, "asthma_cases_per_capita": 0.06699035451118238}, {"state": "Washington", "id": 53, "population": 7288000, "latitude": 47.3826, "longitude": -120.4472, "number_of_asthma_cases": 558951, "asthma_cases_per_capita": 0.07669470362239297}, {"state": "West Virginia", "id": 54, "population": 1831102, "latitude": 38.6409, "longitude": -80.6227, "number_of_asthma_cases": 175368, "asthma_cases_per_capita": 0.09577183575792064}, {"state": "Wisconsin", "id": 55, "population": 5778708, "latitude": 44.6243, "longitude": -89.9941, "number_of_asthma_cases": 408318, "asthma_cases_per_capita": 0.07065904697036085}, {"state": "Wyoming", "id": 56, "population": 585501, "latitude": 42.9957, "longitude": -107.5512, "number_of_asthma_cases": 38099, "asthma_cases_per_capita": 0.06507076845300008}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<aside class="notes">
+<p>Often we want to create more complex figure layouts where visualizations are stacked both horizontally and vertically. Such layouts allow us to present connected, or related information near to one another, and can be useful if there is a key comparison we want to make between multiple visualizations.</p>
+<p>Yes, we could always place each visualization on its own slide or page (when sharing figures on paper), however, our working memories are only so good. We often forget key details about visualizations we just saw when it is removed and we are presented with a new one.</p>
+<p>In Altair, we can create the figure layout by combining the vertical and the horizontal concatenation operators.</p>
+<p>In this slide, we create a pointmap to indicate the total amount of asthma cases in each state, and adjust the size range of the circles to avoid them overlapping on the map.</p>
+<p>Now we would like to place the barplot under the two maps by using the <code>&amp;</code> operator, but as we can see in this slide, this places the barplot under only the rightmost map. Why is that?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="parentheses-can-be-used-to-indicate-groupings-in-complex-layouts" class="slide level2">
+<h2>Parentheses can be used to indicate groupings in complex layouts</h2>
+<div id="25a9ae99" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>(choropleth_small <span class="op">|</span> (us_map <span class="op">+</span> points)) <span class="op">&amp;</span> bars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+
+<style>
+  #altair-viz-a39304300f9b4a5aa22f6feaf0e65cc4.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-a39304300f9b4a5aa22f6feaf0e65cc4.vega-embed details,
+  #altair-viz-a39304300f9b4a5aa22f6feaf0e65cc4.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-a39304300f9b4a5aa22f6feaf0e65cc4"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-a39304300f9b4a5aa22f6feaf0e65cc4") {
+      outputDiv = document.getElementById("altair-viz-a39304300f9b4a5aa22f6feaf0e65cc4");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "vconcat": [{"hconcat": [{"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/us-10m.json", "format": {"feature": "states", "type": "topojson"}}, "mark": {"type": "geoshape"}, "encoding": {"color": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 100, "projection": {"type": "albersUsa"}, "transform": [{"lookup": "id", "from": {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "key": "id", "fields": ["asthma_cases_per_capita"]}}], "width": 240}, {"layer": [{"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/us-10m.json", "format": {"feature": "states", "type": "topojson"}}, "mark": {"type": "geoshape", "color": "lightgray", "stroke": "white"}, "projection": {"type": "albersUsa"}}, {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "mark": {"type": "circle"}, "encoding": {"latitude": {"field": "latitude", "type": "quantitative"}, "longitude": {"field": "longitude", "type": "quantitative"}, "size": {"field": "number_of_asthma_cases", "scale": {"range": [2, 100]}, "title": "Total asthma case", "type": "quantitative"}}}], "height": 100, "width": 240}]}, {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "mark": {"type": "bar"}, "encoding": {"x": {"field": "state", "sort": "-y", "title": "", "type": "nominal"}, "y": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 75, "width": 500}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-4acfa937387f9b7b32d43a126af5b75d": [{"state": "Alabama", "id": 1, "population": 4863300, "latitude": 32.7794, "longitude": -86.8287, "number_of_asthma_cases": 394634, "asthma_cases_per_capita": 0.0811453128534123}, {"state": "Alaska", "id": 2, "population": 741894, "latitude": 64.0685, "longitude": -152.2782, "number_of_asthma_cases": 50685, "asthma_cases_per_capita": 0.06831838510622812}, {"state": "Arizona", "id": 4, "population": 6931071, "latitude": 34.2744, "longitude": -111.6602, "number_of_asthma_cases": 545104, "asthma_cases_per_capita": 0.07864643141009521}, {"state": "Arkansas", "id": 5, "population": 2988248, "latitude": 34.8938, "longitude": -92.4426, "number_of_asthma_cases": 225853, "asthma_cases_per_capita": 0.0755804069809467}, {"state": "California", "id": 6, "population": 39250017, "latitude": 37.1841, "longitude": -119.4696, "number_of_asthma_cases": 2607598, "asthma_cases_per_capita": 0.06643558905974487}, {"state": "Colorado", "id": 8, "population": 5540545, "latitude": 38.9972, "longitude": -105.5478, "number_of_asthma_cases": 399357, "asthma_cases_per_capita": 0.07207901027786978}, {"state": "Connecticut", "id": 9, "population": 3576452, "latitude": 41.6219, "longitude": -72.7273, "number_of_asthma_cases": 290278, "asthma_cases_per_capita": 0.0811636784164865}, {"state": "Delaware", "id": 10, "population": 952065, "latitude": 38.9896, "longitude": -75.505, "number_of_asthma_cases": 77035, "asthma_cases_per_capita": 0.08091359308450578}, {"state": "District of Columbia", "id": 11, "population": 681170, "latitude": 38.9101, "longitude": -77.0147, "number_of_asthma_cases": 66441, "asthma_cases_per_capita": 0.0975395275775504}, {"state": "Florida", "id": 12, "population": 20612439, "latitude": 28.6305, "longitude": -82.4497, "number_of_asthma_cases": 1495632, "asthma_cases_per_capita": 0.07255968107413198}, {"state": "Georgia", "id": 13, "population": 10310371, "latitude": 32.6415, "longitude": -83.4426, "number_of_asthma_cases": 714569, "asthma_cases_per_capita": 0.06930584748114302}, {"state": "Hawaii", "id": 15, "population": 1428557, "latitude": 20.2927, "longitude": -156.3737, "number_of_asthma_cases": 104368, "asthma_cases_per_capita": 0.07305833788921268}, {"state": "Idaho", "id": 16, "population": 1683140, "latitude": 44.3509, "longitude": -114.613, "number_of_asthma_cases": 111954, "asthma_cases_per_capita": 0.06651496607531163}, {"state": "Illinois", "id": 17, "population": 12801539, "latitude": 40.0417, "longitude": -89.1965, "number_of_asthma_cases": 860007, "asthma_cases_per_capita": 0.06717996953335063}, {"state": "Indiana", "id": 18, "population": 6633053, "latitude": 39.8942, "longitude": -86.2816, "number_of_asthma_cases": 509651, "asthma_cases_per_capita": 0.07683505619508844}, {"state": "Iowa", "id": 19, "population": 3134693, "latitude": 42.0751, "longitude": -93.496, "number_of_asthma_cases": 190960, "asthma_cases_per_capita": 0.06091824622060278}, {"state": "Kansas", "id": 20, "population": 2907289, "latitude": 38.4937, "longitude": -98.3804, "number_of_asthma_cases": 214698, "asthma_cases_per_capita": 0.07384817952394826}, {"state": "Kentucky", "id": 21, "population": 4436974, "latitude": 37.5347, "longitude": -85.3021, "number_of_asthma_cases": 395345, "asthma_cases_per_capita": 0.08910239275686538}, {"state": "Louisiana", "id": 22, "population": 4681666, "latitude": 31.0689, "longitude": -91.9968, "number_of_asthma_cases": 316423, "asthma_cases_per_capita": 0.06758769207371905}, {"state": "Maine", "id": 23, "population": 1331479, "latitude": 45.3695, "longitude": -69.2428, "number_of_asthma_cases": 132126, "asthma_cases_per_capita": 0.09923250760995855}, {"state": "Maryland", "id": 24, "population": 6016447, "latitude": 39.055, "longitude": -76.7909, "number_of_asthma_cases": 439909, "asthma_cases_per_capita": 0.07311773875843999}, {"state": "Massachusetts", "id": 25, "population": 6811779, "latitude": 42.2596, "longitude": -71.8083, "number_of_asthma_cases": 558435, "asthma_cases_per_capita": 0.08198078651700239}, {"state": "Michigan", "id": 26, "population": 9928300, "latitude": 44.3467, "longitude": -85.4102, "number_of_asthma_cases": 872519, "asthma_cases_per_capita": 0.08788201404067161}, {"state": "Minnesota", "id": 27, "population": 5519952, "latitude": 46.2807, "longitude": -94.3053, "number_of_asthma_cases": 357232, "asthma_cases_per_capita": 0.064716504781201}, {"state": "Mississippi", "id": 28, "population": 2988726, "latitude": 32.7364, "longitude": -89.6678, "number_of_asthma_cases": 218223, "asthma_cases_per_capita": 0.07301539184254428}, {"state": "Missouri", "id": 29, "population": 6093000, "latitude": 38.3566, "longitude": -92.458, "number_of_asthma_cases": 444334, "asthma_cases_per_capita": 0.07292532414245856}, {"state": "Montana", "id": 30, "population": 1042520, "latitude": 47.0527, "longitude": -109.6333, "number_of_asthma_cases": 82660, "asthma_cases_per_capita": 0.07928864674059011}, {"state": "Nebraska", "id": 31, "population": 1907116, "latitude": 41.5378, "longitude": -99.7951, "number_of_asthma_cases": 128793, "asthma_cases_per_capita": 0.06753286113692088}, {"state": "Nevada", "id": 32, "population": 2940058, "latitude": 39.3289, "longitude": -116.6312, "number_of_asthma_cases": 186787, "asthma_cases_per_capita": 0.06353173985003017}, {"state": "New Hampshire", "id": 33, "population": 1334795, "latitude": 43.6805, "longitude": -71.5811, "number_of_asthma_cases": 128307, "asthma_cases_per_capita": 0.09612487310785552}, {"state": "New Jersey", "id": 34, "population": 8944469, "latitude": 40.1907, "longitude": -74.6728, "number_of_asthma_cases": 593242, "asthma_cases_per_capita": 0.06632501046177253}, {"state": "New Mexico", "id": 35, "population": 2081015, "latitude": 34.4071, "longitude": -106.1126, "number_of_asthma_cases": 157177, "asthma_cases_per_capita": 0.07552900868086006}, {"state": "New York", "id": 36, "population": 19745289, "latitude": 42.9538, "longitude": -75.5268, "number_of_asthma_cases": 1578011, "asthma_cases_per_capita": 0.07991835419577804}, {"state": "North Carolina", "id": 37, "population": 10146788, "latitude": 35.5557, "longitude": -79.3877, "number_of_asthma_cases": 757790, "asthma_cases_per_capita": 0.07468274689487944}, {"state": "North Dakota", "id": 38, "population": 757952, "latitude": 47.4501, "longitude": -100.4659, "number_of_asthma_cases": 46996, "asthma_cases_per_capita": 0.0620039263700076}, {"state": "Ohio", "id": 39, "population": 11614373, "latitude": 40.2862, "longitude": -82.7937, "number_of_asthma_cases": 854186, "asthma_cases_per_capita": 0.0735455973387457}, {"state": "Oklahoma", "id": 40, "population": 3923561, "latitude": 35.5889, "longitude": -97.4943, "number_of_asthma_cases": 307581, "asthma_cases_per_capita": 0.07839332687831284}, {"state": "Oregon", "id": 41, "population": 4093465, "latitude": 43.9336, "longitude": -120.5583, "number_of_asthma_cases": 383340, "asthma_cases_per_capita": 0.09364682487819}, {"state": "Pennsylvania", "id": 42, "population": 12784227, "latitude": 40.8781, "longitude": -77.7996, "number_of_asthma_cases": 1012588, "asthma_cases_per_capita": 0.07920604038085369}, {"state": "Rhode Island", "id": 44, "population": 1056426, "latitude": 41.6762, "longitude": -71.5562, "number_of_asthma_cases": 101251, "asthma_cases_per_capita": 0.09584296486455275}, {"state": "South Carolina", "id": 45, "population": 4961119, "latitude": 33.9169, "longitude": -80.8964, "number_of_asthma_cases": 360353, "asthma_cases_per_capita": 0.07263542761219798}, {"state": "South Dakota", "id": 46, "population": 865454, "latitude": 44.4443, "longitude": -100.2263, "number_of_asthma_cases": 51652, "asthma_cases_per_capita": 0.05968197038779646}, {"state": "Tennessee", "id": 47, "population": 6651194, "latitude": 35.85800000000001, "longitude": -86.3505, "number_of_asthma_cases": 513084, "asthma_cases_per_capita": 0.07714163802769848}, {"state": "Texas", "id": 48, "population": 27862596, "latitude": 31.4757, "longitude": -99.3312, "number_of_asthma_cases": 1572815, "asthma_cases_per_capita": 0.056448975536952835}, {"state": "Utah", "id": 49, "population": 3051217, "latitude": 39.3055, "longitude": -111.6703, "number_of_asthma_cases": 206360, "asthma_cases_per_capita": 0.06763203010470904}, {"state": "Vermont", "id": 50, "population": 624594, "latitude": 44.0687, "longitude": -72.6658, "number_of_asthma_cases": 60216, "asthma_cases_per_capita": 0.09640822678411896}, {"state": "Virginia", "id": 51, "population": 8411808, "latitude": 37.5215, "longitude": -78.8537, "number_of_asthma_cases": 563510, "asthma_cases_per_capita": 0.06699035451118238}, {"state": "Washington", "id": 53, "population": 7288000, "latitude": 47.3826, "longitude": -120.4472, "number_of_asthma_cases": 558951, "asthma_cases_per_capita": 0.07669470362239297}, {"state": "West Virginia", "id": 54, "population": 1831102, "latitude": 38.6409, "longitude": -80.6227, "number_of_asthma_cases": 175368, "asthma_cases_per_capita": 0.09577183575792064}, {"state": "Wisconsin", "id": 55, "population": 5778708, "latitude": 44.6243, "longitude": -89.9941, "number_of_asthma_cases": 408318, "asthma_cases_per_capita": 0.07065904697036085}, {"state": "Wyoming", "id": 56, "population": 585501, "latitude": 42.9957, "longitude": -107.5512, "number_of_asthma_cases": 38099, "asthma_cases_per_capita": 0.06507076845300008}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<aside class="notes">
+<p>The reason that the plot in the previous slide did not look like we wanted it to, was that the <code>&amp;</code> operator has higher priority than <code>|</code> operator.</p>
+<p>The resulted in the choropleth and barplot being vertically concatenated before the point map was horizontally concatenated.</p>
+<p>What we really want is the horizontal concatenation between the maps to occur first, followed by the vertical concatenation of the barplot.</p>
+<p>Just as we use parentheses in mathematics to change the default order of mathematical operations, we can use parentheses to change the default order of concatenation operations.</p>
+<p>You can see an example of that in this slide, where we place the parentheses around different parts of the expression to force the horizontal concatenation between the maps to occur first, and that leads us to get the barplot to show up below both the maps as desired.</p>
+<p>We also add a parenthesis around the two charts that we are layering together, to make it clear which objects the <code>+</code> operator is operating on.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="redundant-colouring-can-make-it-clearer-which-charts-represent-the-same-values" class="slide level2">
+<h2>Redundant colouring can make it clearer which charts represent the same values</h2>
+<div id="c0570f23" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>(choropleth_small <span class="op">|</span> (us_map <span class="op">+</span> points)) <span class="op">&amp;</span> bars.encode(color<span class="op">=</span><span class="st">'asthma_cases_per_capita'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+
+<style>
+  #altair-viz-a2e3db66e2a14218a8bdb70295908337.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-a2e3db66e2a14218a8bdb70295908337.vega-embed details,
+  #altair-viz-a2e3db66e2a14218a8bdb70295908337.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-a2e3db66e2a14218a8bdb70295908337"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-a2e3db66e2a14218a8bdb70295908337") {
+      outputDiv = document.getElementById("altair-viz-a2e3db66e2a14218a8bdb70295908337");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "vconcat": [{"hconcat": [{"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/us-10m.json", "format": {"feature": "states", "type": "topojson"}}, "mark": {"type": "geoshape"}, "encoding": {"color": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 100, "projection": {"type": "albersUsa"}, "transform": [{"lookup": "id", "from": {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "key": "id", "fields": ["asthma_cases_per_capita"]}}], "width": 240}, {"layer": [{"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/us-10m.json", "format": {"feature": "states", "type": "topojson"}}, "mark": {"type": "geoshape", "color": "lightgray", "stroke": "white"}, "projection": {"type": "albersUsa"}}, {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "mark": {"type": "circle"}, "encoding": {"latitude": {"field": "latitude", "type": "quantitative"}, "longitude": {"field": "longitude", "type": "quantitative"}, "size": {"field": "number_of_asthma_cases", "scale": {"range": [2, 100]}, "title": "Total asthma case", "type": "quantitative"}}}], "height": 100, "width": 240}]}, {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "mark": {"type": "bar"}, "encoding": {"color": {"field": "asthma_cases_per_capita", "type": "quantitative"}, "x": {"field": "state", "sort": "-y", "title": "", "type": "nominal"}, "y": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 75, "width": 500}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-4acfa937387f9b7b32d43a126af5b75d": [{"state": "Alabama", "id": 1, "population": 4863300, "latitude": 32.7794, "longitude": -86.8287, "number_of_asthma_cases": 394634, "asthma_cases_per_capita": 0.0811453128534123}, {"state": "Alaska", "id": 2, "population": 741894, "latitude": 64.0685, "longitude": -152.2782, "number_of_asthma_cases": 50685, "asthma_cases_per_capita": 0.06831838510622812}, {"state": "Arizona", "id": 4, "population": 6931071, "latitude": 34.2744, "longitude": -111.6602, "number_of_asthma_cases": 545104, "asthma_cases_per_capita": 0.07864643141009521}, {"state": "Arkansas", "id": 5, "population": 2988248, "latitude": 34.8938, "longitude": -92.4426, "number_of_asthma_cases": 225853, "asthma_cases_per_capita": 0.0755804069809467}, {"state": "California", "id": 6, "population": 39250017, "latitude": 37.1841, "longitude": -119.4696, "number_of_asthma_cases": 2607598, "asthma_cases_per_capita": 0.06643558905974487}, {"state": "Colorado", "id": 8, "population": 5540545, "latitude": 38.9972, "longitude": -105.5478, "number_of_asthma_cases": 399357, "asthma_cases_per_capita": 0.07207901027786978}, {"state": "Connecticut", "id": 9, "population": 3576452, "latitude": 41.6219, "longitude": -72.7273, "number_of_asthma_cases": 290278, "asthma_cases_per_capita": 0.0811636784164865}, {"state": "Delaware", "id": 10, "population": 952065, "latitude": 38.9896, "longitude": -75.505, "number_of_asthma_cases": 77035, "asthma_cases_per_capita": 0.08091359308450578}, {"state": "District of Columbia", "id": 11, "population": 681170, "latitude": 38.9101, "longitude": -77.0147, "number_of_asthma_cases": 66441, "asthma_cases_per_capita": 0.0975395275775504}, {"state": "Florida", "id": 12, "population": 20612439, "latitude": 28.6305, "longitude": -82.4497, "number_of_asthma_cases": 1495632, "asthma_cases_per_capita": 0.07255968107413198}, {"state": "Georgia", "id": 13, "population": 10310371, "latitude": 32.6415, "longitude": -83.4426, "number_of_asthma_cases": 714569, "asthma_cases_per_capita": 0.06930584748114302}, {"state": "Hawaii", "id": 15, "population": 1428557, "latitude": 20.2927, "longitude": -156.3737, "number_of_asthma_cases": 104368, "asthma_cases_per_capita": 0.07305833788921268}, {"state": "Idaho", "id": 16, "population": 1683140, "latitude": 44.3509, "longitude": -114.613, "number_of_asthma_cases": 111954, "asthma_cases_per_capita": 0.06651496607531163}, {"state": "Illinois", "id": 17, "population": 12801539, "latitude": 40.0417, "longitude": -89.1965, "number_of_asthma_cases": 860007, "asthma_cases_per_capita": 0.06717996953335063}, {"state": "Indiana", "id": 18, "population": 6633053, "latitude": 39.8942, "longitude": -86.2816, "number_of_asthma_cases": 509651, "asthma_cases_per_capita": 0.07683505619508844}, {"state": "Iowa", "id": 19, "population": 3134693, "latitude": 42.0751, "longitude": -93.496, "number_of_asthma_cases": 190960, "asthma_cases_per_capita": 0.06091824622060278}, {"state": "Kansas", "id": 20, "population": 2907289, "latitude": 38.4937, "longitude": -98.3804, "number_of_asthma_cases": 214698, "asthma_cases_per_capita": 0.07384817952394826}, {"state": "Kentucky", "id": 21, "population": 4436974, "latitude": 37.5347, "longitude": -85.3021, "number_of_asthma_cases": 395345, "asthma_cases_per_capita": 0.08910239275686538}, {"state": "Louisiana", "id": 22, "population": 4681666, "latitude": 31.0689, "longitude": -91.9968, "number_of_asthma_cases": 316423, "asthma_cases_per_capita": 0.06758769207371905}, {"state": "Maine", "id": 23, "population": 1331479, "latitude": 45.3695, "longitude": -69.2428, "number_of_asthma_cases": 132126, "asthma_cases_per_capita": 0.09923250760995855}, {"state": "Maryland", "id": 24, "population": 6016447, "latitude": 39.055, "longitude": -76.7909, "number_of_asthma_cases": 439909, "asthma_cases_per_capita": 0.07311773875843999}, {"state": "Massachusetts", "id": 25, "population": 6811779, "latitude": 42.2596, "longitude": -71.8083, "number_of_asthma_cases": 558435, "asthma_cases_per_capita": 0.08198078651700239}, {"state": "Michigan", "id": 26, "population": 9928300, "latitude": 44.3467, "longitude": -85.4102, "number_of_asthma_cases": 872519, "asthma_cases_per_capita": 0.08788201404067161}, {"state": "Minnesota", "id": 27, "population": 5519952, "latitude": 46.2807, "longitude": -94.3053, "number_of_asthma_cases": 357232, "asthma_cases_per_capita": 0.064716504781201}, {"state": "Mississippi", "id": 28, "population": 2988726, "latitude": 32.7364, "longitude": -89.6678, "number_of_asthma_cases": 218223, "asthma_cases_per_capita": 0.07301539184254428}, {"state": "Missouri", "id": 29, "population": 6093000, "latitude": 38.3566, "longitude": -92.458, "number_of_asthma_cases": 444334, "asthma_cases_per_capita": 0.07292532414245856}, {"state": "Montana", "id": 30, "population": 1042520, "latitude": 47.0527, "longitude": -109.6333, "number_of_asthma_cases": 82660, "asthma_cases_per_capita": 0.07928864674059011}, {"state": "Nebraska", "id": 31, "population": 1907116, "latitude": 41.5378, "longitude": -99.7951, "number_of_asthma_cases": 128793, "asthma_cases_per_capita": 0.06753286113692088}, {"state": "Nevada", "id": 32, "population": 2940058, "latitude": 39.3289, "longitude": -116.6312, "number_of_asthma_cases": 186787, "asthma_cases_per_capita": 0.06353173985003017}, {"state": "New Hampshire", "id": 33, "population": 1334795, "latitude": 43.6805, "longitude": -71.5811, "number_of_asthma_cases": 128307, "asthma_cases_per_capita": 0.09612487310785552}, {"state": "New Jersey", "id": 34, "population": 8944469, "latitude": 40.1907, "longitude": -74.6728, "number_of_asthma_cases": 593242, "asthma_cases_per_capita": 0.06632501046177253}, {"state": "New Mexico", "id": 35, "population": 2081015, "latitude": 34.4071, "longitude": -106.1126, "number_of_asthma_cases": 157177, "asthma_cases_per_capita": 0.07552900868086006}, {"state": "New York", "id": 36, "population": 19745289, "latitude": 42.9538, "longitude": -75.5268, "number_of_asthma_cases": 1578011, "asthma_cases_per_capita": 0.07991835419577804}, {"state": "North Carolina", "id": 37, "population": 10146788, "latitude": 35.5557, "longitude": -79.3877, "number_of_asthma_cases": 757790, "asthma_cases_per_capita": 0.07468274689487944}, {"state": "North Dakota", "id": 38, "population": 757952, "latitude": 47.4501, "longitude": -100.4659, "number_of_asthma_cases": 46996, "asthma_cases_per_capita": 0.0620039263700076}, {"state": "Ohio", "id": 39, "population": 11614373, "latitude": 40.2862, "longitude": -82.7937, "number_of_asthma_cases": 854186, "asthma_cases_per_capita": 0.0735455973387457}, {"state": "Oklahoma", "id": 40, "population": 3923561, "latitude": 35.5889, "longitude": -97.4943, "number_of_asthma_cases": 307581, "asthma_cases_per_capita": 0.07839332687831284}, {"state": "Oregon", "id": 41, "population": 4093465, "latitude": 43.9336, "longitude": -120.5583, "number_of_asthma_cases": 383340, "asthma_cases_per_capita": 0.09364682487819}, {"state": "Pennsylvania", "id": 42, "population": 12784227, "latitude": 40.8781, "longitude": -77.7996, "number_of_asthma_cases": 1012588, "asthma_cases_per_capita": 0.07920604038085369}, {"state": "Rhode Island", "id": 44, "population": 1056426, "latitude": 41.6762, "longitude": -71.5562, "number_of_asthma_cases": 101251, "asthma_cases_per_capita": 0.09584296486455275}, {"state": "South Carolina", "id": 45, "population": 4961119, "latitude": 33.9169, "longitude": -80.8964, "number_of_asthma_cases": 360353, "asthma_cases_per_capita": 0.07263542761219798}, {"state": "South Dakota", "id": 46, "population": 865454, "latitude": 44.4443, "longitude": -100.2263, "number_of_asthma_cases": 51652, "asthma_cases_per_capita": 0.05968197038779646}, {"state": "Tennessee", "id": 47, "population": 6651194, "latitude": 35.85800000000001, "longitude": -86.3505, "number_of_asthma_cases": 513084, "asthma_cases_per_capita": 0.07714163802769848}, {"state": "Texas", "id": 48, "population": 27862596, "latitude": 31.4757, "longitude": -99.3312, "number_of_asthma_cases": 1572815, "asthma_cases_per_capita": 0.056448975536952835}, {"state": "Utah", "id": 49, "population": 3051217, "latitude": 39.3055, "longitude": -111.6703, "number_of_asthma_cases": 206360, "asthma_cases_per_capita": 0.06763203010470904}, {"state": "Vermont", "id": 50, "population": 624594, "latitude": 44.0687, "longitude": -72.6658, "number_of_asthma_cases": 60216, "asthma_cases_per_capita": 0.09640822678411896}, {"state": "Virginia", "id": 51, "population": 8411808, "latitude": 37.5215, "longitude": -78.8537, "number_of_asthma_cases": 563510, "asthma_cases_per_capita": 0.06699035451118238}, {"state": "Washington", "id": 53, "population": 7288000, "latitude": 47.3826, "longitude": -120.4472, "number_of_asthma_cases": 558951, "asthma_cases_per_capita": 0.07669470362239297}, {"state": "West Virginia", "id": 54, "population": 1831102, "latitude": 38.6409, "longitude": -80.6227, "number_of_asthma_cases": 175368, "asthma_cases_per_capita": 0.09577183575792064}, {"state": "Wisconsin", "id": 55, "population": 5778708, "latitude": 44.6243, "longitude": -89.9941, "number_of_asthma_cases": 408318, "asthma_cases_per_capita": 0.07065904697036085}, {"state": "Wyoming", "id": 56, "population": 585501, "latitude": 42.9957, "longitude": -107.5512, "number_of_asthma_cases": 38099, "asthma_cases_per_capita": 0.06507076845300008}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<aside class="notes">
+<p>To make it clearer that the bars and the choropleth map both represent the asthma cases, we could add redundant colouring to the bars.</p>
+<p>Now it is clear that the bars are the same as the choropleth and separate from the pointmap, whereas they has the same blue colour as the pointmap in the previous slide which could be confusing.</p>
+<p>We still had the y-axis label correctly indicating what the bars represented in the previous slide so this redundant colouring is not strictly necessary, but it can help to remove ambiguity from your figures, particularly as they get more complex.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="titles-can-be-added-to-each-chart-in-the-layout-to-clarify-what-they-represent" class="slide level2">
+<h2>Titles can be added to each chart in the layout to clarify what they represent</h2>
+<div id="51ce1530" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>choropleth_with_title <span class="op">=</span> choropleth_small.properties(title<span class="op">=</span><span class="st">'Asthma cases per capita'</span>)</span>
+<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>pointmap_with_title <span class="op">=</span> (us_map <span class="op">+</span> points).properties(title<span class="op">=</span><span class="st">'Total ashtma cases'</span>)</span>
+<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>bars_with_title <span class="op">=</span> (bars.encode(color<span class="op">=</span><span class="st">'asthma_cases_per_capita'</span>).properties(title<span class="op">=</span><span class="st">'Asthma cases per capita'</span>))</span>
+<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a>figure_panel <span class="op">=</span> (choropleth_with_title <span class="op">|</span> pointmap_with_title) <span class="op">&amp;</span> bars_with_title</span>
+<span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a>figure_panel_title <span class="op">=</span> alt.TitleParams(text<span class="op">=</span><span class="st">'Asthma cases among US states'</span>, dx<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb8-6"><a aria-hidden="true" tabindex="-1"></a>figure_panel.properties(title<span class="op">=</span>figure_panel_title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+
+<style>
+  #altair-viz-627a7e4d8413484a936d0b6b84cc43d7.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-627a7e4d8413484a936d0b6b84cc43d7.vega-embed details,
+  #altair-viz-627a7e4d8413484a936d0b6b84cc43d7.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-627a7e4d8413484a936d0b6b84cc43d7"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-627a7e4d8413484a936d0b6b84cc43d7") {
+      outputDiv = document.getElementById("altair-viz-627a7e4d8413484a936d0b6b84cc43d7");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "vconcat": [{"hconcat": [{"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/us-10m.json", "format": {"feature": "states", "type": "topojson"}}, "mark": {"type": "geoshape"}, "encoding": {"color": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 100, "projection": {"type": "albersUsa"}, "title": "Asthma cases per capita", "transform": [{"lookup": "id", "from": {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "key": "id", "fields": ["asthma_cases_per_capita"]}}], "width": 240}, {"layer": [{"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/us-10m.json", "format": {"feature": "states", "type": "topojson"}}, "mark": {"type": "geoshape", "color": "lightgray", "stroke": "white"}, "projection": {"type": "albersUsa"}}, {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "mark": {"type": "circle"}, "encoding": {"latitude": {"field": "latitude", "type": "quantitative"}, "longitude": {"field": "longitude", "type": "quantitative"}, "size": {"field": "number_of_asthma_cases", "scale": {"range": [2, 100]}, "title": "Total asthma case", "type": "quantitative"}}}], "height": 100, "title": "Total ashtma cases", "width": 240}]}, {"data": {"name": "data-4acfa937387f9b7b32d43a126af5b75d"}, "mark": {"type": "bar"}, "encoding": {"color": {"field": "asthma_cases_per_capita", "type": "quantitative"}, "x": {"field": "state", "sort": "-y", "title": "", "type": "nominal"}, "y": {"field": "asthma_cases_per_capita", "title": "Asthma cases per capita", "type": "quantitative"}}, "height": 75, "title": "Asthma cases per capita", "width": 500}], "title": {"text": "Asthma cases among US states", "dx": 200}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-4acfa937387f9b7b32d43a126af5b75d": [{"state": "Alabama", "id": 1, "population": 4863300, "latitude": 32.7794, "longitude": -86.8287, "number_of_asthma_cases": 394634, "asthma_cases_per_capita": 0.0811453128534123}, {"state": "Alaska", "id": 2, "population": 741894, "latitude": 64.0685, "longitude": -152.2782, "number_of_asthma_cases": 50685, "asthma_cases_per_capita": 0.06831838510622812}, {"state": "Arizona", "id": 4, "population": 6931071, "latitude": 34.2744, "longitude": -111.6602, "number_of_asthma_cases": 545104, "asthma_cases_per_capita": 0.07864643141009521}, {"state": "Arkansas", "id": 5, "population": 2988248, "latitude": 34.8938, "longitude": -92.4426, "number_of_asthma_cases": 225853, "asthma_cases_per_capita": 0.0755804069809467}, {"state": "California", "id": 6, "population": 39250017, "latitude": 37.1841, "longitude": -119.4696, "number_of_asthma_cases": 2607598, "asthma_cases_per_capita": 0.06643558905974487}, {"state": "Colorado", "id": 8, "population": 5540545, "latitude": 38.9972, "longitude": -105.5478, "number_of_asthma_cases": 399357, "asthma_cases_per_capita": 0.07207901027786978}, {"state": "Connecticut", "id": 9, "population": 3576452, "latitude": 41.6219, "longitude": -72.7273, "number_of_asthma_cases": 290278, "asthma_cases_per_capita": 0.0811636784164865}, {"state": "Delaware", "id": 10, "population": 952065, "latitude": 38.9896, "longitude": -75.505, "number_of_asthma_cases": 77035, "asthma_cases_per_capita": 0.08091359308450578}, {"state": "District of Columbia", "id": 11, "population": 681170, "latitude": 38.9101, "longitude": -77.0147, "number_of_asthma_cases": 66441, "asthma_cases_per_capita": 0.0975395275775504}, {"state": "Florida", "id": 12, "population": 20612439, "latitude": 28.6305, "longitude": -82.4497, "number_of_asthma_cases": 1495632, "asthma_cases_per_capita": 0.07255968107413198}, {"state": "Georgia", "id": 13, "population": 10310371, "latitude": 32.6415, "longitude": -83.4426, "number_of_asthma_cases": 714569, "asthma_cases_per_capita": 0.06930584748114302}, {"state": "Hawaii", "id": 15, "population": 1428557, "latitude": 20.2927, "longitude": -156.3737, "number_of_asthma_cases": 104368, "asthma_cases_per_capita": 0.07305833788921268}, {"state": "Idaho", "id": 16, "population": 1683140, "latitude": 44.3509, "longitude": -114.613, "number_of_asthma_cases": 111954, "asthma_cases_per_capita": 0.06651496607531163}, {"state": "Illinois", "id": 17, "population": 12801539, "latitude": 40.0417, "longitude": -89.1965, "number_of_asthma_cases": 860007, "asthma_cases_per_capita": 0.06717996953335063}, {"state": "Indiana", "id": 18, "population": 6633053, "latitude": 39.8942, "longitude": -86.2816, "number_of_asthma_cases": 509651, "asthma_cases_per_capita": 0.07683505619508844}, {"state": "Iowa", "id": 19, "population": 3134693, "latitude": 42.0751, "longitude": -93.496, "number_of_asthma_cases": 190960, "asthma_cases_per_capita": 0.06091824622060278}, {"state": "Kansas", "id": 20, "population": 2907289, "latitude": 38.4937, "longitude": -98.3804, "number_of_asthma_cases": 214698, "asthma_cases_per_capita": 0.07384817952394826}, {"state": "Kentucky", "id": 21, "population": 4436974, "latitude": 37.5347, "longitude": -85.3021, "number_of_asthma_cases": 395345, "asthma_cases_per_capita": 0.08910239275686538}, {"state": "Louisiana", "id": 22, "population": 4681666, "latitude": 31.0689, "longitude": -91.9968, "number_of_asthma_cases": 316423, "asthma_cases_per_capita": 0.06758769207371905}, {"state": "Maine", "id": 23, "population": 1331479, "latitude": 45.3695, "longitude": -69.2428, "number_of_asthma_cases": 132126, "asthma_cases_per_capita": 0.09923250760995855}, {"state": "Maryland", "id": 24, "population": 6016447, "latitude": 39.055, "longitude": -76.7909, "number_of_asthma_cases": 439909, "asthma_cases_per_capita": 0.07311773875843999}, {"state": "Massachusetts", "id": 25, "population": 6811779, "latitude": 42.2596, "longitude": -71.8083, "number_of_asthma_cases": 558435, "asthma_cases_per_capita": 0.08198078651700239}, {"state": "Michigan", "id": 26, "population": 9928300, "latitude": 44.3467, "longitude": -85.4102, "number_of_asthma_cases": 872519, "asthma_cases_per_capita": 0.08788201404067161}, {"state": "Minnesota", "id": 27, "population": 5519952, "latitude": 46.2807, "longitude": -94.3053, "number_of_asthma_cases": 357232, "asthma_cases_per_capita": 0.064716504781201}, {"state": "Mississippi", "id": 28, "population": 2988726, "latitude": 32.7364, "longitude": -89.6678, "number_of_asthma_cases": 218223, "asthma_cases_per_capita": 0.07301539184254428}, {"state": "Missouri", "id": 29, "population": 6093000, "latitude": 38.3566, "longitude": -92.458, "number_of_asthma_cases": 444334, "asthma_cases_per_capita": 0.07292532414245856}, {"state": "Montana", "id": 30, "population": 1042520, "latitude": 47.0527, "longitude": -109.6333, "number_of_asthma_cases": 82660, "asthma_cases_per_capita": 0.07928864674059011}, {"state": "Nebraska", "id": 31, "population": 1907116, "latitude": 41.5378, "longitude": -99.7951, "number_of_asthma_cases": 128793, "asthma_cases_per_capita": 0.06753286113692088}, {"state": "Nevada", "id": 32, "population": 2940058, "latitude": 39.3289, "longitude": -116.6312, "number_of_asthma_cases": 186787, "asthma_cases_per_capita": 0.06353173985003017}, {"state": "New Hampshire", "id": 33, "population": 1334795, "latitude": 43.6805, "longitude": -71.5811, "number_of_asthma_cases": 128307, "asthma_cases_per_capita": 0.09612487310785552}, {"state": "New Jersey", "id": 34, "population": 8944469, "latitude": 40.1907, "longitude": -74.6728, "number_of_asthma_cases": 593242, "asthma_cases_per_capita": 0.06632501046177253}, {"state": "New Mexico", "id": 35, "population": 2081015, "latitude": 34.4071, "longitude": -106.1126, "number_of_asthma_cases": 157177, "asthma_cases_per_capita": 0.07552900868086006}, {"state": "New York", "id": 36, "population": 19745289, "latitude": 42.9538, "longitude": -75.5268, "number_of_asthma_cases": 1578011, "asthma_cases_per_capita": 0.07991835419577804}, {"state": "North Carolina", "id": 37, "population": 10146788, "latitude": 35.5557, "longitude": -79.3877, "number_of_asthma_cases": 757790, "asthma_cases_per_capita": 0.07468274689487944}, {"state": "North Dakota", "id": 38, "population": 757952, "latitude": 47.4501, "longitude": -100.4659, "number_of_asthma_cases": 46996, "asthma_cases_per_capita": 0.0620039263700076}, {"state": "Ohio", "id": 39, "population": 11614373, "latitude": 40.2862, "longitude": -82.7937, "number_of_asthma_cases": 854186, "asthma_cases_per_capita": 0.0735455973387457}, {"state": "Oklahoma", "id": 40, "population": 3923561, "latitude": 35.5889, "longitude": -97.4943, "number_of_asthma_cases": 307581, "asthma_cases_per_capita": 0.07839332687831284}, {"state": "Oregon", "id": 41, "population": 4093465, "latitude": 43.9336, "longitude": -120.5583, "number_of_asthma_cases": 383340, "asthma_cases_per_capita": 0.09364682487819}, {"state": "Pennsylvania", "id": 42, "population": 12784227, "latitude": 40.8781, "longitude": -77.7996, "number_of_asthma_cases": 1012588, "asthma_cases_per_capita": 0.07920604038085369}, {"state": "Rhode Island", "id": 44, "population": 1056426, "latitude": 41.6762, "longitude": -71.5562, "number_of_asthma_cases": 101251, "asthma_cases_per_capita": 0.09584296486455275}, {"state": "South Carolina", "id": 45, "population": 4961119, "latitude": 33.9169, "longitude": -80.8964, "number_of_asthma_cases": 360353, "asthma_cases_per_capita": 0.07263542761219798}, {"state": "South Dakota", "id": 46, "population": 865454, "latitude": 44.4443, "longitude": -100.2263, "number_of_asthma_cases": 51652, "asthma_cases_per_capita": 0.05968197038779646}, {"state": "Tennessee", "id": 47, "population": 6651194, "latitude": 35.85800000000001, "longitude": -86.3505, "number_of_asthma_cases": 513084, "asthma_cases_per_capita": 0.07714163802769848}, {"state": "Texas", "id": 48, "population": 27862596, "latitude": 31.4757, "longitude": -99.3312, "number_of_asthma_cases": 1572815, "asthma_cases_per_capita": 0.056448975536952835}, {"state": "Utah", "id": 49, "population": 3051217, "latitude": 39.3055, "longitude": -111.6703, "number_of_asthma_cases": 206360, "asthma_cases_per_capita": 0.06763203010470904}, {"state": "Vermont", "id": 50, "population": 624594, "latitude": 44.0687, "longitude": -72.6658, "number_of_asthma_cases": 60216, "asthma_cases_per_capita": 0.09640822678411896}, {"state": "Virginia", "id": 51, "population": 8411808, "latitude": 37.5215, "longitude": -78.8537, "number_of_asthma_cases": 563510, "asthma_cases_per_capita": 0.06699035451118238}, {"state": "Washington", "id": 53, "population": 7288000, "latitude": 47.3826, "longitude": -120.4472, "number_of_asthma_cases": 558951, "asthma_cases_per_capita": 0.07669470362239297}, {"state": "West Virginia", "id": 54, "population": 1831102, "latitude": 38.6409, "longitude": -80.6227, "number_of_asthma_cases": 175368, "asthma_cases_per_capita": 0.09577183575792064}, {"state": "Wisconsin", "id": 55, "population": 5778708, "latitude": 44.6243, "longitude": -89.9941, "number_of_asthma_cases": 408318, "asthma_cases_per_capita": 0.07065904697036085}, {"state": "Wyoming", "id": 56, "population": 585501, "latitude": 42.9957, "longitude": -107.5512, "number_of_asthma_cases": 38099, "asthma_cases_per_capita": 0.06507076845300008}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<aside class="notes">
+<p>To make our visualization easier to interpret, we can add descriptive titles. These are often particularly important when we create more complex figures since there are now several panels within each figure to keep track of.</p>
+<p>If we have already taken steps to reduce the ambiguity of the charts in our figure (as we did in the previous slides), we might not need a title for each chart in the figure, but when in doubt it is better to add one title too many than one too few.</p>
+<p>We should at least add an overall title to the figure as we learned in previous modules. Here we use <code>dx</code> to center this figure over the charts in the figure, rather than having it to the left or centered over the entire charts + legends.</p>
+<p>We here make the overall title more general, but could also have highlighted a specific take home message, such as that there is no clear geographical distribution of asthma cases or that the relative differences between most states is rather small. Which title we chose would depend on the narrative we are building with the figure.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lets-apply-what-we-learned" class="title-slide slide level1 center">
+<h1>Let’s apply what we learned!</h1>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":false},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: false,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: true,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: '100%',
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
