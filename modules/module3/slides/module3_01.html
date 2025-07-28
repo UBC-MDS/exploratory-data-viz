@@ -203,7 +203,7 @@
 </section>
 <section id="the-movies-dataset" class="slide level2">
 <h2>The movies dataset</h2>
-<div id="042433e0" class="cell" data-execution_count="2">
+<div id="22b7ffaf" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>movies <span class="op">=</span> pd.read_csv(<span class="st">"data/movies.csv"</span>)</span>
@@ -333,7 +333,7 @@
 </section>
 <section id="visualizing-a-single-column-with-a-point-plot-along-one-axis" class="slide level2">
 <h2>Visualizing a single column with a point plot along one axis</h2>
-<div id="2b767279" class="cell" data-execution_count="3">
+<div id="0f529e95" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies[:<span class="dv">5</span>]).mark_point().encode(</span>
@@ -341,23 +341,23 @@
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-db4ff506d85e4573850e018aab0ed13f.vega-embed {
+  #altair-viz-c9554ed8c1e4416bb2cf62cb11752583.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-db4ff506d85e4573850e018aab0ed13f.vega-embed details,
-  #altair-viz-db4ff506d85e4573850e018aab0ed13f.vega-embed details summary {
+  #altair-viz-c9554ed8c1e4416bb2cf62cb11752583.vega-embed details,
+  #altair-viz-c9554ed8c1e4416bb2cf62cb11752583.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-db4ff506d85e4573850e018aab0ed13f"></div>
+<div id="altair-viz-c9554ed8c1e4416bb2cf62cb11752583"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-db4ff506d85e4573850e018aab0ed13f") {
-      outputDiv = document.getElementById("altair-viz-db4ff506d85e4573850e018aab0ed13f");
+    if (outputDiv.id !== "altair-viz-c9554ed8c1e4416bb2cf62cb11752583") {
+      outputDiv = document.getElementById("altair-viz-c9554ed8c1e4416bb2cf62cb11752583");
     }
 
     const paths = {
@@ -429,29 +429,29 @@
 </section>
 <section id="single-axis-plots-can-become-saturated-when-there-is-a-lot-of-data-to-plot" class="slide level2">
 <h2>Single-axis plots can become saturated when there is a lot of data to plot</h2>
-<div id="498ec1ef" class="cell" data-execution_count="4">
+<div id="6da4b890" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies[:<span class="dv">50</span>]).mark_point().encode(</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'runtime'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-105c8e380215475d91f85f6117f30986.vega-embed {
+  #altair-viz-4286bc9066264d019f43cf6ff9e3e5e4.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-105c8e380215475d91f85f6117f30986.vega-embed details,
-  #altair-viz-105c8e380215475d91f85f6117f30986.vega-embed details summary {
+  #altair-viz-4286bc9066264d019f43cf6ff9e3e5e4.vega-embed details,
+  #altair-viz-4286bc9066264d019f43cf6ff9e3e5e4.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-105c8e380215475d91f85f6117f30986"></div>
+<div id="altair-viz-4286bc9066264d019f43cf6ff9e3e5e4"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-105c8e380215475d91f85f6117f30986") {
-      outputDiv = document.getElementById("altair-viz-105c8e380215475d91f85f6117f30986");
+    if (outputDiv.id !== "altair-viz-4286bc9066264d019f43cf6ff9e3e5e4") {
+      outputDiv = document.getElementById("altair-viz-4286bc9066264d019f43cf6ff9e3e5e4");
     }
 
     const paths = {
@@ -521,29 +521,29 @@
 </section>
 <section id="thinner-marks-avoid-saturation" class="slide level2">
 <h2>Thinner marks avoid saturation</h2>
-<div id="b169169c" class="cell" data-execution_count="5">
+<div id="204ccff9" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies[:<span class="dv">50</span>]).mark_tick().encode(</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'runtime'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-7098ea48dd8f41c58d674961fdf8dbbc.vega-embed {
+  #altair-viz-bb2ecca91a8540cd9af70ad30cf2909c.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-7098ea48dd8f41c58d674961fdf8dbbc.vega-embed details,
-  #altair-viz-7098ea48dd8f41c58d674961fdf8dbbc.vega-embed details summary {
+  #altair-viz-bb2ecca91a8540cd9af70ad30cf2909c.vega-embed details,
+  #altair-viz-bb2ecca91a8540cd9af70ad30cf2909c.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-7098ea48dd8f41c58d674961fdf8dbbc"></div>
+<div id="altair-viz-bb2ecca91a8540cd9af70ad30cf2909c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-7098ea48dd8f41c58d674961fdf8dbbc") {
-      outputDiv = document.getElementById("altair-viz-7098ea48dd8f41c58d674961fdf8dbbc");
+    if (outputDiv.id !== "altair-viz-bb2ecca91a8540cd9af70ad30cf2909c") {
+      outputDiv = document.getElementById("altair-viz-bb2ecca91a8540cd9af70ad30cf2909c");
     }
 
     const paths = {
@@ -615,29 +615,29 @@
 </section>
 <section id="thinner-marks-also-saturate-for-large-data-sets" class="slide level2">
 <h2>Thinner marks also saturate for large data sets</h2>
-<div id="fd45f8a8" class="cell" data-execution_count="6">
+<div id="37ed407c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies).mark_tick().encode(</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'runtime'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-c2d1996a9bed4e9695a2dce9eb218fdc.vega-embed {
+  #altair-viz-cf43d431aae14195833a3e8286bd4b97.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-c2d1996a9bed4e9695a2dce9eb218fdc.vega-embed details,
-  #altair-viz-c2d1996a9bed4e9695a2dce9eb218fdc.vega-embed details summary {
+  #altair-viz-cf43d431aae14195833a3e8286bd4b97.vega-embed details,
+  #altair-viz-cf43d431aae14195833a3e8286bd4b97.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-c2d1996a9bed4e9695a2dce9eb218fdc"></div>
+<div id="altair-viz-cf43d431aae14195833a3e8286bd4b97"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-c2d1996a9bed4e9695a2dce9eb218fdc") {
-      outputDiv = document.getElementById("altair-viz-c2d1996a9bed4e9695a2dce9eb218fdc");
+    if (outputDiv.id !== "altair-viz-cf43d431aae14195833a3e8286bd4b97") {
+      outputDiv = document.getElementById("altair-viz-cf43d431aae14195833a3e8286bd4b97");
     }
 
     const paths = {
@@ -707,30 +707,30 @@
 </section>
 <section id="using-histograms-to-visualize-distributions-avoids-saturation-issues" class="slide level2">
 <h2>Using histograms to visualize distributions avoids saturation issues</h2>
-<div id="684f87fd" class="cell" data-execution_count="7">
+<div id="9018e8e8" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies).mark_bar().encode(</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'runtime'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'count()'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-f8c218cd670d4805b166ea4de1104114.vega-embed {
+  #altair-viz-6bf06ed66c494c3ab74251976020ea93.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-f8c218cd670d4805b166ea4de1104114.vega-embed details,
-  #altair-viz-f8c218cd670d4805b166ea4de1104114.vega-embed details summary {
+  #altair-viz-6bf06ed66c494c3ab74251976020ea93.vega-embed details,
+  #altair-viz-6bf06ed66c494c3ab74251976020ea93.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-f8c218cd670d4805b166ea4de1104114"></div>
+<div id="altair-viz-6bf06ed66c494c3ab74251976020ea93"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f8c218cd670d4805b166ea4de1104114") {
-      outputDiv = document.getElementById("altair-viz-f8c218cd670d4805b166ea4de1104114");
+    if (outputDiv.id !== "altair-viz-6bf06ed66c494c3ab74251976020ea93") {
+      outputDiv = document.getElementById("altair-viz-6bf06ed66c494c3ab74251976020ea93");
     }
 
     const paths = {
@@ -803,30 +803,30 @@
 </section>
 <section id="faceting-is-effective-when-comparing-multiple-distributions" class="slide level2">
 <h2>Faceting is effective when comparing multiple distributions</h2>
-<div id="3bcdcc2d" class="cell" data-execution_count="8">
+<div id="0c44d6f4" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies).mark_bar().encode(</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'runtime'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'count()'</span>).facet(<span class="st">'country'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-167f0c7a529b4e248fc482f07c0cbc0e.vega-embed {
+  #altair-viz-133c2f6a433c4efe9c8efa55a55469cd.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-167f0c7a529b4e248fc482f07c0cbc0e.vega-embed details,
-  #altair-viz-167f0c7a529b4e248fc482f07c0cbc0e.vega-embed details summary {
+  #altair-viz-133c2f6a433c4efe9c8efa55a55469cd.vega-embed details,
+  #altair-viz-133c2f6a433c4efe9c8efa55a55469cd.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-167f0c7a529b4e248fc482f07c0cbc0e"></div>
+<div id="altair-viz-133c2f6a433c4efe9c8efa55a55469cd"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-167f0c7a529b4e248fc482f07c0cbc0e") {
-      outputDiv = document.getElementById("altair-viz-167f0c7a529b4e248fc482f07c0cbc0e");
+    if (outputDiv.id !== "altair-viz-133c2f6a433c4efe9c8efa55a55469cd") {
+      outputDiv = document.getElementById("altair-viz-133c2f6a433c4efe9c8efa55a55469cd");
     }
 
     const paths = {
@@ -899,7 +899,7 @@
 </section>
 <section id="independent-y-axis-scales-let-us-study-each-distribution-in-more-detail" class="slide level2">
 <h2>Independent y-axis scales let us study each distribution in more detail</h2>
-<div id="f849a8ff" class="cell" data-execution_count="9">
+<div id="b678553c" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(movies).mark_bar().encode(</span>
 <span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'runtime'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'count()'</span>)</span>
@@ -908,23 +908,23 @@
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-61246a96301f4ab7b471a59c4c00520a.vega-embed {
+  #altair-viz-216d6900a5754d93b9d531fc018ff80d.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-61246a96301f4ab7b471a59c4c00520a.vega-embed details,
-  #altair-viz-61246a96301f4ab7b471a59c4c00520a.vega-embed details summary {
+  #altair-viz-216d6900a5754d93b9d531fc018ff80d.vega-embed details,
+  #altair-viz-216d6900a5754d93b9d531fc018ff80d.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-61246a96301f4ab7b471a59c4c00520a"></div>
+<div id="altair-viz-216d6900a5754d93b9d531fc018ff80d"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-61246a96301f4ab7b471a59c4c00520a") {
-      outputDiv = document.getElementById("altair-viz-61246a96301f4ab7b471a59c4c00520a");
+    if (outputDiv.id !== "altair-viz-216d6900a5754d93b9d531fc018ff80d") {
+      outputDiv = document.getElementById("altair-viz-216d6900a5754d93b9d531fc018ff80d");
     }
 
     const paths = {
