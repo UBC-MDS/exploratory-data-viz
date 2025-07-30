@@ -506,16 +506,11 @@
 </section>
 <section id="working-with-large-datasets-without-including-all-the-data-in-the-chart" class="slide level2">
 <h2>Working with large datasets without including all the data in the chart</h2>
-<p>Use the data server:</p>
+<p>Use the vegafusion data transformer by including the following line at the start of your analysis:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a>alt.data_transformers.enable(<span class="st">'vegafusion'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Output in the spec:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="er">"data":</span> <span class="fu">{</span></span>
-<span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a>    <span class="dt">"url"</span><span class="fu">:</span> <span class="st">"http://localhost:21319/4d45d69bbd706eda330e96e79ad4bf46.json"</span></span>
-<span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="er">,</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Optionally you could use the mimtype renderer with the data transformer to show plots without Python running:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a>alt.renderers.enable(<span class="st">'mimetype'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <aside class="notes">
-<p>Here, we’re using alt.data_transformers.enable(‘vegafusion’), which differs from what’s shown in the video. That’s because we’re working with the newer Altair version 5, which no longer supports ‘data_server’. In the video, however, Altair version 4 was used.</p>
+<p>Here, we’re using <code>alt.data_transformers.enable('vegafusion')</code>, which differs from what’s shown in the video. That’s because since Altair version 5, <code>vegafusion</code> is the most effective way to work with large datasets and the <code>data_server</code> shown in the video is no longer supported.</p>
+<p>Vegafusion reduces the size of the data passed to altair, by removing unused columns and performing data transformations (e.g.&nbsp;binning and aggregations) before Altair receives the data. You can <a href="https://altair-viz.github.io/user_guide/large_datasets.html#vegafusion-data-transformer">read more in the Altair documentation</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
