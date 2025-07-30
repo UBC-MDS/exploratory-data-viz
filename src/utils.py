@@ -23,6 +23,8 @@ pd.set_option("display.max_rows", 6)
 
 
 def assert_chart_equal(expected, actual):
+    print(type(expected))
+    print(expected)
     expected_dict = expected if isinstance(expected, dict) else expected.to_dict()
     actual_dict = actual if isinstance(actual, dict) else actual.to_dict()
     try:
