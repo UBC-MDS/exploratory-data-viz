@@ -181,7 +181,7 @@ brush = alt.selection_interval()
 (alt.Chart(cars).mark_circle().encode(
     alt.X('Horsepower', title='Enging power (hp)'),
     alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'))
-.add_selection(brush))
+.add_params(brush))
 ```
 
 :::{.notes}
@@ -229,7 +229,7 @@ brush = alt.selection_interval()
     alt.X('Horsepower', title='Enging power (hp)'),
     alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),
     color=alt.condition(brush, 'Origin', alt.value('lightgray')))
-.add_selection(brush))
+.add_params(brush))
 ```
 
 :::{.notes}
@@ -268,7 +268,7 @@ points = (alt.Chart(cars).mark_circle().encode(
     alt.X('Horsepower', title='Enging power (hp)'),
     alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),
     color=alt.condition(brush, 'Origin', alt.value('lightgray')))
-.add_selection(brush)).properties(height=225, width=300)
+.add_params(brush)).properties(height=225, width=300)
 
 points | points.encode(x='Acceleration', y=alt.Y('Weight_in_lbs', title='Weight'))
 ```
@@ -318,7 +318,7 @@ points = (alt.Chart(cars).mark_circle().encode(
     alt.X('Horsepower', title='Enging power (hp)'),
     alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),
     color=alt.condition(brush, 'Origin', alt.value('lightgray')))
-.add_selection(brush)).properties(height=225, width=300)
+.add_params(brush)).properties(height=225, width=300)
 
 points | points.encode(x='Acceleration', y=alt.Y('Weight_in_lbs', title='Weight'))
 ```
