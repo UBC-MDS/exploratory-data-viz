@@ -23,13 +23,13 @@ import altair as alt
 from vega_datasets import data
 
 cars = data.cars()
-click = alt.selection_multi()
+click = alt.selection_point()
 bars = (alt.Chart(cars).mark_bar().encode(
     alt.X('count()', title='Number of cars'),
     alt.Y('Origin', title='Region'),
     alt.Color('Origin', title=None),
     opacity=alt.condition(click, alt.value(0.9), alt.value(0.2)))
-.add_selection(click)).properties(width=300)
+.add_params(click)).properties(width=300)
 
 bars
 ```
@@ -83,7 +83,7 @@ points = (alt.Chart(cars).mark_circle().encode(
     alt.X('Horsepower', title='Enging power (hp)'),
     alt.Y('Miles_per_Gallon', title='Fuel efficiency (miles / gal)'),
     color=alt.condition(brush, 'Origin', alt.value('lightgray')))
-.add_selection(brush)).properties(width=300, height=200)
+.add_params(brush)).properties(width=300, height=200)
 
 points & bars
 ```
@@ -122,8 +122,8 @@ so how can we perform this linkage in Altair?
 ## Linking selections from separate charts requires explicit columns to select on
 
 ```{python}
-click = alt.selection_multi(fields=['Origin'])
-bars = bars.add_selection(click)
+click = alt.selection_point(fields=['Origin'])
+bars = bars.add_params(click)
 points = points.encode(opacity=alt.condition(click, alt.value(0.9), alt.value(0.2)))
 
 points & bars
@@ -168,10 +168,10 @@ which we will see an example of in a few slides.
 ## A selection can be bound to the legend instead of a particular chart
 
 ```{python}
-click_legend = alt.selection_multi(fields=['Origin'], bind='legend')
+click_legend = alt.selection_point(fields=['Origin'], bind='legend')
 points = points.encode(opacity=alt.condition(click_legend, alt.value(0.9), alt.value(0.2)))
 
-points.add_selection(click_legend)
+points.add_params(click_legend)
 ```
 
 :::{.notes}
@@ -195,7 +195,7 @@ it will select the corresponding observations in the scatterplot!
 
 ```{python}
 bars = bars.encode(opacity=alt.condition(click_legend, alt.value(0.9), alt.value(0.2)))
-(points & bars).add_selection(click_legend) 
+(points & bars).add_params(click_legend) 
 ```
 
 :::{.notes}
@@ -213,7 +213,7 @@ and there is no difference in choosing one approach over the other.
 
 ```{python}
 bars = bars.transform_filter(brush)
-(points & bars).add_selection(click_legend) 
+(points & bars).add_params(click_legend) 
 ```
 
 :::{.notes}
@@ -256,7 +256,7 @@ neat!
 ```{python}
 bar_chart_max = cars.groupby('Origin').size().max()
 bars = bars.encode(alt.X('count()', scale=alt.Scale(domain=[0, bar_chart_max])))
-(points & bars).add_selection(click_legend) 
+(points & bars).add_params(click_legend) 
 ```
 
 :::{.notes}
@@ -302,7 +302,7 @@ state_pop["asthma_cases_per_capita"] = (
     state_pop["number_of_asthma_cases"] / state_pop["population"]
 )
 
-hover = alt.selection_single(fields=["state"], on="mouseover")
+hover = alt.selection_point(fields=["state"], on="mouseover")
 choropleth = (
     alt.Chart(state_map)
     .mark_geoshape()
@@ -318,7 +318,7 @@ choropleth = (
             alt.Tooltip("number_of_asthma_cases:Q", title="Asthma cases"),
         ],
     )
-    .add_selection(hover)
+    .add_params(hover)
     .project(type="albersUsa")
     .properties(height=150, width=300)
 )
@@ -389,7 +389,7 @@ looking for the state name of interest.
 ## Two way interactivity between the map and scatter plot
 
 ```{python}
-choropleth & points.encode(tooltip='state').add_selection(hover)
+choropleth & points.encode(tooltip='state').add_params(hover)
 ```
 
 :::{.notes}
