@@ -16,7 +16,7 @@ format:
         'True or False',
         'Panning, zooming and brush selections can be simply added to Altair charts by using the <code>.interactive()</code> method.',
         {
-        'True': 'Try again! Brush selections are added via <code>.add_selection()</code> and  <code>.selection_interval()</code>, not the <code>.interactive()</code> method.',
+        'True': 'Try again! Brush selections are added via <code>.add_params()</code> and  <code>.selection_interval()</code>, not the <code>.interactive()</code> method.',
         'False': ''
         },
         'False',
@@ -86,7 +86,7 @@ linked_scatter = (alt.Chart(____).mark_circle().encode(
     alt.X(____, title=____, scale=alt.Scale(zero=False)),
     alt.Y(____, title=____, scale=alt.Scale(zero=False)),
     color=alt.condition(____, 'species', alt.value('lightgray')))
-    .add_selection(____))
+    .add_params(____))
     
 together_plots = (____ &
                  ____.encode(alt.X(____,
@@ -107,7 +107,7 @@ linked_scatter = (alt.Chart(penguins_df).mark_circle().encode(
     alt.X('body_mass_g', title='Body mass (g)', scale=alt.Scale(zero=False)),
     alt.Y('flipper_length_mm', title='Flipper length (mm)', scale=alt.Scale(zero=False)),
     color=alt.condition(brush, 'species', alt.value('lightgray')))
-    .add_selection(brush))
+    .add_params(brush))
     
 solution = (linked_scatter &
                   linked_scatter.encode(alt.X('culmen_length_mm',
@@ -135,7 +135,7 @@ assert_chart_equal(solution_dict, result_dict)
 - Are you using the data `penguins_df` to create `linked_scatter`? 
 - Are you plotting `body_mass_g` on the x-axis in `linked_scatter`?
 - Are you setting the selection interval as an argument in condition? 
-- Are you setting `brush` in  `add_selection`?
+- Are you setting `brush` in  `add_params`?
 
 :::
 ::::
@@ -152,7 +152,7 @@ linked_scatter = (alt.Chart(penguins_df).mark_circle().encode(
     alt.X('body_mass_g', title='Body mass (g)', scale=alt.Scale(zero=False)),
     alt.Y('flipper_length_mm', title='Flipper length (mm)', scale=alt.Scale(zero=False)),
     color=alt.condition(brush, 'species', alt.value('lightgray')))
-    .add_selection(brush))
+    .add_params(brush))
     
 together_plots = (linked_scatter &
                   linked_scatter.encode(alt.X('culmen_length_mm',

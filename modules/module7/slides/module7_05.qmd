@@ -43,7 +43,7 @@ points = alt.Chart(movies).mark_circle().encode(
     alt.Y('IMDB_Rating', title='IMDB rating'),
     alt.Color('Major_Genre', title='Major genre'),
     opacity=alt.condition(select_genre, alt.value(0.7), alt.value(0.05))).properties(height=200)
-points.add_selection(select_genre)
+points.add_params(select_genre)
 ```
 
 :::{.notes}
@@ -75,7 +75,7 @@ genres = sorted(movies['Major_Genre'].unique())
 dropdown = alt.binding_select(name='Genre ', options=genres)
 select_genre = alt.selection_point(fields=['Major_Genre'], bind=dropdown)
 
-points.add_selection(select_genre).encode(
+points.add_params(select_genre).encode(
     opacity=alt.condition(select_genre, alt.value(0.7), alt.value(0.05)))
 ```
 
@@ -115,7 +115,7 @@ select_genre = alt.selection_point(
     fields=["Major_Genre"], bind=dropdown, value="Comedy"
 )
 
-points.add_selection(select_genre).encode(
+points.add_params(select_genre).encode(
     opacity=alt.condition(select_genre, alt.value(0.7), alt.value(0.05))
 )
 ```
@@ -147,7 +147,7 @@ select_genre_and_mpaa = alt.selection_point(
     fields=['Major_Genre', 'MPAA_Rating'],
     bind={'Major_Genre': dropdown_genre, 'MPAA_Rating': radiobuttons_mpaa})
 
-points.add_selection(select_genre_and_mpaa).encode(
+points.add_params(select_genre_and_mpaa).encode(
     opacity=alt.condition(select_genre_and_mpaa, alt.value(0.7), alt.value(0.05)))
 ```
 
@@ -183,7 +183,7 @@ select_rating = alt.selection_point(
 
 points.encode(
     opacity=alt.condition(select_rating, alt.value(0.7), alt.value(0.05))
-).add_selection(select_rating)
+).add_params(select_rating)
 ```
 
 :::{.notes}
@@ -214,7 +214,7 @@ points.encode(
     opacity=alt.condition(
         alt.datum.Rotten_Tomatoes_Rating < select_rating.Rotten_Tomatoes_Rating,
         alt.value(0.7), alt.value(0.05))
-).add_selection(select_rating)
+).add_params(select_rating)
 ```
 
 :::{.notes}
@@ -252,7 +252,7 @@ points.encode(
         alt.value(0.7),
         alt.value(0.05),
     )
-).add_selection(select_rating)
+).add_params(select_rating)
 ```
 
 :::{.notes}
@@ -290,7 +290,7 @@ points.encode(
     opacity=alt.condition(
         alt.datum.Worldwide_Gross < select_rating.Worldwide_Gross,
         alt.value(0.7), alt.value(0.05))
-).add_selection(select_rating)
+).add_params(select_rating)
 ```
 
 :::{.notes}
@@ -324,7 +324,7 @@ select_rating = alt.selection_point(fields=['Release_Year'], bind=slider)
 
 points.encode(
     opacity=alt.condition(select_rating, alt.value(0.7), alt.value(0.05))
-).add_selection(select_rating)
+).add_params(select_rating)
 ```
 
 :::{.notes}
@@ -354,7 +354,7 @@ bar_slider = (alt.Chart(movies).mark_bar().encode(
     alt.X('Release_Year', title='Release Year'),
     alt.Y('count()'),
     opacity=alt.condition(select_year, alt.value(0.7), alt.value(0.05)))
-.properties(height=50).add_selection(select_year))
+.properties(height=50).add_params(select_year))
 
 points.encode(opacity=alt.condition(select_year, alt.value(0.7), alt.value(0.05))) & bar_slider
 ```
@@ -402,7 +402,7 @@ base = alt.Chart(movies_1995_2010).mark_area().encode(
     alt.Y('mean(Worldwide_Gross)', title='Gross worldwide'))
 
 select_year = alt.selection_interval()
-lower = base.properties(height=50).add_selection(select_year)
+lower = base.properties(height=50).add_params(select_year)
 upper = base.encode(alt.X('Release_Year', title=None, scale=alt.Scale(domain=select_year))).properties(height=200)
 upper & lower
 ```

@@ -108,7 +108,7 @@ slider_scatter = (alt.Chart(penguins_df).mark_circle().encode(
     alt.Y('culmen_depth_mm', title='Culmen depth (mm)', scale=alt.Scale(zero=False)),
     color='species',
     opacity=alt.condition(____ < ____, alt.value(0.7), alt.value(0.05)))
-    .add_selection(____))
+    .add_params(____))
 
 slider_scatter
 ```
@@ -118,7 +118,7 @@ slider_scatter
 #| check: true
 
 slider = alt.binding_range(name='Body mass (g)', max=max(penguins_df['body_mass_g']))
-select_rating = alt.selection_single(
+select_rating = alt.selection_point(
     fields=['body_mass_g'],
     bind=slider,
     name='select_rating')
@@ -129,7 +129,7 @@ solution = (alt.Chart(penguins_df).mark_circle().encode(
     color='species',
     opacity=alt.condition(alt.datum.body_mass_g < select_rating.body_mass_g,
                           alt.value(0.7), alt.value(0.05)))
-    .add_selection(select_rating))
+    .add_params(select_rating))
 
 solution_dict = solution.to_dict()
 result_dict = result.to_dict()
@@ -146,10 +146,10 @@ assert_chart_equal(solution_dict, result_dict)
 
 - Are you setting `alt.binding_range()` to build your sliding tool?
 - Are you setting the max of the slider to `max=max(penguins_df['body_mass_g'])` ? 
-- Are you using `selection_single` to make `select_rating`?
-- Are you binding the `selection_single` to `slider`? 
+- Are you using `selection_point` to make `select_rating`?
+- Are you binding the `selection_point` to `slider`? 
 - Are you setting `alt.datum.body_mass_g < select_rating.body_mass_g` as your expression in `alt.condition()`?
-- Are you calling `select_rating` in `.add_selection()`?
+- Are you calling `select_rating` in `.add_params()`?
 
 :::
 ::::
@@ -161,7 +161,7 @@ assert_chart_equal(solution_dict, result_dict)
 
 ```{pyodide}
 slider = alt.binding_range(name='Body mass (g)', max=max(penguins_df['body_mass_g']))
-select_rating = alt.selection_single(
+select_rating = alt.selection_point(
     fields=['body_mass_g'],
     bind=slider,
     name='select_rating')
@@ -172,7 +172,7 @@ slider_scatter = (alt.Chart(penguins_df).mark_circle().encode(
     color='species',
     opacity=alt.condition(alt.datum.body_mass_g < select_rating.body_mass_g,
                           alt.value(0.7), alt.value(0.05)))
-    .add_selection(select_rating))
+    .add_params(select_rating))
 
 slider_scatter
 ```

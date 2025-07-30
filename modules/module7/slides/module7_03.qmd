@@ -43,16 +43,13 @@ it is often more intuitive to be able to click
 the objects to highlight or select them, 
 rather than dragging with the cursor to select an area.
 
-In this slide we use `selection_multi`
+In this slide we use `selection_point`
 to create a selection based on what we click with our cursor
 If we hold the shift key,
 we can select multiple items.
 
-If you do not want to allow for multiple selection in your visualization,
-you can instead opt to use `selection_single` instead of `selection_multi`.
-
 Here,
-we named our  `alt.selection_multi()` object `click`, 
+we named our  `alt.selection_point()` object `click`, 
 and linked it to a visible change in the chart,
 by passing it inside `alt.condition`
 to the opacity parameter.
@@ -182,7 +179,7 @@ but still want to be able to select data from different origins?
 Instead of using a separate chart,
 we could use the legend to make the selections.
 We can tell Altair that we want to make the legend interactive,
-by binding `selection_multi` to it.
+by binding `selection_point` to it.
 
 We then need to link this new selection
 to the points opacity encoding and add it to the plot.
@@ -338,7 +335,7 @@ which would be hard to read out precisely from the color mapping alone.
 We used `alt.Tooltip` to change the title in the tooltip,
 just as when we change the title of an axis or legend.
 
-We also added a `selection_single` interaction,
+We also added a `selection_point` interaction,
 but instead of binding it to cursor clicks (the default),
 we bound it to `'mouseover'`,
 which is when we are hovering over a state with our cursor.
