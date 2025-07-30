@@ -378,29 +378,17 @@ we will discuss another way to manage this challenge.
 
 ## Working with large datasets without including all the data in the chart
 
-Use the data server:
+Use the vegafusion data transformer by including the following line at the start of your analysis:
 
 ```python
 alt.data_transformers.enable('vegafusion')
 ```
 
-Output in the spec:
-
-```json
-"data": {
-    "url": "http://localhost:21319/4d45d69bbd706eda330e96e79ad4bf46.json"
-  },
-```
-
-Optionally you could use the mimtype renderer
-with the data transformer to show plots without Python running:
-
-```python
-alt.renderers.enable('mimetype')
-```
-
 :::{.notes}
-Here, we're using alt.data_transformers.enable('vegafusion'), which differs from what's shown in the video. That's because we're working with the newer Altair version 5, which no longer supports 'data_server'. In the video, however, Altair version 4 was used.
+Here, we're using `alt.data_transformers.enable('vegafusion')`, which differs from what's shown in the video. That's because since Altair version 5, `vegafusion` is the most effective way to work with large datasets and the `data_server` shown in the video is no longer supported.
+
+Vegafusion reduces the size of the data passed to altair, by removing unused columns and performing data transformations (e.g. binning and aggregations) before Altair receives the data. You can [read more in the Altair documentation](https://altair-viz.github.io/user_guide/large_datasets.html#vegafusion-data-transformer).
+
 :::
 
-# Let's apply what we learned 
+# Let's apply what we learned
