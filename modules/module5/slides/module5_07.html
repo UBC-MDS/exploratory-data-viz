@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-fe91322616dd2b9cea8bc6bfc6aa44e1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.33">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <title>Data Visualization – Effective use of colour for categorical data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,6 +16,9 @@
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -94,7 +97,7 @@
     code span.vs { color: #da4453; } /* VerbatimString */
     code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-619cbfa9e20ba3037c203f55112b9bcb.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-096b74af192d6421b9ecf63b4369cbfc.css">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -186,7 +189,7 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
   
   <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
@@ -304,31 +307,31 @@
 </section>
 <section id="specifying-colour-schemes-in-altair" class="slide level2">
 <h2>Specifying colour schemes in Altair</h2>
-<div id="2448ce2d" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point(size<span class="op">=</span><span class="dv">70</span>, filled<span class="op">=</span><span class="va">True</span>).encode(</span>
+<div id="f36a50e2" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point(size<span class="op">=</span><span class="dv">70</span>, filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Fuel efficiency (miles/gallon)'</span>),</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'Origin'</span>, title<span class="op">=</span><span class="va">None</span>, scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'set1'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'Origin'</span>, title<span class="op">=</span><span class="va">None</span>, scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'set1'</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-0eae0350044e4387a39f12a40cd8cb3b.vega-embed {
+  #altair-viz-3ecc4bd4fc4347dd99c09e407355e382.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-0eae0350044e4387a39f12a40cd8cb3b.vega-embed details,
-  #altair-viz-0eae0350044e4387a39f12a40cd8cb3b.vega-embed details summary {
+  #altair-viz-3ecc4bd4fc4347dd99c09e407355e382.vega-embed details,
+  #altair-viz-3ecc4bd4fc4347dd99c09e407355e382.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-0eae0350044e4387a39f12a40cd8cb3b"></div>
+<div id="altair-viz-3ecc4bd4fc4347dd99c09e407355e382"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-0eae0350044e4387a39f12a40cd8cb3b") {
-      outputDiv = document.getElementById("altair-viz-0eae0350044e4387a39f12a40cd8cb3b");
+    if (outputDiv.id !== "altair-viz-3ecc4bd4fc4347dd99c09e407355e382") {
+      outputDiv = document.getElementById("altair-viz-3ecc4bd4fc4347dd99c09e407355e382");
     }
 
     const paths = {
@@ -397,32 +400,32 @@
 </section>
 <section id="redundant-coding-can-make-charts-easier-to-interpret" class="slide level2">
 <h2>Redundant coding can make charts easier to interpret</h2>
-<div id="623330cc" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point(size<span class="op">=</span><span class="dv">70</span>, filled<span class="op">=</span><span class="va">True</span>).encode(</span>
+<div id="19785693" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point(size<span class="op">=</span><span class="dv">70</span>, filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Fuel efficiency (miles/gallon)'</span>),</span>
 <span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'Origin'</span>, title<span class="op">=</span><span class="va">None</span>, scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'set1'</span>)),</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>    shape<span class="op">=</span><span class="st">'Origin'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>    shape<span class="op">=</span><span class="st">'Origin'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-b7f270a83cf445308e53bd5f5163a9cc.vega-embed {
+  #altair-viz-4ac7e96ca33c43f0b3ca944acf70a2b7.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-b7f270a83cf445308e53bd5f5163a9cc.vega-embed details,
-  #altair-viz-b7f270a83cf445308e53bd5f5163a9cc.vega-embed details summary {
+  #altair-viz-4ac7e96ca33c43f0b3ca944acf70a2b7.vega-embed details,
+  #altair-viz-4ac7e96ca33c43f0b3ca944acf70a2b7.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-b7f270a83cf445308e53bd5f5163a9cc"></div>
+<div id="altair-viz-4ac7e96ca33c43f0b3ca944acf70a2b7"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-b7f270a83cf445308e53bd5f5163a9cc") {
-      outputDiv = document.getElementById("altair-viz-b7f270a83cf445308e53bd5f5163a9cc");
+    if (outputDiv.id !== "altair-viz-4ac7e96ca33c43f0b3ca944acf70a2b7") {
+      outputDiv = document.getElementById("altair-viz-4ac7e96ca33c43f0b3ca944acf70a2b7");
     }
 
     const paths = {
@@ -495,33 +498,33 @@
 </section>
 <section id="specifying-custom-colours" class="slide level2">
 <h2>Specifying custom colours</h2>
-<div id="792582cf" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'coral'</span>, <span class="st">'#4682b4'</span>, <span class="st">'rebeccapurple'</span>]</span>
+<div id="a19acd24" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'coral'</span>, <span class="st">'#4682b4'</span>, <span class="st">'rebeccapurple'</span>]</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point(size<span class="op">=</span><span class="dv">70</span>, filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Fuel efficiency (miles/gallon)'</span>),</span>
 <span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'Origin'</span>, title<span class="op">=</span><span class="va">None</span>, scale<span class="op">=</span>alt.Scale(<span class="bu">range</span><span class="op">=</span>colors)),</span>
-<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>    shape<span class="op">=</span><span class="st">'Origin'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>    shape<span class="op">=</span><span class="st">'Origin'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-a7037bd3602949eea3c03afaf35e9cd6.vega-embed {
+  #altair-viz-fff0d40396844f48b2e9a3f74c7a710b.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-a7037bd3602949eea3c03afaf35e9cd6.vega-embed details,
-  #altair-viz-a7037bd3602949eea3c03afaf35e9cd6.vega-embed details summary {
+  #altair-viz-fff0d40396844f48b2e9a3f74c7a710b.vega-embed details,
+  #altair-viz-fff0d40396844f48b2e9a3f74c7a710b.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-a7037bd3602949eea3c03afaf35e9cd6"></div>
+<div id="altair-viz-fff0d40396844f48b2e9a3f74c7a710b"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-a7037bd3602949eea3c03afaf35e9cd6") {
-      outputDiv = document.getElementById("altair-viz-a7037bd3602949eea3c03afaf35e9cd6");
+    if (outputDiv.id !== "altair-viz-fff0d40396844f48b2e9a3f74c7a710b") {
+      outputDiv = document.getElementById("altair-viz-fff0d40396844f48b2e9a3f74c7a710b");
     }
 
     const paths = {
@@ -614,31 +617,31 @@
 <section id="too-many-hues-are-impossible-to-distinguish" class="slide level2">
 <h2>Too many hues are impossible to distinguish</h2>
 <!-- #endregion -->
-<div id="e4187ff1" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point(size<span class="op">=</span><span class="dv">70</span>, filled<span class="op">=</span><span class="va">True</span>).encode(</span>
+<div id="f3b94124" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point(size<span class="op">=</span><span class="dv">70</span>, filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Fuel efficiency (miles/gallon)'</span>),</span>
-<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'Name'</span>, title<span class="op">=</span><span class="va">None</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'Name'</span>, title<span class="op">=</span><span class="va">None</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-2710ffd1da8d4e3ab4deab4d22b3857a.vega-embed {
+  #altair-viz-eccd0bc951c94188984d6ae7fec239c0.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2710ffd1da8d4e3ab4deab4d22b3857a.vega-embed details,
-  #altair-viz-2710ffd1da8d4e3ab4deab4d22b3857a.vega-embed details summary {
+  #altair-viz-eccd0bc951c94188984d6ae7fec239c0.vega-embed details,
+  #altair-viz-eccd0bc951c94188984d6ae7fec239c0.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2710ffd1da8d4e3ab4deab4d22b3857a"></div>
+<div id="altair-viz-eccd0bc951c94188984d6ae7fec239c0"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2710ffd1da8d4e3ab4deab4d22b3857a") {
-      outputDiv = document.getElementById("altair-viz-2710ffd1da8d4e3ab4deab4d22b3857a");
+    if (outputDiv.id !== "altair-viz-eccd0bc951c94188984d6ae7fec239c0") {
+      outputDiv = document.getElementById("altair-viz-eccd0bc951c94188984d6ae7fec239c0");
     }
 
     const paths = {
@@ -709,32 +712,32 @@
 </section>
 <section id="redundant-coding-of-bar-charts-can-be-disorienting" class="slide level2">
 <h2>Redundant coding of bar charts can be disorienting</h2>
-<div id="df71205e" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>cars[<span class="st">'Brand'</span>] <span class="op">=</span> cars[<span class="st">'Name'</span>].<span class="bu">str</span>.split().<span class="bu">str</span>[<span class="dv">0</span>]  <span class="co"># Extract brand from the name column</span></span>
+<div id="cab959e7" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>cars[<span class="st">'Brand'</span>] <span class="op">=</span> cars[<span class="st">'Name'</span>].<span class="bu">str</span>.split().<span class="bu">str</span>[<span class="dv">0</span>]  <span class="co"># Extract brand from the name column</span></span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(cars).mark_bar().encode(</span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Brand'</span>, title<span class="op">=</span><span class="va">None</span>, sort<span class="op">=</span><span class="st">'x'</span>),</span>
 <span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'mean(Horsepower)'</span>)).properties(width<span class="op">=</span><span class="dv">200</span>, height<span class="op">=</span><span class="dv">350</span>)</span>
-<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>chart <span class="op">|</span> chart.encode(alt.Color(<span class="st">'Brand'</span>, legend<span class="op">=</span><span class="va">None</span>, scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'tableau20'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>chart <span class="op">|</span> chart.encode(alt.Color(<span class="st">'Brand'</span>, legend<span class="op">=</span><span class="va">None</span>, scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'tableau20'</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-887bbcecf0474d2792eef979445125b1.vega-embed {
+  #altair-viz-a2019a12f1894a2fb91f73d317c2f9c5.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-887bbcecf0474d2792eef979445125b1.vega-embed details,
-  #altair-viz-887bbcecf0474d2792eef979445125b1.vega-embed details summary {
+  #altair-viz-a2019a12f1894a2fb91f73d317c2f9c5.vega-embed details,
+  #altair-viz-a2019a12f1894a2fb91f73d317c2f9c5.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-887bbcecf0474d2792eef979445125b1"></div>
+<div id="altair-viz-a2019a12f1894a2fb91f73d317c2f9c5"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-887bbcecf0474d2792eef979445125b1") {
-      outputDiv = document.getElementById("altair-viz-887bbcecf0474d2792eef979445125b1");
+    if (outputDiv.id !== "altair-viz-a2019a12f1894a2fb91f73d317c2f9c5") {
+      outputDiv = document.getElementById("altair-viz-a2019a12f1894a2fb91f73d317c2f9c5");
     }
 
     const paths = {
@@ -807,32 +810,32 @@
 </section>
 <section id="use-consistent-colouring-between-subplots-even-when-it-is-redundant" class="slide level2">
 <h2>Use consistent colouring between subplots even when it is redundant</h2>
-<div id="dfd49407" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(cars).mark_bar().encode(</span>
+<div id="a754ad98" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(cars).mark_bar().encode(</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Origin'</span>, title<span class="op">=</span><span class="va">None</span>),</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'mean(Horsepower)'</span>),</span>
 <span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'Origin'</span>, title<span class="op">=</span><span class="va">None</span>))</span>
-<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>(chart <span class="op">|</span> chart.mark_line().encode(alt.X(<span class="st">'Year'</span>, title<span class="op">=</span><span class="va">None</span>), alt.StrokeDash(<span class="st">'Origin'</span>, title<span class="op">=</span><span class="va">None</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>(chart <span class="op">|</span> chart.mark_line().encode(alt.X(<span class="st">'Year'</span>, title<span class="op">=</span><span class="va">None</span>), alt.StrokeDash(<span class="st">'Origin'</span>, title<span class="op">=</span><span class="va">None</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-b25a62c1ef6a4364ad8324dda22a614b.vega-embed {
+  #altair-viz-e29c1a31d2a548d182131a5170a4a785.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-b25a62c1ef6a4364ad8324dda22a614b.vega-embed details,
-  #altair-viz-b25a62c1ef6a4364ad8324dda22a614b.vega-embed details summary {
+  #altair-viz-e29c1a31d2a548d182131a5170a4a785.vega-embed details,
+  #altair-viz-e29c1a31d2a548d182131a5170a4a785.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-b25a62c1ef6a4364ad8324dda22a614b"></div>
+<div id="altair-viz-e29c1a31d2a548d182131a5170a4a785"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-b25a62c1ef6a4364ad8324dda22a614b") {
-      outputDiv = document.getElementById("altair-viz-b25a62c1ef6a4364ad8324dda22a614b");
+    if (outputDiv.id !== "altair-viz-e29c1a31d2a548d182131a5170a4a785") {
+      outputDiv = document.getElementById("altair-viz-e29c1a31d2a548d182131a5170a4a785");
     }
 
     const paths = {
@@ -1094,7 +1097,7 @@
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1168,13 +1171,14 @@
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-fe91322616dd2b9cea8bc6bfc6aa44e1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.33">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <title>Data Visualization – Effective use of colour for quantitative data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,6 +16,9 @@
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -94,7 +97,7 @@
     code span.vs { color: #da4453; } /* VerbatimString */
     code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-619cbfa9e20ba3037c203f55112b9bcb.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-096b74af192d6421b9ecf63b4369cbfc.css">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -186,7 +189,7 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
   
   <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
@@ -263,33 +266,33 @@
 </section>
 <section id="high-values-should-have-the-most-contrast-to-the-background" class="slide level2">
 <h2>High values should have the most contrast to the background</h2>
-<div id="8102328f" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> data.cars()</span>
+<div id="4f03abb1" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> data.cars()</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Mileage (miles/gallon)'</span>),</span>
 <span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>,</span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>                    scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'viridis'</span>, reverse<span class="op">=</span><span class="va">True</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>                    scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'viridis'</span>, reverse<span class="op">=</span><span class="va">True</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-00832fdb187341d5a09357d5711cb8bf.vega-embed {
+  #altair-viz-682301b507b34132a36d342f6ce8dddc.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-00832fdb187341d5a09357d5711cb8bf.vega-embed details,
-  #altair-viz-00832fdb187341d5a09357d5711cb8bf.vega-embed details summary {
+  #altair-viz-682301b507b34132a36d342f6ce8dddc.vega-embed details,
+  #altair-viz-682301b507b34132a36d342f6ce8dddc.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-00832fdb187341d5a09357d5711cb8bf"></div>
+<div id="altair-viz-682301b507b34132a36d342f6ce8dddc"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-00832fdb187341d5a09357d5711cb8bf") {
-      outputDiv = document.getElementById("altair-viz-00832fdb187341d5a09357d5711cb8bf");
+    if (outputDiv.id !== "altair-viz-682301b507b34132a36d342f6ce8dddc") {
+      outputDiv = document.getElementById("altair-viz-682301b507b34132a36d342f6ce8dddc");
     }
 
     const paths = {
@@ -361,32 +364,32 @@
 </section>
 <section id="some-colour-schemes-are-designed-specifically-for-people-with-colour-vision-deficiencies" class="slide level2">
 <h2>Some colour schemes are designed specifically for people with colour vision deficiencies</h2>
-<div id="c69bcef5" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
+<div id="2e47d710" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Mileage (miles/gallon)'</span>),</span>
 <span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>,</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>                    scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'cividis'</span>, reverse<span class="op">=</span><span class="va">True</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>                    scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'cividis'</span>, reverse<span class="op">=</span><span class="va">True</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-ff6bb1e034f84c73ad49cd5ceec95962.vega-embed {
+  #altair-viz-14c1b6687ea64f43a98b54907e4ac9c7.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-ff6bb1e034f84c73ad49cd5ceec95962.vega-embed details,
-  #altair-viz-ff6bb1e034f84c73ad49cd5ceec95962.vega-embed details summary {
+  #altair-viz-14c1b6687ea64f43a98b54907e4ac9c7.vega-embed details,
+  #altair-viz-14c1b6687ea64f43a98b54907e4ac9c7.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-ff6bb1e034f84c73ad49cd5ceec95962"></div>
+<div id="altair-viz-14c1b6687ea64f43a98b54907e4ac9c7"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-ff6bb1e034f84c73ad49cd5ceec95962") {
-      outputDiv = document.getElementById("altair-viz-ff6bb1e034f84c73ad49cd5ceec95962");
+    if (outputDiv.id !== "altair-viz-14c1b6687ea64f43a98b54907e4ac9c7") {
+      outputDiv = document.getElementById("altair-viz-14c1b6687ea64f43a98b54907e4ac9c7");
     }
 
     const paths = {
@@ -459,32 +462,32 @@
 </section>
 <section id="additional-hue-variation-brings-out-further-detail-but-distorts-the-perceptual-uniformity" class="slide level2">
 <h2>Additional hue variation brings out further detail but distorts the perceptual uniformity</h2>
-<div id="03eff34d" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
+<div id="df3768a0" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Mileage (miles/gallon)'</span>),</span>
 <span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>,</span>
-<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>                    scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'turbo'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>                    scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'turbo'</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-e2600d0f1cae4a4993744db2ef79bce7.vega-embed {
+  #altair-viz-b2af877044f14e0e9e380f9748e27a80.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-e2600d0f1cae4a4993744db2ef79bce7.vega-embed details,
-  #altair-viz-e2600d0f1cae4a4993744db2ef79bce7.vega-embed details summary {
+  #altair-viz-b2af877044f14e0e9e380f9748e27a80.vega-embed details,
+  #altair-viz-b2af877044f14e0e9e380f9748e27a80.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-e2600d0f1cae4a4993744db2ef79bce7"></div>
+<div id="altair-viz-b2af877044f14e0e9e380f9748e27a80"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-e2600d0f1cae4a4993744db2ef79bce7") {
-      outputDiv = document.getElementById("altair-viz-e2600d0f1cae4a4993744db2ef79bce7");
+    if (outputDiv.id !== "altair-viz-b2af877044f14e0e9e380f9748e27a80") {
+      outputDiv = document.getElementById("altair-viz-b2af877044f14e0e9e380f9748e27a80");
     }
 
     const paths = {
@@ -558,31 +561,31 @@
 </section>
 <section id="colour-is-most-effectively-used-to-represent-a-separate-dataframe-column" class="slide level2">
 <h2>Colour is most effectively used to represent a separate dataframe column</h2>
-<div id="4dcd2f00" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
+<div id="429fa805" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Horsepower'</span>, title<span class="op">=</span><span class="st">'Engine power (hp)'</span>),</span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Miles_per_Gallon'</span>, title<span class="op">=</span><span class="st">'Mileage (miles/gallon)'</span>),</span>
-<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'Weight_in_lbs'</span>, title<span class="op">=</span><span class="st">'Weight (lbs)'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'Weight_in_lbs'</span>, title<span class="op">=</span><span class="st">'Weight (lbs)'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-76853189eb1249e898c753e084e9578b.vega-embed {
+  #altair-viz-8c73d3ae6c3d4743acbfb5ac6df19603.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-76853189eb1249e898c753e084e9578b.vega-embed details,
-  #altair-viz-76853189eb1249e898c753e084e9578b.vega-embed details summary {
+  #altair-viz-8c73d3ae6c3d4743acbfb5ac6df19603.vega-embed details,
+  #altair-viz-8c73d3ae6c3d4743acbfb5ac6df19603.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-76853189eb1249e898c753e084e9578b"></div>
+<div id="altair-viz-8c73d3ae6c3d4743acbfb5ac6df19603"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-76853189eb1249e898c753e084e9578b") {
-      outputDiv = document.getElementById("altair-viz-76853189eb1249e898c753e084e9578b");
+    if (outputDiv.id !== "altair-viz-8c73d3ae6c3d4743acbfb5ac6df19603") {
+      outputDiv = document.getElementById("altair-viz-8c73d3ae6c3d4743acbfb5ac6df19603");
     }
 
     const paths = {
@@ -672,8 +675,8 @@
 </section>
 <section id="temperature-data-can-be-represented-with-a-sequential-colour-scheme" class="slide level2">
 <h2>Temperature data can be represented with a sequential colour scheme</h2>
-<div id="5965c597" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div id="7f13a4c9" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>toronto_temp <span class="op">=</span> pd.read_csv(</span>
 <span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/weatherstats_toronto_daily.csv"</span>, parse_dates<span class="op">=</span>[<span class="st">"date"</span>]</span>
@@ -682,27 +685,27 @@
 <span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">"date"</span>, title<span class="op">=</span><span class="va">None</span>),</span>
 <span id="cb5-8"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">"avg_temperature"</span>, title<span class="op">=</span><span class="st">"Average temperature (°C)"</span>),</span>
 <span id="cb5-9"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">"avg_temperature"</span>, title<span class="op">=</span><span class="st">"Average temperature (°C)"</span>),</span>
-<span id="cb5-10"><a aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-10"><a aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-d9c0c7422e4c46428b1fa2a2b7bc3794.vega-embed {
+  #altair-viz-81c9c3993cfe4c5787a77e1b47deccda.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d9c0c7422e4c46428b1fa2a2b7bc3794.vega-embed details,
-  #altair-viz-d9c0c7422e4c46428b1fa2a2b7bc3794.vega-embed details summary {
+  #altair-viz-81c9c3993cfe4c5787a77e1b47deccda.vega-embed details,
+  #altair-viz-81c9c3993cfe4c5787a77e1b47deccda.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d9c0c7422e4c46428b1fa2a2b7bc3794"></div>
+<div id="altair-viz-81c9c3993cfe4c5787a77e1b47deccda"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d9c0c7422e4c46428b1fa2a2b7bc3794") {
-      outputDiv = document.getElementById("altair-viz-d9c0c7422e4c46428b1fa2a2b7bc3794");
+    if (outputDiv.id !== "altair-viz-81c9c3993cfe4c5787a77e1b47deccda") {
+      outputDiv = document.getElementById("altair-viz-81c9c3993cfe4c5787a77e1b47deccda");
     }
 
     const paths = {
@@ -772,33 +775,33 @@
 </section>
 <section id="a-diverging-colour-scheme-effectively-highlights-values-at-the-extreme-temperatures" class="slide level2">
 <h2>A diverging colour scheme effectively highlights values at the extreme temperatures</h2>
-<div id="5ec9d943" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(toronto_temp).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
+<div id="14398fdd" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(toronto_temp).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'date'</span>, title<span class="op">=</span><span class="va">None</span>),</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'avg_temperature'</span>, title<span class="op">=</span><span class="st">'Average temperature (°C)'</span>),</span>
 <span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'avg_temperature'</span>,</span>
 <span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>                    title<span class="op">=</span><span class="st">'Average temperature (°C)'</span>,</span>
-<span id="cb6-6"><a aria-hidden="true" tabindex="-1"></a>                    scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'blueorange'</span>, domainMid<span class="op">=</span><span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a aria-hidden="true" tabindex="-1"></a>                    scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'blueorange'</span>, domainMid<span class="op">=</span><span class="dv">0</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-92fc6e2a6fba4953bdeb7471c5c7b233.vega-embed {
+  #altair-viz-d76bad01d05b481cb56aa2bfe1953e21.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-92fc6e2a6fba4953bdeb7471c5c7b233.vega-embed details,
-  #altair-viz-92fc6e2a6fba4953bdeb7471c5c7b233.vega-embed details summary {
+  #altair-viz-d76bad01d05b481cb56aa2bfe1953e21.vega-embed details,
+  #altair-viz-d76bad01d05b481cb56aa2bfe1953e21.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-92fc6e2a6fba4953bdeb7471c5c7b233"></div>
+<div id="altair-viz-d76bad01d05b481cb56aa2bfe1953e21"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-92fc6e2a6fba4953bdeb7471c5c7b233") {
-      outputDiv = document.getElementById("altair-viz-92fc6e2a6fba4953bdeb7471c5c7b233");
+    if (outputDiv.id !== "altair-viz-d76bad01d05b481cb56aa2bfe1953e21") {
+      outputDiv = document.getElementById("altair-viz-d76bad01d05b481cb56aa2bfe1953e21");
     }
 
     const paths = {
@@ -869,33 +872,33 @@
 </section>
 <section id="an-explicit-domain-can-be-defined-to-adjust-colours-at-the-extremes" class="slide level2">
 <h2>An explicit domain can be defined to adjust colours at the extremes</h2>
-<div id="3accefe7" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(toronto_temp).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
+<div id="7bb29e7a" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(toronto_temp).mark_circle(size<span class="op">=</span><span class="dv">50</span>).encode(</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'date'</span>, title<span class="op">=</span><span class="va">None</span>),</span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'avg_temperature'</span>, title<span class="op">=</span><span class="st">'Average temperature (°C)'</span>),</span>
 <span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'avg_temperature'</span>,</span>
 <span id="cb7-5"><a aria-hidden="true" tabindex="-1"></a>                    title<span class="op">=</span><span class="st">'Average temperature (°C)'</span>,</span>
-<span id="cb7-6"><a aria-hidden="true" tabindex="-1"></a>                    scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'blueorange'</span>, domain<span class="op">=</span>[<span class="op">-</span><span class="dv">30</span>, <span class="dv">30</span>])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-6"><a aria-hidden="true" tabindex="-1"></a>                    scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'blueorange'</span>, domain<span class="op">=</span>[<span class="op">-</span><span class="dv">30</span>, <span class="dv">30</span>])))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-069669090e1f4dfc962e9f7152cf5aec.vega-embed {
+  #altair-viz-53b3a1d4dab04b9dbcebe291c892f3ba.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-069669090e1f4dfc962e9f7152cf5aec.vega-embed details,
-  #altair-viz-069669090e1f4dfc962e9f7152cf5aec.vega-embed details summary {
+  #altair-viz-53b3a1d4dab04b9dbcebe291c892f3ba.vega-embed details,
+  #altair-viz-53b3a1d4dab04b9dbcebe291c892f3ba.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-069669090e1f4dfc962e9f7152cf5aec"></div>
+<div id="altair-viz-53b3a1d4dab04b9dbcebe291c892f3ba"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-069669090e1f4dfc962e9f7152cf5aec") {
-      outputDiv = document.getElementById("altair-viz-069669090e1f4dfc962e9f7152cf5aec");
+    if (outputDiv.id !== "altair-viz-53b3a1d4dab04b9dbcebe291c892f3ba") {
+      outputDiv = document.getElementById("altair-viz-53b3a1d4dab04b9dbcebe291c892f3ba");
     }
 
     const paths = {
@@ -1161,7 +1164,7 @@
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1235,13 +1238,14 @@
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

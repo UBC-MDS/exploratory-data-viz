@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-fe91322616dd2b9cea8bc6bfc6aa44e1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.33">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <title>Data Visualization – Telling stories with visualizations</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,6 +16,9 @@
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -94,7 +97,7 @@
     code span.vs { color: #da4453; } /* VerbatimString */
     code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-619cbfa9e20ba3037c203f55112b9bcb.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-096b74af192d6421b9ecf63b4369cbfc.css">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -186,7 +189,7 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
   
   <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
@@ -228,8 +231,8 @@
 </section>
 <section id="a-tail-of-global-deforestation" class="slide level2">
 <h2>A tail of global deforestation</h2>
-<div id="71802020" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div id="ab74485d" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>forest_loss <span class="op">=</span> pd.read_csv(<span class="st">'data/global-forest-loss.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'decade'</span>])</span>
@@ -237,27 +240,27 @@
 <span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(forest_loss, title<span class="op">=</span>title).mark_line().encode(</span>
 <span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'decade'</span>, title<span class="op">=</span><span class="st">''</span>),</span>
 <span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'cumulative_hectar_lost_millions'</span>,</span>
-<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">'Cumulative lost forest area (million ha)'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">'Cumulative lost forest area (million ha)'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 
 <style>
-  #altair-viz-c987948bf29144cbac1d8c687f5ee5f9.vega-embed {
+  #altair-viz-08b49a2e039f4d2cb63f81d6dfc4c4a4.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-c987948bf29144cbac1d8c687f5ee5f9.vega-embed details,
-  #altair-viz-c987948bf29144cbac1d8c687f5ee5f9.vega-embed details summary {
+  #altair-viz-08b49a2e039f4d2cb63f81d6dfc4c4a4.vega-embed details,
+  #altair-viz-08b49a2e039f4d2cb63f81d6dfc4c4a4.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-c987948bf29144cbac1d8c687f5ee5f9"></div>
+<div id="altair-viz-08b49a2e039f4d2cb63f81d6dfc4c4a4"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-c987948bf29144cbac1d8c687f5ee5f9") {
-      outputDiv = document.getElementById("altair-viz-c987948bf29144cbac1d8c687f5ee5f9");
+    if (outputDiv.id !== "altair-viz-08b49a2e039f4d2cb63f81d6dfc4c4a4") {
+      outputDiv = document.getElementById("altair-viz-08b49a2e039f4d2cb63f81d6dfc4c4a4");
     }
 
     const paths = {
@@ -328,32 +331,32 @@
 </section>
 <section id="half-of-the-tropical-deforestation-is-localized-to-only-two-countries" class="slide level2">
 <h2>Half of the tropical deforestation is localized to only two countries</h2>
-<div id="a81fa01a" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>top_deforestation_regions <span class="op">=</span> pd.read_csv(<span class="st">'data/region-share-tropical-deforestation.csv'</span>)</span>
+<div id="1172ba82" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>top_deforestation_regions <span class="op">=</span> pd.read_csv(<span class="st">'data/region-share-tropical-deforestation.csv'</span>)</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">'Brazil and Indonesia account for almost half of global deforestation'</span></span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(top_deforestation_regions, title<span class="op">=</span>title).mark_bar().encode(</span>
 <span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Share of commodity-driven deforestation (%)'</span>,</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">'Region'</span>, title<span class="op">=</span><span class="st">''</span>, sort<span class="op">=</span><span class="st">'x'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">'Region'</span>, title<span class="op">=</span><span class="st">''</span>, sort<span class="op">=</span><span class="st">'x'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-7adc4811afc84fd99049bb291f9eafb9.vega-embed {
+  #altair-viz-9d5ade8638174dce8294006c49d57d2c.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-7adc4811afc84fd99049bb291f9eafb9.vega-embed details,
-  #altair-viz-7adc4811afc84fd99049bb291f9eafb9.vega-embed details summary {
+  #altair-viz-9d5ade8638174dce8294006c49d57d2c.vega-embed details,
+  #altair-viz-9d5ade8638174dce8294006c49d57d2c.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-7adc4811afc84fd99049bb291f9eafb9"></div>
+<div id="altair-viz-9d5ade8638174dce8294006c49d57d2c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-7adc4811afc84fd99049bb291f9eafb9") {
-      outputDiv = document.getElementById("altair-viz-7adc4811afc84fd99049bb291f9eafb9");
+    if (outputDiv.id !== "altair-viz-9d5ade8638174dce8294006c49d57d2c") {
+      outputDiv = document.getElementById("altair-viz-9d5ade8638174dce8294006c49d57d2c");
     }
 
     const paths = {
@@ -426,33 +429,33 @@
 </section>
 <section id="a-large-part-of-deforestation-is-driven-by-exported-commodities" class="slide level2">
 <h2>A large part of deforestation is driven by exported commodities</h2>
-<div id="68c155d4" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>deforestation_exported <span class="op">=</span> pd.read_csv(<span class="st">'data/share-deforestation-exported.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'Year'</span>])</span>
+<div id="035beb9a" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>deforestation_exported <span class="op">=</span> pd.read_csv(<span class="st">'data/share-deforestation-exported.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'Year'</span>])</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">'Exported commodities contribute heavily to deforestation'</span></span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(deforestation_exported, title<span class="op">=</span>title).mark_line().encode(</span>
 <span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Year'</span>, title<span class="op">=</span><span class="st">''</span>),</span>
 <span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'share_deforestation_exported'</span>, title<span class="op">=</span><span class="st">'Exported deforestation (%)'</span>),</span>
-<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'Region'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'Region'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-00c0194877bd4c37b2f5e5838aaa1c42.vega-embed {
+  #altair-viz-572886fe62934783859e6949bf18aa3a.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-00c0194877bd4c37b2f5e5838aaa1c42.vega-embed details,
-  #altair-viz-00c0194877bd4c37b2f5e5838aaa1c42.vega-embed details summary {
+  #altair-viz-572886fe62934783859e6949bf18aa3a.vega-embed details,
+  #altair-viz-572886fe62934783859e6949bf18aa3a.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-00c0194877bd4c37b2f5e5838aaa1c42"></div>
+<div id="altair-viz-572886fe62934783859e6949bf18aa3a"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-00c0194877bd4c37b2f5e5838aaa1c42") {
-      outputDiv = document.getElementById("altair-viz-00c0194877bd4c37b2f5e5838aaa1c42");
+    if (outputDiv.id !== "altair-viz-572886fe62934783859e6949bf18aa3a") {
+      outputDiv = document.getElementById("altair-viz-572886fe62934783859e6949bf18aa3a");
     }
 
     const paths = {
@@ -524,33 +527,33 @@
 </section>
 <section id="demand-for-beef-is-the-biggest-reason-for-deforestation-in-brazil" class="slide level2">
 <h2>Demand for beef is the biggest reason for deforestation in Brazil</h2>
-<div id="529ba342" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>brazil_drivers <span class="op">=</span> pd.read_csv(<span class="st">"data/drivers-deforestation_2003-2013_brazil.csv"</span>)</span>
+<div id="2cdc69a4" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>brazil_drivers <span class="op">=</span> pd.read_csv(<span class="st">"data/drivers-deforestation_2003-2013_brazil.csv"</span>)</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">"Cattle pasture was the biggest deforestation driver in Brazil 2003-2013"</span></span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(brazil_drivers, title<span class="op">=</span>title).mark_bar().encode(</span>
 <span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">"deforestation_hectares"</span>, title<span class="op">=</span><span class="st">"Deforested area (ha)"</span>),</span>
 <span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">"driver"</span>, title<span class="op">=</span><span class="st">""</span>, sort<span class="op">=</span><span class="st">"x"</span>),</span>
-<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-c8c363567b924e8ba241e545d7fa145e.vega-embed {
+  #altair-viz-d838469801414711aeef84baaaf70b16.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-c8c363567b924e8ba241e545d7fa145e.vega-embed details,
-  #altair-viz-c8c363567b924e8ba241e545d7fa145e.vega-embed details summary {
+  #altair-viz-d838469801414711aeef84baaaf70b16.vega-embed details,
+  #altair-viz-d838469801414711aeef84baaaf70b16.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-c8c363567b924e8ba241e545d7fa145e"></div>
+<div id="altair-viz-d838469801414711aeef84baaaf70b16"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-c8c363567b924e8ba241e545d7fa145e") {
-      outputDiv = document.getElementById("altair-viz-c8c363567b924e8ba241e545d7fa145e");
+    if (outputDiv.id !== "altair-viz-d838469801414711aeef84baaaf70b16") {
+      outputDiv = document.getElementById("altair-viz-d838469801414711aeef84baaaf70b16");
     }
 
     const paths = {
@@ -622,32 +625,32 @@
 </section>
 <section id="beef-is-highly-inefficient-use-of-land-to-generate-calories" class="slide level2">
 <h2>Beef is highly inefficient use of land to generate calories</h2>
-<div id="8ae2a81b" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>land_use <span class="op">=</span> pd.read_csv(<span class="st">'data/land-use-per-kcal.csv'</span>)</span>
+<div id="8c5913e0" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>land_use <span class="op">=</span> pd.read_csv(<span class="st">'data/land-use-per-kcal.csv'</span>)</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">'Beef require the most land per 1000 kcal of food generated'</span></span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(land_use, title<span class="op">=</span>title).mark_bar().encode(</span>
 <span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Land use per 1000kcal (m2)'</span>),</span>
-<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Commodity'</span>, sort<span class="op">=</span><span class="st">'x'</span>, title<span class="op">=</span><span class="st">''</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Commodity'</span>, sort<span class="op">=</span><span class="st">'x'</span>, title<span class="op">=</span><span class="st">''</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-e4a1de52c8c64dcfba9fff36e6bffdb4.vega-embed {
+  #altair-viz-8cb4b1e6c15549fba79db5fce1f97309.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-e4a1de52c8c64dcfba9fff36e6bffdb4.vega-embed details,
-  #altair-viz-e4a1de52c8c64dcfba9fff36e6bffdb4.vega-embed details summary {
+  #altair-viz-8cb4b1e6c15549fba79db5fce1f97309.vega-embed details,
+  #altair-viz-8cb4b1e6c15549fba79db5fce1f97309.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-e4a1de52c8c64dcfba9fff36e6bffdb4"></div>
+<div id="altair-viz-8cb4b1e6c15549fba79db5fce1f97309"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-e4a1de52c8c64dcfba9fff36e6bffdb4") {
-      outputDiv = document.getElementById("altair-viz-e4a1de52c8c64dcfba9fff36e6bffdb4");
+    if (outputDiv.id !== "altair-viz-8cb4b1e6c15549fba79db5fce1f97309") {
+      outputDiv = document.getElementById("altair-viz-8cb4b1e6c15549fba79db5fce1f97309");
     }
 
     const paths = {
@@ -721,32 +724,32 @@
 </section>
 <section id="palm-oil-is-the-biggest-contributor-to-deforestation-in-indonesia" class="slide level2">
 <h2>Palm oil is the biggest contributor to deforestation in Indonesia</h2>
-<div id="507cfad4" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>indonesia_drivers <span class="op">=</span> pd.read_csv(<span class="st">'data/drivers-deforestation_2003-2013_indonesia.csv'</span>)</span>
+<div id="4bf855ff" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>indonesia_drivers <span class="op">=</span> pd.read_csv(<span class="st">'data/drivers-deforestation_2003-2013_indonesia.csv'</span>)</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">'Palm oil was the biggest contribtutor in Indonesia 2003-2013'</span> </span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(indonesia_drivers, title<span class="op">=</span>title).mark_bar().encode(</span>
 <span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'deforestation_hectares'</span>, title<span class="op">=</span><span class="st">'Deforested area (ha)'</span>),</span>
-<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'driver'</span>, title<span class="op">=</span><span class="st">''</span>, sort<span class="op">=</span><span class="st">'x'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'driver'</span>, title<span class="op">=</span><span class="st">''</span>, sort<span class="op">=</span><span class="st">'x'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-8d38cd1193634d16ad4829ee17caeb3a.vega-embed {
+  #altair-viz-235ef8d4a8eb4f03bdc71b4ca2682f23.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-8d38cd1193634d16ad4829ee17caeb3a.vega-embed details,
-  #altair-viz-8d38cd1193634d16ad4829ee17caeb3a.vega-embed details summary {
+  #altair-viz-235ef8d4a8eb4f03bdc71b4ca2682f23.vega-embed details,
+  #altair-viz-235ef8d4a8eb4f03bdc71b4ca2682f23.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-8d38cd1193634d16ad4829ee17caeb3a"></div>
+<div id="altair-viz-235ef8d4a8eb4f03bdc71b4ca2682f23"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-8d38cd1193634d16ad4829ee17caeb3a") {
-      outputDiv = document.getElementById("altair-viz-8d38cd1193634d16ad4829ee17caeb3a");
+    if (outputDiv.id !== "altair-viz-235ef8d4a8eb4f03bdc71b4ca2682f23") {
+      outputDiv = document.getElementById("altair-viz-235ef8d4a8eb4f03bdc71b4ca2682f23");
     }
 
     const paths = {
@@ -820,32 +823,32 @@
 </section>
 <section id="palm-oil-is-the-most-efficient-use-of-land-for-vegetable-oil-production" class="slide level2">
 <h2>Palm oil is the most efficient use of land for vegetable oil production</h2>
-<div id="87eb0420" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>oil_land_use <span class="op">=</span> pd.read_csv(<span class="st">'data/area-land-needed-to-global-oil.csv'</span>)</span>
+<div id="2477c7b3" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>oil_land_use <span class="op">=</span> pd.read_csv(<span class="st">'data/area-land-needed-to-global-oil.csv'</span>)</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">'Palm trees are a the most efficient oil crop'</span></span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(oil_land_use, title<span class="op">=</span>title).mark_bar().encode(</span>
 <span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Commodity'</span>, title<span class="op">=</span><span class="st">''</span>, sort<span class="op">=</span><span class="st">'x'</span>),</span>
-<span id="cb7-5"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Area needed to meet global vegetable oil demand (ha)'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-5"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Area needed to meet global vegetable oil demand (ha)'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-04738536478646d981530b4b6a1b4092.vega-embed {
+  #altair-viz-3d10a42e1b104e7a9ec9b938d3432fa8.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-04738536478646d981530b4b6a1b4092.vega-embed details,
-  #altair-viz-04738536478646d981530b4b6a1b4092.vega-embed details summary {
+  #altair-viz-3d10a42e1b104e7a9ec9b938d3432fa8.vega-embed details,
+  #altair-viz-3d10a42e1b104e7a9ec9b938d3432fa8.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-04738536478646d981530b4b6a1b4092"></div>
+<div id="altair-viz-3d10a42e1b104e7a9ec9b938d3432fa8"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-04738536478646d981530b4b6a1b4092") {
-      outputDiv = document.getElementById("altair-viz-04738536478646d981530b4b6a1b4092");
+    if (outputDiv.id !== "altair-viz-3d10a42e1b104e7a9ec9b938d3432fa8") {
+      outputDiv = document.getElementById("altair-viz-3d10a42e1b104e7a9ec9b938d3432fa8");
     }
 
     const paths = {
@@ -1138,7 +1141,7 @@
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1212,13 +1215,14 @@
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

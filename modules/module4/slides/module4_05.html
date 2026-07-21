@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-fe91322616dd2b9cea8bc6bfc6aa44e1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.33">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <title>Data Visualization – Exploratory Data Analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,6 +16,9 @@
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -94,7 +97,7 @@
     code span.vs { color: #da4453; } /* VerbatimString */
     code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-619cbfa9e20ba3037c203f55112b9bcb.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-096b74af192d6421b9ecf63b4369cbfc.css">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -186,7 +189,7 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
   
   <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
@@ -203,11 +206,11 @@
 </section>
 <section id="glancing-at-the-values-in-the-dataframe-is-a-good-first-step-to-get-familiar-with-a-new-dataset" class="slide level2">
 <h2>Glancing at the values in the dataframe is a good first step to get familiar with a new dataset</h2>
-<div id="5dc1c347" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div id="b165b327" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>movies_extended <span class="op">=</span> pd.read_csv(<span class="st">"data/movies-extended-eda.csv"</span>)</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>movies_extended</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>movies_extended</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <style scoped="">
@@ -224,7 +227,7 @@
     }
 </style>
 
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
@@ -237,7 +240,7 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>Action</td>
 <td>R</td>
 <td>108.0</td>
@@ -245,7 +248,7 @@
 <td>33584.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>Comedy</td>
 <td>PG-13</td>
 <td>95.0</td>
@@ -253,7 +256,7 @@
 <td>51109.0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>Action</td>
 <td>PG-13</td>
 <td>106.0</td>
@@ -261,7 +264,7 @@
 <td>15817.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
+<th data-quarto-table-cell-role="th">...</th>
 <td>...</td>
 <td>...</td>
 <td>...</td>
@@ -269,7 +272,7 @@
 <td>...</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">998</td>
+<th data-quarto-table-cell-role="th">998</th>
 <td>Comedy</td>
 <td>R</td>
 <td>101.0</td>
@@ -277,7 +280,7 @@
 <td>55687.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">999</td>
+<th data-quarto-table-cell-role="th">999</th>
 <td>Adventure</td>
 <td>PG</td>
 <td>129.0</td>
@@ -285,7 +288,7 @@
 <td>21161.0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">1000</td>
+<th data-quarto-table-cell-role="th">1000</th>
 <td>Adventure</td>
 <td>PG-13</td>
 <td>136.0</td>
@@ -318,8 +321,8 @@
 </section>
 <section id="viewing-the-column-data-types-and-missing-values-protects-us-from-errors-later-on" class="slide level2">
 <h2>Viewing the column data types and missing values protects us from errors later on</h2>
-<div id="d4d97048" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>movies_extended.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cc0cd43b" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>movies_extended.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 1001 entries, 0 to 1000
@@ -359,13 +362,13 @@ memory usage: 39.2+ KB</code></pre>
 </section>
 <section id="visualizing-missing-values-helps-us-identify-potential-issues-with-the-data" class="slide level2">
 <h2>Visualizing missing values helps us identify potential issues with the data</h2>
-<div id="5f228a4a" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<div id="9079f641" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>alt.data_transformers.disable_max_rows()<span class="op">;</span></span>
 <span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a>movies_nans <span class="op">=</span> movies_extended.isna().reset_index().melt(id_vars<span class="op">=</span><span class="st">'index'</span>, var_name<span class="op">=</span><span class="st">'column'</span>, value_name<span class="op">=</span><span class="st">'NaN'</span>)</span>
-<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>movies_nans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>movies_nans</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 <style scoped="">
@@ -382,7 +385,7 @@ memory usage: 39.2+ KB</code></pre>
     }
 </style>
 
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
@@ -393,43 +396,43 @@ memory usage: 39.2+ KB</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>0</td>
 <td>Major Genre</td>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>1</td>
 <td>Major Genre</td>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>2</td>
 <td>Major Genre</td>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
+<th data-quarto-table-cell-role="th">...</th>
 <td>...</td>
 <td>...</td>
 <td>...</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">5002</td>
+<th data-quarto-table-cell-role="th">5002</th>
 <td>998</td>
 <td>IMDB Votes</td>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5003</td>
+<th data-quarto-table-cell-role="th">5003</th>
 <td>999</td>
 <td>IMDB Votes</td>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">5004</td>
+<th data-quarto-table-cell-role="th">5004</th>
 <td>1000</td>
 <td>IMDB Votes</td>
 <td>False</td>
@@ -459,32 +462,32 @@ memory usage: 39.2+ KB</code></pre>
 </section>
 <section id="visualizing-missing-values-helps-us-identify-potential-issues-with-the-data-1" class="slide level2">
 <h2>Visualizing missing values helps us identify potential issues with the data</h2>
-<div id="9fc18da3" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_nans).mark_rect(height<span class="op">=</span><span class="dv">17</span>).encode(</span>
+<div id="9b99ad16" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_nans).mark_rect(height<span class="op">=</span><span class="dv">17</span>).encode(</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>alt.X(<span class="st">'index:O'</span>, axis<span class="op">=</span><span class="va">None</span>),</span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'column'</span>,</span>
 <span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'NaN'</span>,</span>
-<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>    stroke<span class="op">=</span><span class="st">'NaN'</span>).properties(width<span class="op">=</span><span class="dv">800</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>    stroke<span class="op">=</span><span class="st">'NaN'</span>).properties(width<span class="op">=</span><span class="dv">800</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-fcf308e6180546d4bc6fa2ed79c379ec.vega-embed {
+  #altair-viz-69b9af1d2df7435299cf9a0e86ef678e.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-fcf308e6180546d4bc6fa2ed79c379ec.vega-embed details,
-  #altair-viz-fcf308e6180546d4bc6fa2ed79c379ec.vega-embed details summary {
+  #altair-viz-69b9af1d2df7435299cf9a0e86ef678e.vega-embed details,
+  #altair-viz-69b9af1d2df7435299cf9a0e86ef678e.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-fcf308e6180546d4bc6fa2ed79c379ec"></div>
+<div id="altair-viz-69b9af1d2df7435299cf9a0e86ef678e"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-fcf308e6180546d4bc6fa2ed79c379ec") {
-      outputDiv = document.getElementById("altair-viz-fcf308e6180546d4bc6fa2ed79c379ec");
+    if (outputDiv.id !== "altair-viz-69b9af1d2df7435299cf9a0e86ef678e") {
+      outputDiv = document.getElementById("altair-viz-69b9af1d2df7435299cf9a0e86ef678e");
     }
 
     const paths = {
@@ -558,8 +561,8 @@ memory usage: 39.2+ KB</code></pre>
 </section>
 <section id="a-statistical-summary-is-useful-to-complement-visualizations" class="slide level2">
 <h2>A statistical summary is useful to complement visualizations</h2>
-<div id="1223073a" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>movies_extended.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="452bef42" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>movies_extended.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 <style scoped="">
@@ -576,7 +579,7 @@ memory usage: 39.2+ KB</code></pre>
     }
 </style>
 
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
@@ -587,43 +590,43 @@ memory usage: 39.2+ KB</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">count</td>
+<th data-quarto-table-cell-role="th">count</th>
 <td>1001.000000</td>
 <td>945.000000</td>
 <td>945.000000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">mean</td>
+<th data-quarto-table-cell-role="th">mean</th>
 <td>110.312687</td>
 <td>6.279577</td>
 <td>43514.432804</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">std</td>
+<th data-quarto-table-cell-role="th">std</th>
 <td>20.701090</td>
 <td>1.178046</td>
 <td>52241.047929</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
+<th data-quarto-table-cell-role="th">...</th>
 <td>...</td>
 <td>...</td>
 <td>...</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">50%</td>
+<th data-quarto-table-cell-role="th">50%</th>
 <td>107.000000</td>
 <td>6.300000</td>
 <td>26303.000000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">75%</td>
+<th data-quarto-table-cell-role="th">75%</th>
 <td>122.000000</td>
 <td>7.100000</td>
 <td>55248.000000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">max</td>
+<th data-quarto-table-cell-role="th">max</th>
 <td>222.000000</td>
 <td>8.900000</td>
 <td>465000.000000</td>
@@ -656,34 +659,34 @@ memory usage: 39.2+ KB</code></pre>
 </section>
 <section id="visualizing-the-distributions-of-all-numerical-columns-helps-us-understand-the-data" class="slide level2">
 <h2>Visualizing the distributions of all numerical columns helps us understand the data</h2>
-<div id="4dab0077" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>numerical_columns <span class="op">=</span> movies_extended.select_dtypes(<span class="st">'number'</span>).columns.tolist()</span>
+<div id="bad1e4d3" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>numerical_columns <span class="op">=</span> movies_extended.select_dtypes(<span class="st">'number'</span>).columns.tolist()</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(movies_extended)</span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a> .mark_bar().encode(</span>
 <span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a>     alt.X(alt.repeat(), <span class="bu">type</span><span class="op">=</span><span class="st">'quantitative'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">25</span>)),</span>
 <span id="cb7-5"><a aria-hidden="true" tabindex="-1"></a>     y<span class="op">=</span><span class="st">'count()'</span>)</span>
 <span id="cb7-6"><a aria-hidden="true" tabindex="-1"></a> .properties(width<span class="op">=</span><span class="dv">250</span>, height<span class="op">=</span><span class="dv">150</span>)</span>
-<span id="cb7-7"><a aria-hidden="true" tabindex="-1"></a> .repeat(numerical_columns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-7"><a aria-hidden="true" tabindex="-1"></a> .repeat(numerical_columns))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-e31d313ec3b0499f91365b1e2dd22feb.vega-embed {
+  #altair-viz-bfc486bc22224ac09cca8f193dd45dbc.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-e31d313ec3b0499f91365b1e2dd22feb.vega-embed details,
-  #altair-viz-e31d313ec3b0499f91365b1e2dd22feb.vega-embed details summary {
+  #altair-viz-bfc486bc22224ac09cca8f193dd45dbc.vega-embed details,
+  #altair-viz-bfc486bc22224ac09cca8f193dd45dbc.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-e31d313ec3b0499f91365b1e2dd22feb"></div>
+<div id="altair-viz-bfc486bc22224ac09cca8f193dd45dbc"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-e31d313ec3b0499f91365b1e2dd22feb") {
-      outputDiv = document.getElementById("altair-viz-e31d313ec3b0499f91365b1e2dd22feb");
+    if (outputDiv.id !== "altair-viz-bfc486bc22224ac09cca8f193dd45dbc") {
+      outputDiv = document.getElementById("altair-viz-bfc486bc22224ac09cca8f193dd45dbc");
     }
 
     const paths = {
@@ -762,34 +765,34 @@ memory usage: 39.2+ KB</code></pre>
 </section>
 <section id="repeating-columns-of-both-x-and-y-lets-us-effectively-explore-pairwise-relationships-between-columns" class="slide level2">
 <h2>Repeating columns of both X and Y lets us effectively explore pairwise relationships between columns</h2>
-<div id="2b9dc115" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Scroll down on the plot to see the last row</span></span>
+<div id="223dd229" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Scroll down on the plot to see the last row</span></span>
 <span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(movies_extended)</span>
 <span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a> .mark_point(size<span class="op">=</span><span class="dv">10</span>).encode(</span>
 <span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a>     alt.X(alt.repeat(<span class="st">'column'</span>), <span class="bu">type</span><span class="op">=</span><span class="st">'quantitative'</span>),</span>
 <span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a>     alt.Y(alt.repeat(<span class="st">'row'</span>), <span class="bu">type</span><span class="op">=</span><span class="st">'quantitative'</span>))</span>
 <span id="cb8-6"><a aria-hidden="true" tabindex="-1"></a> .properties(width<span class="op">=</span><span class="dv">120</span>, height<span class="op">=</span><span class="dv">120</span>)</span>
-<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a> .repeat(column<span class="op">=</span>numerical_columns, row<span class="op">=</span>numerical_columns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a> .repeat(column<span class="op">=</span>numerical_columns, row<span class="op">=</span>numerical_columns))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-bfd0dc615c074c44ab56629df3f3081b.vega-embed {
+  #altair-viz-e938d484e5504e198baadd1926d37c54.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-bfd0dc615c074c44ab56629df3f3081b.vega-embed details,
-  #altair-viz-bfd0dc615c074c44ab56629df3f3081b.vega-embed details summary {
+  #altair-viz-e938d484e5504e198baadd1926d37c54.vega-embed details,
+  #altair-viz-e938d484e5504e198baadd1926d37c54.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-bfd0dc615c074c44ab56629df3f3081b"></div>
+<div id="altair-viz-e938d484e5504e198baadd1926d37c54"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-bfd0dc615c074c44ab56629df3f3081b") {
-      outputDiv = document.getElementById("altair-viz-bfd0dc615c074c44ab56629df3f3081b");
+    if (outputDiv.id !== "altair-viz-e938d484e5504e198baadd1926d37c54") {
+      outputDiv = document.getElementById("altair-viz-e938d484e5504e198baadd1926d37c54");
     }
 
     const paths = {
@@ -865,35 +868,35 @@ memory usage: 39.2+ KB</code></pre>
 </section>
 <section id="heatmaps-can-be-used-for-repeated-charts-to-avoid-saturation" class="slide level2">
 <h2>Heatmaps can be used for repeated charts to avoid saturation</h2>
-<div id="3bd0e2f8" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Scroll down on the plot to see the last row</span></span>
+<div id="ba75cf73" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Scroll down on the plot to see the last row</span></span>
 <span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(movies_extended)</span>
 <span id="cb9-3"><a aria-hidden="true" tabindex="-1"></a> .mark_rect().encode(</span>
 <span id="cb9-4"><a aria-hidden="true" tabindex="-1"></a>     alt.X(alt.repeat(<span class="st">'column'</span>), <span class="bu">type</span><span class="op">=</span><span class="st">'quantitative'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb9-5"><a aria-hidden="true" tabindex="-1"></a>     alt.Y(alt.repeat(<span class="st">'row'</span>), <span class="bu">type</span><span class="op">=</span><span class="st">'quantitative'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb9-6"><a aria-hidden="true" tabindex="-1"></a>     alt.Color(<span class="st">'count()'</span>, title<span class="op">=</span><span class="va">None</span>))</span>
 <span id="cb9-7"><a aria-hidden="true" tabindex="-1"></a> .properties(width<span class="op">=</span><span class="dv">110</span>, height<span class="op">=</span><span class="dv">110</span>)</span>
-<span id="cb9-8"><a aria-hidden="true" tabindex="-1"></a> .repeat(column<span class="op">=</span>numerical_columns, row<span class="op">=</span>numerical_columns)).resolve_scale(color<span class="op">=</span><span class="st">'independent'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-8"><a aria-hidden="true" tabindex="-1"></a> .repeat(column<span class="op">=</span>numerical_columns, row<span class="op">=</span>numerical_columns)).resolve_scale(color<span class="op">=</span><span class="st">'independent'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-524c5d4163fe48989b2877fae4e7c3ca.vega-embed {
+  #altair-viz-4d3f231a3cf84a928ceb684165e64327.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-524c5d4163fe48989b2877fae4e7c3ca.vega-embed details,
-  #altair-viz-524c5d4163fe48989b2877fae4e7c3ca.vega-embed details summary {
+  #altair-viz-4d3f231a3cf84a928ceb684165e64327.vega-embed details,
+  #altair-viz-4d3f231a3cf84a928ceb684165e64327.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-524c5d4163fe48989b2877fae4e7c3ca"></div>
+<div id="altair-viz-4d3f231a3cf84a928ceb684165e64327"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-524c5d4163fe48989b2877fae4e7c3ca") {
-      outputDiv = document.getElementById("altair-viz-524c5d4163fe48989b2877fae4e7c3ca");
+    if (outputDiv.id !== "altair-viz-4d3f231a3cf84a928ceb684165e64327") {
+      outputDiv = document.getElementById("altair-viz-4d3f231a3cf84a928ceb684165e64327");
     }
 
     const paths = {
@@ -968,34 +971,34 @@ memory usage: 39.2+ KB</code></pre>
 </section>
 <section id="repeat-also-allows-us-to-explore-the-relationship-between-categorical-and-numerical-columns" class="slide level2">
 <h2>Repeat also allows us to explore the relationship between categorical and numerical columns</h2>
-<div id="d1b26177" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a>categorical_columns <span class="op">=</span> movies_extended.select_dtypes(<span class="st">'object'</span>).columns.tolist()</span>
+<div id="36b8a2f0" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a>categorical_columns <span class="op">=</span> movies_extended.select_dtypes(<span class="st">'object'</span>).columns.tolist()</span>
 <span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a>(alt.Chart(movies_extended)</span>
 <span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a> .mark_boxplot().encode(</span>
 <span id="cb10-4"><a aria-hidden="true" tabindex="-1"></a>     alt.X(alt.repeat(<span class="st">'column'</span>), <span class="bu">type</span><span class="op">=</span><span class="st">'quantitative'</span>),</span>
 <span id="cb10-5"><a aria-hidden="true" tabindex="-1"></a>     alt.Y(alt.repeat(<span class="st">'row'</span>), <span class="bu">type</span><span class="op">=</span><span class="st">'nominal'</span>, title<span class="op">=</span><span class="st">''</span>))</span>
 <span id="cb10-6"><a aria-hidden="true" tabindex="-1"></a> .properties(width<span class="op">=</span><span class="dv">150</span>)</span>
-<span id="cb10-7"><a aria-hidden="true" tabindex="-1"></a> .repeat(column<span class="op">=</span>numerical_columns, row<span class="op">=</span>categorical_columns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-7"><a aria-hidden="true" tabindex="-1"></a> .repeat(column<span class="op">=</span>numerical_columns, row<span class="op">=</span>categorical_columns))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 
 <style>
-  #altair-viz-a931ee32ac5c4e559042acbe02c31d02.vega-embed {
+  #altair-viz-cd7e778c24904ed0baf02dbcd2d2973e.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-a931ee32ac5c4e559042acbe02c31d02.vega-embed details,
-  #altair-viz-a931ee32ac5c4e559042acbe02c31d02.vega-embed details summary {
+  #altair-viz-cd7e778c24904ed0baf02dbcd2d2973e.vega-embed details,
+  #altair-viz-cd7e778c24904ed0baf02dbcd2d2973e.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-a931ee32ac5c4e559042acbe02c31d02"></div>
+<div id="altair-viz-cd7e778c24904ed0baf02dbcd2d2973e"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-a931ee32ac5c4e559042acbe02c31d02") {
-      outputDiv = document.getElementById("altair-viz-a931ee32ac5c4e559042acbe02c31d02");
+    if (outputDiv.id !== "altair-viz-cd7e778c24904ed0baf02dbcd2d2973e") {
+      outputDiv = document.getElementById("altair-viz-cd7e778c24904ed0baf02dbcd2d2973e");
     }
 
     const paths = {
@@ -1056,7 +1059,7 @@ memory usage: 39.2+ KB</code></pre>
 <p>As we have discussed before, it is often easier to compare plots where the values are sorted.</p>
 <p>For a single boxplot, we learned previously that we can pass a list of the categories in the order we want to plot them.</p>
 <p>In this case, we have different columns on the y-axis, so we would need to pass a list of all categories in all these three columns. We could use a loop with pandas to create this like so:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a>running_time_order <span class="op">=</span> []</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a>running_time_order <span class="op">=</span> []</span>
 <span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> groupby_col <span class="kw">in</span> [<span class="st">'Major Genre'</span>, <span class="st">'MPAA Rating'</span>]:</span>
 <span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a>    running_time_order.extend(</span>
 <span id="cb11-4"><a aria-hidden="true" tabindex="-1"></a>        movies_extended</span>
@@ -1065,7 +1068,7 @@ memory usage: 39.2+ KB</code></pre>
 <span id="cb11-7"><a aria-hidden="true" tabindex="-1"></a>        [<span class="st">'Running Time min'</span>]</span>
 <span id="cb11-8"><a aria-hidden="true" tabindex="-1"></a>        .sort_values()</span>
 <span id="cb11-9"><a aria-hidden="true" tabindex="-1"></a>        .index</span>
-<span id="cb11-10"><a aria-hidden="true" tabindex="-1"></a>        .to_list())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-10"><a aria-hidden="true" tabindex="-1"></a>        .to_list())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1272,7 +1275,7 @@ memory usage: 39.2+ KB</code></pre>
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1346,13 +1349,14 @@ memory usage: 39.2+ KB</code></pre>
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

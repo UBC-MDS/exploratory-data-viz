@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-fe91322616dd2b9cea8bc6bfc6aa44e1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.33">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <title>Data Visualization – Creating subplots via faceting</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,6 +16,9 @@
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -94,7 +97,7 @@
     code span.vs { color: #da4453; } /* VerbatimString */
     code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-619cbfa9e20ba3037c203f55112b9bcb.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-096b74af192d6421b9ecf63b4369cbfc.css">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -186,7 +189,7 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
   
   <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
@@ -203,8 +206,8 @@
 </section>
 <section id="how-does-life-expectancy-differ-between-regions" class="slide level2">
 <h2>How does life expectancy differ between regions?</h2>
-<div id="6f4031ef" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div id="7a9cfeb3" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>gm <span class="op">=</span> pd.read_csv(<span class="st">'data/world-data-gapminder.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'year'</span>])</span>
@@ -212,27 +215,27 @@
 <span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018).mark_bar().encode(</span>
 <span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'life_expectancy'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
-<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'count()'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'count()'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 
 <style>
-  #altair-viz-28f820924111424fb7f8d98c767fdd1f.vega-embed {
+  #altair-viz-ff9201db2d4f481ab01e484c71caf79d.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-28f820924111424fb7f8d98c767fdd1f.vega-embed details,
-  #altair-viz-28f820924111424fb7f8d98c767fdd1f.vega-embed details summary {
+  #altair-viz-ff9201db2d4f481ab01e484c71caf79d.vega-embed details,
+  #altair-viz-ff9201db2d4f481ab01e484c71caf79d.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-28f820924111424fb7f8d98c767fdd1f"></div>
+<div id="altair-viz-ff9201db2d4f481ab01e484c71caf79d"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-28f820924111424fb7f8d98c767fdd1f") {
-      outputDiv = document.getElementById("altair-viz-28f820924111424fb7f8d98c767fdd1f");
+    if (outputDiv.id !== "altair-viz-ff9201db2d4f481ab01e484c71caf79d") {
+      outputDiv = document.getElementById("altair-viz-ff9201db2d4f481ab01e484c71caf79d");
     }
 
     const paths = {
@@ -301,31 +304,31 @@
 </section>
 <section id="stacked-histograms-make-it-hard-to-compare-between-groups" class="slide level2">
 <h2>Stacked histograms make it hard to compare between groups</h2>
-<div id="b924b979" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018).mark_bar().encode(</span>
+<div id="672764f1" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018).mark_bar().encode(</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'life_expectancy'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'count()'</span>),</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'region'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'region'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <style>
-  #altair-viz-a0b4c3a03bb84d43a372c0fbc550b516.vega-embed {
+  #altair-viz-90fed545dddc44888364b991b093fe0f.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-a0b4c3a03bb84d43a372c0fbc550b516.vega-embed details,
-  #altair-viz-a0b4c3a03bb84d43a372c0fbc550b516.vega-embed details summary {
+  #altair-viz-90fed545dddc44888364b991b093fe0f.vega-embed details,
+  #altair-viz-90fed545dddc44888364b991b093fe0f.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-a0b4c3a03bb84d43a372c0fbc550b516"></div>
+<div id="altair-viz-90fed545dddc44888364b991b093fe0f"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-a0b4c3a03bb84d43a372c0fbc550b516") {
-      outputDiv = document.getElementById("altair-viz-a0b4c3a03bb84d43a372c0fbc550b516");
+    if (outputDiv.id !== "altair-viz-90fed545dddc44888364b991b093fe0f") {
+      outputDiv = document.getElementById("altair-viz-90fed545dddc44888364b991b093fe0f");
     }
 
     const paths = {
@@ -397,31 +400,31 @@
 </section>
 <section id="layered-histograms-are-also-difficult-to-compare" class="slide level2">
 <h2>Layered histograms are also difficult to compare</h2>
-<div id="c23702c0" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018).mark_bar(opacity<span class="op">=</span><span class="fl">0.7</span>).encode(</span>
+<div id="5867e338" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018).mark_bar(opacity<span class="op">=</span><span class="fl">0.7</span>).encode(</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'life_expectancy'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'count()'</span>, stack<span class="op">=</span><span class="va">False</span>),</span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'region'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'region'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <style>
-  #altair-viz-3d87f3f35a68486395ac56108b739ca8.vega-embed {
+  #altair-viz-3084119971ee4b758cc80b1f117e278e.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-3d87f3f35a68486395ac56108b739ca8.vega-embed details,
-  #altair-viz-3d87f3f35a68486395ac56108b739ca8.vega-embed details summary {
+  #altair-viz-3084119971ee4b758cc80b1f117e278e.vega-embed details,
+  #altair-viz-3084119971ee4b758cc80b1f117e278e.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-3d87f3f35a68486395ac56108b739ca8"></div>
+<div id="altair-viz-3084119971ee4b758cc80b1f117e278e"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-3d87f3f35a68486395ac56108b739ca8") {
-      outputDiv = document.getElementById("altair-viz-3d87f3f35a68486395ac56108b739ca8");
+    if (outputDiv.id !== "altair-viz-3084119971ee4b758cc80b1f117e278e") {
+      outputDiv = document.getElementById("altair-viz-3084119971ee4b758cc80b1f117e278e");
     }
 
     const paths = {
@@ -491,33 +494,33 @@
 </section>
 <section id="creating-a-separate-subplot-for-each-region-facilitate-comparisons-between-them" class="slide level2">
 <h2>Creating a separate subplot for each region facilitate comparisons between them</h2>
-<div id="62f6fef6" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018).mark_bar().encode(</span>
+<div id="eed6e67c" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018).mark_bar().encode(</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'life_expectancy'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'count()'</span>),</span>
 <span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'region'</span>)</span>
 <span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">200</span>, height<span class="op">=</span><span class="dv">150</span></span>
-<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>).facet(<span class="st">'region'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>).facet(<span class="st">'region'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-2f3b1208ba134acb85f3f218737d9632.vega-embed {
+  #altair-viz-3c4360905cfc47ca8de6dcf5f351cafc.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2f3b1208ba134acb85f3f218737d9632.vega-embed details,
-  #altair-viz-2f3b1208ba134acb85f3f218737d9632.vega-embed details summary {
+  #altair-viz-3c4360905cfc47ca8de6dcf5f351cafc.vega-embed details,
+  #altair-viz-3c4360905cfc47ca8de6dcf5f351cafc.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2f3b1208ba134acb85f3f218737d9632"></div>
+<div id="altair-viz-3c4360905cfc47ca8de6dcf5f351cafc"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2f3b1208ba134acb85f3f218737d9632") {
-      outputDiv = document.getElementById("altair-viz-2f3b1208ba134acb85f3f218737d9632");
+    if (outputDiv.id !== "altair-viz-3c4360905cfc47ca8de6dcf5f351cafc") {
+      outputDiv = document.getElementById("altair-viz-3c4360905cfc47ca8de6dcf5f351cafc");
     }
 
     const paths = {
@@ -587,33 +590,33 @@
 </section>
 <section id="laying-out-facets-vertically-makes-it-easier-to-compare-position-on-the-x-axis" class="slide level2">
 <h2>Laying out facets vertically makes it easier to compare position on the x-axis</h2>
-<div id="9de713b6" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018).mark_bar().encode(</span>
+<div id="3ece672b" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018).mark_bar().encode(</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'life_expectancy'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'count()'</span>, title<span class="op">=</span><span class="va">None</span>),</span>
 <span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'region'</span>)</span>
 <span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">200</span>, height<span class="op">=</span><span class="dv">50</span></span>
-<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a>).facet(<span class="st">'region'</span>, columns<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a>).facet(<span class="st">'region'</span>, columns<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-2509acfc6d0a403e9a20cf06dce7e09c.vega-embed {
+  #altair-viz-c00eb956a4e546dd8751b3d6f1d48952.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2509acfc6d0a403e9a20cf06dce7e09c.vega-embed details,
-  #altair-viz-2509acfc6d0a403e9a20cf06dce7e09c.vega-embed details summary {
+  #altair-viz-c00eb956a4e546dd8751b3d6f1d48952.vega-embed details,
+  #altair-viz-c00eb956a4e546dd8751b3d6f1d48952.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2509acfc6d0a403e9a20cf06dce7e09c"></div>
+<div id="altair-viz-c00eb956a4e546dd8751b3d6f1d48952"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2509acfc6d0a403e9a20cf06dce7e09c") {
-      outputDiv = document.getElementById("altair-viz-2509acfc6d0a403e9a20cf06dce7e09c");
+    if (outputDiv.id !== "altair-viz-c00eb956a4e546dd8751b3d6f1d48952") {
+      outputDiv = document.getElementById("altair-viz-c00eb956a4e546dd8751b3d6f1d48952");
     }
 
     const paths = {
@@ -684,33 +687,33 @@
 </section>
 <section id="subplots-are-often-laid-out-in-even-grids" class="slide level2">
 <h2>Subplots are often laid out in even grids</h2>
-<div id="16f8127f" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018).mark_bar().encode(</span>
+<div id="94dd6d79" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018).mark_bar().encode(</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'life_expectancy'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'count()'</span>),</span>
 <span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'region'</span>)</span>
 <span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">200</span>, height<span class="op">=</span><span class="dv">140</span></span>
-<span id="cb6-6"><a aria-hidden="true" tabindex="-1"></a>).facet(<span class="st">'region'</span>, columns<span class="op">=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a aria-hidden="true" tabindex="-1"></a>).facet(<span class="st">'region'</span>, columns<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-b3bbbf09b6da43dea58d77fb95a2d306.vega-embed {
+  #altair-viz-1c2ff326ede448c68c368e8dc3d2793b.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-b3bbbf09b6da43dea58d77fb95a2d306.vega-embed details,
-  #altair-viz-b3bbbf09b6da43dea58d77fb95a2d306.vega-embed details summary {
+  #altair-viz-1c2ff326ede448c68c368e8dc3d2793b.vega-embed details,
+  #altair-viz-1c2ff326ede448c68c368e8dc3d2793b.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-b3bbbf09b6da43dea58d77fb95a2d306"></div>
+<div id="altair-viz-1c2ff326ede448c68c368e8dc3d2793b"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-b3bbbf09b6da43dea58d77fb95a2d306") {
-      outputDiv = document.getElementById("altair-viz-b3bbbf09b6da43dea58d77fb95a2d306");
+    if (outputDiv.id !== "altair-viz-1c2ff326ede448c68c368e8dc3d2793b") {
+      outputDiv = document.getElementById("altair-viz-1c2ff326ede448c68c368e8dc3d2793b");
     }
 
     const paths = {
@@ -779,33 +782,33 @@
 </section>
 <section id="faceting-on-two-categorical-dataframe-columns-allows-us-to-answer-more-complex-questions" class="slide level2">
 <h2>Faceting on two categorical dataframe columns allows us to answer more complex questions</h2>
-<div id="76ad7448" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018[gm2018[<span class="st">'income_group'</span>].isin([<span class="st">'High'</span>, <span class="st">'Low'</span>])]).mark_bar().encode(</span>
+<div id="23c0f56c" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018[gm2018[<span class="st">'income_group'</span>].isin([<span class="st">'High'</span>, <span class="st">'Low'</span>])]).mark_bar().encode(</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'life_expectancy'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">30</span>)),</span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'count()'</span>),</span>
 <span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'region'</span>)</span>
 <span id="cb7-5"><a aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">200</span>, height<span class="op">=</span><span class="dv">140</span></span>
-<span id="cb7-6"><a aria-hidden="true" tabindex="-1"></a>).facet(column<span class="op">=</span><span class="st">'region'</span>, row<span class="op">=</span><span class="st">'income_group'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-6"><a aria-hidden="true" tabindex="-1"></a>).facet(column<span class="op">=</span><span class="st">'region'</span>, row<span class="op">=</span><span class="st">'income_group'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-c423a0e5d61848f7a77b6862c7fc7a9b.vega-embed {
+  #altair-viz-cb81966802044b79a417abf734787bfb.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-c423a0e5d61848f7a77b6862c7fc7a9b.vega-embed details,
-  #altair-viz-c423a0e5d61848f7a77b6862c7fc7a9b.vega-embed details summary {
+  #altair-viz-cb81966802044b79a417abf734787bfb.vega-embed details,
+  #altair-viz-cb81966802044b79a417abf734787bfb.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-c423a0e5d61848f7a77b6862c7fc7a9b"></div>
+<div id="altair-viz-cb81966802044b79a417abf734787bfb"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-c423a0e5d61848f7a77b6862c7fc7a9b") {
-      outputDiv = document.getElementById("altair-viz-c423a0e5d61848f7a77b6862c7fc7a9b");
+    if (outputDiv.id !== "altair-viz-cb81966802044b79a417abf734787bfb") {
+      outputDiv = document.getElementById("altair-viz-cb81966802044b79a417abf734787bfb");
     }
 
     const paths = {
@@ -875,34 +878,34 @@
 </section>
 <section id="coloring-can-also-group-data-within-each-facet" class="slide level2">
 <h2>Coloring can also group data within each facet</h2>
-<div id="1febbaba" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>income_order <span class="op">=</span> [<span class="st">'High'</span>, <span class="st">'Upper middle'</span>, <span class="st">'Lower middle'</span>, <span class="st">'Low'</span>]</span>
+<div id="126f5d85" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>income_order <span class="op">=</span> [<span class="st">'High'</span>, <span class="st">'Upper middle'</span>, <span class="st">'Lower middle'</span>, <span class="st">'Low'</span>]</span>
 <span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018[gm2018[<span class="st">'region'</span>].isin([<span class="st">'Africa'</span>])]).mark_point().encode(</span>
 <span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'children_per_woman'</span>),</span>
 <span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'child_mortality'</span>),</span>
 <span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'income_group'</span>, sort<span class="op">=</span>income_order),</span>
 <span id="cb8-6"><a aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">200</span>, height<span class="op">=</span><span class="dv">140</span></span>
-<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a>).facet(<span class="st">'sub_region'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a>).facet(<span class="st">'sub_region'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-88df2604374c4e419904747bf60c31c3.vega-embed {
+  #altair-viz-7a617fa1e2654cff8f0f39ba20234d78.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-88df2604374c4e419904747bf60c31c3.vega-embed details,
-  #altair-viz-88df2604374c4e419904747bf60c31c3.vega-embed details summary {
+  #altair-viz-7a617fa1e2654cff8f0f39ba20234d78.vega-embed details,
+  #altair-viz-7a617fa1e2654cff8f0f39ba20234d78.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-88df2604374c4e419904747bf60c31c3"></div>
+<div id="altair-viz-7a617fa1e2654cff8f0f39ba20234d78"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-88df2604374c4e419904747bf60c31c3") {
-      outputDiv = document.getElementById("altair-viz-88df2604374c4e419904747bf60c31c3");
+    if (outputDiv.id !== "altair-viz-7a617fa1e2654cff8f0f39ba20234d78") {
+      outputDiv = document.getElementById("altair-viz-7a617fa1e2654cff8f0f39ba20234d78");
     }
 
     const paths = {
@@ -976,32 +979,32 @@
 </section>
 <section id="as-with-histograms-stacked-colours-are-not-effective-for-categorical-bar-charts" class="slide level2">
 <h2>As with histograms stacked colours are not effective for categorical bar charts</h2>
-<div id="e5b46d00" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018[gm2018[<span class="st">'region'</span>] <span class="op">==</span> <span class="st">'Africa'</span>]).mark_bar().encode(</span>
+<div id="6a809c2d" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018[gm2018[<span class="st">'region'</span>] <span class="op">==</span> <span class="st">'Africa'</span>]).mark_bar().encode(</span>
 <span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'count()'</span>, title<span class="op">=</span><span class="st">'Number of countries'</span>),</span>
 <span id="cb9-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'sub_region'</span>),</span>
 <span id="cb9-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'income_group'</span>, sort<span class="op">=</span>income_order)</span>
-<span id="cb9-5"><a aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-5"><a aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">200</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 
 <style>
-  #altair-viz-cdf9987f382f48d59cae5b0222f39f01.vega-embed {
+  #altair-viz-19257ab839624544a46f1bca2fa072b6.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-cdf9987f382f48d59cae5b0222f39f01.vega-embed details,
-  #altair-viz-cdf9987f382f48d59cae5b0222f39f01.vega-embed details summary {
+  #altair-viz-19257ab839624544a46f1bca2fa072b6.vega-embed details,
+  #altair-viz-19257ab839624544a46f1bca2fa072b6.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-cdf9987f382f48d59cae5b0222f39f01"></div>
+<div id="altair-viz-19257ab839624544a46f1bca2fa072b6"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-cdf9987f382f48d59cae5b0222f39f01") {
-      outputDiv = document.getElementById("altair-viz-cdf9987f382f48d59cae5b0222f39f01");
+    if (outputDiv.id !== "altair-viz-19257ab839624544a46f1bca2fa072b6") {
+      outputDiv = document.getElementById("altair-viz-19257ab839624544a46f1bca2fa072b6");
     }
 
     const paths = {
@@ -1072,33 +1075,33 @@
 </section>
 <section id="faceting-can-anchor-coloured-bars-to-the-same-baseline-and-facilitate-comparisons" class="slide level2">
 <h2>Faceting can anchor coloured bars to the same baseline and facilitate comparisons</h2>
-<div id="a3999856" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018[gm2018[<span class="st">'region'</span>] <span class="op">==</span> <span class="st">'Africa'</span>]).mark_bar().encode(</span>
+<div id="ba1e3dbc" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a>alt.Chart(gm2018[gm2018[<span class="st">'region'</span>] <span class="op">==</span> <span class="st">'Africa'</span>]).mark_bar().encode(</span>
 <span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'count()'</span>, title<span class="op">=</span><span class="st">'Number of countries'</span>),</span>
 <span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'income_group'</span>, sort<span class="op">=</span>income_order),</span>
 <span id="cb10-4"><a aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'income_group'</span>, sort<span class="op">=</span>income_order, legend<span class="op">=</span><span class="va">None</span>)</span>
 <span id="cb10-5"><a aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">200</span></span>
-<span id="cb10-6"><a aria-hidden="true" tabindex="-1"></a>).facet(<span class="st">'sub_region'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-6"><a aria-hidden="true" tabindex="-1"></a>).facet(<span class="st">'sub_region'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 
 <style>
-  #altair-viz-6e43ba11038942a38926978fee0c396f.vega-embed {
+  #altair-viz-cdbe65ac0eda402c9d919551e7bda463.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-6e43ba11038942a38926978fee0c396f.vega-embed details,
-  #altair-viz-6e43ba11038942a38926978fee0c396f.vega-embed details summary {
+  #altair-viz-cdbe65ac0eda402c9d919551e7bda463.vega-embed details,
+  #altair-viz-cdbe65ac0eda402c9d919551e7bda463.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-6e43ba11038942a38926978fee0c396f"></div>
+<div id="altair-viz-cdbe65ac0eda402c9d919551e7bda463"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-6e43ba11038942a38926978fee0c396f") {
-      outputDiv = document.getElementById("altair-viz-6e43ba11038942a38926978fee0c396f");
+    if (outputDiv.id !== "altair-viz-cdbe65ac0eda402c9d919551e7bda463") {
+      outputDiv = document.getElementById("altair-viz-cdbe65ac0eda402c9d919551e7bda463");
     }
 
     const paths = {
@@ -1363,7 +1366,7 @@
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1437,13 +1440,14 @@
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
